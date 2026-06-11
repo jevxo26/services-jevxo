@@ -3,6 +3,7 @@
 import * as React from "react"
 import { cn } from "@/lib/utils"
 import { Search, ChevronLeft, ChevronRight, MoreHorizontal } from "lucide-react"
+import { PremiumSearch } from "@/components/ui/input"
 
 /* ==========================================================================
    1. STANDARD TABLE PRIMITIVES (PREMIUM STYLED WITH THEME VARIABLES)
@@ -144,7 +145,7 @@ export interface CustomTableProps<T> {
   className?: string;
 }
 
-export function CustomTable<T extends { id?: string | number; [key: string]: any }>({
+export function CustomTable<T extends { id?: string | number;[key: string]: any }>({
   columns,
   data,
   actions = [],
@@ -160,7 +161,7 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
   const [activeFilter, setActiveFilter] = React.useState("ALL")
   const [currentPage, setCurrentPage] = React.useState(1)
   const [openDropdownId, setOpenDropdownId] = React.useState<string | number | null>(null)
-  
+
   const dropdownRef = React.useRef<HTMLDivElement>(null)
 
   // Close dropdown on click outside
@@ -184,7 +185,7 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
           return false
         }
       }
-      
+
       // 2. Dropdown Filter check
       if (filterKey && activeFilter !== "ALL") {
         const value = row[filterKey]
@@ -192,7 +193,7 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
           return false
         }
       }
-      
+
       return true
     })
   }, [data, searchQuery, activeFilter, searchKey, filterKey])
@@ -211,21 +212,19 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
 
   return (
     <div className={cn("space-y-4 w-full animate-in fade-in duration-200", className)}>
-      
+
       {/* Top Filter & Search Controls */}
       {(searchKey || (filterKey && filterOptions.length > 0)) && (
         <div className="flex flex-col sm:flex-row gap-3 items-stretch sm:items-center justify-between bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
-          
+
           {/* Search bar */}
           {searchKey && (
-            <div className="relative flex-1 max-w-sm">
-              <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-premium-gray size-4" />
-              <input
-                type="text"
+            <div className="flex-1 max-w-sm">
+              <PremiumSearch
                 placeholder={searchPlaceholder}
                 value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-premium-light border border-slate-200 rounded-xl pl-10 pr-4 py-2.5 text-xs text-premium-slate focus:outline-none focus:border-brand-primary focus:ring-2 focus:ring-brand-hover transition-all font-semibold"
+                onChange={setSearchQuery}
+                resultsCount={filteredData.length}
               />
             </div>
           )}
@@ -273,12 +272,12 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
                         {col.render ? col.render(row) : row[col.key]}
                       </TableCell>
                     ))}
-                    
+
                     {/* Action dropdown or buttons */}
                     {actions.length > 0 && (
                       <TableCell className="text-right relative">
                         <div className="inline-flex items-center justify-end gap-1">
-                          
+
                           {/* Standard primary button if single action, otherwise show dropdown */}
                           {actions.length === 1 ? (
                             <button
@@ -288,8 +287,8 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
                                 actions[0].variant === "destructive"
                                   ? "bg-rose-50 text-brand-primary hover:bg-rose-100"
                                   : actions[0].variant === "secondary"
-                                  ? "bg-premium-light text-premium-gray hover:bg-slate-100"
-                                  : "bg-brand-bg text-brand-primary hover:bg-brand-hover"
+                                    ? "bg-premium-light text-premium-gray hover:bg-slate-100"
+                                    : "bg-brand-bg text-brand-primary hover:bg-brand-hover"
                               )}
                             >
                               {actions[0].label}
@@ -302,7 +301,7 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
                               >
                                 <MoreHorizontal size={18} />
                               </button>
-                              
+
                               {/* Custom Dropdown Dialog overlay list */}
                               {openDropdownId === uniqueRowId && (
                                 <div
@@ -365,7 +364,7 @@ export function CustomTable<T extends { id?: string | number; [key: string]: any
             >
               <ChevronLeft size={16} />
             </button>
-            
+
             {Array.from({ length: totalPages }).map((_, pageIdx) => {
               const pageNum = pageIdx + 1
               return (

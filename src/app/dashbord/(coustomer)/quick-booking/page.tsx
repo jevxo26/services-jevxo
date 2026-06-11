@@ -5,6 +5,8 @@ import { ShieldAlert, Zap, User, Phone, MapPin, Calendar, Check, Save } from "lu
 import { useState } from "react";
 
 import { CustomSelect } from "@/components/ui/select";
+import { CustomCalendar } from "@/components/ui/calendar";
+import dayjs from "dayjs";
 
 export default function QuickBookingPage() {
   const { role } = useRole();
@@ -133,16 +135,12 @@ export default function QuickBookingPage() {
                 placeholder="Select category"
               />
 
-              <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Schedule Date</label>
-                <input
-                  type="date"
-                  value={bookingDetails.scheduleDate}
-                  onChange={(e) => setBookingDetails({ ...bookingDetails, scheduleDate: e.target.value })}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-semibold cursor-pointer"
-                  required
-                />
-              </div>
+              <CustomCalendar
+                label="Schedule Date"
+                value={bookingDetails.scheduleDate ? dayjs(bookingDetails.scheduleDate) : null}
+                onChange={(date) => setBookingDetails({ ...bookingDetails, scheduleDate: date ? date.format("YYYY-MM-DD") : "" })}
+                placeholder="Select schedule date"
+              />
 
               <CustomSelect
                 label="Time Slot"

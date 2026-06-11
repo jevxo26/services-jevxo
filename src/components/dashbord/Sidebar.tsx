@@ -66,7 +66,7 @@ export function Sidebar() {
         ];
       case "customer":
         return [
-          { icon: Home, label: "Overview", href: "/dashbord" },
+          { icon: Home, label: "Overview", href: "/dashbord/overview" },
           { icon: ClipboardList, label: "My Bookings", href: "/dashbord/bookings" },
           { icon: Heart, label: "Saved Services", href: "/dashbord/saved" },
           { icon: Wallet, label: "Wallet", href: "/dashbord/wallet" },

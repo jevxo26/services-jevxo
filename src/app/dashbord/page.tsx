@@ -19,12 +19,20 @@ import {
   Phone,
   Zap,
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { CustomTable } from "@/components/ui/table";
 
 export default function DashboardPage() {
   const { role } = useRole();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (role === "customer") {
+      router.push("/dashbord/overview");
+    }
+  }, [role, router]);
 
   // Dynamic dashboard rendering based on active role
   switch (role) {
@@ -37,7 +45,11 @@ export default function DashboardPage() {
     case "provider":
       return <ProviderDashboard />;
     case "customer":
-      return <CustomerDashboard />;
+      return (
+        <div className="p-8 text-center text-slate-500 animate-pulse">
+          Redirecting to Overview...
+        </div>
+      );
     default:
       return (
         <div className="p-8 text-center text-slate-500">
