@@ -1,6 +1,7 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
+<<<<<<< HEAD
   images: {
     remotePatterns: [
       {
@@ -9,6 +10,9 @@ const nextConfig: NextConfig = {
       },
     ],
   },
+=======
+  /* config options here */
+>>>>>>> origin/shohan
 };
 
 export default nextConfig;
