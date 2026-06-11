@@ -1,160 +1,223 @@
-"use client";
+"use client"
 
-import { useRole } from "@/context/RoleContext";
-import { ShieldAlert, Search, Calendar, MapPin, User, ChevronRight, Filter } from "lucide-react";
-import { useState } from "react";
-import Link from "next/link";
+import * as React from "react"
+import { useRole } from "@/context/RoleContext"
+import {
+  ShieldAlert,
+  Calendar,
+  MapPin,
+  Briefcase,
+  MessageCircle
+} from "lucide-react"
 
 interface Booking {
   id: string;
   service: string;
   provider: string;
-  providerPhone: string;
+  providerAvatar: string;
   amount: string;
+  paymentMethod: string;
   date: string;
   timeSlot: string;
-  status: "Scheduled" | "In Progress" | "Completed" | "Cancelled";
+  status: "Active" | "Scheduled" | "Completed" | "Cancelled";
+  statusText: string;
   address: string;
 }
 
 export default function BookingsPage() {
-  const { role } = useRole();
-  const [filter, setFilter] = useState<"All" | "Scheduled" | "In Progress" | "Completed" | "Cancelled">("All");
-
-  if (role !== "customer") {
-    return <AccessDenied roleRequired="Customer" />;
-  }
+  const { role } = useRole()
+  const [filter, setFilter] = React.useState<"Active" | "Scheduled" | "Completed" | "Cancelled">("Active")
 
   const bookingsList: Booking[] = [
     {
-      id: "RS-9284",
+      id: "RS-99210",
+      service: "Premium AC Servicing",
+      provider: "Kamrul Islam",
+      providerAvatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=100&auto=format&fit=crop&q=80",
+      amount: "৳1,500",
+      paymentMethod: "Paid via Nagad",
+      date: "Today, 14 Oct 2024",
+      timeSlot: "11:00 AM - 12:00 PM",
+      status: "Active",
+      statusText: "On the way",
+      address: "House 24, Road 7, Dhanmondi",
+    },
+    {
+      id: "RS-92844",
       service: "Expert AC Gas Refill",
       provider: "Kabir AC Repair",
-      providerPhone: "+880 1712 345678",
+      providerAvatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&auto=format&fit=crop&q=80",
       amount: "৳1,400",
-      date: "Today, June 12",
+      paymentMethod: "Paid via Bkash",
+      date: "Tomorrow, June 13",
       timeSlot: "03:00 PM - 05:00 PM",
       status: "Scheduled",
+      statusText: "Confirmed",
       address: "House 24, Road 4, Sector 12, Mirpur",
     },
     {
-      id: "RS-9128",
+      id: "RS-91280",
       service: "Deep Sofa Cleaning",
       provider: "Clean & Bright",
-      providerPhone: "+880 1819 876543",
+      providerAvatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=100&auto=format&fit=crop&q=80",
       amount: "৳2,500",
+      paymentMethod: "Cash on Delivery",
       date: "May 20, 2026",
       timeSlot: "11:00 AM - 01:00 PM",
       status: "Completed",
+      statusText: "Completed",
       address: "House 24, Road 4, Sector 12, Mirpur",
     },
     {
-      id: "RS-9014",
+      id: "RS-90140",
       service: "Full Apartment Painting",
       provider: "Dhaka Decorators",
-      providerPhone: "+880 1911 112233",
+      providerAvatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=100&auto=format&fit=crop&q=80",
       amount: "৳15,000",
+      paymentMethod: "Paid via Visa",
       date: "Apr 12, 2026",
       timeSlot: "09:00 AM - 05:00 PM",
-      status: "Completed",
+      status: "Cancelled",
+      statusText: "Cancelled",
       address: "House 24, Road 4, Sector 12, Mirpur",
     },
-  ];
+  ]
 
-  const filteredBookings = bookingsList.filter(
-    (b) => filter === "All" || b.status === filter
-  );
+  const filteredBookings = bookingsList.filter((b) => b.status === filter)
+
+  if (role !== "customer") {
+    return <AccessDenied roleRequired="Customer" />
+  }
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-200">
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900">My Bookings</h1>
-        <p className="text-slate-500 mt-1">Track and manage your scheduled, active, and past home services.</p>
-      </div>
+    <div className="relative min-h-screen p-1 sm:p-6 overflow-hidden animate-in fade-in duration-200">
+      <div className="w-full space-y-8 relative z-10">
+        
+        {/* Title Header */}
+        <div>
+          <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">My Bookings</h1>
+          <p className="text-slate-500 mt-2 font-semibold text-sm">
+            Manage and track your service requests at Rajseba.
+          </p>
+        </div>
 
-      {/* Status Filter Tab Pill Bar */}
-      <div className="flex flex-wrap gap-2 border-b border-slate-100 pb-4">
-        {(["All", "Scheduled", "In Progress", "Completed", "Cancelled"] as const).map((tab) => (
-          <button
-            key={tab}
-            onClick={() => setFilter(tab)}
-            className={`px-4 py-2 rounded-xl text-sm font-semibold transition-all ${
-              filter === tab
-                ? "bg-rose-500 text-white shadow-sm"
-                : "bg-slate-50 text-slate-600 hover:bg-slate-100"
-            }`}
-          >
-            {tab}
-          </button>
-        ))}
-      </div>
+        {/* Status Filter Tab Pill Bar */}
+        <div className="bg-rose-50/30 border border-rose-100/30 p-1.5 rounded-full flex gap-1 w-fit">
+          {(["Active", "Scheduled", "Completed", "Cancelled"] as const).map((tab) => {
+            const isActive = filter === tab;
+            return (
+              <button
+                key={tab}
+                onClick={() => setFilter(tab)}
+                className={`px-6 py-2 rounded-full text-xs font-bold transition-all focus:outline-none ${
+                  isActive
+                    ? "bg-[#FF5B60] text-white shadow-sm shadow-rose-500/10"
+                    : "text-slate-500 hover:text-slate-800 hover:bg-slate-50/50"
+                }`}
+              >
+                {tab}
+              </button>
+            )
+          })}
+        </div>
 
-      {/* Bookings List */}
-      <div className="space-y-4">
-        {filteredBookings.length > 0 ? (
-          filteredBookings.map((booking) => (
-            <div
-              key={booking.id}
-              className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-6 hover:shadow-md transition-all"
-            >
-              <div className="space-y-3 flex-1">
-                <div className="flex flex-wrap items-center gap-3">
-                  <span className="text-sm font-bold text-rose-500">{booking.id}</span>
-                  <span
-                    className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-semibold ${
-                      booking.status === "Completed"
-                        ? "bg-emerald-50 text-emerald-700"
-                        : booking.status === "In Progress"
-                        ? "bg-indigo-50 text-indigo-700"
-                        : booking.status === "Cancelled"
-                        ? "bg-rose-50 text-rose-700"
-                        : "bg-amber-50 text-amber-700"
-                    }`}
-                  >
-                    {booking.status}
-                  </span>
-                </div>
-
-                <h3 className="text-lg font-bold text-slate-800">{booking.service}</h3>
-
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs font-medium text-slate-400">
-                  <div className="flex items-center gap-1.5">
-                    <User size={14} className="text-slate-400" />
-                    <span>Expert: <strong className="text-slate-700">{booking.provider}</strong> ({booking.providerPhone})</span>
+        {/* Bookings List */}
+        <div className="space-y-6">
+          {filteredBookings.length > 0 ? (
+            filteredBookings.map((booking) => (
+              <div
+                key={booking.id}
+                className="bg-white rounded-[28px] border border-slate-100 p-6 shadow-sm space-y-6 flex flex-col justify-between hover:shadow-md transition-shadow"
+              >
+                {/* Top Row: Service Name, Status, Price */}
+                <div className="flex items-start justify-between gap-4">
+                  <div className="flex items-center gap-4">
+                    <div className="w-12 h-12 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-[#FF464C]">
+                      <Briefcase size={22} className="stroke-[2.5]" />
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-slate-800 tracking-tight">{booking.service}</h3>
+                      <div className="flex items-center gap-2 mt-1.5">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600">
+                          <span className="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse" />
+                          {booking.statusText}
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400">Order #{booking.id}</span>
+                      </div>
+                    </div>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <Calendar size={14} className="text-slate-400" />
-                    <span>{booking.date} • {booking.timeSlot}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5 sm:col-span-2">
-                    <MapPin size={14} className="text-slate-400" />
-                    <span>{booking.address}</span>
+
+                  <div className="text-right">
+                    <span className="text-2xl font-black text-[#FF464C]">{booking.amount}</span>
+                    <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">{booking.paymentMethod}</span>
                   </div>
                 </div>
-              </div>
 
-              <div className="flex items-center justify-between md:flex-col md:items-end gap-2 border-t md:border-t-0 pt-4 md:pt-0 border-slate-100">
-                <div className="text-left md:text-right">
-                  <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Price Paid</span>
-                  <span className="text-xl font-bold text-slate-800">{booking.amount}</span>
+                {/* Middle Row: Details (Professional, Date & Time, Service Location) */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-slate-50">
+                  {/* Column 1: Professional */}
+                  <div>
+                    <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest block mb-2">Professional</span>
+                    <div className="flex items-center gap-2.5">
+                      <img
+                        src={booking.providerAvatar}
+                        alt={booking.provider}
+                        className="w-9 h-9 rounded-full object-cover border border-slate-100"
+                      />
+                      <span className="text-xs font-bold text-slate-800">{booking.provider}</span>
+                    </div>
+                  </div>
+
+                  {/* Column 2: Date & Time */}
+                  <div>
+                    <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest block mb-2">Date & Time</span>
+                    <div className="flex items-start gap-2.5">
+                      <Calendar size={16} className="text-slate-400 mt-0.5" />
+                      <div>
+                        <h4 className="text-xs font-bold text-slate-800">{booking.date}</h4>
+                        <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">{booking.timeSlot}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Column 3: Service Location */}
+                  <div>
+                    <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest block mb-2">Service Location</span>
+                    <div className="flex items-start gap-2.5">
+                      <MapPin size={16} className="text-slate-400 mt-0.5" />
+                      <span className="text-xs font-bold text-slate-800 leading-relaxed max-w-[200px]">{booking.address}</span>
+                    </div>
+                  </div>
                 </div>
 
-                {booking.status === "Scheduled" && (
-                  <button className="bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold px-4 py-2 rounded-xl transition-all active:scale-[0.97]">
-                    Reschedule
+                {/* Bottom Row: Contact Professional Link & Actions */}
+                <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                  <button className="flex items-center gap-2 text-rose-500 hover:text-rose-600 text-xs font-bold transition-colors focus:outline-none">
+                    <MessageCircle size={16} />
+                    <span>Contact Professional</span>
                   </button>
-                )}
+
+                  <div className="flex items-center gap-3">
+                    <button className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-2.5 px-6 rounded-2xl transition-colors active:scale-[0.98]">
+                      View Details
+                    </button>
+                    <button className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold py-2.5 px-6 rounded-2xl transition-all shadow-sm shadow-rose-500/10 active:scale-[0.98]">
+                      Track Order
+                    </button>
+                  </div>
+                </div>
               </div>
+            ))
+          ) : (
+            <div className="bg-white p-12 text-center border border-slate-100 rounded-2xl shadow-sm text-slate-400">
+              No bookings found in this category.
             </div>
-          ))
-        ) : (
-          <div className="bg-white p-12 text-center border border-slate-100 rounded-2xl shadow-sm text-slate-400">
-            No bookings found in this category.
-          </div>
-        )}
+          )}
+        </div>
+
       </div>
     </div>
-  );
+  )
 }
 
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
@@ -169,5 +232,5 @@ function AccessDenied({ roleRequired }: { roleRequired: string }) {
         Please toggle your preview role using the selector at the top.
       </p>
     </div>
-  );
+  )
 }

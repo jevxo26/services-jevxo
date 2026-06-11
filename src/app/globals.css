@@ -169,3 +169,20 @@ body {
 @utility border-premium {
   border: 1px solid rgba(226, 232, 240, 0.7);
 }
+
+@utility custom-scrollbar {
+  &::-webkit-scrollbar {
+    height: 6px;
+    width: 6px;
+  }
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    background: #FFD2D4;
+    border-radius: 9999px;
+  }
+  &::-webkit-scrollbar-thumb:hover {
+    background: #FF5B60;
+  }
+}

@@ -61,12 +61,6 @@ export default function CustomerOverviewPage() {
 
   return (
     <div className="relative min-h-screen p-1 sm:p-6 overflow-hidden animate-in fade-in duration-200">
-      
-      {/* Tiled background images using Group1.png and Group2.png (Visible pattern) */}
-      <div className="absolute inset-0 pointer-events-none opacity-[0.35] -z-10">
-        <div className="absolute inset-0 bg-repeat" style={{ backgroundImage: "url('/Group1.png')", backgroundSize: "320px 320px" }} />
-        <div className="absolute inset-0 bg-repeat mix-blend-multiply" style={{ backgroundImage: "url('/Group2.png')", backgroundSize: "320px 320px", backgroundPosition: "160px 160px" }} />
-      </div>
 
       <div className="w-full space-y-8 relative z-10">
         

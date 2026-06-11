@@ -31,7 +31,7 @@ interface MenuItem {
   href: string;
 }
 
-export function Sidebar() {
+export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => void }) {
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
@@ -87,7 +87,25 @@ export function Sidebar() {
   };
 
   return (
-    <div className={`bg-transparent text-slate-800 border-r border-slate-100 transition-all duration-300 ${collapsed ? "w-20" : "w-64"} flex flex-col h-screen relative z-20`}>
+    <>
+      {/* Backdrop overlay for mobile */}
+      <div
+        onClick={onClose}
+        className={`fixed inset-0 bg-slate-900/10 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${
+          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+        }`}
+      />
+
+      <div
+        className={`bg-white/95 backdrop-blur-md md:bg-transparent text-slate-800 border-r border-slate-100 transition-all duration-300 flex flex-col h-screen fixed inset-y-0 left-0 z-50 md:relative md:translate-x-0 ${
+          open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        } ${collapsed ? "w-20" : "w-64"} overflow-hidden`}
+      >
+        {/* Tiled watermark backgrounds inside sidebar */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.16] z-0">
+          <div className="absolute inset-0 bg-repeat" style={{ backgroundImage: "url('/Group1.png')", backgroundSize: "800px 800px" }} />
+          <div className="absolute inset-0 bg-repeat mix-blend-multiply" style={{ backgroundImage: "url('/Group2.png')", backgroundSize: "800px 800px", backgroundPosition: "400px 400px" }} />
+        </div>
       
       {/* Brand Header */}
       <div className="p-6 flex items-center justify-between border-b border-slate-100">
@@ -155,5 +173,6 @@ export function Sidebar() {
         </button>
       </div>
     </div>
+  </>
   );
 }

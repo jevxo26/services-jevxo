@@ -1,10 +1,10 @@
 "use client";
 
-import { Bell, Search, User, ChevronDown, Check, Shield, UserCheck, HardHat, CircleUser, Briefcase } from "lucide-react";
+import { Bell, Search, User, ChevronDown, Check, Shield, UserCheck, HardHat, CircleUser, Briefcase, Menu } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useRole, UserRole } from "@/context/RoleContext";
 
-export function TopNavbar() {
+export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const { role, setRole, roleName } = useRole();
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
@@ -50,9 +50,12 @@ export function TopNavbar() {
   const activeRoleConfig = rolesList.find((x) => x.value === role) || rolesList[0];
 
   return (
-    <header className="bg-white border-b border-slate-200 px-6 py-4 flex items-center justify-between z-30 shadow-sm">
+    <header className="bg-white border-b border-slate-200 px-4 sm:px-6 py-4 flex items-center justify-between z-30 shadow-sm">
       {/* Search Bar */}
-      <div className="flex items-center gap-4 flex-1">
+      <div className="flex items-center gap-2 sm:gap-4 flex-1">
+        <button onClick={onMenuClick} className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl md:hidden shrink-0 focus:outline-none">
+          <Menu size={20} />
+        </button>
         <div className="relative w-80 hidden md:block">
           <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
           <input
