@@ -38,6 +38,12 @@ export default function SettingsPage() {
           { id: "billing", label: "Billing & Address", icon: CreditCard },
           { id: "notifications", label: "Alert Config", icon: Bell },
         ];
+      case "agent":
+        return [
+          { id: "profile", label: "My Profile", icon: User },
+          { id: "payout", label: "Payout Accounts", icon: CreditCard },
+          { id: "security", label: "Security & Pass", icon: Shield },
+        ];
       default:
         return [];
     }
@@ -271,6 +277,40 @@ export default function SettingsPage() {
                       </div>
                       <button className="text-xs font-semibold text-slate-400 hover:text-rose-500 transition-colors">Delete</button>
                     </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Tab: Payout Accounts (Agent only) */}
+            {activeTab === "payout" && (
+              <div className="space-y-6">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-900">Payout Accounts</h3>
+                  <p className="text-xs text-slate-500 mt-1">Configure your bKash, Nagad or Bank Account details to withdraw commissions.</p>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Primary Mobile Wallet</label>
+                    <select
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                      defaultValue="bKash"
+                    >
+                      <option value="bKash">bKash</option>
+                      <option value="Nagad">Nagad</option>
+                      <option value="Rocket">Rocket</option>
+                    </select>
+                  </div>
+
+                  <div>
+                    <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Wallet Phone Number</label>
+                    <input
+                      type="tel"
+                      defaultValue="+880 1712 345678"
+                      className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                      required
+                    />
                   </div>
                 </div>
               </div>

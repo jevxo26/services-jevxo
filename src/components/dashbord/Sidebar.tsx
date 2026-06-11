@@ -60,6 +60,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Zap, label: "Quick Booking", href: "/dashbord/quick-booking" },
           { icon: ShoppingBag, label: "Recent Orders", href: "/dashbord/orders" },
           { icon: Percent, label: "Commission Tracking", href: "/dashbord/commissions" },
+          { icon: Settings, label: "Settings", href: "/dashbord/settings" },
           { icon: HelpCircle, label: "Support Desk", href: "/dashbord/support" },
         ];
       case "provider":

@@ -8,7 +8,7 @@ import { CustomSelect } from "@/components/ui/select";
 import { CustomCalendar } from "@/components/ui/calendar";
 import dayjs from "dayjs";
 
-export default function QuickBookingPage() {
+export default function AgentQuickBookingPage() {
   const { role } = useRole();
   const [success, setSuccess] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({

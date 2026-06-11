@@ -1,6 +1,7 @@
 "use client"
 
 import * as React from "react"
+import { useRole } from "@/context/RoleContext"
 import {
   Sparkles,
   Plus,
@@ -15,11 +16,30 @@ import {
   SlidersHorizontal,
   Download,
   MessageCircle,
-  Check
+  Check,
+  Briefcase,
+  DollarSign,
+  Clock,
+  ArrowUpRight,
+  ShieldAlert
 } from "lucide-react"
 import Link from "next/link"
+import { CustomTable } from "@/components/ui/table"
 
-export default function CustomerOverviewPage() {
+export default function UnifiedOverviewPage() {
+  const { role } = useRole()
+
+  if (role === "agent") {
+    return <AgentOverview />
+  }
+
+  return <CustomerOverview />
+}
+
+/* ==========================================================================
+   1. CUSTOMER OVERVIEW VIEW
+   ========================================================================== */
+function CustomerOverview() {
   const recommendedServices = [
     {
       title: "Sofa Deep Cleaning",
@@ -59,26 +79,68 @@ export default function CustomerOverviewPage() {
     },
   ]
 
+  const customerBookings = [
+    { id: "RS-9284", service: "Expert AC Gas Refill", provider: "Kabir AC Repair", amount: "৳1,400", date: "Today, 03:00 PM", status: "Assigned" },
+    { id: "RS-9128", service: "Deep Sofa Cleaning", provider: "Clean & Bright", amount: "৳2,500", date: "May 20, 2026", status: "Completed" },
+    { id: "RS-9014", service: "Full Apartment Painting", provider: "Dhaka Decorators", amount: "৳15,000", date: "Apr 12, 2026", status: "Completed" },
+  ]
+
+  const customerColumns = [
+    {
+      key: "id",
+      header: "Booking ID",
+      render: (b: any) => <span className="font-bold text-brand-primary">{b.id}</span>
+    },
+    {
+      key: "service",
+      header: "Service",
+      render: (b: any) => <span className="font-semibold text-slate-900">{b.service}</span>
+    },
+    {
+      key: "provider",
+      header: "Expert Provider"
+    },
+    {
+      key: "amount",
+      header: "Amount Paid"
+    },
+    {
+      key: "status",
+      header: "Status",
+      render: (b: any) => (
+        <span
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${b.status === "Completed"
+            ? "bg-emerald-50 text-emerald-700"
+            : "bg-amber-50 text-amber-700"
+            }`}
+        >
+          {b.status}
+        </span>
+      )
+    },
+    {
+      key: "date",
+      header: "Date Completed"
+    }
+  ]
+
   return (
     <div className="relative min-h-screen p-1 sm:p-6 overflow-hidden animate-in fade-in duration-200">
-
       <div className="w-full space-y-8 relative z-10">
-        
+
         {/* Header Title & Top Counters */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div>
-            <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Hello, Anisur!</h1>
+            <h1 className="text-4xl font-extrabold text-slate-900 tracking-tight">Hello, Jevxo</h1>
             <p className="text-slate-500 mt-1 font-semibold text-sm">It's a great day to refresh your home.</p>
           </div>
 
           <div className="flex items-center gap-4">
-            {/* Active Bookings Count */}
             <div className="bg-white px-6 py-3.5 rounded-2xl border border-slate-100 shadow-sm text-center min-w-[110px]">
               <span className="text-3xl font-black text-rose-500 block leading-tight">02</span>
               <span className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">Active</span>
             </div>
 
-            {/* Reward Points */}
             <div className="bg-white px-6 py-3.5 rounded-2xl border border-slate-100 shadow-sm text-center min-w-[110px]">
               <span className="text-3xl font-black text-[#FF464C] block leading-tight">1,250</span>
               <span className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">Points</span>
@@ -88,7 +150,6 @@ export default function CustomerOverviewPage() {
 
         {/* Action Banners Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {/* Book a New Service Banner */}
           <Link
             href="/dashbord/quick-booking"
             className="relative overflow-hidden bg-[#FF5B60] text-white p-6 rounded-[28px] shadow-lg shadow-rose-500/10 flex items-center justify-between group hover:opacity-95 transition-all"
@@ -106,7 +167,6 @@ export default function CustomerOverviewPage() {
             </div>
           </Link>
 
-          {/* Refer a Friend Banner */}
           <div className="bg-white p-6 rounded-[28px] border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
               <div className="p-3 bg-rose-50 rounded-2xl text-rose-500">
@@ -133,8 +193,6 @@ export default function CustomerOverviewPage() {
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            
-            {/* Tracker 1: In Progress Cleaning */}
             <div className="bg-white p-6 rounded-[28px] border border-slate-100/80 shadow-sm space-y-6 flex flex-col justify-between">
               <div className="space-y-4">
                 <div className="flex justify-between items-start">
@@ -147,7 +205,6 @@ export default function CustomerOverviewPage() {
                   </span>
                 </div>
 
-                {/* Assigned Specialist Details */}
                 <div className="flex items-center justify-between bg-slate-50/50 p-3 rounded-2xl border border-slate-100/40">
                   <div className="flex items-center gap-3">
                     <img
@@ -166,7 +223,6 @@ export default function CustomerOverviewPage() {
                 </div>
               </div>
 
-              {/* Progress Bar Timeline */}
               <div className="space-y-4 pt-2">
                 <div className="relative flex justify-between text-[10px] font-bold text-slate-400 select-none">
                   <div className="flex flex-col items-center gap-1.5 relative z-10 bg-white px-2">
@@ -190,13 +246,11 @@ export default function CustomerOverviewPage() {
                     <span>Started</span>
                   </div>
 
-                  {/* Horizontal Connection bar */}
                   <div className="absolute top-2.5 left-6 right-6 h-0.5 bg-slate-100 -z-10">
                     <div className="h-full bg-[#FF464C] w-1/2 rounded-full" />
                   </div>
                 </div>
 
-                {/* Progress bar fill */}
                 <div className="pt-2 border-t border-slate-100/50">
                   <div className="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
                     <div className="bg-[#FF464C] h-full w-3/4 rounded-full" />
@@ -209,7 +263,6 @@ export default function CustomerOverviewPage() {
               </div>
             </div>
 
-            {/* Tracker 2: Scheduled AC Repair */}
             <div className="bg-white p-6 rounded-[28px] border border-slate-100/80 shadow-sm flex flex-col justify-between gap-6">
               <div className="space-y-4">
                 <div className="flex justify-between items-start">
@@ -222,7 +275,6 @@ export default function CustomerOverviewPage() {
                   </span>
                 </div>
 
-                {/* Appointment time detail card */}
                 <div className="flex items-center gap-3.5 bg-slate-50/50 p-4 rounded-2xl border border-slate-100/40">
                   <div className="p-2.5 bg-rose-50 rounded-xl text-rose-500">
                     <Calendar size={18} />
@@ -234,7 +286,6 @@ export default function CustomerOverviewPage() {
                 </div>
               </div>
 
-              {/* Action Buttons Row */}
               <div className="flex items-center gap-3">
                 <button className="flex-1 bg-white hover:bg-rose-50/50 border border-rose-200 text-rose-500 text-xs font-bold py-3 rounded-2xl transition-colors active:scale-[0.98]">
                   Reschedule
@@ -244,21 +295,18 @@ export default function CustomerOverviewPage() {
                 </button>
               </div>
             </div>
-
           </div>
         </div>
 
         {/* Recommended Services Grid */}
         <div className="space-y-4">
           <h2 className="text-xl font-bold text-slate-900 tracking-tight">Recommended for You</h2>
-          
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {recommendedServices.map((service, idx) => (
               <div
                 key={idx}
                 className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative"
               >
-                {/* Image & Heart Save */}
                 <div className="relative aspect-[4/3] w-full bg-slate-50 overflow-hidden">
                   <img
                     src={service.image}
@@ -270,7 +318,6 @@ export default function CustomerOverviewPage() {
                   </button>
                 </div>
 
-                {/* Details Content */}
                 <div className="p-5 flex-1 flex flex-col justify-between gap-4">
                   <div className="space-y-1.5">
                     <div className="flex items-center justify-between">
@@ -355,6 +402,120 @@ export default function CustomerOverviewPage() {
         </div>
 
       </div>
+    </div>
+  )
+}
+
+/* ==========================================================================
+   2. AGENT OVERVIEW VIEW
+   ========================================================================== */
+function AgentOverview() {
+  const stats = [
+    { label: "Bookings Placed", value: "124 Orders", desc: "18 active this week", icon: Briefcase, color: "text-rose-600 bg-rose-50" },
+    { label: "Today's Bookings", value: "12", desc: "৳15,400 order volume", icon: Zap, color: "text-amber-600 bg-amber-50" },
+    { label: "Commission Earned", value: "৳14,500", desc: "৳2,450 this week", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
+    { label: "Pending Payout", value: "৳3,200", desc: "Auto payout on June 15", icon: Clock, color: "text-indigo-600 bg-indigo-50" },
+  ]
+
+  const agentOrders = [
+    { id: "RS-9310", customer: "Sayed Karim", service: "AC Leak Repair", amount: "৳1,800", commission: "৳270", status: "Assigned", date: "Today, 12:00 PM" },
+    { id: "RS-9302", customer: "Salma Khatun", service: "Deep Sofa Clean", amount: "৳2,500", commission: "৳375", status: "Completed", date: "June 11, 2026" },
+    { id: "RS-9290", customer: "Rafiqul Islam", service: "Appliance Repair", amount: "৳1,200", commission: "৳180", status: "Completed", date: "June 08, 2026" },
+  ]
+
+  const columns = [
+    {
+      key: "id",
+      header: "Booking ID",
+      render: (o: any) => <span className="font-bold text-brand-primary">{o.id}</span>
+    },
+    {
+      key: "customer",
+      header: "Client Name"
+    },
+    {
+      key: "service",
+      header: "Service Booked"
+    },
+    {
+      key: "amount",
+      header: "Booking Price"
+    },
+    {
+      key: "commission",
+      header: "My Commission",
+      render: (o: any) => <span className="font-bold text-emerald-600">+{o.commission}</span>
+    },
+    {
+      key: "status",
+      header: "Status",
+      render: (o: any) => (
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${o.status === "Completed" ? "bg-emerald-50 text-emerald-700" : "bg-indigo-50 text-indigo-700"
+          }`}>
+          {o.status}
+        </span>
+      )
+    },
+    {
+      key: "date",
+      header: "Date"
+    }
+  ]
+
+  return (
+    <div className="space-y-8 animate-in fade-in duration-200">
+
+      {/* Header */}
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-900">Agent Overview</h1>
+          <p className="text-slate-500 mt-1">Hello Agent! Manage bookings and track commissions generated by your referrals.</p>
+        </div>
+        <Link
+          href="/dashbord/quick-booking"
+          className="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-rose-500/20 text-sm transition-all active:scale-[0.985] text-center"
+        >
+          Book a New Lead
+        </Link>
+      </div>
+
+      {/* Stats Cards */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        {stats.map((stat, i) => {
+          const Icon = stat.icon;
+          return (
+            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
+              <div className={`p-3 rounded-xl ${stat.color}`}>
+                <Icon size={24} />
+              </div>
+              <div>
+                <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
+                <h4 className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</h4>
+                <span className="text-xs text-slate-400 mt-1 block font-medium">{stat.desc}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Active Agent Bookings Ledger */}
+      <div className="space-y-4">
+        <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+          <h3 className="text-lg font-bold text-slate-900">Recent Lead Orders</h3>
+          <Link href="/dashbord/orders" className="text-xs font-bold text-rose-500 hover:underline">
+            View Ledger &rarr;
+          </Link>
+        </div>
+
+        <CustomTable
+          columns={columns}
+          data={agentOrders}
+          searchKey="customer"
+          searchPlaceholder="Search leads by customer name..."
+          pageSize={5}
+        />
+      </div>
+
     </div>
   )
 }
