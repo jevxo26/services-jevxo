@@ -30,7 +30,7 @@ export default function DashboardPage() {
   const router = useRouter();
 
   useEffect(() => {
-    if (role === "customer") {
+    if (role === "client") {
       router.push("/dashbord/overview");
     }
   }, [role, router]);
@@ -41,9 +41,9 @@ export default function DashboardPage() {
       return <SuperAdminDashboard />;
     case "agent":
       return <AgentDashboard />;
-    case "provider":
+    case "vendor":
       return <ProviderDashboard />;
-    case "customer":
+    case "client":
       return (
         <div className="p-8 text-center text-slate-500 animate-pulse">
           Redirecting to Overview...
@@ -103,13 +103,12 @@ function SuperAdminDashboard() {
       header: "Status",
       render: (b: any) => (
         <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
-            b.status === "Completed"
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${b.status === "Completed"
               ? "bg-emerald-50 text-emerald-700"
               : b.status === "In Progress"
-              ? "bg-indigo-50 text-indigo-700"
-              : "bg-amber-50 text-amber-700"
-          }`}
+                ? "bg-indigo-50 text-indigo-700"
+                : "bg-amber-50 text-amber-700"
+            }`}
         >
           {b.status}
         </span>
@@ -311,20 +310,18 @@ function ProviderDashboard() {
                 <div
                   key={job.id}
                   onClick={() => setActiveJob(job.id)}
-                  className={`p-4 border rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md cursor-pointer transition-all ${
-                    activeJob === job.id ? "border-rose-300 bg-rose-50/20" : "border-slate-100"
-                  }`}
+                  className={`p-4 border rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md cursor-pointer transition-all ${activeJob === job.id ? "border-rose-300 bg-rose-50/20" : "border-slate-100"
+                    }`}
                 >
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold text-rose-500">{job.id}</span>
-                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
-                        currentStatus === "Completed"
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${currentStatus === "Completed"
                           ? "bg-emerald-50 text-emerald-700"
                           : currentStatus === "In Progress"
-                          ? "bg-indigo-50 text-indigo-700"
-                          : "bg-amber-50 text-amber-700"
-                      }`}>
+                            ? "bg-indigo-50 text-indigo-700"
+                            : "bg-amber-50 text-amber-700"
+                        }`}>
                         {currentStatus}
                       </span>
                     </div>
@@ -370,21 +367,19 @@ function ProviderDashboard() {
                   <div className="flex flex-col gap-2">
                     <button
                       onClick={() => updateJobStatus(activeJobDetails.id, "On The Way")}
-                      className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${
-                        (jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "On The Way"
+                      className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${(jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "On The Way"
                           ? "bg-amber-500 border-amber-500 text-white"
                           : "border-slate-200 hover:bg-slate-50 text-slate-700"
-                      }`}
+                        }`}
                     >
                       On The Way
                     </button>
                     <button
                       onClick={() => updateJobStatus(activeJobDetails.id, "In Progress")}
-                      className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${
-                        (jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "In Progress"
+                      className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${(jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "In Progress"
                           ? "bg-indigo-600 border-indigo-600 text-white"
                           : "border-slate-200 hover:bg-slate-50 text-slate-700"
-                      }`}
+                        }`}
                     >
                       In Progress
                     </button>
@@ -450,11 +445,10 @@ function CustomerDashboard() {
       header: "Status",
       render: (b: any) => (
         <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
-            b.status === "Completed"
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${b.status === "Completed"
               ? "bg-emerald-50 text-emerald-700"
               : "bg-amber-50 text-amber-700"
-          }`}
+            }`}
         >
           {b.status}
         </span>
@@ -535,13 +529,12 @@ function CustomerDashboard() {
                 ].map((step, i) => (
                   <div key={i} className="relative">
                     <span
-                      className={`absolute -left-[22px] top-1.5 w-3 h-3 rounded-full border-2 ring-4 ring-white ${
-                        step.done
+                      className={`absolute -left-[22px] top-1.5 w-3 h-3 rounded-full border-2 ring-4 ring-white ${step.done
                           ? "bg-rose-500 border-rose-500"
                           : step.current
-                          ? "bg-rose-500 border-rose-500 animate-pulse"
-                          : "bg-slate-200 border-slate-200"
-                      }`}
+                            ? "bg-rose-500 border-rose-500 animate-pulse"
+                            : "bg-slate-200 border-slate-200"
+                        }`}
                     />
                     <div>
                       <h5 className={`text-sm font-semibold ${step.done || step.current ? "text-slate-800" : "text-slate-400"}`}>
@@ -640,9 +633,8 @@ function AgentDashboard() {
       key: "status",
       header: "Status",
       render: (o: any) => (
-        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
-          o.status === "Completed" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"
-        }`}>
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${o.status === "Completed" ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"
+          }`}>
           {o.status}
         </span>
       )
@@ -686,7 +678,7 @@ function AgentDashboard() {
 
       {/* Commission Analytics & Recent Bookings */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        
+
         {/* Recent Orders Booked */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
