@@ -9,7 +9,7 @@ export const authApi = baseApi.injectEndpoints({
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
-          const userData = (data as any).user || data;
+          const userData = (data as any).data?.user || (data as any).data || (data as any).user || data;
           dispatch(setUser(userData));
         } catch (err) {
           // do nothing, global error handler or component can handle

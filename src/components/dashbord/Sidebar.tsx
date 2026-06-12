@@ -22,7 +22,7 @@ import {
   Calendar,
   Gift
 } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { UserRole, setRole as setAuthRole, getRoleName } from "@/redux/features/auth/authSlice";
 
@@ -36,8 +36,13 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
   const pathname = usePathname();
   const router = useRouter();
   const [collapsed, setCollapsed] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
   const roleName = getRoleName(role);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Dynamic menu items based on role
   const getMenuItems = (userRole: UserRole): MenuItem[] => {
@@ -81,6 +86,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
   const handleLogout = () => {
     router.push("/login");
   };
+
+  if (!mounted) {
+    return null; // Prevent hydration mismatch by skipping render until mounted
+  }
 
   return (
     <>

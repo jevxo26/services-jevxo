@@ -60,7 +60,7 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
 
   const profile = user ? {
     name: user.name || "User",
-    designation: user.role || "Client",
+    designation: roleName || "Client",
     avatar: (user.name || "U").substring(0, 2).toUpperCase()
   } : getProfileData(role);
   const activeRoleConfig = rolesList.find((x) => x.value === role) || rolesList[0];
