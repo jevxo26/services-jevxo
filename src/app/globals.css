@@ -1217,25 +1217,33 @@ body {
   }
 
   .services-search-bar {
-    flex-direction: column;
-    border-radius: var(--radius-lg);
-    padding: 12px;
+    flex-direction: row;
+    border-radius: var(--radius-full);
+    padding: 6px 6px 6px 16px;
     gap: 8px;
   }
 
   .services-search-location {
-    border-left: none;
-    border-top: 1px solid var(--border-light);
-    padding: 8px 0 0;
+    border-left: 1px solid var(--border-light);
+    border-top: none;
+    padding: 0 12px;
     justify-content: center;
   }
 
+  .services-location-text {
+    font-size: 0.8rem;
+  }
+
   .services-filter-btn {
-    align-self: flex-end;
+    align-self: center;
+    width: 40px;
+    height: 40px;
   }
 
   .services-categories {
     gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
   }
 
   .services-category-pill {
