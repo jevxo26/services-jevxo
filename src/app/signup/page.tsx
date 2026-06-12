@@ -15,8 +15,8 @@ export default function RegisterPage() {
   const [showPassword, setShowPassword] = useState(false)
   const [agreeTerms, setAgreeTerms] = useState(false)
   const [isOtpSent, setIsOtpSent] = useState(false)
-  const [otp, setOtp] = useState(["", "", "", "", "", ""])
-  const [timeLeft, setTimeLeft] = useState(59)
+  const [otp, setOtp] = useState(["", "", "", ""])
+  const [timeLeft, setTimeLeft] = useState(300)
 
   const otpInputsRef = useRef<(HTMLInputElement | null)[]>([])
 
@@ -59,8 +59,8 @@ export default function RegisterPage() {
       const response = await register(formData).unwrap()
       // Transition to OTP screen on success
       setIsOtpSent(true)
-      setTimeLeft(59)
-      setOtp(["", "", "", "", "", ""])
+      setTimeLeft(300)
+      setOtp(["", "", "", ""])
       
       // If the backend returns credentials here, we can set them, otherwise we do it on verifyOtp
       if (response.access_token || response.token) {
@@ -83,7 +83,7 @@ export default function RegisterPage() {
     setOtp(nextOtp)
 
     // Move to next input field
-    if (val !== "" && index < 5) {
+    if (val !== "" && index < 3) {
       otpInputsRef.current[index + 1]?.focus()
     }
   }
@@ -97,21 +97,28 @@ export default function RegisterPage() {
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault()
     const enteredOtp = otp.join("")
+<<<<<<< HEAD
     if (enteredOtp.length < 6) {
       toast.warning("Please enter a valid 6-digit OTP code.")
+=======
+    if (enteredOtp.length < 4) {
+      alert("Please enter a valid 4-digit OTP code.")
+>>>>>>> 436a2bd (update login)
       return
     }
 
     try {
-      const response = await verifyOtp({ phone: formData.phone, otp: enteredOtp }).unwrap()
+      const response = await verifyOtp({ phone: formData.phone, otpCode: enteredOtp }).unwrap()
       console.log("OTP Verified successfully:", enteredOtp)
       
-      // If credentials are only provided after OTP verify
-      if (response.access_token || response.token) {
-        const token = response.access_token || response.token;
-        if (token) localStorage.setItem('token', token);
-        const user = response.user || response;
-        dispatch(setUser(user))
+      const token = response?.data?.accessToken || response?.accessToken || response?.data?.token || response?.token;
+      if (token) {
+        localStorage.setItem('token', token);
+      }
+      
+      const user = response?.data?.user || response?.user;
+      if (user) {
+        dispatch(setUser(user));
       }
       
       router.push("/dashbord/overview")
@@ -124,9 +131,15 @@ export default function RegisterPage() {
   const handleResendOtp = async () => {
     try {
       await resendOtp({ phone: formData.phone }).unwrap()
+<<<<<<< HEAD
       setTimeLeft(59)
       setOtp(["", "", "", "", "", ""])
       toast.success("Verification code has been resent to " + formData.phone)
+=======
+      setTimeLeft(300)
+      setOtp(["", "", "", ""])
+      alert("Verification code has been resent to " + formData.phone)
+>>>>>>> 436a2bd (update login)
     } catch (err: any) {
       console.error("Failed to resend OTP:", err)
       toast.error(err.data?.message || "Failed to resend OTP.")
@@ -411,7 +424,7 @@ export default function RegisterPage() {
               {/* Timer Countdown */}
               <div className="text-xs text-rose-500 font-extrabold tracking-wide">
                 {timeLeft > 0 ? (
-                  `Resend code in 00:${timeLeft < 10 ? "0" + timeLeft : timeLeft}`
+                  `Resend code in 0${Math.floor(timeLeft / 60)}:${timeLeft % 60 < 10 ? "0" + (timeLeft % 60) : timeLeft % 60}`
                 ) : (
                   <button
                     type="button"

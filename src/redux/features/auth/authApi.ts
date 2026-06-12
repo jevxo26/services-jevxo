@@ -4,7 +4,7 @@ import { User, setUser } from './authSlice';
 export const authApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getUserProfile: builder.query<User, void>({
-      query: () => '/auth/me',
+      query: () => '/users/me',
       async onQueryStarted(arg, { dispatch, queryFulfilled }) {
         try {
           const { data } = await queryFulfilled;
@@ -26,14 +26,21 @@ export const authApi = baseApi.injectEndpoints({
     }),
     register: builder.mutation<User, any>({
       query: (userData) => ({
-        url: '/auth/register',
+        url: '/users',
         method: 'POST',
         body: userData,
       }),
     }),
-    verifyOtp: builder.mutation<any, { phone: string; otp: string }>({
+    verifyOtp: builder.mutation<any, { phone: string; otpCode: string }>({
       query: (data) => ({
         url: '/auth/verify-otp',
+        method: 'POST',
+        body: data,
+      }),
+    }),
+    sendOtp: builder.mutation<any, { phone: string }>({
+      query: (data) => ({
+        url: '/auth/send-otp',
         method: 'POST',
         body: data,
       }),
@@ -49,4 +56,4 @@ export const authApi = baseApi.injectEndpoints({
   overrideExisting: false,
 });
 
-export const { useGetUserProfileQuery, useLoginMutation, useRegisterMutation, useVerifyOtpMutation, useResendOtpMutation, useLazyGetUserProfileQuery } = authApi;
+export const { useGetUserProfileQuery, useLoginMutation, useRegisterMutation, useVerifyOtpMutation, useSendOtpMutation, useResendOtpMutation, useLazyGetUserProfileQuery } = authApi;

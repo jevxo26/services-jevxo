@@ -4,7 +4,7 @@ import * as React from "react"
 import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Phone, ArrowRight, Star, Briefcase, ShieldCheck, Loader2 } from "lucide-react"
-import { useLoginMutation, useVerifyOtpMutation, useResendOtpMutation } from "@/redux/features/auth/authApi"
+import { useSendOtpMutation, useVerifyOtpMutation, useResendOtpMutation } from "@/redux/features/auth/authApi"
 import { useAppDispatch } from "@/redux/hooks"
 import { setUser } from "@/redux/features/auth/authSlice"
 import { useRouter } from "next/navigation"
@@ -13,16 +13,16 @@ import { toast } from "sonner";
 export default function LoginPage() {
   const router = useRouter()
   const dispatch = useAppDispatch()
-  
+
   const [phone, setPhone] = useState("")
   const [remember, setRemember] = useState(false)
-  
+
   const [isOtpSent, setIsOtpSent] = useState(false)
-  const [otp, setOtp] = useState(["", "", "", "", "", ""])
-  const [timeLeft, setTimeLeft] = useState(59)
+  const [otp, setOtp] = useState(["", "", "", ""])
+  const [timeLeft, setTimeLeft] = useState(300)
   const otpInputsRef = useRef<(HTMLInputElement | null)[]>([])
 
-  const [login, { isLoading, error }] = useLoginMutation()
+  const [sendOtp, { isLoading }] = useSendOtpMutation()
   const [verifyOtp, { isLoading: isVerifying }] = useVerifyOtpMutation()
   const [resendOtp] = useResendOtpMutation()
 
@@ -41,22 +41,15 @@ export default function LoginPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await login({ phone }).unwrap()
-      
+      await sendOtp({ phone }).unwrap()
+
       setIsOtpSent(true)
-      setTimeLeft(59)
-      setOtp(["", "", "", "", "", ""])
-      
-      // If the backend returns credentials here, we can set them, otherwise we do it on verifyOtp
-      if (response.access_token || response.token) {
-        const token = response.access_token || response.token;
-        if (token) localStorage.setItem('token', token);
-        const user = response.user || response;
-        dispatch(setUser(user))
-      }
+      setTimeLeft(300)
+      setOtp(["", "", "", ""])
+
     } catch (err: any) {
-      console.error("Login failed:", err)
-      toast.error(err.data?.message || "Failed to send OTP. Please try again.")
+      console.error("Failed to send OTP:", err)
+      alert(err.data?.message || "Failed to send OTP. Please try again.")
     }
   }
 
@@ -67,7 +60,7 @@ export default function LoginPage() {
     nextOtp[index] = val.slice(-1)
     setOtp(nextOtp)
 
-    if (val !== "" && index < 5) {
+    if (val !== "" && index < 3) {
       otpInputsRef.current[index + 1]?.focus()
     }
   }
@@ -81,22 +74,24 @@ export default function LoginPage() {
   const handleVerifyOtp = async (e: React.FormEvent) => {
     e.preventDefault()
     const enteredOtp = otp.join("")
-    if (enteredOtp.length < 6) {
-      toast.warning("Please enter a valid 6-digit OTP code.")
+    if (enteredOtp.length < 4) {
+      alert("Please enter a valid 4-digit OTP code.")
       return
     }
 
     try {
-      const response = await verifyOtp({ phone, otp: enteredOtp }).unwrap()
-      
-      // If credentials are only provided after OTP verify
-      if (response.access_token || response.token) {
-        const token = response.access_token || response.token;
-        if (token) localStorage.setItem('token', token);
-        const user = response.user || response;
-        dispatch(setUser(user))
+      const response = await verifyOtp({ phone, otpCode: enteredOtp }).unwrap()
+
+      const token = response?.data?.accessToken || response?.accessToken || response?.data?.token || response?.token;
+      if (token) {
+        localStorage.setItem('token', token);
       }
-      
+
+      const user = response?.data?.user || response?.user;
+      if (user) {
+        dispatch(setUser(user));
+      }
+
       router.push("/dashbord/overview")
     } catch (err: any) {
       console.error("OTP verification failed:", err)
@@ -107,9 +102,9 @@ export default function LoginPage() {
   const handleResendOtp = async () => {
     try {
       await resendOtp({ phone }).unwrap()
-      setTimeLeft(59)
-      setOtp(["", "", "", "", "", ""])
-      toast.success("Verification code has been resent to " + phone)
+      setTimeLeft(300)
+      setOtp(["", "", "", ""])
+      alert("Verification code has been resent to " + phone)
     } catch (err: any) {
       console.error("Failed to resend OTP:", err)
       toast.error(err.data?.message || "Failed to resend OTP.")
@@ -122,7 +117,7 @@ export default function LoginPage() {
         <div className="grid grid-cols-1 lg:grid-cols-2 min-h-screen">
           {/* Left Column: Form */}
           <div className="flex flex-col justify-between p-6 sm:p-12 min-h-screen relative overflow-hidden">
-            
+
             {/* Background Watermark Pattern */}
             <div
               className="absolute inset-0 pointer-events-none opacity-[0.14]"
@@ -156,7 +151,7 @@ export default function LoginPage() {
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-5">
-                
+
                 {/* Phone Number */}
                 <div className="space-y-2">
                   <label className="block text-xs font-bold text-gray-700 uppercase tracking-wider">
@@ -278,7 +273,7 @@ export default function LoginPage() {
                 <h2 className="text-xl md:text-2xl font-black text-slate-800 leading-tight">
                   Effortless living, professionally managed.
                 </h2>
-                
+
                 {/* Quote */}
                 <p className="text-sm text-slate-500 leading-relaxed italic">
                   "Rajseba has completely transformed how I manage my home repairs. Fast, reliable, and always premium quality."
@@ -356,7 +351,7 @@ export default function LoginPage() {
               {/* Timer Countdown */}
               <div className="text-xs text-rose-500 font-extrabold tracking-wide">
                 {timeLeft > 0 ? (
-                  `Resend code in 00:${timeLeft < 10 ? "0" + timeLeft : timeLeft}`
+                  `Resend code in 0${Math.floor(timeLeft / 60)}:${timeLeft % 60 < 10 ? "0" + (timeLeft % 60) : timeLeft % 60}`
                 ) : (
                   <button
                     type="button"

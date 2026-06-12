@@ -57,7 +57,13 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
     }
   };
 
-  const profile = getProfileData(role);
+  const user = useAppSelector((state) => state.auth.user);
+
+  const profile = user ? {
+    name: user.name || "User",
+    designation: user.role || "Client",
+    avatar: (user.name || "U").substring(0, 2).toUpperCase()
+  } : getProfileData(role);
   const activeRoleConfig = rolesList.find((x) => x.value === role) || rolesList[0];
 
   return (

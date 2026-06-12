@@ -9,14 +9,6 @@ const nextConfig: NextConfig = {
       },
     ],
   },
-  async rewrites() {
-    return [
-      {
-        source: '/api/:path*',
-        destination: 'https://rajsheba.jevxo.com/:path*',
-      },
-    ];
-  },
 };
 
 export default nextConfig;
