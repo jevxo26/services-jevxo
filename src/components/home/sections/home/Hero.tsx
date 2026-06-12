@@ -79,7 +79,7 @@ const Hero = () => {
           priority
         />
         {/* Soft light glassmorphism overlay for text legibility */}
-        <div className="absolute inset-0 bg-white/80 md:bg-white/75 backdrop-blur-[1.5px]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/75 to-background backdrop-blur-[1px]" />
       </div>
 
       {/* Hero Content Container */}
@@ -89,6 +89,18 @@ const Hero = () => {
         animate="visible"
         className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 text-center"
       >
+        {/* Premium Badge */}
+        <motion.div
+          variants={itemVariants}
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF5A5F]/8 border border-[#FF5A5F]/15 text-[#FF5A5F] text-xs md:text-sm font-semibold mb-6 shadow-[0_2px_10px_rgba(255,90,95,0.05)]"
+        >
+          <span className="flex h-2 w-2 relative">
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5A5F] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF5A5F]"></span>
+          </span>
+          ✨ #1 Premium Doorstep Home Service Platform
+        </motion.div>
+
         {/* Centered Animated Heading */}
         <motion.h1
           variants={itemVariants}
@@ -160,9 +172,28 @@ const Hero = () => {
             type="submit"
             className="w-full md:w-auto bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold px-8 py-3.5 rounded-xl md:rounded-full transition-all duration-200 shadow-sm active:scale-95 text-base flex-shrink-0 cursor-pointer"
           >
-            {HERO_CONTENT.searchButtonText}
+             {HERO_CONTENT.searchButtonText}
           </button>
         </motion.form>
+
+        {/* Trust Badges */}
+        <motion.div
+          variants={itemVariants}
+          className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-10 text-slate-500 font-medium text-xs md:text-sm"
+        >
+          <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xs px-4 py-2 rounded-full border border-slate-200/50 shadow-xs">
+            <span className="text-[#FF5A5F] text-sm">★</span>
+            <span><strong className="text-slate-800 font-bold">4.9/5 Rating</strong> (20k+ Reviews)</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xs px-4 py-2 rounded-full border border-slate-200/50 shadow-xs">
+            <span className="text-[#FF5A5F] text-sm">⚡</span>
+            <span><strong className="text-slate-800 font-bold">30 Min</strong> Express Response</span>
+          </div>
+          <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xs px-4 py-2 rounded-full border border-slate-200/50 shadow-xs">
+            <span className="text-[#FF5A5F] text-sm">🛡️</span>
+            <span><strong className="text-slate-800 font-bold">100%</strong> Satisfaction Insured</span>
+          </div>
+        </motion.div>
       </motion.div>
     </div>
   );

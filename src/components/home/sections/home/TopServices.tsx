@@ -42,7 +42,7 @@ const SERVICES_CONTENT = {
       description: "Full Home Wiring & Panel Fix",
       price: 850,
       rating: 4.7,
-      image: "https://images.unsplash.com/photo-1621905252507-b354bc25edac?q=80&w=600&auto=format&fit=crop",
+      image: "https://images.unsplash.com/photo-1607472586893-edb57bdc0e39?q=80&w=600&auto=format&fit=crop",
       slug: "appliance-repair"
     }
   ]
@@ -113,7 +113,7 @@ export default function TopServices() {
               key={i}
               variants={cardVariants}
               whileHover={{ y: -6 }}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] transition-all duration-300 group flex flex-col h-full"
+              className="bg-white rounded-3xl overflow-hidden border border-slate-100 hover:border-[#FF5A5F]/15 shadow-xs hover:shadow-[0_20px_45px_rgba(255,90,95,0.04)] transition-all duration-300 group flex flex-col h-full"
             >
               {/* Image Block */}
               <div className="h-52 md:h-56 bg-slate-100 relative overflow-hidden">

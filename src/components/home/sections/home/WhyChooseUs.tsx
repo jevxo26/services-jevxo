@@ -80,16 +80,16 @@ export default function WhyChooseUs() {
                 key={i}
                 variants={itemVariants}
                 whileHover={{ y: -6 }}
-                className="text-center p-8 bg-white rounded-[32px] border border-slate-100/80 shadow-[0_15px_45px_rgba(15,23,42,0.015)] hover:shadow-[0_20px_50px_rgba(15,23,42,0.035)] transition-all duration-300 flex flex-col justify-center h-full"
+                className="text-center p-8 md:p-10 bg-gradient-to-b from-white to-slate-50/50 rounded-[32px] border border-slate-100 hover:border-[#FF5A5F]/10 shadow-xs hover:shadow-[0_25px_50px_-12px_rgba(15,23,42,0.04)] transition-all duration-300 flex flex-col justify-center h-full relative overflow-hidden"
               >
                 {/* 3D Circular Floating Icon Badge */}
-                <div className="mx-auto w-20 h-20 rounded-full bg-white flex items-center justify-center text-[#FF5A5F] mb-8 shadow-[0_8px_30px_rgba(255,90,95,0.25)] border border-slate-100/40 relative hover:scale-105 transition-transform duration-300">
+                <div className="mx-auto w-16 h-16 rounded-full bg-white flex items-center justify-center text-[#FF5A5F] mb-6 shadow-[0_8px_24px_rgba(255,90,95,0.15)] border border-slate-100/50 relative hover:scale-105 transition-transform duration-300">
                   {/* Concentric red boundary highlight */}
                   <div className="absolute inset-1 rounded-full border border-[#FF5A5F]/5 bg-slate-50/10" />
-                  <IconComponent className="w-8 h-8 relative z-10" />
+                  <IconComponent className="w-6 h-6 relative z-10" />
                 </div>
                 
-                <h3 className="font-extrabold text-slate-900 text-xl mb-3">
+                <h3 className="font-extrabold text-slate-900 text-lg md:text-xl mb-3">
                   {feature.title}
                 </h3>
                 <p className="text-sm text-slate-500 leading-relaxed max-w-xs mx-auto">

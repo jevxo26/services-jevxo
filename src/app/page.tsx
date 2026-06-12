@@ -10,14 +10,10 @@ export default function Home() {
     <div className="min-h-screen bg-background font-sans">
       <Hero/>
       <div className="relative">
-        {/* Background Pattern with low opacity to prevent contrast issues */}
-        <div 
-          className="absolute top-30 md:top-40 lg:top-50 inset-0 z-0 pointer-events-none opacity-10 bg-repeat" 
-          style={{ 
-            backgroundImage: "url('/bg-icons-design.png')",
-            backgroundSize: "2500px auto"
-          }}
-        />
+        {/* Soft premium radial glows for depth and premium aesthetic */}
+        <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#FF5A5F]/4 blur-[130px] rounded-full pointer-events-none z-0" />
+        <div className="absolute top-[40%] right-[-10%] w-[500px] md:w-[700px] h-[500px] md:h-[700px] bg-cyan-500/3 blur-[150px] rounded-full pointer-events-none z-0" />
+        <div className="absolute bottom-[10%] left-[-5%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-emerald-500/3 blur-[130px] rounded-full pointer-events-none z-0" />
         
         {/* Content sections rendered above the background */}
         <div className="relative z-10">
