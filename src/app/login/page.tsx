@@ -8,6 +8,7 @@ import { useLoginMutation, useVerifyOtpMutation, useResendOtpMutation } from "@/
 import { useAppDispatch } from "@/redux/hooks"
 import { setUser } from "@/redux/features/auth/authSlice"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner";
 
 export default function LoginPage() {
   const router = useRouter()
@@ -55,7 +56,7 @@ export default function LoginPage() {
       }
     } catch (err: any) {
       console.error("Login failed:", err)
-      alert(err.data?.message || "Failed to send OTP. Please try again.")
+      toast.error(err.data?.message || "Failed to send OTP. Please try again.")
     }
   }
 
@@ -81,7 +82,7 @@ export default function LoginPage() {
     e.preventDefault()
     const enteredOtp = otp.join("")
     if (enteredOtp.length < 6) {
-      alert("Please enter a valid 6-digit OTP code.")
+      toast.warning("Please enter a valid 6-digit OTP code.")
       return
     }
 
@@ -99,7 +100,7 @@ export default function LoginPage() {
       router.push("/dashbord/overview")
     } catch (err: any) {
       console.error("OTP verification failed:", err)
-      alert(err.data?.message || "Invalid OTP code.")
+      toast.error(err.data?.message || "Invalid OTP code.")
     }
   }
 
@@ -108,10 +109,10 @@ export default function LoginPage() {
       await resendOtp({ phone }).unwrap()
       setTimeLeft(59)
       setOtp(["", "", "", "", "", ""])
-      alert("Verification code has been resent to " + phone)
+      toast.success("Verification code has been resent to " + phone)
     } catch (err: any) {
       console.error("Failed to resend OTP:", err)
-      alert(err.data?.message || "Failed to resend OTP.")
+      toast.error(err.data?.message || "Failed to resend OTP.")
     }
   }
 

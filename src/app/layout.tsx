@@ -3,6 +3,7 @@ import { Bai_Jamjuree } from "next/font/google";
 import { StoreProvider } from "@/redux/StoreProvider";
 import "./globals.css";
 import { LayoutWrapper } from "@/components/home/LayoutWrapper";
+import ToasterProvider from "@/components/ToasterProvider";
 
 const baiJamjuree = Bai_Jamjuree({
   subsets: ["latin", "latin-ext", "thai"],
@@ -33,6 +34,7 @@ export default function RootLayout({
             {children}
           </LayoutWrapper>
         </StoreProvider>
+        <ToasterProvider />
       </body>
     </html>
   );

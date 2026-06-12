@@ -4,6 +4,7 @@ import React from "react";
 import { Star, MapPin, CheckCircle2, Calendar, Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Expert } from "./types";
+import { toast } from "sonner";
 
 interface DetailModalProps {
   expert: Expert | null;
@@ -130,7 +131,7 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
                 </a>
                 <button
                   onClick={() => {
-                    alert(`Successfully booked ${expert.name}!`);
+                    toast.success(`Successfully booked ${expert.name}!`);
                     onClose();
                   }}
                   className="px-6 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold rounded-xl text-sm shadow-sm transition-all active:scale-97 border-none cursor-pointer"

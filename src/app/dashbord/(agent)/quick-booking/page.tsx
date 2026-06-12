@@ -4,6 +4,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { getRoleName } from "@/redux/features/auth/authSlice";
 import { ShieldAlert, Zap, User, Phone, MapPin, Calendar, Check, Save } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 import { CustomSelect } from "@/components/ui/select";
 import { CustomCalendar } from "@/components/ui/calendar";
@@ -11,7 +12,6 @@ import dayjs from "dayjs";
 
 export default function AgentQuickBookingPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
-  const [success, setSuccess] = useState(false);
   const [bookingDetails, setBookingDetails] = useState({
     clientName: "",
     clientPhone: "",
@@ -45,7 +45,7 @@ export default function AgentQuickBookingPage() {
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccess(true);
+    toast.success("Booking placed successfully! Commission credited.");
     setBookingDetails({
       clientName: "",
       clientPhone: "",
@@ -55,7 +55,6 @@ export default function AgentQuickBookingPage() {
       clientAddress: "",
       preferredProvider: "Kabir AC Repair",
     });
-    setTimeout(() => setSuccess(false), 3000);
   };
 
   if (role !== "agent") {
@@ -71,12 +70,6 @@ export default function AgentQuickBookingPage() {
           </h1>
           <p className="text-slate-500 mt-1">Book services instantly on behalf of your leads/clients to earn 15% commission.</p>
         </div>
-
-        {success && (
-          <div className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-sm font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-sm animate-in fade-in">
-            <Check size={16} /> Booking placed successfully! Commission credited.
-          </div>
-        )}
       </div>
 
       <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">

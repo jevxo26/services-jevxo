@@ -4,15 +4,14 @@ import { useAppSelector } from "@/redux/hooks";
 import { getRoleName } from "@/redux/features/auth/authSlice";
 import { ShieldAlert, User, Phone, MapPin, Mail, Check, Save } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 export default function ProfilePage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
-  const [success, setSuccess] = useState(false);
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccess(true);
-    setTimeout(() => setSuccess(false), 3000);
+    toast.success("Profile updated successfully!");
   };
 
   if (role !== "customer") {
@@ -26,12 +25,6 @@ export default function ProfilePage() {
           <h1 className="text-3xl font-bold text-slate-900">My Profile</h1>
           <p className="text-slate-500 mt-1">Manage personal contact card, addresses, and emergency backup details.</p>
         </div>
-
-        {success && (
-          <div className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-sm font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
-            <Check size={16} /> Profile updated successfully!
-          </div>
-        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">

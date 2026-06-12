@@ -4,6 +4,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { getRoleName } from "@/redux/features/auth/authSlice";
 import { ShieldAlert, MessageCircle, AlertCircle, Check, Send } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 
 interface Ticket {
   id: string;
@@ -16,7 +17,6 @@ interface Ticket {
 
 export default function AgentSupportPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
-  const [success, setSuccess] = useState(false);
   const [tickets, setTickets] = useState<Ticket[]>([
     { id: "TCK-482", subject: "Commission calculation error on RS-9240", category: "Commission & Payout", status: "In Progress", date: "Today", lastReply: "We are auditing the invoice." },
     { id: "TCK-198", subject: "Nagad transfer wallet config missing", category: "Account Config", status: "Resolved", date: "May 14, 2026", lastReply: "Nagad API added." },
@@ -37,10 +37,9 @@ export default function AgentSupportPage() {
       lastReply: "Waiting for support agent assign.",
     };
     setTickets([newTicket, ...tickets]);
-    setSuccess(true);
+    toast.success("Support ticket generated successfully!");
     setSubject("");
     setDescription("");
-    setTimeout(() => setSuccess(false), 3000);
   };
 
   if (role !== "agent") {
@@ -54,12 +53,6 @@ export default function AgentSupportPage() {
           <h1 className="text-3xl font-bold text-slate-900">Support Desk</h1>
           <p className="text-slate-500 mt-1">Get priority resolution from our admin support representatives.</p>
         </div>
-
-        {success && (
-          <div className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-sm font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-sm">
-            <Check size={16} /> Support ticket generated successfully!
-          </div>
-        )}
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start">

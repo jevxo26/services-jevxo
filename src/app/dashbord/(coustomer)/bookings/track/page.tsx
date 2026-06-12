@@ -24,6 +24,7 @@ import {
 } from "lucide-react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner";
 
 export default function BookingTrackWizard() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
@@ -80,9 +81,9 @@ export default function BookingTrackWizard() {
         promoDiscount: 100,
         isPromoApplied: true
       }))
-      alert("Promo code applied successfully! ৳100 discount added.")
+      toast.success("Promo code applied successfully! ৳100 discount added.")
     } else {
-      alert("Invalid Promo Code! Use 'RAJSEBA100'")
+      toast.error("Invalid Promo Code! Use 'RAJSEBA100'")
     }
   }
 

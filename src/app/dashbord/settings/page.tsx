@@ -3,6 +3,7 @@
 import { useAppSelector } from "@/redux/hooks";
 import { getRoleName } from "@/redux/features/auth/authSlice";
 import { useState, useEffect } from "react";
+import { toast } from "sonner";
 import {
   User,
   Shield,
@@ -27,7 +28,6 @@ export default function SettingsPage() {
   const roleName = getRoleName(role);
   const router = useRouter();
   const [activeTab, setActiveTab] = useState("personal");
-  const [successMsg, setSuccessMsg] = useState(false);
 
   // Form Fields State
   const [personalInfo, setPersonalInfo] = useState({
@@ -64,8 +64,7 @@ export default function SettingsPage() {
 
   const handleSave = (e: React.FormEvent) => {
     e.preventDefault();
-    setSuccessMsg(true);
-    setTimeout(() => setSuccessMsg(false), 3000);
+    toast.success("Changes saved successfully!");
   };
 
   // Custom Toggle Switch Component
@@ -99,12 +98,7 @@ export default function SettingsPage() {
 
       <div className="max-w-6xl mx-auto space-y-8 relative z-10">
 
-        {/* Save success toast */}
-        {successMsg && (
-          <div className="fixed top-6 right-6 bg-emerald-50 border border-emerald-100 text-emerald-800 text-sm font-semibold px-4 py-2.5 rounded-xl flex items-center gap-1.5 shadow-lg z-50 animate-in fade-in slide-in-from-top-3 duration-200">
-            <Check size={16} className="text-emerald-600" /> Changes saved successfully!
-          </div>
-        )}
+
 
         {/* Main Columns Grid Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 items-start">

@@ -8,6 +8,7 @@ import { useRegisterMutation, useVerifyOtpMutation, useResendOtpMutation } from 
 import { useAppDispatch } from "@/redux/hooks"
 import { setUser } from "@/redux/features/auth/authSlice"
 import Link from "next/link"
+import { toast } from "sonner";
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -50,7 +51,7 @@ export default function RegisterPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!agreeTerms) {
-      alert("Please agree to the Terms of Use and Privacy Policy.")
+      toast.warning("Please agree to the Terms of Use and Privacy Policy.")
       return
     }
 
@@ -70,7 +71,7 @@ export default function RegisterPage() {
       }
     } catch (err: any) {
       console.error("Registration failed:", err)
-      alert(err.data?.message || "Registration failed. Please try again.")
+      toast.error(err.data?.message || "Registration failed. Please try again.")
     }
   }
 
@@ -97,7 +98,7 @@ export default function RegisterPage() {
     e.preventDefault()
     const enteredOtp = otp.join("")
     if (enteredOtp.length < 6) {
-      alert("Please enter a valid 6-digit OTP code.")
+      toast.warning("Please enter a valid 6-digit OTP code.")
       return
     }
 
@@ -116,7 +117,7 @@ export default function RegisterPage() {
       router.push("/dashbord/overview")
     } catch (err: any) {
       console.error("OTP verification failed:", err)
-      alert(err.data?.message || "Invalid OTP code.")
+      toast.error(err.data?.message || "Invalid OTP code.")
     }
   }
 
@@ -125,10 +126,10 @@ export default function RegisterPage() {
       await resendOtp({ phone: formData.phone }).unwrap()
       setTimeLeft(59)
       setOtp(["", "", "", "", "", ""])
-      alert("Verification code has been resent to " + formData.phone)
+      toast.success("Verification code has been resent to " + formData.phone)
     } catch (err: any) {
       console.error("Failed to resend OTP:", err)
-      alert(err.data?.message || "Failed to resend OTP.")
+      toast.error(err.data?.message || "Failed to resend OTP.")
     }
   }
 

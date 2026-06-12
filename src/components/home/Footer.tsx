@@ -10,6 +10,7 @@ import {
   Mail,
   MapPin,
 } from "lucide-react";
+import { toast } from "sonner";
 import { useState } from "react";
 import { usePathname } from "next/navigation";
 
@@ -436,7 +437,7 @@ export default function Footer() {
                     .catch(console.error);
                 } else {
                   navigator.clipboard.writeText(window.location.origin);
-                  alert("Link copied!");
+                  toast.success("Link copied!");
                 }
               }}
               aria-label="Share"

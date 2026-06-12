@@ -4,6 +4,7 @@ import { useAppSelector } from "@/redux/hooks";
 import { getRoleName } from "@/redux/features/auth/authSlice";
 import { ShieldAlert, DollarSign, Wallet, ArrowDownRight, Check, Send } from "lucide-react";
 import { useState } from "react";
+import { toast } from "sonner";
 import { CustomTable } from "@/components/ui/table";
 import { CustomSelect } from "@/components/ui/select";
 
@@ -19,7 +20,6 @@ interface PayoutLog {
 export default function CommissionPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
   const [payoutBalance, setPayoutBalance] = useState(3200);
-  const [success, setSuccess] = useState(false);
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [transferMethod, setTransferMethod] = useState("bKash Mobile Wallet");
 
@@ -70,14 +70,13 @@ export default function CommissionPage() {
     e.preventDefault();
     const amount = Number(withdrawAmount);
     if (!amount || amount <= 0 || amount > payoutBalance) {
-      alert("Please enter a valid amount within your withdrawable balance.");
+      toast.error("Please enter a valid amount within your withdrawable balance.");
       return;
     }
 
     setPayoutBalance(prev => prev - amount);
-    setSuccess(true);
+    toast.success("Withdrawal request submitted successfully!");
     setWithdrawAmount("");
-    setTimeout(() => setSuccess(false), 3000);
   };
 
   if (role !== "agent") {
@@ -93,12 +92,6 @@ export default function CommissionPage() {
           <h1 className="text-3xl font-bold text-slate-900">Commission Tracking</h1>
           <p className="text-slate-500 mt-1">Track booking commissions, monitor balances, and request direct payouts.</p>
         </div>
-
-        {success && (
-          <div className="bg-emerald-50 border border-emerald-100 text-emerald-800 text-sm font-semibold px-4 py-2 rounded-xl flex items-center gap-1.5 shadow-sm animate-in fade-in">
-            <Check size={16} /> Withdrawal request submitted successfully!
-          </div>
-        )}
       </div>
 
       {/* Balance Panel & Quick Withdraw Grid */}
