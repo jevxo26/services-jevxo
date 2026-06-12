@@ -97,7 +97,7 @@ const Testimonials = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[350px] bg-slate-200/30 blur-[130px] rounded-full pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
-        
+
         {/* Header Block */}
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
@@ -110,7 +110,7 @@ const Testimonials = () => {
 
         {/* Carousel Slider Card Wrapper */}
         <div className="relative max-w-2xl mx-auto min-h-[360px] md:min-h-[320px] flex items-center justify-center px-4">
-          
+
           {/* Shifting background color glow behind card (fading color design) */}
           <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
             <div className={`w-80 h-80 bg-gradient-to-r ${current.glowColor} opacity-10 blur-[80px] rounded-full transition-all duration-700`} />
@@ -133,12 +133,12 @@ const Testimonials = () => {
                     <Star key={starIdx} className="w-5 h-5 fill-[#FF5A5F]" />
                   ))}
                 </div>
-                
+
                 <p className="text-slate-700 italic leading-relaxed text-base md:text-lg mb-8 font-medium">
                   {current.text}
                 </p>
               </div>
-              
+
               {/* Customer Avatar & Location metadata */}
               <div className="flex items-center gap-4 pt-6 border-t border-slate-50">
                 <div className="relative w-12 h-12 bg-slate-100 rounded-full overflow-hidden flex-shrink-0 border-2 border-white shadow-sm">
@@ -193,9 +193,8 @@ const Testimonials = () => {
                   setDirection(dotIdx > activeIndex ? 1 : -1);
                   setActiveIndex(dotIdx);
                 }}
-                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
-                  dotIdx === activeIndex ? "w-7 bg-[#FF5A5F]" : "w-2.5 bg-slate-200 hover:bg-slate-300"
-                }`}
+                className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${dotIdx === activeIndex ? "w-7 bg-[#FF5A5F]" : "w-2.5 bg-slate-200 hover:bg-slate-300"
+                  }`}
                 aria-label={`Go to slide ${dotIdx + 1}`}
               />
             ))}
