@@ -52,13 +52,7 @@ export default function PremiumShiftingPage() {
         {/* Right Image */}
         <div className="flex-1 w-full relative">
           <div className="relative w-full h-[450px] lg:h-[550px] rounded-[2.5rem] overflow-hidden shadow-2xl">
-            <Image 
-              src="/images/service/shifting service-4.png" 
-              alt="Premium Shifting" 
-              fill 
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              priority
-            />
+            <Image src="/images/service/shifting service-4.png" alt="Premium Shifting" fill priority className="object-cover object-center" />
           </div>
           
           {/* Floating Badge */}
@@ -269,7 +263,7 @@ export default function PremiumShiftingPage() {
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-[60px] h-[60px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#b92b2b] transition-colors shrink-0">
-                  <Image src="/images/service/shifting-1.png" alt="Rahim Uddin" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/shifting-1.png" alt="Rahim Uddin" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.05rem]">Rahim Uddin</h4>
@@ -294,7 +288,7 @@ export default function PremiumShiftingPage() {
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-[60px] h-[60px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#b92b2b] transition-colors shrink-0">
-                  <Image src="/images/service/shifting-2.png" alt="Shakil Ahmed" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/shifting-2.png" alt="Shakil Ahmed" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.05rem]">Shakil Ahmed</h4>
@@ -319,7 +313,7 @@ export default function PremiumShiftingPage() {
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-[60px] h-[60px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#b92b2b] transition-colors shrink-0">
-                  <Image src="/images/service/shifting-3.png" alt="Nabila Islam" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/shifting-3.png" alt="Nabila Islam" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.05rem]">Nabila Islam</h4>
@@ -344,7 +338,7 @@ export default function PremiumShiftingPage() {
             <div>
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-[60px] h-[60px] rounded-full overflow-hidden border-2 border-transparent group-hover:border-[#b92b2b] transition-colors shrink-0">
-                  <Image src="/images/service/shifting-4.png" alt="Kamrul Hasan" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/shifting-4.png" alt="Kamrul Hasan" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.05rem]">Kamrul Hasan</h4>

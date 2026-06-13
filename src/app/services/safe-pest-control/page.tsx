@@ -16,13 +16,7 @@ export default function SafePestControlPage() {
           <div className="flex-[2] flex flex-col">
             {/* Hero Image */}
             <div className="relative w-full h-[400px] lg:h-[450px] rounded-[2.5rem] overflow-hidden mb-12 shadow-[0_10px_40px_rgba(0,0,0,0.1)]">
-              <Image 
-                src="/images/service/Professional Pest Control.png" 
-                alt="Safe Pest Control" 
-                fill 
-                style={{ objectFit: "cover", objectPosition: "center" }}
-                priority
-              />
+              <Image src="/images/service/Professional Pest Control.png" alt="Safe Pest Control" fill priority className="object-cover object-center" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent"></div>
               
               <div className="absolute bottom-8 md:bottom-12 left-6 md:left-10 text-white pr-6 md:pr-10">
@@ -218,7 +212,7 @@ export default function SafePestControlPage() {
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-4">
                       <div className="relative w-12 h-12 rounded-full overflow-hidden bg-[#f3f4f6]">
-                        <Image src="/images/service/rep-Technician1.png" alt="Sarah Jenkins" fill style={{ objectFit: "cover" }} />
+                        <Image src="/images/service/rep-Technician1.png" alt="Sarah Jenkins" fill className="object-cover" />
                       </div>
                       <div>
                         <h4 className="font-bold text-[#1a1a1a] text-[1.05rem]">Sarah Jenkins</h4>
@@ -243,7 +237,7 @@ export default function SafePestControlPage() {
                   <div className="flex justify-between items-start mb-4">
                     <div className="flex items-center gap-4">
                       <div className="relative w-12 h-12 rounded-full overflow-hidden bg-[#f3f4f6]">
-                        <Image src="/images/service/rep-Technician2.png" alt="Michael Reed" fill style={{ objectFit: "cover" }} />
+                        <Image src="/images/service/rep-Technician2.png" alt="Michael Reed" fill className="object-cover" />
                       </div>
                       <div>
                         <h4 className="font-bold text-[#1a1a1a] text-[1.05rem]">Michael Reed</h4>

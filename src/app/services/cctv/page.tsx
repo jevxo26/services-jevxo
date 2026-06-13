@@ -82,13 +82,7 @@ export default function CCTVServicePage() {
         {/* Right Image */}
         <div className="flex-1 w-full relative pl-2 pb-2 lg:pl-6 lg:pb-6">
           <div className="relative w-full h-[350px] lg:h-[400px] bg-white rounded-[2rem] overflow-hidden shadow-xl border border-white">
-            <Image 
-              src="/images/service/cc tv1.png" 
-              alt="CCTV Installation" 
-              fill 
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              priority
-            />
+            <Image src="/images/service/cc tv1.png" alt="CCTV Installation" fill priority className="object-cover object-center" />
           </div>
           
           {/* Floating Badge */}
@@ -397,12 +391,7 @@ export default function CCTVServicePage() {
             {/* Right Image */}
             <div className="flex-1 w-full lg:w-1/2">
               <div className="relative w-full aspect-[4/3] rounded-[2rem] overflow-hidden shadow-2xl">
-                <Image 
-                  src="/images/service/cctv room.png" 
-                  alt="Living Room CCTV Setup" 
-                  fill 
-                  style={{ objectFit: "cover", objectPosition: "center" }}
-                />
+                <Image src="/images/service/cctv room.png" alt="Living Room CCTV Setup" fill className="object-cover object-center" />
               </div>
             </div>
           </div>

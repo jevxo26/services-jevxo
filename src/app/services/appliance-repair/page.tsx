@@ -20,13 +20,7 @@ export default function ApplianceRepairPage() {
       <div className="max-w-[1300px] mx-auto px-6 pt-10">
         <div className="relative w-full h-[450px] lg:h-[500px] rounded-[2.5rem] overflow-hidden">
           {/* Background Image */}
-          <Image 
-            src="/images/service/Appliance Repair.png" 
-            alt="Appliance Repair" 
-            fill 
-            style={{ objectFit: "cover", objectPosition: "center" }}
-            priority
-          />
+          <Image src="/images/service/Appliance Repair.png" alt="Appliance Repair" fill priority className="object-cover object-center" />
           {/* Dark Overlay */}
           <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/50 to-transparent"></div>
 
@@ -81,12 +75,7 @@ export default function ApplianceRepairPage() {
           {/* Left Card: Refrigerator Repair */}
           <div className="flex-[2] bg-white rounded-[2.5rem] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#f3f4f6] flex flex-col md:flex-row gap-8">
             <div className="w-full md:w-[350px] relative h-[250px] sm:h-[300px] md:h-auto rounded-[2rem] overflow-hidden shrink-0 bg-gray-100">
-              <Image 
-                src="/images/service/Refrigerator.png" 
-                alt="Refrigerator Repair" 
-                fill 
-                style={{ objectFit: "cover" }}
-              />
+              <Image src="/images/service/Refrigerator.png" alt="Refrigerator Repair" fill className="object-cover" />
             </div>
             
             <div className="flex-1 flex flex-col justify-center py-4 pr-4">
@@ -163,7 +152,7 @@ export default function ApplianceRepairPage() {
           {/* Washing Machine */}
           <div className="bg-white rounded-[2.5rem] p-4 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#f3f4f6] flex flex-col">
             <div className="relative w-full h-[220px] rounded-[2rem] overflow-hidden mb-6">
-              <Image src="/images/service/Washing Machine.png" alt="Washing Machine" fill style={{ objectFit: "cover" }} />
+              <Image src="/images/service/Washing Machine.png" alt="Washing Machine" fill className="object-cover" />
             </div>
             <div className="px-4 pb-4 flex flex-col flex-1">
               <h3 className="text-[1.5rem] font-bold text-[#1a1a1a] mb-2">Washing Machine</h3>
@@ -185,7 +174,7 @@ export default function ApplianceRepairPage() {
           {/* Oven Repair */}
           <div className="bg-white rounded-[2.5rem] p-4 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#f3f4f6] flex flex-col">
             <div className="relative w-full h-[220px] rounded-[2rem] overflow-hidden mb-6">
-              <Image src="/images/service/Oven Repair.png" alt="Oven Repair" fill style={{ objectFit: "cover" }} />
+              <Image src="/images/service/Oven Repair.png" alt="Oven Repair" fill className="object-cover" />
             </div>
             <div className="px-4 pb-4 flex flex-col flex-1">
               <h3 className="text-[1.5rem] font-bold text-[#1a1a1a] mb-2">Oven Repair</h3>

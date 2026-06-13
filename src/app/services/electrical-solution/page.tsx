@@ -38,13 +38,7 @@ export default function ElectricalSolutionPage() {
         <div className="flex-1 w-full relative pl-2 pb-2 lg:pl-6 lg:pb-6">
           <div className="relative w-full h-[400px] lg:h-[500px] bg-white/60 backdrop-blur-sm rounded-[3rem] p-3 lg:p-4 shadow-[0_20px_50px_rgba(0,0,0,0.05)] border border-white">
             <div className="relative w-full h-full rounded-[2.2rem] overflow-hidden">
-              <Image 
-                src="/images/service/Electrician working service-3.png" 
-                alt="Electrician working on panel" 
-                fill 
-                style={{ objectFit: "cover", objectPosition: "center" }}
-                priority
-              />
+              <Image src="/images/service/Electrician working service-3.png" alt="Electrician working on panel" fill priority className="object-cover object-center" />
             </div>
           </div>
           
@@ -167,7 +161,7 @@ export default function ElectricalSolutionPage() {
             <div className="bg-white rounded-[2rem] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6] flex flex-col items-center text-center group">
               <div className="relative w-[120px] h-[120px] mb-4">
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#f8fafc]">
-                  <Image src="/images/service/Electrician Ariful.png" alt="Ariful Islam" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                  <Image src="/images/service/Electrician Ariful.png" alt="Ariful Islam" fill className="object-cover object-top" />
                 </div>
                 <div className="absolute bottom-0 right-0 w-8 h-8 bg-[#10b981] rounded-full border-4 border-white flex items-center justify-center">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -184,7 +178,7 @@ export default function ElectricalSolutionPage() {
             <div className="bg-white rounded-[2rem] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6] flex flex-col items-center text-center group">
               <div className="relative w-[120px] h-[120px] mb-4">
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#f8fafc]">
-                  <Image src="/images/service/Electrician Tanvir.png" alt="Tanvir Ahmed" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                  <Image src="/images/service/Electrician Tanvir.png" alt="Tanvir Ahmed" fill className="object-cover object-top" />
                 </div>
                 <div className="absolute bottom-0 right-0 w-8 h-8 bg-[#10b981] rounded-full border-4 border-white flex items-center justify-center">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -201,7 +195,7 @@ export default function ElectricalSolutionPage() {
             <div className="bg-white rounded-[2rem] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6] flex flex-col items-center text-center group">
               <div className="relative w-[120px] h-[120px] mb-4">
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#f8fafc]">
-                  <Image src="/images/service/Electrician Zahid.png" alt="Md. Zahid" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                  <Image src="/images/service/Electrician Zahid.png" alt="Md. Zahid" fill className="object-cover object-top" />
                 </div>
                 <div className="absolute bottom-0 right-0 w-8 h-8 bg-[#10b981] rounded-full border-4 border-white flex items-center justify-center">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>
@@ -218,7 +212,7 @@ export default function ElectricalSolutionPage() {
             <div className="bg-white rounded-[2rem] p-6 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6] flex flex-col items-center text-center group">
               <div className="relative w-[120px] h-[120px] mb-4">
                 <div className="w-full h-full rounded-full overflow-hidden border-4 border-[#f8fafc]">
-                  <Image src="/images/service/Electrician Salman.png" alt="Salman Khan" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                  <Image src="/images/service/Electrician Salman.png" alt="Salman Khan" fill className="object-cover object-top" />
                 </div>
                 <div className="absolute bottom-0 right-0 w-8 h-8 bg-[#10b981] rounded-full border-4 border-white flex items-center justify-center">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>

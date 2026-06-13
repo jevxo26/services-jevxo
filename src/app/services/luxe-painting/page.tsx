@@ -51,13 +51,7 @@ export default function LuxePaintingPage() {
         {/* Right Image */}
         <div className="flex-1 w-full relative">
           <div className="relative w-full h-[500px] lg:h-[650px] rounded-[2.5rem] overflow-hidden shadow-2xl">
-            <Image 
-              src="/images/service/Professional Painter-1.png" 
-              alt="Professional Painter" 
-              fill 
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              priority
-            />
+            <Image src="/images/service/Professional Painter-1.png" alt="Professional Painter" fill priority className="object-cover object-center" />
           </div>
           
           {/* Floating Badge */}
@@ -87,7 +81,7 @@ export default function LuxePaintingPage() {
           {/* Interior Painting Card */}
           <div className="lg:col-span-2 bg-[#fffcfc] rounded-[2.5rem] p-6 lg:p-8 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#f3f4f6] flex flex-col md:flex-row gap-8 items-center group">
             <div className="relative w-full md:w-[45%] h-[300px] md:h-[350px] rounded-[2rem] overflow-hidden">
-              <Image src="/images/service/paint-2.png" alt="Interior Painting" fill style={{ objectFit: "cover" }} />
+              <Image src="/images/service/paint-2.png" alt="Interior Painting" fill className="object-cover" />
             </div>
             <div className="flex-1 w-full flex flex-col justify-center">
               <h3 className="text-[1.8rem] font-bold text-[#1a1a1a] mb-3">Interior Painting</h3>
@@ -124,7 +118,7 @@ export default function LuxePaintingPage() {
           {/* Exterior Coating Card */}
           <div className="bg-[#fffcfc] rounded-[2.5rem] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#f3f4f6] flex flex-col group">
             <div className="relative w-full h-[240px] rounded-[2rem] overflow-hidden mb-6">
-              <Image src="/images/service/paint-3.png" alt="Exterior Coating" fill style={{ objectFit: "cover" }} />
+              <Image src="/images/service/paint-3.png" alt="Exterior Coating" fill className="object-cover" />
             </div>
             <h3 className="text-[1.5rem] font-bold text-[#1a1a1a] mb-3 px-2">Exterior Coating</h3>
             <p className="text-[#6b7280] text-[1rem] leading-relaxed mb-6 px-2 flex-1">
@@ -140,7 +134,7 @@ export default function LuxePaintingPage() {
           {/* Waterproofing Card */}
           <div className="bg-[#fffcfc] rounded-[2.5rem] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] border border-[#f3f4f6] flex flex-col group">
             <div className="relative w-full h-[240px] rounded-[2rem] overflow-hidden mb-6">
-              <Image src="/images/service/paint-4.png" alt="Waterproofing" fill style={{ objectFit: "cover" }} />
+              <Image src="/images/service/paint-4.png" alt="Waterproofing" fill className="object-cover" />
             </div>
             <h3 className="text-[1.5rem] font-bold text-[#1a1a1a] mb-3 px-2">Waterproofing</h3>
             <p className="text-[#6b7280] text-[1rem] leading-relaxed mb-6 px-2 flex-1">
@@ -205,16 +199,12 @@ export default function LuxePaintingPage() {
             </div>
           </div>
 
-          <div 
-            ref={sliderRef}
-            className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8"
-            style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          >
+          <div ref={sliderRef} className="[&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none] flex gap-6 overflow-x-auto snap-x snap-mandatory pb-8" >
             {/* Card 1: Imran Hossain */}
             <div className="min-w-[350px] lg:min-w-[400px] bg-white rounded-[2rem] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] snap-start shrink-0">
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#b92b2b] shrink-0">
-                  <Image src="/images/service/paintman1.png" alt="Imran Hossain" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paintman1.png" alt="Imran Hossain" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.1rem]">Imran Hossain</h4>
@@ -223,10 +213,10 @@ export default function LuxePaintingPage() {
               </div>
               <div className="flex gap-3 mb-6">
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-5.png" alt="Portfolio 1" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-5.png" alt="Portfolio 1" fill className="object-cover" />
                 </div>
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-6.png" alt="Portfolio 2" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-6.png" alt="Portfolio 2" fill className="object-cover" />
                 </div>
               </div>
               <button className="w-full py-3.5 rounded-[1rem] border border-gray-100 text-[#b92b2b] font-bold text-[0.95rem] hover:bg-gray-50 transition-colors">
@@ -238,7 +228,7 @@ export default function LuxePaintingPage() {
             <div className="min-w-[350px] lg:min-w-[400px] bg-white rounded-[2rem] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] snap-start shrink-0">
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#b92b2b] shrink-0">
-                  <Image src="/images/service/paintman2.png" alt="Farhana Ahmed" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paintman2.png" alt="Farhana Ahmed" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.1rem]">Farhana Ahmed</h4>
@@ -247,10 +237,10 @@ export default function LuxePaintingPage() {
               </div>
               <div className="flex gap-3 mb-6">
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-7.png" alt="Portfolio 3" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-7.png" alt="Portfolio 3" fill className="object-cover" />
                 </div>
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-8.png" alt="Portfolio 4" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-8.png" alt="Portfolio 4" fill className="object-cover" />
                 </div>
               </div>
               <button className="w-full py-3.5 rounded-[1rem] border border-gray-100 text-[#b92b2b] font-bold text-[0.95rem] hover:bg-gray-50 transition-colors">
@@ -262,7 +252,7 @@ export default function LuxePaintingPage() {
             <div className="min-w-[350px] lg:min-w-[400px] bg-white rounded-[2rem] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] snap-start shrink-0">
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#b92b2b] shrink-0">
-                  <Image src="/images/service/paintman3.png" alt="Kabir Uddin" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paintman3.png" alt="Kabir Uddin" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.1rem]">Kabir Uddin</h4>
@@ -271,10 +261,10 @@ export default function LuxePaintingPage() {
               </div>
               <div className="flex gap-3 mb-6">
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-9.png" alt="Portfolio 5" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-9.png" alt="Portfolio 5" fill className="object-cover" />
                 </div>
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-10.png" alt="Portfolio 6" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-10.png" alt="Portfolio 6" fill className="object-cover" />
                 </div>
               </div>
               <button className="w-full py-3.5 rounded-[1rem] border border-gray-100 text-[#b92b2b] font-bold text-[0.95rem] hover:bg-gray-50 transition-colors">
@@ -286,7 +276,7 @@ export default function LuxePaintingPage() {
             <div className="min-w-[350px] lg:min-w-[400px] bg-white rounded-[2rem] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.04)] snap-start shrink-0">
               <div className="flex items-center gap-4 mb-6">
                 <div className="relative w-16 h-16 rounded-full overflow-hidden border-2 border-[#b92b2b] shrink-0">
-                  <Image src="/images/service/paintman1.png" alt="Sajjad Ali" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paintman1.png" alt="Sajjad Ali" fill className="object-cover" />
                 </div>
                 <div>
                   <h4 className="font-bold text-[#1a1a1a] text-[1.1rem]">Sajjad Ali</h4>
@@ -295,10 +285,10 @@ export default function LuxePaintingPage() {
               </div>
               <div className="flex gap-3 mb-6">
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-5.png" alt="Portfolio 7" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-5.png" alt="Portfolio 7" fill className="object-cover" />
                 </div>
                 <div className="relative flex-1 h-[140px] rounded-2xl overflow-hidden bg-gray-100">
-                  <Image src="/images/service/paint-6.png" alt="Portfolio 8" fill style={{ objectFit: "cover" }} />
+                  <Image src="/images/service/paint-6.png" alt="Portfolio 8" fill className="object-cover" />
                 </div>
               </div>
               <button className="w-full py-3.5 rounded-[1rem] border border-gray-100 text-[#b92b2b] font-bold text-[0.95rem] hover:bg-gray-50 transition-colors">
@@ -333,7 +323,7 @@ export default function LuxePaintingPage() {
 
           <div className="flex-1 w-full relative z-10 flex justify-center lg:justify-end">
             <div className="relative w-full max-w-[500px] aspect-[4/3] rounded-[2rem] overflow-hidden shadow-[0_0_50px_rgba(255,255,255,0.4)] border-[6px] border-white/30">
-              <Image src="/images/service/paint-11.png" alt="AI Visualizer" fill style={{ objectFit: "cover" }} />
+              <Image src="/images/service/paint-11.png" alt="AI Visualizer" fill className="object-cover" />
             </div>
           </div>
 

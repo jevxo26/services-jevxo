@@ -10,13 +10,7 @@ export default function MasterACServicePage() {
         <section className="relative w-full h-[450px] rounded-[1.5rem] overflow-hidden shadow-[0_4px_20px_rgba(0,0,0,0.05)] flex items-end pb-12">
           {/* Background Image */}
           <div className="absolute inset-0 z-0">
-            <Image
-              src="/images/service/AC Repair Service-1.png"
-              alt="Professional AC Services"
-              fill
-              style={{ objectFit: "cover", objectPosition: "center 20%" }}
-              priority
-            />
+            <Image src="/images/service/AC Repair Service-1.png" alt="Professional AC Services" fill priority className="object-cover object-[center_20%]" />
             {/* Gradient Overlay for text readability at the bottom */}
             <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent"></div>
           </div>
@@ -131,7 +125,7 @@ export default function MasterACServicePage() {
               {/* Technician 1 */}
               <div className="flex-1 bg-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-transparent flex items-center gap-5">
                 <div className="relative w-20 h-20 rounded-full overflow-hidden shrink-0 shadow-sm">
-                  <Image src="/images/service/ac pro 1.png" alt="Karim Ullah" fill style={{ objectFit: "cover", objectPosition: "center" }} />
+                  <Image src="/images/service/ac pro 1.png" alt="Karim Ullah" fill className="object-cover object-center" />
                 </div>
                 <div className="flex flex-col justify-center">
                   <h4 className="text-[1.1rem] font-bold text-[#1a1a1a] leading-tight mb-1.5">Karim Ullah</h4>
@@ -146,7 +140,7 @@ export default function MasterACServicePage() {
               {/* Technician 2 */}
               <div className="flex-1 bg-white rounded-3xl p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-transparent flex items-center gap-5">
                 <div className="relative w-20 h-20 rounded-full overflow-hidden shrink-0 shadow-sm">
-                  <Image src="/images/service/ac pro 2.png" alt="Zakir Hossain" fill style={{ objectFit: "cover", objectPosition: "center" }} />
+                  <Image src="/images/service/ac pro 2.png" alt="Zakir Hossain" fill className="object-cover object-center" />
                 </div>
                 <div className="flex flex-col justify-center">
                   <h4 className="text-[1.1rem] font-bold text-[#1a1a1a] leading-tight mb-1.5">Zakir Hossain</h4>

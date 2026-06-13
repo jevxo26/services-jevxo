@@ -204,13 +204,7 @@ export default function TrendingServicesPage() {
           {currentServices.map((service) => (
             <Link href={`/services/${service.id}`} key={service.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#e5e7eb] flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group no-underline">
               <div className="relative h-[200px] overflow-hidden">
-                <Image
-                  src={service.image}
-                  alt={service.title}
-                  fill
-                  style={{ objectFit: "cover" }}
-                  className="transition-transform duration-500 group-hover:scale-105"
-                />
+                <Image src={service.image} alt={service.title} fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
                 {service.badge && (
                   <span className="absolute top-3 left-3 py-1 px-3 bg-[#ff5a5f] text-white text-xs font-semibold rounded-full z-10">{service.badge}</span>
                 )}

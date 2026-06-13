@@ -9,13 +9,7 @@ export default function ExpertPlumbingPage() {
       <div className="max-w-[1300px] mx-auto px-6 pt-8">
         <section className="relative w-full h-[450px] rounded-[2.5rem] overflow-hidden shadow-sm flex items-center">
           <div className="absolute inset-0 z-0">
-            <Image
-              src="/images/service/plumbing service-1.png"
-              alt="Premium Plumbing Solutions"
-              fill
-              style={{ objectFit: "cover", objectPosition: "center" }}
-              priority
-            />
+            <Image src="/images/service/plumbing service-1.png" alt="Premium Plumbing Solutions" fill priority className="object-cover object-center" />
             {/* Dark gradient overlay on the left for text readability */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent"></div>
           </div>
@@ -89,14 +83,14 @@ export default function ExpertPlumbingPage() {
               </div>
             </div>
             <div className="w-full md:w-[320px] h-[300px] relative rounded-[1.5rem] overflow-hidden shrink-0 shadow-sm border border-[#f3f4f6]">
-              <Image src="/images/service/plumbing Leak Repair.png" alt="Leak Repair" fill style={{ objectFit: "cover" }} className="transition-transform duration-500 group-hover:scale-105" />
+              <Image src="/images/service/plumbing Leak Repair.png" alt="Leak Repair" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
           </div>
 
           {/* Smaller Card: Pipe Installation */}
           <div className="bg-white rounded-[2rem] p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6] flex flex-col group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1">
             <div className="w-full h-[200px] relative rounded-[1.2rem] overflow-hidden mb-6 shadow-sm border border-[#f3f4f6]">
-              <Image src="/images/service/plumbing Pipe Installation.png" alt="Pipe Installation" fill style={{ objectFit: "cover" }} className="transition-transform duration-500 group-hover:scale-105" />
+              <Image src="/images/service/plumbing Pipe Installation.png" alt="Pipe Installation" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
             <h3 className="text-[1.4rem] font-bold text-[#1a1a1a] mb-3">Pipe Installation</h3>
             <p className="text-[#6b7280] text-[1rem] leading-relaxed mb-8">
@@ -117,7 +111,7 @@ export default function ExpertPlumbingPage() {
           {/* Smaller Card: Sanitary Fitting */}
           <div className="bg-white rounded-[2rem] p-7 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6] flex flex-col group cursor-pointer hover:shadow-[0_8px_30px_rgba(0,0,0,0.06)] transition-all duration-300 hover:-translate-y-1">
             <div className="w-full h-[200px] relative rounded-[1.2rem] overflow-hidden mb-6 shadow-sm border border-[#f3f4f6]">
-              <Image src="/images/service/plumbing Sanitary Fitting.png" alt="Sanitary Fitting" fill style={{ objectFit: "cover" }} className="transition-transform duration-500 group-hover:scale-105" />
+              <Image src="/images/service/plumbing Sanitary Fitting.png" alt="Sanitary Fitting" fill className="object-cover transition-transform duration-500 group-hover:scale-105" />
             </div>
             <h3 className="text-[1.4rem] font-bold text-[#1a1a1a] mb-3">Sanitary Fitting</h3>
             <p className="text-[#6b7280] text-[1rem] leading-relaxed mb-8">
@@ -169,7 +163,7 @@ export default function ExpertPlumbingPage() {
             {/* Plumber 1 */}
             <div className="bg-white rounded-[2rem] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6]">
               <div className="w-full h-[240px] relative rounded-[1.5rem] overflow-hidden mb-5 bg-[#f8fafc]">
-                <Image src="/images/service/plumbing Pro 1.png" alt="Arif Ahmed" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/plumbing Pro 1.png" alt="Arif Ahmed" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b] text-[0.9rem]">★</span>
                   <span className="text-[0.85rem] font-bold text-[#1a1a1a]">4.9</span>
@@ -194,7 +188,7 @@ export default function ExpertPlumbingPage() {
             {/* Plumber 2 */}
             <div className="bg-white rounded-[2rem] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6]">
               <div className="w-full h-[240px] relative rounded-[1.5rem] overflow-hidden mb-5 bg-[#f8fafc]">
-                <Image src="/images/service/plumbing  Pro 2.png" alt="Kamrul Islam" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/plumbing Pro 2.png" alt="Kamrul Islam" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b] text-[0.9rem]">★</span>
                   <span className="text-[0.85rem] font-bold text-[#1a1a1a]">4.8</span>
@@ -219,7 +213,7 @@ export default function ExpertPlumbingPage() {
             {/* Plumber 3 */}
             <div className="bg-white rounded-[2rem] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6]">
               <div className="w-full h-[240px] relative rounded-[1.5rem] overflow-hidden mb-5 bg-[#f8fafc]">
-                <Image src="/images/service/plumbing  Pro 3.png" alt="Sajib Hossain" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/plumbing Pro 3.png" alt="Sajib Hossain" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b] text-[0.9rem]">★</span>
                   <span className="text-[0.85rem] font-bold text-[#1a1a1a]">5.0</span>
@@ -244,7 +238,7 @@ export default function ExpertPlumbingPage() {
             {/* Plumber 4 */}
             <div className="bg-white rounded-[2rem] p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] border border-[#f3f4f6]">
               <div className="w-full h-[240px] relative rounded-[1.5rem] overflow-hidden mb-5 bg-[#f8fafc]">
-                <Image src="/images/service/plumbing  Pro 4.png" alt="Mehedi Hasan" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/plumbing Pro 4.png" alt="Mehedi Hasan" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1.5 rounded-lg flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b] text-[0.9rem]">★</span>
                   <span className="text-[0.85rem] font-bold text-[#1a1a1a]">4.7</span>

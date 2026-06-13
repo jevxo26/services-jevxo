@@ -10,13 +10,7 @@ export default function PremiumDeepCleaningPage() {
       <section className="relative w-full h-[600px] flex items-center">
         {/* Background Image */}
         <div className="absolute inset-0 z-0">
-          <Image
-            src="/images/service/pre cleaning service-2.png"
-            alt="Professional Cleaning for Your Sanctuary"
-            fill
-            style={{ objectFit: "cover" }}
-            priority
-          />
+          <Image src="/images/service/pre cleaning service-2.png" alt="Professional Cleaning for Your Sanctuary" fill priority className="object-cover" />
           {/* Soft black overlay to ensure text readability */}
           <div className="absolute inset-0 bg-black/40"></div>
         </div>
@@ -59,13 +53,7 @@ export default function PremiumDeepCleaningPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Top Left Card */}
             <div className="md:col-span-2 relative h-[380px] rounded-[1.5rem] overflow-hidden group cursor-pointer shadow-sm">
-              <Image
-                src="/images/service/pre cleaning service-21.png"
-                alt="Deep Home Cleaning"
-                fill
-                style={{ objectFit: "cover" }}
-                className="transition-transform duration-700 group-hover:scale-105"
-              />
+              <Image src="/images/service/pre cleaning service-21.png" alt="Deep Home Cleaning" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
                 <h3 className="text-white text-[1.6rem] font-bold mb-2 tracking-tight">Deep Home Cleaning</h3>
@@ -81,13 +69,7 @@ export default function PremiumDeepCleaningPage() {
 
             {/* Top Right Card */}
             <div className="md:col-span-1 relative h-[380px] rounded-[1.5rem] overflow-hidden group cursor-pointer shadow-sm">
-              <Image
-                src="/images/service/pre cleaning service-23.png"
-                alt="Sofa & Carpet"
-                fill
-                style={{ objectFit: "cover" }}
-                className="transition-transform duration-700 group-hover:scale-105"
-              />
+              <Image src="/images/service/pre cleaning service-23.png" alt="Sofa & Carpet" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
               <div className="absolute inset-0 p-8 flex flex-col justify-end">
                 <h3 className="text-white text-[1.6rem] font-bold mb-2 tracking-tight">Sofa & Carpet</h3>
@@ -103,13 +85,7 @@ export default function PremiumDeepCleaningPage() {
 
             {/* Bottom Card */}
             <div className="md:col-span-3 relative h-[280px] rounded-[1.5rem] overflow-hidden group cursor-pointer shadow-sm">
-              <Image
-                src="/images/service/pre cleaning service-24.png"
-                alt="Kitchen Degreasing"
-                fill
-                style={{ objectFit: "cover", objectPosition: "center 60%" }}
-                className="transition-transform duration-700 group-hover:scale-105"
-              />
+              <Image src="/images/service/pre cleaning service-24.png" alt="Kitchen Degreasing" fill className="object-cover object-[center_60%] transition-transform duration-700 group-hover:scale-105" />
               <div className="absolute inset-0 bg-gradient-to-r from-black/90 via-black/50 to-transparent"></div>
               <div className="absolute inset-0 p-8 md:p-10 flex flex-col justify-center max-w-[700px]">
                 <h3 className="text-white text-[1.6rem] font-bold mb-2 tracking-tight">Kitchen Degreasing</h3>
@@ -243,7 +219,7 @@ export default function PremiumDeepCleaningPage() {
             {/* Specialist 1 */}
             <div className="bg-white rounded-[1.5rem] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-transform duration-300 hover:-translate-y-1">
               <div className="relative h-[240px] rounded-[1rem] overflow-hidden mb-5 bg-[#f3f4f6]">
-                <Image src="/images/service/pre cleaning service-25.png" alt="Ayesha Siddiqua" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/pre cleaning service-25.png" alt="Ayesha Siddiqua" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1 rounded-md text-[0.8rem] font-bold flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b]">★</span> 4.9
                 </div>
@@ -264,7 +240,7 @@ export default function PremiumDeepCleaningPage() {
             {/* Specialist 2 */}
             <div className="bg-white rounded-[1.5rem] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-transform duration-300 hover:-translate-y-1">
               <div className="relative h-[240px] rounded-[1rem] overflow-hidden mb-5 bg-[#f3f4f6]">
-                <Image src="/images/service/pre cleaning service-26.png" alt="Kamal Hossain" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/pre cleaning service-26.png" alt="Kamal Hossain" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1 rounded-md text-[0.8rem] font-bold flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b]">★</span> 4.8
                 </div>
@@ -285,7 +261,7 @@ export default function PremiumDeepCleaningPage() {
             {/* Specialist 3 */}
             <div className="bg-white rounded-[1.5rem] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-transform duration-300 hover:-translate-y-1">
               <div className="relative h-[240px] rounded-[1rem] overflow-hidden mb-5 bg-[#f3f4f6]">
-                <Image src="/images/service/pre cleaning service-27.png" alt="Rahat Ahmed" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/pre cleaning service-27.png" alt="Rahat Ahmed" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1 rounded-md text-[0.8rem] font-bold flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b]">★</span> 5.0
                 </div>
@@ -306,7 +282,7 @@ export default function PremiumDeepCleaningPage() {
             {/* Specialist 4 */}
             <div className="bg-white rounded-[1.5rem] p-4 shadow-[0_4px_20px_rgba(0,0,0,0.04)] transition-transform duration-300 hover:-translate-y-1">
               <div className="relative h-[240px] rounded-[1rem] overflow-hidden mb-5 bg-[#f3f4f6]">
-                <Image src="/images/service/pre cleaning service-28.png" alt="Nusrat Jahan" fill style={{ objectFit: "cover", objectPosition: "top" }} />
+                <Image src="/images/service/pre cleaning service-28.png" alt="Nusrat Jahan" fill className="object-cover object-top" />
                 <div className="absolute bottom-3 left-3 bg-white px-2.5 py-1 rounded-md text-[0.8rem] font-bold flex items-center gap-1 shadow-sm">
                   <span className="text-[#f59e0b]">★</span> 4.9
                 </div>
