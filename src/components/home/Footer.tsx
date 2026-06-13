@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import {
   Globe,
   Share2,
@@ -151,7 +152,7 @@ export default function Footer() {
     <footer className="bg-[#FAF6F6] border-t border-slate-100 text-slate-600">
       {/* ── STATS BANNER ── */}
       {isHomepage ? (
-        <div className="bg-[#FF5A5F] text-white">
+        <div className="bg-[#FF5A5F]/80 text-white">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-6">
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 text-center">
               {STATS.map((s) => (
@@ -312,12 +313,12 @@ export default function Footer() {
                     required
                     className="w-full text-sm px-4 py-2.5 rounded-xl border border-slate-200 bg-white text-slate-700 placeholder-slate-400 outline-none focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10 transition-all"
                   />
-                  <button
+                  <Button
                     type="submit"
-                    className="w-full text-sm font-semibold text-white bg-[#FF5A5F] hover:bg-[#FF4449] active:scale-[0.98] py-2.5 rounded-xl transition-all shadow-sm hover:shadow-md"
+                    className="w-full text-sm font-semibold text-white bg-primary hover:bg-primary/90 cursor-pointer active:scale-[0.98] py-2.5 h-auto rounded-xl transition-all shadow-sm hover:shadow-md"
                   >
                     Subscribe
-                  </button>
+                  </Button>
                 </form>
               )}
             </div>
@@ -424,7 +425,8 @@ export default function Footer() {
             >
               <Globe size={15} />
             </a>
-            <button
+            <Button
+              variant="ghost"
               onClick={() => {
                 if (navigator.share) {
                   navigator
@@ -440,10 +442,10 @@ export default function Footer() {
                 }
               }}
               aria-label="Share"
-              className="w-8 h-8 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-[#FF5A5F] rounded-full flex items-center justify-center transition-colors duration-200 active:scale-95"
+              className="w-8 h-8 p-0 bg-slate-100 hover:bg-slate-200 text-slate-500 hover:text-[#FF5A5F] rounded-full flex items-center justify-center transition-colors duration-200 active:scale-95"
             >
               <Share2 size={15} />
-            </button>
+            </Button>
             <Link
               href="/dashboard/support"
               aria-label="Support chat"

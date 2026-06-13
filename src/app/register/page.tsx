@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Eye, EyeOff, Mail, Lock, User, Phone, Shield, Clock, ArrowRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Clean Data Architecture - Dynamic Page Copy
 const REGISTER_CONTENT = {
@@ -239,28 +240,29 @@ export default function RegisterPage() {
                     className="w-full pl-11 pr-12 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#FF5A5F] focus:ring-2 focus:ring-red-100 transition-all duration-300"
                     required
                   />
-                  <button
+                  <Button
+                    variant="ghost"
                     type="button"
                     onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-2 h-auto hover:bg-transparent"
                   >
                     {showPassword ? (
                       <EyeOff className="h-4.5 w-4.5" />
                     ) : (
                       <Eye className="h-4.5 w-4.5" />
                     )}
-                  </button>
+                  </Button>
                 </div>
               </div>
 
               {/* Create Account Action Button */}
-              <button
+              <Button
                 type="submit"
-                className="w-full bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold py-4 rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md active:scale-[0.985] text-base mt-6 cursor-pointer"
+                className="w-full bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold py-4 h-auto rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md active:scale-[0.985] text-base mt-6 cursor-pointer"
               >
                 {REGISTER_CONTENT.submitText}
                 <ArrowRight className="w-4.5 h-4.5" />
-              </button>
+              </Button>
             </form>
 
             {/* Terms and Signin Links */}

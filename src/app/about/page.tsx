@@ -13,6 +13,7 @@ import {
   ArrowRight
 } from "lucide-react";
 import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 const STATS = [
   { value: "10,000+", label: "Happy Households" },
@@ -111,15 +112,15 @@ export default function AboutPage() {
               
               <div className="flex flex-wrap items-center justify-center lg:justify-start gap-4 pt-2">
                 <Link href="/services">
-                  <button className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-6 py-3.5 rounded-xl border-none transition-all cursor-pointer shadow-md hover:shadow-lg active:scale-95 flex items-center gap-2">
+                  <Button className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-6 py-3.5 h-auto rounded-xl border-none transition-all cursor-pointer shadow-md hover:shadow-lg active:scale-95 flex items-center gap-2">
                     Explore Services
                     <ArrowRight className="w-4 h-4" />
-                  </button>
+                  </Button>
                 </Link>
                 <Link href="/contact">
-                  <button className="bg-slate-50 hover:bg-slate-150 text-slate-700 text-xs font-extrabold px-6 py-3.5 rounded-xl border border-slate-200 transition-all cursor-pointer active:scale-95">
+                  <Button variant="outline" className="bg-slate-50 hover:bg-slate-150 text-slate-700 text-xs font-extrabold px-6 py-3.5 h-auto rounded-xl border border-slate-200 transition-all cursor-pointer active:scale-95">
                     Contact Us
-                  </button>
+                  </Button>
                 </Link>
               </div>
             </div>
@@ -166,7 +167,7 @@ export default function AboutPage() {
               <div className="w-12 h-12 rounded-2xl bg-[#FFF0F1] text-[#FF5A5F] flex items-center justify-center">
                 <Target className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Our Mission</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 tracking-wide">Our Mission</h2>
               <p className="text-slate-500 text-sm md:text-base leading-relaxed">
                 To build Bangladesh's most reliable and secure ecosystem for on-demand home services, empowering local professionals with job dignity while delivering standard-setting logistics convenience to premium urban households.
               </p>
@@ -177,7 +178,7 @@ export default function AboutPage() {
               <div className="w-12 h-12 rounded-2xl bg-[#FFF0F1] text-[#FF5A5F] flex items-center justify-center">
                 <Users className="w-6 h-6" />
               </div>
-              <h2 className="text-2xl font-extrabold text-slate-900 tracking-tight">Our Vision</h2>
+              <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 tracking-wide">Our Vision</h2>
               <p className="text-slate-500 text-sm md:text-base leading-relaxed">
                 To become the ultimate household companion in South Asia, synonymous with absolute quality, trusted integrity, and visual excellence, transforming the way services are booked, verified, and valued in society.
               </p>
@@ -192,7 +193,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           
           <div className="text-center max-w-2xl mx-auto mb-12 lg:mb-16">
-            <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 tracking-wide">
               Values That Drive Us
             </h2>
             <p className="text-sm md:text-base text-slate-400 mt-2">
@@ -243,7 +244,7 @@ export default function AboutPage() {
             <span className="text-xs font-black text-[#FF5A5F] uppercase tracking-widest bg-[#FFF0F1] px-3.5 py-1.5 rounded-full border border-rose-100/50">
               The Minds
             </span>
-            <h2 className="text-2xl md:text-4xl font-extrabold text-slate-900 tracking-tight mt-3">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 tracking-wide">
               Meet Our Leadership Team
             </h2>
             <p className="text-sm md:text-base text-slate-500 mt-2">

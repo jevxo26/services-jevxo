@@ -1,7 +1,7 @@
 "use client";
 
-import { Sidebar } from "@/components/dashbord/Sidebar";
-import { TopNavbar } from "@/components/dashbord/TopNavbar";
+import { Sidebar } from "@/components/dashboard/Sidebar";
+import { TopNavbar } from "@/components/dashboard/TopNavbar";
 import { RoleProvider } from "@/context/RoleContext";
 import { useState } from "react";
 

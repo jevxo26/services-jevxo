@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { Star, Heart } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Clean Data Architecture - Dynamic Services configs
 const SERVICES_CONTENT = {
@@ -85,7 +86,7 @@ export default function TopServices() {
         {/* Header Block */}
         <div className="flex flex-col sm:flex-row justify-between items-start sm:items-end gap-4 mb-12 md:mb-16">
           <div>
-            <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+            <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 tracking-wide">
               {SERVICES_CONTENT.title}
             </h2>
             <p className="text-slate-500 mt-2 text-sm md:text-base">
@@ -113,7 +114,7 @@ export default function TopServices() {
               key={i}
               variants={cardVariants}
               whileHover={{ y: -6 }}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-[0_10px_30px_rgba(0,0,0,0.01)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.04)] transition-all duration-300 group flex flex-col h-full"
+              className="bg-white rounded-3xl overflow-hidden border border-slate-100 transition-all duration-300 group shadow-lg hover:shadow-2xl flex flex-col h-full"
             >
               {/* Image Block */}
               <div className="h-52 md:h-56 bg-slate-100 relative overflow-hidden">
@@ -133,16 +134,17 @@ export default function TopServices() {
                 </div>
 
                 {/* Heart Toggle wishlist */}
-                <button
+                <Button
+                  variant="ghost"
                   onClick={(e) => {
                     e.preventDefault();
                     toggleLike(i);
                   }}
-                  className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-xs border border-slate-100/40 hover:scale-110 active:scale-95 transition-transform cursor-pointer"
+                  className="absolute top-4 right-4 w-8 h-8 p-0 rounded-full bg-white flex items-center justify-center shadow-xs border border-slate-100/40 hover:scale-110 active:scale-95 transition-transform cursor-pointer"
                   aria-label="Add to wishlist"
                 >
                   <Heart className={`w-4 h-4 transition-colors ${liked[i] ? "fill-[#FF5A5F] text-[#FF5A5F]" : "text-slate-700"}`} />
-                </button>
+                </Button>
               </div>
 
               {/* Text metadata block */}
@@ -169,9 +171,9 @@ export default function TopServices() {
                     <span>${service.price}</span>
                   </div>
                   <Link href={`/book/${service.slug}`}>
-                    <button className="bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] text-xs font-extrabold px-4 py-2 rounded-xl transition-all shadow-xs cursor-pointer active:scale-95 border-none">
+                    <Button className="bg-primary hover:bg-primary/90 shadow-lg hover:shadow-xl  text-white text-xs font-extrabold px-4 py-2 h-auto rounded-xl transition-all cursor-pointer hover:scale-105 border-none">
                       Book Service
-                    </button>
+                    </Button>
                   </Link>
                 </div>
               </div>

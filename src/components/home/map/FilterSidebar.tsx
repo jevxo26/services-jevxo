@@ -2,6 +2,7 @@
 
 import React from "react";
 import { ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 interface FilterSidebarProps {
   sortBy: string;
@@ -53,12 +54,13 @@ export default function FilterSidebar({
 
       <div className="border-t border-slate-100 pt-5 flex items-center justify-between">
         <h4 className="text-sm font-extrabold text-slate-900">Filters</h4>
-        <button 
+        <Button 
+          variant="link"
           onClick={onClearFilters}
-          className="text-xs font-bold text-[#FF5A5F] hover:underline cursor-pointer bg-transparent border-none outline-none"
+          className="text-xs font-bold text-[#FF5A5F] hover:underline cursor-pointer bg-transparent border-none outline-none p-0 h-auto"
         >
           Clear All
-        </button>
+        </Button>
       </div>
 
       {/* Price range selector slider inputs */}
@@ -118,18 +120,19 @@ export default function FilterSidebar({
           {[3.0, 4.0, 4.5].map((val) => {
             const isSelected = tempMinRating === val;
             return (
-              <button
+              <Button
+                variant="outline"
                 key={val}
                 type="button"
                 onClick={() => setTempMinRating(val)}
-                className={`py-2 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1 cursor-pointer ${
+                className={`py-2 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1 cursor-pointer h-auto ${
                   isSelected
-                    ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F]"
-                    : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"
+                    ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F] hover:bg-rose-50 hover:text-[#FF5A5F]"
+                    : "bg-white border-slate-200 text-slate-600 hover:border-slate-350 hover:bg-slate-50"
                 }`}
               >
                 {val}★+
-              </button>
+              </Button>
             );
           })}
         </div>
@@ -142,30 +145,31 @@ export default function FilterSidebar({
             const val = parseFloat(label.replace("+", ""));
             const isSelected = tempMinRating === val;
             return (
-              <button
+              <Button
+                variant="outline"
                 key={label}
                 type="button"
                 onClick={() => setTempMinRating(val)}
-                className={`flex-1 py-1.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer ${
+                className={`flex-1 py-1.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer h-auto ${
                   isSelected
-                    ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F]"
-                    : "bg-slate-50 border-slate-100 text-slate-500 hover:border-slate-200"
+                    ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F] hover:bg-rose-50 hover:text-[#FF5A5F]"
+                    : "bg-slate-50 border-slate-100 text-slate-500 hover:border-slate-200 hover:bg-slate-100"
                 }`}
               >
                 {label}
-              </button>
+              </Button>
             );
           })}
         </div>
       </div>
 
       {/* Apply button */}
-      <button
+      <Button
         onClick={onApplyFilters}
-        className="w-full bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold py-3 rounded-xl transition-all duration-200 shadow-sm active:scale-98 text-sm cursor-pointer"
+        className="w-full bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold py-3 h-auto rounded-xl transition-all duration-200 shadow-sm active:scale-98 text-sm cursor-pointer"
       >
         Apply Filters
-      </button>
+      </Button>
     </div>
   );
 }

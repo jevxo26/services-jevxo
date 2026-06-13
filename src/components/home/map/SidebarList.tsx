@@ -2,6 +2,7 @@
 
 import React, { useRef, useEffect } from "react";
 import { Search, SlidersHorizontal, Map as MapIcon, List as ListIcon, Star, CheckCircle2, MapPin, Info } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Expert } from "./types";
 
 interface SidebarListProps {
@@ -17,7 +18,21 @@ interface SidebarListProps {
   onOpenFilters: () => void;
 }
 
-const CATEGORIES = ["All Services", "AC Repair", "Cleaning", "Electric"];
+const CATEGORIES = [
+  "All Services",
+  "AC Repair",
+  "Plumbing",
+  "Cleaning",
+  "Electrical",
+  "Shifting",
+  "CCTV",
+  "Appliance Repair",
+  "Painting",
+  "Gardening",
+  "Pest Control",
+  "Home Salon",
+  "Carpentry"
+];
 
 export default function SidebarList({
   searchQuery,
@@ -69,50 +84,53 @@ export default function SidebarList({
           className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none"
         >
           {CATEGORIES.map((cat) => (
-            <button
+            <Button
+              variant="ghost"
               key={cat}
               onClick={() => setSelectedCategory(cat)}
-              className={`px-4 py-1.5 rounded-full text-xs font-bold whitespace-nowrap tracking-wide border transition-all duration-200 cursor-pointer flex-shrink-0 ${
+              className={`px-4 py-1.5 h-auto rounded-full text-xs font-bold whitespace-nowrap tracking-wide border transition-all duration-200 cursor-pointer flex-shrink-0 hover:bg-slate-50 ${
                 selectedCategory === cat
-                  ? "bg-[#FF5A5F] border-[#FF5A5F] text-white shadow-sm"
+                  ? "bg-[#FF5A5F] border-[#FF5A5F] text-white shadow-sm hover:bg-[#FF5A5F] hover:text-white"
                   : "bg-white border-slate-200 text-slate-600 hover:border-[#FF5A5F] hover:text-[#FF5A5F]"
               }`}
             >
               {cat}
-            </button>
-          ))}
-        </div>
+            </Button>
+          ))}        </div>
 
         {/* Tab switcher and filters trigger */}
         <div className="flex items-center justify-between">
           <div className="bg-slate-100 p-1 rounded-full flex items-center w-40">
-            <button
+            <Button
+              variant="ghost"
               onClick={() => setActiveTab("map")}
-              className={`flex-1 py-1 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
+              className={`flex-1 py-1 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
                 activeTab === "map"
-                  ? "bg-[#FF5A5F] text-white shadow-sm"
+                  ? "bg-[#FF5A5F] hover:bg-[#FF5A5F]/90 text-white shadow-sm"
                   : "text-slate-500 hover:text-slate-800"
               }`}
             >
               <MapIcon className="w-3.5 h-3.5" />
               Map
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="ghost"
               onClick={() => setActiveTab("list")}
-              className="flex-1 py-1 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer text-slate-500 hover:text-slate-800"
+              className="flex-1 py-1 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer text-slate-500 hover:text-slate-800 hover:bg-slate-200/50"
             >
               <ListIcon className="w-3.5 h-3.5" />
               List
-            </button>
+            </Button>
           </div>
 
-          <button
+          <Button
+            variant="outline"
             onClick={onOpenFilters}
-            className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 transition-colors shadow-xs cursor-pointer"
+            className="flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-slate-900 border border-slate-200 px-3 py-1.5 rounded-full bg-white hover:bg-slate-50 transition-colors shadow-xs cursor-pointer h-auto"
           >
             <SlidersHorizontal className="w-3.5 h-3.5" />
             Filters
-          </button>
+          </Button>
         </div>
       </div>
 

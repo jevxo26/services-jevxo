@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useState, useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
+import { Button } from "@/components/ui/button";
 import {
   Menu,
   X,
@@ -186,11 +187,14 @@ export function Navbar() {
           <div className="hidden lg:flex items-center gap-5 xl:gap-6">
             {QUICK_ACTIONS.map((action, i) => {
               const Icon = action.icon;
+              const active = isActive(action.href);
               return (
                 <Link
                   key={i}
                   href={action.href}
-                  className="flex flex-col items-center gap-0.5 text-slate-500 hover:text-[#FF5A5F] transition-colors group"
+                  className={`flex flex-col items-center gap-0.5 transition-colors group ${
+                    active ? "text-[#FF5A5F]" : "text-slate-500 hover:text-[#FF5A5F]"
+                  }`}
                   aria-label={action.label}
                 >
                   <Icon className="w-[18px] h-[18px] group-hover:scale-110 transition-transform duration-150" aria-hidden="true" />
@@ -201,7 +205,7 @@ export function Navbar() {
           </div>
 
           {/* Divider */}
-          <div className="hidden lg:block h-10 w-0.5 bg-primary/75" />
+          <div className="hidden lg:block h-10 w-px bg-primary/50" />
 
           {/* Auth Buttons (desktop/tablet) */}
           <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
@@ -213,7 +217,7 @@ export function Navbar() {
             </Link>
             <Link
               href="/register"
-              className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
+              className="bg-primary hover:bg-primary/90 text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
             >
               Signup
             </Link>
@@ -221,21 +225,23 @@ export function Navbar() {
 
           {/* Mobile Right Controls */}
           <div className="flex md:hidden items-center gap-1">
-            <button
+            <Button
+              variant="ghost"
               onClick={handleMobileSearchToggle}
-              className={`p-2.5 rounded-lg transition-colors ${mobileSearchOpen
-                ? "text-[#FF5A5F] bg-rose-50"
+              className={`p-2.5 h-auto rounded-lg transition-colors ${mobileSearchOpen
+                ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
                 : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
                 }`}
               aria-label={mobileSearchOpen ? "Close search" : "Open search"}
               aria-expanded={mobileSearchOpen}
             >
               {mobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
-            </button>
-            <button
+            </Button>
+            <Button
+              variant="ghost"
               onClick={handleMenuToggle}
-              className={`p-2.5 rounded-lg transition-colors ${isOpen
-                ? "text-[#FF5A5F] bg-rose-50"
+              className={`p-2.5 h-auto rounded-lg transition-colors ${isOpen
+                ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
                 : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
                 }`}
               aria-label={isOpen ? "Close menu" : "Open menu"}
@@ -243,7 +249,7 @@ export function Navbar() {
               aria-controls="mobile-menu"
             >
               {isOpen ? <X className="w-[22px] h-[22px]" /> : <Menu className="w-[22px] h-[22px]" />}
-            </button>
+            </Button>
           </div>
 
         </div>
@@ -316,11 +322,16 @@ export function Navbar() {
               <div className="grid grid-cols-4 gap-2 pt-4 pb-1 border-t border-slate-100 mt-3">
                 {QUICK_ACTIONS.map((action, i) => {
                   const Icon = action.icon;
+                  const active = isActive(action.href);
                   return (
                     <Link
                       key={i}
                       href={action.href}
-                      className="flex flex-col items-center gap-1.5 py-3 px-1 text-slate-500 hover:text-[#FF5A5F] hover:bg-rose-50 rounded-xl transition-colors"
+                      className={`flex flex-col items-center gap-1.5 py-3 px-1 rounded-xl transition-colors ${
+                        active
+                          ? "text-[#FF5A5F] bg-rose-50/50"
+                          : "text-slate-500 hover:text-[#FF5A5F] hover:bg-rose-50"
+                      }`}
                       onClick={() => setIsOpen(false)}
                       aria-label={action.label}
                     >

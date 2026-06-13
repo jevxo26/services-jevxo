@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { Search, SlidersHorizontal, Map as MapIcon, List as ListIcon, Info, ChevronRight } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 // Component imports
 import DhakaMap from "@/components/home/map/DhakaMap";
@@ -51,7 +52,7 @@ const EXPERTS_DATA: Expert[] = [
   {
     id: "spark-safety",
     name: "Spark Safety Electric",
-    category: "Electric",
+    category: "Electrical",
     rating: 4.7,
     reviews: 210,
     badge: "Popular",
@@ -85,7 +86,7 @@ const EXPERTS_DATA: Expert[] = [
   {
     id: "modern-electric",
     name: "Modern Electric",
-    category: "Electric",
+    category: "Electrical",
     rating: 4.8,
     reviews: 96,
     badge: "Expert",
@@ -98,6 +99,91 @@ const EXPERTS_DATA: Expert[] = [
     icon: "electric",
     phone: "+880 1515-667788",
     completedJobs: 190
+  },
+  {
+    id: "pro-flow-plumbing",
+    name: "ProFlow Plumbing Specialists",
+    category: "Plumbing",
+    rating: 4.9,
+    reviews: 92,
+    badge: "Expert",
+    location: "Mirpur 10, Dhaka",
+    distance: "2.8km away",
+    status: "Identity Verified",
+    description: "Expert plumbing fixes, tap leaks repair, bathroom pipe fitting, and high pressure water line cleaning.",
+    price: 600,
+    coords: { x: 45, y: 60 },
+    icon: "plumbing",
+    phone: "+880 1711-556677",
+    completedJobs: 310
+  },
+  {
+    id: "dhaka-movers",
+    name: "Dhaka Shift & Move",
+    category: "Shifting",
+    rating: 4.7,
+    reviews: 54,
+    badge: "Popular",
+    location: "Uttara Sector 4, Dhaka",
+    distance: "4.2km away",
+    status: "Available Now",
+    description: "Professional house shifting and furniture moving. Fully secure transport with expert packers and loaders.",
+    price: 4500,
+    coords: { x: 50, y: 15 },
+    icon: "shifting",
+    phone: "+880 1813-889900",
+    completedJobs: 140
+  },
+  {
+    id: "rainbow-painting",
+    name: "Rainbow Premium Painters",
+    category: "Painting",
+    rating: 4.8,
+    reviews: 73,
+    badge: "Top Rated",
+    location: "Gulshan 1, Dhaka",
+    distance: "1.0km away",
+    status: "Identity Verified",
+    description: "Interior and exterior wall painting, wall putty work, and luxury texture finishing. Dust-free service guaranteed.",
+    price: 2500,
+    coords: { x: 60, y: 45 },
+    icon: "painting",
+    phone: "+880 1914-332211",
+    completedJobs: 210
+  },
+  {
+    id: "cctv-secure",
+    name: "SecureForce CCTV Installation",
+    category: "CCTV",
+    rating: 4.9,
+    reviews: 45,
+    badge: "Popular",
+    location: "Mohakhali, Dhaka",
+    distance: "1.9km away",
+    status: "Available Today",
+    description: "Home CCTV camera setup, IP camera configuration, DVR diagnostics, and mobile remote viewing setup.",
+    price: 1200,
+    coords: { x: 40, y: 40 },
+    icon: "cctv",
+    phone: "+880 1512-990088",
+    completedJobs: 180
+  },
+  {
+    id: "glam-home-salon",
+    name: "Glam & Glow Home Salon",
+    category: "Home Salon",
+    rating: 4.8,
+    reviews: 112,
+    badge: "Top Rated",
+    location: "Banani, Dhaka",
+    distance: "1.1km away",
+    status: "Background Checked",
+    description: "Premium ladies facial, haircut, pedicure, manicure, and bridal makeovers directly at your home.",
+    price: 1500,
+    coords: { x: 32, y: 28 },
+    icon: "salon",
+    phone: "+880 1618-112233",
+    completedJobs: 290
   }
 ];
 
@@ -225,7 +311,7 @@ export default function MapPage() {
             {/* Header Layout Section */}
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 md:mb-10">
               <div>
-                <h1 className="text-3xl md:text-4xl font-extrabold text-slate-900 tracking-tight">
+                <h1 className="text-2xl md:text-3xl font-bold text-foreground mb-4 tracking-wide">
                   Available Experts
                 </h1>
                 <p className="text-slate-500 mt-2 text-sm md:text-base">
@@ -235,20 +321,21 @@ export default function MapPage() {
 
               {/* View Switcher Toggle */}
               <div className="bg-slate-100 p-1 rounded-full flex items-center w-40 self-start md:self-auto border border-slate-200/50 shadow-xs">
-                <button
+                <Button
+                  variant="ghost"
                   onClick={() => setActiveTab("map")}
-                  className="flex-1 py-1.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer text-slate-500 hover:text-slate-800"
+                  className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer text-slate-500 hover:text-slate-800"
                 >
                   <MapIcon className="w-3.5 h-3.5" />
                   Map
-                </button>
-                <button
+                </Button>
+                <Button
                   onClick={() => setActiveTab("list")}
-                  className="flex-1 py-1.5 rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#FF5A5F] text-white shadow-sm"
+                  className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#FF5A5F] hover:bg-[#FF5A5F]/90 text-white shadow-sm"
                 >
                   <ListIcon className="w-3.5 h-3.5" />
                   List
-                </button>
+                </Button>
               </div>
             </div>
 
@@ -277,13 +364,14 @@ export default function MapPage() {
                     className="w-full pl-9 pr-4 py-2 bg-white border border-slate-200 rounded-xl text-sm placeholder-slate-400"
                   />
                 </div>
-                <button
+                <Button
+                  variant="outline"
                   onClick={() => setShowFiltersModal(true)}
-                  className="bg-white border border-slate-200 p-2.5 rounded-xl text-slate-700 flex items-center gap-1 text-sm font-bold shadow-xs cursor-pointer"
+                  className="bg-white border border-slate-200 p-2.5 h-auto rounded-xl text-slate-700 flex items-center gap-1 text-sm font-bold shadow-xs cursor-pointer hover:bg-slate-50"
                 >
                   <SlidersHorizontal className="w-4 h-4" />
                   Filters
-                </button>
+                </Button>
               </div>
 
               {/* Experts cards list wrapper */}
@@ -298,12 +386,12 @@ export default function MapPage() {
                       Adjust your price values or minimum rating thresholds to
                       discover results.
                     </p>
-                    <button
+                    <Button
                       onClick={handleClearFilters}
-                      className="mt-6 px-6 py-2.5 bg-[#FF5A5F] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#FF4449] transition-colors cursor-pointer"
+                      className="mt-6 px-6 py-2.5 h-auto bg-[#FF5A5F] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#FF4449] transition-colors cursor-pointer"
                     >
                       Clear Filters
-                    </button>
+                    </Button>
                   </div>
                 ) : (
                   filteredExperts.map((expert) => (
@@ -318,10 +406,10 @@ export default function MapPage() {
                 {/* Load More Trigger */}
                 {filteredExperts.length > 0 && (
                   <div className="flex justify-center pt-6">
-                    <button className="flex items-center gap-1.5 text-slate-500 hover:text-slate-900 font-bold text-sm border border-slate-200 rounded-full px-6 py-3 bg-white hover:bg-slate-50 transition-colors shadow-xs cursor-pointer">
+                    <Button variant="outline" className="flex items-center gap-1.5 text-slate-500 hover:text-slate-900 font-bold text-sm border border-slate-200 rounded-full px-6 py-3 h-auto bg-white hover:bg-slate-50 transition-colors shadow-xs cursor-pointer">
                       Load More Experts
                       <ChevronRight className="w-4 h-4 rotate-90" />
-                    </button>
+                    </Button>
                   </div>
                 )}
               </div>

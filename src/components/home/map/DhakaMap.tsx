@@ -2,7 +2,10 @@
 
 import React, { useRef } from "react";
 import { Compass, Plus, Minus } from "lucide-react";
-import { FaSnowflake, FaBroom, FaBolt } from "react-icons/fa";
+import { Button } from "@/components/ui/button";
+import { FaSnowflake, FaBroom, FaBolt, FaFaucet, FaPaintRoller } from "react-icons/fa";
+import { TbTruck, TbScissors } from "react-icons/tb";
+import { MdOutlineSecurity } from "react-icons/md";
 import { motion, AnimatePresence } from "framer-motion";
 import { Expert } from "./types";
 
@@ -79,6 +82,11 @@ export default function DhakaMap({
   const renderCategoryIcon = (iconName: string, className: string = "w-4 h-4") => {
     if (iconName === "ac") return <FaSnowflake className={className} />;
     if (iconName === "cleaning") return <FaBroom className={className} />;
+    if (iconName === "plumbing") return <FaFaucet className={className} />;
+    if (iconName === "shifting") return <TbTruck className={className} />;
+    if (iconName === "painting") return <FaPaintRoller className={className} />;
+    if (iconName === "cctv") return <MdOutlineSecurity className={className} />;
+    if (iconName === "salon") return <TbScissors className={className} />;
     return <FaBolt className={className} />;
   };
 
@@ -231,29 +239,31 @@ export default function DhakaMap({
         })}
       </motion.div>
 
-      {/* Floating Map Utility Controls */}
       <div className="absolute bottom-6 right-6 flex flex-col gap-3 z-30">
-        <button
+        <Button
+          variant="ghost"
           onClick={resetMap}
-          className="w-12 h-12 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer"
+          className="w-12 h-12 p-0 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer hover:bg-slate-50"
           title="Reset Map View"
         >
           <Compass className="w-5 h-5" />
-        </button>
+        </Button>
 
         <div className="bg-white rounded-2xl shadow-lg border border-slate-100 flex flex-col overflow-hidden">
-          <button
+          <Button
+            variant="ghost"
             onClick={() => adjustZoom(0.25)}
-            className="w-12 h-12 flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] hover:bg-slate-50 transition-colors border-b border-slate-100 cursor-pointer"
+            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] hover:bg-slate-50 transition-colors border-b border-slate-100 cursor-pointer shadow-none"
           >
             <Plus className="w-5 h-5" />
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="ghost"
             onClick={() => adjustZoom(-0.25)}
-            className="w-12 h-12 flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] hover:bg-slate-50 transition-colors cursor-pointer"
+            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] hover:bg-slate-50 transition-colors cursor-pointer shadow-none"
           >
             <Minus className="w-5 h-5" />
-          </button>
+          </Button>
         </div>
       </div>
     </div>

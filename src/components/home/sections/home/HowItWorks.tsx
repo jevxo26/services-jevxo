@@ -58,7 +58,7 @@ const HowItWorks = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         {/* Header Block */}
         <div className="text-center mb-16 lg:mb-20">
-          <h2 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4 tracking-tight">
+          <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-4 tracking-wide">
             {HOW_IT_WORKS_CONTENT.title}
           </h2>
           <p className="text-sm md:text-base text-slate-500 max-w-md mx-auto leading-relaxed">
@@ -85,7 +85,7 @@ const HowItWorks = () => {
                 strokeLinejoin="round"
                 strokeDasharray="8 4"
                 animate={{ strokeDashoffset: [0, -24] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
               />
             </svg>
           </div>
@@ -107,7 +107,7 @@ const HowItWorks = () => {
                 strokeLinejoin="round"
                 strokeDasharray="8 4"
                 animate={{ strokeDashoffset: [0, -24] }}
-                transition={{ repeat: Infinity, duration: 1.5, ease: "linear" }}
+                transition={{ repeat: Infinity, duration: 5, ease: "linear" }}
               />
             </svg>
           </div>
@@ -128,10 +128,12 @@ const HowItWorks = () => {
                 >
                   {/* Timeline Step node bubble */}
                   <motion.div
-                    whileHover={{ scale: 1.05, y: -2 }}
-                    className="w-20 h-20 bg-white border border-slate-200 text-slate-800 rounded-full flex items-center justify-center text-xl font-extrabold mb-6 shadow-sm relative z-10 group-hover:border-[#FF5A5F]/40 group-hover:shadow-[0_8px_20px_rgba(255,90,95,0.1)] transition-all duration-300"
+                    whileHover={{ y: -2 }}
+                    className="w-20 h-20 bg-white group-hover:bg-primary group-hover:scale-105 border border-slate-200 text-slate-800 rounded-full flex items-center justify-center text-xl font-extrabold mb-6 shadow-lg relative z-10 group-hover:border-[#FF5A5F]/40  group-hover:shadow-xl transition-all duration-300"
                   >
-                    <span className="text-[#FF5A5F]">{step.stepNumber}</span>
+                    <span className="text-primary group-hover:text-white">
+                      {step.stepNumber}
+                    </span>
                   </motion.div>
 
                   <h3 className="font-extrabold text-slate-800 text-xl mb-3 group-hover:text-[#FF5A5F] transition-colors duration-200">

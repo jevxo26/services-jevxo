@@ -3,6 +3,7 @@
 import React from "react";
 import { X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 
 interface FiltersModalProps {
   isOpen: boolean;
@@ -52,12 +53,13 @@ export default function FiltersModal({
           >
             <div className="flex items-center justify-between border-b border-slate-100 pb-3">
               <h3 className="text-lg font-black text-slate-900">Advanced Filters</h3>
-              <button
+              <Button
+                variant="ghost"
                 onClick={onClose}
-                className="text-slate-400 hover:text-slate-700 p-1 bg-slate-50 rounded-full cursor-pointer border-none outline-none"
+                className="text-slate-400 hover:text-slate-700 p-1 h-auto bg-slate-50 rounded-full cursor-pointer border-none outline-none"
               >
                 <X className="w-5 h-5" />
-              </button>
+              </Button>
             </div>
 
             {/* Price range selector */}
@@ -93,18 +95,19 @@ export default function FiltersModal({
                 {[3.0, 4.0, 4.5].map((val) => {
                   const isSelected = tempMinRating === val;
                   return (
-                    <button
+                    <Button
+                      variant="outline"
                       key={val}
                       type="button"
                       onClick={() => setTempMinRating(val)}
-                      className={`py-2.5 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1 cursor-pointer ${
+                      className={`py-2.5 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1 cursor-pointer h-auto ${
                         isSelected
-                          ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F]"
-                          : "bg-white border-slate-200 text-slate-600 hover:border-slate-300"
+                          ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F] hover:bg-rose-50 hover:text-[#FF5A5F]"
+                          : "bg-white border-slate-200 text-slate-600 hover:border-slate-350 hover:bg-slate-50"
                       }`}
                     >
                       {val}★+
-                    </button>
+                    </Button>
                   );
                 })}
               </div>
@@ -127,20 +130,21 @@ export default function FiltersModal({
 
             {/* Actions Footer */}
             <div className="flex gap-4 border-t border-slate-100 pt-5">
-              <button
+              <Button
                 type="button"
+                variant="outline"
                 onClick={onClearFilters}
-                className="flex-1 py-3 text-slate-500 hover:text-slate-800 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
+                className="flex-1 py-3 h-auto text-slate-500 hover:text-slate-800 text-sm font-bold rounded-xl border border-slate-200 hover:bg-slate-50 transition-colors cursor-pointer"
               >
                 Clear All
-              </button>
-              <button
+              </Button>
+              <Button
                 type="button"
                 onClick={onApplyFilters}
-                className="flex-1 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-sm font-bold rounded-xl transition-all shadow-sm cursor-pointer border-none"
+                className="flex-1 py-3 h-auto bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-sm font-bold rounded-xl transition-all shadow-sm cursor-pointer border-none"
               >
                 Apply Filters
-              </button>
+              </Button>
             </div>
 
           </motion.div>

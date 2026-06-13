@@ -11,7 +11,7 @@ export interface Expert {
   description: string;
   price: number;
   coords: { x: number; y: number };
-  icon: "ac" | "cleaning" | "electric";
+  icon: "ac" | "cleaning" | "electric" | "plumbing" | "shifting" | "painting" | "cctv" | "salon";
   phone: string;
   completedJobs: number;
 }

@@ -2,8 +2,12 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { Search, MapPin } from "lucide-react";
+import { Search, MapPin, ChevronDown, Calendar } from "lucide-react";
 import { motion, useScroll, useTransform } from "framer-motion";
+import { useRouter } from "next/navigation";
+import dayjs from "dayjs";
+import { CustomCalendar } from "@/components/ui/calendar";
+import { Button } from "@/components/ui/button";
 
 // Clean Data Architecture - Configurable Dynamic Copy
 const HERO_CONTENT = {
@@ -13,15 +17,21 @@ const HERO_CONTENT = {
   bgImage: "https://images.unsplash.com/photo-1581578731548-c64695cc6952?q=80&w=2000&auto=format&fit=crop",
   bgAlt: "Expert home services background",
   searchPlaceholder: "What service do you need today?",
-  locations: [
-    { value: "", label: "Select Location" },
-    { value: "dhaka", label: "Dhaka" },
-    { value: "mirpur", label: "Mirpur, Dhaka" },
-    { value: "banani", label: "Banani, Dhaka" },
-    { value: "chittagong", label: "Chittagong" },
-    { value: "sylhet", label: "Sylhet" },
+  categories: [
+    { label: "AC Repair", slug: "ac-repair" },
+    { label: "Plumbing", slug: "plumbing" },
+    { label: "Cleaning", slug: "cleaning" },
+    { label: "Electrical", slug: "electrical" },
+    { label: "Shifting", slug: "shifting" },
+    { label: "CCTV", slug: "cctv" },
+    { label: "Appliance Repair", slug: "appliance-repair" },
+    { label: "Painting", slug: "painting" },
+    { label: "Gardening", slug: "gardening" },
+    { label: "Pest Control", slug: "pest-control" },
+    { label: "Home Salon", slug: "home-salon" },
+    { label: "Carpentry", slug: "carpentry" },
   ],
-  searchButtonText: "Search",
+  searchButtonText: "Book Now",
 };
 
 // Title entrance variants
@@ -50,8 +60,11 @@ const itemVariants = {
 } as const;
 
 const Hero = () => {
-  const [searchQuery, setSearchQuery] = useState("");
+  const router = useRouter();
+  const [selectedCategory, setSelectedCategory] = useState("");
   const [location, setLocation] = useState("");
+  const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const { scrollY } = useScroll();
 
@@ -62,7 +75,18 @@ const Hero = () => {
 
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Searching for:", searchQuery, "in location:", location);
+    if (selectedCategory) {
+      let url = `/categories/${selectedCategory}`;
+      const params = [];
+      if (location) params.push(`location=${encodeURIComponent(location)}`);
+      if (selectedDate) params.push(`date=${selectedDate.format("YYYY-MM-DD")}`);
+      if (params.length > 0) {
+        url += `?${params.join("&")}`;
+      }
+      router.push(url);
+    } else {
+      router.push("/categories/ac-repair");
+    }
   };
 
   return (
@@ -118,14 +142,35 @@ const Hero = () => {
           onSubmit={handleSearch}
           className="w-full max-w-3xl mx-auto bg-white rounded-2xl md:rounded-full shadow-[0_10px_30px_rgba(0,0,0,0.04)] border border-slate-100 p-3 flex flex-col md:flex-row items-center gap-3 md:gap-0"
         >
-          {/* Service Search Input */}
-          <div className="flex items-center gap-3 flex-1 w-full px-4 py-2 md:py-1">
+          {/* Category Dropdown Select */}
+          <div className="flex items-center gap-3 flex-1 w-full px-4 py-2 md:py-1 relative">
             <Search className="text-slate-400 w-5 h-5 flex-shrink-0" />
+            <select
+              value={selectedCategory}
+              onChange={(e) => setSelectedCategory(e.target.value)}
+              className="bg-transparent text-sm text-slate-700 outline-none w-full py-1.5 cursor-pointer appearance-none pr-8"
+            >
+              <option value="">Select Category</option>
+              {HERO_CONTENT.categories.map((cat, i) => (
+                <option key={i} value={cat.slug} className="text-slate-700">
+                  {cat.label}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="text-slate-400 w-4 h-4 flex-shrink-0 pointer-events-none absolute right-4" />
+          </div>
+
+          {/* Vertical Separator */}
+          <div className="hidden md:block h-8 w-px bg-slate-200" />
+
+          {/* Location Text Input */}
+          <div className="flex items-center gap-3 flex-1 w-full px-4 py-2 md:py-1">
+            <MapPin className="text-slate-400 w-5 h-5 flex-shrink-0" />
             <input
               type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder={HERO_CONTENT.searchPlaceholder}
+              value={location}
+              onChange={(e) => setLocation(e.target.value)}
+              placeholder="Enter location"
               className="bg-transparent text-sm text-slate-700 placeholder-slate-400 outline-none w-full py-1.5"
             />
           </div>
@@ -133,35 +178,45 @@ const Hero = () => {
           {/* Vertical Separator */}
           <div className="hidden md:block h-8 w-px bg-slate-200" />
 
-          {/* Location Selector Dropdown */}
-          <div className="flex items-center gap-3 w-full md:w-56 px-4 py-2 md:py-1">
-            <MapPin className="text-slate-400 w-5 h-5 flex-shrink-0" />
-            <select
-              value={location}
-              onChange={(e) => setLocation(e.target.value)}
-              className="bg-transparent text-sm text-slate-700 outline-none w-full py-1.5 cursor-pointer appearance-none"
+          {/* Date Picker Popover Trigger */}
+          <div className="flex items-center gap-3 flex-1 w-full px-4 py-2 md:py-1 relative">
+            <div
+              onClick={() => setShowCalendar(!showCalendar)}
+              className="flex items-center gap-3 w-full py-1.5 cursor-pointer"
             >
-              {HERO_CONTENT.locations.map((loc, i) => (
-                <option
-                  key={i}
-                  value={loc.value}
-                  className={
-                    loc.value === "" ? "text-slate-400" : "text-slate-700"
-                  }
-                >
-                  {loc.label}
-                </option>
-              ))}
-            </select>
+              <Calendar className="text-slate-400 w-5 h-5 flex-shrink-0" />
+              <span className="text-sm text-slate-700 select-none">
+                {selectedDate ? selectedDate.format("DD MMM, YYYY") : "Select Date"}
+              </span>
+            </div>
+
+            {showCalendar && (
+              <>
+                <div
+                  className="fixed inset-0 z-40"
+                  onClick={() => setShowCalendar(false)}
+                />
+                <div className="absolute top-full left-0 md:left-auto md:right-0 mt-3 z-50 bg-white border border-slate-100 rounded-2xl shadow-xl p-2 max-w-[340px]">
+                  <CustomCalendar
+                    staticInline={true}
+                    value={selectedDate}
+                    onChange={(date) => {
+                      setSelectedDate(date);
+                      setShowCalendar(false);
+                    }}
+                  />
+                </div>
+              </>
+            )}
           </div>
 
-          {/* Search Action Button */}
-          <button
+          {/* Book Now Action Button */}
+          <Button
             type="submit"
-            className="w-full md:w-auto bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold px-8 py-3.5 rounded-xl md:rounded-full transition-all duration-200 shadow-sm active:scale-95 text-base flex-shrink-0 cursor-pointer"
+            className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3.5 h-auto rounded-xl md:rounded-full transition-all duration-200 shadow-sm active:scale-95 text-base flex-shrink-0 cursor-pointer"
           >
             {HERO_CONTENT.searchButtonText}
-          </button>
+          </Button>
         </motion.form>
       </motion.div>
     </div>

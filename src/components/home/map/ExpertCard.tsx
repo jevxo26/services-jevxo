@@ -2,6 +2,7 @@
 
 import React from "react";
 import { Star, MapPin, ShieldCheck } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import { Expert } from "./types";
 
 interface ExpertCardProps {
@@ -61,12 +62,12 @@ export default function ExpertCard({ expert, onViewDetails }: ExpertCardProps) {
           </span>
         </div>
 
-        <button
+        <Button
           onClick={onViewDetails}
-          className="px-6 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold rounded-2xl text-sm md:text-base transition-all shadow-sm hover:shadow-md active:scale-97 text-center w-auto md:w-full cursor-pointer"
+          className="px-6 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold rounded-2xl text-sm md:text-base transition-all shadow-sm hover:shadow-md active:scale-97 text-center w-auto md:w-full cursor-pointer h-auto"
         >
           View Details
-        </button>
+        </Button>
       </div>
 
     </div>

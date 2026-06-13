@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import { Button } from "@/components/ui/button";
 
 const serviceCategories = [
   { id: "cleaning", label: "Cleaning", icon: "🧹" },
@@ -96,9 +97,10 @@ export default function ServicesPage() {
               </svg>
               <span className="services-location-text">Dhaka, BD</span>
             </div>
-            <button
+            <Button
+              variant="ghost"
               id="filter-button"
-              className="services-filter-btn"
+              className="services-filter-btn p-2 h-auto"
               aria-label="Filter services"
             >
               <svg
@@ -115,16 +117,17 @@ export default function ServicesPage() {
                 <line x1="8" y1="12" x2="16" y2="12" />
                 <line x1="11" y1="18" x2="13" y2="18" />
               </svg>
-            </button>
+            </Button>
           </div>
 
           {/* Category Pills */}
           <div className="services-categories">
             {serviceCategories.map((cat) => (
-              <button
+              <Button
+                variant="ghost"
                 key={cat.id}
                 id={`category-${cat.id}`}
-                className={`services-category-pill ${
+                className={`services-category-pill h-auto ${
                   activeCategory === cat.id
                     ? "services-category-pill--active"
                     : ""
@@ -133,7 +136,7 @@ export default function ServicesPage() {
               >
                 <span className="services-category-icon">{cat.icon}</span>
                 {cat.label}
-              </button>
+              </Button>
             ))}
           </div>
         </div>
@@ -191,7 +194,7 @@ export default function ServicesPage() {
                           ৳{service.price.toLocaleString()}
                         </span>
                       </div>
-                      <button className="trending-book-btn">Book Now</button>
+                      <Button className="trending-book-btn h-auto">Book Now</Button>
                     </div>
                   </div>
                 </div>
@@ -226,12 +229,13 @@ export default function ServicesPage() {
                       <span className="trending-price-value-small">
                         ৳{service.price.toLocaleString()}
                       </span>
-                      <button
-                        className="trending-arrow-btn"
+                      <Button
+                        variant="ghost"
+                        className="trending-arrow-btn p-0 h-auto"
                         aria-label={`View ${service.title}`}
                       >
                         →
-                      </button>
+                      </Button>
                     </div>
                   </div>
                 </div>
@@ -337,7 +341,7 @@ function ServiceListings() {
         <aside className="listings-filters">
           <div className="filters-header">
             <h3 className="filters-title">Filters</h3>
-            <button className="filters-clear" onClick={handleClear}>Clear</button>
+            <Button variant="ghost" className="filters-clear p-1 h-auto hover:bg-slate-50" onClick={handleClear}>Clear</Button>
           </div>
 
           {/* Price Range */}
@@ -458,31 +462,34 @@ function ServiceListings() {
 
           {/* Pagination */}
           <div className="listings-pagination">
-            <button
-              className="pagination-arrow"
+            <Button
+              variant="ghost"
+              className="pagination-arrow p-0 h-auto hover:bg-slate-50 disabled:opacity-50"
               disabled={currentPage === 1}
               onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
               aria-label="Previous page"
             >
               ‹
-            </button>
+            </Button>
             {[1, 2, 3].map((page) => (
-              <button
+              <Button
+                variant="ghost"
                 key={page}
-                className={`pagination-num ${currentPage === page ? "pagination-num--active" : ""}`}
+                className={`pagination-num p-0 h-auto hover:bg-slate-50 ${currentPage === page ? "pagination-num--active" : ""}`}
                 onClick={() => setCurrentPage(page)}
               >
                 {page}
-              </button>
+              </Button>
             ))}
-            <button
-              className="pagination-arrow"
+            <Button
+              variant="ghost"
+              className="pagination-arrow p-0 h-auto hover:bg-slate-50 disabled:opacity-50"
               disabled={currentPage === 3}
               onClick={() => setCurrentPage((p) => Math.min(3, p + 1))}
               aria-label="Next page"
             >
               ›
-            </button>
+            </Button>
           </div>
         </div>
       </div>

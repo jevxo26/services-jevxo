@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { 
   User, 
   Mail, 
@@ -196,13 +197,14 @@ export default function ProfilePage() {
                   fill
                   className="object-cover"
                 />
-                <button 
-                  className="absolute bottom-1 right-1 w-7 h-7 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-full flex items-center justify-center shadow-xs transition-all duration-200 active:scale-95 cursor-pointer"
+                <Button 
+                  variant="ghost"
+                  className="absolute bottom-1 right-1 w-7 h-7 p-0 bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 rounded-full flex items-center justify-center shadow-xs transition-all duration-200 active:scale-95 cursor-pointer hover:text-slate-750 hover:border-slate-300"
                   aria-label="Upload photo"
                   onClick={() => showToast("Avatar upload feature coming soon!")}
                 >
                   <Camera className="w-3.5 h-3.5" />
-                </button>
+                </Button>
               </div>
               
               <div className="space-y-1.5 pt-1">
@@ -229,18 +231,19 @@ export default function ProfilePage() {
             </div>
             
             <div className="flex items-center gap-3 w-full md:w-auto">
-              <button 
+              <Button 
+                variant="outline"
                 onClick={() => setEditMode(!editMode)}
-                className="flex-1 md:flex-none bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-extrabold px-5 py-3 rounded-xl border border-slate-200 transition-all cursor-pointer active:scale-98"
+                className="flex-1 md:flex-none bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-extrabold px-5 py-3 h-auto rounded-xl border border-slate-200 transition-all cursor-pointer active:scale-98"
               >
                 {editMode ? "Cancel Editing" : "Edit Profile"}
-              </button>
-              <button 
+              </Button>
+              <Button 
                 onClick={() => showToast("Booking shortcuts loaded!")}
-                className="flex-1 md:flex-none bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-5 py-3 rounded-xl border-none transition-all cursor-pointer shadow-xs active:scale-98"
+                className="flex-1 md:flex-none bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-5 py-3 h-auto rounded-xl border-none transition-all cursor-pointer shadow-xs active:scale-98"
               >
                 Book a Service
-              </button>
+              </Button>
             </div>
           </div>
         </div>
@@ -254,73 +257,77 @@ export default function ProfilePage() {
               Account Control
             </h2>
             
-            <button
+            <Button
+              variant="ghost"
               onClick={() => { setActiveTab("personal"); setEditMode(false); }}
-              className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all duration-200 cursor-pointer ${
+              className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "personal" 
-                  ? "bg-[#FFF0F1] text-[#FF5A5F] font-bold" 
-                  : "hover:bg-slate-50 text-slate-600 font-medium"
+                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "personal" ? "bg-[#FF5A5F]/10" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "personal" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
                   <User className="w-4 h-4" />
                 </span>
                 <span className="text-sm">Personal Info</span>
               </span>
               <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "personal" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
-            </button>
+            </Button>
 
-            <button
+            <Button
+              variant="ghost"
               onClick={() => { setActiveTab("bookings"); setEditMode(false); }}
-              className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all duration-200 cursor-pointer ${
+              className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "bookings" 
-                  ? "bg-[#FFF0F1] text-[#FF5A5F] font-bold" 
-                  : "hover:bg-slate-50 text-slate-600 font-medium"
+                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "bookings" ? "bg-[#FF5A5F]/10" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "bookings" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
                   <Calendar className="w-4 h-4" />
                 </span>
                 <span className="text-sm">My Bookings</span>
               </span>
               <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "bookings" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
-            </button>
+            </Button>
 
-            <button
+            <Button
+              variant="ghost"
               onClick={() => { setActiveTab("saved"); setEditMode(false); }}
-              className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all duration-200 cursor-pointer ${
+              className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "saved" 
-                  ? "bg-[#FFF0F1] text-[#FF5A5F] font-bold" 
-                  : "hover:bg-slate-50 text-slate-600 font-medium"
+                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "saved" ? "bg-[#FF5A5F]/10" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "saved" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
                   <Heart className="w-4 h-4" />
                 </span>
                 <span className="text-sm">Saved Experts</span>
               </span>
               <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "saved" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
-            </button>
+            </Button>
 
-            <button
+            <Button
+              variant="ghost"
               onClick={() => { setActiveTab("settings"); setEditMode(false); }}
-              className={`w-full flex items-center justify-between p-3.5 rounded-2xl transition-all duration-200 cursor-pointer ${
+              className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "settings" 
-                  ? "bg-[#FFF0F1] text-[#FF5A5F] font-bold" 
-                  : "hover:bg-slate-50 text-slate-600 font-medium"
+                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "settings" ? "bg-[#FF5A5F]/10" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "settings" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
                   <Settings className="w-4 h-4" />
                 </span>
                 <span className="text-sm">Preferences & Security</span>
               </span>
               <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "settings" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
-            </button>
+            </Button>
           </div>
 
           {/* ── RIGHT CONTENT PANEL (8 Columns on LG) ── */}
@@ -390,19 +397,20 @@ export default function ProfilePage() {
                       </div>
                       
                       <div className="flex gap-3 pt-3 border-t border-slate-100">
-                        <button
+                        <Button
                           type="submit"
-                          className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-6 py-3 rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
+                          className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-6 py-3 h-auto rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
                         >
                           Save Changes
-                        </button>
-                        <button
+                        </Button>
+                        <Button
                           type="button"
+                          variant="ghost"
                           onClick={() => { setFormData(profile); setEditMode(false); }}
-                          className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold px-6 py-3 rounded-xl border-none transition-all active:scale-95 cursor-pointer"
+                          className="bg-slate-100 hover:bg-slate-200 text-slate-700 text-xs font-extrabold px-6 py-3 h-auto rounded-xl border-none transition-all active:scale-95 cursor-pointer hover:text-slate-700 hover:bg-slate-200"
                         >
                           Cancel
-                        </button>
+                        </Button>
                       </div>
                     </form>
                   ) : (
@@ -456,12 +464,12 @@ export default function ProfilePage() {
                           <Shield className="w-4 h-4 text-emerald-500" />
                           <span>All communications and service addresses are verified.</span>
                         </div>
-                        <button
+                        <Button
                           onClick={() => setEditMode(true)}
-                          className="w-full sm:w-auto bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] text-xs font-extrabold px-4 py-2.5 rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95 text-center"
+                          className="w-full sm:w-auto bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] text-xs font-extrabold px-4 py-2.5 h-auto rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95 text-center"
                         >
                           Modify Details
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   )}
@@ -520,26 +528,28 @@ export default function ProfilePage() {
                           <div className="flex justify-end gap-2 mt-4 pt-4 border-t border-slate-50/50">
                             {booking.status === "Scheduled" ? (
                               <>
-                                <button 
+                                <Button 
+                                  variant="outline"
                                   onClick={() => showToast("Reschedule request submitted successfully.")}
-                                  className="bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-extrabold px-4 py-2 rounded-lg border border-slate-200 transition-all cursor-pointer active:scale-95"
+                                  className="bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-extrabold px-4 py-2 h-auto rounded-lg border border-slate-200 transition-all cursor-pointer active:scale-95"
                                 >
                                   Reschedule
-                                </button>
-                                <button 
+                                </Button>
+                                <Button 
                                   onClick={() => showToast("Cancellation request submitted.")}
-                                  className="bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] text-xs font-extrabold px-4 py-2 rounded-lg border-none transition-all cursor-pointer active:scale-95"
+                                  className="bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] text-xs font-extrabold px-4 py-2 h-auto rounded-lg border-none transition-all cursor-pointer active:scale-95"
                                 >
                                   Cancel Booking
-                                </button>
+                                </Button>
                               </>
                             ) : (
-                              <button 
+                              <Button 
+                                variant="outline"
                                 onClick={() => showToast("Support details request submitted.")}
-                                className="bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-extrabold px-4 py-2 rounded-lg border border-slate-200 transition-all cursor-pointer active:scale-95"
+                                className="bg-slate-50 hover:bg-slate-100 text-slate-700 text-xs font-extrabold px-4 py-2 h-auto rounded-lg border border-slate-200 transition-all cursor-pointer active:scale-95"
                               >
                                 View Details / Invoice
-                              </button>
+                              </Button>
                             )}
                           </div>
                         </div>
@@ -605,12 +615,12 @@ export default function ProfilePage() {
                               {expert.available ? "Available" : "Busy"}
                             </span>
                           </div>
-                          <button 
+                          <Button 
                             onClick={() => showToast(`Initiating direct book link for ${expert.name}`)}
-                            className="bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] text-xs font-extrabold px-3 py-1.5 rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95"
+                            className="bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] text-xs font-extrabold px-3 py-1.5 h-auto rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95"
                           >
                             Book Now
-                          </button>
+                          </Button>
                         </div>
                       </div>
                     ))}
@@ -641,19 +651,20 @@ export default function ProfilePage() {
                           <h4 className="font-extrabold text-slate-800 text-sm">Email Alerts</h4>
                           <p className="text-xs text-slate-400">Receive invoices, receipts, and order statuses in email.</p>
                         </div>
-                        <button
+                        <Button
+                          variant="ghost"
                           onClick={() => {
                             setNotificationSettings(prev => ({ ...prev, emailAlerts: !prev.emailAlerts }));
                             showToast("Email notification settings updated.");
                           }}
-                          className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none ${
+                          className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none p-0 shadow-none hover:bg-transparent ${
                             notificationSettings.emailAlerts ? "bg-[#FF5A5F]" : "bg-slate-300"
                           }`}
                         >
                           <span className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform ${
                             notificationSettings.emailAlerts ? "translate-x-5" : "translate-x-0"
                           }`} />
-                        </button>
+                        </Button>
                       </div>
 
                       <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/40">
@@ -661,19 +672,20 @@ export default function ProfilePage() {
                           <h4 className="font-extrabold text-slate-800 text-sm">App Push Notifications</h4>
                           <p className="text-xs text-slate-400">Real-time alerts for technician locations and chat updates.</p>
                         </div>
-                        <button
+                        <Button
+                          variant="ghost"
                           onClick={() => {
                             setNotificationSettings(prev => ({ ...prev, pushAlerts: !prev.pushAlerts }));
                             showToast("Push notification settings updated.");
                           }}
-                          className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none ${
+                          className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none p-0 shadow-none hover:bg-transparent ${
                             notificationSettings.pushAlerts ? "bg-[#FF5A5F]" : "bg-slate-300"
                           }`}
                         >
                           <span className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform ${
                             notificationSettings.pushAlerts ? "translate-x-5" : "translate-x-0"
                           }`} />
-                        </button>
+                        </Button>
                       </div>
 
                       <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100/40">
@@ -681,19 +693,20 @@ export default function ProfilePage() {
                           <h4 className="font-extrabold text-slate-800 text-sm">SMS alerts</h4>
                           <p className="text-xs text-slate-400">Receive urgent dispatch and verification codes via text.</p>
                         </div>
-                        <button
+                        <Button
+                          variant="ghost"
                           onClick={() => {
                             setNotificationSettings(prev => ({ ...prev, smsAlerts: !prev.smsAlerts }));
                             showToast("SMS notification settings updated.");
                           }}
-                          className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none ${
+                          className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none p-0 shadow-none hover:bg-transparent ${
                             notificationSettings.smsAlerts ? "bg-[#FF5A5F]" : "bg-slate-300"
                           }`}
                         >
                           <span className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform ${
                             notificationSettings.smsAlerts ? "translate-x-5" : "translate-x-0"
                           }`} />
-                        </button>
+                        </Button>
                       </div>
                     </div>
                   </div>
@@ -726,12 +739,12 @@ export default function ProfilePage() {
                         />
                       </div>
 
-                      <button
+                      <Button
                         type="submit"
-                        className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-5 py-3 rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
+                        className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-5 py-3 h-auto rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
                       >
                         Change Password
-                      </button>
+                      </Button>
                     </form>
                   </div>
                 </motion.div>

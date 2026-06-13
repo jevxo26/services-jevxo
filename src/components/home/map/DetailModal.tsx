@@ -3,6 +3,7 @@
 import React from "react";
 import { Star, MapPin, CheckCircle2, Calendar, Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Button } from "@/components/ui/button";
 import { Expert } from "./types";
 
 interface DetailModalProps {
@@ -35,12 +36,13 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
             
             {/* Header Visual Cover */}
             <div className="p-6 bg-gradient-to-r from-rose-500 to-[#FF5A5F] text-white relative">
-              <button
+              <Button
+                variant="ghost"
                 onClick={onClose}
-                className="absolute top-4 right-4 text-white/80 hover:text-white p-1.5 hover:bg-white/10 rounded-full cursor-pointer border-none outline-none"
+                className="absolute top-4 right-4 text-white/80 hover:text-white hover:bg-white/10 p-1.5 h-auto rounded-full cursor-pointer border-none outline-none"
               >
                 <X className="w-5 h-5" />
-              </button>
+              </Button>
               
               <span className="text-[10px] font-extrabold tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full inline-block mb-2 uppercase">
                 {expert.badge}
@@ -128,15 +130,15 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
                 >
                   <Phone className="w-4 h-4" />
                 </a>
-                <button
+                <Button
                   onClick={() => {
                     alert(`Successfully booked ${expert.name}!`);
                     onClose();
                   }}
-                  className="px-6 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold rounded-xl text-sm shadow-sm transition-all active:scale-97 border-none cursor-pointer"
+                  className="px-6 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold rounded-xl text-sm shadow-sm transition-all active:scale-97 border-none cursor-pointer h-auto"
                 >
                   Book Appointment
-                </button>
+                </Button>
               </div>
             </div>
 

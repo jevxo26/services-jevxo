@@ -5,6 +5,7 @@ import { useState, useEffect, useRef } from "react"
 import { useRouter } from "next/navigation"
 import { Eye, EyeOff, Mail, Lock, User, Phone, Briefcase, Check, ShieldCheck, PenTool } from "lucide-react"
 import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export default function RegisterPage() {
   const router = useRouter()
@@ -200,29 +201,31 @@ export default function RegisterPage() {
                       className="w-full pl-11 pr-12 py-3.5 rounded-2xl border border-slate-100 bg-slate-50/60 focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-rose-500/5 outline-none transition-all text-xs font-bold text-slate-800"
                       required
                     />
-                    <button
+                    <Button
+                      variant="ghost"
                       type="button"
                       onClick={() => setShowPassword(!showPassword)}
-                      className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none"
+                      className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-2 h-auto hover:bg-transparent"
                     >
                       {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
-                    </button>
+                    </Button>
                   </div>
                 </div>
 
                 {/* Terms Agreement */}
                 <div className="flex items-center gap-2 pt-1">
-                  <button
+                  <Button
                     type="button"
+                    variant="ghost"
                     onClick={() => setAgreeTerms(!agreeTerms)}
-                    className={`w-5 h-5 rounded border flex items-center justify-center transition-all focus:outline-none ${
+                    className={`w-5 h-5 p-0 min-w-0 rounded border flex items-center justify-center transition-all focus:outline-none hover:bg-transparent ${
                       agreeTerms
-                        ? "bg-[#FF5B60] border-[#FF5B60] text-white"
-                        : "border-slate-250 bg-slate-50/60"
+                        ? "bg-[#FF5B60] border-[#FF5B60] text-white hover:bg-[#FF5B60] hover:text-white"
+                        : "border-slate-250 bg-slate-50/60 hover:bg-slate-50/60"
                     }`}
                   >
                     {agreeTerms && <Check size={12} className="stroke-[3]" />}
-                  </button>
+                  </Button>
                   <span className="text-[11px] text-slate-500 font-semibold">
                     I agree to the{" "}
                     <Link href="#" className="text-[#FF5B60] hover:underline font-bold">
@@ -237,12 +240,12 @@ export default function RegisterPage() {
                 </div>
 
                 {/* Submit Button */}
-                <button
+                <Button
                   type="submit"
-                  className="w-full bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-extrabold py-3.5 rounded-2xl shadow-sm shadow-rose-500/10 active:scale-[0.99] transition-all focus:outline-none mt-2"
+                  className="w-full bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-extrabold py-3.5 h-auto rounded-2xl shadow-sm shadow-rose-500/10 active:scale-[0.99] transition-all focus:outline-none mt-2"
                 >
                   Create Account
-                </button>
+                </Button>
               </form>
 
               {/* Social Login */}
@@ -254,22 +257,22 @@ export default function RegisterPage() {
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
-                  <button className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors text-[10px] font-black text-slate-700 focus:outline-none active:scale-[0.98]">
+                  <Button variant="outline" className="flex items-center justify-center gap-2 py-3 px-4 h-auto rounded-2xl border border-slate-100 hover:bg-slate-50 hover:text-slate-700 transition-colors text-[10px] font-black text-slate-700 focus:outline-none active:scale-[0.98]">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/c/c1/Google_%22G%22_logo.svg"
                       alt="google"
                       className="w-4 h-4"
                     />
                     GOOGLE
-                  </button>
-                  <button className="flex items-center justify-center gap-2 py-3 px-4 rounded-2xl border border-slate-100 hover:bg-slate-50 transition-colors text-[10px] font-black text-slate-700 focus:outline-none active:scale-[0.98]">
+                  </Button>
+                  <Button variant="outline" className="flex items-center justify-center gap-2 py-3 px-4 h-auto rounded-2xl border border-slate-100 hover:bg-slate-50 hover:text-slate-700 transition-colors text-[10px] font-black text-slate-700 focus:outline-none active:scale-[0.98]">
                     <img
                       src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg"
                       alt="apple"
                       className="w-4 h-4"
                     />
                     APPLE
-                  </button>
+                  </Button>
                 </div>
               </div>
             </div>
@@ -376,33 +379,35 @@ export default function RegisterPage() {
                 {timeLeft > 0 ? (
                   `Resend code in 00:${timeLeft < 10 ? "0" + timeLeft : timeLeft}`
                 ) : (
-                  <button
+                  <Button
+                    variant="link"
                     type="button"
                     onClick={handleResendOtp}
-                    className="text-[#FF5B60] hover:underline font-black focus:outline-none"
+                    className="text-[#FF5B60] hover:underline font-black focus:outline-none p-0 h-auto"
                   >
                     Resend Code
-                  </button>
+                  </Button>
                 )}
               </div>
 
               {/* Verify & Proceed Submit Button */}
-              <button
+              <Button
                 type="submit"
-                className="w-full bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-black py-4 rounded-2xl shadow-sm shadow-rose-500/10 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 focus:outline-none"
+                className="w-full bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-black py-4 h-auto rounded-2xl shadow-sm shadow-rose-500/10 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 focus:outline-none"
               >
                 VERIFY & PROCEED <span className="text-sm font-extrabold">→</span>
-              </button>
+              </Button>
             </form>
 
             {/* Option to change phone number */}
-            <button
+            <Button
+              variant="link"
               type="button"
               onClick={() => setIsOtpSent(false)}
-              className="text-xs text-slate-500 hover:text-slate-850 hover:underline font-bold flex items-center justify-center gap-1 mx-auto focus:outline-none"
+              className="text-xs text-slate-500 hover:text-slate-850 hover:underline hover:no-underline font-bold flex items-center justify-center gap-1 mx-auto focus:outline-none p-0 h-auto"
             >
               Change Phone Number
-            </button>
+            </Button>
           </div>
 
           <span className="text-[10px] text-slate-400 font-extrabold mt-6 block text-center relative z-10">
