@@ -69,7 +69,7 @@ export default function SavedServicesPage() {
     setRecentlyViewed([])
   }
 
-  if (role !== "customer") {
+  if (role !== "client") {
     return <AccessDenied roleRequired="Customer" />
   }
 

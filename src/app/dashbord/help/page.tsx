@@ -76,7 +76,7 @@ export default function HelpCenterPage() {
     }
   ]
 
-  if (role !== "customer") {
+  if (role !== "client") {
     return <AccessDenied roleRequired="Customer" />
   }
 

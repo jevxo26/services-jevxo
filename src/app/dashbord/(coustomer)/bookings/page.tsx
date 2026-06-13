@@ -87,7 +87,7 @@ export default function BookingsPage() {
 
   const filteredBookings = bookingsList.filter((b) => b.status === filter)
 
-  if (role !== "customer") {
+  if (role !== "client") {
     return <AccessDenied roleRequired="Customer" />
   }
 

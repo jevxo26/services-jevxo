@@ -14,7 +14,7 @@ export default function ProfilePage() {
     toast.success("Profile updated successfully!");
   };
 
-  if (role !== "customer") {
+  if (role !== "client") {
     return <AccessDenied roleRequired="Customer" />;
   }
 

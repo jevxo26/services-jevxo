@@ -25,27 +25,11 @@ export default function ToasterProvider() {
           gap: "12px",
           boxShadow: "0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.05)",
         },
-        success: {
-          style: {
-            background: "#ECFDF5",
-            color: "#065F46",
-            borderColor: "#A7F3D0",
-          },
-        },
-        error: {
-          style: {
-            background: "#FEF2F2",
-            color: "#991B1B",
-            borderColor: "#FECACA",
-          },
-        },
-        info: {
-          style: {
-            background: "#F0F9FF",
-            color: "#075985",
-            borderColor: "#BAE6FD",
-          },
-        },
+        classNames: {
+          success: "!bg-[#ECFDF5] !text-[#065F46] !border-[#A7F3D0]",
+          error: "!bg-[#FEF2F2] !text-[#991B1B] !border-[#FECACA]",
+          info: "!bg-[#F0F9FF] !text-[#075985] !border-[#BAE6FD]",
+        }
       }}
     />
   );

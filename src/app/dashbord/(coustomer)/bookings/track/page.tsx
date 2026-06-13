@@ -49,7 +49,7 @@ export default function BookingTrackWizard() {
     isPromoApplied: false
   })
 
-  if (role !== "customer") {
+  if (role !== "client") {
     return <AccessDenied roleRequired="Customer" />
   }
 

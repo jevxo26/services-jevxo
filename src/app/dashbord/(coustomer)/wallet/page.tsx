@@ -76,7 +76,7 @@ export default function WalletPage() {
     setTimeout(() => setCopied(false), 2000)
   }
 
-  if (role !== "customer") {
+  if (role !== "client") {
     return <AccessDenied roleRequired="Customer" />
   }
 
