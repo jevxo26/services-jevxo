@@ -5,11 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 
 const serviceCategories = [
-  { id: "cleaning", label: "Cleaning", icon: "🧹" },
-  { id: "ac-repair", label: "AC Repair", icon: "❄️" },
-  { id: "plumbing", label: "Plumbing", icon: "🔧" },
-  { id: "electrical", label: "Electrical", icon: "⚡" },
-  { id: "painting", label: "Painting", icon: "🎨" },
+  { id: "premium-deep-cleaning", label: "Cleaning", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10 2l-6 6"/><path d="M15.5 15.5L10 21l-4-4L11.5 11.5"/><path d="M21 3l-6 6"/></svg> },
+  { id: "master-ac-service", label: "AC Repair", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="2" x2="12" y2="22"></line><line x1="12" y1="2" x2="16" y2="6"></line><line x1="12" y1="2" x2="8" y2="6"></line><line x1="12" y1="22" x2="16" y2="18"></line><line x1="12" y1="22" x2="8" y2="18"></line><line x1="2" y1="12" x2="22" y2="12"></line><line x1="2" y1="12" x2="6" y2="8"></line><line x1="2" y1="12" x2="6" y2="16"></line><line x1="22" y1="12" x2="18" y2="8"></line><line x1="22" y1="12" x2="18" y2="16"></line><line x1="4.93" y1="4.93" x2="19.07" y2="19.07"></line><line x1="4.93" y1="19.07" x2="19.07" y2="4.93"></line></svg> },
+  { id: "expert-plumbing", label: "Plumbing", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg> },
+  { id: "electrical-solution", label: "Electrical", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon></svg> },
+  { id: "luxe-painting", label: "Painting", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 2v4"/><path d="M21 2v4"/><path d="M14 6h8v6h-8z"/><path d="M14 8H7a2 2 0 0 0-2 2v6"/><path d="M9 16v6h2v-6z"/></svg> },
+  { id: "cctv", label: "CCTV", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg> },
+  { id: "premium-shifting", label: "Shifting", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="1" y="3" width="15" height="13"></rect><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"></polygon><circle cx="5.5" cy="18.5" r="2.5"></circle><circle cx="18.5" cy="18.5" r="2.5"></circle></svg> },
+  { id: "appliance-repair", label: "Appliance Repair", icon: <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/><line x1="2" y1="2" x2="22" y2="22"/></svg> },
 ];
 
 const trendingServices = [
@@ -40,7 +43,7 @@ const trendingServices = [
 ];
 
 export default function ServicesPage() {
-  const [activeCategory, setActiveCategory] = useState("cleaning");
+  const [activeCategory, setActiveCategory] = useState("ac-repair");
   const [searchQuery, setSearchQuery] = useState("");
 
   return (
@@ -48,7 +51,7 @@ export default function ServicesPage() {
       {/* Hero Section */}
       <section className="services-hero">
         <div className="services-hero-content">
-          <h1 className="services-title">Find the best home services</h1>
+          <h1 className="services-title">Find the best home <span className="text-[#ff5a5f]">services</span></h1>
           <p className="services-subtitle">
             Premium, reliable, and effortless solutions for your urban lifestyle
             in Bangladesh.
@@ -102,40 +105,60 @@ export default function ServicesPage() {
               className="services-filter-btn"
               aria-label="Filter services"
             >
-              <svg
-                width="18"
-                height="18"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <line x1="4" y1="6" x2="20" y2="6" />
-                <line x1="8" y1="12" x2="16" y2="12" />
-                <line x1="11" y1="18" x2="13" y2="18" />
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="4" y1="21" x2="4" y2="14"></line>
+                <line x1="4" y1="10" x2="4" y2="3"></line>
+                <line x1="12" y1="21" x2="12" y2="12"></line>
+                <line x1="12" y1="8" x2="12" y2="3"></line>
+                <line x1="20" y1="21" x2="20" y2="16"></line>
+                <line x1="20" y1="12" x2="20" y2="3"></line>
+                <line x1="1" y1="14" x2="7" y2="14"></line>
+                <line x1="9" y1="8" x2="15" y2="8"></line>
+                <line x1="17" y1="16" x2="23" y2="16"></line>
               </svg>
             </button>
           </div>
 
           {/* Category Pills */}
-          <div className="services-categories">
-            {serviceCategories.map((cat) => (
-              <button
-                key={cat.id}
-                id={`category-${cat.id}`}
-                className={`services-category-pill ${
-                  activeCategory === cat.id
-                    ? "services-category-pill--active"
-                    : ""
-                }`}
-                onClick={() => setActiveCategory(cat.id)}
-              >
-                <span className="services-category-icon">{cat.icon}</span>
-                {cat.label}
-              </button>
-            ))}
+          <div className="flex flex-col gap-4 mt-4 w-full items-center">
+            {/* First Row: 5 items */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {serviceCategories.slice(0, 5).map((cat) => (
+                <Link
+                  href={`/services/${cat.id}`}
+                  key={cat.id}
+                  id={`category-${cat.id}`}
+                  className={`services-category-pill ${
+                    activeCategory === cat.id
+                      ? "services-category-pill--active !border-[#ff5a5f] !text-[#ff5a5f] !bg-[#fff0ef]"
+                      : "text-gray-700 no-underline"
+                  }`}
+                  onClick={() => setActiveCategory(cat.id)}
+                >
+                  <span className="services-category-icon">{cat.icon}</span>
+                  {cat.label}
+                </Link>
+              ))}
+            </div>
+            {/* Second Row: 3 items */}
+            <div className="flex flex-wrap justify-center gap-4">
+              {serviceCategories.slice(5).map((cat) => (
+                <Link
+                  href={`/services/${cat.id}`}
+                  key={cat.id}
+                  id={`category-${cat.id}`}
+                  className={`services-category-pill ${
+                    activeCategory === cat.id
+                      ? "services-category-pill--active !border-[#ff5a5f] !text-[#ff5a5f] !bg-[#fff0ef]"
+                      : "text-gray-700 no-underline"
+                  }`}
+                  onClick={() => setActiveCategory(cat.id)}
+                >
+                  <span className="services-category-icon">{cat.icon}</span>
+                  {cat.label}
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -192,7 +215,7 @@ export default function ServicesPage() {
                           ৳{service.price.toLocaleString()}
                         </span>
                       </div>
-                      <button className="trending-book-btn">Book Now</button>
+                      <Link href={`/services/${service.id}`} className="trending-book-btn">Book Now</Link>
                     </div>
                   </div>
                 </div>
@@ -227,12 +250,13 @@ export default function ServicesPage() {
                       <span className="trending-price-value-small">
                         ৳{service.price.toLocaleString()}
                       </span>
-                      <button
+                      <Link
+                        href={`/services/${service.id}`}
                         className="trending-arrow-btn"
                         aria-label={`View ${service.title}`}
                       >
                         →
-                      </button>
+                      </Link>
                     </div>
                   </div>
                 </div>
@@ -252,58 +276,76 @@ export default function ServicesPage() {
    ============================ */
 const serviceListings = [
   {
-    id: "luxury-wall-painting",
-    title: "Luxury Wall Painting",
-    description: "Italian finish textures and moisture-proof...",
-    image: "/images/service/service-3.png",
-    category: "Painting & Renovation",
-    price: "৳15/sq.ft",
-    done: "3k+ done",
-  },
-  {
-    id: "emergency-leak-repair",
-    title: "Emergency Leak Repair",
-    description: "60-minute response time for all plumbing...",
-    image: "/images/service/service-4.png",
-    category: "Plumbing",
-    price: "৳600",
+    id: "premium-deep-cleaning",
+    title: "Premium Deep Cleaning",
+    description: "Complete sanitation for houses & offices.",
+    image: "/images/service/cleaning.png",
+    category: "Cleaning",
+    price: "৳1,500",
     done: "1.2k+ done",
   },
   {
-    id: "smart-home-setup",
-    title: "Smart Home Setup",
-    description: "Installation of smart switches, hubs, and...",
-    image: "/images/service/service-5.png",
+    id: "master-ac-service",
+    title: "Master AC Service",
+    description: "Jet wash, gas refill & master repair.",
+    image: "/images/service/ac.png",
+    category: "AC Repair",
+    price: "৳1,200",
+    done: "850+ done",
+  },
+  {
+    id: "expert-plumbing",
+    title: "Expert Plumbing",
+    description: "Leak fixing, pipe installation & drainage.",
+    image: "/images/service/plumbing.png",
+    category: "Plumbing",
+    price: "৳800",
+    done: "520+ done",
+  },
+  {
+    id: "electrical-solution",
+    title: "Electrical Solution",
+    description: "Wiring, socket repair & appliance setup.",
+    image: "/images/service/electrical.png",
     category: "Electrical",
-    price: "৳2,500",
-    done: "800+ done",
+    price: "৳900",
+    done: "910+ done",
   },
   {
-    id: "refrigerator-servicing",
-    title: "Refrigerator Servicing",
-    description: "Gas charge, compressor checks, and...",
-    image: "/images/service/service-6.png",
+    id: "luxe-painting",
+    title: "Luxe Painting",
+    description: "Interior & exterior wall painting solutions.",
+    image: "/images/service/luxe.png",
+    category: "Painting",
+    price: "৳5,000",
+    done: "315+ done",
+  },
+  {
+    id: "premium-shifting",
+    title: "Premium Shifting",
+    description: "Hassle-free home & office moving.",
+    image: "/images/service/shifting.png",
+    category: "Shifting",
+    price: "৳4,500",
+    done: "1.1k+ done",
+  },
+  {
+    id: "safe-pest-control",
+    title: "Safe Pest Control",
+    description: "Eco-friendly pest & termite control.",
+    image: "/images/service/pest.png",
+    category: "Pest Control",
+    price: "৳2,000",
+    done: "640+ done",
+  },
+  {
+    id: "appliance-repair",
+    title: "Appliance Repair",
+    description: "Fridge, Oven & Microwave servicing.",
+    image: "/images/service/appliance.png",
     category: "Appliance",
-    price: "৳1,500",
-    done: "2.1k+ done",
-  },
-  {
-    id: "sofa-carpet-shampoo",
-    title: "Sofa & Carpet Shampoo",
-    description: "Deep vacuuming and shampooing for all...",
-    image: "/images/service/service-7.png",
-    category: "Cleaning",
-    price: "৳800/seat",
-    done: "4k+ done",
-  },
-  {
-    id: "cabinet-wood-polishing",
-    title: "Cabinet Wood Polishing",
-    description: "Restore the natural shine of your premium",
-    image: "/images/service/service-8.png",
-    category: "Renovation",
-    price: "৳3,500",
-    done: "500+ done",
+    price: "৳1,000",
+    done: "290+ done",
   },
 ];
 
@@ -417,8 +459,8 @@ function ServiceListings() {
         {/* Service Cards Grid */}
         <div className="listings-content">
           <div className="listings-grid">
-            {serviceListings.map((service) => (
-              <div key={service.id} className="listing-card">
+            {serviceListings.slice((currentPage - 1) * 6, currentPage * 6).map((service) => (
+              <Link href={`/services/${service.id}`} key={service.id} className="listing-card">
                 <div className="listing-card-image">
                   <Image
                     src={service.image}
@@ -453,7 +495,7 @@ function ServiceListings() {
                     </span>
                   </div>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
 
@@ -467,7 +509,7 @@ function ServiceListings() {
             >
               ‹
             </button>
-            {[1, 2, 3].map((page) => (
+            {Array.from({ length: Math.ceil(serviceListings.length / 6) }, (_, i) => i + 1).map((page) => (
               <button
                 key={page}
                 className={`pagination-num ${currentPage === page ? "pagination-num--active" : ""}`}
@@ -478,8 +520,8 @@ function ServiceListings() {
             ))}
             <button
               className="pagination-arrow"
-              disabled={currentPage === 3}
-              onClick={() => setCurrentPage((p) => Math.min(3, p + 1))}
+              disabled={currentPage === Math.ceil(serviceListings.length / 6)}
+              onClick={() => setCurrentPage((p) => Math.min(Math.ceil(serviceListings.length / 6), p + 1))}
               aria-label="Next page"
             >
               ›

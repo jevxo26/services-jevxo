@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useState } from "react";
 
 const trendingPageServices = [
   {
@@ -13,6 +14,7 @@ const trendingPageServices = [
     reviews: "1.2k",
     price: "1,500",
     badge: "Trending",
+    category: "Cleaning"
   },
   {
     id: "master-ac-service",
@@ -23,6 +25,7 @@ const trendingPageServices = [
     reviews: "850",
     price: "1,200",
     badge: null,
+    category: "AC Repair"
   },
   {
     id: "expert-plumbing",
@@ -33,6 +36,7 @@ const trendingPageServices = [
     reviews: "520",
     price: "800",
     badge: null,
+    category: "Plumbing"
   },
   {
     id: "electrical-solution",
@@ -43,6 +47,7 @@ const trendingPageServices = [
     reviews: "910",
     price: "900",
     badge: null,
+    category: "Electrical"
   },
   {
     id: "luxe-painting",
@@ -53,6 +58,7 @@ const trendingPageServices = [
     reviews: "315",
     price: "5,000",
     badge: null,
+    category: "Painting"
   },
   {
     id: "premium-shifting",
@@ -63,6 +69,7 @@ const trendingPageServices = [
     reviews: "1.1k",
     price: "4,500",
     badge: null,
+    category: "Shifting"
   },
   {
     id: "safe-pest-control",
@@ -73,6 +80,7 @@ const trendingPageServices = [
     reviews: "640",
     price: "2,000",
     badge: null,
+    category: "Pest Control"
   },
   {
     id: "appliance-repair",
@@ -83,10 +91,38 @@ const trendingPageServices = [
     reviews: "290",
     price: "1,000",
     badge: null,
+    category: "Appliance"
+  },
+  {
+    id: "cctv",
+    title: "CCTV Service and Security",
+    description: "Advanced camera installation and system monitoring.",
+    image: "/images/service/cc tv1.png",
+    rating: 4.8,
+    reviews: "540",
+    price: "1,500",
+    badge: "New",
+    category: "CCTV"
   },
 ];
 
 export default function TrendingServicesPage() {
+  const [selectedCategory, setSelectedCategory] = useState("All Categories");
+  const [isCategoryOpen, setIsCategoryOpen] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 8;
+  
+  const categories = ["All Categories", "Cleaning", "AC Repair", "Plumbing", "Electrical", "Painting", "Shifting", "Pest Control", "Appliance", "CCTV"];
+
+  const filteredServices = selectedCategory === "All Categories" 
+    ? trendingPageServices 
+    : trendingPageServices.filter(service => service.category === selectedCategory);
+
+  const totalPages = Math.ceil(filteredServices.length / itemsPerPage);
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentServices = filteredServices.slice(indexOfFirstItem, indexOfLastItem);
+
   return (
     <section className="bg-[#FFF0EF] px-6 pt-10 pb-20 min-h-[calc(100vh-64px)]">
       <div className="max-w-[1100px] mx-auto">
@@ -109,10 +145,33 @@ export default function TrendingServicesPage() {
         {/* Filters */}
         <div className="flex flex-col md:flex-row items-start md:items-center justify-between bg-white px-6 py-3 rounded-[20px] md:rounded-full shadow-[0_4px_20px_rgba(0,0,0,0.04)] mb-10 gap-4 md:gap-0">
           <div className="flex items-center gap-3 flex-wrap">
-            <button className="flex items-center gap-2 px-5 py-2.5 bg-white border border-[#e5e7eb] rounded-full text-[0.95rem] font-semibold text-[#4b5563] cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]">
-              All Categories
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
-            </button>
+            <div className="relative">
+              <button 
+                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+                className="flex items-center gap-2 px-5 py-2.5 bg-white border border-[#e5e7eb] rounded-full text-[0.95rem] font-semibold text-[#4b5563] cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]"
+              >
+                {selectedCategory}
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 12 15 18 9"></polyline></svg>
+              </button>
+              
+              {isCategoryOpen && (
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white border border-[#e5e7eb] rounded-xl shadow-[0_4px_20px_rgba(0,0,0,0.08)] z-20 py-2 flex flex-col">
+                  {categories.map((cat) => (
+                    <button 
+                      key={cat}
+                      className={`w-full text-left px-4 py-2.5 text-[0.95rem] transition-colors ${selectedCategory === cat ? 'bg-[#fff0ef] text-[#8b1a1a] font-semibold' : 'text-[#4b5563] hover:bg-[#f9fafb] hover:text-[#8b1a1a]'}`}
+                      onClick={() => {
+                        setSelectedCategory(cat);
+                        setCurrentPage(1);
+                        setIsCategoryOpen(false);
+                      }}
+                    >
+                      {cat}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
             
             <button className="flex items-center gap-2 px-5 py-2.5 bg-white border border-[#e5e7eb] rounded-full text-[0.95rem] font-semibold text-[#4b5563] cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]">
               Price Range
@@ -142,8 +201,8 @@ export default function TrendingServicesPage() {
 
         {/* Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mb-10">
-          {trendingPageServices.map((service) => (
-            <div key={service.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#e5e7eb] flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group">
+          {currentServices.map((service) => (
+            <Link href={`/services/${service.id}`} key={service.id} className="bg-white rounded-2xl overflow-hidden shadow-sm border border-[#e5e7eb] flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-1 cursor-pointer group no-underline">
               <div className="relative h-[200px] overflow-hidden">
                 <Image
                   src={service.image}
@@ -170,23 +229,43 @@ export default function TrendingServicesPage() {
                     <span className="text-[0.65rem] text-[#9ca3af] uppercase font-semibold block mb-0.5">Starts from</span>
                     <span className="text-xl font-bold text-[#8b1a1a]">৳{service.price}</span>
                   </div>
-                  <Link href={`/services/${service.id}`} className="px-4 py-2 bg-[#ff5a5f] hover:bg-[#e0484d] text-white border-none rounded-md text-[0.85rem] font-semibold transition-colors duration-200 cursor-pointer no-underline">Book Now</Link>
+                  <span className="px-4 py-2 bg-[#ff5a5f] hover:bg-[#e0484d] text-white border-none rounded-md text-[0.85rem] font-semibold transition-colors duration-200 cursor-pointer text-center block">Book Now</span>
                 </div>
               </div>
-            </div>
+            </Link>
           ))}
         </div>
 
         {/* Pagination */}
-        <div className="flex items-center justify-center gap-2">
-          <button className="flex items-center justify-center w-10 h-10 rounded-full border border-[#e5e7eb] bg-white text-[#1a1a1a] text-xl cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]">‹</button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-full border border-[#8b1a1a] bg-[#8b1a1a] text-white text-[0.9rem] font-semibold cursor-pointer transition-all duration-200 hover:bg-[#a52a2a]">1</button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-full border border-[#e5e7eb] bg-white text-[#1a1a1a] text-[0.9rem] font-semibold cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]">2</button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-full border border-[#e5e7eb] bg-white text-[#1a1a1a] text-[0.9rem] font-semibold cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]">3</button>
-          <span className="text-[#6b7280] mx-2">...</span>
-          <button className="flex items-center justify-center w-10 h-10 rounded-full border border-[#e5e7eb] bg-white text-[#1a1a1a] text-[0.9rem] font-semibold cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]">12</button>
-          <button className="flex items-center justify-center w-10 h-10 rounded-full border border-[#e5e7eb] bg-white text-[#1a1a1a] text-xl cursor-pointer transition-all duration-200 hover:border-[#8b1a1a] hover:text-[#8b1a1a]">›</button>
-        </div>
+        {totalPages > 1 && (
+          <div className="flex items-center justify-center gap-2">
+            <button 
+              onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
+              disabled={currentPage === 1}
+              className={`flex items-center justify-center w-10 h-10 rounded-full border ${currentPage === 1 ? 'border-gray-200 text-gray-300 cursor-not-allowed' : 'border-[#e5e7eb] bg-white text-[#1a1a1a] cursor-pointer hover:border-[#8b1a1a] hover:text-[#8b1a1a]'} text-xl transition-all duration-200`}
+            >
+              ‹
+            </button>
+            
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(page => (
+              <button 
+                key={page}
+                onClick={() => setCurrentPage(page)}
+                className={`flex items-center justify-center w-10 h-10 rounded-full border text-[0.9rem] font-semibold transition-all duration-200 ${currentPage === page ? 'border-[#8b1a1a] bg-[#8b1a1a] text-white hover:bg-[#a52a2a] cursor-default' : 'border-[#e5e7eb] bg-white text-[#1a1a1a] cursor-pointer hover:border-[#8b1a1a] hover:text-[#8b1a1a]'}`}
+              >
+                {page}
+              </button>
+            ))}
+
+            <button 
+              onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
+              disabled={currentPage === totalPages}
+              className={`flex items-center justify-center w-10 h-10 rounded-full border ${currentPage === totalPages ? 'border-gray-200 text-gray-300 cursor-not-allowed' : 'border-[#e5e7eb] bg-white text-[#1a1a1a] cursor-pointer hover:border-[#8b1a1a] hover:text-[#8b1a1a]'} text-xl transition-all duration-200`}
+            >
+              ›
+            </button>
+          </div>
+        )}
 
         {/* Custom Service Section */}
         <div className="bg-white rounded-[24px] px-6 py-12 mt-[60px] text-center shadow-[0_4px_24px_rgba(0,0,0,0.04)] flex flex-col items-center">
