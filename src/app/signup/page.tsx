@@ -406,7 +406,7 @@ export default function RegisterPage() {
             <div className="space-y-2.5">
               <h2 className="text-2xl font-black text-slate-800 tracking-tight">Verify Your Number</h2>
               <p className="text-xs text-slate-450 font-semibold leading-relaxed px-4">
-                We've sent a 6-digit code to <strong className="text-slate-800">{formData.phone || "+880 1712-XXXXXX"}</strong>
+                We've sent a 4-digit code to <strong className="text-slate-800">{formData.phone || "+880 1712-XXXXXX"}</strong>
               </p>
             </div>
 
