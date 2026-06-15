@@ -18,7 +18,7 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
       <body className="antialiased">
         {!hideLayout && <Navbar />}
         <main
-          className={`flex-grow ${hideLayout ? "" : "pb-20 md:pb-0 pb-[calc(env(safe-area-inset-bottom)+80px)]"}`}
+          className={`grow ${hideLayout ? "" : "md:pb-0 pb-[calc(env(safe-area-inset-bottom)+80px)]"}`}
         >
           {children}
         </main>
@@ -27,4 +27,3 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
     </>
   );
 }
-// wessdssss

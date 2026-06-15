@@ -266,7 +266,7 @@ export function Navbar() {
                                 return (
                                   <Link
                                     key={cat.slug}
-                                    href={`/categories/${cat.slug}`}
+                                    href={`/categories/service/${cat.slug}`}
                                     className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/50 group/item transition-colors"
                                     onClick={() => setShowMenuDropdown(false)}
                                   >
@@ -646,12 +646,12 @@ export function Navbar() {
                                 {CATEGORIES_CONTENT.categories.map((cat) => {
                                   const IconComponent = cat.icon;
                                   const isCategoryActive =
-                                    pathname === `/categories/${cat.slug}`;
+                                    pathname === `/categories/service/${cat.slug}`;
 
                                   return (
                                     <Link
                                       key={cat.slug}
-                                      href={`/categories/${cat.slug}`}
+                                      href={`/categories/service/${cat.slug}`}
                                       className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${
                                         isCategoryActive
                                           ? "bg-rose-50 text-[#FF5A5F] font-semibold"
