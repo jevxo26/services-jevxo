@@ -7,6 +7,7 @@ import { Phone, ArrowRight, Star, Briefcase, ShieldCheck, Loader2, Sparkles, Log
 import { useSendOtpMutation, useVerifyOtpMutation, useResendOtpMutation } from "@/redux/features/auth/authApi"
 import { useAppDispatch } from "@/redux/hooks"
 import { setUser } from "@/redux/features/auth/authSlice"
+import { setTokens } from "@/lib/token"
 import { useRouter, useSearchParams } from "next/navigation"
 import { toast } from "sonner";
 
@@ -84,14 +85,10 @@ export default function LoginPage() {
     try {
       const response = await verifyOtp({ phone, otpCode: enteredOtp }).unwrap()
 
-      const token = response?.data?.accessToken || response?.accessToken || response?.data?.token || response?.token;
-      if (token) {
-        localStorage.setItem('token', token);
-        const date = new Date();
-        date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
-        const expires = "; expires=" + date.toUTCString();
-        document.cookie = `token=${token}${expires}; path=/; SameSite=Lax`;
-        document.cookie = `rajseba_access_token=${token}${expires}; path=/; SameSite=Lax`;
+      const accessToken = response?.data?.accessToken || response?.accessToken || response?.data?.token || response?.token;
+      const refreshToken = response?.data?.refreshToken || response?.refreshToken;
+      if (accessToken) {
+        setTokens(accessToken, refreshToken || '');
       }
 
       const user = response?.data?.user || response?.user;
@@ -105,7 +102,7 @@ export default function LoginPage() {
         const expires = "; expires=" + date.toUTCString();
         document.cookie = `rajseba_user_role=${roleString}${expires}; path=/; SameSite=Lax`;
 
-        // Redirect based on query parameter or role
+        toast.success("Login successful!")
         if (redirectUrl) {
           router.push(redirectUrl)
         } else if (roleString === "client") {
@@ -114,13 +111,9 @@ export default function LoginPage() {
           router.push("/dashbord")
         }
       } else {
-        if (redirectUrl) {
-          router.push(redirectUrl)
-        } else {
-          router.push("/dashbord/overview")
-        }
+        toast.success("Login successful!")
+        router.push(redirectUrl || "/dashbord/overview")
       }
-      toast.success("Login successful!")
     } catch (err: any) {
       console.error("OTP verification failed:", err)
       toast.error(err.data?.message || "Invalid OTP code.")
