@@ -1,10 +1,11 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import { getRoleName } from "@/redux/features/auth/authSlice";
 import { ShieldAlert, ShieldCheck, XCircle, Check } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CustomTable } from "@/components/ui/table";
+import { useGetAllUsersQuery, useUpdateUserMutation } from "@/redux/features/admin/user";
+import { useGetAllRolesQuery } from "@/redux/features/admin/role";
 
 interface UserItem {
   id: string;
@@ -19,29 +20,49 @@ interface UserItem {
 export default function UsersPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
 
-  // Mock Users data
-  const initialUsers: UserItem[] = [
-    { id: "USR-001", name: "Ahmad Jalal", email: "ahmad@gmail.com", role: "Customer", status: "Active", joined: "Jan 12, 2026" },
-    { id: "USR-002", name: "Kabir Hossain", email: "kabir.ac@rajseba.com", role: "Professional", status: "Active", joined: "Feb 05, 2026", rating: "4.86" },
-    { id: "USR-003", name: "Maria Kazi", email: "maria.kazi@outlook.com", role: "Customer", status: "Active", joined: "Mar 20, 2026" },
-    { id: "USR-004", name: "Sumon Khan", email: "sumon.electric@rajseba.com", role: "Professional", status: "Pending Approval", joined: "June 01, 2026", rating: "New" },
-    { id: "USR-005", name: "Imran Miah", email: "imran.plumber@gmail.com", role: "Professional", status: "Suspended", joined: "Nov 14, 2025", rating: "4.20" },
-    { id: "USR-006", name: "Sharmin Akter", email: "sharmin.akter@hotmail.com", role: "Customer", status: "Active", joined: "Dec 08, 2025" },
-  ];
+  const [users, setUsers] = useState<UserItem[]>([]);
 
-  const [users, setUsers] = useState<UserItem[]>(initialUsers);
+  // Connect APIs
+  const { data: apiUsersRes, isLoading: isUsersLoading } = useGetAllUsersQuery();
+  const { data: rolesRes, isLoading: isRolesLoading } = useGetAllRolesQuery();
+  const [updateUserMut] = useUpdateUserMutation();
+
+  useEffect(() => {
+    const apiUsers = apiUsersRes?.data || (Array.isArray(apiUsersRes) ? apiUsersRes : []);
+    if (apiUsers && apiUsers.length > 0) {
+      const mappedUsers = apiUsers.map((u: any) => ({
+        id: u.id || u._id || `USR-${Math.floor(Math.random() * 1000)}`,
+        name: u.name || `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown User',
+        email: u.email || 'No Email',
+        role: u.role === 'Professional' || u.role?.name === 'Professional' ? 'Professional' : 'Customer',
+        status: u.status || 'Active',
+        joined: u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'Unknown',
+        rating: u.rating || 'New',
+      }));
+      setUsers(mappedUsers);
+    }
+  }, [apiUsersRes]);
 
   // Verification and Status update actions
-  const handleVerify = (id: string) => {
-    setUsers(users.map(u => u.id === id ? { ...u, status: "Active" as const } : u));
+  const handleVerify = async (id: string) => {
+    setUsers(prev => prev.map(u => u.id === id ? { ...u, status: "Active" as const } : u));
+    try {
+      await updateUserMut({ id, data: { status: "Active" } }).unwrap();
+    } catch (e) { console.error(e); }
   };
 
-  const handleSuspend = (id: string) => {
-    setUsers(users.map(u => u.id === id ? { ...u, status: "Suspended" as const } : u));
+  const handleSuspend = async (id: string) => {
+    setUsers(prev => prev.map(u => u.id === id ? { ...u, status: "Suspended" as const } : u));
+    try {
+      await updateUserMut({ id, data: { status: "Suspended" } }).unwrap();
+    } catch (e) { console.error(e); }
   };
 
-  const handleActivate = (id: string) => {
-    setUsers(users.map(u => u.id === id ? { ...u, status: "Active" as const } : u));
+  const handleActivate = async (id: string) => {
+    setUsers(prev => prev.map(u => u.id === id ? { ...u, status: "Active" as const } : u));
+    try {
+      await updateUserMut({ id, data: { status: "Active" } }).unwrap();
+    } catch (e) { console.error(e); }
   };
 
   // Access check
