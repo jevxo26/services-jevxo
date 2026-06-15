@@ -142,7 +142,7 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 {SERVICES.map((s) => (
                   <li key={s.label}>
-                    <Link href={s.href} className="text-slate-500 hover:text-[#FF5A5F] flex items-center gap-2 group">
+                    <Link href={s.href} className="text-slate-500 hover:text-[#FF5A5F] hover:font-semibold hover:underline flex items-center gap-2 group">
                       <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-[#FF5A5F]" />
                       {s.label}
                     </Link>
@@ -156,7 +156,7 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 {QUICK_LINKS.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-slate-500 hover:text-[#FF5A5F] flex items-center gap-2 group">
+                    <Link href={l.href} className="text-slate-500 hover:text-[#FF5A5F] hover:font-semibold hover:underline flex items-center gap-2 group">
                       <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-[#FF5A5F]" />
                       {l.label}
                     </Link>
@@ -233,10 +233,10 @@ export default function Footer() {
       <div className="border-t border-slate-200 bg-white py-5">
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
           <div className="text-center sm:text-left">
-            © {new Date().getFullYear()} <span className="font-bold">Rajseba.</span> All rights reserved
+            © {new Date().getFullYear()} <span className="font-bold">Rajseba</span>. All rights reserved.
             <p className="mt-1">
               Design & Developed by{" "}
-              <Link href="https://jevxo-core-ecosystem.vercel.app/" className="text-primary hover:underline">
+              <Link href="https://jevxo-core-ecosystem.vercel.app/" className="text-primary font-semibold hover:font-bold hover:underline">
                 Jevxo
               </Link>
             </p>

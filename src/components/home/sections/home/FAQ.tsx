@@ -29,7 +29,7 @@ export default function FAQ() {
   };
 
   return (
-    <div className="py-16 md:py-24 bg-white">
+    <div className="py-16 md:py-24 bg-transparent">
       <div className="max-w-7xl mx-auto px-4 md:px-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-start">
 
@@ -61,13 +61,13 @@ export default function FAQ() {
               return (
                 <div
                   key={index}
-                  className={`rounded-2xl border overflow-hidden transition-all duration-300 ${isOpen
+                  className={`rounded-2xl border bg-white overflow-hidden transition-all duration-300 ${isOpen
                     ? 'border-[#FF5A5F]/40 shadow-sm'
                     : 'border-slate-200 hover:border-slate-300'
                     }`}
                 >
                   <button
-                    className="w-full flex items-center justify-between gap-4 px-5 py-5 text-left focus:outline-none"
+                    className="w-full  flex items-center justify-between gap-4 px-5 py-5 text-left focus:outline-none"
                     onClick={() => toggle(index)}
                     aria-expanded={isOpen}
                   >

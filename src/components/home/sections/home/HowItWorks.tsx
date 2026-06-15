@@ -77,7 +77,7 @@ const HowItWorks = () => {
         {/* Timeline Path container */}
         <div className="relative">
           {/* Connecting SVG Arrow 1 (Desktop) */}
-          <div className="absolute left-[16%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
+          <div className="absolute left-[15%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
               className="w-full h-8 text-[#FF5A5F]"
               viewBox="0 0 100 24"
@@ -121,7 +121,7 @@ const HowItWorks = () => {
           </div>
 
           {/* Connecting SVG Arrow 3 (Desktop) */}
-          <div className="absolute left-[66%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
+          <div className="absolute left-[67%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
               className="w-full h-8 text-[#FF5A5F]"
               viewBox="0 0 100 24"

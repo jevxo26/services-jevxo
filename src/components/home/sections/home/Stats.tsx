@@ -45,7 +45,7 @@ function StatCard({ stat, triggered }: { stat: typeof stats[0]; triggered: boole
 
   return (
     <div className="flex flex-col items-center group">
-      <div className="w-16 h-16 rounded-full bg-[#FF5A5F]/10 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
+      <div className="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
         <stat.icon className="w-8 h-8 text-[#FF5A5F]" />
       </div>
       <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2 tabular-nums">
@@ -79,7 +79,7 @@ export default function Stats() {
   }, []);
 
   return (
-    <div className="py-8 md:py-12 mt-15 bg-white relative" ref={ref}>
+    <div className="py-8 md:py-12 mt-15 bg-transparent relative" ref={ref}>
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
 
         {/* Title */}

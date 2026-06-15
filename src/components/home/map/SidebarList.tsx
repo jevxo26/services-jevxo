@@ -63,7 +63,7 @@ export default function SidebarList({
   }, []);
 
   return (
-    <div className="w-full md:w-[380px] bg-white border border-slate-200 rounded-3xl flex flex-col h-[45vh] md:h-full z-10 shadow-md overflow-hidden">
+    <div className="w-full md:w-[380px] bg-white border border-slate-200 rounded-3xl flex flex-col h-[60vh] md:h-full z-10 shadow-md overflow-hidden">
       {/* Sidebar Header Filters */}
       <div className="p-4 border-b border-slate-100 space-y-4">
         {/* Search Bar */}

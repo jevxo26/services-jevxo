@@ -16,7 +16,9 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
   return (
     <>
       {!hideLayout && <Navbar />}
-      <main className={`flex-grow ${hideLayout ? "" : "pb-16 md:pb-0"}`}>
+      <main
+        className={`flex-grow ${hideLayout ? "" : "pb-20 md:pb-0 pb-[calc(env(safe-area-inset-bottom)+80px)]"}`}
+      >
         {children}
       </main>
       {!hideLayout && <Footer />}

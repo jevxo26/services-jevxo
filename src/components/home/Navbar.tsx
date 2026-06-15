@@ -699,8 +699,8 @@ export function Navbar() {
       </motion.nav>
 
       {/* ─── MOBILE BOTTOM NAVIGATION ─── */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-md border-t border-slate-200/80 shadow-[0_-4px_12px_rgba(0,0,0,0.03)] z-50 px-2 py-2 pb-safe-bottom">
-        <div className="grid grid-cols-6 gap-1 max-w-lg mx-auto">
+      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-slate-200/80 shadow-[0_-4px_12px_rgba(0,0,0,0.03)] z-50 py-2 safe-bottom">
+        <div className="grid grid-cols-6 gap-1 max-w-lg mx-auto px-2">
           {bottomLinks.map((link, i) => {
             const Icon = link.icon;
             const active = link.hasDropdown
