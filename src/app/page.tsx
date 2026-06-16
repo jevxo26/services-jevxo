@@ -5,10 +5,9 @@ import Testimonials from "@/components/home/sections/home/Testimonials";
 import TopServices from "@/components/home/sections/home/TopServices";
 import WhyChooseUs from "@/components/home/sections/home/WhyChooseUs";
 import Stats from "@/components/home/sections/home/Stats";
-// import AppDownload from "@/components/home/sections/home/AppDownload";
+import AppDownload from "@/components/home/sections/home/AppDownload";
 // import PartnerCta from "@/components/home/sections/home/PartnerCta";
 import FAQ from "@/components/home/sections/home/FAQ";
-import Image from "next/image";
 
 export default function Home() {
   return (
@@ -32,6 +31,8 @@ export default function Home() {
           <Stats />
           <HowItWorks />
           <Testimonials />
+          <AppDownload />
+          {/* <PartnerCta /> */}
           <FAQ />
         </div>
       </div>

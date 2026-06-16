@@ -191,10 +191,8 @@ export function Navbar() {
         className="bg-white border-b sticky top-0 z-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
-
           {/* ─── TOP BAR ─── */}
           <div className="flex items-center justify-between h-16 sm:h-[68px] gap-3">
-
             {/* Brand */}
             <Link
               href="/"
@@ -212,9 +210,14 @@ export function Navbar() {
             </Link>
 
             {/* Left Desktop Nav Links */}
-            <nav className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0" aria-label="Left navigation">
+            <nav
+              className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0"
+              aria-label="Left navigation"
+            >
               {LEFT_NAV_LINKS.map((link, i) => {
-                const active = link.hasDropdown ? pathname.startsWith("/categories") : isActive(link.href);
+                const active = link.hasDropdown
+                  ? pathname.startsWith("/categories")
+                  : isActive(link.href);
                 const Icon = link.icon;
 
                 if (link.hasDropdown) {
@@ -227,12 +230,19 @@ export function Navbar() {
                     >
                       <button
                         type="button"
-                        className={`flex items-center font-semibold text-xs lg:text-sm transition-colors cursor-pointer ${active ? "text-[#FF5A5F]" : "text-slate-600 hover:text-[#FF5A5F]"
-                          }`}
+                        className={`flex items-center font-semibold text-xs lg:text-sm transition-colors cursor-pointer ${
+                          active
+                            ? "text-[#FF5A5F]"
+                            : "text-slate-600 hover:text-[#FF5A5F]"
+                        }`}
                       >
-                        <Icon className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`} />
+                        <Icon
+                          className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`}
+                        />
                         <span>{link.label}</span>
-                        <ChevronDown className={`w-3.5 h-3.5 ml-1 transition-transform duration-200 ${showMenuDropdown ? "rotate-180" : ""}`} />
+                        <ChevronDown
+                          className={`w-3.5 h-3.5 ml-1 transition-transform duration-200 ${showMenuDropdown ? "rotate-180" : ""}`}
+                        />
                         {active && (
                           <motion.span
                             layoutId="navIndicatorLeft"
@@ -256,7 +266,7 @@ export function Navbar() {
                                 return (
                                   <Link
                                     key={cat.slug}
-                                    href={`/categories/${cat.slug}`}
+                                    href={`/categories/service/${cat.slug}`}
                                     className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/50 group/item transition-colors"
                                     onClick={() => setShowMenuDropdown(false)}
                                   >
@@ -281,10 +291,15 @@ export function Navbar() {
                   <Link
                     key={i}
                     href={link.href}
-                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active ? "text-[#FF5A5F]" : "text-slate-600 hover:text-[#FF5A5F]"
-                      }`}
+                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${
+                      active
+                        ? "text-[#FF5A5F]"
+                        : "text-slate-600 hover:text-[#FF5A5F]"
+                    }`}
                   >
-                    <Icon className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`} />
+                    <Icon
+                      className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`}
+                    />
                     <span>{link.label}</span>
                     {active && (
                       <motion.span
@@ -305,9 +320,14 @@ export function Navbar() {
                     style={{ opacity: opacityVal, scale: scaleVal, y: yVal }}
                     className="absolute inset-0"
                   >
-                    <label htmlFor="desktop-search" className="sr-only">Search services</label>
+                    <label htmlFor="desktop-search" className="sr-only">
+                      Search services
+                    </label>
                     <div className="flex items-center h-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF5A5F] focus-within:ring-2 focus-within:ring-[#FF5A5F]/10 transition-all">
-                      <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
+                      <Search
+                        className="w-4 h-4 text-slate-400 flex-shrink-0"
+                        aria-hidden="true"
+                      />
                       <input
                         id="desktop-search"
                         type="text"
@@ -320,9 +340,14 @@ export function Navbar() {
               </div>
             ) : (
               <div className="hidden md:flex flex-1 justify-center max-w-xs lg:max-w-sm mx-4">
-                <label htmlFor="desktop-search-2" className="sr-only">Search services</label>
+                <label htmlFor="desktop-search-2" className="sr-only">
+                  Search services
+                </label>
                 <div className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF5A5F] focus-within:ring-2 focus-within:ring-[#FF5A5F]/10 transition-all">
-                  <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
+                  <Search
+                    className="w-4 h-4 text-slate-400 flex-shrink-0"
+                    aria-hidden="true"
+                  />
                   <input
                     id="desktop-search-2"
                     type="text"
@@ -334,7 +359,10 @@ export function Navbar() {
             )}
 
             {/* Right Desktop Nav Links */}
-            <nav className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0" aria-label="Right navigation">
+            <nav
+              className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0"
+              aria-label="Right navigation"
+            >
               {RIGHT_NAV_LINKS.map((link, i) => {
                 const active = isActive(link.href);
                 const Icon = link.icon;
@@ -343,10 +371,15 @@ export function Navbar() {
                   <Link
                     key={i}
                     href={link.href}
-                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active ? "text-[#FF5A5F]" : "text-slate-600 hover:text-[#FF5A5F]"
-                      }`}
+                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${
+                      active
+                        ? "text-[#FF5A5F]"
+                        : "text-slate-600 hover:text-[#FF5A5F]"
+                    }`}
                   >
-                    <Icon className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`} />
+                    <Icon
+                      className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled || !isHomepage ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`}
+                    />
                     <span>{link.label}</span>
                     {active && (
                       <motion.span
@@ -375,8 +408,12 @@ export function Navbar() {
                   aria-expanded={profileDropdownOpen}
                 >
                   <div className="text-right hidden lg:block">
-                    <p className="text-xs font-bold text-slate-800 leading-none">{profile.name}</p>
-                    <p className="text-[10px] text-slate-400 mt-1 leading-none font-semibold">{profile.roleName}</p>
+                    <p className="text-xs font-bold text-slate-800 leading-none">
+                      {profile.name}
+                    </p>
+                    <p className="text-[10px] text-slate-400 mt-1 leading-none font-semibold">
+                      {profile.roleName}
+                    </p>
                   </div>
                   <div className="w-9 h-9 bg-rose-100 text-[#FF5A5F] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-sm hover:scale-105 transition-transform duration-200 select-none">
                     {profile.avatar}
@@ -393,15 +430,23 @@ export function Navbar() {
                       className="absolute right-0 mt-2 w-56 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50 overflow-hidden"
                     >
                       <div className="px-4 py-3 border-b border-slate-50 bg-slate-50/40">
-                        <p className="text-sm font-bold text-slate-800 truncate">{profile.name}</p>
-                        <p className="text-xs text-slate-400 truncate mt-0.5 font-medium">{profile.email}</p>
+                        <p className="text-sm font-bold text-slate-800 truncate">
+                          {profile.name}
+                        </p>
+                        <p className="text-xs text-slate-400 truncate mt-0.5 font-medium">
+                          {profile.email}
+                        </p>
                         <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF5A5F] bg-rose-50 border border-rose-100/50 rounded-full mt-2">
                           {profile.roleName}
                         </span>
                       </div>
                       <div className="p-1 space-y-0.5">
                         <Link
-                          href={role === "client" ? "/dashbord/overview" : "/dashbord"}
+                          href={
+                            role === "client"
+                              ? "/dashbord/overview"
+                              : "/dashbord"
+                          }
                           className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
@@ -477,30 +522,39 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 onClick={handleMobileSearchToggle}
-                className={`p-2.5 h-auto rounded-lg transition-colors ${mobileSearchOpen
-                  ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
-                  : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
-                  }`}
+                className={`p-2.5 h-auto rounded-lg transition-colors ${
+                  mobileSearchOpen
+                    ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
+                    : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
+                }`}
                 aria-label={mobileSearchOpen ? "Close search" : "Open search"}
                 aria-expanded={mobileSearchOpen}
               >
-                {mobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
+                {mobileSearchOpen ? (
+                  <X className="w-5 h-5" />
+                ) : (
+                  <Search className="w-5 h-5" />
+                )}
               </Button>
               <Button
                 variant="ghost"
                 onClick={handleMenuToggle}
-                className={`p-2.5 h-auto rounded-lg transition-colors ${isOpen
-                  ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
-                  : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
-                  }`}
+                className={`p-2.5 h-auto rounded-lg transition-colors ${
+                  isOpen
+                    ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
+                    : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
+                }`}
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu"
               >
-                {isOpen ? <X className="w-[22px] h-[22px]" /> : <Menu className="w-[22px] h-[22px]" />}
+                {isOpen ? (
+                  <X className="w-[22px] h-[22px]" />
+                ) : (
+                  <Menu className="w-[22px] h-[22px]" />
+                )}
               </Button>
             </div>
-
           </div>
 
           {/* ─── MOBILE SEARCH BAR ─── */}
@@ -515,9 +569,14 @@ export function Navbar() {
                 className="md:hidden overflow-hidden border-t border-slate-100"
               >
                 <div className="py-3 px-1">
-                  <label htmlFor="mobile-search" className="sr-only">Search services</label>
+                  <label htmlFor="mobile-search" className="sr-only">
+                    Search services
+                  </label>
                   <div className="flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 h-11 gap-2 focus-within:border-[#FF5A5F] focus-within:ring-2 focus-within:ring-[#FF5A5F]/10 transition-all">
-                    <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
+                    <Search
+                      className="w-4 h-4 text-slate-400 flex-shrink-0"
+                      aria-hidden="true"
+                    />
                     <input
                       id="mobile-search"
                       ref={mobileSearchRef}
@@ -530,7 +589,6 @@ export function Navbar() {
               </motion.div>
             )}
           </AnimatePresence>
-
         </div>
 
         {/* ─── MOBILE DRAWER ─── */}
@@ -548,10 +606,11 @@ export function Navbar() {
               className="md:hidden overflow-hidden border-t border-slate-100 bg-white"
             >
               <div className="px-4 py-4 space-y-1">
-
                 {/* Nav Links */}
                 {ALL_NAV_LINKS.map((link, i) => {
-                  const active = link.hasDropdown ? pathname.startsWith("/categories") : isActive(link.href);
+                  const active = link.hasDropdown
+                    ? pathname.startsWith("/categories")
+                    : isActive(link.href);
                   const Icon = link.icon;
 
                   if (link.hasDropdown) {
@@ -559,15 +618,22 @@ export function Navbar() {
                       <div key={i} className="space-y-1">
                         <button
                           type="button"
-                          onClick={() => setShowMobileAccordion(!showMobileAccordion)}
-                          className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${active ? "text-[#FF5A5F] bg-rose-50" : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
-                            }`}
+                          onClick={() =>
+                            setShowMobileAccordion(!showMobileAccordion)
+                          }
+                          className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${
+                            active
+                              ? "text-[#FF5A5F] bg-rose-50"
+                              : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                          }`}
                         >
                           <div className="flex items-center gap-2.5">
                             <Icon className="w-5 h-5 text-slate-500" />
                             <span>{link.label}</span>
                           </div>
-                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showMobileAccordion ? "rotate-180" : ""}`} />
+                          <ChevronDown
+                            className={`w-4 h-4 transition-transform duration-200 ${showMobileAccordion ? "rotate-180" : ""}`}
+                          />
                         </button>
 
                         <AnimatePresence>
@@ -582,18 +648,35 @@ export function Navbar() {
                               <div className="grid grid-cols-2 gap-1.5">
                                 {CATEGORIES_CONTENT.categories.map((cat) => {
                                   const IconComponent = cat.icon;
+                                  const isCategoryActive =
+                                    pathname === `/categories/service/${cat.slug}`;
+
                                   return (
                                     <Link
                                       key={cat.slug}
-                                      href={`/categories/${cat.slug}`}
-                                      className="flex items-center gap-2.5 p-2 rounded-lg hover:bg-slate-50 text-slate-600 hover:text-[#FF5A5F] transition-colors"
+                                      href={`/categories/service/${cat.slug}`}
+                                      className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${
+                                        isCategoryActive
+                                          ? "bg-rose-50 text-[#FF5A5F] font-semibold"
+                                          : "text-slate-600 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                                      }`}
                                       onClick={() => {
                                         setIsOpen(false);
                                         setShowMobileAccordion(false);
                                       }}
                                     >
-                                      <IconComponent className="w-4 h-4 text-slate-400" />
-                                      <span className="text-xs font-semibold">{cat.label}</span>
+                                      <IconComponent
+                                        className={`w-4 h-4 flex-shrink-0 ${
+                                          isCategoryActive
+                                            ? "text-[#FF5A5F]"
+                                            : "text-slate-400"
+                                        }`}
+                                      />
+                                      <span>{cat.label}</span>
+
+                                      {isCategoryActive && (
+                                        <div className="ml-auto w-1.5 h-1.5 bg-[#FF5A5F] rounded-full" />
+                                      )}
                                     </Link>
                                   );
                                 })}
@@ -609,8 +692,11 @@ export function Navbar() {
                     <Link
                       key={i}
                       href={link.href}
-                      className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors ${active ? "text-[#FF5A5F] bg-rose-50" : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
-                        }`}
+                      className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors ${
+                        active
+                          ? "text-[#FF5A5F] bg-rose-50"
+                          : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                      }`}
                       onClick={() => setIsOpen(false)}
                     >
                       <Icon className="w-5 h-5 text-slate-500" />
@@ -638,8 +724,12 @@ export function Navbar() {
                         {profile.avatar}
                       </div>
                       <div className="min-w-0 flex-grow">
-                        <p className="text-sm font-bold text-slate-800 truncate leading-none">{profile.name}</p>
-                        <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">{profile.email}</p>
+                        <p className="text-sm font-bold text-slate-800 truncate leading-none">
+                          {profile.name}
+                        </p>
+                        <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">
+                          {profile.email}
+                        </p>
                         <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF5A5F] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5 font-semibold">
                           {profile.roleName}
                         </span>
@@ -649,7 +739,9 @@ export function Navbar() {
                     {/* Navigation Actions */}
                     <div className="grid grid-cols-3 gap-2">
                       <Link
-                        href={role === "client" ? "/dashbord/overview" : "/dashbord"}
+                        href={
+                          role === "client" ? "/dashbord/overview" : "/dashbord"
+                        }
                         className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF5A5F] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
@@ -707,7 +799,6 @@ export function Navbar() {
                     </Link>
                   </div>
                 )}
-
               </div>
             </motion.div>
           )}
@@ -719,8 +810,14 @@ export function Navbar() {
         <div className="grid grid-cols-6 gap-1 max-w-lg mx-auto px-2">
           {bottomLinks.map((link, i) => {
             const Icon = link.icon;
+
+            // Improved active logic - consistent with desktop navbar
+            const isMenuActive =
+              link.hasDropdown && pathname.startsWith("/categories");
+            const isLinkActive = isMenuActive || isActive(link.href);
+
             const active = link.hasDropdown
-              ? pathname.startsWith("/categories") || (isOpen && showMobileAccordion)
+              ? isMenuActive
               : isActive(link.href);
 
             const handleClick = (e: React.MouseEvent) => {
@@ -738,13 +835,17 @@ export function Navbar() {
                 key={i}
                 href={link.href}
                 onClick={handleClick}
-                className={`flex flex-col items-center justify-center gap-1 py-1 rounded-xl transition-all active:scale-90 ${active
-                  ? "text-[#FF5A5F]"
-                  : "text-slate-500 hover:text-[#FF5A5F]"
-                  }`}
+                className={`flex flex-col items-center justify-center gap-1 py-1.5 rounded-xl transition-all active:scale-90 relative
+            ${
+              active ? "text-[#FF5A5F]" : "text-slate-500 hover:text-[#FF5A5F]"
+            }`}
               >
-                <Icon className={`w-5 h-5 transition-transform duration-200 ${active ? "scale-110" : ""}`} />
-                <span className="text-[10px] font-semibold tracking-wide leading-none">{link.label}</span>
+                <Icon
+                  className={`w-5 h-5 transition-all duration-200 ${active ? "scale-110" : ""}`}
+                />
+                <span className="text-[10px] font-semibold tracking-wide leading-none">
+                  {link.label}
+                </span>
               </Link>
             );
           })}

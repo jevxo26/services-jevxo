@@ -6,37 +6,7 @@ import Link from "next/link";
 export default function PremiumDeepCleaningPage() {
   return (
     <div className="bg-white min-h-screen">
-      {/* Hero Section */}
-      <section className="relative w-full h-[600px] flex items-center">
-        {/* Background Image */}
-        <div className="absolute inset-0 z-0">
-          <Image src="/images/service/pre cleaning service-2.png" alt="Professional Cleaning for Your Sanctuary" fill priority className="object-cover" />
-          {/* Soft black overlay to ensure text readability */}
-          <div className="absolute inset-0 bg-black/40"></div>
-        </div>
-
-        {/* Content */}
-        <div className="relative z-10 w-full max-w-[1200px] mx-auto px-6">
-          <div className="max-w-[700px]">
-            <h1 className="text-white text-[3.5rem] font-bold leading-tight mb-4 tracking-tight drop-shadow-md">
-              Professional Cleaning for<br />Your Sanctuary
-            </h1>
-            <p className="text-white text-[1.15rem] leading-relaxed mb-8 max-w-[550px] drop-shadow-md">
-              Experience the ultimate in hygiene with our premium, hotel-grade
-              cleaning services tailored for urban homes in Bangladesh.
-            </p>
-
-            <div className="flex flex-wrap items-center gap-4">
-              <button className="px-8 py-3 bg-[#c92a2a] hover:bg-[#a62323] text-white rounded-lg text-[1rem] font-semibold transition-colors shadow-lg">
-                Book Now
-              </button>
-              <button className="px-8 py-3 bg-white/10 hover:bg-white/20 text-white border border-white/50 rounded-lg text-[1rem] font-semibold backdrop-blur-sm transition-colors shadow-lg">
-                Explore Services
-              </button>
-            </div>
-          </div>
-        </div>
-      </section>
+     
 
       {/* Expertise Section */}
       <section className="py-20 px-6 bg-[#fff5f5]">

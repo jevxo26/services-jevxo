@@ -1,6 +1,5 @@
 "use client";
 
-import React, { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { TbAirConditioning, TbTruck, TbScissors } from "react-icons/tb";
@@ -55,14 +54,6 @@ const cardVariants = {
 } as const;
 
 const ExploreCategories = () => {
-  const [showAll, setShowAll] = useState(false);
-
-  const displayedCategories = showAll
-    ? CATEGORIES_CONTENT.categories
-    : CATEGORIES_CONTENT.categories.slice(0, VISIBLE_COUNT);
-
-  const hasMore = CATEGORIES_CONTENT.categories.length > VISIBLE_COUNT;
-
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-6 py-8 md:py-12 overflow-hidden">
       {/* Header */}
@@ -77,37 +68,14 @@ const ExploreCategories = () => {
             {CATEGORIES_CONTENT.subtitle}
           </p>
         </div>
-
-        {hasMore && (
-          <div className="flex justify-center md:justify-end">
-            <Button
-              variant="outline"
-              onClick={() => setShowAll((prev) => !prev)}
-              className="
-          rounded-xl
-          flex items-center gap-2
-          px-5 py-2
-          bg-white
-          hover:bg-[#FFF0F1]
-          hover:text-[#FF5A5F]
-          border border-slate-200
-          shadow-sm
-        "
-            >
-              {/* <Eye className="w-4 h-4" /> */}
-
-              {showAll ? "Show Less" : "View All"}
-            </Button>
-          </div>
-        )}
       </div>
       {/* Grid */}
       <motion.div
         layout
-        className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 md:gap-6"
+        className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 md:gap-6"
       >
         <AnimatePresence mode="popLayout">
-          {displayedCategories.map((cat) => {
+          {CATEGORIES_CONTENT.categories.map((cat) => {
             const IconComponent = cat.icon;
             return (
               <motion.div
@@ -120,12 +88,7 @@ const ExploreCategories = () => {
                 whileTap={{ scale: 0.97 }}
                 layout
               >
-                <Link href={`/categories/${cat.slug}`} className="block h-full">
-                  {/*
-                   * Card shell — neumorphic raised effect.
-                   * Requires a mid-tone background on the parent page (not white)
-                   * for the shadow contrast to read correctly.
-                   */}
+                <Link href={`/categories/service/${cat.slug}`} className="block h-full">
                   <div
                     className="
                       group relative overflow-hidden

@@ -86,7 +86,7 @@ export default function WhyChooseUs() {
                   group relative overflow-hidden
                   flex flex-col items-center justify-center
                   text-center h-full
-                  rounded-[32px] p-6 md:p-8
+                  rounded-[32px] p-4 lg:p-8
                   bg-gradient-to-br from-white to-[#e8eaed]
                   border border-white/80
                   cursor-default
