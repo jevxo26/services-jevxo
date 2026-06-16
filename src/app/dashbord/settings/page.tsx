@@ -83,7 +83,7 @@ export default function SettingsPage() {
   );
 
   return (
-    <div className="relative min-h-screen p-1 sm:p-6 overflow-hidden animate-in fade-in duration-200">
+    <div className="w-full animate-in fade-in duration-200">
 
       {/* Background Watermark Pattern Wrapper */}
       <div

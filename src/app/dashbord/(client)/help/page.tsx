@@ -81,7 +81,7 @@ export default function HelpCenterPage() {
   }
 
   return (
-    <div className="relative min-h-screen p-1 sm:p-6 overflow-hidden animate-in fade-in duration-200">
+    <div className="w-full animate-in fade-in duration-200">
       <div className="w-full space-y-10 relative z-10">
 
         {/* Title Header */}

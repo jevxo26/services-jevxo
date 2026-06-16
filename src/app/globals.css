@@ -44,7 +44,6 @@
   --color-ring: var(--ring);
   --color-card: var(--card);
   --color-card-foreground: var(--card-foreground);
-  /* ... other shadcn vars */
   --font-heading: var(--font-bai-jamjuree);
   --font-sans: var(--font-bai-jamjuree);
   --color-sidebar-ring: var(--sidebar-ring);
@@ -71,7 +70,6 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  /* Brand Colors from Screenshot */
   --color-brand-primary: #FF464C;
   --color-brand-light: #FF5B60;
   --color-brand-dark: #D6363B;
@@ -84,12 +82,10 @@
 }
 
 :root {
-  /* Light Theme - Matching Screenshot */
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
 
   --primary: #FF5A5F;
-  /* Your brand color */
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -132,7 +128,6 @@
 }
 
 .dark {
-  /* Dark mode */
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
   --primary: #FF5A5F;
@@ -151,7 +146,6 @@
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
   --ring: #FF5A5F;
-  /* ... rest of dark colors */
 }
 
 /* ============== Bai Jamjuree Font ============== */
@@ -166,8 +160,6 @@ body {
 @layer base {
   * {
     @apply border-border outline-ring/50;
-    scrollbar-width: thin;
-    scrollbar-color: #FFD2D4 transparent;
   }
 
   body {
@@ -177,9 +169,12 @@ body {
   html {
     @apply font-sans;
     overflow-x: hidden;
+    /* ✅ Scrollbar শুধু একবার html-এ */
+    scrollbar-width: thin;
+    scrollbar-color: #FFD2D4 transparent;
   }
 
-  /* Webkit support for brand custom scrollbar */
+  /* ✅ Webkit scrollbar — একবারই */
   ::-webkit-scrollbar {
     width: 6px;
     height: 6px;
@@ -220,6 +215,7 @@ body {
   border: 1px solid rgba(226, 232, 240, 0.7);
 }
 
+/* ✅ custom-scrollbar utility — specific scrollable divs এ manually use করো */
 @utility custom-scrollbar {
   &::-webkit-scrollbar {
     height: 6px;

@@ -14,8 +14,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
     <div
       data-slot="table-container"
       className={cn(
-        "relative w-full overflow-x-auto select-none pb-40", // Added pb-40 to give space for dropdowns
-        /* Premium custom thin scrollbar styling */
+        "relative w-full overflow-x-auto",
         "[&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar]:w-1.5",
         "[&::-webkit-scrollbar-track]:bg-slate-50",
         "[&::-webkit-scrollbar-thumb]:bg-slate-200 [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-slate-300"

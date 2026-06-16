@@ -61,6 +61,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Wrench, label: "Manage Services", href: "/dashbord/services" },
           { icon: Layers, label: "Nested Services", href: "/dashbord/nested-services" },
           { icon: BarChart3, label: "System Analytics", href: "/dashbord/analytics" },
+          { icon: Wallet, label: "Withdraw Requests", href: "/dashbord/withdraw" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
@@ -80,6 +81,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Wrench, label: "My Services", href: "/dashbord/services" },
           { icon: Layers, label: "My Sub-Services", href: "/dashbord/nested-services" },
           { icon: Package, label: "My Packages", href: "/dashbord/packages" },
+          { icon: Wallet, label: "Withdraw Money", href: "/dashbord/withdraw" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];

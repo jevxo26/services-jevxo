@@ -19,11 +19,22 @@ import {
   ChevronRight,
   Phone,
   Zap,
+  Building,
+  Globe,
+  FileText,
+  Plus,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CustomTable } from "@/components/ui/table";
+import {
+  useGetAllProfilesQuery,
+  useCreateProfileMutation,
+  useUpdateProfileMutation,
+} from "@/redux/features/shared/profileApi";
+import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
+import { toast } from "sonner";
 
 export default function DashboardPage() {
   const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
@@ -75,6 +86,8 @@ export default function DashboardPage() {
    1. SUPER ADMIN DASHBOARD
    ========================================================================== */
 function SuperAdminDashboard() {
+  const authUser = useAppSelector((state) => state.auth.user);
+  
   const stats = [
     { label: "Total Revenue", value: "৳1,245,600", desc: "+12.5% this month", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
     { label: "Verified Providers", value: "842", desc: "18 pending approval", icon: HardHat, color: "text-teal-600 bg-teal-50" },
@@ -137,7 +150,7 @@ function SuperAdminDashboard() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Header */}
       <div>
-        <h1 className="text-3xl font-bold text-slate-900">System Overview</h1>
+        <h1 className="text-3xl font-bold text-slate-900">Hello, {authUser?.name || "Admin"}!</h1>
         <p className="text-slate-500 mt-1">Real-time statistics and administrative insights for Rajseba.</p>
       </div>
 
@@ -250,11 +263,26 @@ function SuperAdminDashboard() {
    2. PROVIDER DASHBOARD
    ========================================================================== */
 function ProviderDashboard() {
+  const authUser = useAppSelector((state) => state.auth.user);
+  const { data: profilesRes, isLoading: isProfilesLoading } = useGetAllProfilesQuery();
+  const { data: categoriesRes } = useGetAllCategoriesQuery();
+  
+  const [createProfileMut, { isLoading: isCreating }] = useCreateProfileMutation();
+  const [updateProfileMut, { isLoading: isUpdating }] = useUpdateProfileMutation();
+  
+  const [isEditingProfile, setIsEditingProfile] = useState(false);
+  const [isCreatingProfile, setIsCreatingProfile] = useState(false);
+  
+  // Find vendor's profile by user ID (matching string or number)
+  const myProfile = profilesRes?.data?.find(
+    (p: any) => p.user?.id === authUser?.id || p.user?.id === Number(authUser?.id) || p.user_id === authUser?.id || p.user_id === Number(authUser?.id)
+  );
+
   const stats = [
     { label: "Today's Earnings", value: "৳2,450", desc: "+৳1,200 yesterday", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
-    { label: "Jobs Completed", value: "3 Today", desc: "18 completed this month", icon: CheckCircle2, color: "text-teal-600 bg-teal-50" },
-    { label: "Upcoming Bookings", value: "2 Scheduled", desc: "Next job at 03:00 PM", icon: Calendar, color: "text-indigo-600 bg-indigo-50" },
-    { label: "My Rating", value: "4.86 / 5", desc: "Top Rated Badge Active", icon: Star, color: "text-amber-600 bg-amber-50" },
+    { label: "Projects completed", value: myProfile?.total_projects !== undefined ? `${myProfile.total_projects}` : "0", desc: "Total projects completed", icon: CheckCircle2, color: "text-teal-600 bg-teal-50" },
+    { label: "Starting Price", value: myProfile?.min_starting_price !== undefined ? `৳${myProfile.min_starting_price}` : "N/A", desc: "Minimum starting price", icon: Calendar, color: "text-indigo-600 bg-indigo-50" },
+    { label: "My Rating", value: myProfile?.rating !== undefined ? `${myProfile.rating} / 5` : "New", desc: myProfile?.company_name || "Professional Profile", icon: Star, color: "text-amber-600 bg-amber-50" },
   ];
 
   const providerJobs = [
@@ -274,13 +302,45 @@ function ProviderDashboard() {
 
   const activeJobDetails = providerJobs.find((j) => j.id === activeJob);
 
+  const handleProfileSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const profileData: any = {
+      type: formData.get("type") as 'personal' | 'company',
+      company_name: formData.get("company_name") as string || undefined,
+      description: formData.get("description") as string || undefined,
+      location: formData.get("location") as string || undefined,
+      min_starting_price: formData.get("min_starting_price") ? Number(formData.get("min_starting_price")) : undefined,
+      google_map_link: formData.get("google_map_link") as string || undefined,
+      category_id: formData.get("category_id") ? Number(formData.get("category_id")) : undefined,
+    };
+
+    try {
+      if (myProfile) {
+        // Update existing profile
+        await updateProfileMut({ id: myProfile.id, data: profileData }).unwrap();
+        toast.success("Business profile updated successfully!");
+        setIsEditingProfile(false);
+      } else {
+        // Create new profile
+        profileData.user_id = Number(authUser?.id);
+        await createProfileMut(profileData).unwrap();
+        toast.success("Business profile created successfully!");
+        setIsCreatingProfile(false);
+      }
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed to save profile. Please check validation.");
+      console.error(err);
+    }
+  };
+
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Header with toggle availability */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Provider Dashboard</h1>
-          <p className="text-slate-500 mt-1">Hello Kabir! Manage your active schedules and monitor earnings.</p>
+          <p className="text-slate-500 mt-1">Hello, {authUser?.name || myProfile?.company_name || "Provider"}! Manage your active schedules and monitor earnings.</p>
         </div>
         <div className="flex items-center gap-3 bg-white border border-slate-100 p-3 rounded-2xl shadow-sm">
           <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
@@ -357,61 +417,281 @@ function ProviderDashboard() {
           </div>
         </div>
 
-        {/* Job Actions Console (Right 1 column) */}
-        {activeJobDetails && (
-          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
-            <div>
-              <h3 className="text-lg font-bold text-slate-900">Job Console</h3>
-              <p className="text-xs text-slate-400 mt-1 font-medium">Update current status of Booking {activeJobDetails.id}</p>
-            </div>
-
-            <div className="space-y-4 pt-2">
-              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
-                <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Client Contact</p>
-                <h5 className="text-sm font-bold text-slate-800">{activeJobDetails.customer}</h5>
-                <p className="text-xs font-semibold text-rose-500 flex items-center gap-1">
-                  <Phone size={12} /> {activeJobDetails.phone}
-                </p>
+        {/* Right 1 Column: Job Console & Business Profile */}
+        <div className="space-y-6">
+          {/* Job Actions Console */}
+          {activeJobDetails && (
+            <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+              <div>
+                <h3 className="text-lg font-bold text-slate-950">Job Console</h3>
+                <p className="text-xs text-slate-400 mt-1 font-medium">Update current status of Booking {activeJobDetails.id}</p>
               </div>
 
-              <div className="space-y-2 pt-2">
-                <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Update Status</p>
-                {activeJobDetails.status !== "Completed" ? (
-                  <div className="flex flex-col gap-2">
+              <div className="space-y-4 pt-2">
+                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
+                  <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Client Contact</p>
+                  <h5 className="text-sm font-bold text-slate-850">{activeJobDetails.customer}</h5>
+                  <p className="text-xs font-semibold text-rose-500 flex items-center gap-1">
+                    <Phone size={12} /> {activeJobDetails.phone}
+                  </p>
+                </div>
+
+                <div className="space-y-2 pt-2">
+                  <p className="text-xs font-semibold text-slate-400 uppercase tracking-wider">Update Status</p>
+                  {activeJobDetails.status !== "Completed" ? (
+                    <div className="flex flex-col gap-2">
+                      <button
+                        onClick={() => updateJobStatus(activeJobDetails.id, "On The Way")}
+                        className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${(jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "On The Way"
+                            ? "bg-amber-500 border-amber-500 text-white"
+                            : "border-slate-200 hover:bg-slate-50 text-slate-700"
+                          }`}
+                      >
+                        On The Way
+                      </button>
+                      <button
+                        onClick={() => updateJobStatus(activeJobDetails.id, "In Progress")}
+                        className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${(jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "In Progress"
+                            ? "bg-indigo-600 border-indigo-600 text-white"
+                            : "border-slate-200 hover:bg-slate-50 text-slate-700"
+                          }`}
+                      >
+                        In Progress
+                      </button>
+                      <button
+                        onClick={() => updateJobStatus(activeJobDetails.id, "Completed")}
+                        className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-all active:scale-[0.98]"
+                      >
+                        Mark Completed
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-emerald-800 text-center text-xs font-semibold flex items-center justify-center gap-1.5">
+                      <CheckCircle2 size={16} /> Job Completed successfully!
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Business Profile Console */}
+          <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
+            <div className="flex justify-between items-center pb-3 border-b border-slate-100">
+              <div>
+                <h3 className="text-lg font-bold text-slate-900">Business Profile</h3>
+                <p className="text-xs text-slate-400 mt-0.5">Manage your commercial profile details</p>
+              </div>
+              {!isEditingProfile && !isCreatingProfile && myProfile && (
+                <button
+                  onClick={() => setIsEditingProfile(true)}
+                  className="text-xs font-semibold text-rose-500 hover:text-rose-600 px-3 py-1.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-100/50 transition-colors"
+                >
+                  Edit
+                </button>
+              )}
+            </div>
+
+            {isEditingProfile || isCreatingProfile || !myProfile ? (
+              <form onSubmit={handleProfileSubmit} className="space-y-4">
+                {!myProfile && !isCreatingProfile && (
+                  <div className="p-4 bg-amber-50 border border-amber-100 rounded-xl space-y-2">
+                    <p className="text-xs text-amber-800 font-semibold leading-relaxed">
+                      You haven't set up your business profile yet. Complete your profile setup to receive bookings and show up in searches!
+                    </p>
                     <button
-                      onClick={() => updateJobStatus(activeJobDetails.id, "On The Way")}
-                      className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${(jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "On The Way"
-                          ? "bg-amber-500 border-amber-500 text-white"
-                          : "border-slate-200 hover:bg-slate-50 text-slate-700"
-                        }`}
+                      type="button"
+                      onClick={() => setIsCreatingProfile(true)}
+                      className="text-xs font-bold bg-amber-500 hover:bg-amber-600 text-white px-3 py-1.5 rounded-lg transition-all"
                     >
-                      On The Way
+                      Set Up Profile Now
                     </button>
-                    <button
-                      onClick={() => updateJobStatus(activeJobDetails.id, "In Progress")}
-                      className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${(jobStatuses[activeJobDetails.id] || activeJobDetails.status) === "In Progress"
-                          ? "bg-indigo-600 border-indigo-600 text-white"
-                          : "border-slate-200 hover:bg-slate-50 text-slate-700"
-                        }`}
-                    >
-                      In Progress
-                    </button>
-                    <button
-                      onClick={() => updateJobStatus(activeJobDetails.id, "Completed")}
-                      className="w-full py-2.5 bg-emerald-500 hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-all active:scale-[0.98]"
-                    >
-                      Mark Completed
-                    </button>
-                  </div>
-                ) : (
-                  <div className="p-3 bg-emerald-50 border border-emerald-100 rounded-xl text-emerald-800 text-center text-xs font-semibold flex items-center justify-center gap-1.5">
-                    <CheckCircle2 size={16} /> Job Completed successfully!
                   </div>
                 )}
+
+                {(isCreatingProfile || myProfile) && (
+                  <>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Profile Type</label>
+                        <select
+                          name="type"
+                          defaultValue={myProfile?.type || 'personal'}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-rose-300"
+                          required
+                        >
+                          <option value="personal">Personal</option>
+                          <option value="company">Company</option>
+                        </select>
+                      </div>
+                      <div>
+                        <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Starting Price (৳)</label>
+                        <input
+                          name="min_starting_price"
+                          type="number"
+                          placeholder="800"
+                          defaultValue={myProfile?.min_starting_price}
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-rose-300"
+                          required
+                        />
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Company/Business Name</label>
+                      <input
+                        name="company_name"
+                        type="text"
+                        placeholder="e.g. Rana AC Services"
+                        defaultValue={myProfile?.company_name}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-rose-300"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Business Category</label>
+                      <select
+                        name="category_id"
+                        defaultValue={myProfile?.category?.id || ""}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-rose-300"
+                      >
+                        <option value="">Select a Category</option>
+                        {categoriesRes?.data?.map((cat: any) => (
+                          <option key={cat.id} value={cat.id}>
+                            {cat.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Service Location</label>
+                      <input
+                        name="location"
+                        type="text"
+                        placeholder="e.g. Mirpur, Dhaka"
+                        defaultValue={myProfile?.location}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-rose-300"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Business Description</label>
+                      <textarea
+                        name="description"
+                        rows={3}
+                        placeholder="Describe your expertise and service quality..."
+                        defaultValue={myProfile?.description}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-rose-300"
+                        required
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-[10px] font-bold text-slate-400 uppercase mb-1">Google Maps Link</label>
+                      <input
+                        name="google_map_link"
+                        type="url"
+                        placeholder="https://maps.google.com/..."
+                        defaultValue={myProfile?.google_map_link}
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-rose-300"
+                      />
+                    </div>
+
+                    <div className="flex gap-2 pt-2">
+                      <button
+                        type="submit"
+                        disabled={isCreating || isUpdating}
+                        className="flex-1 py-2 bg-rose-500 hover:bg-rose-600 text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+                      >
+                        {isCreating || isUpdating ? "Saving..." : "Save Details"}
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          setIsEditingProfile(false);
+                          setIsCreatingProfile(false);
+                        }}
+                        className="px-4 py-2 border border-slate-200 hover:bg-slate-50 rounded-xl text-xs font-semibold text-slate-700 transition-all"
+                      >
+                        Cancel
+                      </button>
+                    </div>
+                  </>
+                )}
+              </form>
+            ) : (
+              <div className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="w-12 h-12 bg-rose-50 rounded-xl flex items-center justify-center text-rose-500 font-bold shrink-0">
+                    <Building size={20} />
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-slate-850">{myProfile.company_name}</h4>
+                    <span className="inline-block px-2 py-0.5 rounded-full bg-slate-100 text-[10px] font-semibold text-slate-500 capitalize">
+                      {myProfile.type}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="space-y-2.5 pt-2 text-xs">
+                  <div className="flex items-start gap-2.5">
+                    <MapPin size={14} className="text-slate-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-slate-750">Location</p>
+                      <p className="text-slate-500">{myProfile.location || "Not provided"}</p>
+                    </div>
+                  </div>
+
+                  {myProfile.category && (
+                    <div className="flex items-start gap-2.5">
+                      <Briefcase size={14} className="text-slate-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-bold text-slate-750">Category</p>
+                        <p className="text-slate-500">{myProfile.category.name}</p>
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="flex items-start gap-2.5">
+                    <FileText size={14} className="text-slate-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-slate-750">Description</p>
+                      <p className="text-slate-500 leading-relaxed">{myProfile.description || "Not provided"}</p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-start gap-2.5">
+                    <DollarSign size={14} className="text-slate-400 shrink-0 mt-0.5" />
+                    <div>
+                      <p className="font-bold text-slate-750">Min Starting Price</p>
+                      <p className="text-slate-500">৳{myProfile.min_starting_price || "Not set"}</p>
+                    </div>
+                  </div>
+
+                  {myProfile.google_map_link && (
+                    <div className="flex items-start gap-2.5">
+                      <Globe size={14} className="text-slate-400 shrink-0 mt-0.5" />
+                      <div>
+                        <p className="font-bold text-slate-750">Location Link</p>
+                        <a
+                          href={myProfile.google_map_link}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="text-rose-500 hover:underline font-semibold"
+                        >
+                          View on Google Maps
+                        </a>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );
@@ -421,6 +701,8 @@ function ProviderDashboard() {
    4. CUSTOMER DASHBOARD
    ========================================================================== */
 function CustomerDashboard() {
+  const authUser = useAppSelector((state) => state.auth.user);
+  
   const stats = [
     { label: "Active Orders", value: "1 Service", desc: "Provider is arriving today", icon: Clock, color: "text-amber-600 bg-amber-50" },
     { label: "Completed Bookings", value: "14 Services", desc: "Expert home care received", icon: CheckCircle2, color: "text-emerald-600 bg-emerald-50" },
@@ -478,7 +760,7 @@ function CustomerDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-slate-900">Welcome back, Sharmin!</h1>
+          <h1 className="text-3xl font-bold text-slate-900">Welcome back, {authUser?.name || "Client"}!</h1>
           <p className="text-slate-500 mt-1">Keep track of your active services and book premium care for your home.</p>
         </div>
         <button className="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-rose-500/20 text-sm transition-all active:scale-[0.985]">
@@ -606,6 +888,8 @@ function CustomerDashboard() {
    5. AGENT DASHBOARD OVERVIEW
    ========================================================================== */
 function AgentDashboard() {
+  const authUser = useAppSelector((state) => state.auth.user);
+
   const stats = [
     { label: "Bookings Placed", value: "124 Orders", desc: "18 active this week", icon: Briefcase, color: "text-rose-600 bg-rose-50" },
     { label: "Today's Bookings", value: "12", desc: "৳15,400 order volume", icon: Zap, color: "text-amber-600 bg-amber-50" },
@@ -660,7 +944,7 @@ function AgentDashboard() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Agent Partner Desk</h1>
-          <p className="text-slate-500 mt-1">Hello Rezaul! Book services on behalf of clients and track your commissions.</p>
+          <p className="text-slate-500 mt-1">Hello, {authUser?.name || "Agent"}! Book services on behalf of clients and track your commissions.</p>
         </div>
         <Link
           href="/dashbord/quick-booking"

@@ -81,9 +81,9 @@ export default function WalletPage() {
   }
 
   return (
-    <div className="relative min-h-screen p-1 sm:p-6 overflow-hidden animate-in fade-in duration-200">
+    <div className="w-full animate-in fade-in duration-200">
       <div className="w-full space-y-8 relative z-10">
-        
+
         {/* Top Balance & Quick Manage Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Balance Display Card */}
@@ -106,7 +106,7 @@ export default function WalletPage() {
           {/* Quick Manage Card */}
           <div className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm flex flex-col justify-between gap-4">
             <h3 className="font-extrabold text-slate-800 text-base">Quick Manage</h3>
-            
+
             <div className="space-y-2.5">
               {/* Manage Cards */}
               <div className="flex items-center justify-between p-3 bg-slate-50/50 rounded-2xl border border-slate-100/40 hover:bg-slate-50 transition-colors cursor-pointer group">
@@ -129,14 +129,12 @@ export default function WalletPage() {
                 </div>
                 <button
                   onClick={() => setAutoRecharge(!autoRecharge)}
-                  className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-200 focus:outline-none ${
-                    autoRecharge ? "bg-[#FF5B60]" : "bg-slate-200"
-                  }`}
+                  className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-200 focus:outline-none ${autoRecharge ? "bg-[#FF5B60]" : "bg-slate-200"
+                    }`}
                 >
                   <div
-                    className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200 transform ${
-                      autoRecharge ? "translate-x-4" : "translate-x-0"
-                    }`}
+                    className={`w-4 h-4 rounded-full bg-white shadow-sm transition-transform duration-200 transform ${autoRecharge ? "translate-x-4" : "translate-x-0"
+                      }`}
                   />
                 </button>
               </div>
@@ -255,9 +253,8 @@ export default function WalletPage() {
                     return (
                       <tr key={txn.id} className="hover:bg-slate-50/30 transition-colors">
                         <td className="p-4 pl-6 flex items-center gap-3">
-                          <div className={`p-2.5 rounded-xl shrink-0 ${
-                            txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"
-                          }`}>
+                          <div className={`p-2.5 rounded-xl shrink-0 ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"
+                            }`}>
                             <Icon size={16} />
                           </div>
                           <div>
@@ -268,15 +265,13 @@ export default function WalletPage() {
                         <td className="p-4 text-xs font-semibold text-slate-400">
                           {txn.date}
                         </td>
-                        <td className={`p-4 text-xs font-extrabold ${
-                          txn.type === "credited" ? "text-emerald-500" : "text-[#FF5B60]"
-                        }`}>
+                        <td className={`p-4 text-xs font-extrabold ${txn.type === "credited" ? "text-emerald-500" : "text-[#FF5B60]"
+                          }`}>
                           {txn.amount}
                         </td>
                         <td className="p-4 pr-6">
-                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-lg ${
-                            txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"
-                          }`}>
+                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-lg ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"
+                            }`}>
                             {txn.status}
                           </span>
                         </td>
@@ -308,7 +303,7 @@ function AccessDenied({ roleRequired }: { roleRequired: string }) {
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
       <p className="text-sm text-slate-500 mt-2 max-w-sm">
-        This subpage is only accessible to users with the <strong className="text-slate-800">{roleRequired}</strong> role. 
+        This subpage is only accessible to users with the <strong className="text-slate-800">{roleRequired}</strong> role.
         Please toggle your preview role using the selector at the top.
       </p>
     </div>

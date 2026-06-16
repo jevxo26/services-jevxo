@@ -74,8 +74,8 @@ export default function NestedServicesManagementPage() {
     const base =
       role === "vendor"
         ? allServices.filter(
-            (s) => String(s.vendor_id) === String(currentUserId)
-          )
+          (s) => String(s.vendor_id) === String(currentUserId)
+        )
         : allServices;
     return [
       { value: "NONE", label: "Select a Parent Service" },
