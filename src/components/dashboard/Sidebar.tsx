@@ -20,7 +20,9 @@ import {
   Percent,
   LayoutGrid,
   Calendar,
-  Gift
+  Gift,
+  Wrench,
+  Layers
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -55,6 +57,8 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Users, label: "Manage Users", href: "/dashbord/users" },
           { icon: Briefcase, label: "Role Management", href: "/dashbord/role" },
           { icon: ClipboardList, label: "Manage Categories", href: "/dashbord/category" },
+          { icon: Wrench, label: "Manage Services", href: "/dashbord/services" },
+          { icon: Layers, label: "Nested Services", href: "/dashbord/nested-services" },
           { icon: BarChart3, label: "System Analytics", href: "/dashbord/analytics" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },
@@ -72,6 +76,8 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
       case "vendor":
         return [
           { icon: LayoutGrid, label: "Overview", href: "/dashbord" },
+          { icon: Wrench, label: "My Services", href: "/dashbord/services" },
+          { icon: Layers, label: "My Sub-Services", href: "/dashbord/nested-services" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
