@@ -127,7 +127,7 @@ export default function ServicesManagementPage() {
     setBanner("");
     setCategoryId("NONE");
     setEmployeeIdsStr("");
-    
+
     if (role === "vendor") {
       setVendorId(String(currentUserId));
     } else {
@@ -276,19 +276,19 @@ export default function ServicesManagementPage() {
     },
     ...(role === "superadmin"
       ? [
-          {
-            key: "vendor",
-            header: "Vendor",
-            render: (service: Service) => {
-              const vend = allUsers.find((u: any) => String(u.id || u._id) === String(service.vendor_id));
-              return (
-                <span className="inline-flex items-center gap-1 bg-slate-50 text-slate-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-slate-100">
-                  <User size={12} className="text-slate-400" /> {vend ? vend.name : `Vendor ID: ${service.vendor_id ?? "None"}`}
-                </span>
-              );
-            },
+        {
+          key: "vendor",
+          header: "Vendor",
+          render: (service: Service) => {
+            const vend = allUsers.find((u: any) => String(u.id || u._id) === String(service.vendor_id));
+            return (
+              <span className="inline-flex items-center gap-1 bg-slate-50 text-slate-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-slate-100">
+                <User size={12} className="text-slate-400" /> {vend ? vend.name : `Vendor ID: ${service.vendor_id ?? "None"}`}
+              </span>
+            );
           },
-        ]
+        },
+      ]
       : []),
     {
       key: "actions",

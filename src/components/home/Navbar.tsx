@@ -230,11 +230,10 @@ export function Navbar() {
                     >
                       <button
                         type="button"
-                        className={`flex items-center font-semibold text-xs lg:text-sm transition-colors cursor-pointer ${
-                          active
-                            ? "text-[#FF5A5F]"
-                            : "text-slate-600 hover:text-[#FF5A5F]"
-                        }`}
+                        className={`flex items-center font-semibold text-xs lg:text-sm transition-colors cursor-pointer ${active
+                          ? "text-[#FF5A5F]"
+                          : "text-slate-600 hover:text-[#FF5A5F]"
+                          }`}
                       >
                         <Icon
                           className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`}
@@ -291,11 +290,10 @@ export function Navbar() {
                   <Link
                     key={i}
                     href={link.href}
-                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${
-                      active
-                        ? "text-[#FF5A5F]"
-                        : "text-slate-600 hover:text-[#FF5A5F]"
-                    }`}
+                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active
+                      ? "text-[#FF5A5F]"
+                      : "text-slate-600 hover:text-[#FF5A5F]"
+                      }`}
                   >
                     <Icon
                       className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`}
@@ -371,11 +369,10 @@ export function Navbar() {
                   <Link
                     key={i}
                     href={link.href}
-                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${
-                      active
-                        ? "text-[#FF5A5F]"
-                        : "text-slate-600 hover:text-[#FF5A5F]"
-                    }`}
+                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active
+                      ? "text-[#FF5A5F]"
+                      : "text-slate-600 hover:text-[#FF5A5F]"
+                      }`}
                   >
                     <Icon
                       className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled || !isHomepage ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`}
@@ -387,7 +384,7 @@ export function Navbar() {
                         className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF5A5F] rounded-full"
                       />
                     )}
-                </Link>
+                  </Link>
                 );
               })}
             </nav>
@@ -522,11 +519,10 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 onClick={handleMobileSearchToggle}
-                className={`p-2.5 h-auto rounded-lg transition-colors ${
-                  mobileSearchOpen
-                    ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
-                    : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
-                }`}
+                className={`p-2.5 h-auto rounded-lg transition-colors ${mobileSearchOpen
+                  ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
+                  : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
+                  }`}
                 aria-label={mobileSearchOpen ? "Close search" : "Open search"}
                 aria-expanded={mobileSearchOpen}
               >
@@ -539,11 +535,10 @@ export function Navbar() {
               <Button
                 variant="ghost"
                 onClick={handleMenuToggle}
-                className={`p-2.5 h-auto rounded-lg transition-colors ${
-                  isOpen
-                    ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
-                    : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
-                }`}
+                className={`p-2.5 h-auto rounded-lg transition-colors ${isOpen
+                  ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
+                  : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
+                  }`}
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu"
@@ -621,11 +616,10 @@ export function Navbar() {
                           onClick={() =>
                             setShowMobileAccordion(!showMobileAccordion)
                           }
-                          className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${
-                            active
-                              ? "text-[#FF5A5F] bg-rose-50"
-                              : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
-                          }`}
+                          className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${active
+                            ? "text-[#FF5A5F] bg-rose-50"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                            }`}
                         >
                           <div className="flex items-center gap-2.5">
                             <Icon className="w-5 h-5 text-slate-500" />
@@ -655,22 +649,20 @@ export function Navbar() {
                                     <Link
                                       key={cat.slug}
                                       href={`/categories/service/${cat.slug}`}
-                                      className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${
-                                        isCategoryActive
-                                          ? "bg-rose-50 text-[#FF5A5F] font-semibold"
-                                          : "text-slate-600 hover:bg-slate-50 hover:text-[#FF5A5F]"
-                                      }`}
+                                      className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${isCategoryActive
+                                        ? "bg-rose-50 text-[#FF5A5F] font-semibold"
+                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                                        }`}
                                       onClick={() => {
                                         setIsOpen(false);
                                         setShowMobileAccordion(false);
                                       }}
                                     >
                                       <IconComponent
-                                        className={`w-4 h-4 flex-shrink-0 ${
-                                          isCategoryActive
-                                            ? "text-[#FF5A5F]"
-                                            : "text-slate-400"
-                                        }`}
+                                        className={`w-4 h-4 flex-shrink-0 ${isCategoryActive
+                                          ? "text-[#FF5A5F]"
+                                          : "text-slate-400"
+                                          }`}
                                       />
                                       <span>{cat.label}</span>
 
@@ -692,11 +684,10 @@ export function Navbar() {
                     <Link
                       key={i}
                       href={link.href}
-                      className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors ${
-                        active
-                          ? "text-[#FF5A5F] bg-rose-50"
-                          : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
-                      }`}
+                      className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors ${active
+                        ? "text-[#FF5A5F] bg-rose-50"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                        }`}
                       onClick={() => setIsOpen(false)}
                     >
                       <Icon className="w-5 h-5 text-slate-500" />
@@ -806,15 +797,21 @@ export function Navbar() {
       </motion.nav>
 
       {/* ─── MOBILE BOTTOM NAVIGATION ─── */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 bg-white/95 backdrop-blur-lg border-t border-slate-200/80 shadow-[0_-4px_12px_rgba(0,0,0,0.03)] z-50 py-2 safe-bottom">
-        <div className="grid grid-cols-6 gap-1 max-w-lg mx-auto px-2">
+      <motion.div
+        initial={{ y: 100 }}
+        animate={{ y: 0 }}
+        transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.1 }}
+        className="md:hidden fixed bottom-0 left-0 right-0 z-50 safe-bottom"
+      >
+        {/* Glassmorphism background */}
+        <div className="absolute inset-0 bg-white/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
+
+        <div className="relative grid grid-cols-6 gap-0 max-w-lg mx-auto px-1 py-1.5">
           {bottomLinks.map((link, i) => {
             const Icon = link.icon;
 
-            // Improved active logic - consistent with desktop navbar
             const isMenuActive =
               link.hasDropdown && pathname.startsWith("/categories");
-            const isLinkActive = isMenuActive || isActive(link.href);
 
             const active = link.hasDropdown
               ? isMenuActive
@@ -830,27 +827,85 @@ export function Navbar() {
               }
             };
 
+            // Show avatar for authenticated user's profile/dashboard link
+            const isProfileLink = link.label === "Dashboard" || link.label === "Login";
+            const showAvatar = isProfileLink && mounted && isAuthenticated && profile;
+
             return (
               <Link
                 key={i}
                 href={link.href}
                 onClick={handleClick}
-                className={`flex flex-col items-center justify-center gap-1 py-1.5 rounded-xl transition-all active:scale-90 relative
-            ${
-              active ? "text-[#FF5A5F]" : "text-slate-500 hover:text-[#FF5A5F]"
-            }`}
+                className="relative flex flex-col items-center justify-center py-1 group"
               >
-                <Icon
-                  className={`w-5 h-5 transition-all duration-200 ${active ? "scale-110" : ""}`}
-                />
-                <span className="text-[10px] font-semibold tracking-wide leading-none">
-                  {link.label}
-                </span>
+                {/* Active background pill */}
+                {active && (
+                  <motion.div
+                    layoutId="bottomNavPill"
+                    className="absolute inset-x-1.5 inset-y-0.5 bg-gradient-to-b from-rose-50 to-rose-100/60 rounded-2xl border border-rose-100/50"
+                    transition={{ type: "spring", stiffness: 400, damping: 30 }}
+                  />
+                )}
+
+                {/* Icon */}
+                <motion.div
+                  className="relative z-10"
+                  whileTap={{ scale: 0.75 }}
+                  transition={{ type: "spring", stiffness: 500, damping: 15 }}
+                >
+                  {showAvatar ? (
+                    <motion.div
+                      animate={active ? { scale: 1.1 } : { scale: 1 }}
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold border select-none ${active
+                        ? "bg-rose-100 text-[#FF5A5F] border-rose-200 shadow-sm"
+                        : "bg-slate-100 text-slate-500 border-slate-200"
+                        }`}
+                    >
+                      {profile?.avatar}
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      animate={active ? { y: -2 } : { y: 0 }}
+                      transition={{ type: "spring", stiffness: 400, damping: 20 }}
+                    >
+                      <Icon
+                        className={`w-[21px] h-[21px] transition-colors duration-200 ${active
+                          ? "text-[#FF5A5F] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
+                          : "text-slate-400 group-hover:text-slate-600"
+                          }`}
+                        strokeWidth={active ? 2.4 : 1.8}
+                      />
+                    </motion.div>
+                  )}
+                </motion.div>
+
+                {/* Label */}
+                <motion.span
+                  animate={active ? { y: -1, opacity: 1 } : { y: 0, opacity: 0.7 }}
+                  transition={{ type: "spring", stiffness: 400, damping: 25 }}
+                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF5A5F]" : "text-slate-400 group-hover:text-slate-600"
+                    }`}
+                >
+                  {showAvatar ? "Profile" : link.label}
+                </motion.span>
+
+                {/* Active dot indicator */}
+                <AnimatePresence>
+                  {active && (
+                    <motion.div
+                      initial={{ scale: 0, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0, opacity: 0 }}
+                      transition={{ type: "spring", stiffness: 500, damping: 25 }}
+                      className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF5A5F] rounded-full shadow-[0_0_6px_2px_rgba(255,90,95,0.4)] z-10"
+                    />
+                  )}
+                </AnimatePresence>
               </Link>
             );
           })}
         </div>
-      </div>
+      </motion.div>
     </>
   );
 }

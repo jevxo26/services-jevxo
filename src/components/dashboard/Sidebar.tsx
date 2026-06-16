@@ -22,7 +22,8 @@ import {
   Calendar,
   Gift,
   Wrench,
-  Layers
+  Layers,
+  Package
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -78,6 +79,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: LayoutGrid, label: "Overview", href: "/dashbord" },
           { icon: Wrench, label: "My Services", href: "/dashbord/services" },
           { icon: Layers, label: "My Sub-Services", href: "/dashbord/nested-services" },
+          { icon: Package, label: "My Packages", href: "/dashbord/packages" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
