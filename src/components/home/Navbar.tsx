@@ -64,7 +64,7 @@ const MOBILE_BOTTOM_LINKS: NavLink[] = [
 
 export function Navbar() {
   const dispatch = useAppDispatch();
-  const { user, isAuthenticated, role } = useAppSelector((state) => state.auth);
+  const { user, isAuthenticated, role, isLoading: authLoading } = useAppSelector((state) => state.auth);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -202,7 +202,7 @@ export function Navbar() {
               <Image
                 src="/logo.png"
                 alt="Rajseba"
-                width={140}
+                width={40}
                 height={40}
                 className="h-9 sm:h-10 w-auto object-contain"
                 priority
@@ -387,17 +387,20 @@ export function Navbar() {
                         className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF5A5F] rounded-full"
                       />
                     )}
-                  </Link>
+                </Link>
                 );
               })}
             </nav>
 
             {/* Auth Buttons or Profile Dropdown (desktop/tablet) */}
-            {mounted && isAuthenticated && profile ? (
-              <div
-                className="hidden md:block relative"
-                ref={profileDropdownRef}
-              >
+            {!mounted || authLoading ? (
+              // Skeleton while auth initializes — prevents Login/Signup flash for logged-in users
+              <div className="hidden md:flex items-center gap-2">
+                <div className="w-20 h-8 bg-slate-100 rounded-lg animate-pulse" />
+                <div className="w-9 h-9 bg-slate-100 rounded-full animate-pulse" />
+              </div>
+            ) : isAuthenticated && profile ? (
+              <div className="hidden md:block relative" ref={profileDropdownRef}>
                 <button
                   onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
                   className="flex items-center gap-2.5 hover:opacity-90 transition-opacity focus:outline-none"
@@ -498,7 +501,7 @@ export function Navbar() {
               <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
                 <Link
                   href="/login"
-                  className="flex items-center gap-2 font-semibold text-slate-700 text-[#FF5A5F] bg-rose-100 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
+                  className="flex items-center gap-2 font-semibold text-slate-700 text-[#FF565C] bg-rose-100 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   Login
@@ -703,7 +706,17 @@ export function Navbar() {
                 })}
 
                 {/* Auth Section */}
-                {mounted && isAuthenticated && profile ? (
+                {!mounted || authLoading ? (
+                  <div className="pt-4 border-t border-slate-100 mt-1">
+                    <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50">
+                      <div className="w-12 h-12 bg-slate-200 rounded-full animate-pulse" />
+                      <div className="flex-1 space-y-2">
+                        <div className="h-3 bg-slate-200 rounded animate-pulse w-3/4" />
+                        <div className="h-2.5 bg-slate-200 rounded animate-pulse w-1/2" />
+                      </div>
+                    </div>
+                  </div>
+                ) : isAuthenticated && profile ? (
                   <div className="pt-4 border-t border-slate-100 mt-1 space-y-4">
                     {/* User profile card */}
                     <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">

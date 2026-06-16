@@ -21,9 +21,18 @@ interface AuthState {
 
 const initialState: AuthState = {
   user: null,
-  role: typeof window !== "undefined" ? (localStorage.getItem("rajseba_user_role") as UserRole) || null : null,
+  role: null,
   isAuthenticated: false,
   isLoading: true,
+};
+
+const saveRoleToStorage = (roleString: string) => {
+  if (typeof window === 'undefined') return;
+  localStorage.setItem("rajseba_user_role", roleString);
+  const date = new Date();
+  date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
+  const expires = "; expires=" + date.toUTCString();
+  document.cookie = `rajseba_user_role=${roleString}${expires}; path=/; SameSite=Lax`;
 };
 
 export const authSlice = createSlice({
@@ -33,36 +42,49 @@ export const authSlice = createSlice({
     setUser: (state, action: PayloadAction<User>) => {
       state.user = action.payload;
       state.isAuthenticated = true;
-      if (action.payload.role) {
-        const rawRoleName = typeof action.payload.role === 'object' ? (action.payload.role as any).name : action.payload.role;
-        const roleString = typeof rawRoleName === 'string' ? rawRoleName.toLowerCase().replace(/\s+/g, '') : "client";
-        state.role = roleString as UserRole;
-        if (typeof window !== "undefined") {
-          localStorage.setItem("rajseba_user_role", roleString);
-          const date = new Date();
-          date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
-          const expires = "; expires=" + date.toUTCString();
-          document.cookie = `rajseba_user_role=${roleString}${expires}; path=/; SameSite=Lax`;
-        }
-      } else {
-        state.role = "client";
-        if (typeof window !== "undefined") {
-          localStorage.setItem("rajseba_user_role", "client");
-          const date = new Date();
-          date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
-          const expires = "; expires=" + date.toUTCString();
-          document.cookie = `rajseba_user_role=client${expires}; path=/; SameSite=Lax`;
-        }
+      state.isLoading = false;
+
+      const rawRole = typeof action.payload.role === 'object' && action.payload.role
+        ? (action.payload.role as any).name
+        : (action.payload.role || 'client');
+      const roleString = typeof rawRole === 'string'
+        ? rawRole.toLowerCase().replace(/\s+/g, '')
+        : "client";
+
+      state.role = roleString as UserRole;
+
+      if (typeof window !== 'undefined') {
+        // Persist user data and role for instant restore on page reload
+        try {
+          localStorage.setItem("rajseba_user", JSON.stringify(action.payload));
+        } catch {}
+        saveRoleToStorage(roleString);
       }
+    },
+    restoreUser: (state) => {
+      // Called synchronously on client mount to rehydrate from localStorage
+      if (typeof window === 'undefined') return;
+      try {
+        const stored = localStorage.getItem("rajseba_user");
+        const token = localStorage.getItem("rajseba_access_token") || localStorage.getItem("token");
+        if (stored && token) {
+          const user = JSON.parse(stored) as User;
+          state.user = user;
+          state.isAuthenticated = true;
+          const rawRole = typeof user.role === 'object' && user.role
+            ? (user.role as any).name
+            : (user.role || 'client');
+          state.role = (typeof rawRole === 'string'
+            ? rawRole.toLowerCase().replace(/\s+/g, '')
+            : "client") as UserRole;
+        }
+      } catch {}
+      state.isLoading = false;
     },
     setRole: (state, action: PayloadAction<UserRole>) => {
       state.role = action.payload;
-      if (typeof window !== "undefined") {
-        localStorage.setItem("rajseba_user_role", action.payload);
-        const date = new Date();
-        date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
-        const expires = "; expires=" + date.toUTCString();
-        document.cookie = `rajseba_user_role=${action.payload}${expires}; path=/; SameSite=Lax`;
+      if (typeof window !== 'undefined') {
+        saveRoleToStorage(action.payload);
       }
     },
     setLoading: (state, action: PayloadAction<boolean>) => {
@@ -72,7 +94,9 @@ export const authSlice = createSlice({
       state.user = null;
       state.isAuthenticated = false;
       state.role = null;
-      if (typeof window !== "undefined") {
+      state.isLoading = false;
+      if (typeof window !== 'undefined') {
+        localStorage.removeItem("rajseba_user");
         localStorage.removeItem("rajseba_user_role");
         localStorage.removeItem("token");
         localStorage.removeItem("rajseba_access_token");
@@ -87,7 +111,7 @@ export const authSlice = createSlice({
   },
 });
 
-export const { setUser, setRole, setLoading, logout } = authSlice.actions;
+export const { setUser, restoreUser, setRole, setLoading, logout } = authSlice.actions;
 
 export default authSlice.reducer;
 

@@ -4,31 +4,31 @@ export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     createUser: builder.mutation<any, any>({
       query: (data) => ({
-        url: '/api/users',
+        url: '/users',
         method: 'POST',
         body: data,
       }),
       invalidatesTags: ['Admin'],
     }),
     getAllUsers: builder.query<any, void>({
-      query: () => '/api/users',
+      query: () => '/users',
       providesTags: ['Admin'],
     }),
     getUserById: builder.query<any, string>({
-      query: (id) => `/api/users/${id}`,
+      query: (id) => `/users/${id}`,
       providesTags: ['Admin'],
     }),
     updateUser: builder.mutation<any, { id: string; data: any }>({
       query: ({ id, data }) => ({
-        url: `/api/users/${id}`,
-        method: 'PUT',
+        url: `/users/${id}`,
+        method: 'PATCH',
         body: data,
       }),
       invalidatesTags: ['Admin'],
     }),
     deleteUser: builder.mutation<any, string>({
       query: (id) => ({
-        url: `/api/users/${id}`,
+        url: `/users/${id}`,
         method: 'DELETE',
       }),
       invalidatesTags: ['Admin'],

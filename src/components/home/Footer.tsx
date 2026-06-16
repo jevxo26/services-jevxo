@@ -92,9 +92,10 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="Rajseba"
-                width={140}
+                width={40}
                 height={40}
-                className="h-9 w-auto object-contain"
+                style={{ width: 'auto', height: 'auto' }}
+                className="h-9 object-contain"
                 priority
               />
             </Link>
@@ -119,20 +120,6 @@ export default function Footer() {
               ))}
             </ul>
 
-            {/* <div className="flex items-center gap-3 flex-wrap">
-              {SOCIALS.map((s) => (
-                <a
-                  key={s.label}
-                  href={s.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  aria-label={s.label}
-                  className="w-9 h-9 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-500 hover:text-[#FF5A5F] hover:border-[#FF5A5F] transition-all"
-                >
-                  {s.icon}
-                </a>
-              ))}
-            </div> */}
           </div>
 
           {/* Services + Quick Links - 2 Columns on Mobile */}

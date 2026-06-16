@@ -54,6 +54,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: LayoutGrid, label: "Overview", href: "/dashbord" },
           { icon: Users, label: "Manage Users", href: "/dashbord/users" },
           { icon: Briefcase, label: "Role Management", href: "/dashbord/role" },
+          { icon: ClipboardList, label: "Manage Categories", href: "/dashbord/category" },
           { icon: BarChart3, label: "System Analytics", href: "/dashbord/analytics" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },
@@ -131,7 +132,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
               </div>
             )}
           </Link>
-          <button onClick={() => setCollapsed(!collapsed)} className="text-slate-400 hover:text-slate-700 p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
+          <button onClick={() => setCollapsed(!collapsed)} className="md:hidden text-slate-400 hover:text-slate-700 p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
             <Menu size={18} />
           </button>
         </div>

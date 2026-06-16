@@ -5,6 +5,7 @@ import { ShieldAlert, Trash2, PlusCircle } from "lucide-react";
 import { useState, useEffect } from "react";
 import { CustomTable } from "@/components/ui/table";
 import { useGetAllRolesQuery, useCreateRoleMutation, useDeleteRoleMutation } from "@/redux/features/admin/role";
+import { toast } from "sonner";
 
 interface RoleItem {
   id: string;
@@ -49,16 +50,21 @@ export default function RoleManagementPage() {
         ]
       };
       await createRoleMut(newRole).unwrap();
-    } catch (e) {
+      toast.success("Role created successfully!");
+    } catch (e: any) {
       console.error("Failed to create role:", e);
+      toast.error(e.data?.message || e.message || "Failed to create role");
     }
   };
 
   const handleDelete = async (id: string) => {
+    if (!confirm("Are you sure you want to delete this role?")) return;
     try {
       await deleteRoleMut(id).unwrap();
-    } catch (e) {
+      toast.success("Role deleted successfully!");
+    } catch (e: any) {
       console.error("Failed to delete role:", e);
+      toast.error(e.data?.message || e.message || "Failed to delete role");
     }
   };
 
@@ -145,7 +151,7 @@ export default function RoleManagementPage() {
           <p className="text-slate-500 mt-1">Manage admin roles and permissions for the platform.</p>
         </div>
         <div className="flex gap-2">
-          <button 
+          <button
             onClick={handleCreateRole}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >

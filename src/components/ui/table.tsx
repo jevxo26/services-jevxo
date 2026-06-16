@@ -14,7 +14,7 @@ function Table({ className, ...props }: React.ComponentProps<"table">) {
     <div
       data-slot="table-container"
       className={cn(
-        "relative w-full overflow-x-auto select-none",
+        "relative w-full overflow-x-auto select-none pb-40", // Added pb-40 to give space for dropdowns
         /* Premium custom thin scrollbar styling */
         "[&::-webkit-scrollbar]:h-1.5 [&::-webkit-scrollbar]:w-1.5",
         "[&::-webkit-scrollbar-track]:bg-slate-50",
@@ -251,7 +251,7 @@ export function CustomTable<T extends { id?: string | number;[key: string]: any 
       )}
 
       {/* Main Responsive Table Card */}
-      <div className="bg-white rounded-3xl border border-slate-100 shadow-premium overflow-hidden relative">
+      <div className="bg-white rounded-3xl border border-slate-100 shadow-premium relative">
         <Table>
           <TableHeader>
             <TableRow>

@@ -5,11 +5,11 @@ import { useState, useRef, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { UserRole, setRole as setAuthRole, getRoleName } from "@/redux/features/auth/authSlice";
 import { logout as authLogout } from "@/redux/features/auth/authSlice";
-// Note: useAppSelector and useAppDispatch should be imported from @/redux/hooks
 import Link from "next/link";
 
 export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
-  const role = useAppSelector((state) => state.auth.role) || "superadmin";
+  const authUser = useAppSelector((state) => state.auth.user);
+  const role = useAppSelector((state) => state.auth.role) || "client";
   const dispatch = useAppDispatch();
   const roleName = getRoleName(role);
   const logout = () => dispatch(authLogout());
@@ -40,79 +40,74 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
     { value: "client", label: "Client", desc: "Client profile", icon: CircleUser, color: "text-indigo-500 bg-indigo-50" },
   ];
 
-  // Dynamic user data for navbar display
-  const getProfileData = (r: UserRole) => {
-    switch (r) {
-      case "superadmin":
-        return { name: "Aftab Farhan", designation: "System Administrator", avatar: "AF" };
-      case "agent":
-        return { name: "Rezaul Karim", designation: "Booking Partner", avatar: "RK" };
-      case "vendor":
-        return { name: "Kabir AC Repair", designation: "Verified Technician", avatar: "KR" };
-      case "client":
-        return { name: "Sharmin Akter", designation: "Premium Client", avatar: "SA" };
-      default:
-        return { name: "John Doe", designation: "User", avatar: "JD" };
-    }
-  };
-
-  const user = useAppSelector((state) => state.auth.user);
-
-  const profile = user ? {
-    name: user.name || "User",
-    designation: roleName || "Client",
-    avatar: (user.name || "U").substring(0, 2).toUpperCase()
-  } : getProfileData(role);
-  const activeRoleConfig = rolesList.find((x) => x.value === role) || rolesList[0];
+  // Derive display profile from real user data in Redux
+  const name = authUser?.name || "User";
+  const email = authUser?.email || authUser?.phone || "";
+  const avatar = name.substring(0, 2).toUpperCase();
+  const activeRoleConfig = rolesList.find((x) => x.value === role) || rolesList[3];
 
   return (
-    <header className="bg-white border-b border-slate-200 px-4 sm:px-6 py-4 flex items-center justify-between z-30 shadow-sm">
+    <header className="bg-white/95 backdrop-blur-md border-b border-slate-100 px-4 sm:px-8 py-4 flex items-center justify-between z-30 sticky top-0 shadow-sm">
       {/* Search Bar */}
       <div className="flex items-center gap-2 sm:gap-4 flex-1">
-        <button onClick={onMenuClick} className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl md:hidden shrink-0 focus:outline-none">
+        <button onClick={onMenuClick} className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl md:hidden shrink-0 focus:outline-none transition-colors">
           <Menu size={20} />
         </button>
-        <div className="relative w-80 hidden md:block">
-          <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" size={18} />
+        <div className="relative w-full max-w-md hidden md:block group">
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF464C] transition-colors" size={16} />
           <input
             type="text"
             placeholder="Search booking ID, service, client..."
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-10 pr-4 py-2 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all"
+            className="w-full bg-slate-50 border border-slate-100 hover:border-slate-200 rounded-2xl pl-11 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-rose-200 focus:ring-4 focus:ring-rose-50 transition-all shadow-sm"
           />
         </div>
       </div>
 
       {/* Right Navbar Controls */}
-      <div className="flex items-center gap-4">
-
+      <div className="flex items-center gap-5">
 
         {/* Notifications Button */}
-        <button className="p-2.5 hover:bg-slate-100 rounded-xl relative text-slate-600 hover:text-slate-900 transition-colors">
+        <button className="p-2.5 hover:bg-slate-50 rounded-full relative text-slate-500 hover:text-slate-900 transition-all border border-transparent hover:border-slate-100 hover:shadow-sm">
           <Bell size={18} />
-          <span className="absolute top-2 right-2 w-2 h-2 bg-rose-500 rounded-full ring-2 ring-white"></span>
+          <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#FF464C] rounded-full ring-2 ring-white"></span>
         </button>
 
         {/* Profile Info & Dropdown */}
         <div className="relative" ref={profileDropdownRef}>
           <button
             onClick={() => setProfileDropdownOpen(!profileDropdownOpen)}
-            className="flex items-center gap-3 pl-4 border-l border-slate-200 text-left hover:opacity-85 transition-opacity active:scale-[0.98] focus:outline-none"
+            className="flex items-center gap-3 pl-5 border-l border-slate-100 text-left hover:opacity-90 transition-all active:scale-[0.98] focus:outline-none"
           >
             <div className="text-right hidden sm:block">
-              <p className="text-sm font-semibold text-slate-800 leading-none">{profile.name}</p>
-              <p className="text-[11px] text-slate-400 mt-1 leading-none">{profile.designation}</p>
+              <p className="text-sm font-bold text-slate-800 leading-none">{name}</p>
+              <p className="text-[11px] text-slate-400 mt-1.5 font-medium leading-none">{roleName}</p>
             </div>
-            <div className="w-10 h-10 bg-rose-100 text-rose-700 font-bold rounded-xl flex items-center justify-center shadow-inner select-none transition-transform hover:scale-105">
-              {profile.avatar}
+            <div className="w-10 h-10 bg-gradient-to-br from-[#FF5B60] to-[#FF464C] text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-rose-500/20 select-none transition-transform hover:scale-105">
+              {avatar}
             </div>
           </button>
 
           {profileDropdownOpen && (
-            <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-200 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
-              <div className="px-4 py-2 border-b border-slate-100 sm:hidden">
-                <p className="text-sm font-bold text-slate-800 leading-none">{profile.name}</p>
-                <p className="text-[10px] text-slate-400 mt-1 leading-none">{profile.designation}</p>
+            <div className="absolute right-0 mt-3 w-64 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+
+              {/* User Info Header */}
+              <div className="px-4 py-3 border-b border-slate-100">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#FF5B60] to-[#FF464C] text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-rose-500/20 select-none shrink-0">
+                    {avatar}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-bold text-slate-800 truncate leading-none">{name}</p>
+                    {email && (
+                      <p className="text-xs text-slate-400 mt-1 truncate leading-none">{email}</p>
+                    )}
+                    <span className={`inline-block mt-1.5 px-2 py-0.5 text-[10px] font-bold rounded-full ${activeRoleConfig.color}`}>
+                      {roleName}
+                    </span>
+                  </div>
+                </div>
               </div>
+
               <div className="p-1 space-y-0.5">
                 <Link
                   href="/dashbord/profile"

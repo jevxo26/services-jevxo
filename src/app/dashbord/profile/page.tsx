@@ -8,15 +8,21 @@ import { useGetUserProfileQuery } from "@/redux/features/auth/authApi";
 import { useUpdateUserMutation } from "@/redux/features/admin/user";
 
 export default function ProfilePage() {
-  const role = useAppSelector((state) => state.auth.role) || "superadmin";
+  const role = useAppSelector((state) => state.auth.role) || "client";
+  const reduxUser = useAppSelector((state) => state.auth.user);
+
   const { data: userRes, isLoading } = useGetUserProfileQuery();
   const [updateUserMut] = useUpdateUserMutation();
 
-  const user = userRes?.data?.user || userRes?.data || userRes || {};
-  const name = user.name || (user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : null) || "Unknown User";
-  const email = user.email || "No Email";
-  const phone = user.phoneNumber || user.phone || "No Phone";
-  const address = user.address || "No Address Provided";
+  // Prefer API response, fall back to Redux store (which is persisted from localStorage)
+  const apiUser = userRes?.data?.user || userRes?.data || userRes;
+  const user = (apiUser && Object.keys(apiUser).length > 1 ? apiUser : null) || reduxUser || {};
+
+  const name = (user as any).name || ((user as any).firstName ? `${(user as any).firstName} ${(user as any).lastName || ''}`.trim() : null) || "Unknown User";
+  const email = (user as any).email || "No Email";
+  const phone = (user as any).phoneNumber || (user as any).phone || "No Phone";
+  const address = (user as any).address || "No Address Provided";
+
 
   const handleSave = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -39,7 +45,7 @@ export default function ProfilePage() {
     }
   };
 
-  if (isLoading) {
+  if (isLoading && !reduxUser) {
     return <div className="p-8 text-center text-slate-500 animate-pulse">Loading profile...</div>;
   }
 
