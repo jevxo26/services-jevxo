@@ -1,4 +1,19 @@
-import { ArrowRight, Stars } from 'lucide-react';
+import { ArrowRight, Star } from 'lucide-react';
+
+function StarRating({ rating }: { rating: number }) {
+  return (
+    <span className="flex items-center gap-0.5" aria-label={`${rating} out of 5`}>
+      {[1, 2, 3, 4, 5].map((i) => (
+        <Star
+          key={i}
+          size={12}
+          strokeWidth={0}
+          className={i <= Math.round(rating) ? 'fill-[#f59e0b]' : 'fill-[#e5e7eb]'}
+        />
+      ))}
+    </span>
+  );
+}
 import Image from 'next/image';
 import Link from 'next/link';
 
@@ -87,7 +102,7 @@ const TrendingServices = () => {
                 </div>
                 <div className="p-6 flex flex-col justify-center gap-3">
                   <div className="flex items-center gap-2">
-                    <Stars rating={service.rating} />
+                    <StarRating rating={service.rating} />
                     <span className="text-xs text-[#6b7280] font-semibold">
                       ({service.rating} • {service.reviews} reviews)
                     </span>
