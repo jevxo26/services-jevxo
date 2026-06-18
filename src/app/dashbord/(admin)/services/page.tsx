@@ -13,8 +13,11 @@ import {
   Layers,
   Tag,
   Globe,
+  Eye,
+  User,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
 import { CustomTable } from "@/components/ui/table";
 import type { TableAction } from "@/components/ui/table";
 import { Input } from "@/components/ui/input";
@@ -28,10 +31,12 @@ import {
   Service,
 } from "@/redux/features/admin/service";
 import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
+import { useGetAllUsersQuery } from "@/redux/features/admin/user";
 import { toast } from "sonner";
 import { uploadImage } from "@/lib/upload";
 
 export default function AdminServicesManagementPage() {
+  const router = useRouter();
   const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
   const role =
     typeof rawRole === "string"
@@ -45,6 +50,7 @@ export default function AdminServicesManagementPage() {
     refetch: refetchServices,
   } = useGetAllServicesQuery();
   const { data: apiCategoriesRes } = useGetAllCategoriesQuery();
+  const { data: apiUsersRes } = useGetAllUsersQuery();
 
   const [createMut, { isLoading: isCreating }] = useCreateServiceMutation();
   const [updateMut, { isLoading: isUpdating }] = useUpdateServiceMutation();
@@ -64,6 +70,8 @@ export default function AdminServicesManagementPage() {
   const [description, setDescription] = useState("");
   const [image, setImage] = useState("");
   const [categoryId, setCategoryId] = useState("NONE");
+  const [vendorId, setVendorId] = useState("NONE");
+  const [employeeIds, setEmployeeIds] = useState<number[]>([]);
 
   const allCategories =
     apiCategoriesRes?.data || (Array.isArray(apiCategoriesRes) ? apiCategoriesRes : []);
@@ -75,6 +83,25 @@ export default function AdminServicesManagementPage() {
       label: c.name,
     })),
   ];
+
+  const allUsers = apiUsersRes?.data || (Array.isArray(apiUsersRes) ? apiUsersRes : []);
+  
+  const vendorOptions = [
+    { value: "NONE", label: "Select a Vendor" },
+    ...allUsers.filter((u: any) => u.role?.name === "Vendor" || u.role === "Vendor").map((u: any) => ({
+      value: String(u.id || u._id),
+      label: u.name || `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown',
+    })),
+  ];
+
+  const employeeOptions = (categoryId === "NONE" || vendorId === "NONE") ? [] : allUsers
+    .filter((u: any) => u.role?.name === "Employee" || u.role === "Employee")
+    .filter((u: any) => String(u.profile?.category?.id) === categoryId)
+    .filter((u: any) => String(u.vendor?.id || u.vendor) === vendorId)
+    .map((u: any) => ({
+      id: Number(u.id || u._id),
+      name: u.name || `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown',
+    }));
 
   useEffect(() => {
     const all: Service[] =
@@ -98,7 +125,7 @@ export default function AdminServicesManagementPage() {
   };
 
   const resetForm = () => {
-    setName(""); setSubtitle(""); setSlug(""); setDescription(""); setImage(""); setCategoryId("NONE");
+    setName(""); setSubtitle(""); setSlug(""); setDescription(""); setImage(""); setCategoryId("NONE"); setVendorId("NONE"); setEmployeeIds([]);
   };
 
   const openCreateModal = () => {
@@ -115,6 +142,8 @@ export default function AdminServicesManagementPage() {
     setDescription(item.description || "");
     setImage(item.image || "");
     setCategoryId(item.category_id ? String(item.category_id) : "NONE");
+    setVendorId(item.vendor ? String(item.vendor.id) : "NONE");
+    setEmployeeIds(item.employees ? item.employees.map((e: any) => Number(e.id)) : []);
     setIsModalOpen(true);
   };
 
@@ -138,6 +167,8 @@ export default function AdminServicesManagementPage() {
             description: description.trim() || undefined,
             image: image || undefined,
             category_id: categoryId !== "NONE" ? Number(categoryId) : undefined,
+            vendor_id: vendorId !== "NONE" ? Number(vendorId) : undefined,
+            employee_ids: employeeIds.length > 0 ? employeeIds : undefined,
           },
         }).unwrap();
         toast.success("Service updated successfully!");
@@ -149,6 +180,8 @@ export default function AdminServicesManagementPage() {
           description: description.trim() || undefined,
           image: image || undefined,
           category_id: categoryId !== "NONE" ? Number(categoryId) : undefined,
+          vendor_id: vendorId !== "NONE" ? Number(vendorId) : undefined,
+          employee_ids: employeeIds.length > 0 ? employeeIds : undefined,
         }).unwrap();
         toast.success("Service created successfully!");
       }
@@ -212,12 +245,22 @@ export default function AdminServicesManagementPage() {
       ),
     },
     {
-      key: "category_id",
+      key: "category",
       header: "Category",
-      render: (item: Service) => (
+      render: (item: Service | any) => (
         <span className="inline-flex items-center gap-1.5 bg-indigo-50/70 text-indigo-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-indigo-100/50">
           <Tag size={11} />
-          {item.category_id ? `Cat #${item.category_id}` : "—"}
+          {item.category?.name || (item.category_id ? `Cat #${item.category_id}` : "—")}
+        </span>
+      ),
+    },
+    {
+      key: "vendor",
+      header: "Vendor",
+      render: (item: Service | any) => (
+        <span className="inline-flex items-center gap-1.5 bg-emerald-50/70 text-emerald-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-emerald-100/50">
+          <User size={11} />
+          {item.vendor?.name || (item.vendor_id ? `Vendor #${item.vendor_id}` : "—")}
         </span>
       ),
     },
@@ -233,6 +276,7 @@ export default function AdminServicesManagementPage() {
   ];
 
   const tableActions: TableAction<Service>[] = [
+    { label: "View Details", icon: Eye, onClick: (item) => router.push(`/dashbord/services/${item.id || (item as any)._id}`), variant: "default" },
     { label: "Edit", icon: Edit2, onClick: openEditModal, variant: "secondary" },
     { label: "Delete", icon: Trash2, onClick: openDeleteModal, variant: "destructive" },
   ];
@@ -289,7 +333,16 @@ export default function AdminServicesManagementPage() {
             <form onSubmit={handleSubmit} className="p-6 space-y-4 max-h-[80vh] overflow-y-auto">
               <div>
                 <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Service Name *</label>
-                <Input placeholder="e.g. AC Repairing" value={name} onChange={(e) => setName(e.target.value)} required />
+                <Input 
+                  placeholder="e.g. AC Repairing" 
+                  value={name} 
+                  onChange={(e) => {
+                    const val = e.target.value;
+                    setName(val);
+                    setSlug(val.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)+/g, ''));
+                  }} 
+                  required 
+                />
               </div>
               <div>
                 <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Slug *</label>
@@ -302,6 +355,31 @@ export default function AdminServicesManagementPage() {
               <div>
                 <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Category</label>
                 <CustomSelect options={categoryOptions} value={categoryId} onChange={setCategoryId} />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Vendor</label>
+                <CustomSelect options={vendorOptions} value={vendorId} onChange={setVendorId} />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-2">Employees</label>
+                <div className="grid grid-cols-2 gap-2 max-h-32 overflow-y-auto p-2 border border-slate-200 rounded-xl bg-slate-50">
+                  {employeeOptions.length > 0 ? employeeOptions.map(emp => (
+                    <label key={emp.id} className="flex items-center gap-2 cursor-pointer group">
+                      <input 
+                        type="checkbox" 
+                        className="w-4 h-4 rounded border-slate-300 text-brand-primary focus:ring-brand-primary/30"
+                        checked={employeeIds.includes(emp.id)}
+                        onChange={(e) => {
+                          if (e.target.checked) setEmployeeIds([...employeeIds, emp.id]);
+                          else setEmployeeIds(employeeIds.filter(id => id !== emp.id));
+                        }}
+                      />
+                      <span className="text-sm text-slate-700">{emp.name}</span>
+                    </label>
+                  )) : (
+                    <span className="text-xs text-slate-400">No employees found.</span>
+                  )}
+                </div>
               </div>
               <div>
                 <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Description</label>

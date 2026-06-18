@@ -14,6 +14,7 @@ import {
   Heart,
   Wallet,
   User,
+  UserPlus,
   HelpCircle,
   Zap,
   ShoppingBag,
@@ -56,6 +57,9 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         return [
           { icon: LayoutGrid, label: "Overview", href: "/dashbord" },
           { icon: Users, label: "Manage Users", href: "/dashbord/users" },
+          { icon: Briefcase, label: "Manage Vendors", href: "/dashbord/vendors" },
+          { icon: Zap, label: "Manage Agents", href: "/dashbord/agents" },
+          { icon: UserPlus, label: "Manage Employees", href: "/dashbord/employees" },
           { icon: Briefcase, label: "Role Management", href: "/dashbord/role" },
           { icon: ClipboardList, label: "Manage Categories", href: "/dashbord/category" },
           { icon: Wrench, label: "Manage Services", href: "/dashbord/services" },
