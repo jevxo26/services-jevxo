@@ -15,15 +15,13 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
   return (
     <>
-      <body className="antialiased">
-        {!hideLayout && <Navbar />}
-        <main
-          className={`grow ${hideLayout ? "" : "md:pb-0 pb-[calc(env(safe-area-inset-bottom)+80px)]"}`}
-        >
-          {children}
-        </main>
-        {!hideLayout && <Footer />}
-      </body>
+      {!hideLayout && <Navbar />}
+      <main
+        className={`grow ${hideLayout ? "" : "md:pb-0 pb-[calc(env(safe-area-inset-bottom)+80px)]"}`}
+      >
+        {children}
+      </main>
+      {!hideLayout && <Footer />}
     </>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { CustomTable } from "@/components/ui/table";
 import { Calendar, User, Package as PkgIcon, MapPin, Search, ChevronDown, CheckCircle, XCircle, Clock, Trash2, ShieldCheck, Briefcase } from "lucide-react";
 import { toast } from "sonner";
@@ -24,7 +25,6 @@ export default function BookingsManagementPage() {
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<string>("all");
-  const [openDropdownId, setOpenDropdownId] = useState<number | null>(null);
   
   // Create Modal State
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -108,11 +108,12 @@ export default function BookingsManagementPage() {
   });
 
   const getStatusColor = (status: string) => {
-    switch(status) {
-      case 'pending': return 'bg-amber-100 text-amber-600';
-      case 'assigned': return 'bg-blue-100 text-blue-600';
-      case 'completed': return 'bg-emerald-100 text-emerald-600';
-      case 'cancelled': return 'bg-rose-100 text-rose-600';
+    switch (status.toLowerCase()) {
+      case 'pending': return 'bg-amber-50 text-amber-600 border border-amber-200';
+      case 'assigned': return 'bg-blue-50 text-blue-600 border border-blue-200';
+      case 'on_the_way': return 'bg-purple-50 text-purple-600 border border-purple-200';
+      case 'completed': return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
+      case 'cancelled': return 'bg-rose-50 text-rose-600 border border-rose-200';
       default: return 'bg-slate-100 text-slate-600';
     }
   };
@@ -194,53 +195,12 @@ export default function BookingsManagementPage() {
       header: "Actions",
       accessorKey: "actions",
       render: (item: any) => (
-        <div className="relative">
-          <button 
-            onClick={() => setOpenDropdownId(openDropdownId === item.id ? null : item.id)}
-            className="flex items-center gap-1.5 px-3 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
-          >
-            Update <ChevronDown size={14} />
-          </button>
-          
-          {openDropdownId === item.id && (
-            <>
-              <div className="fixed inset-0 z-40" onClick={() => setOpenDropdownId(null)} />
-              <div className="absolute right-0 top-full mt-1 w-40 bg-white rounded-xl shadow-lg border border-slate-100 z-50 py-1">
-                <button
-                  onClick={() => { handleStatusChange(item.id, 'pending'); setOpenDropdownId(null); }}
-                  className="w-full text-left px-4 py-2 text-sm text-amber-600 hover:bg-amber-50 flex items-center gap-2 font-medium"
-                >
-                  <Clock size={14} /> Pending
-                </button>
-                <button
-                  onClick={() => { handleStatusChange(item.id, 'assigned'); setOpenDropdownId(null); }}
-                  className="w-full text-left px-4 py-2 text-sm text-blue-600 hover:bg-blue-50 flex items-center gap-2 font-medium"
-                >
-                  <ShieldCheck size={14} /> Assigned
-                </button>
-                <button
-                  onClick={() => { handleStatusChange(item.id, 'completed'); setOpenDropdownId(null); }}
-                  className="w-full text-left px-4 py-2 text-sm text-emerald-600 hover:bg-emerald-50 flex items-center gap-2 font-medium"
-                >
-                  <CheckCircle size={14} /> Completed
-                </button>
-                <button
-                  onClick={() => { handleStatusChange(item.id, 'cancelled'); setOpenDropdownId(null); }}
-                  className="w-full text-left px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 flex items-center gap-2 font-medium"
-                >
-                  <XCircle size={14} /> Cancelled
-                </button>
-                <div className="h-px bg-slate-100 my-1 mx-2" />
-                <button
-                  onClick={() => { handleDelete(item.id); setOpenDropdownId(null); }}
-                  className="w-full text-left px-4 py-2 text-sm text-rose-600 hover:bg-rose-50 flex items-center gap-2 font-medium"
-                >
-                  <Trash2 size={14} /> Delete
-                </button>
-              </div>
-            </>
-          )}
-        </div>
+        <Link 
+          href={`/dashbord/manage-bookings/${item.id}`}
+          className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+        >
+          View Details
+        </Link>
       )
     }
   ];

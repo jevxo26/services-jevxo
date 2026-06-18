@@ -4,13 +4,13 @@ export interface Booking {
   id: number;
   user?: any;
   vendor?: any;
-  employee?: any;
+  employees?: any[];
   nestedService?: any;
   pkg?: any;
   date: string;
   location: string;
   notes?: string;
-  status: 'pending' | 'assigned' | 'completed' | 'cancelled';
+  status: 'pending' | 'assigned' | 'on_the_way' | 'completed' | 'cancelled';
   createdAt: string;
   updatedAt: string;
 }
@@ -55,11 +55,11 @@ export const bookingApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Booking'],
     }),
-    assignEmployeeToBooking: builder.mutation<BookingApiResponse<Booking>, { id: string | number; employee_id: number }>({
-      query: ({ id, employee_id }) => ({
+    assignEmployeeToBooking: builder.mutation<BookingApiResponse<Booking>, { id: string | number; employee_ids: number[] }>({
+      query: ({ id, employee_ids }) => ({
         url: `/bookings/${id}/assign`,
         method: 'POST',
-        body: { employee_id },
+        body: { employee_ids },
       }),
       invalidatesTags: ['Booking'],
     }),

@@ -1,102 +1,11 @@
 "use client";
 
 import { useState } from "react";
+import { useGetAllBookingsQuery, useUpdateBookingStatusMutation } from "@/redux/features/admin/booking";
+import { toast } from "sonner";
+import { MapPin, Calendar, Clock, Briefcase, Package as PkgIcon, User, XCircle, Search } from "lucide-react";
 
-type BookingStatus = "confirmed" | "pending" | "completed" | "cancelled";
-
-interface Booking {
-  id: string;
-  service: string;
-  provider: string;
-  date: string;
-  time: string;
-  price: string;
-  status: BookingStatus;
-  icon: string;
-}
-
-const BOOKINGS: Booking[] = [
-  {
-    id: "1",
-    service: "Home Cleaning Service",
-    provider: "CleanPro BD",
-    date: "20 Jun",
-    time: "10:00 AM",
-    price: "৳2,500",
-    status: "confirmed",
-    icon: "🏠",
-  },
-  {
-    id: "2",
-    service: "AC Repair & Maintenance",
-    provider: "CoolTech Services",
-    date: "22 Jun",
-    time: "2:00 PM",
-    price: "৳3,800",
-    status: "confirmed",
-    icon: "❄️",
-  },
-  {
-    id: "3",
-    service: "Plumbing Repair",
-    provider: "PipeFix Dhaka",
-    date: "25 Jun",
-    time: "11:00 AM",
-    price: "৳1,200",
-    status: "pending",
-    icon: "🔧",
-  },
-  {
-    id: "4",
-    service: "Furniture Assembly",
-    provider: "HomeAssist Pro",
-    date: "28 Jun",
-    time: "9:00 AM",
-    price: "৳950",
-    status: "pending",
-    icon: "🪑",
-  },
-  {
-    id: "5",
-    service: "Pest Control Treatment",
-    provider: "SafeHome Pest",
-    date: "30 Jun",
-    time: "8:30 AM",
-    price: "৳1,800",
-    status: "confirmed",
-    icon: "🐛",
-  },
-  {
-    id: "6",
-    service: "Deep Cleaning Service",
-    provider: "CleanPro BD",
-    date: "10 Jun",
-    time: "9:00 AM",
-    price: "৳3,200",
-    status: "completed",
-    icon: "✨",
-  },
-  {
-    id: "7",
-    service: "Electrical Wiring Check",
-    provider: "Volt Masters",
-    date: "5 Jun",
-    time: "3:00 PM",
-    price: "৳1,050",
-    status: "completed",
-    icon: "⚡",
-  },
-  {
-    id: "8",
-    service: "Painting Service",
-    provider: "Brush & Roll Co.",
-    date: "3 Jun",
-    time: "10:00 AM",
-    price: "৳4,500",
-    status: "cancelled",
-    icon: "🎨",
-  },
-];
+type BookingStatus = "confirmed" | "pending" | "completed" | "cancelled" | "assigned" | "on_the_way";
 
 const STATUS_CONFIG: Record<
   BookingStatus,
@@ -117,6 +26,22 @@ const STATUS_CONFIG: Record<
     iconBg: "bg-[#FFF0F1]",
     iconText: "text-[#D6363B]",
   },
+  assigned: {
+    label: "Assigned",
+    pillBg: "bg-blue-50",
+    pillText: "text-blue-700",
+    borderColor: "border-l-blue-400",
+    iconBg: "bg-blue-50",
+    iconText: "text-blue-700",
+  },
+  on_the_way: {
+    label: "On the way",
+    pillBg: "bg-purple-50",
+    pillText: "text-purple-700",
+    borderColor: "border-l-purple-400",
+    iconBg: "bg-purple-50",
+    iconText: "text-purple-700",
+  },
   pending: {
     label: "Pending",
     pillBg: "bg-amber-50",
@@ -127,11 +52,11 @@ const STATUS_CONFIG: Record<
   },
   completed: {
     label: "Completed",
-    pillBg: "bg-gray-100",
-    pillText: "text-gray-500",
-    borderColor: "border-l-gray-300",
-    iconBg: "bg-gray-100",
-    iconText: "text-gray-500",
+    pillBg: "bg-emerald-50",
+    pillText: "text-emerald-700",
+    borderColor: "border-l-emerald-400",
+    iconBg: "bg-emerald-50",
+    iconText: "text-emerald-700",
   },
   cancelled: {
     label: "Cancelled",
@@ -145,31 +70,59 @@ const STATUS_CONFIG: Record<
 
 const FILTERS: { label: string; value: "all" | BookingStatus }[] = [
   { label: "All", value: "all" },
-  { label: "Confirmed", value: "confirmed" },
   { label: "Pending", value: "pending" },
+  { label: "Assigned", value: "assigned" },
+  { label: "On the way", value: "on_the_way" },
   { label: "Completed", value: "completed" },
   { label: "Cancelled", value: "cancelled" },
 ];
 
-const STATS = [
-  { label: "Confirmed", value: "3", sub: "Upcoming" },
-  { label: "Pending", value: "2", sub: "Awaiting approval" },
-  { label: "Completed", value: "2", sub: "This month" },
-  { label: "Total spent", value: "৳14,500", sub: "June 2026" },
-];
-
 export default function BookingsPage() {
+  const { data: bookingsRes, isLoading } = useGetAllBookingsQuery();
+  const [updateStatus, { isLoading: isUpdating }] = useUpdateBookingStatusMutation();
+
   const [activeFilter, setActiveFilter] = useState<"all" | BookingStatus>("all");
   const [search, setSearch] = useState("");
+  const [selectedBooking, setSelectedBooking] = useState<any>(null);
 
-  const filtered = BOOKINGS.filter((b) => {
+  const bookings = bookingsRes?.data || [];
+
+  const handleCancel = async (id: number) => {
+    if (!confirm("Are you sure you want to cancel this booking?")) return;
+    try {
+      await updateStatus({ id, status: "cancelled" }).unwrap();
+      toast.success("Booking cancelled successfully.");
+      setSelectedBooking(null);
+    } catch (error: any) {
+      toast.error(error.data?.message || "Failed to cancel booking.");
+    }
+  };
+
+  const filtered = bookings.filter((b: any) => {
     const matchFilter = activeFilter === "all" || b.status === activeFilter;
+    const serviceName = b.nestedService?.name || b.pkg?.name || "";
+    const vendorName = b.vendor?.name || "";
     const matchSearch =
       !search ||
-      b.service.toLowerCase().includes(search.toLowerCase()) ||
-      b.provider.toLowerCase().includes(search.toLowerCase());
+      serviceName.toLowerCase().includes(search.toLowerCase()) ||
+      vendorName.toLowerCase().includes(search.toLowerCase());
     return matchFilter && matchSearch;
   });
+
+  const getStats = () => {
+    let pending = 0, completed = 0, cancelled = 0;
+    bookings.forEach((b: any) => {
+      if (b.status === "pending" || b.status === "assigned" || b.status === "on_the_way") pending++;
+      if (b.status === "completed") completed++;
+      if (b.status === "cancelled") cancelled++;
+    });
+    return [
+      { label: "Total Bookings", value: bookings.length.toString(), sub: "All time" },
+      { label: "Upcoming", value: pending.toString(), sub: "Pending/Assigned" },
+      { label: "Completed", value: completed.toString(), sub: "Finished" },
+      { label: "Cancelled", value: cancelled.toString(), sub: "Stopped" },
+    ];
+  };
 
   return (
     <section className="min-h-screen bg-[var(--background)] px-4 py-8 sm:px-6 lg:px-8">
@@ -179,23 +132,17 @@ export default function BookingsPage() {
         <div className="mb-8 flex items-start justify-between gap-4">
           <div>
             <h1 className="text-2xl font-semibold text-[var(--text-primary)] tracking-tight">
-              Bookings
+              My Bookings
             </h1>
             <p className="mt-1 text-sm text-[var(--text-secondary)]">
-              June 2026 — {BOOKINGS.length} bookings total
+              View your booking history and active requests
             </p>
           </div>
-          <button
-            className="flex shrink-0 items-center gap-2 rounded-xl bg-[#FF5A5F] px-4 py-2.5 text-sm font-medium text-white transition-colors hover:bg-[#D6363B] active:scale-[0.98]"
-          >
-            <span className="text-base leading-none">+</span>
-            New booking
-          </button>
         </div>
 
         {/* Stats */}
         <div className="mb-6 grid grid-cols-2 gap-3 sm:grid-cols-4">
-          {STATS.map((stat) => (
+          {getStats().map((stat) => (
             <div
               key={stat.label}
               className="rounded-xl bg-[#FFF0F1] px-4 py-3"
@@ -229,86 +176,66 @@ export default function BookingsPage() {
 
         {/* Search */}
         <div className="mb-5 flex items-center gap-3 rounded-xl border border-[var(--border-light)] bg-white px-4 py-2.5">
-          <svg
-            className="h-4 w-4 shrink-0 text-[var(--text-muted)]"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={1.8}
-              d="M21 21l-4.35-4.35M17 11A6 6 0 1 1 5 11a6 6 0 0 1 12 0z"
-            />
-          </svg>
+          <Search className="h-4 w-4 shrink-0 text-[var(--text-muted)]" />
           <input
             type="text"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            placeholder="Search by service or provider..."
+            placeholder="Search by service or vendor..."
             className="flex-1 bg-transparent text-sm text-[var(--text-primary)] placeholder:text-[var(--text-muted)] outline-none"
           />
-          {search && (
-            <button
-              onClick={() => setSearch("")}
-              className="text-[var(--text-muted)] hover:text-[var(--text-secondary)]"
-            >
-              <svg className="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
-          )}
         </div>
 
         {/* Booking Cards */}
         <div className="flex flex-col gap-3">
-          {filtered.length === 0 ? (
+          {isLoading ? (
+            <div className="py-16 text-center text-[var(--text-secondary)]">
+              <div className="w-8 h-8 border-2 border-[#FF5A5F] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+              Loading bookings...
+            </div>
+          ) : filtered.length === 0 ? (
             <div className="py-16 text-center">
               <p className="text-4xl">📋</p>
               <p className="mt-3 text-sm text-[var(--text-secondary)]">
-                No bookings match your filter.
+                No bookings found.
               </p>
             </div>
           ) : (
-            filtered.map((booking) => {
-              const cfg = STATUS_CONFIG[booking.status];
+            filtered.map((booking: any) => {
+              const cfg = STATUS_CONFIG[booking.status as BookingStatus] || STATUS_CONFIG['pending'];
+              const serviceName = booking.nestedService?.name || booking.pkg?.name || "Unknown Service";
+              const dateStr = booking.date ? new Date(booking.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) : "N/A";
+              
               return (
                 <div
                   key={booking.id}
-                  className={`flex items-center gap-4 rounded-r-xl border border-l-4 bg-white px-4 py-4 transition-shadow hover:shadow-md ${cfg.borderColor}`}
+                  className={`flex flex-col sm:flex-row sm:items-center gap-4 rounded-r-xl border border-l-4 bg-white px-4 py-4 transition-shadow hover:shadow-md ${cfg.borderColor}`}
                   style={{ borderTopColor: "#e5e7eb", borderRightColor: "#e5e7eb", borderBottomColor: "#e5e7eb" }}
                 >
-                  {/* Icon */}
-                  <div
-                    className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-lg ${cfg.iconBg}`}
-                  >
-                    {booking.icon}
-                  </div>
-
-                  {/* Info */}
-                  <div className="min-w-0 flex-1">
-                    <p className="truncate text-sm font-semibold text-[var(--text-primary)]">
-                      {booking.service}
-                    </p>
-                    <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-[var(--text-secondary)]">
-                      <span>📅 {booking.date}, {booking.time}</span>
-                      <span>👤 {booking.provider}</span>
+                  <div className="flex items-center gap-4 flex-1 min-w-0">
+                    <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${cfg.iconBg} ${cfg.iconText}`}>
+                      {booking.nestedService ? <Briefcase size={20} /> : <PkgIcon size={20} />}
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <p className="truncate text-sm font-semibold text-[var(--text-primary)]">
+                        {serviceName}
+                      </p>
+                      <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-0.5 text-xs text-[var(--text-secondary)]">
+                        <span className="flex items-center gap-1"><Calendar size={12} /> {dateStr}</span>
+                        <span className="flex items-center gap-1"><User size={12} /> {booking.vendor?.name || "Unassigned"}</span>
+                      </div>
                     </div>
                   </div>
 
-                  {/* Right */}
-                  <div className="flex shrink-0 flex-col items-end gap-2">
-                    <span
-                      className={`rounded-full px-2.5 py-0.5 text-xs font-medium ${cfg.pillBg} ${cfg.pillText}`}
-                    >
+                  <div className="flex shrink-0 items-center sm:flex-col sm:items-end justify-between gap-2 mt-2 sm:mt-0 pt-3 sm:pt-0 border-t border-slate-100 sm:border-0">
+                    <span className={`rounded-full px-2.5 py-0.5 text-xs font-bold capitalize ${cfg.pillBg} ${cfg.pillText}`}>
                       {cfg.label}
                     </span>
-                    <span className="text-sm font-semibold text-[var(--text-primary)]">
-                      {booking.price}
-                    </span>
-                    <button className="rounded-lg border border-[var(--border-light)] px-3 py-1 text-xs text-[var(--text-secondary)] transition-colors hover:border-[#FF5A5F] hover:text-[#FF5A5F]">
-                      {booking.status === "completed" ? "Review" : booking.status === "cancelled" ? "Rebook" : "Details"}
+                    <button 
+                      onClick={() => setSelectedBooking(booking)}
+                      className="rounded-lg border border-[var(--border-light)] px-4 py-1.5 text-xs font-bold text-[var(--text-secondary)] transition-colors hover:border-[#FF5A5F] hover:text-[#FF5A5F] bg-slate-50 hover:bg-white"
+                    >
+                      View Details
                     </button>
                   </div>
                 </div>
@@ -316,8 +243,90 @@ export default function BookingsPage() {
             })
           )}
         </div>
-
       </div>
+
+      {/* Details Modal */}
+      {selectedBooking && (
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl shadow-xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-200">
+            <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+              <h2 className="text-xl font-bold text-slate-800 flex items-center gap-2">
+                Booking Details
+              </h2>
+              <button 
+                onClick={() => setSelectedBooking(null)}
+                className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-colors"
+              >
+                <XCircle size={20} />
+              </button>
+            </div>
+            
+            <div className="p-6 space-y-6">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h3 className="text-lg font-bold text-slate-800">
+                    {selectedBooking.nestedService?.name || selectedBooking.pkg?.name || "Unknown Service"}
+                  </h3>
+                  <p className="text-sm text-slate-500 mt-1 flex items-center gap-1">
+                    Booking ID: <span className="font-mono font-medium text-slate-700">#{selectedBooking.id}</span>
+                  </p>
+                </div>
+                <span className={`px-3 py-1 rounded-full text-xs font-bold capitalize ${STATUS_CONFIG[selectedBooking.status as BookingStatus]?.pillBg} ${STATUS_CONFIG[selectedBooking.status as BookingStatus]?.pillText}`}>
+                  {selectedBooking.status}
+                </span>
+              </div>
+
+              <div className="grid grid-cols-2 gap-4">
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1"><Calendar size={12}/> Date</p>
+                  <p className="text-sm font-semibold text-slate-700">
+                    {selectedBooking.date ? new Date(selectedBooking.date).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' }) : "N/A"}
+                  </p>
+                </div>
+                <div className="bg-slate-50 p-3 rounded-xl border border-slate-100">
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1"><User size={12}/> Vendor</p>
+                  <p className="text-sm font-semibold text-slate-700">{selectedBooking.vendor?.name || "Pending Assignment"}</p>
+                </div>
+              </div>
+
+              <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-3">
+                <div>
+                  <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1"><MapPin size={12}/> Location</p>
+                  <p className="text-sm font-medium text-slate-700">{selectedBooking.location}</p>
+                </div>
+                {selectedBooking.notes && (
+                  <div className="pt-2 border-t border-slate-200">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Notes</p>
+                    <p className="text-sm font-medium text-slate-600 italic">"{selectedBooking.notes}"</p>
+                  </div>
+                )}
+                {selectedBooking.employee && (
+                  <div className="pt-2 border-t border-slate-200">
+                    <p className="text-xs font-bold text-slate-400 uppercase tracking-wider mb-1">Assigned Professional</p>
+                    <p className="text-sm font-medium text-slate-700">{selectedBooking.employee.name}</p>
+                  </div>
+                )}
+              </div>
+              
+              {(selectedBooking.status === "pending" || selectedBooking.status === "assigned") && (
+                <div className="pt-4 border-t border-slate-100">
+                  <button
+                    onClick={() => handleCancel(selectedBooking.id)}
+                    disabled={isUpdating}
+                    className="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-2.5 rounded-xl text-sm transition-colors"
+                  >
+                    {isUpdating ? "Processing..." : "Cancel Booking"}
+                  </button>
+                  <p className="text-center text-xs text-slate-400 mt-2">
+                    Cancelling a booking cannot be undone.
+                  </p>
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
+      )}
+
     </section>
   );
 }

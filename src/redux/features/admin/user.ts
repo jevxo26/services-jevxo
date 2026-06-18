@@ -33,6 +33,10 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Admin'],
     }),
+    getEmployeesByVendor: builder.query<any, string | number>({
+      query: (vendorId) => `/users/employees/vendor/${vendorId}`,
+      providesTags: ['Admin'],
+    }),
   }),
   overrideExisting: false,
 });
@@ -43,4 +47,5 @@ export const {
   useGetUserByIdQuery,
   useUpdateUserMutation,
   useDeleteUserMutation,
+  useGetEmployeesByVendorQuery,
 } = userApi;
