@@ -516,9 +516,9 @@ export default function PackagesManagementPage() {
                               {isSelected && <Check size={12} strokeWidth={3} />}
                             </div>
                             <span className="truncate">{ns.name}</span>
-                            {ns.price != null && (
+                            {ns.starting_price != null && (
                               <span className="ml-auto text-xs text-slate-400 font-medium shrink-0">
-                                ৳{ns.price.toLocaleString()}
+                                ৳{ns.starting_price.toLocaleString()}
                               </span>
                             )}
                           </button>

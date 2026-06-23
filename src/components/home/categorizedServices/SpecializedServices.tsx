@@ -62,7 +62,7 @@ export function SpecializedServices({ nestedServices }: { nestedServices?: any[]
           id: String(ns.id),
           title: ns.name,
           description: ns.description || "Expert service technician ready to assist you.",
-          price: ns.price ? `৳${ns.price}` : undefined,
+          price: (ns.starting_price || ns.price) ? `৳${ns.starting_price || ns.price}` : undefined,
           priceLabel: undefined as string | undefined,
           type: isEmergency ? "emergency" as const : "normal" as const,
           icon: <Droplet className="w-7 h-7 text-[#FF5A5F]" />,

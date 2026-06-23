@@ -20,6 +20,7 @@ interface VendorItem {
   joined: string;
   phone?: string;
   categoryName?: string;
+  profile?: any;
 }
 
 export default function VendorsManagementPage() {
@@ -63,6 +64,7 @@ export default function VendorsManagementPage() {
         status: u.status?.toLowerCase() || 'inactive',
         joined: u.createdAt ? new Date(u.createdAt).toLocaleDateString() : 'Unknown',
         categoryName: u.profile?.category?.name || 'Unassigned',
+        profile: u.profile,
       }));
       setVendors(mappedUsers);
     } else {
@@ -199,6 +201,7 @@ export default function VendorsManagementPage() {
     },
     {
       key: "categoryName",
+      header: "Category",
       render: (vendor: VendorItem) => (
         <div className="flex flex-wrap gap-1">
           {vendor.profile?.categories?.length > 0 ? (

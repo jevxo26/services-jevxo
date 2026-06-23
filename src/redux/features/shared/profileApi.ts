@@ -18,6 +18,7 @@ export interface Profile {
   updatedAt?: string;
   user?: Record<string, any>;
   categories?: Record<string, any>[];
+  category?: any;
 }
 
 export interface ProfileApiResponse<T> {

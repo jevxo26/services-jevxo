@@ -241,7 +241,7 @@ export default function VendorServicesPage() {
   ];
 
   const tableActions: TableAction<Service>[] = [
-    { label: "View", icon: Eye, onClick: (item) => router.push(`/dashbord/vendor-services/${item.id}`), variant: "primary" },
+    { label: "View", icon: Eye, onClick: (item) => router.push(`/dashbord/vendor-services/${item.id}`), variant: "default" },
     { label: "Edit", icon: Edit2, onClick: openEditModal, variant: "secondary" },
     { label: "Delete", icon: Trash2, onClick: openDeleteModal, variant: "destructive" },
   ];

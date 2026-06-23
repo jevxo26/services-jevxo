@@ -20,6 +20,7 @@ export default function ProfilePage() {
   const [updateUserMut] = useUpdateUserMutation();
   const [createProfileMut, { isLoading: isCreatingProfile }] = useCreateProfileMutation();
   const [updateProfileMut, { isLoading: isUpdatingProfile }] = useUpdateProfileMutation();
+  const { data: apiCategoriesRes, isLoading: isCategoriesLoading } = useGetAllCategoriesQuery();
   const allCategories = apiCategoriesRes?.data || (Array.isArray(apiCategoriesRes) ? apiCategoriesRes : []);
 
   // Prefer API response, fall back to Redux store (which is persisted from localStorage)
