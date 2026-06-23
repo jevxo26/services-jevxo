@@ -53,7 +53,24 @@ const specializedServices: SpecializedService[] = [
   },
 ];
 
-export function SpecializedServices() {
+export function SpecializedServices({ nestedServices }: { nestedServices?: any[] }) {
+  const displayServices = nestedServices && nestedServices.length > 0
+    ? nestedServices.map((ns, idx) => {
+        // If there's 3 or more services, make the last one an emergency card for UI design style
+        const isEmergency = nestedServices.length > 2 && idx === nestedServices.length - 1;
+        return {
+          id: String(ns.id),
+          title: ns.name,
+          description: ns.description || "Expert service technician ready to assist you.",
+          price: ns.price ? `৳${ns.price}` : undefined,
+          priceLabel: undefined as string | undefined,
+          type: isEmergency ? "emergency" as const : "normal" as const,
+          icon: <Droplet className="w-7 h-7 text-[#FF5A5F]" />,
+          ctaText: isEmergency ? "Call Hotline" : undefined,
+        };
+      })
+    : specializedServices;
+
   return (
     <section className="">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -78,7 +95,7 @@ export function SpecializedServices() {
 
         {/* Dynamic Grid */}
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
-          {specializedServices.map((service, index) => {
+          {displayServices.map((service, index) => {
             if (service.type === "emergency") {
               return (
                 <div key={service.id} className="md:col-span-8">

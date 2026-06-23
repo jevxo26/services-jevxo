@@ -5,78 +5,27 @@ import { CustomSelect } from "@/components/ui/select";
 import dayjs from "dayjs";
 import { Calendar, MapPin, Search } from "lucide-react";
 import Link from "next/link";
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { TbAirConditioning, TbTruck, TbScissors } from "react-icons/tb";
-import {
-  FaFaucet,
-  FaBolt,
-  FaTv,
-  FaPaintRoller,
-  FaLeaf,
-  FaBug,
-  FaHammer,
-} from "react-icons/fa";
-import { MdOutlineCleaningServices, MdOutlineSecurity } from "react-icons/md";
 import { useRouter } from "next/navigation";
+import { useGetPublicCategoriesQuery } from "@/redux/features/landing/landingApi";
 
 const ServiceHero = () => {
-  const categories = [
-    {
-      id: "ac-repair",
-      label: "AC Repair",
-      slug: "ac-repair",
-      icon: TbAirConditioning,
-    },
-    { id: "plumbing", label: "Plumbing", slug: "plumbing", icon: FaFaucet },
-    {
-      id: "cleaning",
-      label: "Cleaning",
-      slug: "cleaning",
-      icon: MdOutlineCleaningServices,
-    },
-    { id: "electrical", label: "Electrical", slug: "electrical", icon: FaBolt },
-    { id: "shifting", label: "Shifting", slug: "shifting", icon: TbTruck },
-    { id: "cctv", label: "CCTV", slug: "cctv", icon: MdOutlineSecurity },
-    {
-      id: "appliance-repair",
-      label: "Appliance Repair",
-      slug: "appliance-repair",
-      icon: FaTv,
-    },
-    {
-      id: "painting",
-      label: "Painting",
-      slug: "painting",
-      icon: FaPaintRoller,
-    },
-    { id: "gardening", label: "Gardening", slug: "gardening", icon: FaLeaf },
-    {
-      id: "pest-control",
-      label: "Pest Control",
-      slug: "pest-control",
-      icon: FaBug,
-    },
-    {
-      id: "home-salon",
-      label: "Home Salon",
-      slug: "home-salon",
-      icon: TbScissors,
-    },
-    { id: "carpentry", label: "Carpentry", slug: "carpentry", icon: FaHammer },
-  ];
+  const { data: categoriesRes, isLoading: isCategoriesLoading } = useGetPublicCategoriesQuery();
+  const apiCategories = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
 
   const [selectedCategory, setSelectedCategory] = useState("");
   const [location, setLocation] = useState("");
   const [selectedDate, setSelectedDate] = useState<dayjs.Dayjs | null>(null);
   const [showCalendar, setShowCalendar] = useState(false);
   const router = useRouter();
-  
 
-  const categoryOptions = categories.map((cat) => ({
-    value: cat.slug,
-    label: cat.label,
-  }));
+  const categoryOptions = useMemo(() => {
+    return apiCategories.map((cat: any) => ({
+      value: cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id),
+      label: cat.name || "",
+    }));
+  }, [apiCategories]);
 
   const itemVariants = {
     hidden: { opacity: 0, y: 30 },
@@ -110,7 +59,7 @@ const ServiceHero = () => {
       }
       router.push(url);
     } else {
-      router.push("/categories/ac-repair");
+      router.push("/services");
     }
   };
 
@@ -132,13 +81,13 @@ const ServiceHero = () => {
             Find the Best Home <span className="text-primary"> Services </span>{" "}
             for Your Lifestyle
           </h1>
-          <p className="text-sm md:text-base text-[#6b7280] max-w-xl mx-auto lg:mx-0 mb-4">
+          <p className="text-sm md:text-base text-[#6b7280] max-w-xl mx-auto lg:mx-0 mb-4 font-medium">
             Premium, reliable, and effortless home service solutions across
             Bangladesh.
           </p>
         </div>
 
-        {/* Animated Floating Search Bar Card with Handoff Scroll Control */}
+        {/* Animated Floating Search Bar Card */}
         <motion.form
           variants={itemVariants}
           style={{
@@ -156,9 +105,9 @@ const ServiceHero = () => {
               options={categoryOptions}
               value={selectedCategory}
               onChange={setSelectedCategory}
-              placeholder="Select Category"
+              placeholder={isCategoriesLoading ? "Loading..." : "Select Category"}
               className="w-full"
-              triggerClassName="border-none bg-transparent hover:bg-transparent shadow-none px-0 py-1.5 h-auto text-slate-700 font-medium focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0 focus:outline-none"
+              triggerClassName="border-none bg-transparent hover:bg-transparent shadow-none px-0 py-1.5 h-auto text-slate-700 font-semibold focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-0 focus:outline-none cursor-pointer"
             />
           </div>
 
@@ -173,7 +122,7 @@ const ServiceHero = () => {
               value={location}
               onChange={(e) => setLocation(e.target.value)}
               placeholder="Enter location"
-              className="bg-transparent text-sm text-slate-700 placeholder-slate-400 outline-none w-full py-1.5"
+              className="bg-transparent text-sm font-semibold text-slate-700 placeholder-slate-400 outline-none w-full py-1.5"
             />
           </div>
 
@@ -187,7 +136,7 @@ const ServiceHero = () => {
               className="flex items-center gap-3 w-full py-1.5 cursor-pointer"
             >
               <Calendar className="text-slate-400 w-5 h-5 flex-shrink-0" />
-              <span className="text-sm text-slate-700 select-none">
+              <span className="text-sm font-semibold text-slate-700 select-none">
                 {selectedDate
                   ? selectedDate.format("DD MMM, YYYY")
                   : "Select Date"}
@@ -216,7 +165,7 @@ const ServiceHero = () => {
           {/* Book Now Action Button */}
           <Button
             type="submit"
-            className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white font-bold px-8 py-3.5 h-auto rounded-xl md:rounded-full transition-all duration-200 shadow-sm active:scale-95 text-base flex-shrink-0 cursor-pointer"
+            className="w-full md:w-auto bg-primary hover:bg-primary/90 text-white font-extrabold px-8 py-3.5 h-auto rounded-xl md:rounded-full transition-all duration-200 shadow-sm active:scale-95 text-base flex-shrink-0 cursor-pointer"
           >
             Book Now
           </Button>
@@ -231,7 +180,7 @@ const ServiceHero = () => {
           ].map(([icon, label]) => (
             <div key={label as string} className="flex items-center gap-1.5">
               <span>{icon}</span>
-              <span className="text-xs font-medium text-[#6b7280]">
+              <span className="text-xs font-bold text-[#6b7280]">
                 {label}
               </span>
             </div>
@@ -240,15 +189,28 @@ const ServiceHero = () => {
 
         {/* Quick-nav category pills */}
         <div className="flex flex-wrap justify-center gap-2">
-          {categories.map((cat, i) => (
-            <Link
-              key={i}
-              href={`categories/service/${cat.id}`}
-              className="flex items-center gap-1.5 px-3 py-2 rounded-full border font-semibold text-xs transition-all duration-200 hover:-translate-y-0.5 no-underline border-[#e5e7eb] text-[#4b5563] bg-white hover:border-[#ff5a5f] hover:text-[#ff5a5f] hover:shadow-sm"
-            >
-              {cat.label}
-            </Link>
-          ))}
+          {isCategoriesLoading ? (
+            Array.from({ length: 5 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="h-8 w-24 bg-slate-150 animate-pulse rounded-full border border-slate-100"
+              />
+            ))
+          ) : (
+            apiCategories.map((cat: any) => {
+              const slug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id);
+              const label = cat.name || "";
+              return (
+                <Link
+                  key={cat.id}
+                  href={`/categories/${slug}`}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-full border font-bold text-xs transition-all duration-200 hover:-translate-y-0.5 no-underline border-[#e5e7eb] text-[#4b5563] bg-white hover:border-[#ff5a5f] hover:text-[#ff5a5f] hover:shadow-sm cursor-pointer"
+                >
+                  {label}
+                </Link>
+              );
+            })
+          )}
         </div>
       </div>
     </section>

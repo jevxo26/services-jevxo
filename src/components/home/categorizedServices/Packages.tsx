@@ -51,21 +51,38 @@ const packages = [
   },
 ];
 
-export function Packages() {
+export function Packages({ packages: inputPackages }: { packages?: any[] }) {
+  const displayPackages = inputPackages && inputPackages.length > 0
+    ? inputPackages.map((pkg, idx) => {
+        const variant = idx % 3 === 1 ? "popular" : idx % 3 === 2 ? "dark" : "light";
+        return {
+          title: pkg.name.toUpperCase(),
+          price: pkg.price ? Number(pkg.price).toLocaleString() : null,
+          features: pkg.items && pkg.items.length > 0
+            ? pkg.items.map((it: any) => it.nestedService?.name || "Premium item")
+            : ["Full Service", "Expert technician", "Quality check", "Support included"],
+          buttonText: "Select Package",
+          variant,
+          badge: variant === "popular" ? "POPULAR" : undefined,
+          description: pkg.description,
+        };
+      })
+    : packages;
+
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-slate-900">
-            Exclusive Home Security Packages
+            Exclusive Packages
           </h2>
           <p className="text-slate-600 mt-2">
-            Save more with our bundled security solutions.
+            Save more with our bundled solutions.
           </p>
         </div>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {packages.map((pkg, index) => (
+          {displayPackages.map((pkg, index) => (
             <motion.div
               key={index}
               initial={{ opacity: 0, y: 30 }}
@@ -107,7 +124,7 @@ export function Packages() {
               {/* Features or Description */}
               {pkg.features ? (
                 <ul className="space-y-3 mb-10 flex-1">
-                  {pkg.features.map((feature, i) => (
+                  {pkg.features.map((feature: any, i: number) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
                       <Check className="w-5 h-5 text-[#FF5A5F] mt-0.5 flex-shrink-0" />
                       <span

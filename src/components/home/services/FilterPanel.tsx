@@ -1,10 +1,13 @@
 "use client"
+import React, { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowDownNarrowWide,
   ArrowUpNarrowWide,
   CalendarDays,
   Check,
   Clock,
+  LayoutGrid,
   Siren,
   SlidersHorizontal,
   Sparkles,
@@ -12,9 +15,7 @@ import {
   TrendingUp,
   X,
 } from "lucide-react";
-import { useSearchParams } from "next/navigation";
-import { useState } from "react";
-import { FaBolt, FaBug, FaFaucet, FaLeaf, FaPaintRoller, FaTv } from "react-icons/fa";
+import { FaBolt, FaBug, FaFaucet, FaLeaf, FaPaintRoller, FaTv, FaHammer } from "react-icons/fa";
 import { MdOutlineCleaningServices, MdOutlineSecurity } from "react-icons/md";
 import { TbAirConditioning, TbScissors, TbTruck } from "react-icons/tb";
 
@@ -36,47 +37,28 @@ interface FilterPanelProps {
   ratingCounts: Record<string, number>;
   resultCount: number;
   onClearAll: () => void;
+  categories: any[];
+  isLoadingCategories?: boolean;
 }
 
-const categories = [
-  {
-    id: "ac-repair",
-    label: "AC Repair",
-    slug: "ac-repair",
-    icon: TbAirConditioning,
-  },
-  { id: "plumbing", label: "Plumbing", slug: "plumbing", icon: FaFaucet },
-  {
-    id: "cleaning",
-    label: "Cleaning",
-    slug: "cleaning",
-    icon: MdOutlineCleaningServices,
-  },
-  { id: "electrical", label: "Electrical", slug: "electrical", icon: FaBolt },
-  { id: "shifting", label: "Shifting", slug: "shifting", icon: TbTruck },
-  { id: "cctv", label: "CCTV", slug: "cctv", icon: MdOutlineSecurity },
-  {
-    id: "appliance-repair",
-    label: "Appliance Repair",
-    slug: "appliance-repair",
-    icon: FaTv,
-  },
-  { id: "painting", label: "Painting", slug: "painting", icon: FaPaintRoller },
-  { id: "gardening", label: "Gardening", slug: "gardening", icon: FaLeaf },
-  {
-    id: "pest-control",
-    label: "Pest Control",
-    slug: "pest-control",
-    icon: FaBug,
-  },
-  {
-    id: "home-salon",
-    label: "Home Salon",
-    slug: "home-salon",
-    icon: TbScissors,
-  },
-  { id: "carpentry", label: "Carpentry", slug: "carpentry", icon: FaPaintRoller },
-];
+const CATEGORY_ICON_MAP: Record<string, React.ComponentType<any>> = {
+  "AC Repair": TbAirConditioning,
+  "AC": TbAirConditioning,
+  "Plumbing": FaFaucet,
+  "Cleaning": MdOutlineCleaningServices,
+  "Electrical": FaBolt,
+  "Shifting": TbTruck,
+  "CCTV": MdOutlineSecurity,
+  "Security": MdOutlineSecurity,
+  "Appliance Repair": FaTv,
+  "Appliance": FaTv,
+  "Painting": FaPaintRoller,
+  "Gardening": FaLeaf,
+  "Pest Control": FaBug,
+  "Salon": TbScissors,
+  "Home Salon": TbScissors,
+  "Carpentry": FaHammer,
+};
 
 const RATING_OPTIONS = [
   { value: "5.0", label: "5.0 only" },
@@ -87,11 +69,7 @@ const RATING_OPTIONS = [
 const SORT_OPTIONS = [
   { value: "popularity", label: "Popularity", icon: TrendingUp },
   { value: "price-low", label: "Price: Low → High", icon: ArrowUpNarrowWide },
-  {
-    value: "price-high",
-    label: "Price: High → Low",
-    icon: ArrowDownNarrowWide,
-  },
+  { value: "price-high", label: "Price: High → Low", icon: ArrowDownNarrowWide },
   { value: "rating", label: "Rating", icon: Star },
   { value: "newest", label: "Newest first", icon: Sparkles },
 ];
@@ -101,6 +79,9 @@ const AVAILABILITY_OPTIONS = [
   { id: "weekend", label: "This weekend", icon: CalendarDays },
   { id: "emergency", label: "Emergency (24h)", icon: Siren },
 ];
+
+const PRICE_FLOOR = 500;
+const PRICE_CEIL = 5000;
 
 function ToggleSwitch({
   checked,
@@ -118,18 +99,18 @@ function ToggleSwitch({
       aria-checked={checked}
       aria-label={label}
       onClick={onChange}
-      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ${checked ? "bg-[#ff5a5f]" : "bg-[#e5e7eb]"}`}
+      className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none cursor-pointer ${
+        checked ? "bg-[#ff5a5f]" : "bg-slate-200"
+      }`}
     >
       <span
-        className={`inline-block h-4 w-4 transform rounded-full bg-white shadow transition-transform duration-200 ${checked ? "translate-x-6" : "translate-x-1"}`}
+        className={`inline-block h-4 w-4 transform rounded-full bg-white shadow-md transition-transform duration-300 ${
+          checked ? "translate-x-6" : "translate-x-1"
+        }`}
       />
     </button>
   );
 }
-
-
-const PRICE_FLOOR = 500;
-const PRICE_CEIL = 5000;
 
 export default function FilterPanel({
   isOpen,
@@ -139,170 +120,419 @@ export default function FilterPanel({
   ratingCounts,
   resultCount,
   onClearAll,
+  categories,
+  isLoadingCategories = false,
 }: FilterPanelProps) {
   const {
     activeCategory,
-    searchQuery,
     selectedRating,
     sortBy,
     priceMax,
     selectedAvailability,
   } = filters;
+
   const fillPct = ((priceMax - PRICE_FLOOR) / (PRICE_CEIL - PRICE_FLOOR)) * 100;
 
-  // Active filter chips
-  const chips: { label: string; onRemove: () => void }[] = [];
-  if (activeCategory !== "all") {
-    const cat = categories.find((c) => c.id === activeCategory);
-    chips.push({
-      label: cat?.label ?? activeCategory,
-      onRemove: () => setFilters({ activeCategory: "all", currentPage: 1 }),
-    });
-  }
-  if (searchQuery)
-    chips.push({
-      label: `"${searchQuery}"`,
-      onRemove: () => setFilters({ searchQuery: "", currentPage: 1 }),
-    });
-  if (selectedRating)
-    chips.push({
-      label: `${selectedRating}+ ★`,
-      onRemove: () => setFilters({ selectedRating: "", currentPage: 1 }),
-    });
-  if (priceMax < PRICE_CEIL)
-    chips.push({
-      label: `≤ ৳${priceMax.toLocaleString()}`,
-      onRemove: () => setFilters({ priceMax: PRICE_CEIL, currentPage: 1 }),
-    });
-  selectedAvailability.forEach((slot) => {
-    const opt = AVAILABILITY_OPTIONS.find((o) => o.id === slot);
-    chips.push({
-      label: opt?.label ?? slot,
-      onRemove: () =>
-        setFilters({
-          selectedAvailability: selectedAvailability.filter((a) => a !== slot),
-          currentPage: 1,
-        }),
-    });
-  });
-
+  // Prevent background scroll when open
+  useEffect(() => {
+    if (isOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [isOpen]);
 
   return (
-    <>
+    <AnimatePresence>
       {isOpen && (
-        <div
-          className="fixed inset-0 bg-black/40 z-40 md:hidden"
-          onClick={onClose}
-          aria-hidden="true"
-        />
-      )}
+        <>
+          {/* Glassmorphic Backdrop Overlay */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={onClose}
+            className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-[9999] transition-opacity"
+          />
 
-      <aside
-        className={`
-          fixed inset-x-0 bottom-0 z-20 bg-white rounded-t-3xl shadow-2xl max-h-[88vh] overflow-y-auto
-          transform transition-transform duration-300 ease-out
-          ${isOpen ? "translate-y-0" : "translate-y-full"}
-          md:static md:translate-y-0 md:max-h-none md:rounded-2xl md:shadow-md md:border md:border-[#e5e7eb]
-          md:w-72 md:shrink-0 md:sticky md:top-24 md:h-fit
-          p-5 md:p-6 space-y-8
-        `}
-        role="dialog"
-        aria-modal="true"
-        aria-label="Service filters"
-      >
-        {/* Drag handle (mobile) */}
-        <div className="md:hidden w-10 h-1 bg-[#d1d5db] rounded-full mx-auto mb-4" />
-
-        {/* Header */}
-        <div className="flex items-center justify-between mb-5">
-          <div className="flex items-center gap-2">
-            <SlidersHorizontal
-              size={18}
-              className="text-[#ff5a5f]"
-              strokeWidth={2.5}
-            />
-            <h3 className="text-base font-bold text-[#1a1a1a] m-0">Filters</h3>
-          </div>
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              className="text-sm font-semibold text-[#6b7280] hover:text-[#ff5a5f] transition-colors"
-              onClick={onClearAll}
-            >
-              Clear all
-            </button>
-            <button
-              type="button"
-              className="md:hidden w-8 h-8 flex items-center justify-center rounded-full bg-[#f3f4f6] text-[#6b7280] hover:text-[#ff5a5f] transition-colors"
-              onClick={onClose}
-              aria-label="Close filters"
-            >
-              <X size={16} strokeWidth={2.5} />
-            </button>
-          </div>
-        </div>
-
-        {/* Active chips */}
-        {chips.length > 0 && (
-          <div className="flex flex-wrap gap-2 mb-5">
-            {chips.map((chip, i) => (
-              <span
-                key={i}
-                className="flex items-center gap-1 pl-3 pr-2 py-1 rounded-full bg-[#fff0ef] text-[#ff5a5f] text-xs font-semibold border border-[#ffd0d1]"
-              >
-                {chip.label}
+          {/* Slide-out Drawer Panel */}
+          <motion.aside
+            initial={{ x: "100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "100%" }}
+            transition={{ type: "spring", damping: 25, stiffness: 220 }}
+            className="fixed right-0 top-0 bottom-0 w-full sm:w-[450px] bg-white shadow-2xl z-[10000] flex flex-col h-full overflow-hidden"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Filter options"
+          >
+            {/* Header */}
+            <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+              <div className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-xl bg-[#fff0ef] flex items-center justify-center text-[#ff5a5f]">
+                  <SlidersHorizontal size={18} strokeWidth={2.5} />
+                </div>
+                <div>
+                  <h3 className="text-base font-extrabold text-slate-800">Filters</h3>
+                  <p className="text-[11px] text-slate-400 font-semibold">{resultCount} results found</p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
                 <button
                   type="button"
-                  onClick={chip.onRemove}
-                  className="w-4 h-4 flex items-center justify-center rounded-full hover:bg-[#ff5a5f]/20 transition-colors"
+                  onClick={onClearAll}
+                  className="text-xs font-bold text-slate-500 hover:text-[#ff5a5f] hover:bg-[#fff0ef]/50 transition-colors bg-slate-100 px-3 py-2 rounded-xl cursor-pointer"
                 >
-                  <X size={10} strokeWidth={3} />
+                  Clear all
                 </button>
-              </span>
-            ))}
-          </div>
-        )}
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 text-slate-600 hover:text-[#ff5a5f] hover:bg-[#fff0ef] transition-all cursor-pointer"
+                  aria-label="Close filters"
+                >
+                  <X size={18} strokeWidth={2.5} />
+                </button>
+              </div>
+            </div>
 
-        {/* Category */}
-        <section className="">
-          <h4 className="text-[10px] font-bold text-[#9ca3af] tracking-widest mb-3 uppercase">
-            Category
-          </h4>
-          <div className="grid grid-cols-2 gap-2">
-            {categories.map((cat) => {
-              const Icon = cat.icon;
-              const isActive = activeCategory === cat.id;
+            {/* Scrollable Filters Content */}
+            <div className="flex-1 overflow-y-auto px-6 py-6 space-y-8 scrollbar-thin">
+              
+              {/* Category selector */}
+              <section className="space-y-3">
+                <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+                  Service Category
+                </h4>
+                <div className="grid grid-cols-2 gap-2.5">
+                  {isLoadingCategories ? (
+                    Array.from({ length: 6 }).map((_, idx) => (
+                      <div
+                        key={idx}
+                        className="h-11 bg-slate-100 animate-pulse rounded-xl border border-slate-50"
+                      />
+                    ))
+                  ) : (
+                    categories.map((cat: any) => {
+                      const slug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id);
+                      const name = cat.name || cat.label;
+                      const Icon =
+                        CATEGORY_ICON_MAP[name] ||
+                        CATEGORY_ICON_MAP[Object.keys(CATEGORY_ICON_MAP).find((k) =>
+                          name?.toLowerCase().includes(k.toLowerCase())
+                        ) || ""] ||
+                        LayoutGrid;
+                      const isActive = activeCategory === slug;
+                      return (
+                        <motion.button
+                          whileHover={{ scale: 1.015 }}
+                          whileTap={{ scale: 0.985 }}
+                          key={cat.id}
+                          type="button"
+                          onClick={() =>
+                            setFilters({
+                              activeCategory: isActive ? "all" : slug,
+                              currentPage: 1,
+                            })
+                          }
+                          className={`flex items-center gap-2.5 px-3.5 py-3 rounded-xl border text-xs font-bold transition-all duration-200 text-left cursor-pointer ${
+                            isActive
+                              ? "border-[#ff5a5f] bg-[#fff0ef] text-[#ff5a5f] shadow-[0_4px_12px_rgba(255,90,95,0.08)]"
+                              : "border-slate-100 bg-slate-50/50 text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                          }`}
+                        >
+                          <Icon size={15} strokeWidth={2.5} className="shrink-0" />
+                          <span className="truncate">{name}</span>
+                        </motion.button>
+                      );
+                    })
+                  )}
+                </div>
+              </section>
+
+              {/* Price range */}
+              <section className="space-y-4">
+                <div className="flex items-center justify-between">
+                  <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+                    Price Range limit
+                  </h4>
+                  <span className="text-[11px] font-extrabold text-[#ff5a5f] bg-[#fff0ef] px-2.5 py-1 rounded-lg">
+                    ৳{PRICE_FLOOR.toLocaleString()} – ৳{priceMax.toLocaleString()}
+                  </span>
+                </div>
+                <div className="px-1.5 pt-2">
+                  <div className="relative h-2 bg-slate-100 rounded-full mb-4">
+                    <div
+                      className="absolute h-full bg-[#ff5a5f] rounded-full"
+                      style={{ width: `${fillPct}%` }}
+                    />
+                    <input
+                      type="range"
+                      min={PRICE_FLOOR}
+                      max={PRICE_CEIL}
+                      step={100}
+                      value={priceMax}
+                      onChange={(e) =>
+                        setFilters({ priceMax: Number(e.target.value), currentPage: 1 })
+                      }
+                      className="absolute w-full h-2 top-0 left-0 appearance-none bg-transparent z-10 cursor-pointer
+                        [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5
+                        [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white
+                        [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#ff5a5f]
+                        [&::-webkit-slider-thumb]:shadow-[0_2px_6px_rgba(0,0,0,0.15)] [&::-webkit-slider-thumb]:transition-transform
+                        [&::-webkit-slider-thumb]:active:scale-110"
+                      aria-label="Maximum price"
+                    />
+                  </div>
+                  <div className="flex justify-between text-[10px] text-slate-400 font-extrabold uppercase">
+                    <span>৳{PRICE_FLOOR.toLocaleString()}</span>
+                    <span>৳{PRICE_CEIL.toLocaleString()}</span>
+                  </div>
+                </div>
+              </section>
+
+              {/* Rating selection */}
+              <section className="space-y-3">
+                <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+                  Minimum Rating
+                </h4>
+                <div className="flex flex-col gap-2.5">
+                  {RATING_OPTIONS.map((opt) => {
+                    const isActive = selectedRating === opt.value;
+                    return (
+                      <motion.label
+                        whileHover={{ scale: 1.008 }}
+                        key={opt.value}
+                        className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all ${
+                          isActive
+                            ? "border-[#ff5a5f] bg-[#fff0ef] shadow-[0_4px_12px_rgba(255,90,95,0.05)]"
+                            : "border-slate-100 bg-slate-50/50 hover:border-slate-200"
+                        }`}
+                      >
+                        <span className="flex items-center gap-3">
+                          <input
+                            type="radio"
+                            name="rating"
+                            value={opt.value}
+                            checked={isActive}
+                            onChange={() =>
+                              setFilters({
+                                selectedRating: isActive ? "" : opt.value,
+                                currentPage: 1,
+                              })
+                            }
+                            className="w-4 h-4 accent-[#ff5a5f] cursor-pointer"
+                          />
+                          <span className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
+                            <Star
+                              size={13}
+                              className="fill-amber-400 text-amber-400"
+                            />
+                            {opt.label}
+                          </span>
+                        </span>
+                        <span className="text-[10px] font-bold text-slate-400 bg-slate-100 px-2.5 py-0.5 rounded-lg">
+                          {ratingCounts[opt.value] ?? 0}
+                        </span>
+                      </motion.label>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* Sort By options */}
+              <section className="space-y-3">
+                <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+                  Sort Results
+                </h4>
+                <div className="grid grid-cols-1 gap-2">
+                  {SORT_OPTIONS.map((opt) => {
+                    const Icon = opt.icon;
+                    const isActive = sortBy === opt.value;
+                    return (
+                      <motion.button
+                        whileHover={{ scale: 1.005 }}
+                        whileTap={{ scale: 0.995 }}
+                        key={opt.value}
+                        type="button"
+                        onClick={() =>
+                          setFilters({ sortBy: opt.value, currentPage: 1 })
+                        }
+                        className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
+                          isActive
+                            ? "border-[#ff5a5f] bg-[#fff0ef] text-[#ff5a5f]"
+                            : "border-slate-100 bg-slate-50/50 text-slate-600 hover:border-slate-200"
+                        }`}
+                      >
+                        <span className="flex items-center gap-3">
+                          <Icon size={15} strokeWidth={2.5} className={isActive ? "text-[#ff5a5f]" : "text-slate-400"} />
+                          {opt.label}
+                        </span>
+                        {isActive && <Check size={14} strokeWidth={3} />}
+                      </motion.button>
+                    );
+                  })}
+                </div>
+              </section>
+
+              {/* Availability toggles */}
+              <section className="space-y-3">
+                <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+                  Availability
+                </h4>
+                <div className="flex flex-col gap-1">
+                  {AVAILABILITY_OPTIONS.map((opt) => {
+                    const Icon = opt.icon;
+                    const checked = selectedAvailability.includes(opt.id);
+                    return (
+                      <div
+                        key={opt.id}
+                        className="flex items-center justify-between py-3 border-b border-slate-50 last:border-0"
+                      >
+                        <span className="flex items-center gap-3 text-xs font-bold text-slate-700">
+                          <div className="w-8 h-8 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400">
+                            <Icon size={15} strokeWidth={2.5} />
+                          </div>
+                          {opt.label}
+                        </span>
+                        <ToggleSwitch
+                          checked={checked}
+                          label={opt.label}
+                          onChange={() =>
+                            setFilters({
+                              selectedAvailability: checked
+                                ? selectedAvailability.filter((a) => a !== opt.id)
+                                : [...selectedAvailability, opt.id],
+                              currentPage: 1,
+                            })
+                          }
+                        />
+                      </div>
+                    );
+                  })}
+                </div>
+              </section>
+
+            </div>
+
+            {/* Footer Action buttons */}
+            <div className="px-6 py-4 border-t border-slate-100 bg-slate-50 flex items-center gap-4">
+              <button
+                type="button"
+                onClick={onClose}
+                className="flex-1 py-3.5 rounded-2xl bg-[#ff5a5f] hover:bg-[#e04a4f] text-white font-extrabold text-xs shadow-lg shadow-rose-200 hover:shadow-xl active:scale-98 transition-all text-center uppercase tracking-wider cursor-pointer"
+              >
+                Apply Filters ({resultCount})
+              </button>
+            </div>
+
+          </motion.aside>
+        </>
+      )}
+    </AnimatePresence>
+  );
+}
+
+export function FilterPanelDesktop({
+  filters,
+  setFilters,
+  ratingCounts,
+  resultCount,
+  onClearAll,
+  categories,
+  isLoadingCategories = false,
+}: Omit<FilterPanelProps, "isOpen" | "onClose">) {
+  const {
+    activeCategory,
+    selectedRating,
+    sortBy,
+    priceMax,
+    selectedAvailability,
+  } = filters;
+
+  const fillPct = ((priceMax - PRICE_FLOOR) / (PRICE_CEIL - PRICE_FLOOR)) * 100;
+
+  return (
+    <aside className="bg-white border border-slate-100 rounded-2xl p-5 shadow-sm space-y-6 sticky top-24">
+      {/* Header */}
+      <div className="flex items-center justify-between pb-3 border-b border-slate-100">
+        <div className="flex items-center gap-2">
+          <SlidersHorizontal size={15} className="text-[#ff5a5f]" strokeWidth={2.5} />
+          <span className="text-sm font-extrabold text-slate-800">Filters</span>
+        </div>
+        <button
+          type="button"
+          onClick={onClearAll}
+          className="text-xs font-bold text-slate-500 hover:text-[#ff5a5f] transition-colors cursor-pointer"
+        >
+          Clear all
+        </button>
+      </div>
+
+      {/* Category selector */}
+      <section className="space-y-2.5">
+        <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+          Category
+        </h4>
+        <div className="grid grid-cols-2 gap-2">
+          {isLoadingCategories ? (
+            Array.from({ length: 6 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="h-10 bg-slate-100 animate-pulse rounded-xl border border-slate-50"
+              />
+            ))
+          ) : (
+            categories.map((cat: any) => {
+              const slug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id);
+              const name = cat.name || cat.label;
+              const Icon =
+                CATEGORY_ICON_MAP[name] ||
+                CATEGORY_ICON_MAP[Object.keys(CATEGORY_ICON_MAP).find((k) =>
+                  name?.toLowerCase().includes(k.toLowerCase())
+                ) || ""] ||
+                LayoutGrid;
+              const isActive = activeCategory === slug;
               return (
                 <button
                   key={cat.id}
                   type="button"
                   onClick={() =>
                     setFilters({
-                      activeCategory: isActive ? "all" : cat.id,
+                      activeCategory: isActive ? "all" : slug,
                       currentPage: 1,
                     })
                   }
-                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-semibold transition-all duration-200 ${isActive ? "border-[#ff5a5f] bg-[#fff0ef] text-[#ff5a5f]" : "border-[#e5e7eb] text-[#4b5563] hover:border-[#ff5a5f] hover:text-[#ff5a5f]"}`}
+                  className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-semibold transition-all duration-200 text-left cursor-pointer truncate ${
+                    isActive
+                      ? "border-[#ff5a5f] bg-[#fff0ef] text-[#ff5a5f]"
+                      : "border-slate-100 bg-slate-50/50 text-slate-600 hover:border-slate-300 hover:bg-slate-50"
+                  }`}
                 >
                   <Icon size={14} strokeWidth={2.5} className="shrink-0" />
-                  <span className="truncate">{cat.label}</span>
+                  <span className="truncate">{name}</span>
                 </button>
               );
-            })}
-          </div>
-        </section>
+            })
+          )}
+        </div>
+      </section>
 
-        {/* Price Range */}
-        <section className="">
-          <div className="flex items-center justify-between mb-3">
-            <h4 className="text-[10px] font-bold text-[#9ca3af] tracking-widest uppercase">
-              Price Range
-            </h4>
-            <span className="text-xs font-semibold text-[#ff5a5f] bg-[#fff0ef] px-2 py-0.5 rounded-md">
-              ৳{PRICE_FLOOR.toLocaleString()}–{priceMax.toLocaleString()}
-            </span>
-          </div>
-          <div className="relative h-1.5 bg-[#e5e7eb] rounded-full mb-3">
+      {/* Price range */}
+      <section className="space-y-3">
+        <div className="flex items-center justify-between">
+          <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+            Price Range
+          </h4>
+          <span className="text-[11px] font-extrabold text-[#ff5a5f] bg-[#fff0ef] px-2 py-0.5 rounded-lg">
+            ৳{PRICE_FLOOR} - ৳{priceMax}
+          </span>
+        </div>
+        <div className="px-1 pt-1">
+          <div className="relative h-2 bg-slate-100 rounded-full mb-3">
             <div
               className="absolute h-full bg-[#ff5a5f] rounded-full"
               style={{ width: `${fillPct}%` }}
@@ -316,142 +546,57 @@ export default function FilterPanel({
               onChange={(e) =>
                 setFilters({ priceMax: Number(e.target.value), currentPage: 1 })
               }
-              className="absolute w-full h-1.5 top-0 left-0 appearance-none bg-transparent z-10 cursor-pointer
+              className="absolute w-full h-2 top-0 left-0 appearance-none bg-transparent z-10 cursor-pointer
                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
                 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white
-                [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-[#ff5a5f]
-                [&::-webkit-slider-thumb]:shadow-md [&::-webkit-slider-thumb]:cursor-pointer"
+                [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#ff5a5f]
+                [&::-webkit-slider-thumb]:shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
               aria-label="Maximum price"
             />
           </div>
-          <div className="flex justify-between text-[10px] text-[#9ca3af] font-medium">
-            <span>৳{PRICE_FLOOR.toLocaleString()}</span>
-            <span>৳{PRICE_CEIL.toLocaleString()}</span>
+          <div className="flex justify-between text-[10px] text-slate-400 font-bold">
+            <span>৳{PRICE_FLOOR}</span>
+            <span>৳{PRICE_CEIL}</span>
           </div>
-        </section>
-
-        {/* Min Rating */}
-        <section className="">
-          <h4 className="text-[10px] font-bold text-[#9ca3af] tracking-widest mb-3 uppercase">
-            Min Rating
-          </h4>
-          <div className="flex flex-col gap-2">
-            {RATING_OPTIONS.map((opt) => {
-              const isActive = selectedRating === opt.value;
-              return (
-                <label
-                  key={opt.value}
-                  className={`flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl border cursor-pointer transition-colors ${isActive ? "border-[#ff5a5f] bg-[#fff0ef]" : "border-[#e5e7eb] hover:border-[#ff5a5f]/50"}`}
-                >
-                  <span className="flex items-center gap-2">
-                    <input
-                      type="radio"
-                      name="rating"
-                      value={opt.value}
-                      checked={isActive}
-                      onChange={() =>
-                        setFilters({
-                          selectedRating: isActive ? "" : opt.value,
-                          currentPage: 1,
-                        })
-                      }
-                      className="w-3.5 h-3.5 accent-[#ff5a5f] cursor-pointer"
-                    />
-                    <span className="flex items-center gap-1.5 text-xs font-semibold text-[#1a1a1a]">
-                      <Star
-                        size={12}
-                        className="fill-[#f59e0b] text-[#f59e0b]"
-                        strokeWidth={0}
-                      />
-                      {opt.label}
-                    </span>
-                  </span>
-                  <span className="text-[10px] font-semibold text-[#9ca3af] bg-[#f3f4f6] px-2 py-0.5 rounded-md">
-                    {ratingCounts[opt.value] ?? 0}
-                  </span>
-                </label>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Sort By */}
-        <section className="">
-          <h4 className="text-[10px] font-bold text-[#9ca3af] tracking-widest mb-3 uppercase">
-            Sort By
-          </h4>
-          <div className="flex flex-col gap-2">
-            {SORT_OPTIONS.map((opt) => {
-              const Icon = opt.icon;
-              const isActive = sortBy === opt.value;
-              return (
-                <button
-                  key={opt.value}
-                  type="button"
-                  onClick={() =>
-                    setFilters({ sortBy: opt.value, currentPage: 1 })
-                  }
-                  className={`flex items-center justify-between gap-2 px-3 py-2.5 rounded-xl border text-xs font-semibold transition-colors ${isActive ? "border-[#ff5a5f] bg-[#fff0ef] text-[#ff5a5f]" : "border-[#e5e7eb] text-[#4b5563] hover:border-[#ff5a5f]/50"}`}
-                >
-                  <span className="flex items-center gap-2">
-                    <Icon size={14} strokeWidth={2.5} />
-                    {opt.label}
-                  </span>
-                  {isActive && <Check size={14} strokeWidth={3} />}
-                </button>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Availability */}
-        <section>
-          <h4 className="text-[10px] font-bold text-[#9ca3af] tracking-widest mb-3 uppercase">
-            Availability
-          </h4>
-          <div className="flex flex-col gap-3">
-            {AVAILABILITY_OPTIONS.map((opt) => {
-              const Icon = opt.icon;
-              const checked = selectedAvailability.includes(opt.id);
-              return (
-                <div key={opt.id} className="flex items-center justify-between">
-                  <span className="flex items-center gap-2 text-xs font-semibold text-[#1a1a1a]">
-                    <Icon
-                      size={14}
-                      className="text-[#9ca3af]"
-                      strokeWidth={2.5}
-                    />
-                    {opt.label}
-                  </span>
-                  <ToggleSwitch
-                    checked={checked}
-                    label={opt.label}
-                    onChange={() =>
-                      setFilters({
-                        selectedAvailability: checked
-                          ? selectedAvailability.filter((a) => a !== opt.id)
-                          : [...selectedAvailability, opt.id],
-                        currentPage: 1,
-                      })
-                    }
-                  />
-                </div>
-              );
-            })}
-          </div>
-        </section>
-
-        {/* Mobile Apply button */}
-        <div className="md:hidden sticky bottom-0 bg-white pt-4 mt-5 -mx-5 px-5 border-t border-[#f3f4f6]">
-          <button
-            type="button"
-            onClick={onClose}
-            className="w-full py-3 rounded-xl bg-[#ff5a5f] text-white font-bold text-sm shadow-lg hover:bg-[#e04a4f] active:scale-95 transition-all"
-          >
-            Show {resultCount} result{resultCount !== 1 ? "s" : ""}
-          </button>
         </div>
-      </aside>
-    </>
+      </section>
+
+
+      {/* Availability toggles */}
+      <section className="space-y-2">
+        <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
+          Availability
+        </h4>
+        <div className="flex flex-col gap-1">
+          {AVAILABILITY_OPTIONS.map((opt) => {
+            const Icon = opt.icon;
+            const checked = selectedAvailability.includes(opt.id);
+            return (
+              <div
+                key={opt.id}
+                className="flex items-center justify-between py-2 border-b border-slate-50 last:border-0"
+              >
+                <span className="flex items-center gap-2.5 text-xs font-semibold text-slate-700">
+                  <Icon size={14} className="text-slate-400" />
+                  {opt.label}
+                </span>
+                <ToggleSwitch
+                  checked={checked}
+                  label={opt.label}
+                  onChange={() =>
+                    setFilters({
+                      selectedAvailability: checked
+                        ? selectedAvailability.filter((a) => a !== opt.id)
+                        : [...selectedAvailability, opt.id],
+                      currentPage: 1,
+                    })
+                  }
+                />
+              </div>
+            );
+          })}
+        </div>
+      </section>
+    </aside>
   );
 }

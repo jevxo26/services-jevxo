@@ -1,7 +1,15 @@
-import { ArrowLeft, ArrowRight, SlidersHorizontal } from "lucide-react";
+import { ArrowLeft, ArrowRight, SlidersHorizontal, LayoutGrid } from "lucide-react";
 import { useMemo } from "react";
-import FilterPanel from "./FilterPanel";
+import FilterPanel, { FilterPanelDesktop } from "./FilterPanel";
 import ServiceCard from "./ServiceCard";
+import { CustomSelect } from "@/components/ui/select";
+import {
+  useGetPublicCategoriesQuery,
+  useGetPublicNestedServicesQuery,
+} from "@/redux/features/landing/landingApi";
+import { FaBolt, FaBug, FaFaucet, FaLeaf, FaPaintRoller, FaTv, FaHammer } from "react-icons/fa";
+import { MdOutlineCleaningServices, MdOutlineSecurity } from "react-icons/md";
+import { TbAirConditioning, TbScissors, TbTruck } from "react-icons/tb";
 
 interface ServiceListing {
   id: string;
@@ -16,7 +24,9 @@ interface ServiceListing {
   rating: number;
   availability: string[];
   daysAgo: number;
+  slug?: string;
 }
+
 interface FilterState {
   activeCategory: string;
   searchQuery: string;
@@ -27,118 +37,59 @@ interface FilterState {
   currentPage: number;
 }
 
+const CATEGORY_ICON_MAP: Record<string, React.ComponentType<any>> = {
+  "AC Repair": TbAirConditioning,
+  "AC": TbAirConditioning,
+  "Plumbing": FaFaucet,
+  "Cleaning": MdOutlineCleaningServices,
+  "Electrical": FaBolt,
+  "Shifting": TbTruck,
+  "CCTV": MdOutlineSecurity,
+  "Security": MdOutlineSecurity,
+  "Appliance Repair": FaTv,
+  "Appliance": FaTv,
+  "Painting": FaPaintRoller,
+  "Gardening": FaLeaf,
+  "Pest Control": FaBug,
+  "Salon": TbScissors,
+  "Home Salon": TbScissors,
+  "Carpentry": FaHammer,
+};
+
 const RATING_OPTIONS = [
   { value: "5.0", label: "5.0 only" },
   { value: "4.5", label: "4.5 & up" },
   { value: "4.0", label: "4.0 & up" },
 ];
 
-const moreServices = Array.from({ length: 12 }, (_, i) => ({
-  id: `service-${i + 7}`,
-  title: `Service ${i + 7}`,
-  description: "Professional home service with expert technicians.",
-  image: "/images/service/service-1.png",
-  category: "cleaning",
-  categoryLabel: "Cleaning",
-  price: 800 + i * 100,
-  priceDisplay: `৳${800 + i * 100}`,
-  done: "1.2k+ done",
-  rating: 4.5 + (i % 3) * 0.1,
-  availability: ["today"],
-  daysAgo: i % 10,
-}));
-
-const SERVICE_LISTINGS: ServiceListing[] = [
-  {
-    id: "luxury-wall-painting",
-    title: "Luxury Wall Painting",
-    description: "Italian finish textures and moisture-proof coating.",
-    image: "/images/service/service-3.png",
-    category: "painting",
-    categoryLabel: "Painting",
-    price: 15,
-    priceDisplay: "৳15/sq.ft",
-    done: "3k+ done",
-    rating: 4.8,
-    availability: ["weekend"],
-    daysAgo: 2,
-  },
-  {
-    id: "emergency-leak-repair",
-    title: "Emergency Leak Repair",
-    description: "60-minute response for all plumbing emergencies.",
-    image: "/images/service/service-4.png",
-    category: "plumbing",
-    categoryLabel: "Plumbing",
-    price: 600,
-    priceDisplay: "৳600",
-    done: "1.2k+ done",
-    rating: 4.6,
-    availability: ["today", "emergency"],
-    daysAgo: 5,
-  },
-  {
-    id: "smart-home-setup",
-    title: "Smart Home Setup",
-    description: "Installation of smart switches, hubs and automation.",
-    image: "/images/service/service-5.png",
-    category: "electrical",
-    categoryLabel: "Electrical",
-    price: 2500,
-    priceDisplay: "৳2,500",
-    done: "800+ done",
-    rating: 4.7,
-    availability: ["today", "weekend"],
-    daysAgo: 1,
-  },
-  {
-    id: "refrigerator-servicing",
-    title: "Refrigerator Servicing",
-    description: "Gas charge, compressor checks and cooling fixes.",
-    image: "/images/service/service-6.png",
-    category: "appliance",
-    categoryLabel: "Appliance",
-    price: 1500,
-    priceDisplay: "৳1,500",
-    done: "2.1k+ done",
-    rating: 4.5,
-    availability: ["today"],
-    daysAgo: 10,
-  },
-  {
-    id: "sofa-carpet-shampoo",
-    title: "Sofa & Carpet Shampoo",
-    description: "Deep vacuuming and shampooing for all fabric types.",
-    image: "/images/service/service-7.png",
-    category: "cleaning",
-    categoryLabel: "Cleaning",
-    price: 800,
-    priceDisplay: "৳800/seat",
-    done: "4k+ done",
-    rating: 4.9,
-    availability: ["today", "weekend"],
-    daysAgo: 7,
-  },
-  {
-    id: "cabinet-wood-polishing",
-    title: "Cabinet Wood Polishing",
-    description: "Restore the natural shine of your premium wood.",
-    image: "/images/service/service-8.png",
-    category: "painting",
-    categoryLabel: "Renovation",
-    price: 3500,
-    priceDisplay: "৳3,500",
-    done: "500+ done",
-    rating: 4.4,
-    availability: ["weekend"],
-    daysAgo: 15,
-  },
-  ...moreServices,
-];
-
 const PER_PAGE = 9;
 const PRICE_CEIL = 5000;
 
+const getHash = (str: string) => {
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash << 5) - hash + str.charCodeAt(i);
+    hash |= 0;
+  }
+  return Math.abs(hash);
+};
+
+const ServiceCardSkeleton = () => (
+  <div className="bg-white border border-[#e5e7eb] rounded-2xl overflow-hidden shadow-sm flex flex-col animate-pulse">
+    <div className="h-48 bg-slate-200 relative" />
+    <div className="p-4 flex flex-col flex-1 space-y-3">
+      <div className="h-4 bg-slate-200 rounded w-3/4" />
+      <div className="space-y-2">
+        <div className="h-3 bg-slate-200/60 rounded w-full" />
+        <div className="h-3 bg-slate-200/60 rounded w-5/6" />
+      </div>
+      <div className="flex items-center justify-between pt-3 border-t border-[#f3f4f6] mt-auto">
+        <div className="h-5 bg-slate-200 rounded w-1/3" />
+        <div className="h-3 bg-slate-200/60 rounded w-1/4" />
+      </div>
+    </div>
+  </div>
+);
 
 export default function ServiceListing({
   filters,
@@ -163,8 +114,65 @@ export default function ServiceListing({
     currentPage,
   } = filters;
 
+  const { data: categoriesRes, isLoading: isCategoriesLoading } = useGetPublicCategoriesQuery();
+  const categories = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
+
+  const { data: nestedRes, isLoading: isServicesLoading } = useGetPublicNestedServicesQuery();
+  const allNestedServices = nestedRes?.data || (Array.isArray(nestedRes) ? nestedRes : []);
+
+  const mappedListings = useMemo(() => {
+    return allNestedServices.map((item: any) => {
+      const id = String(item.id);
+      const hash = getHash(id);
+
+      // Done options
+      const doneOptions = ["800+ done", "1.2k+ done", "2.1k+ done", "3k+ done", "4k+ done"];
+      const done = doneOptions[hash % doneOptions.length];
+
+      // Availability options
+      const availOptions = [
+        ["today"],
+        ["weekend"],
+        ["today", "weekend"],
+        ["today", "emergency"],
+        ["weekend", "emergency"],
+        ["today", "weekend", "emergency"]
+      ];
+      const availability = availOptions[hash % availOptions.length];
+
+      // Rating: 4.0 to 5.0 with one decimal place
+      const rating = parseFloat((4.0 + (hash % 11) * 0.1).toFixed(1));
+
+      // Days ago
+      const daysAgo = hash % 15;
+
+      const parentService = item.service || {};
+      const categoryObj = parentService.category || {};
+      const catSlug = categoryObj.slug || categoryObj.name?.toLowerCase().replace(/\s+/g, "-") || "";
+      const catLabel = categoryObj.name || "";
+
+      const priceVal = item.price ? Number(item.price) : 0;
+
+      return {
+        id,
+        title: item.name || "",
+        description: item.description || "",
+        image: item.image || "/images/service/service-1.png",
+        category: catSlug,
+        categoryLabel: catLabel,
+        price: priceVal,
+        priceDisplay: priceVal > 0 ? `৳${priceVal.toLocaleString()}` : "Contact for price",
+        done,
+        rating,
+        availability,
+        daysAgo,
+        slug: parentService.slug || "",
+      };
+    });
+  }, [allNestedServices]);
+
   const filteredListings = useMemo(() => {
-    let list = [...SERVICE_LISTINGS];
+    let list = [...mappedListings];
     if (activeCategory !== "all")
       list = list.filter((s) => s.category === activeCategory);
     if (searchQuery) {
@@ -198,6 +206,7 @@ export default function ServiceListing({
     }
     return list;
   }, [
+    mappedListings,
     activeCategory,
     searchQuery,
     selectedRating,
@@ -213,7 +222,7 @@ export default function ServiceListing({
   );
 
   const ratingCounts = useMemo(() => {
-    const base = SERVICE_LISTINGS.filter((s) => {
+    const base = mappedListings.filter((s: any) => {
       if (activeCategory !== "all" && s.category !== activeCategory)
         return false;
       if (searchQuery) {
@@ -234,11 +243,11 @@ export default function ServiceListing({
     });
     return RATING_OPTIONS.reduce<Record<string, number>>((acc, opt) => {
       acc[opt.value] = base.filter(
-        (s) => s.rating >= parseFloat(opt.value),
+        (s: any) => s.rating >= parseFloat(opt.value),
       ).length;
       return acc;
     }, {});
-  }, [activeCategory, searchQuery, priceMax, selectedAvailability]);
+  }, [mappedListings, activeCategory, searchQuery, priceMax, selectedAvailability]);
 
   const activeFilterCount = useMemo(() => {
     let n = 0;
@@ -249,126 +258,247 @@ export default function ServiceListing({
     return n;
   }, [activeCategory, selectedRating, priceMax, selectedAvailability]);
 
-  return (
-    <section className="">
-      <div className="max-w-[1400px] mx-auto flex flex-col md:flex-row gap-8">
-        <FilterPanel
-          isOpen={isFilterOpen}
-          onClose={() => setIsFilterOpen(false)}
-          filters={filters}
-          setFilters={setFilters}
-          ratingCounts={ratingCounts}
-          resultCount={filteredListings.length}
-          onClearAll={onClearAll}
-        />
+  const ratingDropdownOptions = useMemo(() => {
+    return [
+      { value: "all", label: "Min Rating (All)" },
+      ...RATING_OPTIONS.map((opt) => ({
+        value: opt.value,
+        label: `★ ${opt.label} (${ratingCounts[opt.value] ?? 0})`
+      }))
+    ];
+  }, [ratingCounts]);
 
-        <div className="flex-1 min-w-0">
-          {/* Mobile filter trigger + result count */}
-          <div className="flex items-center justify-between mb-5 md:hidden">
+  const sortDropdownOptions = [
+    { value: "popularity", label: "Sort: Popularity" },
+    { value: "price-low", label: "Sort: Price: Low → High" },
+    { value: "price-high", label: "Sort: Price: High → Low" },
+    { value: "rating", label: "Sort: Rating" },
+    { value: "newest", label: "Sort: Newest first" },
+  ];
+
+  return (
+    <section className="py-6 bg-slate-50/30">
+      <div className="max-w-[1400px] mx-auto px-4">
+        
+        {/* Horizontal Category Bar (Airbnb-style) */}
+        <div className="border-b border-slate-100 bg-white -mx-4 px-4 mb-6 shadow-sm rounded-2xl">
+          <div className="flex items-center gap-6 overflow-x-auto py-3.5 scrollbar-none [-ms-overflow-style:none] [scrollbar-width:none]">
+            <button
+              onClick={() => setFilters({ activeCategory: "all", currentPage: 1 })}
+              className={`flex flex-col items-center gap-1 pb-1.5 min-w-[75px] border-b-2 transition-all cursor-pointer shrink-0 text-center ${
+                activeCategory === "all"
+                  ? "border-[#ff5a5f] text-[#ff5a5f] font-extrabold"
+                  : "border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 font-semibold"
+              }`}
+            >
+              <LayoutGrid size={18} strokeWidth={2.5} />
+              <span className="text-[10px] tracking-wide uppercase mt-1">All Services</span>
+            </button>
+
+            {categories.map((cat: any) => {
+              const slug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id);
+              const name = cat.name || cat.label;
+              const Icon =
+                CATEGORY_ICON_MAP[name] ||
+                CATEGORY_ICON_MAP[Object.keys(CATEGORY_ICON_MAP).find((k) =>
+                  name?.toLowerCase().includes(k.toLowerCase())
+                ) || ""] ||
+                LayoutGrid;
+              const isActive = activeCategory === slug;
+
+              return (
+                <button
+                  key={cat.id}
+                  onClick={() => setFilters({ activeCategory: isActive ? "all" : slug, currentPage: 1 })}
+                  className={`flex flex-col items-center gap-1 pb-1.5 min-w-[75px] border-b-2 transition-all cursor-pointer shrink-0 text-center ${
+                    isActive
+                      ? "border-[#ff5a5f] text-[#ff5a5f] font-extrabold"
+                      : "border-transparent text-slate-500 hover:text-slate-800 hover:border-slate-300 font-semibold"
+                  }`}
+                >
+                  <Icon size={18} strokeWidth={2.5} />
+                  <span className="text-[10px] tracking-wide uppercase mt-1 truncate max-w-[85px]">{name}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* Top Search & Actions bar */}
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+          <div className="flex flex-1 flex-col md:flex-row md:items-center gap-4">
+            <div className="relative flex-1 max-w-md w-full">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+                <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+                </svg>
+              </span>
+              <input
+                type="text"
+                placeholder="Search for services, repairs..."
+                value={searchQuery}
+                onChange={(e) => setFilters({ searchQuery: e.target.value, currentPage: 1 })}
+                className="w-full pl-10 pr-4 py-2.5 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-semibold placeholder-slate-400 text-slate-700 focus:outline-none focus:border-[#ff5a5f] transition-all"
+              />
+            </div>
+
+            {/* Desktop Sort By and Min Rating select dropdowns */}
+            <div className="hidden md:flex items-center gap-3">
+              {/* Min Rating Select */}
+              <div className="relative min-w-[140px]">
+                <CustomSelect
+                  options={ratingDropdownOptions}
+                  value={selectedRating || "all"}
+                  onChange={(val) => setFilters({ selectedRating: val === "all" ? "" : val, currentPage: 1 })}
+                  placeholder="Min Rating (All)"
+                  triggerClassName="bg-slate-50/50 border border-slate-100 hover:border-slate-300 rounded-xl px-4 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:border-[#ff5a5f] focus-visible:ring-0 focus:ring-0 transition-all cursor-pointer h-[40px] shadow-none"
+                />
+              </div>
+
+              {/* Sort By Select */}
+              <div className="relative min-w-[160px]">
+                <CustomSelect
+                  options={sortDropdownOptions}
+                  value={sortBy}
+                  onChange={(val) => setFilters({ sortBy: val, currentPage: 1 })}
+                  placeholder="Sort: Popularity"
+                  triggerClassName="bg-slate-50/50 border border-slate-100 hover:border-slate-300 rounded-xl px-4 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:border-[#ff5a5f] focus-visible:ring-0 focus:ring-0 transition-all cursor-pointer h-[40px] shadow-none"
+                />
+              </div>
+            </div>
+          </div>
+
+          <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+            {/* Filter Toggle Button for Mobile Only */}
             <button
               type="button"
               onClick={() => setIsFilterOpen(true)}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl border border-[#e5e7eb] bg-white text-sm font-semibold text-[#1a1a1a] shadow-sm"
+              className="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-100 bg-white text-xs font-extrabold text-slate-700 shadow-sm cursor-pointer"
             >
-              <SlidersHorizontal
-                size={16}
-                className="text-[#ff5a5f]"
-                strokeWidth={2.5}
-              />
+              <SlidersHorizontal size={14} className="text-[#ff5a5f]" strokeWidth={2.5} />
               Filters
               {activeFilterCount > 0 && (
-                <span className="flex items-center justify-center min-w-[20px] h-5 px-1.5 rounded-full bg-[#ff5a5f] text-white text-[10px] font-bold">
+                <span className="flex items-center justify-center min-w-[18px] h-4.5 px-1 rounded-full bg-[#ff5a5f] text-white text-[9px] font-bold">
                   {activeFilterCount}
                 </span>
               )}
             </button>
-            <span className="text-xs font-semibold text-[#6b7280]">
-              {filteredListings.length} result
-              {filteredListings.length !== 1 ? "s" : ""}
+
+            <span className="text-xs font-semibold text-slate-400 bg-slate-50 px-3 py-2 rounded-xl">
+              {filteredListings.length} {filteredListings.length === 1 ? "result" : "results"}
             </span>
           </div>
+        </div>
 
-          {/* Desktop result count */}
-          <div className="hidden md:flex items-center justify-between mb-5">
-            <h2 className="text-2xl font-bold text-[#1a1a1a]">
-              All Services
-              <span className="ml-2 text-sm font-normal text-[#9ca3af]">
-                ({filteredListings.length} results)
-              </span>
-            </h2>
+        {/* Main Split Layout */}
+        <div className="flex flex-col md:flex-row gap-6 items-start">
+          
+          {/* Desktop Left Sidebar Filters (hidden on mobile, block on md+) */}
+          <div className="hidden md:block w-72 shrink-0">
+            <FilterPanelDesktop
+              filters={filters}
+              setFilters={setFilters}
+              ratingCounts={ratingCounts}
+              resultCount={filteredListings.length}
+              onClearAll={onClearAll}
+              categories={categories}
+              isLoadingCategories={isCategoriesLoading}
+            />
           </div>
 
-          {/* Grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5">
-            {pagedItems.map((service) => (
-              <ServiceCard key={service.id} service={service} />
-            ))}
-          </div>
+          {/* Mobile Drawer (visible on mobile drawer triggers) */}
+          <FilterPanel
+            isOpen={isFilterOpen}
+            onClose={() => setIsFilterOpen(false)}
+            filters={filters}
+            setFilters={setFilters}
+            ratingCounts={ratingCounts}
+            resultCount={filteredListings.length}
+            onClearAll={onClearAll}
+            categories={categories}
+            isLoadingCategories={isCategoriesLoading}
+          />
 
-          {/* Empty state */}
-          {pagedItems.length === 0 && (
-            <div className="flex flex-col items-center justify-center text-center py-20 px-6 bg-white rounded-2xl border border-[#e5e7eb]">
-              <div className="w-12 h-12 rounded-full bg-[#fff0ef] flex items-center justify-center text-[#ff5a5f] mb-4">
-                <SlidersHorizontal size={20} strokeWidth={2.5} />
-              </div>
-              <h3 className="text-base font-bold text-[#1a1a1a] mb-1">
-                No services found
-              </h3>
-              <p className="text-sm text-[#6b7280] mb-5 max-w-xs">
-                Try widening your filters or clearing your search.
-              </p>
-              <button
-                type="button"
-                onClick={onClearAll}
-                className="px-6 py-2.5 rounded-xl bg-[#ff5a5f] text-white text-sm font-bold hover:bg-[#e04a4f] transition-all shadow-md"
-              >
-                Clear filters
-              </button>
-            </div>
-          )}
-
-          {/* Pagination */}
-          {totalPages > 1 && (
-            <div className="flex justify-center items-center gap-2 mt-10">
-              <button
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-[#e5e7eb] text-[#4b5563] disabled:opacity-40 hover:border-[#ff5a5f] hover:text-[#ff5a5f] transition-all"
-                disabled={currentPage === 1}
-                onClick={() =>
-                  setFilters({ currentPage: Math.max(1, currentPage - 1) })
-                }
-              >
-                <ArrowLeft size={16} strokeWidth={2.5} />
-              </button>
-
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (page) => (
-                  <button
-                    key={page}
-                    onClick={() => setFilters({ currentPage: page })}
-                    className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-semibold transition-all ${
-                      currentPage === page
-                        ? "bg-[#ff5a5f] text-white border-[#ff5a5f]"
-                        : "border border-[#e5e7eb] text-[#4b5563] hover:border-[#ff5a5f] hover:text-[#ff5a5f]"
-                    }`}
-                  >
-                    {page}
-                  </button>
-                ),
+          {/* Services Grid (spans remaining width) */}
+          <div className="flex-1 min-w-0 w-full">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {isServicesLoading ? (
+                Array.from({ length: 6 }).map((_, idx) => (
+                  <ServiceCardSkeleton key={idx} />
+                ))
+              ) : (
+                pagedItems.map((service) => (
+                  <ServiceCard key={service.id} service={service} />
+                ))
               )}
-
-              <button
-                className="w-10 h-10 flex items-center justify-center rounded-full border border-[#e5e7eb] text-[#4b5563] disabled:opacity-40 hover:border-[#ff5a5f] hover:text-[#ff5a5f] transition-all"
-                disabled={currentPage === totalPages}
-                onClick={() =>
-                  setFilters({
-                    currentPage: Math.min(totalPages, currentPage + 1),
-                  })
-                }
-              >
-                <ArrowRight size={16} strokeWidth={2.5} />
-              </button>
             </div>
-          )}
+
+            {/* Empty state */}
+            {pagedItems.length === 0 && (
+              <div className="flex flex-col items-center justify-center text-center py-20 px-6 bg-white rounded-2xl border border-slate-100 shadow-sm mt-6">
+                <div className="w-12 h-12 rounded-full bg-[#fff0ef] flex items-center justify-center text-[#ff5a5f] mb-4">
+                  <SlidersHorizontal size={20} strokeWidth={2.5} />
+                </div>
+                <h3 className="text-base font-bold text-slate-800 mb-1">
+                  No services found
+                </h3>
+                <p className="text-sm text-slate-400 mb-5 max-w-xs font-semibold">
+                  Try widening your filters or clearing your search.
+                </p>
+                <button
+                  type="button"
+                  onClick={onClearAll}
+                  className="px-6 py-2.5 rounded-xl bg-[#ff5a5f] text-white text-sm font-bold hover:bg-[#e04a4f] transition-all shadow-md cursor-pointer"
+                >
+                  Clear filters
+                </button>
+              </div>
+            )}
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="flex justify-center items-center gap-2 mt-10">
+                <button
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-100 bg-white text-slate-600 disabled:opacity-40 hover:border-[#ff5a5f] hover:text-[#ff5a5f] transition-all shadow-sm cursor-pointer"
+                  disabled={currentPage === 1}
+                  onClick={() =>
+                    setFilters({ currentPage: Math.max(1, currentPage - 1) })
+                  }
+                >
+                  <ArrowLeft size={16} strokeWidth={2.5} />
+                </button>
+
+                {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+                  (page) => (
+                    <button
+                      key={page}
+                      onClick={() => setFilters({ currentPage: page })}
+                      className={`w-10 h-10 flex items-center justify-center rounded-full text-sm font-semibold transition-all shadow-sm cursor-pointer ${
+                        currentPage === page
+                          ? "bg-[#ff5a5f] text-white border-[#ff5a5f]"
+                          : "border border-slate-100 bg-white text-slate-600 hover:border-[#ff5a5f] hover:text-[#ff5a5f]"
+                      }`}
+                    >
+                      {page}
+                    </button>
+                  ),
+                )}
+
+                <button
+                  className="w-10 h-10 flex items-center justify-center rounded-full border border-slate-100 bg-white text-slate-600 disabled:opacity-40 hover:border-[#ff5a5f] hover:text-[#ff5a5f] transition-all shadow-sm cursor-pointer"
+                  disabled={currentPage === totalPages}
+                  onClick={() =>
+                    setFilters({
+                      currentPage: Math.min(totalPages, currentPage + 1),
+                    })
+                  }
+                >
+                  <ArrowRight size={16} strokeWidth={2.5} />
+                </button>
+              </div>
+            )}
+          </div>
+
         </div>
       </div>
     </section>

@@ -235,3 +235,12 @@ body {
     background: #FF5B60;
   }
 }
+
+/* ✅ Fix for Radix UI Select Layout Shift (lafa klafi) */
+body[data-scroll-locked] {
+  padding-right: 0px !important;
+  margin-right: 0px !important;
+}
+html {
+  overflow-y: scroll !important;
+}

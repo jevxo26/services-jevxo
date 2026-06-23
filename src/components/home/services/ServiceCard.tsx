@@ -1,5 +1,4 @@
 import { Clock, Star } from "lucide-react";
-import Image from "next/image";
 import Link from "next/link";
 
 interface ServiceListing {
@@ -15,22 +14,21 @@ interface ServiceListing {
   rating: number;
   availability: string[];
   daysAgo: number;
+  slug?: string;
 }
 
 
 export default function ServiceCard({ service }: { service: ServiceListing }) {
   return (
     <Link
-      href={`/services/${service.id}`}
+      href={`/categories/service/${service.slug || service.id}`}
       className="group bg-white border border-[#e5e7eb] rounded-2xl overflow-hidden shadow-sm no-underline flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 hover:border-[#ff5a5f]"
     >
       <div className="relative h-48 overflow-hidden">
-        <Image
+        <img
           src={service.image}
           alt={service.title}
-          fill
-          style={{ objectFit: "cover" }}
-          className="transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <span className="absolute top-3 left-3 py-1 px-2.5 bg-white/95 text-[#1a1a1a] text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-sm">
           {service.categoryLabel}

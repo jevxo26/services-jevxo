@@ -5,7 +5,10 @@ import {
 import { motion } from "framer-motion";
 
 
-export function CategorizedHero() {
+export function CategorizedHero({ name, description }: { name?: string; description?: string }) {
+  const displayName = name || "Certified Electrical Experts in Dhaka";
+  const displayDesc = description || "From flickering lights to full-house wiring, our certified technicians ensure your home's safety with premium electrical solutions.";
+
   return (
     <div className="py-12 md:py-16 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
@@ -20,15 +23,12 @@ export function CategorizedHero() {
 
             {/* Main Heading */}
             <h1 className="text-3xl md:text-5xl max-w-xl font-bold leading-tight">
-              Certified Electrical{" "}
-              <span className="text-[#ff5a5f]">Experts in Dhaka</span>
+              {displayName}
             </h1>
 
             {/* Description */}
             <p className="text-lg text-slate-600 max-w-lg leading-relaxed">
-              From flickering lights to full-house wiring, our certified
-              technicians ensure your home's safety with premium electrical
-              solutions.
+              {displayDesc}
             </p>
 
             {/* Buttons */}
