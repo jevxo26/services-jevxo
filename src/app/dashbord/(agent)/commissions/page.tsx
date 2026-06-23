@@ -1,82 +1,88 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import { getRoleName } from "@/redux/features/auth/authSlice";
-import { ShieldAlert, DollarSign, Wallet, ArrowDownRight, Check, Send } from "lucide-react";
+import { ShieldAlert, ArrowDownRight, Send, Loader2 } from "lucide-react";
 import { useState } from "react";
 import { toast } from "sonner";
 import { CustomTable } from "@/components/ui/table";
 import { CustomSelect } from "@/components/ui/select";
-
-interface PayoutLog {
-  id: string;
-  amount: string;
-  method: string;
-  account: string;
-  status: "Completed" | "Pending";
-  date: string;
-}
+import { useGetAllWithdrawsQuery, useRequestWithdrawMutation } from "@/redux/features/shared/withdrawApi";
+import { useGetUserProfileQuery } from "@/redux/features/auth/authApi";
 
 export default function CommissionPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
-  const [payoutBalance, setPayoutBalance] = useState(3200);
+  const authUser = useAppSelector((state) => state.auth.user);
+
   const [withdrawAmount, setWithdrawAmount] = useState("");
   const [transferMethod, setTransferMethod] = useState("bKash Mobile Wallet");
 
-  const logs: PayoutLog[] = [
-    { id: "PAY-104", amount: "৳5,400", method: "bKash Transfer", account: "01712 ****78", status: "Completed", date: "June 01, 2026" },
-    { id: "PAY-084", amount: "৳3,000", method: "bKash Transfer", account: "01712 ****78", status: "Completed", date: "May 15, 2026" },
-  ];
+  // Get current user's wallet balance
+  const { data: profileData } = useGetUserProfileQuery();
+  const walletBalance = (profileData as any)?.data?.wallet_balance ?? (profileData as any)?.wallet_balance ?? 0;
+
+  // Vendor withdrawals — agent uses wallet_balance, so use userId as vendorId
+  const userId = authUser?.id || authUser?._id;
+  const { data: withdrawsRes, isLoading: loadingWithdraws } = useGetAllWithdrawsQuery();
+  const [requestWithdraw, { isLoading: requesting }] = useRequestWithdrawMutation();
+
+  // Filter my withdrawals
+  const allWithdraws = withdrawsRes?.data || [];
+  const myWithdraws = allWithdraws.filter((w: any) =>
+    w.vendor?.id === userId || w.vendor?.id === Number(userId)
+  );
 
   const columns = [
     {
       key: "id",
-      header: "Payout ID",
-      render: (log: PayoutLog) => (
-        <span className="font-mono text-slate-500 font-bold text-xs">{log.id}</span>
+      header: "Withdraw ID",
+      render: (w: any) => (
+        <span className="font-mono text-slate-500 font-bold text-xs">WD-{w.id}</span>
       )
     },
     {
       key: "amount",
       header: "Amount",
-      render: (log: PayoutLog) => (
-        <span className="font-bold text-slate-800">{log.amount}</span>
+      render: (w: any) => (
+        <span className="font-bold text-slate-800">৳{Number(w.amount).toLocaleString()}</span>
       )
-    },
-    {
-      key: "method",
-      header: "Method"
-    },
-    {
-      key: "account",
-      header: "Account Detail"
     },
     {
       key: "status",
       header: "Status",
-      render: (log: PayoutLog) => (
-        <span className="bg-emerald-50 text-emerald-700 text-xs font-bold px-2.5 py-0.5 rounded-full">
-          {log.status}
+      render: (w: any) => (
+        <span className={`text-xs font-bold px-2.5 py-0.5 rounded-full ${
+          w.status === "approved"
+            ? "bg-emerald-50 text-emerald-700"
+            : w.status === "rejected"
+              ? "bg-red-50 text-red-700"
+              : "bg-amber-50 text-amber-700"
+        }`}>
+          {w.status}
         </span>
       )
     },
     {
-      key: "date",
-      header: "Date Transferred"
+      key: "createdAt",
+      header: "Date Requested",
+      render: (w: any) => <span>{new Date(w.createdAt).toLocaleDateString("en-BD")}</span>
     }
   ];
 
-  const handleWithdraw = (e: React.FormEvent) => {
+  const handleWithdraw = async (e: React.FormEvent) => {
     e.preventDefault();
     const amount = Number(withdrawAmount);
-    if (!amount || amount <= 0 || amount > payoutBalance) {
+    if (!amount || amount <= 0 || amount > Number(walletBalance)) {
       toast.error("Please enter a valid amount within your withdrawable balance.");
       return;
     }
 
-    setPayoutBalance(prev => prev - amount);
-    toast.success("Withdrawal request submitted successfully!");
-    setWithdrawAmount("");
+    try {
+      await requestWithdraw({ amount }).unwrap();
+      toast.success("Withdrawal request submitted successfully!");
+      setWithdrawAmount("");
+    } catch (err: any) {
+      toast.error(err?.data?.message || "Failed to submit withdrawal request.");
+    }
   };
 
   if (role !== "agent") {
@@ -90,7 +96,7 @@ export default function CommissionPage() {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl font-bold text-slate-900">Commission Tracking</h1>
-          <p className="text-slate-500 mt-1">Track booking commissions, monitor balances, and request direct payouts.</p>
+          <p className="text-slate-500 mt-1">Track your wallet balance and request direct payouts.</p>
         </div>
       </div>
 
@@ -104,7 +110,7 @@ export default function CommissionPage() {
           </div>
           <div>
             <span className="text-xs font-bold text-rose-100 uppercase tracking-widest block">Withdrawable Balance</span>
-            <h2 className="text-4xl font-black mt-2">৳{payoutBalance.toLocaleString()}</h2>
+            <h2 className="text-4xl font-black mt-2">৳{Number(walletBalance).toLocaleString()}</h2>
           </div>
           <p className="text-xs text-rose-100/80 font-medium">Automatic bi-monthly payouts on 1st and 15th.</p>
         </div>
@@ -143,9 +149,11 @@ export default function CommissionPage() {
 
             <button
               type="submit"
-              className="bg-rose-500 hover:bg-rose-600 text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md shadow-rose-500/10 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
+              disabled={requesting}
+              className="bg-rose-500 hover:bg-rose-600 disabled:opacity-70 text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md shadow-rose-500/10 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
             >
-              <Send size={16} /> Request Out
+              {requesting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
+              Request Out
             </button>
           </form>
         </div>
@@ -155,13 +163,23 @@ export default function CommissionPage() {
       {/* Payout History Log */}
       <div className="space-y-4">
         <h3 className="text-lg font-bold text-slate-900">Payout Logs</h3>
-        <CustomTable
-          columns={columns}
-          data={logs}
-          searchKey="id"
-          searchPlaceholder="Search payout logs by Payout ID..."
-          pageSize={5}
-        />
+        {loadingWithdraws ? (
+          <div className="flex items-center justify-center h-32">
+            <Loader2 size={28} className="animate-spin text-rose-500" />
+          </div>
+        ) : myWithdraws.length > 0 ? (
+          <CustomTable
+            columns={columns}
+            data={myWithdraws}
+            searchKey="id"
+            searchPlaceholder="Search payout logs..."
+            pageSize={5}
+          />
+        ) : (
+          <div className="bg-white p-10 text-center border border-slate-100 rounded-2xl shadow-sm text-slate-400 text-sm">
+            No withdrawal requests yet.
+          </div>
+        )}
       </div>
 
     </div>
@@ -177,7 +195,6 @@ function AccessDenied({ roleRequired }: { roleRequired: string }) {
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
       <p className="text-sm text-slate-500 mt-2 max-w-sm">
         This subpage is only accessible to users with the <strong className="text-slate-800">{roleRequired}</strong> role.
-        Please toggle your preview role using the selector at the top.
       </p>
     </div>
   );

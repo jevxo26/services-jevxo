@@ -1,88 +1,70 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import { getRoleName } from "@/redux/features/auth/authSlice";
-import { ShieldAlert, Search, Calendar, User, Phone, MapPin } from "lucide-react";
-import { useState } from "react";
-
-interface AgentOrder {
-  id: string;
-  customerName: string;
-  customerPhone: string;
-  service: string;
-  provider: string;
-  price: string;
-  commission: string;
-  status: "Completed" | "Assigned" | "Pending Assign" | "Cancelled";
-  date: string;
-}
-
+import { ShieldAlert, Loader2 } from "lucide-react";
 import { CustomTable } from "@/components/ui/table";
+import { useGetAllBookingsQuery } from "@/redux/features/admin/booking";
 
 export default function AgentOrdersPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
 
-  const initialOrders: AgentOrder[] = [
-    { id: "RS-9310", customerName: "Sayed Karim", customerPhone: "+880 1711 223344", service: "AC Leak Repair", provider: "Kabir AC Repair", price: "৳1,800", commission: "৳270", status: "Assigned", date: "Today, June 12" },
-    { id: "RS-9302", customerName: "Salma Khatun", customerPhone: "+880 1819 554433", service: "Deep Sofa Clean", provider: "Clean & Bright", price: "৳2,500", commission: "৳375", status: "Completed", date: "June 11, 2026" },
-    { id: "RS-9290", customerName: "Rafiqul Islam", customerPhone: "+880 1912 667788", service: "Appliance Repair", provider: "Mamun Electricians", price: "৳1,200", commission: "৳180", status: "Completed", date: "June 08, 2026" },
-    { id: "RS-9240", customerName: "Kazi Nabil", customerPhone: "+880 1713 009988", service: "Wall Painting & Decor", provider: "Dhaka Decorators", price: "৳10,000", commission: "৳1,500", status: "Completed", date: "May 28, 2026" },
-  ];
+  const { data: bookingsRes, isLoading } = useGetAllBookingsQuery();
+  const allBookings = (bookingsRes?.data || []) as any[];
 
   const columns = [
     {
       key: "id",
       header: "Order ID",
-      render: (o: AgentOrder) => (
-        <span className="font-bold text-brand-primary">{o.id}</span>
+      render: (o: any) => (
+        <span className="font-bold text-brand-primary">#{o.id}</span>
       )
     },
     {
-      key: "customerName",
+      key: "user",
       header: "Client",
-      render: (o: AgentOrder) => (
+      render: (o: any) => (
         <div>
-          <p className="font-bold text-slate-900 leading-none">{o.customerName}</p>
-          <p className="text-xs text-slate-400 mt-1">{o.customerPhone}</p>
+          <p className="font-bold text-slate-900 leading-none">{o.user?.name || "—"}</p>
+          <p className="text-xs text-slate-400 mt-1">{o.user?.phone || ""}</p>
         </div>
       )
     },
     {
-      key: "service",
-      header: "Service Info"
+      key: "nestedService",
+      header: "Service Info",
+      render: (o: any) => <span>{o.nestedService?.name || o.pkg?.name || "—"}</span>
     },
     {
-      key: "provider",
-      header: "Assigned Provider"
+      key: "vendor",
+      header: "Assigned Provider",
+      render: (o: any) => <span>{o.vendor?.name || "—"}</span>
     },
     {
-      key: "price",
-      header: "Price"
-    },
-    {
-      key: "commission",
-      header: "Commission",
-      render: (o: AgentOrder) => (
-        <span className="font-bold text-emerald-600">+{o.commission}</span>
-      )
+      key: "location",
+      header: "Location",
+      render: (o: any) => <span className="text-xs">{o.location || "—"}</span>
     },
     {
       key: "status",
       header: "Status",
-      render: (o: AgentOrder) => (
-        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${o.status === "Completed"
+      render: (o: any) => (
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold ${
+          o.status === "completed"
             ? "bg-emerald-50 text-emerald-700"
-            : o.status === "Assigned"
+            : o.status === "assigned" || o.status === "on_the_way"
               ? "bg-indigo-50 text-indigo-700"
-              : "bg-amber-50 text-amber-700"
-          }`}>
+              : o.status === "cancelled"
+                ? "bg-red-50 text-red-700"
+                : "bg-amber-50 text-amber-700"
+        }`}>
           {o.status}
         </span>
       )
     },
     {
-      key: "date",
-      header: "Date"
+      key: "createdAt",
+      header: "Date",
+      render: (o: any) => <span>{new Date(o.createdAt).toLocaleDateString("en-BD")}</span>
     }
   ];
 
@@ -94,23 +76,31 @@ export default function AgentOrdersPage() {
     <div className="space-y-8 animate-in fade-in duration-200">
       <div>
         <h1 className="text-3xl font-bold text-slate-900">Recent Orders</h1>
-        <p className="text-slate-500 mt-1">Full transaction ledger of bookings placed by your agent profile.</p>
+        <p className="text-slate-500 mt-1">Full transaction ledger of all bookings managed by your agent profile.</p>
       </div>
 
-      <CustomTable
-        columns={columns}
-        data={initialOrders}
-        searchKey="customerName"
-        searchPlaceholder="Search orders by customer name..."
-        filterKey="status"
-        filterPlaceholder="All Statuses"
-        filterOptions={[
-          { label: "Completed", value: "Completed" },
-          { label: "Assigned", value: "Assigned" },
-          { label: "Pending Assign", value: "Pending Assign" }
-        ]}
-        pageSize={5}
-      />
+      {isLoading ? (
+        <div className="flex items-center justify-center h-64">
+          <Loader2 size={32} className="animate-spin text-rose-500" />
+        </div>
+      ) : (
+        <CustomTable
+          columns={columns}
+          data={allBookings}
+          searchKey="id"
+          searchPlaceholder="Search orders by ID..."
+          filterKey="status"
+          filterPlaceholder="All Statuses"
+          filterOptions={[
+            { label: "Completed", value: "completed" },
+            { label: "Assigned", value: "assigned" },
+            { label: "Pending", value: "pending" },
+            { label: "On the Way", value: "on_the_way" },
+            { label: "Cancelled", value: "cancelled" },
+          ]}
+          pageSize={10}
+        />
+      )}
     </div>
   );
 }
@@ -124,7 +114,6 @@ function AccessDenied({ roleRequired }: { roleRequired: string }) {
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
       <p className="text-sm text-slate-500 mt-2 max-w-sm">
         This subpage is only accessible to users with the <strong className="text-slate-800">{roleRequired}</strong> role.
-        Please toggle your preview role using the selector at the top.
       </p>
     </div>
   );

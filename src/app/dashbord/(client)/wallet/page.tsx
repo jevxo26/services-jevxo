@@ -2,7 +2,6 @@
 
 import * as React from "react"
 import { useAppSelector } from "@/redux/hooks";
-import { getRoleName } from "@/redux/features/auth/authSlice";
 import {
   ShieldAlert,
   Plus,
@@ -13,38 +12,32 @@ import {
   Copy,
   SlidersHorizontal,
   ArrowRight,
-  TrendingUp,
   FileText,
   Sparkles,
   Wrench,
   BadgeCent,
-  Gift
+  Gift,
+  Loader2
 } from "lucide-react"
-
-interface Transaction {
-  id: string;
-  service: string;
-  orderId: string;
-  date: string;
-  amount: string;
-  type: "debited" | "credited";
-  status: "DEBITED" | "CREDITED";
-  icon: React.ComponentType<any>;
-}
+import { useGetUserProfileQuery } from "@/redux/features/auth/authApi"
 
 export default function WalletPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
   const [copied, setCopied] = React.useState(false)
   const [autoRecharge, setAutoRecharge] = React.useState(true)
 
-  const transactions: Transaction[] = [
+  const { data: profileData, isLoading } = useGetUserProfileQuery()
+
+  const walletBalance = (profileData as any)?.data?.wallet_balance ?? (profileData as any)?.wallet_balance ?? 0
+
+  const transactions = [
     {
       id: "1",
       service: "Premium Home Cleaning",
       orderId: "Order #RS-8823",
       date: "May 12, 2024",
       amount: "- ৳ 2,450.00",
-      type: "debited",
+      type: "debited" as const,
       status: "DEBITED",
       icon: Sparkles,
     },
@@ -54,7 +47,7 @@ export default function WalletPage() {
       orderId: "via bKash",
       date: "May 10, 2024",
       amount: "+ ৳ 5,000.00",
-      type: "credited",
+      type: "credited" as const,
       status: "CREDITED",
       icon: BadgeCent,
     },
@@ -64,7 +57,7 @@ export default function WalletPage() {
       orderId: "Order #RS-8756",
       date: "May 08, 2024",
       amount: "- ৳ 1,200.00",
-      type: "debited",
+      type: "debited" as const,
       status: "DEBITED",
       icon: Wrench,
     },
@@ -80,6 +73,14 @@ export default function WalletPage() {
     return <AccessDenied roleRequired="Customer" />
   }
 
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center h-64">
+        <Loader2 size={32} className="animate-spin text-rose-500" />
+      </div>
+    )
+  }
+
   return (
     <div className="w-full animate-in fade-in duration-200">
       <div className="w-full space-y-8 relative z-10">
@@ -90,7 +91,9 @@ export default function WalletPage() {
           <div className="lg:col-span-2 bg-gradient-to-br from-rose-50/70 to-orange-50/40 p-8 rounded-[32px] border border-rose-100/60 shadow-sm flex flex-col justify-between min-h-[200px]">
             <div>
               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Balance</span>
-              <h2 className="text-4xl sm:text-5xl font-black text-slate-800 mt-2">৳ 24,580.00</h2>
+              <h2 className="text-4xl sm:text-5xl font-black text-slate-800 mt-2">
+                ৳ {Number(walletBalance).toLocaleString("en-BD", { minimumFractionDigits: 2 })}
+              </h2>
             </div>
 
             <div className="flex flex-wrap items-center gap-4 mt-6">
@@ -181,7 +184,7 @@ export default function WalletPage() {
                 </span>
               </div>
 
-              {/* Card 2: Personal Account */}
+              {/* Card 2: bKash */}
               <div className="bg-white p-4 rounded-3xl border border-slate-100 shadow-sm flex items-center justify-between gap-4">
                 <div className="flex items-center gap-3.5">
                   <div className="w-12 h-8 bg-pink-600 rounded-lg flex items-center justify-center text-white font-extrabold text-[9px] shrink-0">
@@ -201,7 +204,6 @@ export default function WalletPage() {
 
           {/* Refer & Earn ৳500 Coupon Card */}
           <div className="lg:col-span-2 bg-[#FF5B60] text-white p-6 rounded-[32px] shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[220px]">
-            {/* Outline Background Illustration */}
             <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-4 translate-y-4">
               <Gift size={160} />
             </div>
@@ -253,8 +255,7 @@ export default function WalletPage() {
                     return (
                       <tr key={txn.id} className="hover:bg-slate-50/30 transition-colors">
                         <td className="p-4 pl-6 flex items-center gap-3">
-                          <div className={`p-2.5 rounded-xl shrink-0 ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"
-                            }`}>
+                          <div className={`p-2.5 rounded-xl shrink-0 ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"}`}>
                             <Icon size={16} />
                           </div>
                           <div>
@@ -265,13 +266,11 @@ export default function WalletPage() {
                         <td className="p-4 text-xs font-semibold text-slate-400">
                           {txn.date}
                         </td>
-                        <td className={`p-4 text-xs font-extrabold ${txn.type === "credited" ? "text-emerald-500" : "text-[#FF5B60]"
-                          }`}>
+                        <td className={`p-4 text-xs font-extrabold ${txn.type === "credited" ? "text-emerald-500" : "text-[#FF5B60]"}`}>
                           {txn.amount}
                         </td>
                         <td className="p-4 pr-6">
-                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-lg ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"
-                            }`}>
+                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-lg ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"}`}>
                             {txn.status}
                           </span>
                         </td>
@@ -304,7 +303,6 @@ function AccessDenied({ roleRequired }: { roleRequired: string }) {
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
       <p className="text-sm text-slate-500 mt-2 max-w-sm">
         This subpage is only accessible to users with the <strong className="text-slate-800">{roleRequired}</strong> role.
-        Please toggle your preview role using the selector at the top.
       </p>
     </div>
   )
