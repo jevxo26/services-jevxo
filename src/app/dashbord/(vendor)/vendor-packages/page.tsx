@@ -109,9 +109,12 @@ export default function PackagesManagementPage() {
   useEffect(() => {
     const all: Package[] =
       apiPackagesRes?.data || (Array.isArray(apiPackagesRes) ? apiPackagesRes : []);
+      
+    const services: Service[] = 
+      apiServicesRes?.data || (Array.isArray(apiServicesRes) ? apiServicesRes : []);
 
     if (role === "vendor") {
-      const vendorServiceIds = allServices
+      const vendorServiceIds = services
         .filter((s) => String(s.vendor?.id || s.vendor_id) === String(currentUserId))
         .map((s) => s.id);
       setPackages(
@@ -120,7 +123,7 @@ export default function PackagesManagementPage() {
     } else {
       setPackages(all);
     }
-  }, [apiPackagesRes, allServices, role, currentUserId]);
+  }, [apiPackagesRes, apiServicesRes, role, currentUserId]);
 
   const resetForm = () => {
     setName("");
