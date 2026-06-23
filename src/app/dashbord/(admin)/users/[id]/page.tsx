@@ -39,7 +39,7 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
   if (isUserLoading || isBookingsLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <div className="w-10 h-10 border-4 border-rose-500 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin"></div>
       </div>
     );
   }
@@ -76,12 +76,12 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
         <div className="lg:col-span-1 space-y-6">
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
             <div className="flex flex-col items-center text-center">
-              <div className="w-24 h-24 bg-gradient-to-br from-rose-100 to-rose-50 text-rose-500 rounded-full flex items-center justify-center mb-4 text-3xl font-black shadow-inner">
+              <div className="w-24 h-24 bg-gradient-to-br from-rose-100 to-rose-50 text-[#FF7C71] rounded-full flex items-center justify-center mb-4 text-3xl font-black shadow-inner">
                 {user.name ? user.name.charAt(0).toUpperCase() : <User size={40} />}
               </div>
               <h2 className="text-xl font-bold text-slate-900">{user.name}</h2>
               <span className={`mt-2 inline-flex items-center px-3 py-1 rounded-full text-xs font-bold ${
-                user.status === "active" ? "bg-emerald-50 text-emerald-700" : "bg-rose-50 text-rose-700"
+                user.status === "active" ? "bg-emerald-50 text-emerald-700" : "bg-[#FFF8F7] text-[#E5675D]"
               }`}>
                 {user.status || "Unknown"}
               </span>
@@ -158,7 +158,7 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
             <div className="flex items-center justify-between mb-6">
               <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-                <Activity size={20} className="text-rose-500" /> Recent Bookings
+                <Activity size={20} className="text-[#FF7C71]" /> Recent Bookings
               </h3>
             </div>
 
@@ -193,7 +193,7 @@ export default function UserDetailsPage({ params }: { params: Promise<{ id: stri
                       </span>
                       <span className={`inline-flex items-center px-2.5 py-1 rounded-md text-[10px] font-bold uppercase tracking-wider ${
                         booking.status === 'completed' ? 'bg-emerald-100 text-emerald-700' :
-                        booking.status === 'cancelled' ? 'bg-rose-100 text-rose-700' :
+                        booking.status === 'cancelled' ? 'bg-[#FFEBE9] text-[#E5675D]' :
                         booking.status === 'assigned' ? 'bg-indigo-100 text-indigo-700' :
                         'bg-amber-100 text-amber-700'
                       }`}>

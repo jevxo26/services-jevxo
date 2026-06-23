@@ -331,7 +331,7 @@ export default function MapPage() {
                 </Button>
                 <Button
                   onClick={() => setActiveTab("list")}
-                  className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#FF5A5F] hover:bg-[#FF5A5F]/90 text-white shadow-sm"
+                  className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#FF7C71] hover:bg-[#FF7C71]/90 text-white shadow-sm"
                 >
                   <ListIcon className="w-3.5 h-3.5" />
                   List
@@ -388,7 +388,7 @@ export default function MapPage() {
                     </p>
                     <Button
                       onClick={handleClearFilters}
-                      className="mt-6 px-6 py-2.5 h-auto bg-[#FF5A5F] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#FF4449] transition-colors cursor-pointer"
+                      className="mt-6 px-6 py-2.5 h-auto bg-[#FF7C71] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#E5675D] transition-colors cursor-pointer"
                     >
                       Clear Filters
                     </Button>

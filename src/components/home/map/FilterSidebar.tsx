@@ -39,7 +39,7 @@ export default function FilterSidebar({
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:bg-white focus:border-[#FF5A5F] focus:ring-1 focus:ring-red-100 transition-all cursor-pointer appearance-none"
+            className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71] focus:ring-1 focus:ring-red-100 transition-all cursor-pointer appearance-none"
           >
             <option>Recommended</option>
             <option>Price: Low to High</option>
@@ -57,7 +57,7 @@ export default function FilterSidebar({
         <Button 
           variant="link"
           onClick={onClearFilters}
-          className="text-xs font-bold text-[#FF5A5F] hover:underline cursor-pointer bg-transparent border-none outline-none p-0 h-auto"
+          className="text-xs font-bold text-[#FF7C71] hover:underline cursor-pointer bg-transparent border-none outline-none p-0 h-auto"
         >
           Clear All
         </Button>
@@ -72,12 +72,12 @@ export default function FilterSidebar({
         {/* Slider bar mock */}
         <div className="h-1.5 bg-slate-100 rounded-full relative">
           <div 
-            className="absolute h-full bg-[#FF5A5F] rounded-full" 
+            className="absolute h-full bg-[#FF7C71] rounded-full" 
             style={{ left: "0%", right: `${100 - fillRight}%` }}
           />
-          <div className="absolute left-0 w-4 h-4 bg-white border-2 border-[#FF5A5F] rounded-full top-1/2 -translate-y-1/2 shadow-sm" />
+          <div className="absolute left-0 w-4 h-4 bg-white border-2 border-[#FF7C71] rounded-full top-1/2 -translate-y-1/2 shadow-sm" />
           <div 
-            className="absolute w-4 h-4 bg-white border-2 border-[#FF5A5F] rounded-full top-1/2 -translate-y-1/2 shadow-sm" 
+            className="absolute w-4 h-4 bg-white border-2 border-[#FF7C71] rounded-full top-1/2 -translate-y-1/2 shadow-sm" 
             style={{ left: `${fillRight}%`, transform: "translate(-50%, -50%)" }}
           />
         </div>
@@ -91,7 +91,7 @@ export default function FilterSidebar({
                 type="number"
                 value={tempPriceRange.min}
                 onChange={(e) => setTempPriceRange({ ...tempPriceRange, min: parseInt(e.target.value) || 0 })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-7 pr-3 py-2 text-xs font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5A5F] transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-7 pr-3 py-2 text-xs font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71] transition-all"
               />
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function FilterSidebar({
                 type="number"
                 value={tempPriceRange.max}
                 onChange={(e) => setTempPriceRange({ ...tempPriceRange, max: Math.min(10000, parseInt(e.target.value) || 0) })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-7 pr-3 py-2 text-xs font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF5A5F] transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl pl-7 pr-3 py-2 text-xs font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71] transition-all"
               />
             </div>
           </div>
@@ -127,7 +127,7 @@ export default function FilterSidebar({
                 onClick={() => setTempMinRating(val)}
                 className={`py-2 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1 cursor-pointer h-auto ${
                   isSelected
-                    ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F] hover:bg-rose-50 hover:text-[#FF5A5F]"
+                    ? "bg-rose-50 border-[#FF7C71] text-[#FF7C71] hover:bg-rose-50 hover:text-[#FF7C71]"
                     : "bg-white border-slate-200 text-slate-600 hover:border-slate-350 hover:bg-slate-50"
                 }`}
               >
@@ -152,7 +152,7 @@ export default function FilterSidebar({
                 onClick={() => setTempMinRating(val)}
                 className={`flex-1 py-1.5 rounded-lg text-xs font-bold border transition-colors cursor-pointer h-auto ${
                   isSelected
-                    ? "bg-rose-50 border-[#FF5A5F] text-[#FF5A5F] hover:bg-rose-50 hover:text-[#FF5A5F]"
+                    ? "bg-rose-50 border-[#FF7C71] text-[#FF7C71] hover:bg-rose-50 hover:text-[#FF7C71]"
                     : "bg-slate-50 border-slate-100 text-slate-500 hover:border-slate-200 hover:bg-slate-100"
                 }`}
               >
@@ -166,7 +166,7 @@ export default function FilterSidebar({
       {/* Apply button */}
       <Button
         onClick={onApplyFilters}
-        className="w-full bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold py-3 h-auto rounded-xl transition-all duration-200 shadow-sm active:scale-98 text-sm cursor-pointer"
+        className="w-full bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold py-3 h-auto rounded-xl transition-all duration-200 shadow-sm active:scale-98 text-sm cursor-pointer"
       >
         Apply Filters
       </Button>

@@ -35,7 +35,7 @@ const CORE_VALUES = [
     description:
       "Every professional undergoes multi-tier biometric background screening and skills validation.",
     icon: ShieldCheck,
-    bg: "bg-rose-50 text-[#FF5A5F]",
+    bg: "bg-rose-50 text-[#FF7C71]",
   },
   {
     title: "Premium Standards",
@@ -177,7 +177,7 @@ function StatCard({ value, label, delay }: { value: string; label: string; delay
         initial={{ opacity: 0, scale: 0.5 }}
         animate={inView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.5 }}
         transition={{ type: "spring", stiffness: 130, damping: 12, delay: delay + 0.1 }}
-        className="text-2xl md:text-3xl lg:text-4xl font-black text-[#FF5A5F] tracking-tight"
+        className="text-2xl md:text-3xl lg:text-4xl font-black text-[#FF7C71] tracking-tight"
       >
         {value}
       </motion.p>
@@ -214,11 +214,11 @@ export default function AboutPage() {
         {/* Parallax glow */}
         <motion.div
           style={{ y: glowY }}
-          className="absolute -top-1/4 right-0 w-[500px] h-[500px] bg-[#FF5A5F]/6 blur-[120px] rounded-full pointer-events-none"
+          className="absolute -top-1/4 right-0 w-[500px] h-[500px] bg-[#FF7C71]/6 blur-[120px] rounded-full pointer-events-none"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 40]) }}
-          className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#FF5A5F]/3 blur-[100px] rounded-full pointer-events-none"
+          className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-[#FF7C71]/3 blur-[100px] rounded-full pointer-events-none"
         />
 
         <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
@@ -234,7 +234,7 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 32 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.55, ease: "easeOut", delay: 0 }}
-                className="inline-block text-xs font-black text-[#FF5A5F] uppercase tracking-widest bg-[#FFF0F1] px-3.5 py-1.5 rounded-full border border-rose-100/50"
+                className="inline-block text-xs font-black text-[#FF7C71] uppercase tracking-widest bg-[#FFF8F7] px-3.5 py-1.5 rounded-full border border-rose-100/50"
               >
                 Our Story
               </motion.span>
@@ -246,7 +246,7 @@ export default function AboutPage() {
               >
                 Redefining Home Care for{" "}
                 <motion.span
-                  className="text-[#FF5A5F] inline-block"
+                  className="text-[#FF7C71] inline-block"
                   initial={{ opacity: 0, y: 14 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.35, duration: 0.5, ease: "easeOut" }}
@@ -273,7 +273,7 @@ export default function AboutPage() {
               >
                 <Link href="/services">
                   <motion.div whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}>
-                    <Button className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-6 py-3.5 h-auto rounded-xl border-none transition-colors cursor-pointer shadow-md hover:shadow-[0_8px_20px_rgba(255,90,95,0.35)] flex items-center gap-2">
+                    <Button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-6 py-3.5 h-auto rounded-xl border-none transition-colors cursor-pointer shadow-md hover:shadow-[0_8px_20px_rgba(255,90,95,0.35)] flex items-center gap-2">
                       Explore Services
                       <ArrowRight className="w-4 h-4" />
                     </Button>
@@ -339,12 +339,12 @@ export default function AboutPage() {
               <motion.div
                 whileHover={{ y: -4, boxShadow: "0 16px 40px rgba(255,90,95,0.08)" }}
                 transition={{ duration: 0.3 }}
-                className="bg-white border border-slate-100 rounded-[32px] p-8 md:p-10 space-y-4 hover:border-[#FF5A5F]/20 transition-colors duration-300"
+                className="bg-white border border-slate-100 rounded-[32px] p-8 md:p-10 space-y-4 hover:border-[#FF7C71]/20 transition-colors duration-300"
               >
                 <motion.div
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
                   transition={{ duration: 0.4 }}
-                  className="w-12 h-12 rounded-2xl bg-[#FFF0F1] text-[#FF5A5F] flex items-center justify-center"
+                  className="w-12 h-12 rounded-2xl bg-[#FFF8F7] text-[#FF7C71] flex items-center justify-center"
                 >
                   <Target className="w-6 h-6" />
                 </motion.div>
@@ -364,12 +364,12 @@ export default function AboutPage() {
               <motion.div
                 whileHover={{ y: -4, boxShadow: "0 16px 40px rgba(255,90,95,0.08)" }}
                 transition={{ duration: 0.3 }}
-                className="bg-white border border-slate-100 rounded-[32px] p-8 md:p-10 space-y-4 hover:border-[#FF5A5F]/20 transition-colors duration-300"
+                className="bg-white border border-slate-100 rounded-[32px] p-8 md:p-10 space-y-4 hover:border-[#FF7C71]/20 transition-colors duration-300"
               >
                 <motion.div
                   whileHover={{ rotate: [0, -10, 10, 0], scale: 1.1 }}
                   transition={{ duration: 0.4 }}
-                  className="w-12 h-12 rounded-2xl bg-[#FFF0F1] text-[#FF5A5F] flex items-center justify-center"
+                  className="w-12 h-12 rounded-2xl bg-[#FFF8F7] text-[#FF7C71] flex items-center justify-center"
                 >
                   <Users className="w-6 h-6" />
                 </motion.div>
@@ -456,7 +456,7 @@ export default function AboutPage() {
           <Reveal variants={stagger} className="text-center max-w-2xl mx-auto mb-10 lg:mb-14">
             <motion.span
               variants={scaleIn}
-              className="inline-block text-xs font-black text-[#FF5A5F] uppercase tracking-widest bg-[#FFF0F1] px-3.5 py-1.5 rounded-full border border-rose-100/50"
+              className="inline-block text-xs font-black text-[#FF7C71] uppercase tracking-widest bg-[#FFF8F7] px-3.5 py-1.5 rounded-full border border-rose-100/50"
             >
               The Minds
             </motion.span>
@@ -487,14 +487,14 @@ export default function AboutPage() {
                 key={i}
                 variants={cardVariant}
                 whileHover={{ y: -8, boxShadow: "0 20px 40px rgba(0,0,0,0.05)" }}
-                className="bg-white border border-slate-100 rounded-3xl p-6 flex flex-col items-center text-center space-y-4 hover:border-[#FF5A5F]/15 transition-colors duration-300 h-full"
+                className="bg-white border border-slate-100 rounded-3xl p-6 flex flex-col items-center text-center space-y-4 hover:border-[#FF7C71]/15 transition-colors duration-300 h-full"
               >
                 <motion.div
                   whileHover={{ scale: 1.08 }}
                   transition={{ type: "spring", stiffness: 200, damping: 12 }}
                   className="relative"
                 >
-                  <div className="w-24 h-24 rounded-full overflow-hidden relative border-2 border-[#FFF0F1] shadow-sm">
+                  <div className="w-24 h-24 rounded-full overflow-hidden relative border-2 border-[#FFF8F7] shadow-sm">
                     <Image
                       src={member.avatar}
                       alt={member.name}
@@ -503,7 +503,7 @@ export default function AboutPage() {
                     />
                   </div>
                   <motion.div
-                    className="absolute inset-0 rounded-full border-2 border-[#FF5A5F]/30"
+                    className="absolute inset-0 rounded-full border-2 border-[#FF7C71]/30"
                     initial={{ scale: 1, opacity: 0 }}
                     whileHover={{ scale: 1.18, opacity: 1 }}
                     transition={{ duration: 0.3 }}
@@ -516,7 +516,7 @@ export default function AboutPage() {
                   transition={{ delay: 0.2 + i * 0.08 }}
                 >
                   <h3 className="font-extrabold text-slate-900 text-sm">{member.name}</h3>
-                  <p className="text-xs font-semibold text-[#FF5A5F] uppercase tracking-wider mt-0.5">
+                  <p className="text-xs font-semibold text-[#FF7C71] uppercase tracking-wider mt-0.5">
                     {member.role}
                   </p>
                 </motion.div>

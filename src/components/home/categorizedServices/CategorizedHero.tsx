@@ -16,7 +16,7 @@ export function CategorizedHero({ name, description }: { name?: string; descript
           {/* Left Content */}
           <div className="space-y-6">
             {/* Urgent Badge */}
-            <div className="inline-flex items-center gap-2 bg-[#fff0f0] text-[#ff5a5f] px-4 py-1.5 rounded-full text-sm font-semibold">
+            <div className="inline-flex items-center gap-2 bg-[#fff0f0] text-[#FF7C71] px-4 py-1.5 rounded-full text-sm font-semibold">
               <Zap className="w-4 h-4" />
               Urgent Repairs Available 24/7
             </div>
@@ -36,7 +36,7 @@ export function CategorizedHero({ name, description }: { name?: string; descript
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-[#ff5a5f] hover:bg-[#e04a4f] text-white px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 transition-all shadow-lg"
+                className="bg-[#FF7C71] hover:bg-[#E5675D] text-white px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 transition-all shadow-lg"
               >
                 Book Urgent Repair
                 <span className="text-xl">→</span>
@@ -63,7 +63,7 @@ export function CategorizedHero({ name, description }: { name?: string; descript
             >
               <div className="flex items-center gap-4">
                 <div className="w-12 h-12 bg-[#fff0f0] rounded-2xl flex items-center justify-center">
-                  <ShieldCheck className="w-7 h-7 text-[#ff5a5f]" />
+                  <ShieldCheck className="w-7 h-7 text-[#FF7C71]" />
                 </div>
                 <div>
                   <p className="font-semibold text-slate-900">ISO Certified</p>

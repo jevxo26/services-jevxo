@@ -70,7 +70,7 @@ const ServiceHero = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
         {/* Title */}
         <h1 className="text-3xl sm:text-4xl md:text-5xl font-black text-slate-900 leading-tight mb-4 max-w-3xl mx-auto">
-          Find the best home <span className="text-[#ff5a5f]">services</span>
+          Find the best home <span className="text-[#FF7C71]">services</span>
         </h1>
         <p className="text-sm md:text-base text-slate-500 max-w-xl mx-auto mb-8 font-medium leading-relaxed">
           Premium, reliable, and effortless solutions for your urban lifestyle in Bangladesh.
@@ -114,7 +114,7 @@ const ServiceHero = () => {
           {/* Search Button (Square/Round Red) */}
           <Button
             type="submit"
-            className="w-10 h-10 bg-[#ff5a5f] hover:bg-[#e04a4f] text-white flex items-center justify-center rounded-full transition-all duration-200 shrink-0 cursor-pointer shadow-md shadow-rose-200"
+            className="w-10 h-10 bg-[#FF7C71] hover:bg-[#E5675D] text-white flex items-center justify-center rounded-full transition-all duration-200 shrink-0 cursor-pointer shadow-md shadow-rose-200"
             aria-label="Search"
           >
             <Search size={16} strokeWidth={2.8} />
@@ -156,11 +156,11 @@ const ServiceHero = () => {
                   href={pillHref}
                   className={`flex items-center gap-2 px-4 py-2 rounded-full border font-extrabold text-xs transition-all duration-200 hover:-translate-y-0.5 no-underline cursor-pointer shadow-sm ${
                     isActive
-                      ? "border-[#ff5a5f] text-[#ff5a5f] bg-[#FFF0EF]"
-                      : "border-slate-100 text-slate-600 bg-white hover:border-[#ff5a5f]/40 hover:text-slate-800"
+                      ? "border-[#FF7C71] text-[#FF7C71] bg-[#FFF8F7]"
+                      : "border-slate-100 text-slate-600 bg-white hover:border-[#FF7C71]/40 hover:text-slate-800"
                   }`}
                 >
-                  <Icon size={14} className={isActive ? "text-[#ff5a5f]" : "text-slate-400"} />
+                  <Icon size={14} className={isActive ? "text-[#FF7C71]" : "text-slate-400"} />
                   {label}
                 </Link>
               );

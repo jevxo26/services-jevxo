@@ -8,7 +8,7 @@ export default function AppDownload() {
   return (
     <div className="py-12 md:py-20 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="bg-gradient-to-br from-[#FF5A5F]/80 to-[#FF3B4F]/20 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
+        <div className="bg-gradient-to-br from-[#FF7C71]/80 to-[#FF7C71]/20 rounded-3xl p-8 md:p-12 shadow-2xl relative overflow-hidden">
           {/* Decorative Background Elements */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute -top-10 -right-10 w-72 h-72 bg-white rounded-full blur-3xl" />
@@ -44,7 +44,7 @@ export default function AppDownload() {
                 <motion.button
                   whileHover={{ scale: 1.06 }}
                   whileTap={{ scale: 0.97 }}
-                  className="flex items-center gap-3 bg-white text-[#FF5A5F] hover:bg-slate-100 px-6 py-3.5 rounded-2xl transition-all shadow-lg"
+                  className="flex items-center gap-3 bg-white text-[#FF7C71] hover:bg-slate-100 px-6 py-3.5 rounded-2xl transition-all shadow-lg"
                 >
                   <Smartphone className="w-6 h-6" />
                   <div className="text-left text-sm">
@@ -83,7 +83,7 @@ export default function AppDownload() {
 
                 <div className="h-full bg-gradient-to-b from-slate-50 to-white p-2 pt-12 flex flex-col">
                   <div className="text-center mb-6">
-                    <div className="inline-block bg-[#FF5A5F] text-white text-xs font-bold px-3 py-1 rounded-full mb-2">
+                    <div className="inline-block bg-[#FF7C71] text-white text-xs font-bold px-3 py-1 rounded-full mb-2">
                       Rajseba
                     </div>
                     <p className="text-slate-500 text-sm">Home Services</p>
@@ -106,8 +106,8 @@ export default function AppDownload() {
                       </div>
                     </div>
 
-                    <div className="bg-[#FF5A5F]/10 rounded-2xl p-4 text-center">
-                      <p className="text-[#FF5A5F] font-semibold text-sm">
+                    <div className="bg-[#FF7C71]/10 rounded-2xl p-4 text-center">
+                      <p className="text-[#FF7C71] font-semibold text-sm">
                         Next Slot
                       </p>
                       <p className="text-2xl font-bold text-slate-800">

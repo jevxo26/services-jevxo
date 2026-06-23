@@ -208,10 +208,10 @@ export default function DhakaMap({
                     initial={{ opacity: 0, y: 10, scale: 0.8 }}
                     animate={{ opacity: 1, y: 0, scale: 1 }}
                     exit={{ opacity: 0, y: 10, scale: 0.8 }}
-                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#FF5A5F] text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-md whitespace-nowrap flex flex-col items-center"
+                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#FF7C71] text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-md whitespace-nowrap flex flex-col items-center"
                   >
                     <span>৳{expert.price}</span>
-                    <div className="w-2 h-2 bg-[#FF5A5F] rotate-45 -mt-1" />
+                    <div className="w-2 h-2 bg-[#FF7C71] rotate-45 -mt-1" />
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -223,15 +223,15 @@ export default function DhakaMap({
                 }}
                 className={`w-11 h-11 rounded-full flex items-center justify-center border-2 shadow-md transition-colors duration-300 relative ${
                   isSelected
-                    ? "bg-[#FF5A5F] border-white text-white"
-                    : "bg-white border-[#FF5A5F]/20 text-[#FF5A5F]"
+                    ? "bg-[#FF7C71] border-white text-white"
+                    : "bg-white border-[#FF7C71]/20 text-[#FF7C71]"
                 }`}
               >
                 {renderCategoryIcon(expert.icon, "w-4.5 h-4.5")}
                 
                 {/* Selected Pin Bottom Stem Line */}
                 {isSelected && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-0.5 h-2 bg-[#FF5A5F]" />
+                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-0.5 h-2 bg-[#FF7C71]" />
                 )}
               </motion.div>
             </motion.div>
@@ -243,7 +243,7 @@ export default function DhakaMap({
         <Button
           variant="ghost"
           onClick={resetMap}
-          className="w-12 h-12 p-0 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer hover:bg-slate-50"
+          className="w-12 h-12 p-0 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-700 hover:text-[#FF7C71] shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer hover:bg-slate-50"
           title="Reset Map View"
         >
           <Compass className="w-5 h-5" />
@@ -253,14 +253,14 @@ export default function DhakaMap({
           <Button
             variant="ghost"
             onClick={() => adjustZoom(0.25)}
-            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] hover:bg-slate-50 transition-colors border-b border-slate-100 cursor-pointer shadow-none"
+            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF7C71] hover:bg-slate-50 transition-colors border-b border-slate-100 cursor-pointer shadow-none"
           >
             <Plus className="w-5 h-5" />
           </Button>
           <Button
             variant="ghost"
             onClick={() => adjustZoom(-0.25)}
-            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF5A5F] hover:bg-slate-50 transition-colors cursor-pointer shadow-none"
+            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF7C71] hover:bg-slate-50 transition-colors cursor-pointer shadow-none"
           >
             <Minus className="w-5 h-5" />
           </Button>

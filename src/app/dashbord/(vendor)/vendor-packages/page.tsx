@@ -226,7 +226,7 @@ export default function PackagesManagementPage() {
   if (role !== "superadmin" && role !== "vendor") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
@@ -261,7 +261,7 @@ export default function PackagesManagementPage() {
       key: "service",
       header: "Parent Service",
       render: (item: Package) => (
-        <span className="inline-flex items-center gap-1.5 bg-rose-50/70 text-rose-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-rose-100/50">
+        <span className="inline-flex items-center gap-1.5 bg-[#FFF8F7]/70 text-[#E5675D] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#FFEBE9]/50">
           <Wrench size={12} />
           {item.service?.name || "—"}
         </span>
@@ -345,7 +345,7 @@ export default function PackagesManagementPage() {
       {/* Table */}
       {isPackagesLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-premium">
-          <div className="w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : packages.length === 0 ? (
         <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -360,7 +360,7 @@ export default function PackagesManagementPage() {
           </p>
           <button
             onClick={openCreateModal}
-            className="mt-4 bg-rose-50 hover:bg-rose-100 text-rose-500 font-bold px-4 py-2 rounded-xl text-xs transition-all"
+            className="mt-4 bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#FF7C71] font-bold px-4 py-2 rounded-xl text-xs transition-all"
           >
             Create New Package
           </button>
@@ -611,7 +611,7 @@ export default function PackagesManagementPage() {
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="bg-[#FF464C] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
+                  className="bg-[#FF7C71] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
                 >
                   Delete
                 </button>

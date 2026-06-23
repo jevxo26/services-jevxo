@@ -79,7 +79,7 @@ export default function AdminLocationsPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center">
-        <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4"><ShieldAlert size={48} /></div>
+        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4"><ShieldAlert size={48} /></div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
         <p className="text-sm text-slate-500 mt-2">Only Super Admins can manage locations.</p>
       </div>
@@ -191,7 +191,7 @@ export default function AdminLocationsPage() {
 
       <div>
         {(activeTab === "divisions" && divLoad) || (activeTab === "districts" && distLoad) || (activeTab === "areas" && areaLoad) ? (
-           <div className="py-20 text-center"><div className="w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full animate-spin mx-auto" /></div>
+           <div className="py-20 text-center"><div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin mx-auto" /></div>
         ) : (
           <CustomTable 
             columns={getColumns()} 

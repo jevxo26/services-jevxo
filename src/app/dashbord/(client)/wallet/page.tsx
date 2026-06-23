@@ -76,7 +76,7 @@ export default function WalletPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-rose-500" />
+        <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
       </div>
     )
   }
@@ -88,7 +88,7 @@ export default function WalletPage() {
         {/* Top Balance & Quick Manage Section */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
           {/* Balance Display Card */}
-          <div className="lg:col-span-2 bg-gradient-to-br from-rose-50/70 to-orange-50/40 p-8 rounded-[32px] border border-rose-100/60 shadow-sm flex flex-col justify-between min-h-[200px]">
+          <div className="lg:col-span-2 bg-gradient-to-br from-rose-50/70 to-orange-50/40 p-8 rounded-[32px] border border-[#FFEBE9]/60 shadow-sm flex flex-col justify-between min-h-[200px]">
             <div>
               <span className="text-xs font-bold text-slate-400 uppercase tracking-widest">Total Balance</span>
               <h2 className="text-4xl sm:text-5xl font-black text-slate-800 mt-2">
@@ -97,7 +97,7 @@ export default function WalletPage() {
             </div>
 
             <div className="flex flex-wrap items-center gap-4 mt-6">
-              <button className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold px-8 py-3.5 rounded-2xl flex items-center gap-2 shadow-sm shadow-rose-500/10 active:scale-[0.98] transition-all">
+              <button className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold px-8 py-3.5 rounded-2xl flex items-center gap-2 shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] transition-all">
                 <Plus size={16} /> Add Funds
               </button>
               <button className="bg-white hover:bg-slate-50 border border-slate-100 text-slate-700 text-xs font-bold px-8 py-3.5 rounded-2xl flex items-center gap-2 active:scale-[0.98] transition-all">
@@ -132,7 +132,7 @@ export default function WalletPage() {
                 </div>
                 <button
                   onClick={() => setAutoRecharge(!autoRecharge)}
-                  className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-200 focus:outline-none ${autoRecharge ? "bg-[#FF5B60]" : "bg-slate-200"
+                  className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-200 focus:outline-none ${autoRecharge ? "bg-[#FF7C71]" : "bg-slate-200"
                     }`}
                 >
                   <div
@@ -162,7 +162,7 @@ export default function WalletPage() {
           <div className="lg:col-span-3 space-y-4">
             <div className="flex justify-between items-center">
               <h3 className="font-extrabold text-slate-800 text-base">Payment Methods</h3>
-              <button className="text-xs font-bold text-[#FF5B60] hover:underline focus:outline-none">
+              <button className="text-xs font-bold text-[#FF7C71] hover:underline focus:outline-none">
                 Add New
               </button>
             </div>
@@ -179,7 +179,7 @@ export default function WalletPage() {
                     <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">**** **** **** 4242</span>
                   </div>
                 </div>
-                <span className="text-[9px] font-bold text-[#FF5B60] bg-rose-50 px-2 py-0.5 rounded-lg">
+                <span className="text-[9px] font-bold text-[#FF7C71] bg-[#FFF8F7] px-2 py-0.5 rounded-lg">
                   Primary
                 </span>
               </div>
@@ -195,7 +195,7 @@ export default function WalletPage() {
                     <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">017 **** 5678</span>
                   </div>
                 </div>
-                <button className="p-2 bg-slate-50 hover:bg-rose-50 text-slate-400 hover:text-[#FF5B60] rounded-xl transition-colors focus:outline-none">
+                <button className="p-2 bg-slate-50 hover:bg-[#FFF8F7] text-slate-400 hover:text-[#FF7C71] rounded-xl transition-colors focus:outline-none">
                   <Trash2 size={14} />
                 </button>
               </div>
@@ -203,7 +203,7 @@ export default function WalletPage() {
           </div>
 
           {/* Refer & Earn ৳500 Coupon Card */}
-          <div className="lg:col-span-2 bg-[#FF5B60] text-white p-6 rounded-[32px] shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div className="lg:col-span-2 bg-[#FF7C71] text-white p-6 rounded-[32px] shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[220px]">
             <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-4 translate-y-4">
               <Gift size={160} />
             </div>
@@ -255,7 +255,7 @@ export default function WalletPage() {
                     return (
                       <tr key={txn.id} className="hover:bg-slate-50/30 transition-colors">
                         <td className="p-4 pl-6 flex items-center gap-3">
-                          <div className={`p-2.5 rounded-xl shrink-0 ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"}`}>
+                          <div className={`p-2.5 rounded-xl shrink-0 ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-[#FFF8F7] text-[#FF7C71]"}`}>
                             <Icon size={16} />
                           </div>
                           <div>
@@ -266,11 +266,11 @@ export default function WalletPage() {
                         <td className="p-4 text-xs font-semibold text-slate-400">
                           {txn.date}
                         </td>
-                        <td className={`p-4 text-xs font-extrabold ${txn.type === "credited" ? "text-emerald-500" : "text-[#FF5B60]"}`}>
+                        <td className={`p-4 text-xs font-extrabold ${txn.type === "credited" ? "text-emerald-500" : "text-[#FF7C71]"}`}>
                           {txn.amount}
                         </td>
                         <td className="p-4 pr-6">
-                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-lg ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-rose-50 text-[#FF5B60]"}`}>
+                          <span className={`text-[9px] font-bold px-2 py-0.5 rounded-lg ${txn.type === "credited" ? "bg-emerald-50 text-emerald-500" : "bg-[#FFF8F7] text-[#FF7C71]"}`}>
                             {txn.status}
                           </span>
                         </td>
@@ -282,7 +282,7 @@ export default function WalletPage() {
             </div>
 
             <div className="p-4 text-center border-t border-slate-50">
-              <button className="text-xs font-bold text-[#FF5B60] hover:underline focus:outline-none flex items-center gap-1 mx-auto">
+              <button className="text-xs font-bold text-[#FF7C71] hover:underline focus:outline-none flex items-center gap-1 mx-auto">
                 View All Transactions <ArrowRight size={12} />
               </button>
             </div>
@@ -297,7 +297,7 @@ export default function WalletPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

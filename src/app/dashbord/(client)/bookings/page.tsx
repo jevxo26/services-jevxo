@@ -57,7 +57,7 @@ export default function BookingsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-rose-500" />
+        <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
       </div>
     )
   }
@@ -75,7 +75,7 @@ export default function BookingsPage() {
         </div>
 
         {/* Status Filter Tab Pill Bar */}
-        <div className="bg-rose-50/30 border border-rose-100/30 p-1.5 rounded-full flex gap-1 w-fit">
+        <div className="bg-[#FFF8F7]/30 border border-[#FFEBE9]/30 p-1.5 rounded-full flex gap-1 w-fit">
           {(["Active", "Scheduled", "Completed", "Cancelled"] as const).map((tab) => {
             const isActive = filter === tab;
             return (
@@ -84,7 +84,7 @@ export default function BookingsPage() {
                 onClick={() => setFilter(tab)}
                 className={`px-6 py-2 rounded-full text-xs font-bold transition-all focus:outline-none ${
                   isActive
-                    ? "bg-[#FF5B60] text-white shadow-sm shadow-rose-500/10"
+                    ? "bg-[#FF7C71] text-white shadow-sm shadow-[#FF7C71]/10"
                     : "text-slate-500 hover:text-slate-800 hover:bg-slate-50/50"
                 }`}
               >
@@ -105,7 +105,7 @@ export default function BookingsPage() {
                 {/* Top Row: Service Name, Status, Price */}
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-[#FF464C]">
+                    <div className="w-12 h-12 bg-[#FFF8F7] border border-[#FFEBE9] rounded-2xl flex items-center justify-center text-[#FF7C71]">
                       <Briefcase size={22} className="stroke-[2.5]" />
                     </div>
                     <div>
@@ -113,8 +113,8 @@ export default function BookingsPage() {
                         {booking.nestedService?.name || booking.pkg?.name || "Service Booking"}
                       </h3>
                       <div className="flex items-center gap-2 mt-1.5">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-rose-50 text-rose-600">
-                          <span className="w-1.5 h-1.5 rounded-full bg-rose-600 animate-pulse" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF8F7] text-[#E5675D]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#E5675D] animate-pulse" />
                           {STATUS_TEXT[booking.status] || booking.status}
                         </span>
                         <span className="text-[10px] font-bold text-slate-400">Order #{booking.id}</span>
@@ -135,7 +135,7 @@ export default function BookingsPage() {
                   <div>
                     <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-widest block mb-2">Professional</span>
                     <div className="flex items-center gap-2.5">
-                      <div className="w-9 h-9 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 font-bold text-sm border border-rose-200">
+                      <div className="w-9 h-9 rounded-full bg-[#FFEBE9] flex items-center justify-center text-[#E5675D] font-bold text-sm border border-[#FF7C71]/30">
                         {booking.vendor?.name?.[0] || "V"}
                       </div>
                       <span className="text-xs font-bold text-slate-800">{booking.vendor?.name || "Assigned Vendor"}</span>
@@ -169,7 +169,7 @@ export default function BookingsPage() {
 
                 {/* Bottom Row: Actions */}
                 <div className="flex items-center justify-between pt-4 border-t border-slate-50">
-                  <button className="flex items-center gap-2 text-rose-500 hover:text-rose-600 text-xs font-bold transition-colors focus:outline-none">
+                  <button className="flex items-center gap-2 text-[#FF7C71] hover:text-[#E5675D] text-xs font-bold transition-colors focus:outline-none">
                     <MessageCircle size={16} />
                     <span>Contact Professional</span>
                   </button>
@@ -180,7 +180,7 @@ export default function BookingsPage() {
                     </button>
                     <Link
                       href="/dashbord/bookings/track"
-                      className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold py-2.5 px-6 rounded-2xl transition-all shadow-sm shadow-rose-500/10 active:scale-[0.98] inline-block text-center"
+                      className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold py-2.5 px-6 rounded-2xl transition-all shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] inline-block text-center"
                     >
                       Track Order
                     </Link>
@@ -203,7 +203,7 @@ export default function BookingsPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

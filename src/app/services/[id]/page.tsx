@@ -28,7 +28,7 @@ export default function ServiceDetailPage({
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50/50">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-[#FF5A5F]" />
+          <Loader2 className="w-10 h-10 animate-spin text-[#FF7C71]" />
           <p className="text-sm font-semibold text-slate-500">Loading service details...</p>
         </div>
       </div>
@@ -50,7 +50,7 @@ export default function ServiceDetailPage({
           </p>
           <Link
             href="/services"
-            className="inline-flex items-center justify-center gap-2 bg-[#ff5a5f] hover:bg-[#e04a4f] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md cursor-pointer"
           >
             <ArrowLeft size={16} /> Back to Services
           </Link>

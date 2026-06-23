@@ -22,7 +22,7 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
   return (
     <Link
       href={`/categories/service/${service.slug || service.id}`}
-      className="group bg-white border border-[#e5e7eb] rounded-2xl overflow-hidden shadow-sm no-underline flex flex-col transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 hover:border-[#ff5a5f]"
+      className="group bg-white border border-[#e5e7eb] rounded-2xl overflow-hidden shadow-sm no-underline flex flex-col hover-card-premium"
     >
       <div className="relative h-48 overflow-hidden">
         <img
@@ -50,7 +50,7 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
           {service.description}
         </p>
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#f3f4f6]">
-          <span className="text-base font-extrabold text-[#ff5a5f]">
+          <span className="text-base font-extrabold text-[#FF7C71]">
             {service.priceDisplay}
           </span>
           <span className="flex items-center gap-1 text-[10px] font-semibold text-[#9ca3af]">

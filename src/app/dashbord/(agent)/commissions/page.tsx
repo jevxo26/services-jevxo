@@ -104,7 +104,7 @@ export default function CommissionPage() {
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
 
         {/* Withdrawable Balance card */}
-        <div className="bg-gradient-to-br from-rose-500 to-[#FF464C] text-white p-6 rounded-2xl shadow-lg shadow-rose-500/10 flex flex-col justify-between relative overflow-hidden min-h-[200px]">
+        <div className="bg-gradient-to-br from-rose-500 to-[#FF7C71] text-white p-6 rounded-2xl shadow-lg shadow-[#FF7C71]/10 flex flex-col justify-between relative overflow-hidden min-h-[200px]">
           <div className="absolute right-0 top-0 w-24 h-24 bg-white/5 rounded-bl-full flex items-center justify-center font-bold text-white/10 text-3xl">
             ৳
           </div>
@@ -118,7 +118,7 @@ export default function CommissionPage() {
         {/* Quick Withdraw Console */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2 space-y-4">
           <h3 className="text-base font-bold text-slate-800 flex items-center gap-2">
-            <ArrowDownRight className="text-[#FF5B60]" /> Request Immediate Payout
+            <ArrowDownRight className="text-[#FF7C71]" /> Request Immediate Payout
           </h3>
           <form onSubmit={handleWithdraw} className="grid grid-cols-1 sm:grid-cols-3 gap-4 items-end">
             <div className="sm:col-span-1">
@@ -128,7 +128,7 @@ export default function CommissionPage() {
                 placeholder="e.g. 1500"
                 value={withdrawAmount}
                 onChange={(e) => setWithdrawAmount(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                 required
               />
             </div>
@@ -150,7 +150,7 @@ export default function CommissionPage() {
             <button
               type="submit"
               disabled={requesting}
-              className="bg-rose-500 hover:bg-rose-600 disabled:opacity-70 text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md shadow-rose-500/10 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
+              className="bg-[#FF7C71] hover:bg-[#E5675D] disabled:opacity-70 text-white font-bold py-2.5 px-6 rounded-xl text-sm shadow-md shadow-[#FF7C71]/10 transition-all active:scale-[0.98] flex items-center justify-center gap-1.5"
             >
               {requesting ? <Loader2 size={16} className="animate-spin" /> : <Send size={16} />}
               Request Out
@@ -165,7 +165,7 @@ export default function CommissionPage() {
         <h3 className="text-lg font-bold text-slate-900">Payout Logs</h3>
         {loadingWithdraws ? (
           <div className="flex items-center justify-center h-32">
-            <Loader2 size={28} className="animate-spin text-rose-500" />
+            <Loader2 size={28} className="animate-spin text-[#FF7C71]" />
           </div>
         ) : myWithdraws.length > 0 ? (
           <CustomTable
@@ -189,7 +189,7 @@ export default function CommissionPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

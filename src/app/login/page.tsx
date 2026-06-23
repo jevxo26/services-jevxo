@@ -161,7 +161,7 @@ export default function LoginPage() {
 
           {/* Logo */}
           <Link href="/" className="inline-flex items-center gap-2.5 group w-fit">
-            <div className="w-10 h-10 bg-gradient-to-br from-[#FF565C] to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/30">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#FF7C71] to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/30">
               <Sparkles size={19} className="stroke-[2.5]" />
             </div>
             <span className="font-extrabold text-white text-2xl tracking-tight">Rajseba</span>
@@ -248,7 +248,7 @@ export default function LoginPage() {
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{
-            backgroundImage: "radial-gradient(circle, #FF565C 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #FF7C71 1px, transparent 1px)",
             backgroundSize: "28px 28px"
           }}
         />
@@ -258,10 +258,10 @@ export default function LoginPage() {
           {/* Mobile logo */}
           <div className="lg:hidden mb-10">
             <Link href="/" className="inline-flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-gradient-to-br from-[#FF565C] to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/25">
+              <div className="w-9 h-9 bg-gradient-to-br from-[#FF7C71] to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/25">
                 <Sparkles size={17} className="stroke-[2.5]" />
               </div>
-              <span className="font-extrabold text-[#FF565C] text-2xl tracking-tight">Rajseba</span>
+              <span className="font-extrabold text-[#FF7C71] text-2xl tracking-tight">Rajseba</span>
             </Link>
           </div>
 
@@ -333,7 +333,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-[#FF565C] to-rose-600 hover:from-[#FF464C] hover:to-rose-700 disabled:opacity-60 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 hover:shadow-rose-500/35 transition-all flex items-center justify-center gap-2 focus:outline-none active:scale-[0.99] mt-1"
+                  className="w-full bg-gradient-to-r from-[#FF7C71] to-rose-600 hover:from-[#FF7C71] hover:to-rose-700 disabled:opacity-60 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 hover:shadow-rose-500/35 transition-all flex items-center justify-center gap-2 focus:outline-none active:scale-[0.99] mt-1"
                 >
                   {isLoading ? (
                     <Loader2 size={18} className="animate-spin" />
@@ -376,7 +376,7 @@ export default function LoginPage() {
               {/* Sign up link */}
               <p className="text-center text-sm text-slate-500 font-medium mt-8">
                 Don't have an account?{" "}
-                <Link href="/signup" className="text-[#FF565C] hover:underline font-bold">
+                <Link href="/signup" className="text-[#FF7C71] hover:underline font-bold">
                   Create one free →
                 </Link>
               </p>
@@ -460,7 +460,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isVerifying || otp.join("").length < 4}
-                  className="w-full bg-gradient-to-r from-[#FF565C] to-rose-600 hover:from-[#FF464C] hover:to-rose-700 disabled:opacity-50 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 active:scale-[0.99] transition-all flex items-center justify-center gap-2 focus:outline-none"
+                  className="w-full bg-gradient-to-r from-[#FF7C71] to-rose-600 hover:from-[#FF7C71] hover:to-rose-700 disabled:opacity-50 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 active:scale-[0.99] transition-all flex items-center justify-center gap-2 focus:outline-none"
                 >
                   {isVerifying ? (
                     <Loader2 size={18} className="animate-spin" />

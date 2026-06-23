@@ -98,7 +98,7 @@ const Testimonials = () => {
         <div className="mb-10 text-center">
           <div className="flex items-center justify-center gap-3 mb-3">
             <div className="p-2 rounded-full bg-rose-50">
-              <MessageSquare className="w-6 h-6 text-[#FF5A5F]" />
+              <MessageSquare className="w-6 h-6 text-[#FF7C71]" />
             </div>
             <h2 className="text-3xl font-bold text-slate-800">
               Real Happy Customers, Real Stories
@@ -112,7 +112,7 @@ const Testimonials = () => {
         {/* Loading */}
         {isLoading && (
           <div className="flex justify-center py-12">
-            <Loader2 className="w-8 h-8 animate-spin text-[#FF5A5F]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
           </div>
         )}
 
@@ -146,7 +146,7 @@ const Testimonials = () => {
                         <p className="text-xs text-slate-500 mt-0.5">{test.location}</p>
                         <div className="flex gap-1 mt-1.5">
                           {[...Array(Math.min(test.rating || 5, 5))].map((_, i) => (
-                            <Star key={i} className="w-4 h-4 text-[#FF5A5F] fill-current" />
+                            <Star key={i} className="w-4 h-4 text-[#FF7C71] fill-current" />
                           ))}
                         </div>
                       </div>
@@ -170,7 +170,7 @@ const Testimonials = () => {
                 key={i}
                 onClick={() => setActiveIndex(i)}
                 className={`w-2 h-2 rounded-full transition-all ${
-                  i === activeIndex ? "bg-[#FF5A5F] w-6" : "bg-slate-300"
+                  i === activeIndex ? "bg-[#FF7C71] w-6" : "bg-slate-300"
                 }`}
                 aria-label={`Go to slide ${i + 1}`}
               />

@@ -72,7 +72,7 @@ export default function TopServices() {
         <div className="space-y-4 mb-8 md:mb-10">
           <div className="text-center">
             <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
-              <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-[#FF5A5F]" />
+              <Sparkles className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
               Top Rated Services
             </h2>
             <p className="text-slate-500 text-sm max-w-md mx-auto">
@@ -83,7 +83,7 @@ export default function TopServices() {
           <div className="flex justify-center md:justify-end">
             <Link
               href="/services"
-              className="rounded-xl flex items-center gap-2 px-5 py-2 bg-white hover:bg-[#FFF0F1] hover:text-[#FF5A5F] border border-slate-200 shadow-sm text-sm font-semibold transition-colors"
+              className="rounded-xl flex items-center gap-2 px-5 py-2 bg-white hover:bg-[#FFF8F7] hover:text-[#FF7C71] border border-slate-200 shadow-sm text-sm font-semibold transition-colors"
             >
               View All Services
             </Link>
@@ -93,7 +93,7 @@ export default function TopServices() {
         {/* Loading */}
         {isLoading && (
           <div className="flex justify-center items-center py-16">
-            <Loader2 className="w-8 h-8 animate-spin text-[#FF5A5F]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
           </div>
         )}
 
@@ -123,8 +123,7 @@ export default function TopServices() {
                 <motion.div
                   key={service.id}
                   variants={cardVariants}
-                  whileHover={{ y: -6 }}
-                  className="bg-white rounded-3xl overflow-hidden border border-slate-100 hover:border-[#FF5A5F]/20 shadow-sm hover:shadow-lg transition-all duration-300 group flex flex-col h-full"
+                  className="bg-white rounded-3xl overflow-hidden border border-slate-100 group flex flex-col h-full hover-card-premium"
                 >
                   {/* ── Illustration or image ── */}
                   <div className="relative">
@@ -164,7 +163,7 @@ export default function TopServices() {
                       aria-label="Add to wishlist"
                     >
                       <Heart
-                        className={`w-4 h-4 transition-colors ${liked[service.id] ? "fill-[#FF5A5F] text-[#FF5A5F]" : "text-slate-500"}`}
+                        className={`w-4 h-4 transition-colors ${liked[service.id] ? "fill-[#FF7C71] text-[#FF7C71]" : "text-slate-500"}`}
                       />
                     </Button>
                   </div>
@@ -176,8 +175,8 @@ export default function TopServices() {
                         <h3 className="font-extrabold text-slate-900 text-base leading-snug tracking-tight">
                           {service.name}
                         </h3>
-                        <div className="flex items-center gap-0.5 text-[#FF5A5F] font-black text-sm whitespace-nowrap">
-                          <Star className="w-3 h-3 fill-[#FF5A5F]" />
+                        <div className="flex items-center gap-0.5 text-[#FF7C71] font-black text-sm whitespace-nowrap">
+                          <Star className="w-3 h-3 fill-[#FF7C71]" />
                           <span>4.8</span>
                         </div>
                       </div>
@@ -198,7 +197,7 @@ export default function TopServices() {
                         )}
                       </div>
                       <Link href={`/categories/service/${slug}`}>
-                        <Button className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-4 py-2 h-auto rounded-xl transition-all cursor-pointer hover:scale-105 border-none shadow-md hover:shadow-lg">
+                        <Button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-4 py-2 h-auto rounded-xl transition-all cursor-pointer hover:scale-105 border-none shadow-md hover:shadow-lg">
                           Book Now
                         </Button>
                       </Link>

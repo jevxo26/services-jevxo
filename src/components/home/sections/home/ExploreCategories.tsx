@@ -86,7 +86,7 @@ const ExploreCategories = () => {
       <div className="space-y-4 mb-8 md:mb-10">
         <div className="text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2 flex items-center justify-center gap-2">
-            <LayoutGrid className="w-6 h-6 text-[#FF5A5F]" />
+            <LayoutGrid className="w-6 h-6 text-[#FF7C71]" />
             Explore Categories
           </h2>
           <p className="text-slate-500 text-sm max-w-md mx-auto">
@@ -98,7 +98,7 @@ const ExploreCategories = () => {
       {/* Loading state */}
       {isLoading && (
         <div className="flex justify-center items-center py-16">
-          <Loader2 className="w-8 h-8 animate-spin text-[#FF5A5F]" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
         </div>
       )}
 
@@ -134,7 +134,6 @@ const ExploreCategories = () => {
                   initial="hidden"
                   animate="visible"
                   exit="exit"
-                  whileHover={{ y: -8, scale: 1.025 }}
                   whileTap={{ scale: 0.97 }}
                   layout
                 >
@@ -147,9 +146,7 @@ const ExploreCategories = () => {
                         bg-gradient-to-br from-white to-[#e8eaed]
                         border border-white/80
                         cursor-pointer
-                        transition-all duration-300
-                        shadow-[8px_8px_20px_rgba(174,180,190,0.55),_-6px_-6px_16px_rgba(255,255,255,0.95)]
-                        hover:shadow-[12px_18px_30px_rgba(150,158,170,0.45),_-6px_-6px_18px_rgba(255,255,255,1)]
+                        hover-card-premium
                       "
                     >
                       {/* Gloss sheen */}

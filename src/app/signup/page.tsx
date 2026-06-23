@@ -226,7 +226,7 @@ export default function RegisterPage() {
                   </label>
                   <div className="relative group">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-                      <User size={18} className="text-gray-400 group-focus-within:text-[#FF565C] transition-colors" />
+                      <User size={18} className="text-gray-400 group-focus-within:text-[#FF7C71] transition-colors" />
                     </div>
                     <input
                       type="text"
@@ -234,7 +234,7 @@ export default function RegisterPage() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
-                      className="w-full pl-12 pr-4 py-3.5 rounded-[14px] bg-[#F3F4F6] border-2 border-transparent focus:bg-white focus:border-[#FF565C]/30 focus:ring-4 focus:ring-[#FF565C]/10 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-450 shadow-sm"
+                      className="w-full pl-12 pr-4 py-3.5 rounded-[14px] bg-[#F3F4F6] border-2 border-transparent focus:bg-white focus:border-[#FF7C71]/30 focus:ring-4 focus:ring-[#FF7C71]/10 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-450 shadow-sm"
                       required
                     />
                   </div>
@@ -247,7 +247,7 @@ export default function RegisterPage() {
                   </label>
                   <div className="relative group">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-                      <Mail size={18} className="text-gray-400 group-focus-within:text-[#FF565C] transition-colors" />
+                      <Mail size={18} className="text-gray-400 group-focus-within:text-[#FF7C71] transition-colors" />
                     </div>
                     <input
                       type="email"
@@ -255,7 +255,7 @@ export default function RegisterPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="name@company.com"
-                      className="w-full pl-12 pr-4 py-3.5 rounded-[14px] bg-[#F3F4F6] border-2 border-transparent focus:bg-white focus:border-[#FF565C]/30 focus:ring-4 focus:ring-[#FF565C]/10 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-450 shadow-sm"
+                      className="w-full pl-12 pr-4 py-3.5 rounded-[14px] bg-[#F3F4F6] border-2 border-transparent focus:bg-white focus:border-[#FF7C71]/30 focus:ring-4 focus:ring-[#FF7C71]/10 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-450 shadow-sm"
                       required
                     />
                   </div>
@@ -268,7 +268,7 @@ export default function RegisterPage() {
                   </label>
                   <div className="relative group">
                     <div className="absolute left-4 top-1/2 -translate-y-1/2 z-10">
-                      <Phone size={18} className="text-gray-400 group-focus-within:text-[#FF565C] transition-colors" />
+                      <Phone size={18} className="text-gray-400 group-focus-within:text-[#FF7C71] transition-colors" />
                     </div>
                     <input
                       type="tel"
@@ -276,7 +276,7 @@ export default function RegisterPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="+1(555) 000-0000"
-                      className="w-full pl-12 pr-4 py-3.5 rounded-[14px] bg-[#F3F4F6] border-2 border-transparent focus:bg-white focus:border-[#FF565C]/30 focus:ring-4 focus:ring-[#FF565C]/10 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-450 shadow-sm"
+                      className="w-full pl-12 pr-4 py-3.5 rounded-[14px] bg-[#F3F4F6] border-2 border-transparent focus:bg-white focus:border-[#FF7C71]/30 focus:ring-4 focus:ring-[#FF7C71]/10 focus:outline-none transition-all text-sm text-gray-800 placeholder-gray-450 shadow-sm"
                       required
                     />
                   </div>
@@ -289,16 +289,16 @@ export default function RegisterPage() {
                     id="agreeTerms"
                     checked={agreeTerms}
                     onChange={(e) => setAgreeTerms(e.target.checked)}
-                    className="w-4 h-4 rounded border-2 border-gray-300 text-[#FF565C] focus:ring-[#FF565C]/30 focus:ring-2 accent-[#FF565C] cursor-pointer"
+                    className="w-4 h-4 rounded border-2 border-gray-300 text-[#FF7C71] focus:ring-[#FF7C71]/30 focus:ring-2 accent-[#FF7C71] cursor-pointer"
                     required
                   />
                   <label htmlFor="agreeTerms" className="text-xs text-gray-500 font-medium select-none cursor-pointer">
                     I agree to the{" "}
-                    <Link href="#" className="text-[#FF565C] hover:underline font-semibold">
+                    <Link href="#" className="text-[#FF7C71] hover:underline font-semibold">
                       Terms of Use
                     </Link>{" "}
                     and{" "}
-                    <Link href="#" className="text-[#FF565C] hover:underline font-semibold">
+                    <Link href="#" className="text-[#FF7C71] hover:underline font-semibold">
                       Privacy Policy
                     </Link>
                     .
@@ -309,7 +309,7 @@ export default function RegisterPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-[#FF565C] to-rose-600 hover:from-[#FF464C] hover:to-rose-700 disabled:from-[#FF565C]/70 disabled:to-rose-600/70 text-white text-sm font-bold py-3.5 rounded-[14px] shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 transition-all focus:outline-none mt-2 flex justify-center items-center gap-2 active:scale-[0.99]"
+                  className="w-full bg-gradient-to-r from-[#FF7C71] to-rose-600 hover:from-[#FF7C71] hover:to-rose-700 disabled:from-[#FF7C71]/70 disabled:to-rose-600/70 text-white text-sm font-bold py-3.5 rounded-[14px] shadow-lg shadow-rose-500/25 hover:shadow-rose-500/40 transition-all focus:outline-none mt-2 flex justify-center items-center gap-2 active:scale-[0.99]"
                 >
                   {isLoading ? (
                     <Loader2 size={18} className="animate-spin" />
@@ -326,7 +326,7 @@ export default function RegisterPage() {
             {/* Footer Login Info */}
             <div className="text-center text-sm text-gray-500 font-medium relative z-10 pt-4">
               Already have an account?{" "}
-              <Link href="/login" className="text-[#FF565C] hover:underline font-bold ml-1">
+              <Link href="/login" className="text-[#FF7C71] hover:underline font-bold ml-1">
                 Login
               </Link>
             </div>
@@ -346,7 +346,7 @@ export default function RegisterPage() {
               <div className="bg-white/90 backdrop-blur-md p-6 rounded-[32px] border border-white/20 shadow-xl space-y-6">
 
                 <div className="flex gap-4 items-center">
-                  <div className="w-14 h-14 bg-gradient-to-br from-[#FF565C] to-rose-600 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-rose-500/25">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#FF7C71] to-rose-600 rounded-2xl flex items-center justify-center text-white shrink-0 shadow-lg shadow-rose-500/25">
                     <Home size={22} className="stroke-[2.5]" />
                   </div>
                   <div>
@@ -358,21 +358,21 @@ export default function RegisterPage() {
                 <div className="grid grid-cols-3 gap-2 pt-4 border-t border-slate-200/60 text-center">
                   <div>
                     <div className="flex items-center justify-center gap-1 mb-1">
-                      <Users size={16} className="text-[#FF565C]" />
+                      <Users size={16} className="text-[#FF7C71]" />
                       <span className="text-2xl font-black text-slate-800">50k+</span>
                     </div>
                     <span className="text-[9px] text-slate-450 font-extrabold uppercase tracking-widest mt-1.5 block">Active Users</span>
                   </div>
                   <div className="border-x border-slate-200/60">
                     <div className="flex items-center justify-center gap-1 mb-1">
-                      <Star size={16} className="text-[#FF565C]" />
+                      <Star size={16} className="text-[#FF7C71]" />
                       <span className="text-2xl font-black text-slate-800">4.9/5</span>
                     </div>
                     <span className="text-[9px] text-slate-450 font-extrabold uppercase tracking-widest mt-1.5 block">Avg Rating</span>
                   </div>
                   <div>
                     <div className="flex items-center justify-center gap-1 mb-1">
-                      <Award size={16} className="text-[#FF565C]" />
+                      <Award size={16} className="text-[#FF7C71]" />
                       <span className="text-2xl font-black text-slate-800">120+</span>
                     </div>
                     <span className="text-[9px] text-slate-450 font-extrabold uppercase tracking-widest mt-1.5 block">Expert Categories</span>
@@ -399,7 +399,7 @@ export default function RegisterPage() {
           />
 
           <div className="w-full max-w-[460px] bg-white/95 backdrop-blur-md p-8 sm:p-12 rounded-[40px] border border-slate-100 shadow-xl text-center space-y-7 relative z-10 animate-in zoom-in duration-300">
-            <div className="w-14 h-14 bg-rose-50 rounded-full flex items-center justify-center text-[#FF565C] mx-auto">
+            <div className="w-14 h-14 bg-rose-50 rounded-full flex items-center justify-center text-[#FF7C71] mx-auto">
               <ShieldCheck size={26} className="stroke-[2.5]" />
             </div>
 
@@ -422,7 +422,7 @@ export default function RegisterPage() {
                     ref={(el) => { otpInputsRef.current[idx] = el }}
                     onChange={(e) => handleOtpChange(e.target.value, idx)}
                     onKeyDown={(e) => handleOtpKeyDown(e.key, idx)}
-                    className="w-12 h-12 rounded-xl border-2 border-slate-200 bg-slate-50/60 focus:bg-white text-center text-lg font-black focus:outline-none focus:border-[#FF565C]/50 focus:ring-4 focus:ring-rose-500/10 outline-none transition-all text-slate-800 shadow-sm"
+                    className="w-12 h-12 rounded-xl border-2 border-slate-200 bg-slate-50/60 focus:bg-white text-center text-lg font-black focus:outline-none focus:border-[#FF7C71]/50 focus:ring-4 focus:ring-rose-500/10 outline-none transition-all text-slate-800 shadow-sm"
                     required
                   />
                 ))}
@@ -436,7 +436,7 @@ export default function RegisterPage() {
                   <button
                     type="button"
                     onClick={handleResendOtp}
-                    className="text-[#FF565C] hover:underline font-black focus:outline-none"
+                    className="text-[#FF7C71] hover:underline font-black focus:outline-none"
                   >
                     Resend Code
                   </button>
@@ -447,7 +447,7 @@ export default function RegisterPage() {
               <button
                 type="submit"
                 disabled={isVerifying}
-                className="w-full bg-gradient-to-r from-[#FF565C] to-rose-600 hover:from-[#FF464C] hover:to-rose-700 disabled:from-[#FF565C]/70 disabled:to-rose-600/70 text-white text-sm font-black py-4 rounded-[14px] shadow-lg shadow-rose-500/25 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 focus:outline-none"
+                className="w-full bg-gradient-to-r from-[#FF7C71] to-rose-600 hover:from-[#FF7C71] hover:to-rose-700 disabled:from-[#FF7C71]/70 disabled:to-rose-600/70 text-white text-sm font-black py-4 rounded-[14px] shadow-lg shadow-rose-500/25 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 focus:outline-none"
               >
                 {isVerifying ? (
                   <Loader2 size={18} className="animate-spin" />

@@ -58,7 +58,7 @@ export default function WhyChooseUs() {
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         <div className="mb-10 md:mb-12 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
-            <ShieldCheck className="w-6 h-6 md:w-8 md:h-8 text-[#FF5A5F]" />
+            <ShieldCheck className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
             {WHY_CHOOSE_US_CONTENT.title}
           </h2>
 
@@ -80,7 +80,6 @@ export default function WhyChooseUs() {
               <motion.div
                 key={feature.title}
                 variants={itemVariants}
-                whileHover={{ y: -8, scale: 1.025 }}
                 whileTap={{ scale: 0.97 }}
                 className="
                   group relative overflow-hidden
@@ -90,9 +89,7 @@ export default function WhyChooseUs() {
                   bg-gradient-to-br from-white to-[#e8eaed]
                   border border-white/80
                   cursor-default
-                  transition-all duration-300
-                  shadow-[8px_8px_20px_rgba(174,180,190,0.55),_-6px_-6px_16px_rgba(255,255,255,0.95)]
-                  hover:shadow-[12px_18px_30px_rgba(150,158,170,0.45),_-6px_-6px_18px_rgba(255,255,255,1)]
+                  hover-card-premium
                 "
               >
                 {/* Top gloss sheen */}

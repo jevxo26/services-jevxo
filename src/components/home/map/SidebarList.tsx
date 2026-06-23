@@ -74,7 +74,7 @@ export default function SidebarList({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search services in Dhaka..."
-            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#FF5A5F] focus:ring-1 focus:ring-red-200 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71] focus:ring-1 focus:ring-red-200 transition-all"
           />
         </div>
 
@@ -90,8 +90,8 @@ export default function SidebarList({
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-1.5 h-auto rounded-full text-xs font-bold whitespace-nowrap tracking-wide border transition-all duration-200 cursor-pointer flex-shrink-0 hover:bg-slate-50 ${
                 selectedCategory === cat
-                  ? "bg-[#FF5A5F] border-[#FF5A5F] text-white shadow-sm hover:bg-[#FF5A5F] hover:text-white"
-                  : "bg-white border-slate-200 text-slate-600 hover:border-[#FF5A5F] hover:text-[#FF5A5F]"
+                  ? "bg-[#FF7C71] border-[#FF7C71] text-white shadow-sm hover:bg-[#FF7C71] hover:text-white"
+                  : "bg-white border-slate-200 text-slate-600 hover:border-[#FF7C71] hover:text-[#FF7C71]"
               }`}
             >
               {cat}
@@ -106,7 +106,7 @@ export default function SidebarList({
               onClick={() => setActiveTab("map")}
               className={`flex-1 py-1 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
                 activeTab === "map"
-                  ? "bg-[#FF5A5F] hover:bg-[#FF5A5F]/90 text-white shadow-sm"
+                  ? "bg-[#FF7C71] hover:bg-[#FF7C71]/90 text-white shadow-sm"
                   : "text-slate-500 hover:text-slate-800"
               }`}
             >
@@ -155,7 +155,7 @@ export default function SidebarList({
                 onClick={() => setSelectedExpertId(expert.id)}
                 className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between relative bg-white ${
                   isSelected
-                    ? "border-[#FF5A5F] shadow-[0_8px_30px_rgb(255,90,95,0.06)] ring-1 ring-red-100"
+                    ? "border-[#FF7C71] shadow-[0_8px_30px_rgb(255,90,95,0.06)] ring-1 ring-red-100"
                     : "border-slate-100 hover:border-slate-300 shadow-sm"
                 }`}
               >
@@ -167,7 +167,7 @@ export default function SidebarList({
 
                 {/* Top: Header Metadata */}
                 <div>
-                  <span className="text-[10px] font-extrabold tracking-wider bg-rose-50 border border-rose-100 text-[#FF5A5F] px-2.5 py-0.5 rounded-full inline-block mb-2 uppercase">
+                  <span className="text-[10px] font-extrabold tracking-wider bg-rose-50 border border-rose-100 text-[#FF7C71] px-2.5 py-0.5 rounded-full inline-block mb-2 uppercase">
                     {expert.category}
                   </span>
                   
@@ -190,7 +190,7 @@ export default function SidebarList({
                   
                   <div className="font-black text-slate-900 text-right">
                     <span className="text-[10px] text-slate-400 font-bold block">STARTING AT</span>
-                    <span className="text-[#FF5A5F] text-sm font-black">৳{expert.price}+</span>
+                    <span className="text-[#FF7C71] text-sm font-black">৳{expert.price}+</span>
                   </div>
                 </div>
               </div>

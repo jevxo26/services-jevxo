@@ -82,7 +82,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#FAF6F6] text-slate-600 border-t border-slate-200">
+    <footer className="bg-[#FFF8F7] text-slate-600 border-t border-slate-200">
       <div className="max-w-7xl mx-auto px-4 md:px-6 pt-12 pb-10">
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-8 md:gap-10">
 
@@ -109,9 +109,9 @@ export default function Footer() {
                 <li key={label}>
                   <a
                     href={href}
-                    className="flex items-center gap-3 text-sm text-slate-500 hover:text-[#FF5A5F] transition-colors group"
+                    className="flex items-center gap-3 text-sm text-slate-500 hover:text-[#FF7C71] transition-colors group"
                   >
-                    <span className="w-8 h-8 rounded-xl bg-white border border-slate-200 flex items-center justify-center flex-shrink-0 group-hover:border-[#FF5A5F]">
+                    <span className="w-8 h-8 rounded-xl bg-white border border-slate-200 flex items-center justify-center flex-shrink-0 group-hover:border-[#FF7C71]">
                       <Icon className="w-4 h-4" />
                     </span>
                     {label}
@@ -129,8 +129,8 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 {SERVICES.map((s) => (
                   <li key={s.label}>
-                    <Link href={s.href} className="text-slate-500 hover:text-[#FF5A5F] hover:font-semibold hover:underline flex items-center gap-2 group">
-                      <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-[#FF5A5F]" />
+                    <Link href={s.href} className="text-slate-500 hover:text-[#FF7C71] hover:font-semibold hover:underline flex items-center gap-2 group">
+                      <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-[#FF7C71]" />
                       {s.label}
                     </Link>
                   </li>
@@ -143,8 +143,8 @@ export default function Footer() {
               <ul className="space-y-2 text-sm">
                 {QUICK_LINKS.map((l) => (
                   <li key={l.label}>
-                    <Link href={l.href} className="text-slate-500 hover:text-[#FF5A5F] hover:font-semibold hover:underline flex items-center gap-2 group">
-                      <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-[#FF5A5F]" />
+                    <Link href={l.href} className="text-slate-500 hover:text-[#FF7C71] hover:font-semibold hover:underline flex items-center gap-2 group">
+                      <span className="w-1 h-1 rounded-full bg-slate-300 group-hover:bg-[#FF7C71]" />
                       {l.label}
                     </Link>
                   </li>
@@ -171,7 +171,7 @@ export default function Footer() {
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Your email address"
                     required
-                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-sm focus:border-[#FF5A5F] outline-none"
+                    className="w-full px-4 py-3 rounded-2xl border border-slate-200 bg-white text-sm focus:border-[#FF7C71] outline-none"
                   />
                   <Button type="submit" className="w-full bg-primary hover:bg-primary/90 py-3 h-auto rounded-2xl text-sm font-semibold">
                     Subscribe
@@ -217,7 +217,7 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-slate-200 bg-white py-5">
+      <div className="border-t border-slate-200 bg-[#FFF8F7] py-5">
         <div className="max-w-7xl mx-auto px-4 md:px-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-slate-500">
           <div className="text-center sm:text-left">
             © {new Date().getFullYear()} <span className="font-bold">Rajseba</span>. All rights reserved.
@@ -230,7 +230,7 @@ export default function Footer() {
           </div>
 
           <div className="flex items-center gap-3">
-            <a href="https://rajseba.com" target="_blank" aria-label="Visit website" className="w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center hover:text-[#FF5A5F]">
+            <a href="https://rajseba.com" target="_blank" aria-label="Visit website" className="w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center hover:text-[#FF7C71]">
               <Globe size={16} />
             </a>
             <Button
@@ -243,12 +243,12 @@ export default function Footer() {
                   toast.success("Link copied!");
                 }
               }}
-              className="w-9 h-9 p-0 bg-slate-100 hover:bg-slate-200 rounded-full hover:text-[#FF5A5F]"
+              className="w-9 h-9 p-0 bg-slate-100 hover:bg-slate-200 rounded-full hover:text-[#FF7C71]"
               aria-label="Share"
             >
               <Share2 size={16} />
             </Button>
-            <Link href="/dashboard/support" aria-label="Support chat" className="w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center hover:text-[#FF5A5F]">
+            <Link href="/dashboard/support" aria-label="Support chat" className="w-9 h-9 bg-slate-100 hover:bg-slate-200 rounded-full flex items-center justify-center hover:text-[#FF7C71]">
               <MessageSquare size={16} />
             </Link>
           </div>

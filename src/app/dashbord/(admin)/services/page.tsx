@@ -220,7 +220,7 @@ export default function AdminServicesManagementPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4"><ShieldAlert size={48} /></div>
+        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4"><ShieldAlert size={48} /></div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
         <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Administrators only.</p>
       </div>
@@ -233,7 +233,7 @@ export default function AdminServicesManagementPage() {
       header: "Service Details",
       render: (item: Service) => (
         <div className="flex items-center gap-3">
-          <div className="w-12 h-12 bg-rose-50 text-rose-500 rounded-2xl flex items-center justify-center overflow-hidden shrink-0 border border-rose-100/40">
+          <div className="w-12 h-12 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl flex items-center justify-center overflow-hidden shrink-0 border border-[#FFEBE9]/40">
             {item.image ? (
               <img src={item.image} alt={item.name} className="w-full h-full object-cover" />
             ) : (
@@ -312,7 +312,7 @@ export default function AdminServicesManagementPage() {
       {/* Table */}
       {isServicesLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-premium">
-          <div className="w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : services.length === 0 ? (
         <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -321,7 +321,7 @@ export default function AdminServicesManagementPage() {
           </div>
           <h3 className="text-base font-bold text-slate-800">No Services Found</h3>
           <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">Start by creating your first service.</p>
-          <button onClick={openCreateModal} className="mt-4 bg-rose-50 hover:bg-rose-100 text-rose-500 font-bold px-4 py-2 rounded-xl text-xs transition-all">
+          <button onClick={openCreateModal} className="mt-4 bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#FF7C71] font-bold px-4 py-2 rounded-xl text-xs transition-all">
             Add New Service
           </button>
         </div>
@@ -335,7 +335,7 @@ export default function AdminServicesManagementPage() {
           <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="p-6 border-b border-slate-100 flex items-center justify-between">
               <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
-                <Sparkles className="text-rose-500" size={20} />
+                <Sparkles className="text-[#FF7C71]" size={20} />
                 {editingItem ? "Edit Service" : "Create New Service"}
               </h2>
               <button onClick={() => setIsModalOpen(false)} className="p-1.5 hover:bg-slate-100 rounded-lg text-slate-400 hover:text-slate-600 transition-all">
@@ -400,7 +400,7 @@ export default function AdminServicesManagementPage() {
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
                   rows={2}
-                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/10 focus-visible:border-rose-400/80 transition-all w-full"
+                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7C71]/20/10 focus-visible:border-rose-400/80 transition-all w-full"
                 />
               </div>
               <div>
@@ -410,7 +410,7 @@ export default function AdminServicesManagementPage() {
                   value={overview}
                   onChange={(e) => setOverview(e.target.value)}
                   rows={2}
-                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/10 focus-visible:border-rose-400/80 transition-all w-full"
+                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7C71]/20/10 focus-visible:border-rose-400/80 transition-all w-full"
                 />
               </div>
               <div>
@@ -420,7 +420,7 @@ export default function AdminServicesManagementPage() {
                   value={details}
                   onChange={(e) => setDetails(e.target.value)}
                   rows={3}
-                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/10 focus-visible:border-rose-400/80 transition-all w-full"
+                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7C71]/20/10 focus-visible:border-rose-400/80 transition-all w-full"
                 />
               </div>
               
@@ -434,7 +434,7 @@ export default function AdminServicesManagementPage() {
                 <div className="space-y-3">
                   {faq.map((f, i) => (
                     <div key={i} className="flex flex-col gap-2 p-3 bg-slate-50 rounded-xl border border-slate-100 relative">
-                      <button type="button" onClick={() => setFaq(faq.filter((_, idx) => idx !== i))} className="absolute -top-2 -right-2 bg-rose-100 text-rose-500 hover:bg-rose-500 hover:text-white rounded-full p-1 transition-colors">
+                      <button type="button" onClick={() => setFaq(faq.filter((_, idx) => idx !== i))} className="absolute -top-2 -right-2 bg-[#FFEBE9] text-[#FF7C71] hover:bg-[#FF7C71] hover:text-white rounded-full p-1 transition-colors">
                         <X size={12} />
                       </button>
                       <Input placeholder="Question" value={f.question} onChange={(e) => {
@@ -507,7 +507,7 @@ export default function AdminServicesManagementPage() {
               <p className="text-sm text-slate-500 max-w-xs mx-auto">Are you sure you want to delete this service? All nested services and packages under it may also be affected.</p>
               <div className="pt-4 border-t border-slate-100 flex justify-end gap-3">
                 <button type="button" onClick={() => { setIsDeleteModalOpen(false); setItemToDelete(null); }} className="px-4 py-2 text-sm font-bold text-slate-500 hover:bg-slate-50 rounded-xl transition-all">Cancel</button>
-                <button onClick={handleDelete} className="bg-[#FF464C] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10">Delete</button>
+                <button onClick={handleDelete} className="bg-[#FF7C71] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10">Delete</button>
               </div>
             </div>
           </div>

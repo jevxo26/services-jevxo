@@ -100,7 +100,7 @@ export function Experts({ employees }: { employees?: any[] }) {
                   <p className="text-slate-600 text-sm mb-4">{expert.title}</p>
 
                   <div className="flex items-center justify-center gap-1 mb-1">
-                    <Star className="w-5 h-5 fill-[#FF5A5F] text-[#FF5A5F]" />
+                    <Star className="w-5 h-5 fill-[#FF7C71] text-[#FF7C71]" />
                     <span className="font-bold text-lg text-slate-900">
                       {expert.rating}
                     </span>

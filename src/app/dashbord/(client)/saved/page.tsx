@@ -101,7 +101,7 @@ export default function SavedServicesPage() {
                 />
                 <button
                   onClick={() => handleUnsave(service.id)}
-                  className="absolute top-4 right-4 p-2 bg-white rounded-full text-[#FF464C] hover:scale-110 transition-transform shadow-md focus:outline-none"
+                  className="absolute top-4 right-4 p-2 bg-white rounded-full text-[#FF7C71] hover:scale-110 transition-transform shadow-md focus:outline-none"
                 >
                   <Heart size={14} className="fill-current" />
                 </button>
@@ -122,11 +122,11 @@ export default function SavedServicesPage() {
                 <div className="flex items-center justify-between pt-3 border-t border-slate-50">
                   <div>
                     <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-wider block">Starts From</span>
-                    <span className="text-sm font-black text-[#FF464C]">{service.price}</span>
+                    <span className="text-sm font-black text-[#FF7C71]">{service.price}</span>
                   </div>
                   <Link
                     href="/dashbord/quick-booking"
-                    className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm shadow-rose-500/10 active:scale-[0.98]"
+                    className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold px-4 py-2 rounded-xl transition-all shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98]"
                   >
                     Book Now
                   </Link>
@@ -138,7 +138,7 @@ export default function SavedServicesPage() {
           {/* Discover More Card */}
           <div className="bg-white/80 backdrop-blur-md rounded-3xl border border-dashed border-slate-200 p-6 flex flex-col justify-between items-center text-center shadow-sm">
             <div className="my-auto space-y-4">
-              <div className="w-12 h-12 bg-rose-50 rounded-full flex items-center justify-center text-[#FF464C] mx-auto border border-rose-100">
+              <div className="w-12 h-12 bg-[#FFF8F7] rounded-full flex items-center justify-center text-[#FF7C71] mx-auto border border-[#FFEBE9]">
                 <Plus size={20} />
               </div>
               <div className="space-y-1.5">
@@ -151,7 +151,7 @@ export default function SavedServicesPage() {
             
             <Link
               href="/dashbord/quick-booking"
-              className="mt-6 w-full bg-white hover:bg-slate-50 border border-slate-100 text-[#FF464C] text-xs font-bold py-2.5 rounded-2xl transition-colors text-center"
+              className="mt-6 w-full bg-white hover:bg-slate-50 border border-slate-100 text-[#FF7C71] text-xs font-bold py-2.5 rounded-2xl transition-colors text-center"
             >
               Find More Services
             </Link>
@@ -165,7 +165,7 @@ export default function SavedServicesPage() {
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">Recently Viewed</h2>
               <p className="text-xs text-slate-400 mt-0.5 font-semibold">Services you explored in the last 24 hours.</p>
             </div>
-            <Link href="/dashbord/quick-booking" className="text-xs font-bold text-rose-500 hover:underline flex items-center gap-0.5">
+            <Link href="/dashbord/quick-booking" className="text-xs font-bold text-[#FF7C71] hover:underline flex items-center gap-0.5">
               View All <ChevronRight size={12} />
             </Link>
           </div>
@@ -193,9 +193,9 @@ export default function SavedServicesPage() {
             {recentlyViewed.length > 0 ? (
               <button
                 onClick={handleClearHistory}
-                className="bg-white/80 p-3 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-4 hover:bg-rose-50/20 group transition-all text-left focus:outline-none w-full"
+                className="bg-white/80 p-3 rounded-[24px] border border-slate-100 shadow-sm flex items-center gap-4 hover:bg-[#FFF8F7]/20 group transition-all text-left focus:outline-none w-full"
               >
-                <div className="w-16 h-16 bg-rose-50 rounded-2xl flex items-center justify-center text-[#FF464C] group-hover:scale-105 transition-transform shrink-0">
+                <div className="w-16 h-16 bg-[#FFF8F7] rounded-2xl flex items-center justify-center text-[#FF7C71] group-hover:scale-105 transition-transform shrink-0">
                   <History size={24} />
                 </div>
                 <div>
@@ -219,7 +219,7 @@ export default function SavedServicesPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

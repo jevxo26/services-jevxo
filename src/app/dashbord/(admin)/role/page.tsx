@@ -85,7 +85,7 @@ export default function RoleManagementPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
@@ -147,7 +147,7 @@ export default function RoleManagementPage() {
         <div className="flex items-center justify-end gap-2">
           <button
             onClick={() => handleDelete(r.id)}
-            className="bg-rose-50 hover:bg-rose-100 text-rose-600 text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
+            className="bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#E5675D] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
           >
             <Trash2 size={14} /> Delete
           </button>
@@ -196,7 +196,7 @@ export default function RoleManagementPage() {
             <form onSubmit={handleCreateRole} className="space-y-4">
               <div>
                 <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Role Name</label>
-                <select name="name" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all">
+                <select name="name" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all">
                   <option value="" disabled selected>Select Role Name</option>
                   <option value="Super Admin">Super Admin</option>
                   <option value="Agent">Agent</option>

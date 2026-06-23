@@ -20,11 +20,11 @@ const STATUS_CONFIG: Record<
 > = {
   confirmed: {
     label: "Confirmed",
-    pillBg: "bg-[#FFF0F1]",
-    pillText: "text-[#D6363B]",
-    borderColor: "border-l-[#FF5A5F]",
-    iconBg: "bg-[#FFF0F1]",
-    iconText: "text-[#D6363B]",
+    pillBg: "bg-[#FFF8F7]",
+    pillText: "text-[#E5675D]",
+    borderColor: "border-l-[#FF7C71]",
+    iconBg: "bg-[#FFF8F7]",
+    iconText: "text-[#E5675D]",
   },
   assigned: {
     label: "Assigned",
@@ -145,15 +145,15 @@ export default function BookingsPage() {
           {getStats().map((stat) => (
             <div
               key={stat.label}
-              className="rounded-xl bg-[#FFF0F1] px-4 py-3"
+              className="rounded-xl bg-[#FFF8F7] px-4 py-3"
             >
-              <p className="text-xs font-medium uppercase tracking-wide text-[#D6363B] opacity-70">
+              <p className="text-xs font-medium uppercase tracking-wide text-[#E5675D] opacity-70">
                 {stat.label}
               </p>
-              <p className="mt-1 text-xl font-semibold text-[#D6363B]">
+              <p className="mt-1 text-xl font-semibold text-[#E5675D]">
                 {stat.value}
               </p>
-              <p className="text-xs text-[#FF5A5F] opacity-60">{stat.sub}</p>
+              <p className="text-xs text-[#FF7C71] opacity-60">{stat.sub}</p>
             </div>
           ))}
         </div>
@@ -165,8 +165,8 @@ export default function BookingsPage() {
               key={f.value}
               onClick={() => setActiveFilter(f.value)}
               className={`rounded-full px-4 py-1.5 text-sm font-medium transition-all ${activeFilter === f.value
-                  ? "bg-[#FF5A5F] text-white shadow-sm"
-                  : "bg-[#FFF0F1] text-[#D6363B] hover:bg-[#FFE4E6]"
+                  ? "bg-[#FF7C71] text-white shadow-sm"
+                  : "bg-[#FFF8F7] text-[#E5675D] hover:bg-[#FFEBE9]"
                 }`}
             >
               {f.label}
@@ -190,7 +190,7 @@ export default function BookingsPage() {
         <div className="flex flex-col gap-3">
           {isLoading ? (
             <div className="py-16 text-center text-[var(--text-secondary)]">
-              <div className="w-8 h-8 border-2 border-[#FF5A5F] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-[#FF7C71] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
               Loading bookings...
             </div>
           ) : filtered.length === 0 ? (
@@ -233,7 +233,7 @@ export default function BookingsPage() {
                     </span>
                     <button 
                       onClick={() => setSelectedBooking(booking)}
-                      className="rounded-lg border border-[var(--border-light)] px-4 py-1.5 text-xs font-bold text-[var(--text-secondary)] transition-colors hover:border-[#FF5A5F] hover:text-[#FF5A5F] bg-slate-50 hover:bg-white"
+                      className="rounded-lg border border-[var(--border-light)] px-4 py-1.5 text-xs font-bold text-[var(--text-secondary)] transition-colors hover:border-[#FF7C71] hover:text-[#FF7C71] bg-slate-50 hover:bg-white"
                     >
                       View Details
                     </button>

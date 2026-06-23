@@ -22,7 +22,7 @@ const specializedServices: SpecializedService[] = [
     description:
       "Non-invasive ultrasonic leak detection for hidden pipes. We fix everything from dripping faucets to underground line bursts.",
     price: "৳800/hr",
-    icon: <Droplet className="w-7 h-7 text-[#FF5A5F]" />,
+    icon: <Droplet className="w-7 h-7 text-[#FF7C71]" />,
     type: "normal",
   },
   {
@@ -65,7 +65,7 @@ export function SpecializedServices({ nestedServices }: { nestedServices?: any[]
           price: (ns.starting_price || ns.price) ? `৳${ns.starting_price || ns.price}` : undefined,
           priceLabel: undefined as string | undefined,
           type: isEmergency ? "emergency" as const : "normal" as const,
-          icon: <Droplet className="w-7 h-7 text-[#FF5A5F]" />,
+          icon: <Droplet className="w-7 h-7 text-[#FF7C71]" />,
           ctaText: isEmergency ? "Call Hotline" : undefined,
         };
       })
@@ -86,7 +86,7 @@ export function SpecializedServices({ nestedServices }: { nestedServices?: any[]
           </div>
           <Link
             href="/services"
-            className="text-[#FF5A5F] hover:text-[#e04a4f] font-medium flex items-center gap-1 mt-4 md:mt-0 text-sm group"
+            className="text-[#FF7C71] hover:text-[#E5675D] font-medium flex items-center gap-1 mt-4 md:mt-0 text-sm group"
           >
             View All Services{" "}
             <span className="group-hover:translate-x-1 transition">→</span>
@@ -112,11 +112,11 @@ export function SpecializedServices({ nestedServices }: { nestedServices?: any[]
 
                     {/* Subtle Glow Effects */}
                     <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                      <div className="absolute top-0 right-10 w-50 h-50 bg-[#FF5A5F]/33 rounded-full blur-[66px]" />
+                      <div className="absolute top-0 right-10 w-50 h-50 bg-[#FF7C71]/33 rounded-full blur-[66px]" />
                     </div>
 
                     <div className="flex flex-wrap gap-3 mt-auto">
-                      <button className="bg-[#FF5A5F] hover:bg-[#e04a4f] px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 transition">
+                      <button className="bg-[#FF7C71] hover:bg-[#E5675D] px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 transition">
                         <Phone className="w-5 h-5" />
                         {service.ctaText || "Call Hotline"}
                       </button>
@@ -127,7 +127,7 @@ export function SpecializedServices({ nestedServices }: { nestedServices?: any[]
 
                     {/* 60 Minute Badge */}
                     <div className="absolute bottom-8 right-8 text-right">
-                      <div className="text-7xl font-bold text-[#FF5A5F] leading-none">
+                      <div className="text-7xl font-bold text-[#FF7C71] leading-none">
                         60
                       </div>
                       <div className="text-sm uppercase tracking-[2px] text-slate-400">
@@ -169,13 +169,13 @@ export function SpecializedServices({ nestedServices }: { nestedServices?: any[]
                       {service.priceLabel && (
                         <span className="text-slate-500 text-sm">From </span>
                       )}
-                      <span className="text-[#FF5A5F] font-bold text-2xl">
+                      <span className="text-[#FF7C71] font-bold text-2xl">
                         {service.price}
                       </span>
                     </div>
                   )}
 
-                  <button className="bg-[#FF5A5F] hover:bg-[#e04a4f] text-white px-6 py-2.5 rounded-full text-sm font-semibold transition">
+                  <button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white px-6 py-2.5 rounded-full text-sm font-semibold transition">
                     Book Now
                   </button>
                 </div>

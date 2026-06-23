@@ -121,7 +121,7 @@ export default function BookingTrackWizard() {
               <div className="flex items-center gap-3 z-10">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-black transition-all ${
-                    step >= 1 ? "bg-[#FF5B60] text-white" : "bg-slate-100 text-slate-400"
+                    step >= 1 ? "bg-[#FF7C71] text-white" : "bg-slate-100 text-slate-400"
                   }`}
                 >
                   {step > 1 ? <Check size={16} className="stroke-[3]" /> : "1"}
@@ -131,13 +131,13 @@ export default function BookingTrackWizard() {
                 </span>
               </div>
 
-              <div className={`flex-1 h-[2px] mx-4 transition-colors ${step >= 2 ? "bg-[#FF5B60]" : "bg-slate-100"}`} />
+              <div className={`flex-1 h-[2px] mx-4 transition-colors ${step >= 2 ? "bg-[#FF7C71]" : "bg-slate-100"}`} />
 
               {/* Step 2 */}
               <div className="flex items-center gap-3 z-10">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-black transition-all ${
-                    step >= 2 ? "bg-[#FF5B60] text-white" : "bg-slate-100 text-slate-400"
+                    step >= 2 ? "bg-[#FF7C71] text-white" : "bg-slate-100 text-slate-400"
                   }`}
                 >
                   {step > 2 ? <Check size={16} className="stroke-[3]" /> : "2"}
@@ -147,13 +147,13 @@ export default function BookingTrackWizard() {
                 </span>
               </div>
 
-              <div className={`flex-1 h-[2px] mx-4 transition-colors ${step >= 3 ? "bg-[#FF5B60]" : "bg-slate-100"}`} />
+              <div className={`flex-1 h-[2px] mx-4 transition-colors ${step >= 3 ? "bg-[#FF7C71]" : "bg-slate-100"}`} />
 
               {/* Step 3 */}
               <div className="flex items-center gap-3 z-10">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-black transition-all ${
-                    step >= 3 ? "bg-[#FF5B60] text-white" : "bg-slate-100 text-slate-400"
+                    step >= 3 ? "bg-[#FF7C71] text-white" : "bg-slate-100 text-slate-400"
                   }`}
                 >
                   {step > 3 ? <Check size={16} className="stroke-[3]" /> : "3"}
@@ -163,13 +163,13 @@ export default function BookingTrackWizard() {
                 </span>
               </div>
 
-              <div className={`flex-1 h-[2px] mx-4 transition-colors ${step >= 4 ? "bg-[#FF5B60]" : "bg-slate-100"}`} />
+              <div className={`flex-1 h-[2px] mx-4 transition-colors ${step >= 4 ? "bg-[#FF7C71]" : "bg-slate-100"}`} />
 
               {/* Step 4 */}
               <div className="flex items-center gap-3 z-10">
                 <div
                   className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-black transition-all ${
-                    step >= 4 ? "bg-[#FF5B60] text-white" : "bg-slate-100 text-slate-400"
+                    step >= 4 ? "bg-[#FF7C71] text-white" : "bg-slate-100 text-slate-400"
                   }`}
                 >
                   4
@@ -210,7 +210,7 @@ export default function BookingTrackWizard() {
                           </div>
                         </div>
                       </div>
-                      <button className="text-[#FF5B60] hover:text-[#FF464C] text-sm font-extrabold transition-all px-5 py-2.5 hover:bg-rose-50/40 rounded-xl focus:outline-none">
+                      <button className="text-[#FF7C71] hover:text-[#FF7C71] text-sm font-extrabold transition-all px-5 py-2.5 hover:bg-[#FFF8F7]/40 rounded-xl focus:outline-none">
                         Change
                       </button>
                     </div>
@@ -225,7 +225,7 @@ export default function BookingTrackWizard() {
                           onClick={() => setBookingData(prev => ({ ...prev, rooms: num }))}
                           className={`p-5 rounded-2xl border transition-all text-center flex flex-col items-center justify-center gap-1 focus:outline-none ${
                             bookingData.rooms === num
-                              ? "border-[#FF5B60] bg-rose-50/20 text-[#FF5B60] scale-[1.03] shadow-md shadow-rose-500/5"
+                              ? "border-[#FF7C71] bg-[#FFF8F7]/20 text-[#FF7C71] scale-[1.03] shadow-md shadow-rose-500/5"
                               : "border-slate-100 bg-white hover:bg-slate-50 text-slate-700"
                           }`}
                         >
@@ -251,12 +251,12 @@ export default function BookingTrackWizard() {
                             onClick={() => toggleExtra(item.id)}
                             className={`px-6 py-4 rounded-2xl border text-sm font-bold transition-all flex items-center gap-3 focus:outline-none ${
                               active
-                                ? "border-[#FF5B60] bg-rose-50/20 text-[#FF5B60] scale-[1.02] shadow-sm"
+                                ? "border-[#FF7C71] bg-[#FFF8F7]/20 text-[#FF7C71] scale-[1.02] shadow-sm"
                                 : "border-slate-100 bg-white hover:bg-slate-50 text-slate-600"
                             }`}
                           >
                             <span className={`w-5 h-5 rounded flex items-center justify-center border transition-all ${
-                              active ? "bg-[#FF5B60] border-[#FF5B60] text-white" : "border-slate-350"
+                              active ? "bg-[#FF7C71] border-[#FF7C71] text-white" : "border-slate-350"
                             }`}>
                               {active && <Check size={12} className="stroke-[3]" />}
                             </span>
@@ -276,7 +276,7 @@ export default function BookingTrackWizard() {
                   <div className="bg-white p-6 sm:p-8 rounded-[36px] border border-slate-100 shadow-sm space-y-5">
                     <div className="flex items-center justify-between">
                       <h4 className="text-base font-black text-slate-800">Select Date & Time</h4>
-                      <span className="text-xs font-black text-[#FF5B60] uppercase tracking-wider">October 2024</span>
+                      <span className="text-xs font-black text-[#FF7C71] uppercase tracking-wider">October 2024</span>
                     </div>
 
                     {/* Month Grid */}
@@ -294,7 +294,7 @@ export default function BookingTrackWizard() {
                               onClick={() => setBookingData(prev => ({ ...prev, date: day }))}
                               className={`aspect-square rounded-full text-sm font-black flex items-center justify-center transition-all ${
                                 isSelected
-                                  ? "bg-[#FF5B60] text-white shadow-md shadow-rose-500/20 scale-110"
+                                  ? "bg-[#FF7C71] text-white shadow-md shadow-[#FF7C71]/20 scale-110"
                                   : "hover:bg-slate-50 text-slate-700"
                               }`}
                             >
@@ -317,7 +317,7 @@ export default function BookingTrackWizard() {
                               onClick={() => setBookingData(prev => ({ ...prev, timeSlot: slot }))}
                               className={`py-3 px-2 text-center rounded-xl text-xs font-black border transition-all ${
                                 isSelected
-                                  ? "border-[#FF5B60] bg-rose-50/20 text-[#FF5B60]"
+                                  ? "border-[#FF7C71] bg-[#FFF8F7]/20 text-[#FF7C71]"
                                   : "border-slate-100 bg-white hover:bg-slate-50 text-slate-550"
                               }`}
                             >
@@ -346,7 +346,7 @@ export default function BookingTrackWizard() {
                               onClick={() => setBookingData(prev => ({ ...prev, professional: pro.id }))}
                               className={`w-full p-5 rounded-2xl border transition-all text-left flex items-center justify-between gap-3 focus:outline-none ${
                                 isSelected
-                                  ? "border-[#FF5B60] bg-rose-50/20 text-[#FF5B60] scale-[1.01]"
+                                  ? "border-[#FF7C71] bg-[#FFF8F7]/20 text-[#FF7C71] scale-[1.01]"
                                   : "border-slate-100 bg-white hover:bg-slate-50 text-slate-700"
                               }`}
                             >
@@ -365,7 +365,7 @@ export default function BookingTrackWizard() {
                               <div className="flex items-center gap-2">
                                 <span className="text-xs font-black text-amber-500">★ {pro.rating}</span>
                                 {isSelected && (
-                                  <div className="w-5 h-5 rounded-full bg-[#FF5B60] text-white flex items-center justify-center shadow-sm">
+                                  <div className="w-5 h-5 rounded-full bg-[#FF7C71] text-white flex items-center justify-center shadow-sm">
                                     <Check size={10} className="stroke-[3]" />
                                   </div>
                                 )}
@@ -379,7 +379,7 @@ export default function BookingTrackWizard() {
                     <div className="bg-slate-50/80 p-5 rounded-2xl text-xs font-bold text-slate-400 space-y-1">
                       <span className="font-extrabold text-slate-800 block text-xs">Preferred Pro Availability</span>
                       <p>Deep Home Cleaning • Service Duration: 4 hrs</p>
-                      <span className="font-black text-[#FF5B60] block mt-1.5 text-sm">Total base: ৳2,450</span>
+                      <span className="font-black text-[#FF7C71] block mt-1.5 text-sm">Total base: ৳2,450</span>
                     </div>
                   </div>
                 </div>
@@ -404,7 +404,7 @@ export default function BookingTrackWizard() {
                             onClick={() => setBookingData(prev => ({ ...prev, addressType: addr.id, addressLine: addr.val }))}
                             className={`w-full p-5 rounded-2xl border transition-all text-left flex items-start justify-between gap-3 focus:outline-none ${
                               isSelected
-                                ? "border-[#FF5B60] bg-rose-50/20 text-[#FF5B60] scale-[1.01]"
+                                ? "border-[#FF7C71] bg-[#FFF8F7]/20 text-[#FF7C71] scale-[1.01]"
                                 : "border-slate-100 bg-white hover:bg-slate-50 text-slate-700"
                             }`}
                           >
@@ -415,7 +415,7 @@ export default function BookingTrackWizard() {
                               </span>
                             </div>
                             <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all mt-0.5 ${
-                              isSelected ? "bg-[#FF5B60] border-[#FF5B60] text-white" : "border-slate-200 bg-white"
+                              isSelected ? "bg-[#FF7C71] border-[#FF7C71] text-white" : "border-slate-200 bg-white"
                             }`}>
                               {isSelected && <Check size={10} className="stroke-[3]" />}
                             </div>
@@ -423,7 +423,7 @@ export default function BookingTrackWizard() {
                         )
                       })}
                       
-                      <button className="w-full py-4 border border-dashed border-[#FF5B60]/40 rounded-2xl text-xs font-black text-[#FF5B60] hover:bg-rose-50/20 transition-all flex items-center justify-center gap-1.5 focus:outline-none">
+                      <button className="w-full py-4 border border-dashed border-[#FF7C71]/40 rounded-2xl text-xs font-black text-[#FF7C71] hover:bg-[#FFF8F7]/20 transition-all flex items-center justify-center gap-1.5 focus:outline-none">
                         <Plus size={14} /> Add New Address
                       </button>
                     </div>
@@ -438,11 +438,11 @@ export default function BookingTrackWizard() {
                       
                       {/* Simulated Pin */}
                       <div className="relative z-10 flex flex-col items-center">
-                        <div className="bg-[#FF5B60] text-white text-xs font-black px-4 py-2 rounded-full shadow-md shadow-rose-500/25 mb-1.5">
+                        <div className="bg-[#FF7C71] text-white text-xs font-black px-4 py-2 rounded-full shadow-md shadow-rose-500/25 mb-1.5">
                           {bookingData.addressLine.split(",")[0]}
                         </div>
-                        <div className="w-8 h-8 rounded-full bg-[#FF5B60]/20 flex items-center justify-center animate-ping absolute top-7" />
-                        <div className="w-7 h-7 rounded-full bg-[#FF5B60] border-2 border-white shadow-md z-10 flex items-center justify-center">
+                        <div className="w-8 h-8 rounded-full bg-[#FF7C71]/20 flex items-center justify-center animate-ping absolute top-7" />
+                        <div className="w-7 h-7 rounded-full bg-[#FF7C71] border-2 border-white shadow-md z-10 flex items-center justify-center">
                           <div className="w-2 h-2 rounded-full bg-white" />
                         </div>
                       </div>
@@ -454,7 +454,7 @@ export default function BookingTrackWizard() {
                         value={bookingData.specialInstruction}
                         onChange={(e) => setBookingData(prev => ({ ...prev, specialInstruction: e.target.value }))}
                         rows={2}
-                        className="w-full bg-slate-50/50 border border-slate-100 rounded-2xl px-4 py-3 text-xs text-slate-700 focus:outline-none focus:border-rose-300 resize-none font-semibold"
+                        className="w-full bg-slate-50/50 border border-slate-100 rounded-2xl px-4 py-3 text-xs text-slate-700 focus:outline-none focus:border-[#FF7C71]/40 resize-none font-semibold"
                         placeholder="e.g. Please bring a tall ladder..."
                       />
                     </div>
@@ -531,7 +531,7 @@ export default function BookingTrackWizard() {
                             onClick={() => setBookingData(prev => ({ ...prev, paymentMethod: pay.id }))}
                             className={`w-full p-5 rounded-2xl border transition-all text-left flex items-center justify-between gap-3 focus:outline-none ${
                               isSelected
-                                ? "border-[#FF5B60] bg-rose-50/20 text-[#FF5B60] scale-[1.01]"
+                                ? "border-[#FF7C71] bg-[#FFF8F7]/20 text-[#FF7C71] scale-[1.01]"
                                 : "border-slate-100 bg-white hover:bg-slate-50 text-slate-700"
                             }`}
                           >
@@ -540,7 +540,7 @@ export default function BookingTrackWizard() {
                               <span className="text-xs text-slate-400 font-bold mt-0.5 block">{pay.desc}</span>
                             </div>
                             <div className={`w-5 h-5 rounded-full border flex items-center justify-center transition-all ${
-                              isSelected ? "bg-[#FF5B60] border-[#FF5B60] text-white" : "border-slate-200 bg-white"
+                              isSelected ? "bg-[#FF7C71] border-[#FF7C71] text-white" : "border-slate-200 bg-white"
                             }`}>
                               {isSelected && <Check size={10} className="stroke-[3]" />}
                             </div>
@@ -579,14 +579,14 @@ export default function BookingTrackWizard() {
                   {step === 4 ? (
                     <button
                       onClick={handleConfirmAndPay}
-                      className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold px-9 py-4 rounded-2xl flex items-center gap-2 shadow-sm shadow-rose-500/10 active:scale-[0.98] transition-all focus:outline-none"
+                      className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold px-9 py-4 rounded-2xl flex items-center gap-2 shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] transition-all focus:outline-none"
                     >
                       Confirm & Pay <ArrowRight size={16} />
                     </button>
                   ) : (
                     <button
                       onClick={handleNextStep}
-                      className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold px-9 py-4 rounded-2xl flex items-center gap-2 shadow-sm shadow-rose-500/10 active:scale-[0.98] transition-all focus:outline-none"
+                      className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold px-9 py-4 rounded-2xl flex items-center gap-2 shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] transition-all focus:outline-none"
                     >
                       Next Step <ArrowRight size={16} />
                     </button>
@@ -641,7 +641,7 @@ export default function BookingTrackWizard() {
                 </div>
 
                 {bookingData.promoDiscount > 0 && (
-                  <div className="flex justify-between items-center text-sm font-black text-rose-500">
+                  <div className="flex justify-between items-center text-sm font-black text-[#FF7C71]">
                     <span>Promo Discount</span>
                     <span>- ৳{bookingData.promoDiscount}</span>
                   </div>
@@ -653,7 +653,7 @@ export default function BookingTrackWizard() {
                   <span className="text-sm font-black text-slate-800">Total Payable</span>
                   <span className="text-xs text-slate-400 font-bold block mt-0.5">VAT & charges included</span>
                 </div>
-                <span className="text-2xl font-black text-[#FF5B60]">৳{totalPayable}</span>
+                <span className="text-2xl font-black text-[#FF7C71]">৳{totalPayable}</span>
               </div>
 
               {/* Dynamic selections summary list */}
@@ -693,7 +693,7 @@ export default function BookingTrackWizard() {
                 </div>
               )}
 
-              <div className="bg-rose-50/20 border border-rose-100/30 p-4.5 rounded-2xl text-xs font-bold text-slate-400 leading-relaxed">
+              <div className="bg-[#FFF8F7]/20 border border-[#FFEBE9]/30 p-4.5 rounded-2xl text-xs font-bold text-slate-400 leading-relaxed">
                 * Prices include premium equipment and non-toxic supplies.
               </div>
             </div>
@@ -703,7 +703,7 @@ export default function BookingTrackWizard() {
           /* Step 5: Booking Confirmed Success Screen (Extended Layout) */
           <div className="max-w-7xl mx-auto bg-white/95 p-8 sm:p-14 rounded-[40px] border border-slate-100 shadow-sm text-center space-y-10 animate-in zoom-in duration-300 w-full">
             <div className="space-y-4">
-              <div className="w-24 h-24 bg-rose-50 rounded-full flex items-center justify-center text-[#FF5B60] mx-auto shadow-sm">
+              <div className="w-24 h-24 bg-[#FFF8F7] rounded-full flex items-center justify-center text-[#FF7C71] mx-auto shadow-sm">
                 <Check size={48} className="stroke-[3]" />
               </div>
               <div className="space-y-3">
@@ -773,7 +773,7 @@ export default function BookingTrackWizard() {
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-6 max-w-md mx-auto w-full">
               <Link
                 href="/dashbord/overview"
-                className="w-full bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-black py-4 px-6 rounded-2xl shadow-sm shadow-rose-500/10 active:scale-[0.98] transition-all inline-block text-center"
+                className="w-full bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-black py-4 px-6 rounded-2xl shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] transition-all inline-block text-center"
               >
                 Back to Home
               </Link>
@@ -792,7 +792,7 @@ export default function BookingTrackWizard() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

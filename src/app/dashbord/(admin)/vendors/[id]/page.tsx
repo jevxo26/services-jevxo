@@ -60,7 +60,7 @@ export default function VendorDetailsPage() {
         {/* Left Column: Vendor Profile Data */}
         <div className="col-span-1 space-y-6">
           <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col items-center text-center space-y-4">
-            <div className="w-24 h-24 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center font-black text-3xl shadow-inner relative">
+            <div className="w-24 h-24 bg-[#FFEBE9] text-[#E5675D] rounded-full flex items-center justify-center font-black text-3xl shadow-inner relative">
               {vendor.name?.substring(0, 2).toUpperCase() || "UU"}
               <span className={`absolute bottom-1 right-1 w-5 h-5 rounded-full border-4 border-white flex items-center justify-center text-[10px] text-white ${vendor.status === 'active' ? 'bg-emerald-500' : 'bg-amber-500'}`}>
                 {vendor.status === 'active' ? '✓' : '!'}
@@ -68,7 +68,7 @@ export default function VendorDetailsPage() {
             </div>
             <div>
               <h3 className="text-lg font-bold text-slate-800">{vendor.name}</h3>
-              <span className="text-xs font-semibold text-rose-500 bg-rose-50 px-2.5 py-0.5 rounded-lg mt-1 inline-block capitalize">
+              <span className="text-xs font-semibold text-[#FF7C71] bg-[#FFF8F7] px-2.5 py-0.5 rounded-lg mt-1 inline-block capitalize">
                 {vendor.role?.name || "Vendor"}
               </span>
             </div>

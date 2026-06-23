@@ -36,7 +36,7 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
           >
             
             {/* Header Visual Cover */}
-            <div className="p-6 bg-gradient-to-r from-rose-500 to-[#FF5A5F] text-white relative">
+            <div className="p-6 bg-gradient-to-r from-rose-500 to-[#FF7C71] text-white relative">
               <Button
                 variant="ghost"
                 onClick={onClose}
@@ -99,7 +99,7 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
                   </div>
 
                   <div className="flex items-center gap-3 text-sm text-slate-700 font-semibold">
-                    <div className="w-7 h-7 rounded-lg bg-[#FF5A5F]/5 text-[#FF5A5F] flex items-center justify-center">
+                    <div className="w-7 h-7 rounded-lg bg-[#FF7C71]/5 text-[#FF7C71] flex items-center justify-center">
                       <Calendar className="w-4 h-4" />
                     </div>
                     <span>Book online instantly with secure checkout</span>
@@ -136,7 +136,7 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
                     toast.success(`Successfully booked ${expert.name}!`);
                     onClose();
                   }}
-                  className="px-6 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-bold rounded-xl text-sm shadow-sm transition-all active:scale-97 border-none cursor-pointer h-auto"
+                  className="px-6 py-3 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold rounded-xl text-sm shadow-sm transition-all active:scale-97 border-none cursor-pointer h-auto"
                 >
                   Book Appointment
                 </Button>

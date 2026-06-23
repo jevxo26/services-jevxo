@@ -232,7 +232,7 @@ export function CustomSelect({
       minHeight: size === "sm" ? "36px" : size === "lg" ? "48px" : "42px",
       borderColor: state.isFocused ? "#fda4af" : "#e2e8f0",
       backgroundColor: "#ffffff",
-      boxShadow: state.isFocused ? "0 0 0 2px #ffe4e6" : "none",
+      boxShadow: state.isFocused ? "0 0 0 2px #FFEBE9" : "none",
       "&:hover": {
         borderColor: state.isFocused ? "#fda4af" : "#cbd5e1"
       }
@@ -243,7 +243,7 @@ export function CustomSelect({
     }),
     option: (base: any, state: any) => ({
       ...base,
-      backgroundColor: state.isSelected ? "#f43f5e" : state.isFocused ? "#ffe4e6" : "white",
+      backgroundColor: state.isSelected ? "#f43f5e" : state.isFocused ? "#FFEBE9" : "white",
       color: state.isSelected ? "white" : "#0f172a",
       fontSize: "0.875rem",
       "&:active": {

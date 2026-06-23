@@ -36,7 +36,7 @@ export default function CustomQuote({
       >
         {/* Left Content */}
         <div className="flex-1 space-y-4">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#ff5a5f] leading-tight">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-[#FF7C71] leading-tight">
             {title}
           </h2>
           <p className="text-slate-600 leading-relaxed max-w-md text-[15px]">
@@ -50,7 +50,7 @@ export default function CustomQuote({
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
             onClick={onPrimaryClick}
-            className="px-8 py-4 bg-[#ff5a5f] hover:bg-[#e04a4f] text-white font-semibold rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 text-base"
+            className="px-8 py-4 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 text-base"
           >
             <MessageSquare className="w-5 h-5" />
             {primaryButtonText}

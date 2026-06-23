@@ -81,7 +81,7 @@ export default function AgentOrdersPage() {
 
       {isLoading ? (
         <div className="flex items-center justify-center h-64">
-          <Loader2 size={32} className="animate-spin text-rose-500" />
+          <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
         </div>
       ) : (
         <CustomTable
@@ -108,7 +108,7 @@ export default function AgentOrdersPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

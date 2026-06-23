@@ -148,7 +148,7 @@ export default function BookingsManagementPage() {
       case 'assigned': return 'bg-blue-50 text-blue-600 border border-blue-200';
       case 'on_the_way': return 'bg-purple-50 text-purple-600 border border-purple-200';
       case 'completed': return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
-      case 'cancelled': return 'bg-rose-50 text-rose-600 border border-rose-200';
+      case 'cancelled': return 'bg-[#FFF8F7] text-[#E5675D] border border-[#FF7C71]/30';
       default: return 'bg-slate-100 text-slate-600';
     }
   };

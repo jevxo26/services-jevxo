@@ -122,11 +122,11 @@ const Hero = () => {
         {/* Premium Badge */}
         <motion.div
           variants={itemVariants}
-          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF5A5F]/8 border border-[#FF5A5F]/15 text-[#FF5A5F] text-xs md:text-sm font-semibold mb-6 shadow-[0_2px_10px_rgba(255,90,95,0.05)]"
+          className="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-[#FF7C71]/8 border border-[#FF7C71]/15 text-[#FF7C71] text-xs md:text-sm font-semibold mb-6 shadow-[0_2px_10px_rgba(255,90,95,0.05)]"
         >
           <span className="flex h-2 w-2 relative">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF5A5F] opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF5A5F]"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#FF7C71] opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2 w-2 bg-[#FF7C71]"></span>
           </span>
           ✨ #1 Premium Doorstep Home Service Platform
         </motion.div>
@@ -138,7 +138,7 @@ const Hero = () => {
         >
           {HERO_CONTENT.title}
           <br />
-          <span className="text-[#FF5A5F]">{HERO_CONTENT.accentTitle}</span>
+          <span className="text-[#FF7C71]">{HERO_CONTENT.accentTitle}</span>
         </motion.h1>
 
         {/* Animated Subtitle */}
@@ -238,15 +238,15 @@ const Hero = () => {
           className="flex flex-wrap items-center justify-center gap-4 md:gap-8 mt-10 text-slate-500 font-medium text-xs md:text-sm"
         >
           <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xs px-4 py-2 rounded-full border border-slate-200/50 shadow-xs">
-            <span className="text-[#FF5A5F] text-sm">★</span>
+            <span className="text-[#FF7C71] text-sm">★</span>
             <span><strong className="text-slate-800 font-bold">4.9/5 Rating</strong> (20k+ Reviews)</span>
           </div>
           <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xs px-4 py-2 rounded-full border border-slate-200/50 shadow-xs">
-            <span className="text-[#FF5A5F] text-sm">⚡</span>
+            <span className="text-[#FF7C71] text-sm">⚡</span>
             <span><strong className="text-slate-800 font-bold">30 Min</strong> Express Response</span>
           </div>
           <div className="flex items-center gap-2 bg-white/40 backdrop-blur-xs px-4 py-2 rounded-full border border-slate-200/50 shadow-xs">
-            <span className="text-[#FF5A5F] text-sm">🛡️</span>
+            <span className="text-[#FF7C71] text-sm">🛡️</span>
             <span><strong className="text-slate-800 font-bold">100%</strong> Satisfaction Insured</span>
           </div>
         </motion.div>

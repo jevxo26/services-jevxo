@@ -15,7 +15,7 @@ export default function DashboardLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex h-screen overflow-hidden bg-slate-50 text-slate-900 relative">
+    <div className="flex h-screen overflow-hidden bg-[#FFF8F7] text-slate-900 relative">
       {/* Tiled watermark backgrounds */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.16] z-0">
         <div className="absolute inset-0 bg-repeat" style={{ backgroundImage: "url('/Group1.png')", backgroundSize: "800px 800px" }} />

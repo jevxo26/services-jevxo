@@ -66,7 +66,7 @@ export default function AdminWithdrawPage() {
     const map: Record<string, string> = {
       pending: "bg-amber-50 text-amber-700 border-amber-100",
       approved: "bg-emerald-50 text-emerald-700 border-emerald-100",
-      rejected: "bg-rose-50 text-rose-700 border-rose-100",
+      rejected: "bg-[#FFF8F7] text-[#E5675D] border-[#FFEBE9]",
     };
     const icons: Record<string, React.ReactNode> = {
       pending: <Clock size={11} />,
@@ -85,7 +85,7 @@ export default function AdminWithdrawPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4"><ShieldAlert size={48} /></div>
+        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4"><ShieldAlert size={48} /></div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
         <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Administrators only.</p>
       </div>
@@ -195,7 +195,7 @@ export default function AdminWithdrawPage() {
       {/* Table */}
       {isLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-premium">
-          <div className="w-8 h-8 border-4 border-rose-500 border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : withdraws.length === 0 ? (
         <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -257,7 +257,7 @@ export default function AdminWithdrawPage() {
                     <button
                       disabled={isUpdating}
                       onClick={() => { handleUpdateStatus(selectedItem.id, "rejected"); setSelectedItem(null); }}
-                      className="bg-rose-500 hover:bg-rose-600 disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all"
+                      className="bg-[#FF7C71] hover:bg-[#E5675D] disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all"
                     >
                       Reject
                     </button>

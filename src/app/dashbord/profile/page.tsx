@@ -124,7 +124,7 @@ export default function ProfilePage() {
         
         {/* Left Column: Premium ID Card */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col items-center text-center space-y-4">
-          <div className="w-24 h-24 bg-rose-100 text-rose-600 rounded-full flex items-center justify-center font-black text-3xl shadow-inner relative">
+          <div className="w-24 h-24 bg-[#FFEBE9] text-[#E5675D] rounded-full flex items-center justify-center font-black text-3xl shadow-inner relative">
             {name?.substring(0, 2).toUpperCase() || "UU"}
             <span className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 rounded-full border-4 border-white flex items-center justify-center text-[10px] text-white">
               ✓
@@ -132,7 +132,7 @@ export default function ProfilePage() {
           </div>
           <div>
             <h3 className="text-lg font-bold text-slate-800">{name}</h3>
-            <span className="text-xs font-semibold text-rose-500 bg-rose-50 px-2.5 py-0.5 rounded-lg mt-1 inline-block capitalize">
+            <span className="text-xs font-semibold text-[#FF7C71] bg-[#FFF8F7] px-2.5 py-0.5 rounded-lg mt-1 inline-block capitalize">
               {getRoleName(role)}
             </span>
           </div>
@@ -165,7 +165,7 @@ export default function ProfilePage() {
                   name="name"
                   type="text"
                   defaultValue={name !== "Unknown User" ? name : ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                   required
                 />
               </div>
@@ -176,7 +176,7 @@ export default function ProfilePage() {
                   name="phone"
                   type="tel"
                   defaultValue={phone !== "No Phone" ? phone : ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                 />
               </div>
 
@@ -186,7 +186,7 @@ export default function ProfilePage() {
                   name="address"
                   type="text"
                   defaultValue={address !== "No Address Provided" ? address : ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                   required
                 />
               </div>
@@ -237,7 +237,7 @@ export default function ProfilePage() {
                   name="company_name"
                   type="text"
                   defaultValue={profile?.company_name || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="Leave blank if personal"
                 />
               </div>
@@ -259,7 +259,7 @@ export default function ProfilePage() {
                   name="location"
                   type="text"
                   defaultValue={profile?.location || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="e.g. Block C, House 12"
                 />
               </div>
@@ -270,7 +270,7 @@ export default function ProfilePage() {
                   name="description"
                   rows={4}
                   defaultValue={profile?.description || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all resize-none font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none font-medium"
                   placeholder="Describe the services and expertise..."
                 ></textarea>
               </div>
@@ -282,7 +282,7 @@ export default function ProfilePage() {
                   type="number"
                   step="0.01"
                   defaultValue={profile?.min_starting_price || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="0.00"
                 />
               </div>
@@ -293,7 +293,7 @@ export default function ProfilePage() {
                   name="google_map_link"
                   type="url"
                   defaultValue={profile?.google_map_link || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="https://maps.app.goo.gl/..."
                 />
               </div>
@@ -303,7 +303,7 @@ export default function ProfilePage() {
               <button
                 type="submit"
                 disabled={isSaving}
-                className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-1.5 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-1.5 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={16} /> {isSaving ? "Saving..." : "Save Changes"}
               </button>

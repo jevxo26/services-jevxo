@@ -90,7 +90,7 @@ export function Packages({ packages: inputPackages }: { packages?: any[] }) {
               transition={{ delay: index * 0.1 }}
               className={`rounded-3xl p-8 relative flex flex-col h-full transition-all hover:-translate-y-1 ${
                 pkg.variant === "popular"
-                  ? "border-2 border-[#FF5A5F] bg-rose-50/50 shadow-xl"
+                  ? "border-2 border-[#FF7C71] bg-rose-50/50 shadow-xl"
                   : pkg.variant === "dark"
                     ? "bg-[#261817] text-white"
                     : "bg-white border border-slate-100"
@@ -98,7 +98,7 @@ export function Packages({ packages: inputPackages }: { packages?: any[] }) {
             >
               {/* Popular Badge */}
               {pkg.badge && (
-                <div className="absolute -top-3 right-6 bg-[#FF5A5F] text-white text-xs font-bold px-4 py-1 rounded-full">
+                <div className="absolute -top-3 right-6 bg-[#FF7C71] text-white text-xs font-bold px-4 py-1 rounded-full">
                   {pkg.badge}
                 </div>
               )}
@@ -126,7 +126,7 @@ export function Packages({ packages: inputPackages }: { packages?: any[] }) {
                 <ul className="space-y-3 mb-10 flex-1">
                   {pkg.features.map((feature: any, i: number) => (
                     <li key={i} className="flex items-start gap-3 text-sm">
-                      <Check className="w-5 h-5 text-[#FF5A5F] mt-0.5 flex-shrink-0" />
+                      <Check className="w-5 h-5 text-[#FF7C71] mt-0.5 flex-shrink-0" />
                       <span
                         className={
                           pkg.variant === "dark"
@@ -151,7 +151,7 @@ export function Packages({ packages: inputPackages }: { packages?: any[] }) {
                   pkg.variant === "dark"
                     ? "bg-slate-100 text-slate-900 hover:bg-slate-300"
                     : pkg.variant === "popular"
-                      ? "bg-[#FF5A5F] text-white hover:bg-[#e04a4f]"
+                      ? "bg-[#FF7C71] text-white hover:bg-[#E5675D]"
                       : "bg-[#261817]/90 text-white hover:bg-black"
                 }`}
               >

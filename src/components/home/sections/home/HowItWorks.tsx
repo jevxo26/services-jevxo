@@ -59,13 +59,13 @@ const HowItWorks = () => {
   return (
     <div className=" py-8 md:py-12 mt-15 overflow-hidden relative">
       {/* Decorative light blurs */}
-      {/* <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-[#FF5A5F]/5 blur-[90px] rounded-full pointer-events-none" /> */}
+      {/* <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-[#FF7C71]/5 blur-[90px] rounded-full pointer-events-none" /> */}
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         {/* Header Block */}
         <div className="mb-10 md:mb-12 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-foreground mb-2 flex items-center justify-center gap-2">
-            <Workflow className="w-6 h-6 md:w-8 md:h-8 text-[#FF5A5F]" />
+            <Workflow className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
             {HOW_IT_WORKS_CONTENT.title}
           </h2>
 
@@ -79,7 +79,7 @@ const HowItWorks = () => {
           {/* Connecting SVG Arrow 1 (Desktop) */}
           <div className="absolute left-[15%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
-              className="w-full h-8 text-[#FF5A5F]"
+              className="w-full h-8 text-[#FF7C71]"
               viewBox="0 0 100 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -101,7 +101,7 @@ const HowItWorks = () => {
           {/* Connecting SVG Arrow 2 (Desktop) */}
           <div className="absolute left-[41%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
-              className="w-full h-8 text-[#FF5A5F]"
+              className="w-full h-8 text-[#FF7C71]"
               viewBox="0 0 100 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ const HowItWorks = () => {
           {/* Connecting SVG Arrow 3 (Desktop) */}
           <div className="absolute left-[67%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
-              className="w-full h-8 text-[#FF5A5F]"
+              className="w-full h-8 text-[#FF7C71]"
               viewBox="0 0 100 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -159,14 +159,14 @@ const HowItWorks = () => {
                   {/* Timeline Step node bubble */}
                   <motion.div
                     whileHover={{ y: -2 }}
-                    className="w-20 h-20 bg-white group-hover:bg-primary group-hover:scale-105 border border-slate-200 text-slate-800 rounded-full flex items-center justify-center text-xl font-extrabold mb-6 shadow-lg relative z-10 group-hover:border-[#FF5A5F]/40  group-hover:shadow-xl transition-all duration-300"
+                    className="w-20 h-20 bg-white group-hover:bg-primary group-hover:scale-105 border border-slate-200 text-slate-800 rounded-full flex items-center justify-center text-xl font-extrabold mb-6 shadow-lg relative z-10 group-hover:border-[#FF7C71]/40  group-hover:shadow-xl transition-all duration-300"
                   >
                     <span className="text-primary group-hover:text-white">
                       {step.stepNumber}
                     </span>
                   </motion.div>
 
-                  <h3 className="font-extrabold text-slate-800 text-xl mb-3 group-hover:text-[#FF5A5F] transition-colors duration-200">
+                  <h3 className="font-extrabold text-slate-800 text-xl mb-3 group-hover:text-[#FF7C71] transition-colors duration-200">
                     {step.title}
                   </h3>
                   <p className="text-sm text-slate-500 leading-relaxed max-w-xs mx-auto">
@@ -176,7 +176,7 @@ const HowItWorks = () => {
 
                 {/* Vertical SVG Arrow for Mobile Screens */}
                 {i < HOW_IT_WORKS_CONTENT.steps.length - 1 && (
-                  <div className="flex sm:hidden my-2 items-center justify-center text-[#FF5A5F] z-0 pointer-events-none">
+                  <div className="flex sm:hidden my-2 items-center justify-center text-[#FF7C71] z-0 pointer-events-none">
                     <svg
                       className="w-6 h-10"
                       viewBox="0 0 24 40"

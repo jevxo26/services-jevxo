@@ -46,7 +46,7 @@ function StatCard({ stat, triggered }: { stat: typeof stats[0]; triggered: boole
   return (
     <div className="flex flex-col items-center group">
       <div className="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
-        <stat.icon className="w-8 h-8 text-[#FF5A5F]" />
+        <stat.icon className="w-8 h-8 text-[#FF7C71]" />
       </div>
       <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2 tabular-nums">
         {triggered ? `${formatNumber(count)}${stat.suffix}` : '0'}
@@ -85,7 +85,7 @@ export default function Stats() {
         {/* Title */}
         <div className="mb-10 md:mb-12 text-center">
           <h2 className="text-2xl md:text-3xl font-bold text-slate-800 mb-2 flex items-center justify-center gap-2">
-            <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-[#FF5A5F]" />
+            <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
             Our Platform Impact
           </h2>
 

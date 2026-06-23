@@ -31,7 +31,7 @@ export function Commitments() {
                 className="flex flex-col items-center text-center group"
               >
                 <div className="w-16 h-16 bg-[#fff0f0] rounded-2xl flex items-center justify-center mb-5 group-hover:scale-110 transition-transform">
-                  <feature.icon className="w-8 h-8 text-[#FF5A5F]" />
+                  <feature.icon className="w-8 h-8 text-[#FF7C71]" />
                 </div>
                 <p className="font-semibold text-slate-800">{feature.label}</p>
               </motion.div>

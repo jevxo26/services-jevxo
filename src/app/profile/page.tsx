@@ -204,7 +204,7 @@ export default function ProfilePage() {
               </Button>
               <Button 
                 onClick={() => showToast("Booking shortcuts loaded!")}
-                className="flex-1 md:flex-none bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-5 py-3 h-auto rounded-xl border-none transition-all cursor-pointer shadow-xs active:scale-98"
+                className="flex-1 md:flex-none bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-5 py-3 h-auto rounded-xl border-none transition-all cursor-pointer shadow-xs active:scale-98"
               >
                 Book a Service
               </Button>
@@ -226,17 +226,17 @@ export default function ProfilePage() {
               onClick={() => { setActiveTab("personal"); setEditMode(false); }}
               className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "personal" 
-                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  ? "bg-[#FFF8F7] hover:bg-[#FFF8F7] text-[#FF7C71] hover:text-[#FF7C71] font-bold" 
                   : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "personal" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "personal" ? "bg-[#FF7C71]/10 text-[#FF7C71]" : "bg-slate-100 text-slate-500"}`}>
                   <User className="w-4 h-4" />
                 </span>
                 <span className="text-sm">Personal Info</span>
               </span>
-              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "personal" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
+              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "personal" ? "rotate-90 text-[#FF7C71]" : ""}`} />
             </Button>
 
             <Button
@@ -244,17 +244,17 @@ export default function ProfilePage() {
               onClick={() => { setActiveTab("bookings"); setEditMode(false); }}
               className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "bookings" 
-                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  ? "bg-[#FFF8F7] hover:bg-[#FFF8F7] text-[#FF7C71] hover:text-[#FF7C71] font-bold" 
                   : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "bookings" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "bookings" ? "bg-[#FF7C71]/10 text-[#FF7C71]" : "bg-slate-100 text-slate-500"}`}>
                   <Calendar className="w-4 h-4" />
                 </span>
                 <span className="text-sm">My Bookings</span>
               </span>
-              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "bookings" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
+              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "bookings" ? "rotate-90 text-[#FF7C71]" : ""}`} />
             </Button>
 
             <Button
@@ -262,17 +262,17 @@ export default function ProfilePage() {
               onClick={() => { setActiveTab("saved"); setEditMode(false); }}
               className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "saved" 
-                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  ? "bg-[#FFF8F7] hover:bg-[#FFF8F7] text-[#FF7C71] hover:text-[#FF7C71] font-bold" 
                   : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "saved" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "saved" ? "bg-[#FF7C71]/10 text-[#FF7C71]" : "bg-slate-100 text-slate-500"}`}>
                   <Heart className="w-4 h-4" />
                 </span>
                 <span className="text-sm">Saved Experts</span>
               </span>
-              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "saved" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
+              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "saved" ? "rotate-90 text-[#FF7C71]" : ""}`} />
             </Button>
 
             <Button
@@ -280,17 +280,17 @@ export default function ProfilePage() {
               onClick={() => { setActiveTab("settings"); setEditMode(false); }}
               className={`w-full flex items-center justify-between p-3.5 h-auto rounded-2xl transition-all duration-200 cursor-pointer hover:bg-slate-50 ${
                 activeTab === "settings" 
-                  ? "bg-[#FFF0F1] hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] font-bold" 
+                  ? "bg-[#FFF8F7] hover:bg-[#FFF8F7] text-[#FF7C71] hover:text-[#FF7C71] font-bold" 
                   : "text-slate-600 font-medium hover:text-slate-700"
               }`}
             >
               <span className="flex items-center gap-3">
-                <span className={`p-2 rounded-xl transition-all ${activeTab === "settings" ? "bg-[#FF5A5F]/10 text-[#FF5A5F]" : "bg-slate-100 text-slate-500"}`}>
+                <span className={`p-2 rounded-xl transition-all ${activeTab === "settings" ? "bg-[#FF7C71]/10 text-[#FF7C71]" : "bg-slate-100 text-slate-500"}`}>
                   <Settings className="w-4 h-4" />
                 </span>
                 <span className="text-sm">Preferences & Security</span>
               </span>
-              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "settings" ? "rotate-90 text-[#FF5A5F]" : ""}`} />
+              <ChevronRight className={`w-4 h-4 text-slate-400 transition-transform ${activeTab === "settings" ? "rotate-90 text-[#FF7C71]" : ""}`} />
             </Button>
           </div>
 
@@ -322,7 +322,7 @@ export default function ProfilePage() {
                             type="text"
                             value={formData.name}
                             onChange={e => setFormData(prev => ({ ...prev, name: e.target.value }))}
-                            className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10 transition-all"
+                            className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10 transition-all"
                             required
                           />
                         </div>
@@ -332,7 +332,7 @@ export default function ProfilePage() {
                             type="email"
                             value={formData.email}
                             onChange={e => setFormData(prev => ({ ...prev, email: e.target.value }))}
-                            className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10 transition-all"
+                            className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10 transition-all"
                             required
                           />
                         </div>
@@ -344,7 +344,7 @@ export default function ProfilePage() {
                           type="text"
                           value={formData.phone}
                           onChange={e => setFormData(prev => ({ ...prev, phone: e.target.value }))}
-                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10 transition-all"
+                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10 transition-all"
                           required
                         />
                       </div>
@@ -355,7 +355,7 @@ export default function ProfilePage() {
                           type="text"
                           value={formData.address}
                           onChange={e => setFormData(prev => ({ ...prev, address: e.target.value }))}
-                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10 transition-all"
+                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-800 outline-none focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10 transition-all"
                           required
                         />
                       </div>
@@ -363,7 +363,7 @@ export default function ProfilePage() {
                       <div className="flex gap-3 pt-3 border-t border-slate-100">
                         <Button
                           type="submit"
-                          className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-6 py-3 h-auto rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
+                          className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-6 py-3 h-auto rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
                         >
                           Save Changes
                         </Button>
@@ -430,7 +430,7 @@ export default function ProfilePage() {
                         </div>
                         <Button
                           onClick={() => setEditMode(true)}
-                          className="w-full sm:w-auto bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] text-xs font-extrabold px-4 py-2.5 h-auto rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95 text-center"
+                          className="w-full sm:w-auto bg-rose-50 hover:bg-[#FFF8F7] text-[#FF7C71] hover:text-[#FF7C71] text-xs font-extrabold px-4 py-2.5 h-auto rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95 text-center"
                         >
                           Modify Details
                         </Button>
@@ -461,7 +461,7 @@ export default function ProfilePage() {
                         <Calendar className="w-10 h-10 text-slate-300 mx-auto mb-3" />
                         <h4 className="text-sm font-bold text-slate-700">No Bookings Found</h4>
                         <p className="text-xs text-slate-400 mt-1 max-w-xs mx-auto">You haven't scheduled any services yet. Book a new service to see it here.</p>
-                        <Button className="mt-4 bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-5 py-2.5 h-auto rounded-xl border-none shadow-xs">Book a Service</Button>
+                        <Button className="mt-4 bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-5 py-2.5 h-auto rounded-xl border-none shadow-xs">Book a Service</Button>
                       </div>
                     ) : (
                       MOCK_BOOKINGS.map((booking) => {
@@ -473,7 +473,7 @@ export default function ProfilePage() {
                           >
                             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
                               <div>
-                                <span className="text-[10px] font-black text-[#FF5A5F] uppercase tracking-wider block mb-0.5">Booking ID: {booking.id}</span>
+                                <span className="text-[10px] font-black text-[#FF7C71] uppercase tracking-wider block mb-0.5">Booking ID: {booking.id}</span>
                                 <h4 className="font-extrabold text-slate-800 text-base">{booking.serviceName}</h4>
                               </div>
                               <span className={`self-start sm:self-center px-3 py-1 rounded-full text-xs font-semibold border ${booking.statusColor} flex items-center gap-1.5`}>
@@ -493,7 +493,7 @@ export default function ProfilePage() {
                               </div>
                               <div>
                                 <span className="text-[9px] font-black uppercase text-slate-400 block mb-0.5">Total Fare Charged</span>
-                                <span className="text-[#FF5A5F] font-extrabold text-sm">{booking.price}</span>
+                                <span className="text-[#FF7C71] font-extrabold text-sm">{booking.price}</span>
                               </div>
                             </div>
 
@@ -509,7 +509,7 @@ export default function ProfilePage() {
                                   </Button>
                                   <Button 
                                     onClick={() => showToast("Cancellation request submitted.")}
-                                    className="bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] text-xs font-extrabold px-4 py-2 h-auto rounded-lg border-none transition-all cursor-pointer active:scale-95"
+                                    className="bg-rose-50 hover:bg-[#FFF8F7] text-[#FF7C71] hover:text-[#FF7C71] text-xs font-extrabold px-4 py-2 h-auto rounded-lg border-none transition-all cursor-pointer active:scale-95"
                                   >
                                     Cancel Booking
                                   </Button>
@@ -558,7 +558,7 @@ export default function ProfilePage() {
                       MOCK_SAVED_EXPERTS.map((expert) => (
                         <div 
                           key={expert.id}
-                          className="border border-slate-100 rounded-2xl p-5 hover:shadow-[0_12px_24px_-4px_rgba(0,0,0,0.03)] hover:border-[#FF5A5F]/20 transition-all duration-300 bg-white flex flex-col justify-between"
+                          className="border border-slate-100 rounded-2xl p-5 hover:shadow-[0_12px_24px_-4px_rgba(0,0,0,0.03)] hover:border-[#FF7C71]/20 transition-all duration-300 bg-white flex flex-col justify-between"
                         >
                           <div>
                             <div className="flex items-center gap-4.5 mb-4">
@@ -597,7 +597,7 @@ export default function ProfilePage() {
                             </div>
                             <Button 
                               onClick={() => showToast(`Initiating direct book link for ${expert.name}`)}
-                              className="bg-rose-50 hover:bg-[#FFF0F1] text-[#FF5A5F] hover:text-[#FF5A5F] text-xs font-extrabold px-3 py-1.5 h-auto rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95"
+                              className="bg-rose-50 hover:bg-[#FFF8F7] text-[#FF7C71] hover:text-[#FF7C71] text-xs font-extrabold px-3 py-1.5 h-auto rounded-xl border-none transition-all shadow-xs cursor-pointer active:scale-95"
                             >
                               Book Now
                             </Button>
@@ -639,7 +639,7 @@ export default function ProfilePage() {
                             showToast("Email notification settings updated.");
                           }}
                           className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none p-0 shadow-none hover:bg-transparent ${
-                            notificationSettings.emailAlerts ? "bg-[#FF5A5F]" : "bg-slate-300"
+                            notificationSettings.emailAlerts ? "bg-[#FF7C71]" : "bg-slate-300"
                           }`}
                         >
                           <span className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform ${
@@ -660,7 +660,7 @@ export default function ProfilePage() {
                             showToast("Push notification settings updated.");
                           }}
                           className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none p-0 shadow-none hover:bg-transparent ${
-                            notificationSettings.pushAlerts ? "bg-[#FF5A5F]" : "bg-slate-300"
+                            notificationSettings.pushAlerts ? "bg-[#FF7C71]" : "bg-slate-300"
                           }`}
                         >
                           <span className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform ${
@@ -681,7 +681,7 @@ export default function ProfilePage() {
                             showToast("SMS notification settings updated.");
                           }}
                           className={`w-11 h-6 rounded-full transition-colors relative cursor-pointer outline-none border-none p-0 shadow-none hover:bg-transparent ${
-                            notificationSettings.smsAlerts ? "bg-[#FF5A5F]" : "bg-slate-300"
+                            notificationSettings.smsAlerts ? "bg-[#FF7C71]" : "bg-slate-300"
                           }`}
                         >
                           <span className={`absolute top-0.5 left-0.5 bg-white w-5 h-5 rounded-full shadow-sm transition-transform ${
@@ -705,7 +705,7 @@ export default function ProfilePage() {
                         <input 
                           type="password"
                           placeholder="••••••••"
-                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-850 outline-none focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10 transition-all"
+                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-850 outline-none focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10 transition-all"
                           required
                         />
                       </div>
@@ -715,14 +715,14 @@ export default function ProfilePage() {
                         <input 
                           type="password"
                           placeholder="Minimum 8 characters"
-                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-850 outline-none focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10 transition-all"
+                          className="w-full text-sm px-4 py-3 rounded-xl border border-slate-200 bg-white text-slate-850 outline-none focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10 transition-all"
                           required
                         />
                       </div>
 
                       <Button
                         type="submit"
-                        className="bg-[#FF5A5F] hover:bg-[#FF4449] text-white text-xs font-extrabold px-5 py-3 h-auto rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
+                        className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-5 py-3 h-auto rounded-xl border-none transition-all shadow-xs active:scale-95 cursor-pointer"
                       >
                         Change Password
                       </Button>

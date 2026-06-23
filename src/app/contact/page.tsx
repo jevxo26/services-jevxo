@@ -231,7 +231,7 @@ export default function ContactPage() {
 
   const inputBase =
     "w-full text-sm px-4 py-3 rounded-xl border bg-white text-slate-800 outline-none transition-all placeholder:text-slate-300";
-  const inputNormal = `${inputBase} border-slate-200 focus:border-[#FF5A5F] focus:ring-2 focus:ring-[#FF5A5F]/10`;
+  const inputNormal = `${inputBase} border-slate-200 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10`;
   const inputError = `${inputBase} border-rose-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-400/10 bg-rose-50/40`;
 
   return (
@@ -245,11 +245,11 @@ export default function ContactPage() {
         {/* Parallax ambient glows */}
         <motion.div
           style={{ y: glowY }}
-          className="pointer-events-none absolute -top-24 right-0 w-[520px] h-[520px] bg-[#FF5A5F]/7 blur-[130px] rounded-full"
+          className="pointer-events-none absolute -top-24 right-0 w-[520px] h-[520px] bg-[#FF7C71]/7 blur-[130px] rounded-full"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 30]) }}
-          className="pointer-events-none absolute bottom-0 left-1/4 w-[320px] h-[320px] bg-[#FF5A5F]/4 blur-[100px] rounded-full"
+          className="pointer-events-none absolute bottom-0 left-1/4 w-[320px] h-[320px] bg-[#FF7C71]/4 blur-[100px] rounded-full"
         />
 
         <div className="max-w-3xl mx-auto px-4 md:px-6 text-center relative z-10">
@@ -264,7 +264,7 @@ export default function ContactPage() {
               initial={{ opacity: 0, y: 28 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
-              className="inline-block text-xs font-black text-[#FF5A5F] uppercase tracking-widest bg-[#FFF0F1] px-4 py-1.5 rounded-full border border-rose-100/60"
+              className="inline-block text-xs font-black text-[#FF7C71] uppercase tracking-widest bg-[#FFF8F7] px-4 py-1.5 rounded-full border border-rose-100/60"
             >
               Support Center
             </motion.span>
@@ -278,7 +278,7 @@ export default function ContactPage() {
             >
               We&apos;re here whenever{" "}
               <motion.span
-                className="text-[#FF5A5F] inline-block"
+                className="text-[#FF7C71] inline-block"
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3, duration: 0.45, ease: "easeOut" }}
@@ -311,7 +311,7 @@ export default function ContactPage() {
                   transition={{ duration: 0.5, ease: "easeOut", delay: 0.18 + i * 0.06 }}
                   className="flex items-center gap-1.5 text-xs font-semibold text-slate-500"
                 >
-                  <Icon className="w-3.5 h-3.5 text-[#FF5A5F]" />
+                  <Icon className="w-3.5 h-3.5 text-[#FF7C71]" />
                   {text}
                 </motion.span>
               ))}
@@ -337,10 +337,10 @@ export default function ContactPage() {
                   viewport={{ once: true, margin: "-60px" }}
                   whileHover={{ y: -5, boxShadow: "0 12px 32px rgba(255,90,95,0.10)" }}
                   whileTap={{ scale: 0.98 }}
-                  className="group bg-white border border-slate-100 rounded-3xl p-6 flex items-start gap-4 hover:border-[#FF5A5F]/25 transition-colors duration-300"
+                  className="group bg-white border border-slate-100 rounded-3xl p-6 flex items-start gap-4 hover:border-[#FF7C71]/25 transition-colors duration-300"
                 >
                   <motion.span
-                    className="p-3.5 rounded-2xl bg-[#FFF0F1] text-[#FF5A5F] flex-shrink-0"
+                    className="p-3.5 rounded-2xl bg-[#FFF8F7] text-[#FF7C71] flex-shrink-0"
                     whileHover={{ rotate: [0, -8, 8, 0], scale: 1.1 }}
                     transition={{ duration: 0.4 }}
                   >
@@ -351,11 +351,11 @@ export default function ContactPage() {
                       <h3 className="font-extrabold text-slate-900 text-xs uppercase tracking-wide">
                         {label}
                       </h3>
-                      <span className="text-[10px] font-bold text-[#FF5A5F] bg-[#FFF0F1] px-2 py-0.5 rounded-full whitespace-nowrap">
+                      <span className="text-[10px] font-bold text-[#FF7C71] bg-[#FFF8F7] px-2 py-0.5 rounded-full whitespace-nowrap">
                         {badge}
                       </span>
                     </div>
-                    <p className="text-sm font-bold text-slate-800 group-hover:text-[#FF5A5F] transition-colors truncate">
+                    <p className="text-sm font-bold text-slate-800 group-hover:text-[#FF7C71] transition-colors truncate">
                       {primary}
                     </p>
                     <p className="text-xs text-slate-400 font-medium mt-0.5">{secondary}</p>
@@ -405,7 +405,7 @@ export default function ContactPage() {
                         ].map(({ id, label, type, autoComplete, placeholder, required }, i) => (
                           <div key={id} className="space-y-1.5">
                             <label htmlFor={id} className="text-xs font-extrabold text-slate-600 uppercase tracking-wide">
-                              {label} {required && <span className="text-[#FF5A5F]">*</span>}
+                              {label} {required && <span className="text-[#FF7C71]">*</span>}
                             </label>
                             <motion.input
                               id={id}
@@ -460,7 +460,7 @@ export default function ContactPage() {
                         </div>
                         <div className="space-y-1.5">
                           <label htmlFor="subject" className="text-xs font-extrabold text-slate-600 uppercase tracking-wide">
-                            Subject <span className="text-[#FF5A5F]">*</span>
+                            Subject <span className="text-[#FF7C71]">*</span>
                           </label>
                           <motion.select
                             id="subject"
@@ -498,7 +498,7 @@ export default function ContactPage() {
                       {/* Message */}
                       <div className="space-y-1.5">
                         <label htmlFor="message" className="text-xs font-extrabold text-slate-600 uppercase tracking-wide">
-                          Your Message <span className="text-[#FF5A5F]">*</span>
+                          Your Message <span className="text-[#FF7C71]">*</span>
                         </label>
                         <motion.textarea
                           id="message"
@@ -537,7 +537,7 @@ export default function ContactPage() {
                         <Button
                           type="submit"
                           disabled={loading}
-                          className="w-full bg-[#FF5A5F] hover:bg-[#e84e53] disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-extrabold py-3.5 h-auto rounded-xl border-none transition-colors shadow-md hover:shadow-[0_8px_24px_rgba(255,90,95,0.35)] flex items-center justify-center gap-2"
+                          className="w-full bg-[#FF7C71] hover:bg-[#e84e53] disabled:opacity-60 disabled:cursor-not-allowed text-white text-sm font-extrabold py-3.5 h-auto rounded-xl border-none transition-colors shadow-md hover:shadow-[0_8px_24px_rgba(255,90,95,0.35)] flex items-center justify-center gap-2"
                         >
                           <AnimatePresence mode="wait">
                             {loading ? (
@@ -572,7 +572,7 @@ export default function ContactPage() {
 
                       <p className="text-center text-[11px] text-slate-400">
                         By submitting, you agree to our{" "}
-                        <a href="/privacy" className="underline hover:text-[#FF5A5F]">
+                        <a href="/privacy" className="underline hover:text-[#FF7C71]">
                           Privacy Policy
                         </a>.
                       </p>
@@ -653,7 +653,7 @@ export default function ContactPage() {
                       initial={{ opacity: 0, x: -10 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: 0.5 }}
-                      className="inline-block text-[10px] font-black tracking-widest text-[#FF5A5F] bg-white/90 px-2.5 py-1 rounded-full uppercase mb-1"
+                      className="inline-block text-[10px] font-black tracking-widest text-[#FF7C71] bg-white/90 px-2.5 py-1 rounded-full uppercase mb-1"
                     >
                       Headquarters
                     </motion.span>
@@ -675,7 +675,7 @@ export default function ContactPage() {
                   className="bg-white border border-slate-100 rounded-3xl p-6 space-y-4"
                 >
                   <div className="flex items-center gap-2">
-                    <Clock className="w-4 h-4 text-[#FF5A5F]" />
+                    <Clock className="w-4 h-4 text-[#FF7C71]" />
                     <h4 className="font-extrabold text-slate-900 text-sm uppercase tracking-wide">
                       Office Hours
                     </h4>
@@ -706,7 +706,7 @@ export default function ContactPage() {
                   whileInView={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
                   viewport={{ once: true, margin: "-60px" }}
-                  className="bg-[#FFF0F1] border border-rose-100 rounded-3xl p-6 space-y-4"
+                  className="bg-[#FFF8F7] border border-rose-100 rounded-3xl p-6 space-y-4"
                 >
                   <h4 className="font-extrabold text-slate-900 text-sm">Follow Rajseba</h4>
                   <p className="text-xs text-slate-500 leading-relaxed">
@@ -725,7 +725,7 @@ export default function ContactPage() {
                         transition={{ delay: 0.5 + i * 0.07 }}
                         whileHover={{ scale: 1.15, rotate: 5 }}
                         whileTap={{ scale: 0.9 }}
-                        className="w-9 h-9 rounded-full bg-white border border-rose-100 text-[#FF5A5F] flex items-center justify-center hover:bg-[#FF5A5F] hover:text-white hover:border-[#FF5A5F] transition-colors duration-200 shadow-xs"
+                        className="w-9 h-9 rounded-full bg-white border border-rose-100 text-[#FF7C71] flex items-center justify-center hover:bg-[#FF7C71] hover:text-white hover:border-[#FF7C71] transition-colors duration-200 shadow-xs"
                       >
                         <Icon className="w-3.5 h-3.5" />
                       </motion.a>
@@ -751,7 +751,7 @@ export default function ContactPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, ease: "easeOut", delay: 0 }}
                 viewport={{ once: true, margin: "-60px" }}
-                className="inline-flex items-center gap-1.5 text-xs font-black text-[#FF5A5F] uppercase tracking-widest mb-3"
+                className="inline-flex items-center gap-1.5 text-xs font-black text-[#FF7C71] uppercase tracking-widest mb-3"
               >
                 <HelpCircle className="w-3.5 h-3.5" />
                 FAQ
@@ -773,7 +773,7 @@ export default function ContactPage() {
                 className="text-sm text-slate-400 mt-2"
               >
                 Can&apos;t find what you&apos;re looking for?{" "}
-                <a href="mailto:support@rajseba.com" className="text-[#FF5A5F] font-semibold hover:underline">
+                <a href="mailto:support@rajseba.com" className="text-[#FF7C71] font-semibold hover:underline">
                   Email us directly.
                 </a>
               </motion.p>
@@ -799,10 +799,10 @@ export default function ContactPage() {
                       type="button"
                       onClick={() => setActiveFaq(isOpen ? null : i)}
                       aria-expanded={isOpen}
-                      className="w-full flex items-center justify-between px-5 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#FF5A5F]/40 rounded-2xl"
+                      className="w-full flex items-center justify-between px-5 py-4 text-left outline-none focus-visible:ring-2 focus-visible:ring-[#FF7C71]/40 rounded-2xl"
                     >
                       <span
-                        className={`text-sm font-bold pr-4 transition-colors duration-200 ${isOpen ? "text-[#FF5A5F]" : "text-slate-800"
+                        className={`text-sm font-bold pr-4 transition-colors duration-200 ${isOpen ? "text-[#FF7C71]" : "text-slate-800"
                           }`}
                       >
                         {faq.question}
@@ -812,7 +812,7 @@ export default function ContactPage() {
                         transition={{ duration: 0.25, ease: "easeInOut" }}
                       >
                         <ChevronDown
-                          className={`w-4 h-4 flex-shrink-0 transition-colors duration-200 ${isOpen ? "text-[#FF5A5F]" : "text-slate-400"
+                          className={`w-4 h-4 flex-shrink-0 transition-colors duration-200 ${isOpen ? "text-[#FF7C71]" : "text-slate-400"
                             }`}
                         />
                       </motion.div>
@@ -847,7 +847,7 @@ export default function ContactPage() {
       <RevealSection>
         <motion.section
 
-          className="bg-[#FF5A5F] py-12 md:py-16 relative overflow-hidden"
+          className="bg-[#FF7C71] py-12 md:py-16 relative overflow-hidden"
         >
           {/* Decorative circle */}
           <motion.div
@@ -889,7 +889,7 @@ export default function ContactPage() {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 href="/services"
-                className="inline-flex items-center gap-2 bg-white text-[#FF5A5F] text-xs font-extrabold px-6 py-3.5 rounded-xl hover:bg-rose-50 transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 bg-white text-[#FF7C71] text-xs font-extrabold px-6 py-3.5 rounded-xl hover:bg-rose-50 transition-colors shadow-sm"
               >
                 Explore Services
               </motion.a>

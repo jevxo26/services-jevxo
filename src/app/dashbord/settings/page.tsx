@@ -72,7 +72,7 @@ export default function SettingsPage() {
     <button
       type="button"
       onClick={onChange}
-      className={`w-11 h-6 rounded-full transition-colors relative focus:outline-none shrink-0 ${checked ? "bg-rose-500" : "bg-slate-200"
+      className={`w-11 h-6 rounded-full transition-colors relative focus:outline-none shrink-0 ${checked ? "bg-[#FF7C71]" : "bg-slate-200"
         }`}
     >
       <span
@@ -127,7 +127,7 @@ export default function SettingsPage() {
                     key={tab.id}
                     onClick={() => handleTabClick(tab.id)}
                     className={`flex items-center gap-3 px-5 py-3 rounded-2xl text-left transition-all ${isActive
-                      ? "bg-rose-50 text-rose-500 font-bold"
+                      ? "bg-[#FFF8F7] text-[#FF7C71] font-bold"
                       : "text-slate-500 hover:bg-slate-50 hover:text-slate-800 font-semibold"
                       }`}
                   >
@@ -142,7 +142,7 @@ export default function SettingsPage() {
             <div className="hidden lg:block pt-6 border-t border-slate-100 mt-6">
               <button
                 onClick={() => router.push("/login")}
-                className="w-full flex items-center gap-3 px-5 py-3 rounded-2xl text-left text-slate-500 hover:bg-rose-50 hover:text-rose-600 transition-all font-semibold"
+                className="w-full flex items-center gap-3 px-5 py-3 rounded-2xl text-left text-slate-500 hover:bg-[#FFF8F7] hover:text-[#E5675D] transition-all font-semibold"
               >
                 <LogOut size={18} />
                 <span className="text-sm">Logout</span>
@@ -164,7 +164,7 @@ export default function SettingsPage() {
                     alt="Zayed Mansoor Profile"
                     className="w-20 h-20 rounded-full object-cover border-2 border-white ring-4 ring-slate-100"
                   />
-                  <button className="absolute bottom-0 right-0 p-1.5 bg-rose-500 hover:bg-rose-600 text-white rounded-full border-2 border-white shadow-md transition-transform active:scale-90">
+                  <button className="absolute bottom-0 right-0 p-1.5 bg-[#FF7C71] hover:bg-[#E5675D] text-white rounded-full border-2 border-white shadow-md transition-transform active:scale-90">
                     <Pencil size={12} className="stroke-[2.5]" />
                   </button>
                 </div>
@@ -172,13 +172,13 @@ export default function SettingsPage() {
                 <div>
                   <h2 className="text-2xl font-black text-slate-900 leading-tight">Zayed Mansoor</h2>
                   <p className="text-sm text-slate-400 mt-0.5 font-semibold">{personalInfo.email}</p>
-                  <span className="inline-flex items-center gap-1 bg-rose-50 text-rose-500 text-xs font-bold px-3 py-1 rounded-full mt-2 border border-rose-100">
+                  <span className="inline-flex items-center gap-1 bg-[#FFF8F7] text-[#FF7C71] text-xs font-bold px-3 py-1 rounded-full mt-2 border border-[#FFEBE9]">
                     ★ Premium Member
                   </span>
                 </div>
               </div>
 
-              <button className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-6 py-2.5 rounded-full text-xs shadow-md shadow-rose-500/10 transition-all active:scale-[0.98]">
+              <button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold px-6 py-2.5 rounded-full text-xs shadow-md shadow-[#FF7C71]/10 transition-all active:scale-[0.98]">
                 View Public Profile
               </button>
             </div>
@@ -199,7 +199,7 @@ export default function SettingsPage() {
                           type="text"
                           value={personalInfo.fullName}
                           onChange={(e) => setPersonalInfo({ ...personalInfo, fullName: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-rose-500/5 transition-all"
+                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF7C71]/20/5 transition-all"
                           required
                         />
                       </div>
@@ -210,7 +210,7 @@ export default function SettingsPage() {
                           type="email"
                           value={personalInfo.email}
                           onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-rose-500/5 transition-all"
+                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF7C71]/20/5 transition-all"
                           required
                         />
                       </div>
@@ -221,7 +221,7 @@ export default function SettingsPage() {
                           type="tel"
                           value={personalInfo.phone}
                           onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-rose-500/5 transition-all"
+                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF7C71]/20/5 transition-all"
                         />
                       </div>
 
@@ -231,7 +231,7 @@ export default function SettingsPage() {
                           type="text"
                           value={personalInfo.location}
                           onChange={(e) => setPersonalInfo({ ...personalInfo, location: e.target.value })}
-                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-rose-500/5 transition-all"
+                          className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF7C71]/20/5 transition-all"
                         />
                       </div>
                     </div>
@@ -239,7 +239,7 @@ export default function SettingsPage() {
                     <div className="flex justify-end pt-2">
                       <button
                         type="submit"
-                        className="bg-rose-500 hover:bg-rose-600 text-white font-bold px-6 py-2.5 rounded-full text-xs shadow-md shadow-rose-500/10 transition-all active:scale-[0.98]"
+                        className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold px-6 py-2.5 rounded-full text-xs shadow-md shadow-[#FF7C71]/10 transition-all active:scale-[0.98]"
                       >
                         Save Changes
                       </button>
@@ -258,7 +258,7 @@ export default function SettingsPage() {
                         <h4 className="text-sm font-bold text-slate-800">Password</h4>
                         <p className="text-xs text-slate-400 mt-1 font-semibold">Last updated 3 months ago</p>
                       </div>
-                      <button className="text-rose-500 hover:text-rose-600 text-xs font-bold focus:outline-none hover:underline">
+                      <button className="text-[#FF7C71] hover:text-[#E5675D] text-xs font-bold focus:outline-none hover:underline">
                         Update
                       </button>
                     </div>
@@ -296,7 +296,7 @@ export default function SettingsPage() {
                     {/* Email Notifications Row */}
                     <div className="flex items-center justify-between gap-4 p-4 bg-slate-50/50 hover:bg-slate-50/80 rounded-2xl border border-slate-50 transition-colors">
                       <div className="flex items-start gap-3.5">
-                        <div className="p-2.5 bg-rose-50 rounded-xl text-rose-500 shrink-0">
+                        <div className="p-2.5 bg-[#FFF8F7] rounded-xl text-[#FF7C71] shrink-0">
                           <Mail size={18} />
                         </div>
                         <div>
@@ -313,7 +313,7 @@ export default function SettingsPage() {
                     {/* SMS Alerts Row */}
                     <div className="flex items-center justify-between gap-4 p-4 bg-slate-50/50 hover:bg-slate-50/80 rounded-2xl border border-slate-50 transition-colors">
                       <div className="flex items-start gap-3.5">
-                        <div className="p-2.5 bg-rose-50 rounded-xl text-rose-500 shrink-0">
+                        <div className="p-2.5 bg-[#FFF8F7] rounded-xl text-[#FF7C71] shrink-0">
                           <MessageSquare size={18} />
                         </div>
                         <div>
@@ -330,7 +330,7 @@ export default function SettingsPage() {
                     {/* Promotions Row */}
                     <div className="flex items-center justify-between gap-4 p-4 bg-slate-50/50 hover:bg-slate-50/80 rounded-2xl border border-slate-50 transition-colors">
                       <div className="flex items-start gap-3.5">
-                        <div className="p-2.5 bg-rose-50 rounded-xl text-rose-500 shrink-0">
+                        <div className="p-2.5 bg-[#FFF8F7] rounded-xl text-[#FF7C71] shrink-0">
                           <Megaphone size={18} />
                         </div>
                         <div>
@@ -366,7 +366,7 @@ export default function SettingsPage() {
                         <p className="text-xs text-emerald-600 font-semibold mt-0.5">Connected</p>
                       </div>
                     </div>
-                    <button className="text-slate-400 hover:text-rose-500 text-xs font-bold transition-colors">Disconnect</button>
+                    <button className="text-slate-400 hover:text-[#FF7C71] text-xs font-bold transition-colors">Disconnect</button>
                   </div>
 
                   <div className="flex items-center justify-between p-4 bg-slate-50 rounded-2xl border border-slate-100">
@@ -377,7 +377,7 @@ export default function SettingsPage() {
                         <p className="text-xs text-slate-400 font-semibold mt-0.5">Not Connected</p>
                       </div>
                     </div>
-                    <button className="text-rose-500 hover:text-rose-600 text-xs font-bold transition-colors">Connect</button>
+                    <button className="text-[#FF7C71] hover:text-[#E5675D] text-xs font-bold transition-colors">Connect</button>
                   </div>
                 </div>
               </div>
@@ -392,15 +392,15 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-4 border border-rose-100 bg-rose-50/20 rounded-2xl">
+                  <div className="flex items-center justify-between p-4 border border-[#FFEBE9] bg-[#FFF8F7]/20 rounded-2xl">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-black bg-rose-500 text-white px-2 py-1 rounded">bKash</span>
+                      <span className="text-xs font-black bg-[#FF7C71] text-white px-2 py-1 rounded">bKash</span>
                       <div>
                         <h5 className="text-sm font-bold text-slate-800">01712 ****78</h5>
-                        <span className="text-[10px] text-rose-500 font-bold block mt-0.5">Primary Payment Option</span>
+                        <span className="text-[10px] text-[#FF7C71] font-bold block mt-0.5">Primary Payment Option</span>
                       </div>
                     </div>
-                    <span className="text-xs text-rose-500 font-extrabold uppercase">Active</span>
+                    <span className="text-xs text-[#FF7C71] font-extrabold uppercase">Active</span>
                   </div>
 
                   <div className="flex items-center justify-between p-4 border border-slate-100 rounded-2xl">
@@ -411,7 +411,7 @@ export default function SettingsPage() {
                         <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">Expires 12/28</span>
                       </div>
                     </div>
-                    <button className="text-xs font-semibold text-slate-400 hover:text-rose-500 transition-colors">Delete</button>
+                    <button className="text-xs font-semibold text-slate-400 hover:text-[#FF7C71] transition-colors">Delete</button>
                   </div>
                 </div>
               </div>

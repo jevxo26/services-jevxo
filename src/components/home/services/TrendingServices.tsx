@@ -132,7 +132,7 @@ export default function TrendingServices() {
 
   if (isLoading) {
     return (
-      <section className="py-14 bg-[#FFF0EF] relative overflow-hidden">
+      <section className="py-14 bg-[#FFF8F7] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="h-8 w-48 bg-slate-200/50 animate-pulse rounded-lg mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6">
@@ -146,7 +146,7 @@ export default function TrendingServices() {
 
   if (!allNestedServices.length) {
     return (
-      <section className="py-14 bg-[#FFF0EF] relative overflow-hidden">
+      <section className="py-14 bg-[#FFF8F7] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center py-12">
           <h2 className="text-xl font-extrabold text-slate-800 mb-2">Trending Services</h2>
           <p className="text-sm text-slate-500">No trending services available at the moment.</p>
@@ -173,7 +173,7 @@ export default function TrendingServices() {
           </div>
           <Link
             href="/services"
-            className="text-xs font-extrabold text-[#ff5a5f] hover:text-[#e04a4f] hover:underline flex items-center gap-1 uppercase tracking-wider transition-all"
+            className="text-xs font-extrabold text-[#FF7C71] hover:text-[#E5675D] hover:underline flex items-center gap-1 uppercase tracking-wider transition-all"
           >
             View all <ArrowRight size={14} />
           </Link>
@@ -184,7 +184,7 @@ export default function TrendingServices() {
 
           {/* Featured Large Card */}
           {featured && (
-            <div className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100/60 hover:shadow-md transition-all duration-300">
+            <div className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-3xl overflow-hidden border border-slate-100/60 hover-card-premium">
               <div className="relative min-h-[220px] sm:min-h-full bg-slate-50">
                 <img
                   src={featured.image}
@@ -234,7 +234,7 @@ export default function TrendingServices() {
 
           {/* Secondary Vertical Card */}
           {secondary && (
-            <div className="bg-white rounded-3xl overflow-hidden shadow-sm border border-slate-100/60 flex flex-col hover:shadow-md transition-all duration-300">
+            <div className="bg-white rounded-3xl overflow-hidden border border-slate-100/60 flex flex-col hover-card-premium">
               <div className="relative h-44 w-full bg-slate-50 shrink-0">
                 <img
                   src={secondary.image}
@@ -262,7 +262,7 @@ export default function TrendingServices() {
                   </span>
                   <Link
                     href={secondary.slug ? `/categories/service/${secondary.slug}` : "/services"}
-                    className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-50 hover:bg-[#ff5a5f] text-slate-500 hover:text-white border border-slate-100 hover:border-transparent transition-all cursor-pointer shadow-sm"
+                    className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-50 hover:bg-[#FF7C71] text-slate-500 hover:text-white border border-slate-100 hover:border-transparent transition-all cursor-pointer shadow-sm"
                     aria-label={`View ${secondary.title}`}
                   >
                     <ArrowRight size={14} strokeWidth={2.5} />

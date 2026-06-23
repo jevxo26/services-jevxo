@@ -188,7 +188,7 @@ export function Navbar() {
     <>
       <motion.nav
         style={{ boxShadow: headerShadow, borderBottomColor: borderColor }}
-        className="bg-white border-b sticky top-0 z-50"
+        className="bg-[#FFF8F7] border-b sticky top-0 z-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           {/* ─── TOP BAR ─── */}
@@ -231,8 +231,8 @@ export function Navbar() {
                       <button
                         type="button"
                         className={`flex items-center font-semibold text-xs lg:text-sm transition-colors cursor-pointer ${active
-                          ? "text-[#FF5A5F]"
-                          : "text-slate-600 hover:text-[#FF5A5F]"
+                          ? "text-[#FF7C71]"
+                          : "text-slate-600 hover:text-[#FF7C71]"
                           }`}
                       >
                         <Icon
@@ -245,7 +245,7 @@ export function Navbar() {
                         {active && (
                           <motion.span
                             layoutId="navIndicatorLeft"
-                            className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF5A5F] rounded-full"
+                            className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF7C71] rounded-full"
                           />
                         )}
                       </button>
@@ -269,7 +269,7 @@ export function Navbar() {
                                     className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/50 group/item transition-colors"
                                     onClick={() => setShowMenuDropdown(false)}
                                   >
-                                    <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500 group-hover/item:bg-[#FF5A5F]/10 group-hover/item:text-[#FF5A5F] transition-colors">
+                                    <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500 group-hover/item:bg-[#FF7C71]/10 group-hover/item:text-[#FF7C71] transition-colors">
                                       <IconComponent className="w-5 h-5" />
                                     </div>
                                     <span className="font-semibold text-sm text-slate-700 group-hover/item:text-slate-900 transition-colors">
@@ -291,8 +291,8 @@ export function Navbar() {
                     key={i}
                     href={link.href}
                     className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active
-                      ? "text-[#FF5A5F]"
-                      : "text-slate-600 hover:text-[#FF5A5F]"
+                      ? "text-[#FF7C71]"
+                      : "text-slate-600 hover:text-[#FF7C71]"
                       }`}
                   >
                     <Icon
@@ -302,7 +302,7 @@ export function Navbar() {
                     {active && (
                       <motion.span
                         layoutId="navIndicatorLeft"
-                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF5A5F] rounded-full"
+                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF7C71] rounded-full"
                       />
                     )}
                   </Link>
@@ -321,7 +321,7 @@ export function Navbar() {
                     <label htmlFor="desktop-search" className="sr-only">
                       Search services
                     </label>
-                    <div className="flex items-center h-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF5A5F] focus-within:ring-2 focus-within:ring-[#FF5A5F]/10 transition-all">
+                    <div className="flex items-center h-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
                       <Search
                         className="w-4 h-4 text-slate-400 flex-shrink-0"
                         aria-hidden="true"
@@ -341,7 +341,7 @@ export function Navbar() {
                 <label htmlFor="desktop-search-2" className="sr-only">
                   Search services
                 </label>
-                <div className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF5A5F] focus-within:ring-2 focus-within:ring-[#FF5A5F]/10 transition-all">
+                <div className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
                   <Search
                     className="w-4 h-4 text-slate-400 flex-shrink-0"
                     aria-hidden="true"
@@ -370,8 +370,8 @@ export function Navbar() {
                     key={i}
                     href={link.href}
                     className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active
-                      ? "text-[#FF5A5F]"
-                      : "text-slate-600 hover:text-[#FF5A5F]"
+                      ? "text-[#FF7C71]"
+                      : "text-slate-600 hover:text-[#FF7C71]"
                       }`}
                   >
                     <Icon
@@ -381,7 +381,7 @@ export function Navbar() {
                     {active && (
                       <motion.span
                         layoutId="navIndicatorRight"
-                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF5A5F] rounded-full"
+                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF7C71] rounded-full"
                       />
                     )}
                   </Link>
@@ -412,7 +412,7 @@ export function Navbar() {
                       {profile.roleName}
                     </p>
                   </div>
-                  <div className="w-9 h-9 bg-rose-100 text-[#FF5A5F] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-sm hover:scale-105 transition-transform duration-200 select-none">
+                  <div className="w-9 h-9 bg-rose-100 text-[#FF7C71] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-sm hover:scale-105 transition-transform duration-200 select-none">
                     {profile.avatar}
                   </div>
                 </button>
@@ -433,7 +433,7 @@ export function Navbar() {
                         <p className="text-xs text-slate-400 truncate mt-0.5 font-medium">
                           {profile.email}
                         </p>
-                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF5A5F] bg-rose-50 border border-rose-100/50 rounded-full mt-2">
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF7C71] bg-rose-50 border border-rose-100/50 rounded-full mt-2">
                           {profile.roleName}
                         </span>
                       </div>
@@ -444,7 +444,7 @@ export function Navbar() {
                               ? "/dashbord/overview"
                               : "/dashbord"
                           }
-                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F] transition-all font-semibold"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
                           <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
@@ -455,7 +455,7 @@ export function Navbar() {
 
                         <Link
                           href="/dashbord/profile"
-                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F] transition-all font-semibold"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
                           <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
@@ -466,7 +466,7 @@ export function Navbar() {
 
                         <Link
                           href="/dashbord/settings"
-                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F] transition-all font-semibold"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
                           <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
@@ -484,7 +484,7 @@ export function Navbar() {
                           }}
                           className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-rose-600 hover:bg-rose-50 transition-all font-semibold"
                         >
-                          <div className="p-1.5 rounded-lg bg-rose-50 text-[#FF5A5F]">
+                          <div className="p-1.5 rounded-lg bg-rose-50 text-[#FF7C71]">
                             <LogOut size={15} />
                           </div>
                           <span>Sign Out</span>
@@ -498,7 +498,7 @@ export function Navbar() {
               <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
                 <Link
                   href="/login"
-                  className="flex items-center gap-2 font-semibold text-slate-700 text-[#FF565C] bg-rose-100 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
+                  className="flex items-center gap-2 font-semibold text-slate-700 text-[#FF7C71] bg-rose-100 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   Login
@@ -506,7 +506,7 @@ export function Navbar() {
 
                 <Link
                   href="/signup"
-                  className="flex items-center gap-2 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
+                  className="flex items-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
                 >
                   <UserPlus className="w-4 h-4" />
                   Signup
@@ -520,8 +520,8 @@ export function Navbar() {
                 variant="ghost"
                 onClick={handleMobileSearchToggle}
                 className={`p-2.5 h-auto rounded-lg transition-colors ${mobileSearchOpen
-                  ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
-                  : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
+                  ? "text-[#FF7C71] bg-rose-50 hover:bg-rose-50 hover:text-[#FF7C71]"
+                  : "text-slate-600 hover:text-[#FF7C71] hover:bg-slate-50"
                   }`}
                 aria-label={mobileSearchOpen ? "Close search" : "Open search"}
                 aria-expanded={mobileSearchOpen}
@@ -536,8 +536,8 @@ export function Navbar() {
                 variant="ghost"
                 onClick={handleMenuToggle}
                 className={`p-2.5 h-auto rounded-lg transition-colors ${isOpen
-                  ? "text-[#FF5A5F] bg-rose-50 hover:bg-rose-50 hover:text-[#FF5A5F]"
-                  : "text-slate-600 hover:text-[#FF5A5F] hover:bg-slate-50"
+                  ? "text-[#FF7C71] bg-rose-50 hover:bg-rose-50 hover:text-[#FF7C71]"
+                  : "text-slate-600 hover:text-[#FF7C71] hover:bg-slate-50"
                   }`}
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
@@ -567,7 +567,7 @@ export function Navbar() {
                   <label htmlFor="mobile-search" className="sr-only">
                     Search services
                   </label>
-                  <div className="flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 h-11 gap-2 focus-within:border-[#FF5A5F] focus-within:ring-2 focus-within:ring-[#FF5A5F]/10 transition-all">
+                  <div className="flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 h-11 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
                     <Search
                       className="w-4 h-4 text-slate-400 flex-shrink-0"
                       aria-hidden="true"
@@ -598,7 +598,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.22, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden border-t border-slate-100 bg-white"
+              className="md:hidden overflow-hidden border-t border-slate-100 bg-[#FFF8F7]"
             >
               <div className="px-4 py-4 space-y-1">
                 {/* Nav Links */}
@@ -617,8 +617,8 @@ export function Navbar() {
                             setShowMobileAccordion(!showMobileAccordion)
                           }
                           className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${active
-                            ? "text-[#FF5A5F] bg-rose-50"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                            ? "text-[#FF7C71] bg-rose-50"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71]"
                             }`}
                         >
                           <div className="flex items-center gap-2.5">
@@ -650,8 +650,8 @@ export function Navbar() {
                                       key={cat.slug}
                                       href={`/categories/service/${cat.slug}`}
                                       className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${isCategoryActive
-                                        ? "bg-rose-50 text-[#FF5A5F] font-semibold"
-                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                                        ? "bg-rose-50 text-[#FF7C71] font-semibold"
+                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF7C71]"
                                         }`}
                                       onClick={() => {
                                         setIsOpen(false);
@@ -660,14 +660,14 @@ export function Navbar() {
                                     >
                                       <IconComponent
                                         className={`w-4 h-4 flex-shrink-0 ${isCategoryActive
-                                          ? "text-[#FF5A5F]"
+                                          ? "text-[#FF7C71]"
                                           : "text-slate-400"
                                           }`}
                                       />
                                       <span>{cat.label}</span>
 
                                       {isCategoryActive && (
-                                        <div className="ml-auto w-1.5 h-1.5 bg-[#FF5A5F] rounded-full" />
+                                        <div className="ml-auto w-1.5 h-1.5 bg-[#FF7C71] rounded-full" />
                                       )}
                                     </Link>
                                   );
@@ -685,8 +685,8 @@ export function Navbar() {
                       key={i}
                       href={link.href}
                       className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors ${active
-                        ? "text-[#FF5A5F] bg-rose-50"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#FF5A5F]"
+                        ? "text-[#FF7C71] bg-rose-50"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71]"
                         }`}
                       onClick={() => setIsOpen(false)}
                     >
@@ -711,7 +711,7 @@ export function Navbar() {
                   <div className="pt-4 border-t border-slate-100 mt-1 space-y-4">
                     {/* User profile card */}
                     <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                      <div className="w-12 h-12 bg-rose-100 text-[#FF5A5F] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-inner select-none shrink-0">
+                      <div className="w-12 h-12 bg-rose-100 text-[#FF7C71] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-inner select-none shrink-0">
                         {profile.avatar}
                       </div>
                       <div className="min-w-0 flex-grow">
@@ -721,7 +721,7 @@ export function Navbar() {
                         <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">
                           {profile.email}
                         </p>
-                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF5A5F] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5 font-semibold">
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF7C71] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5 font-semibold">
                           {profile.roleName}
                         </span>
                       </div>
@@ -733,7 +733,7 @@ export function Navbar() {
                         href={
                           role === "client" ? "/dashbord/overview" : "/dashbord"
                         }
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF5A5F] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF7C71] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <LayoutGrid size={18} className="text-slate-400" />
@@ -741,7 +741,7 @@ export function Navbar() {
                       </Link>
                       <Link
                         href="/dashbord/profile"
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF5A5F] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF7C71] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <User size={18} className="text-slate-400" />
@@ -749,7 +749,7 @@ export function Navbar() {
                       </Link>
                       <Link
                         href="/dashbord/settings"
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF5A5F] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF7C71] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <Settings size={18} className="text-slate-400" />
@@ -773,7 +773,7 @@ export function Navbar() {
                   <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 mt-1">
                     <Link
                       href="/login"
-                      className="flex items-center justify-center gap-2 py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF5A5F] hover:text-[#FF5A5F] hover:bg-rose-50 transition-colors"
+                      className="flex items-center justify-center gap-2 py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF7C71] hover:text-[#FF7C71] hover:bg-rose-50 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       <LogIn className="w-4 h-4" />
@@ -782,7 +782,7 @@ export function Navbar() {
 
                     <Link
                       href="/register"
-                      className="flex items-center justify-center gap-2 py-3 bg-[#FF5A5F] hover:bg-[#FF4449] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
+                      className="flex items-center justify-center gap-2 py-3 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
                       onClick={() => setIsOpen(false)}
                     >
                       <UserPlus className="w-4 h-4" />
@@ -804,7 +804,7 @@ export function Navbar() {
         className="md:hidden fixed bottom-0 left-0 right-0 z-50 safe-bottom"
       >
         {/* Glassmorphism background */}
-        <div className="absolute inset-0 bg-white/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
+        <div className="absolute inset-0 bg-[#FFF8F7]/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
 
         <div className="relative grid grid-cols-6 gap-0 max-w-lg mx-auto px-1 py-1.5">
           {bottomLinks.map((link, i) => {
@@ -842,7 +842,7 @@ export function Navbar() {
                 {active && (
                   <motion.div
                     layoutId="bottomNavPill"
-                    className="absolute inset-x-1.5 inset-y-0.5 bg-gradient-to-b from-rose-50 to-rose-100/60 rounded-2xl border border-rose-100/50"
+                    className="absolute inset-x-1.5 inset-y-0.5 bg-[#FFF8F7] rounded-2xl border border-rose-100/50"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -857,7 +857,7 @@ export function Navbar() {
                     <motion.div
                       animate={active ? { scale: 1.1 } : { scale: 1 }}
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold border select-none ${active
-                        ? "bg-rose-100 text-[#FF5A5F] border-rose-200 shadow-sm"
+                        ? "bg-rose-100 text-[#FF7C71] border-rose-200 shadow-sm"
                         : "bg-slate-100 text-slate-500 border-slate-200"
                         }`}
                     >
@@ -870,7 +870,7 @@ export function Navbar() {
                     >
                       <Icon
                         className={`w-[21px] h-[21px] transition-colors duration-200 ${active
-                          ? "text-[#FF5A5F] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
+                          ? "text-[#FF7C71] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
                           : "text-slate-400 group-hover:text-slate-600"
                           }`}
                         strokeWidth={active ? 2.4 : 1.8}
@@ -883,7 +883,7 @@ export function Navbar() {
                 <motion.span
                   animate={active ? { y: -1, opacity: 1 } : { y: 0, opacity: 0.7 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF5A5F]" : "text-slate-400 group-hover:text-slate-600"
+                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF7C71]" : "text-slate-400 group-hover:text-slate-600"
                     }`}
                 >
                   {showAvatar ? "Profile" : link.label}
@@ -897,7 +897,7 @@ export function Navbar() {
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ type: "spring", stiffness: 500, damping: 25 }}
-                      className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF5A5F] rounded-full shadow-[0_0_6px_2px_rgba(255,90,95,0.4)] z-10"
+                      className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF7C71] rounded-full shadow-[0_0_6px_2px_rgba(255,90,95,0.4)] z-10"
                     />
                   )}
                 </AnimatePresence>

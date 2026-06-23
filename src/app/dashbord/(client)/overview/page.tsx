@@ -108,18 +108,18 @@ function CustomerOverview() {
           <div className="flex items-center gap-4">
             <div className="bg-white px-6 py-3.5 rounded-2xl border border-slate-100 shadow-sm text-center min-w-[110px]">
               {loadingBookings ? (
-                <Loader2 size={20} className="animate-spin text-rose-500 mx-auto" />
+                <Loader2 size={20} className="animate-spin text-[#FF7C71] mx-auto" />
               ) : (
-                <span className="text-3xl font-black text-rose-500 block leading-tight">{activeBookings.length.toString().padStart(2, "0")}</span>
+                <span className="text-3xl font-black text-[#FF7C71] block leading-tight">{activeBookings.length.toString().padStart(2, "0")}</span>
               )}
               <span className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">Active</span>
             </div>
 
             <div className="bg-white px-6 py-3.5 rounded-2xl border border-slate-100 shadow-sm text-center min-w-[110px]">
               {loadingBookings ? (
-                <Loader2 size={20} className="animate-spin text-rose-500 mx-auto" />
+                <Loader2 size={20} className="animate-spin text-[#FF7C71] mx-auto" />
               ) : (
-                <span className="text-3xl font-black text-[#FF464C] block leading-tight">{completedBookings.length}</span>
+                <span className="text-3xl font-black text-[#FF7C71] block leading-tight">{completedBookings.length}</span>
               )}
               <span className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">Completed</span>
             </div>
@@ -130,7 +130,7 @@ function CustomerOverview() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             href="/dashbord/quick-booking"
-            className="relative overflow-hidden bg-[#FF5B60] text-white p-6 rounded-[28px] shadow-lg shadow-rose-500/10 flex items-center justify-between group hover:opacity-95 transition-all"
+            className="relative overflow-hidden bg-[#FF7C71] text-white p-6 rounded-[28px] shadow-lg shadow-[#FF7C71]/10 flex items-center justify-between group hover:opacity-95 transition-all"
           >
             <div className="flex items-center gap-4">
               <div className="p-3 bg-white/20 rounded-full border border-white/10">
@@ -147,7 +147,7 @@ function CustomerOverview() {
 
           <div className="bg-white p-6 rounded-[28px] border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-rose-50 rounded-2xl text-rose-500">
+              <div className="p-3 bg-[#FFF8F7] rounded-2xl text-[#FF7C71]">
                 <Share2 size={22} />
               </div>
               <div>
@@ -155,7 +155,7 @@ function CustomerOverview() {
                 <p className="text-xs text-slate-400 mt-0.5 font-semibold">Earn credits for sharing</p>
               </div>
             </div>
-            <button className="p-2.5 bg-rose-500 text-white rounded-full hover:bg-rose-600 transition-colors shadow-sm focus:outline-none">
+            <button className="p-2.5 bg-[#FF7C71] text-white rounded-full hover:bg-[#E5675D] transition-colors shadow-sm focus:outline-none">
               <ChevronRight size={16} />
             </button>
           </div>
@@ -166,7 +166,7 @@ function CustomerOverview() {
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">Active Bookings</h2>
-              <Link href="/dashbord/bookings" className="text-xs font-bold text-rose-500 hover:underline">
+              <Link href="/dashbord/bookings" className="text-xs font-bold text-[#FF7C71] hover:underline">
                 View All &rarr;
               </Link>
             </div>
@@ -176,13 +176,13 @@ function CustomerOverview() {
                 <div key={booking.id} className="bg-white p-6 rounded-[28px] border border-slate-100/80 shadow-sm space-y-4 flex flex-col justify-between">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-extrabold text-[#FF464C] text-base">
+                      <h3 className="font-extrabold text-[#FF7C71] text-base">
                         {booking.nestedService?.name || booking.pkg?.name || "Service Booking"}
                       </h3>
                       <span className="text-[10px] font-bold text-slate-400 block mt-0.5">ID: #{booking.id}</span>
                     </div>
                     <span className={`text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider ${
-                      booking.status === "on_the_way" ? "text-rose-600 bg-rose-50" : "text-amber-600 bg-amber-50"
+                      booking.status === "on_the_way" ? "text-[#E5675D] bg-[#FFF8F7]" : "text-amber-600 bg-amber-50"
                     }`}>
                       {booking.status === "on_the_way" ? "On the Way" : booking.status}
                     </span>
@@ -190,7 +190,7 @@ function CustomerOverview() {
 
                   <div className="flex items-center justify-between bg-slate-50/50 p-3 rounded-2xl border border-slate-100/40">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-rose-100 flex items-center justify-center text-rose-600 font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-[#FFEBE9] flex items-center justify-center text-[#E5675D] font-bold text-sm">
                         {booking.vendor?.name?.[0] || "V"}
                       </div>
                       <div>
@@ -198,7 +198,7 @@ function CustomerOverview() {
                         <p className="text-[10px] font-semibold text-slate-400">Verified Specialist</p>
                       </div>
                     </div>
-                    <button className="p-2 bg-white text-rose-500 rounded-xl hover:bg-rose-50 border border-slate-100 shadow-sm transition-colors">
+                    <button className="p-2 bg-white text-[#FF7C71] rounded-xl hover:bg-[#FFF8F7] border border-slate-100 shadow-sm transition-colors">
                       <MessageCircle size={16} />
                     </button>
                   </div>
@@ -233,11 +233,11 @@ function CustomerOverview() {
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                     ) : (
-                      <div className="w-full h-full bg-rose-50 flex items-center justify-center text-rose-300">
+                      <div className="w-full h-full bg-[#FFF8F7] flex items-center justify-center text-rose-300">
                         <Sparkles size={40} />
                       </div>
                     )}
-                    <button className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-xl text-slate-500 hover:text-rose-500 transition-colors shadow-sm focus:outline-none">
+                    <button className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-xl text-slate-500 hover:text-[#FF7C71] transition-colors shadow-sm focus:outline-none">
                       <Heart size={14} className="fill-current" />
                     </button>
                   </div>
@@ -253,7 +253,7 @@ function CustomerOverview() {
                         <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-wider block">Category</span>
                         <span className="text-sm font-black text-slate-800">{service.category?.name || "—"}</span>
                       </div>
-                      <button className="w-8 h-8 bg-rose-500 hover:bg-rose-600 text-white rounded-full flex items-center justify-center shadow-md shadow-rose-500/10 transition-transform active:scale-90 focus:outline-none">
+                      <button className="w-8 h-8 bg-[#FF7C71] hover:bg-[#E5675D] text-white rounded-full flex items-center justify-center shadow-md shadow-[#FF7C71]/10 transition-transform active:scale-90 focus:outline-none">
                         <Plus size={16} />
                       </button>
                     </div>
@@ -310,7 +310,7 @@ function AgentOverview() {
   }).length
 
   const stats = [
-    { label: "Total Bookings", value: isLoading ? "—" : `${totalOrders}`, desc: "All time bookings", icon: Briefcase, color: "text-rose-600 bg-rose-50" },
+    { label: "Total Bookings", value: isLoading ? "—" : `${totalOrders}`, desc: "All time bookings", icon: Briefcase, color: "text-[#E5675D] bg-[#FFF8F7]" },
     { label: "Today's Bookings", value: isLoading ? "—" : `${todayOrders}`, desc: "Placed today", icon: Zap, color: "text-amber-600 bg-amber-50" },
     { label: "Completed", value: isLoading ? "—" : `${allBookings.filter((b: any) => b.status === "completed").length}`, desc: "Total completed orders", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
     { label: "Pending", value: isLoading ? "—" : `${allBookings.filter((b: any) => b.status === "pending").length}`, desc: "Awaiting assignment", icon: Clock, color: "text-indigo-600 bg-indigo-50" },
@@ -364,7 +364,7 @@ function AgentOverview() {
         </div>
         <Link
           href="/dashbord/quick-booking"
-          className="bg-rose-500 hover:bg-rose-600 text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-rose-500/20 text-sm transition-all active:scale-[0.985] text-center"
+          className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/20 text-sm transition-all active:scale-[0.985] text-center"
         >
           Book a New Lead
         </Link>
@@ -393,14 +393,14 @@ function AgentOverview() {
       <div className="space-y-4">
         <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
           <h3 className="text-lg font-bold text-slate-900">Recent Lead Orders</h3>
-          <Link href="/dashbord/orders" className="text-xs font-bold text-rose-500 hover:underline">
+          <Link href="/dashbord/orders" className="text-xs font-bold text-[#FF7C71] hover:underline">
             View All &rarr;
           </Link>
         </div>
 
         {isLoading ? (
           <div className="flex items-center justify-center h-32">
-            <Loader2 size={32} className="animate-spin text-rose-500" />
+            <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
           </div>
         ) : (
           <CustomTable

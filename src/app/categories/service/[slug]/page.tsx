@@ -24,7 +24,7 @@ export default function CategoryDetailPage({
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50/50">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-[#FF5A5F]" />
+          <Loader2 className="w-10 h-10 animate-spin text-[#FF7C71]" />
           <p className="text-sm font-semibold text-slate-500">Loading service details...</p>
         </div>
       </div>

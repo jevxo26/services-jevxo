@@ -104,7 +104,7 @@ export default function HelpCenterPage() {
                   className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-6"
                 >
                   <div className="space-y-4">
-                    <div className="w-12 h-12 bg-rose-50/60 rounded-2xl flex items-center justify-center text-[#FF464C] border border-rose-100/30">
+                    <div className="w-12 h-12 bg-[#FFF8F7]/60 rounded-2xl flex items-center justify-center text-[#FF7C71] border border-[#FFEBE9]/30">
                       <Icon size={20} />
                     </div>
                     <div>
@@ -118,7 +118,7 @@ export default function HelpCenterPage() {
                       <Link
                         key={lidx}
                         href="#"
-                        className="flex items-center text-xs font-bold text-[#FF5B60] hover:text-[#FF464C] transition-colors"
+                        className="flex items-center text-xs font-bold text-[#FF7C71] hover:text-[#FF7C71] transition-colors"
                       >
                         <span className="mr-1.5 text-sm font-bold">→</span>
                         {link}
@@ -138,7 +138,7 @@ export default function HelpCenterPage() {
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">Popular Articles</h2>
               <p className="text-xs text-slate-400 mt-0.5 font-semibold">Most read guides by the Rajseba community</p>
             </div>
-            <Link href="#" className="text-xs font-bold text-rose-500 hover:underline">
+            <Link href="#" className="text-xs font-bold text-[#FF7C71] hover:underline">
               View all articles
             </Link>
           </div>
@@ -156,7 +156,7 @@ export default function HelpCenterPage() {
               <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/10 z-0" />
 
               <div className="relative z-10 w-fit">
-                <span className="bg-[#FF464C] text-white text-[9px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+                <span className="bg-[#FF7C71] text-white text-[9px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
                   Featured Guide
                 </span>
               </div>
@@ -178,10 +178,10 @@ export default function HelpCenterPage() {
                   key={idx}
                   className="bg-white/95 p-5 rounded-[28px] border border-slate-100 shadow-sm flex flex-col justify-between gap-2 hover:shadow-md transition-shadow cursor-pointer"
                 >
-                  <span className="text-[9px] font-bold text-[#FF464C] uppercase tracking-wider">
+                  <span className="text-[9px] font-bold text-[#FF7C71] uppercase tracking-wider">
                     {art.tag}
                   </span>
-                  <h4 className="font-extrabold text-slate-800 text-sm hover:text-[#FF464C] transition-colors">
+                  <h4 className="font-extrabold text-slate-800 text-sm hover:text-[#FF7C71] transition-colors">
                     {art.title}
                   </h4>
                   <span className="text-[10px] text-slate-450 font-semibold block mt-1">
@@ -194,7 +194,7 @@ export default function HelpCenterPage() {
         </div>
 
         {/* Still Need Help Banner Section */}
-        <div className="bg-rose-50/45 rounded-[40px] border border-rose-100/30 p-8 sm:p-10 text-center space-y-8 mt-6">
+        <div className="bg-[#FFF8F7]/45 rounded-[40px] border border-[#FFEBE9]/30 p-8 sm:p-10 text-center space-y-8 mt-6">
           <div className="space-y-2">
             <h2 className="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">Still need help?</h2>
             <p className="text-xs text-slate-500 font-semibold max-w-lg mx-auto leading-relaxed">
@@ -205,35 +205,35 @@ export default function HelpCenterPage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 divide-y md:divide-y-0 md:divide-x divide-rose-100/50">
             {/* Live Chat */}
             <div className="space-y-4 pt-4 md:pt-0">
-              <div className="w-14 h-14 bg-white border border-rose-100/70 rounded-full flex items-center justify-center text-[#FF5B60] mx-auto shadow-sm">
+              <div className="w-14 h-14 bg-white border border-[#FFEBE9]/70 rounded-full flex items-center justify-center text-[#FF7C71] mx-auto shadow-sm">
                 <MessageSquare size={22} />
               </div>
               <div>
                 <h4 className="font-extrabold text-slate-800 text-sm">Live Chat</h4>
                 <p className="text-[10px] text-slate-400 font-bold mt-0.5">Typical response time: 2 mins</p>
               </div>
-              <button className="bg-[#FF5B60] hover:bg-[#FF464C] text-white text-xs font-bold px-6 py-2.5 rounded-full shadow-sm shadow-rose-500/10 active:scale-[0.98] transition-all w-fit mx-auto focus:outline-none">
+              <button className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold px-6 py-2.5 rounded-full shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] transition-all w-fit mx-auto focus:outline-none">
                 Start Chatting
               </button>
             </div>
 
             {/* Email Support */}
             <div className="space-y-4 pt-6 md:pt-0 md:pl-6">
-              <div className="w-14 h-14 bg-white border border-rose-100/70 rounded-full flex items-center justify-center text-[#FF5B60] mx-auto shadow-sm">
+              <div className="w-14 h-14 bg-white border border-[#FFEBE9]/70 rounded-full flex items-center justify-center text-[#FF7C71] mx-auto shadow-sm">
                 <Mail size={22} />
               </div>
               <div>
                 <h4 className="font-extrabold text-slate-800 text-sm">Email Support</h4>
                 <p className="text-[10px] text-slate-400 font-bold mt-0.5">Typical response time: 2 hours</p>
               </div>
-              <button className="border border-[#FF5B60] hover:bg-rose-50/40 text-[#FF5B60] text-xs font-bold px-6 py-2.5 rounded-full active:scale-[0.98] transition-all w-fit mx-auto focus:outline-none">
+              <button className="border border-[#FF7C71] hover:bg-[#FFF8F7]/40 text-[#FF7C71] text-xs font-bold px-6 py-2.5 rounded-full active:scale-[0.98] transition-all w-fit mx-auto focus:outline-none">
                 Send Email
               </button>
             </div>
 
             {/* hotline */}
             <div className="space-y-4 pt-6 md:pt-0 md:pl-6">
-              <div className="w-14 h-14 bg-white border border-rose-100/70 rounded-full flex items-center justify-center text-[#FF5B60] mx-auto shadow-sm">
+              <div className="w-14 h-14 bg-white border border-[#FFEBE9]/70 rounded-full flex items-center justify-center text-[#FF7C71] mx-auto shadow-sm">
                 <Phone size={22} />
               </div>
               <div>
@@ -255,7 +255,7 @@ export default function HelpCenterPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4">
+      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
