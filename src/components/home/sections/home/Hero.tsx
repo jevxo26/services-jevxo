@@ -36,6 +36,8 @@ const HERO_CONTENT = {
   searchButtonText: "Book Now",
 };
 
+// 9uhwer9ugher89hg98
+
 const categoryOptions = HERO_CONTENT.categories.map((cat) => ({
   value: cat.slug,
   label: cat.label,
