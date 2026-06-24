@@ -1,24 +1,31 @@
 'use client';
 
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { Provider } from 'react-redux';
 import { store } from './store';
 import { useGetUserProfileQuery } from './features/auth/authApi';
 import { restoreUser } from './features/auth/authSlice';
 import { useAppDispatch } from './hooks';
 
+let isRestored = false;
+
 function AuthLoader({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
+  const [mounted, setMounted] = useState(false);
 
-  // Step 1: On first client mount, instantly restore user from localStorage.
-  // This prevents the Login/Signup flash for already-logged-in users.
-  useEffect(() => {
+  // Synchronously restore user on the client side before the first render completes.
+  // This avoids race conditions and flashes of unauthenticated states.
+  if (typeof window !== 'undefined' && !isRestored) {
     dispatch(restoreUser());
-  }, [dispatch]);
+    isRestored = true;
+  }
 
-  // Step 2: If a token exists, silently validate it via /users/me in the background.
-  // This refreshes user data and handles expired tokens (will clear auth on 401).
-  const hasToken = typeof window !== 'undefined'
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  // Only trigger profile validation after client mount and if a token is present.
+  const hasToken = mounted
     ? !!(localStorage.getItem('rajseba_access_token') || localStorage.getItem('token'))
     : false;
 

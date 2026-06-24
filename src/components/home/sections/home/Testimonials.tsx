@@ -92,12 +92,12 @@ const Testimonials = () => {
   }, [maxIndex]);
 
   return (
-    <div className="py-12 md:py-16 mt-8">
+    <div className="py-12 md:py-16 mt-8 pb-6 md:pb-8">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="mb-10 text-center">
           <div className="flex items-center justify-center gap-3 mb-3">
-            <div className="p-2 rounded-full bg-rose-50">
+            <div className="p-2 rounded-full bg-[#FFF8F7]">
               <MessageSquare className="w-6 h-6 text-[#FF7C71]" />
             </div>
             <h2 className="text-3xl font-bold text-slate-800">
@@ -162,21 +162,7 @@ const Testimonials = () => {
           </div>
         )}
 
-        {/* Dots */}
-        {!isLoading && N > cardsToShow && (
-          <div className="flex justify-center gap-2 mt-6">
-            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setActiveIndex(i)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  i === activeIndex ? "bg-[#FF7C71] w-6" : "bg-slate-300"
-                }`}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
-        )}
+
       </div>
     </div>
   );

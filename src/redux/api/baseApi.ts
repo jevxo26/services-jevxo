@@ -39,8 +39,9 @@ const baseQueryWithReauth: BaseQueryFn<
       if (refreshResult.data) {
         // save new tokens
         const data = refreshResult.data as any;
-        const accessToken = data.accessToken || data.access_token;
-        const newRefreshToken = data.refreshToken || data.refresh_token || refreshToken;
+        const tokenContainer = data.data || data;
+        const accessToken = tokenContainer.accessToken || tokenContainer.access_token;
+        const newRefreshToken = tokenContainer.refreshToken || tokenContainer.refresh_token || refreshToken;
 
         if (accessToken) {
           setTokens(accessToken, newRefreshToken);
