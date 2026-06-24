@@ -126,7 +126,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
     }
   };
 
-  const menuItems = getMenuItems(role);
+  const menuItems = [
+    { icon: Home, label: "Home Page", href: "/" },
+    ...getMenuItems(role)
+  ];
 
   const handleLogout = () => {
     dispatch(authLogout());

@@ -112,27 +112,17 @@ const Hero = () => {
     >
       {/* Background Container */}
       <div className="absolute inset-0 z-0 bg-[#FFF8F7] overflow-hidden">
-        {/* Left Side Icons Background */}
-        <div className="absolute left-0 top-1/2 -translate-y-1/2 w-full md:w-[45%] h-[85%] opacity-35 md:opacity-[0.85] pointer-events-none select-none">
+        {/* Full Background Icons */}
+        <div className="absolute inset-0 w-full h-full opacity-15 md:opacity-20 pointer-events-none select-none">
           <Image
             src="/bg-icons-design.png"
-            alt="Service Icons"
+            alt="Service Icons Background"
             fill
-            className="object-cover object-left"
+            className="object-cover object-center"
             priority
           />
         </div>
 
-        {/* Right Side Cleaner Background */}
-        <div className="absolute right-0 bottom-0 top-0 w-full md:w-[50%] opacity-25 md:opacity-[0.9] pointer-events-none select-none">
-          <Image
-            src="/images/service/pre cleaning service-21.png"
-            alt="Cleaner Professional"
-            fill
-            className="object-cover object-center md:object-contain md:object-right-bottom"
-            priority
-          />
-        </div>
 
         {/* Soft light glassmorphism overlay for text legibility (slightly stronger on mobile) */}
         <div className="absolute inset-0 bg-gradient-to-b from-white/55 sm:from-white/40 via-white/70 sm:via-white/55 to-background backdrop-blur-[1.5px] sm:backdrop-blur-[1px] md:hidden" />
