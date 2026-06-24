@@ -8,6 +8,21 @@ import Stats from "@/components/home/sections/home/Stats";
 import AppDownload from "@/components/home/sections/home/AppDownload";
 // import PartnerCta from "@/components/home/sections/home/PartnerCta";
 import FAQ from "@/components/home/sections/home/FAQ";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Rajseba - Expert Care for Your Premium Home",
+  description: "Professional home services in Bangladesh with verified experts. Book top-rated cleaning, AC repair, plumbing, electrical, and other home services today.",
+  keywords: ["home services", "AC repair", "cleaning", "plumbing", "electrical", "Bangladesh", "Dhaka", "Rajseba"],
+  openGraph: {
+    title: "Rajseba - Expert Care for Your Premium Home",
+    description: "Professional home services in Bangladesh with verified experts.",
+    url: "https://rajseba.com",
+    siteName: "Rajseba",
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 export default function Home() {
   return (

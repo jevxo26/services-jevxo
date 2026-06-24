@@ -3,6 +3,21 @@ import ServiceHero from '@/components/home/services/ServiceHero';
 import ServiceLists from '@/components/home/services/ServiceLists';
 import TrendingServices from '@/components/home/services/TrendingServices';
 import CategorizedSections from '@/components/home/services/CategorizedSections';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: "Professional Home Services Directory - Rajseba",
+  description: "Browse and book from our comprehensive list of verified home services including cleaning, appliance repair, plumbing, electrical, and painting in Bangladesh.",
+  keywords: ["home service list", "AC service", "home cleaning services", "plumbing service", "electrical work", "Dhaka services"],
+  openGraph: {
+    title: "Professional Home Services Directory - Rajseba",
+    description: "Browse and book from our comprehensive list of verified home services.",
+    url: "https://rajseba.com/services",
+    siteName: "Rajseba",
+    locale: "en_US",
+    type: "website",
+  },
+};
 
 const Services = () => {
   return (

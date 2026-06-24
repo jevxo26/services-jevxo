@@ -74,13 +74,13 @@ function LiveChatContent() {
       console.log("Connected to chat server");
     });
 
-    newSocket.on("newMessage", (message) => {
+    newSocket.on("newMessage", (message: any) => {
       setMessages((prev) => [...prev, message]);
       refetchInbox();
       scrollToBottom();
     });
 
-    newSocket.on("messageSent", (message) => {
+    newSocket.on("messageSent", (message: any) => {
       setMessages((prev) => [...prev, message]);
       refetchInbox();
       scrollToBottom();

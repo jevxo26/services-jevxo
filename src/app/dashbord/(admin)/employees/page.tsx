@@ -445,7 +445,7 @@ export default function EmployeesPage() {
               <h2 className="text-xl font-bold text-slate-800">
                 {step === 1 ? "Step 1: Employee Account" : "Step 2: Employee Profile"}
               </h2>
-              <button onClick={closeModal} className="text-slate-400 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 rounded-full p-1.5 transition-all">
+              <button onClick={closeCreateModal} className="text-slate-400 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 rounded-full p-1.5 transition-all">
                 <XCircle size={24} />
               </button>
             </div>
@@ -480,7 +480,7 @@ export default function EmployeesPage() {
                   </div>
                 )}
                 <div className="pt-4 flex justify-end gap-3 border-t border-slate-100">
-                  <button type="button" onClick={closeModal} className="px-5 py-2.5 text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all">
+                  <button type="button" onClick={closeCreateModal} className="px-5 py-2.5 text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all">
                     Cancel
                   </button>
                   <button type="submit" disabled={isCreating} className="px-5 py-2.5 text-sm font-bold text-white bg-brand-primary hover:bg-brand-dark rounded-xl transition-all disabled:opacity-50">
