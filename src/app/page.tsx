@@ -6,6 +6,9 @@ import TopServices from "@/components/home/sections/home/TopServices";
 import WhyChooseUs from "@/components/home/sections/home/WhyChooseUs";
 import Stats from "@/components/home/sections/home/Stats";
 import AppDownload from "@/components/home/sections/home/AppDownload";
+import SpecialOffers from "@/components/home/sections/home/SpecialOffers";
+import FeaturedProviders from "@/components/home/sections/home/FeaturedProviders";
+import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
 // import PartnerCta from "@/components/home/sections/home/PartnerCta";
 import FAQ from "@/components/home/sections/home/FAQ";
 import { Metadata } from "next";
@@ -35,22 +38,28 @@ export default function Home() {
         <div className="absolute bottom-[10%] left-[-5%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-emerald-500/3 blur-[130px] rounded-full pointer-events-none z-0" />
 
         {/* Content sections rendered above the background */}
-        <div 
-        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
-        style={{ backgroundSize: 'auto' }}
+        <div
+          className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+          style={{ backgroundSize: 'auto' }}
         />
         <div className="relative z-10">
           <ExploreCategories />
           <TopServices />
+          {/* ✨ Special Deals — shown right after browsing services to drive booking */}
+          <SpecialOffers />
+          {/* 👷 Top Professionals — builds trust before WhyChooseUs */}
+          <FeaturedProviders />
           <WhyChooseUs />
           <Stats />
+          {/* 🗺️ Coverage Map — shown after stats to answer "is this available near me?" */}
+          <ServiceAreas />
           <HowItWorks />
-          <Testimonials />
           <AppDownload />
+          <Testimonials />
           {/* <PartnerCta /> */}
           <FAQ />
         </div>
       </div>
-      </div>
+    </div>
   );
 }
