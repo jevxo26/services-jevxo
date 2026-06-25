@@ -9,9 +9,10 @@ export function LayoutWrapper({ children }: { children: React.ReactNode }) {
 
   const cleanPath = pathname?.replace(/\/$/, "") || "";
 
-  // Hide the global home page navbar and footer on dashboard pages
+  // Hide the global home page navbar and footer on dashboard and auth pages
   const isDashboard = cleanPath.startsWith("/dashbord");
-  const hideLayout = isDashboard;
+  const isAuth = cleanPath === "/login" || cleanPath === "/signup";
+  const hideLayout = isDashboard || isAuth;
 
   return (
     <>

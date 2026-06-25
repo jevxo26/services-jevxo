@@ -2,7 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { getAccessToken, getRefreshToken, setTokens, clearTokens } from '@/lib/token';
 
-const API_BASE_URL = "http://localhost:8000";
+const API_BASE_URL = "https://rajseba-api-production.up.railway.app"
+
+// "http://localhost:8000";
 // "http://localhost:8000"
 // https://rajseba-api-production.up.railway.app
 const baseQuery = fetchBaseQuery({

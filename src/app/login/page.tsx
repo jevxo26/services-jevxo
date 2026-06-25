@@ -427,8 +427,8 @@ export default function LoginPage() {
                       onChange={(e) => handleOtpChange(e.target.value, idx)}
                       onKeyDown={(e) => handleOtpKeyDown(e.key, idx)}
                       className={`w-14 h-16 rounded-2xl border-2 text-center text-2xl font-black focus:outline-none transition-all shadow-sm ${digit
-                          ? "border-rose-500 bg-rose-50 text-rose-600"
-                          : "border-slate-200 bg-slate-50 text-slate-800 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-400/10"
+                        ? "border-rose-500 bg-rose-50 text-rose-600"
+                        : "border-slate-200 bg-slate-50 text-slate-800 focus:border-rose-400 focus:bg-white focus:ring-4 focus:ring-rose-400/10"
                         }`}
                       required
                     />
