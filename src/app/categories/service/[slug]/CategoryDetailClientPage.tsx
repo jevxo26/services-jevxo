@@ -73,6 +73,8 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
         />
         <SpecializedServices
           nestedServices={service.nestedServices}
+          serviceId={service.id}
+          vendorId={service.vendor?.id}
         />
         <Packages
           packages={service.packages}

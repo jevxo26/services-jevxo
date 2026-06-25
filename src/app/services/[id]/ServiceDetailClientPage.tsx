@@ -84,6 +84,8 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
         />
         <SpecializedServices
           nestedServices={service.nestedServices}
+          serviceId={service.id}
+          vendorId={service.vendor?.id}
         />
         <Packages
           packages={service.packages}
