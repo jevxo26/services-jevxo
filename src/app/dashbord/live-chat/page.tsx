@@ -16,8 +16,8 @@ function LiveChatContent() {
   const isAgent = role === "agent";
 
   const searchParams = useSearchParams();
-  const queryUserId = searchParams?.get("userId");
-  const queryUserName = searchParams?.get("userName");
+  const queryUserId = searchParams?.get("userId") || searchParams?.get("receiverId");
+  const queryUserName = searchParams?.get("userName") || searchParams?.get("receiverName");
 
   const [socket, setSocket] = useState<Socket | null>(null);
   const [messages, setMessages] = useState<any[]>([]);

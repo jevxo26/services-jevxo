@@ -14,12 +14,12 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { useGetAllBookingsQuery } from "@/redux/features/admin/booking"
 
-type BookingStatus = "Active" | "Scheduled" | "Completed" | "Cancelled"
+type BookingStatus = "All" | "Pending" | "Assigned" | "On The Way" | "Completed" | "Cancelled"
 
 const STATUS_MAP: Record<string, BookingStatus> = {
-  pending: "Scheduled",
-  assigned: "Active",
-  on_the_way: "Active",
+  pending: "Pending",
+  assigned: "Assigned",
+  on_the_way: "On The Way",
   completed: "Completed",
   cancelled: "Cancelled",
 }
@@ -36,7 +36,7 @@ export default function BookingsPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
   const authUser = useAppSelector((state) => state.auth.user);
   const router = useRouter();
-  const [filter, setFilter] = React.useState<BookingStatus>("Active")
+  const [filter, setFilter] = React.useState<BookingStatus>("All")
 
   const { data: bookingsRes, isLoading } = useGetAllBookingsQuery()
 
@@ -48,7 +48,8 @@ export default function BookingsPage() {
   })
 
   const filteredBookings = myBookings.filter((b: any) => {
-    const mappedStatus = STATUS_MAP[b.status] || "Scheduled"
+    if (filter === "All") return true;
+    const mappedStatus = STATUS_MAP[b.status] || "Pending"
     return mappedStatus === filter
   })
 
@@ -83,7 +84,7 @@ export default function BookingsPage() {
 
         {/* Status Filter Tab Pill Bar */}
         <div className="bg-[#FFF8F7]/30 border border-[#FFEBE9]/30 p-1.5 rounded-full flex gap-1 w-fit">
-          {(["Active", "Scheduled", "Completed", "Cancelled"] as const).map((tab) => {
+          {(["All", "Pending", "Assigned", "On The Way", "Completed", "Cancelled"] as const).map((tab) => {
             const isActive = filter === tab;
             return (
               <button
@@ -208,7 +209,7 @@ export default function BookingsPage() {
                   <div className="flex items-center gap-2 flex-wrap">
                     {booking.vendor && (
                       <button
-                        onClick={() => router.push(`/dashbord/live-chat?receiverId=${booking.vendor.id}`)}
+                        onClick={() => router.push(`/dashbord/live-chat?receiverId=${booking.vendor.id}&receiverName=${encodeURIComponent(booking.vendor.name)}`)}
                         className="flex items-center gap-1.5 text-[#FF7C71] bg-[#FFF8F7] hover:bg-[#FFEBE9] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus:outline-none"
                       >
                         <MessageCircle size={14} />
@@ -218,7 +219,7 @@ export default function BookingsPage() {
                     {booking.employees?.map((emp: any) => (
                       <button
                         key={emp.id}
-                        onClick={() => router.push(`/dashbord/live-chat?receiverId=${emp.id}`)}
+                        onClick={() => router.push(`/dashbord/live-chat?receiverId=${emp.id}&receiverName=${encodeURIComponent(emp.name)}`)}
                         className="flex items-center gap-1.5 text-indigo-600 bg-indigo-50 hover:bg-indigo-100 px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus:outline-none"
                       >
                         <MessageCircle size={14} />
@@ -233,11 +234,14 @@ export default function BookingsPage() {
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <button className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-2.5 px-6 rounded-2xl transition-colors active:scale-[0.98]">
+                    <button
+                      onClick={() => router.push(`/dashbord/bookings/${booking.id}`)}
+                      className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-2.5 px-6 rounded-2xl transition-colors active:scale-[0.98]"
+                    >
                       View Details
                     </button>
                     <Link
-                      href="/dashbord/bookings/track"
+                      href={`/dashbord/bookings/track/${booking.id}`}
                       className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold py-2.5 px-6 rounded-2xl transition-all shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] inline-block text-center"
                     >
                       Track Order

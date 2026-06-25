@@ -353,7 +353,7 @@ export default function BookingDetailsPage() {
                 )}
               </div>
 
-              {booking.vendor && (
+              {booking.vendor && !(typeof rawRole === 'string' && rawRole.toLowerCase() === 'agent') && (
                 <div className="border-t border-slate-50 pt-4 space-y-3">
                   <p className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">Assign Professionals</p>
 

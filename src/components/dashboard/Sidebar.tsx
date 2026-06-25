@@ -106,8 +106,9 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
       case "client":
         return [
           { icon: LayoutGrid, label: "Overview", href: "/dashbord/overview" },
-          { icon: Heart, label: "Saved Services", href: "/dashbord/saved" },
           { icon: Calendar, label: "My Bookings", href: "/dashbord/bookings" },
+          { icon: Heart, label: "Saved Services", href: "/dashbord/saved" },
+
           { icon: Wallet, label: "Wallet", href: "/dashbord/client-wallet" },
           { icon: HelpCircle, label: "Help", href: "/dashbord/help" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },

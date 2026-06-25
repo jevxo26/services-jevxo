@@ -827,7 +827,7 @@ function CustomerDashboard() {
       render: (b: any) => (
         b.vendorId ? (
           <button
-            onClick={() => router.push(`/dashbord/live-chat?receiverId=${b.vendorId}`)}
+            onClick={() => router.push(`/dashbord/live-chat?receiverId=${b.vendorId}&receiverName=${encodeURIComponent(b.provider)}`)}
             className="text-xs bg-[#FFF8F7] text-[#FF7C71] px-3 py-1.5 rounded-lg font-bold hover:bg-[#FFEBE9] transition-colors"
           >
             Chat Provider
@@ -899,14 +899,22 @@ function CustomerDashboard() {
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Service Timeline</p>
-                  {activeBooking.vendor?.id && (
+                  <div className="flex items-center gap-2">
+                    {activeBooking.vendor?.id && (
+                      <button
+                        onClick={() => router.push(`/dashbord/live-chat?receiverId=${activeBooking.vendor.id}&receiverName=${encodeURIComponent(activeBooking.vendor.name)}`)}
+                        className="bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#FF7C71] border border-[#FF7C71]/20 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
+                      >
+                        <MessageCircle size={14} /> Chat
+                      </button>
+                    )}
                     <button
-                      onClick={() => router.push(`/dashbord/live-chat?receiverId=${activeBooking.vendor.id}`)}
+                      onClick={() => router.push(`/dashbord/bookings/track/${activeBooking.id}`)}
                       className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
                     >
-                      <MessageCircle size={14} /> Chat with Provider
+                      <MapPin size={14} /> Track Flow
                     </button>
-                  )}
+                  </div>
                 </div>
                 <div className="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#FFEBE9]">
                   {[
