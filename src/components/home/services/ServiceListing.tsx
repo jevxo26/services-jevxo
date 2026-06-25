@@ -97,12 +97,14 @@ export default function ServiceListing({
   onClearAll,
   isFilterOpen,
   setIsFilterOpen,
+  categoryName,
 }: {
   filters: FilterState;
   setFilters: (f: Partial<FilterState>) => void;
   onClearAll: () => void;
   isFilterOpen: boolean;
   setIsFilterOpen: (v: boolean) => void;
+  categoryName?: string;
 }) {
   const {
     activeCategory,
@@ -300,6 +302,21 @@ export default function ServiceListing({
   return (
     <section className="py-6 bg-slate-50/30">
       <div className="max-w-[1400px] mx-auto px-4">
+
+        {/* Results count heading — shown only when a category name is provided (e.g. from category page) */}
+        {categoryName && (
+          <div className="mb-5">
+            <p className="text-lg md:text-2xl font-black text-slate-900">
+              <span className="text-slate-500 font-semibold">
+                {filteredListings.length} results found for{" "}
+              </span>
+              <span className="text-[#FF7C71]">{categoryName}</span>
+            </p>
+            <p className="text-xs text-slate-400 font-medium mt-1">
+              Verified professionals ready to serve you in Dhaka, Bangladesh.
+            </p>
+          </div>
+        )}
 
 
         {/* Top Search & Actions bar */}

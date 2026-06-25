@@ -137,7 +137,7 @@ const ExploreCategories = () => {
                   whileTap={{ scale: 0.97 }}
                   layout
                 >
-                  <Link href={`/services?category=${cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || cat.id}`} className="block h-full">
+                  <Link href={`/categories/${cat.id}`} className="block h-full">
                     <div
                       className="
                         group relative overflow-hidden
