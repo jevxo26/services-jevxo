@@ -224,5 +224,5 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         </div>
       </div>
     </>
-  );
+  )
 }
