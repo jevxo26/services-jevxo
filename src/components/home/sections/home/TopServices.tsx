@@ -1,11 +1,13 @@
 "use client";
 
-import { useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Heart, Sparkles, Star, Loader2 } from "lucide-react";
+import { Heart, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useGetPublicServicesQuery } from "@/redux/features/landing/landingApi";
+import { useAppSelector } from "@/redux/hooks";
+import { useGetSavedServicesQuery, useToggleSavedServiceMutation } from "@/redux/features/admin/user";
+import { toast } from "sonner";
 
 
 // ─── Color pairs for cards (cycling) ────────────────────────────────────────
@@ -53,8 +55,15 @@ function ServiceIllustration({ bgColor, iconColor }: { bgColor: string; iconColo
 
 // ─── Component ────────────────────────────────────────────────────────────────
 export default function TopServices() {
-  const [liked, setLiked] = useState<Record<number, boolean>>({});
+  const { isAuthenticated } = useAppSelector((s) => s.auth);
   const { data: servicesRes, isLoading, isError } = useGetPublicServicesQuery();
+
+  const { data: savedRes } = useGetSavedServicesQuery(undefined, {
+    skip: !isAuthenticated,
+  });
+  const savedServices: any[] = savedRes?.data || [];
+
+  const [toggleSaved] = useToggleSavedServiceMutation();
 
   // Support both { data: [...] } and [...] shapes
   const allServices: any[] = servicesRes?.data || (Array.isArray(servicesRes) ? servicesRes : []);
@@ -107,9 +116,22 @@ export default function TopServices() {
   // Display top 8 services
   const displayServices = sortedServices.slice(0, 8);
 
-  const toggleLike = (id: number, e: React.MouseEvent) => {
+  const toggleLike = async (service: any, e: React.MouseEvent) => {
     e.preventDefault();
-    setLiked((prev) => ({ ...prev, [id]: !prev[id] }));
+    e.stopPropagation();
+
+    if (!isAuthenticated) {
+      toast.error("Please login to save to wishlist");
+      return;
+    }
+
+    const isWishlisted = savedServices.some((s) => String(s.id) === String(service.id));
+    try {
+      await toggleSaved(service.id).unwrap();
+      toast.success(isWishlisted ? "Removed from wishlist" : "Saved to wishlist ❤️");
+    } catch {
+      toast.error("Failed to update wishlist");
+    }
   };
 
   return (
@@ -200,12 +222,16 @@ export default function TopServices() {
                   {/* Wishlist heart */}
                   <Button
                     variant="ghost"
-                    onClick={(e) => toggleLike(service.id, e)}
+                    onClick={(e) => toggleLike(service, e)}
                     className="absolute top-3 right-3 w-8 h-8 p-0 rounded-full bg-white/90 flex items-center justify-center shadow-sm border border-slate-100/60 hover:scale-110 active:scale-95 transition-transform cursor-pointer"
                     aria-label="Add to wishlist"
                   >
                     <Heart
-                      className={`w-4 h-4 transition-colors ${liked[service.id] ? "fill-[#FF7C71] text-[#FF7C71]" : "text-slate-500"}`}
+                      className={`w-4 h-4 transition-colors ${
+                        savedServices.some((s) => String(s.id) === String(service.id))
+                          ? "fill-[#FF7C71] text-[#FF7C71]"
+                          : "text-slate-500"
+                      }`}
                     />
                   </Button>
                 </div>

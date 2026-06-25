@@ -2,8 +2,8 @@
 
 import { Clock, Heart, Star } from "lucide-react";
 import Link from "next/link";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { toggleWishlist } from "@/redux/features/wishlist/wishlistSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { useToggleSavedServiceMutation, useGetSavedServicesQuery } from "@/redux/features/admin/user";
 import { toast } from "sonner";
 
 interface ServiceListing {
@@ -23,12 +23,20 @@ interface ServiceListing {
 }
 
 export default function ServiceCard({ service }: { service: ServiceListing }) {
-  const dispatch = useAppDispatch();
   const { isAuthenticated } = useAppSelector((s) => s.auth);
-  const wishlistItems = useAppSelector((s) => s.wishlist.items);
-  const isWishlisted = wishlistItems.some((i) => i.id === service.id);
 
-  const handleWishlist = (e: React.MouseEvent) => {
+  // Fetch saved services only when logged in
+  const { data: savedRes } = useGetSavedServicesQuery(undefined, {
+    skip: !isAuthenticated,
+  });
+  const savedServices: any[] = savedRes?.data || [];
+  const isWishlisted = savedServices.some(
+    (s) => String(s.id) === String(service.id)
+  );
+
+  const [toggleSaved, { isLoading: isToggling }] = useToggleSavedServiceMutation();
+
+  const handleWishlist = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
 
@@ -37,24 +45,11 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
       return;
     }
 
-    dispatch(
-      toggleWishlist({
-        id: service.id,
-        title: service.title,
-        image: service.image,
-        priceDisplay: service.priceDisplay,
-        price: service.price,
-        categoryLabel: service.categoryLabel,
-        rating: service.rating,
-        slug: service.slug,
-        addedAt: new Date().toISOString(),
-      })
-    );
-
-    if (isWishlisted) {
-      toast.success("Removed from wishlist");
-    } else {
-      toast.success("Added to wishlist ❤️");
+    try {
+      await toggleSaved(service.id).unwrap();
+      toast.success(isWishlisted ? "Removed from wishlist" : "Saved to wishlist ❤️");
+    } catch {
+      toast.error("Failed to update wishlist");
     }
   };
 
@@ -80,8 +75,9 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
         {/* Wishlist Heart Button */}
         <button
           onClick={handleWishlist}
+          disabled={isToggling}
           aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-          className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all duration-200 cursor-pointer ${
+          className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-60 ${
             isWishlisted
               ? "bg-[#FF7C71] text-white scale-110"
               : "bg-white/90 text-slate-400 hover:bg-rose-50 hover:text-[#FF7C71] hover:scale-110"

@@ -2,16 +2,13 @@ import {
   Zap,
   ShieldCheck,
   Heart,
-  Loader2,
   Star,
   Sparkles,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import {
-  useGetSavedServicesQuery,
-  useToggleSavedServiceMutation,
-} from "@/redux/features/admin/user";
-import { useAppSelector } from "@/redux/hooks";
+import { useAppSelector } from "@/redux/hooks"
+import { useGetSavedServicesQuery, useToggleSavedServiceMutation } from "@/redux/features/admin/user";
+import { toast } from "sonner";
 
 interface CategorizedHeroProps {
   id?: number;
@@ -43,27 +40,25 @@ export function CategorizedHero({
 
   const authUser = useAppSelector((state) => state.auth.user);
 
-  const { data: savedServicesRes, isLoading: isLoadingSaved } =
-    useGetSavedServicesQuery(undefined, {
-      skip: !authUser,
-    });
+  const { data: savedRes } = useGetSavedServicesQuery(undefined, {
+    skip: !authUser,
+  });
+  const savedServices: any[] = savedRes?.data || [];
+  const isSaved = id ? savedServices.some((s) => String(s.id) === String(id)) : false;
 
-  const [toggleSavedService, { isLoading: isToggling }] =
-    useToggleSavedServiceMutation();
-
-  const savedServices = savedServicesRes?.data || [];
-
-  const isSaved = id
-    ? savedServices.some((s: any) => s.id === id)
-    : false;
+  const [toggleSaved, { isLoading: isToggling }] = useToggleSavedServiceMutation();
 
   const handleToggleSave = async () => {
-    if (!authUser || !id) return;
-
+    if (!authUser) {
+      toast.error("Please login to save to wishlist");
+      return;
+    }
+    if (!id) return;
     try {
-      await toggleSavedService(id).unwrap();
-    } catch (err) {
-      console.error("Failed to toggle save", err);
+      await toggleSaved(id).unwrap();
+      toast.success(isSaved ? "Removed from wishlist" : "Saved to wishlist ❤️");
+    } catch {
+      toast.error("Failed to update wishlist");
     }
   };
 
@@ -99,24 +94,16 @@ export function CategorizedHero({
                   whileHover={{ scale: 1.1 }}
                   whileTap={{ scale: 0.9 }}
                   onClick={handleToggleSave}
-                  disabled={isToggling || isLoadingSaved}
-                  className="p-3 bg-white rounded-full border border-slate-100 shadow-sm flex-shrink-0 focus:outline-none"
+                  className="p-3 bg-white rounded-full border border-slate-100 shadow-sm flex-shrink-0 focus:outline-none cursor-pointer"
                 >
-                  {isToggling ? (
-                    <Loader2
-                      size={24}
-                      className="animate-spin text-slate-400"
-                    />
-                  ) : (
-                    <Heart
-                      size={24}
-                      className={
-                        isSaved
-                          ? "fill-[#FF7C71] text-[#FF7C71]"
-                          : "text-slate-400"
-                      }
-                    />
-                  )}
+                  <Heart
+                    size={24}
+                    className={
+                      isSaved
+                        ? "fill-[#FF7C71] text-[#FF7C71]"
+                        : "text-slate-400"
+                    }
+                  />
                 </motion.button>
               )}
             </div>

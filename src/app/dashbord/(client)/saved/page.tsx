@@ -1,14 +1,14 @@
 "use client"
 
 import * as React from "react"
-import { useAppSelector, useAppDispatch } from "@/redux/hooks";
-import { removeWishlistItem, clearWishlist } from "@/redux/features/wishlist/wishlistSlice";
+import { useAppSelector } from "@/redux/hooks";
+import { useGetSavedServicesQuery, useToggleSavedServiceMutation } from "@/redux/features/admin/user";
 import {
   ShieldAlert,
   Heart,
   Star,
   Plus,
-  Trash2,
+  Loader2,
   ChevronRight,
   BookOpen,
 } from "lucide-react"
@@ -17,17 +17,22 @@ import { toast } from "sonner";
 
 export default function SavedServicesPage() {
   const role = useAppSelector((state) => state.auth.role) || "client";
-  const dispatch = useAppDispatch();
-  const wishlistItems = useAppSelector((s) => s.wishlist.items);
+  const authUser = useAppSelector((state) => state.auth.user);
 
-  const handleUnsave = (id: string, title: string) => {
-    dispatch(removeWishlistItem(id));
-    toast.success(`"${title}" removed from wishlist`);
-  };
+  const { data: savedRes, isLoading } = useGetSavedServicesQuery(undefined, {
+    skip: !authUser,
+  });
+  const savedServices: any[] = savedRes?.data || [];
 
-  const handleClearAll = () => {
-    dispatch(clearWishlist());
-    toast.success("Wishlist cleared");
+  const [toggleSaved] = useToggleSavedServiceMutation();
+
+  const handleUnsave = async (id: string | number, title: string) => {
+    try {
+      await toggleSaved(id).unwrap();
+      toast.success(`"${title}" removed from wishlist`);
+    } catch {
+      toast.error("Failed to remove from wishlist");
+    }
   };
 
   if (role !== "client") {
@@ -47,24 +52,19 @@ export default function SavedServicesPage() {
             <div>
               <h1 className="text-xl font-extrabold text-slate-900">Saved Services</h1>
               <p className="text-xs text-slate-400 mt-0.5">
-                {wishlistItems.length} service{wishlistItems.length !== 1 ? "s" : ""} saved to your wishlist.
+                {isLoading ? "Loading..." : `${savedServices.length} service${savedServices.length !== 1 ? "s" : ""} saved to your wishlist.`}
               </p>
             </div>
           </div>
-          {wishlistItems.length > 0 && (
-            <button
-              onClick={handleClearAll}
-              className="flex items-center gap-2 text-xs font-bold text-rose-500 hover:text-rose-700 bg-rose-50 hover:bg-rose-100 px-4 py-2 rounded-xl transition-all cursor-pointer"
-            >
-              <Trash2 size={13} />
-              Clear All
-            </button>
-          )}
         </div>
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {wishlistItems.length === 0 ? (
+          {isLoading ? (
+            <div className="col-span-full flex items-center justify-center py-16">
+              <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+            </div>
+          ) : savedServices.length === 0 ? (
             <div className="col-span-full bg-white p-12 rounded-[24px] border border-dashed border-slate-200 text-center shadow-sm">
               <div className="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-300 mx-auto mb-4">
                 <Heart size={28} />
@@ -83,7 +83,7 @@ export default function SavedServicesPage() {
             </div>
           ) : (
             <>
-              {wishlistItems.map((service) => (
+              {savedServices.map((service: any) => (
                 <div
                   key={service.id}
                   className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative"
@@ -92,16 +92,18 @@ export default function SavedServicesPage() {
                   <div className="relative aspect-[4/3] w-full bg-slate-50 overflow-hidden">
                     <img
                       src={service.image || "https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=500&auto=format&fit=crop&q=80"}
-                      alt={service.title}
+                      alt={service.name}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                     {/* Category badge */}
-                    <span className="absolute top-3 left-3 py-1 px-2.5 bg-white/95 text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-sm text-slate-700">
-                      {service.categoryLabel}
-                    </span>
+                    {service.category?.name && (
+                      <span className="absolute top-3 left-3 py-1 px-2.5 bg-white/95 text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-sm text-slate-700">
+                        {service.category.name}
+                      </span>
+                    )}
                     {/* Remove heart */}
                     <button
-                      onClick={() => handleUnsave(service.id, service.title)}
+                      onClick={() => handleUnsave(service.id, service.name)}
                       className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-[#FF7C71] text-white shadow-md hover:scale-110 transition-all cursor-pointer"
                       aria-label="Remove from wishlist"
                     >
@@ -113,13 +115,17 @@ export default function SavedServicesPage() {
                   <div className="p-5 flex-1 flex flex-col justify-between gap-4">
                     <div className="space-y-1.5">
                       <div className="flex items-center justify-between">
-                        <h3 className="font-extrabold text-slate-800 text-sm line-clamp-1">{service.title}</h3>
-                        <div className="flex items-center gap-0.5 text-amber-500 font-bold text-xs">
-                          <Star size={11} className="fill-current" />
-                          {service.rating.toFixed(1)}
-                        </div>
+                        <h3 className="font-extrabold text-slate-800 text-sm line-clamp-1">{service.name}</h3>
+                        {service.reviews?.length > 0 && (
+                          <div className="flex items-center gap-0.5 text-amber-500 font-bold text-xs">
+                            <Star size={11} className="fill-current" />
+                            {(service.reviews.reduce((acc: number, r: any) => acc + (r.rating || 5), 0) / service.reviews.length).toFixed(1)}
+                          </div>
+                        )}
                       </div>
-                      <p className="text-xs text-slate-400 font-semibold">{service.priceDisplay}</p>
+                      <p className="text-xs text-slate-400 font-semibold line-clamp-2">
+                        {service.subtitle || service.description || "Top-rated service."}
+                      </p>
                     </div>
 
                     <div className="flex items-center justify-between pt-3 border-t border-slate-50 gap-2">

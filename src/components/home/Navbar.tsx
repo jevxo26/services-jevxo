@@ -27,7 +27,7 @@ import {
   MapPin
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { CATEGORIES_CONTENT } from "./sections/home/ExploreCategories";
+import { useGetPublicCategoriesQuery } from "@/redux/features/landing/landingApi";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { logout as authLogout, getRoleName } from "@/redux/features/auth/authSlice";
 
@@ -67,6 +67,10 @@ export function Navbar() {
   const { user, isAuthenticated, role, isLoading: authLoading } = useAppSelector((state) => state.auth);
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
+
+  // Fetch API categories for Menu dropdown
+  const { data: categoriesRes } = useGetPublicCategoriesQuery();
+  const apiCategories: any[] = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [mobileSearchOpen, setMobileSearchOpen] = useState(false);
@@ -257,28 +261,37 @@ export function Navbar() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 8, scale: 0.95 }}
                             transition={{ duration: 0.15 }}
-                            className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[460px] bg-white rounded-2xl border border-slate-100 shadow-xl p-4 z-50"
+                            className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[500px] bg-white rounded-2xl border border-slate-100 shadow-xl p-4 z-50"
                           >
-                            <div className="grid grid-cols-2 gap-2">
-                              {CATEGORIES_CONTENT.categories.map((cat) => {
-                                const IconComponent = cat.icon;
-                                return (
+                            {apiCategories.length === 0 ? (
+                              <div className="grid grid-cols-4 gap-2">
+                                {[1,2,3,4,5,6,7,8].map((n) => (
+                                  <div key={n} className="h-12 bg-slate-50 rounded-xl animate-pulse" />
+                                ))}
+                              </div>
+                            ) : (
+                              <div className="grid grid-cols-2 gap-2">
+                                {apiCategories.map((cat: any) => (
                                   <Link
-                                    key={cat.slug}
-                                    href={`/categories/service/${cat.slug}`}
+                                    key={cat.id}
+                                    href={`/categories/${cat.id}`}
                                     className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/50 group/item transition-colors"
                                     onClick={() => setShowMenuDropdown(false)}
                                   >
-                                    <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500 group-hover/item:bg-[#FF7C71]/10 group-hover/item:text-[#FF7C71] transition-colors">
-                                      <IconComponent className="w-5 h-5" />
+                                    <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500 group-hover/item:bg-[#FF7C71]/10 group-hover/item:text-[#FF7C71] transition-colors overflow-hidden shrink-0">
+                                      {cat.icon ? (
+                                        <img src={cat.icon} alt={cat.name} className="w-5 h-5 object-contain" />
+                                      ) : (
+                                        <LayoutGrid className="w-4 h-4" />
+                                      )}
                                     </div>
-                                    <span className="font-semibold text-sm text-slate-700 group-hover/item:text-slate-900 transition-colors">
-                                      {cat.label}
+                                    <span className="font-semibold text-sm text-slate-700 group-hover/item:text-slate-900 transition-colors line-clamp-1">
+                                      {cat.name}
                                     </span>
                                   </Link>
-                                );
-                              })}
-                            </div>
+                                ))}
+                              </div>
+                            )}
                           </motion.div>
                         )}
                       </AnimatePresence>
@@ -640,32 +653,34 @@ export function Navbar() {
                               className="overflow-hidden pl-4 pr-2 py-1 space-y-1"
                             >
                               <div className="grid grid-cols-2 gap-1.5">
-                                {CATEGORIES_CONTENT.categories.map((cat) => {
-                                  const IconComponent = cat.icon;
-                                  const isCategoryActive =
-                                    pathname === `/categories/service/${cat.slug}`;
-
+                                {apiCategories.length === 0 ? (
+                                  [1,2,3,4].map((n) => (
+                                    <div key={n} className="h-12 bg-slate-50 rounded-xl animate-pulse" />
+                                  ))
+                                ) : apiCategories.map((cat: any) => {
+                                  const isCategoryActive = pathname === `/categories/${cat.id}`;
                                   return (
                                     <Link
-                                      key={cat.slug}
-                                      href={`/categories/service/${cat.slug}`}
-                                      className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${isCategoryActive
-                                        ? "bg-rose-50 text-[#FF7C71] font-semibold"
-                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF7C71]"
-                                        }`}
+                                      key={cat.id}
+                                      href={`/categories/${cat.id}`}
+                                      className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${
+                                        isCategoryActive
+                                          ? "bg-rose-50 text-[#FF7C71] font-semibold"
+                                          : "text-slate-600 hover:bg-slate-50 hover:text-[#FF7C71]"
+                                      }`}
                                       onClick={() => {
                                         setIsOpen(false);
                                         setShowMobileAccordion(false);
                                       }}
                                     >
-                                      <IconComponent
-                                        className={`w-4 h-4 flex-shrink-0 ${isCategoryActive
-                                          ? "text-[#FF7C71]"
-                                          : "text-slate-400"
-                                          }`}
-                                      />
-                                      <span>{cat.label}</span>
-
+                                      <div className="w-5 h-5 flex items-center justify-center shrink-0 overflow-hidden">
+                                        {cat.icon ? (
+                                          <img src={cat.icon} alt={cat.name} className={`w-4 h-4 object-contain ${isCategoryActive ? "" : "opacity-60"}`} />
+                                        ) : (
+                                          <LayoutGrid className={`w-4 h-4 flex-shrink-0 ${isCategoryActive ? "text-[#FF7C71]" : "text-slate-400"}`} />
+                                        )}
+                                      </div>
+                                      <span className="line-clamp-1">{cat.name}</span>
                                       {isCategoryActive && (
                                         <div className="ml-auto w-1.5 h-1.5 bg-[#FF7C71] rounded-full" />
                                       )}

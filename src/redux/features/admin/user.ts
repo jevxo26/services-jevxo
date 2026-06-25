@@ -44,14 +44,14 @@ export const userApi = baseApi.injectEndpoints({
     }),
     getSavedServices: builder.query<any, void>({
       query: () => '/users/me/saved-services',
-      providesTags: ['Admin'],
+      providesTags: ['Admin', 'Client'],
     }),
     toggleSavedService: builder.mutation<any, string | number>({
       query: (serviceId) => ({
         url: `/users/me/saved-services/${serviceId}`,
         method: 'POST',
       }),
-      invalidatesTags: ['Admin'],
+      invalidatesTags: ['Admin', 'Client'],
     }),
   }),
   overrideExisting: false,
