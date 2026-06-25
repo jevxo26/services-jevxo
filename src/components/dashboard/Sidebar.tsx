@@ -73,6 +73,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Package, label: "Manage Packages", href: "/dashbord/packages" },
           { icon: BarChart3, label: "System Analytics", href: "/dashbord/analytics" },
           { icon: Wallet, label: "Withdraw Requests", href: "/dashbord/withdraw" },
+          { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
@@ -82,7 +83,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Users, label: "Manage Clients", href: "/dashbord/users" },
           { icon: Wrench, label: "Services", href: "/dashbord/services" },
           { icon: Calendar, label: "Manage Bookings", href: "/dashbord/manage-bookings" },
-          { icon: Wallet, label: "Wallet", href: "/dashbord/client-wallet" },
+          { icon: Wallet, label: "Wallet & Earnings", href: "/dashbord/vendor-wallet" },
           { icon: HelpCircle, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
           { icon: Settings, label: "Settings", href: "/dashbord/settings" },

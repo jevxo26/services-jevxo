@@ -10,8 +10,13 @@ export const userApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['Admin'],
     }),
-    getAllUsers: builder.query<any, void>({
-      query: () => '/users',
+    getAllUsers: builder.query<any, { role?: string } | void>({
+      query: (params) => {
+        if (params && params.role) {
+          return `/users?role=${params.role}`;
+        }
+        return '/users';
+      },
       providesTags: ['Admin'],
     }),
     getUserById: builder.query<any, string>({

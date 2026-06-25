@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { useGetAllBookingsQuery, useUpdateBookingStatusMutation } from "@/redux/features/admin/booking";
+import { useGetAllBookingsQuery, useUpdateBookingStatusMutation, useDeleteBookingMutation } from "@/redux/features/admin/booking";
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
 import Link from "next/link";
@@ -20,7 +20,8 @@ import {
   CheckCircle2, 
   ShieldAlert,
   ArrowRight,
-  TrendingUp
+  TrendingUp,
+  Trash2
 } from "lucide-react";
 
 type BookingStatus = "confirmed" | "pending" | "completed" | "cancelled" | "assigned" | "on_the_way";
@@ -101,6 +102,7 @@ export default function BookingsPage() {
     skip: !isAuthenticated,
   });
   const [updateStatus, { isLoading: isUpdating }] = useUpdateBookingStatusMutation();
+  const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
 
   const [activeFilter, setActiveFilter] = useState<"all" | BookingStatus>("all");
   const [search, setSearch] = useState("");
@@ -113,9 +115,20 @@ export default function BookingsPage() {
     try {
       await updateStatus({ id, status: "cancelled" }).unwrap();
       toast.success("Booking cancelled successfully.");
-      setSelectedBooking(null);
+      if (selectedBooking?.id === id) setSelectedBooking({ ...selectedBooking, status: "cancelled" });
     } catch (error: any) {
       toast.error(error.data?.message || "Failed to cancel booking.");
+    }
+  };
+
+  const handleDelete = async (id: number) => {
+    if (!confirm("Are you sure you want to permanently delete this booking?")) return;
+    try {
+      await deleteBooking(id).unwrap();
+      toast.success("Booking deleted successfully.");
+      if (selectedBooking?.id === id) setSelectedBooking(null);
+    } catch (error: any) {
+      toast.error(error.data?.message || "Failed to delete booking.");
     }
   };
 
@@ -365,12 +378,22 @@ export default function BookingsPage() {
                     <span className={`rounded-full px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider border ${cfg.pillBg} ${cfg.pillText} select-none`}>
                       {cfg.label}
                     </span>
-                    <button 
-                      onClick={() => setSelectedBooking(booking)}
-                      className="rounded-xl border border-slate-200 hover:border-[#FF7C71] hover:text-[#FF7C71] bg-slate-50 hover:bg-[#FFF8F7]/30 px-4 py-2 text-xs font-bold text-slate-650 transition-all hover:scale-105 active:scale-95 cursor-pointer"
-                    >
-                      View Details
-                    </button>
+                    <div className="flex items-center gap-2">
+                      <button 
+                        onClick={() => setSelectedBooking(booking)}
+                        className="rounded-xl border border-slate-200 hover:border-[#FF7C71] hover:text-[#FF7C71] bg-slate-50 hover:bg-[#FFF8F7]/30 px-4 py-2 text-xs font-bold text-slate-650 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                      >
+                        View Details
+                      </button>
+                      <button 
+                        onClick={() => handleDelete(booking.id)}
+                        disabled={isDeleting}
+                        className="p-2 rounded-xl border border-rose-200 hover:border-rose-500 hover:text-white hover:bg-rose-500 text-rose-500 bg-rose-50 transition-all hover:scale-105 active:scale-95 cursor-pointer disabled:opacity-50"
+                        title="Delete Booking"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
                   </div>
                 </div>
               );
@@ -459,20 +482,30 @@ export default function BookingsPage() {
               </div>
               
               {/* Actions */}
-              {(selectedBooking.status === "pending" || selectedBooking.status === "assigned") && (
-                <div className="pt-2 border-t border-slate-100">
+              <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
+                {(selectedBooking.status === "pending" || selectedBooking.status === "assigned") && (
                   <button
                     onClick={() => handleCancel(selectedBooking.id)}
                     disabled={isUpdating}
-                    className="w-full bg-rose-50 hover:bg-rose-100 text-rose-600 font-extrabold py-3 rounded-2xl text-xs transition-colors cursor-pointer border border-rose-150/40"
+                    className="w-full bg-amber-50 hover:bg-amber-100 text-amber-600 font-extrabold py-3 rounded-2xl text-xs transition-colors cursor-pointer border border-amber-150/40 disabled:opacity-50"
                   >
                     {isUpdating ? "Processing..." : "Cancel Booking Request"}
                   </button>
-                  <p className="text-center text-[10px] text-slate-400 mt-2 font-medium">
-                    Note: Booking cancellations are permanent and cannot be undone.
-                  </p>
-                </div>
-              )}
+                )}
+                
+                <button
+                  onClick={() => handleDelete(selectedBooking.id)}
+                  disabled={isDeleting}
+                  className="w-full bg-rose-50 hover:bg-rose-100 text-rose-600 font-extrabold py-3 rounded-2xl text-xs transition-colors cursor-pointer border border-rose-150/40 flex items-center justify-center gap-2 disabled:opacity-50"
+                >
+                  <Trash2 size={16} />
+                  {isDeleting ? "Deleting..." : "Delete Booking"}
+                </button>
+
+                <p className="text-center text-[10px] text-slate-400 mt-1 font-medium">
+                  Note: Booking cancellations or deletions are permanent and cannot be undone.
+                </p>
+              </div>
             </div>
           </div>
         </div>

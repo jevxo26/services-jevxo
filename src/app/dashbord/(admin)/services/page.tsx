@@ -92,7 +92,7 @@ export default function AdminServicesManagementPage() {
 
   const vendorOptions = [
     { value: "NONE", label: "Select a Vendor" },
-    ...allUsers.filter((u: any) => u.role?.name === "Vendor" || u.role === "Vendor").map((u: any) => ({
+    ...allUsers.filter((u: any) => u.role?.name?.toLowerCase() === "vendor" || (typeof u.role === 'string' && u.role.toLowerCase() === "vendor")).map((u: any) => ({
       value: String(u.id || u._id),
       label: u.name || `${u.firstName || ''} ${u.lastName || ''}`.trim() || 'Unknown',
     })),
@@ -221,12 +221,12 @@ export default function AdminServicesManagementPage() {
     }
   };
 
-  if (role !== "superadmin") {
+  if (role !== "superadmin" && role !== "agent") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-rose-50 rounded-2xl text-rose-500 mb-4"><ShieldAlert size={48} /></div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Administrators only.</p>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Administrators and Agents.</p>
       </div>
     );
   }
@@ -281,6 +281,16 @@ export default function AdminServicesManagementPage() {
       ),
     },
     {
+      key: "commission",
+      header: "Agent Commission",
+      render: (item: Service | any) => (
+        <span className="inline-flex items-center gap-1.5 bg-amber-50/70 text-amber-700 font-bold text-xs px-2.5 py-1 rounded-xl border border-amber-100/50">
+          <Sparkles size={11} />
+          {item.agent_commission_percentage ? `${item.agent_commission_percentage}%` : "0%"}
+        </span>
+      ),
+    },
+    {
       key: "createdAt",
       header: "Created",
       render: (item: Service) => (
@@ -293,8 +303,10 @@ export default function AdminServicesManagementPage() {
 
   const tableActions: TableAction<Service>[] = [
     { label: "View Details", icon: Eye, onClick: (item) => router.push(`/dashbord/services/${item.id || (item as any)._id}`), variant: "default" },
-    { label: "Edit", icon: Edit2, onClick: openEditModal, variant: "secondary" },
-    { label: "Delete", icon: Trash2, onClick: openDeleteModal, variant: "destructive" },
+    ...(role === "superadmin" ? [
+      { label: "Edit", icon: Edit2, onClick: openEditModal, variant: "secondary" as const },
+      { label: "Delete", icon: Trash2, onClick: openDeleteModal, variant: "destructive" as const },
+    ] : []),
   ];
 
   return (
@@ -310,12 +322,14 @@ export default function AdminServicesManagementPage() {
             <p className="text-xs text-slate-400 mt-0.5">Create and manage all services across the platform.</p>
           </div>
         </div>
-        <button
-          onClick={openCreateModal}
-          className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
-        >
-          <PlusCircle size={18} /> Add Service
-        </button>
+        {role === "superadmin" && (
+          <button
+            onClick={openCreateModal}
+            className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
+          >
+            <PlusCircle size={18} /> Add Service
+          </button>
+        )}
       </div>
 
       {/* Table */}

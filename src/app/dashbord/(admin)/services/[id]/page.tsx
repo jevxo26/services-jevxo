@@ -216,14 +216,14 @@ export default function ServiceDetailsPage() {
                       {ns.subServices && ns.subServices.length > 0 && (
                         <div className="mt-3 pt-3 border-t border-slate-100 border-dashed">
                           <p className="text-[10px] font-bold text-slate-400 uppercase mb-2">Options</p>
-                          <ul className="space-y-1.5">
+                          <div className="grid grid-cols-1 gap-2">
                             {ns.subServices.map((sub: any) => (
-                              <li key={sub.id} className="flex justify-between items-center text-xs">
-                                <span className="text-slate-600">{sub.name}</span>
-                                <span className="font-bold text-brand-primary">৳{sub.price}</span>
-                              </li>
+                              <div key={sub.id} className="flex flex-col bg-slate-50 border border-slate-100 rounded-xl p-3 hover:border-brand-primary/20 transition-colors">
+                                <span className="text-xs font-bold text-slate-700 leading-tight mb-1">{sub.name}</span>
+                                <span className="text-sm font-black text-brand-primary">৳{sub.price}</span>
+                              </div>
                             ))}
-                          </ul>
+                          </div>
                         </div>
                       )}
                     </div>

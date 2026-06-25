@@ -1,10 +1,11 @@
 "use client";
 
 import { useAppSelector } from "@/redux/hooks";
-import { ShieldAlert, ShieldCheck, XCircle, Eye, MoreVertical, Trash2, Store } from "lucide-react";
+import { ShieldAlert, ShieldCheck, XCircle, Eye, MoreVertical, Trash2, Store, Edit } from "lucide-react";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { CustomTable } from "@/components/ui/table";
+import { CustomSelect } from "@/components/ui/select";
 import { useGetAllUsersQuery, useUpdateUserMutation, useCreateUserMutation, useDeleteUserMutation } from "@/redux/features/admin/user";
 import { useGetAllRolesQuery } from "@/redux/features/admin/role";
 import { useCreateProfileMutation } from "@/redux/features/admin/profile";
@@ -41,6 +42,12 @@ export default function VendorsManagementPage() {
   const [selectedDevision, setSelectedDevision] = useState<string>("");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("");
   const [selectedArea, setSelectedArea] = useState<string>("");
+
+  const [profileType, setProfileType] = useState<string>("personal");
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
+
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [editingVendor, setEditingVendor] = useState<VendorItem | null>(null);
 
   // Connect APIs
   const { data: apiUsersRes, isLoading: isUsersLoading, refetch } = useGetAllUsersQuery();
@@ -121,12 +128,12 @@ export default function VendorsManagementPage() {
     }
 
     const formData = new FormData(e.currentTarget);
-    const categoryIds = formData.getAll("category_ids").map(id => Number(id));
+    const categoryIds = selectedCategoryIds;
 
     const profileData = {
       user_id: createdUserId,
       category_ids: categoryIds.length > 0 ? categoryIds : undefined,
-      type: formData.get("type")?.toString() || "personal",
+      type: profileType,
       location: formData.get("location")?.toString() || "",
       devision_id: selectedDevision ? Number(selectedDevision) : undefined,
       district_id: selectedDistrict ? Number(selectedDistrict) : undefined,
@@ -155,6 +162,30 @@ export default function VendorsManagementPage() {
     setSelectedDevision("");
     setSelectedDistrict("");
     setSelectedArea("");
+    setProfileType("personal");
+    setSelectedCategoryIds([]);
+  };
+
+  const handleEditVendor = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (!editingVendor) return;
+    const formData = new FormData(e.currentTarget);
+    const data = {
+      name: formData.get("name")?.toString() || "",
+      email: formData.get("email")?.toString() || "",
+      phone: formData.get("phone")?.toString() || "",
+      commission_percentage: Number(formData.get("commission_percentage")) || 0,
+    };
+    try {
+      await updateUserMut({ id: editingVendor.id, data }).unwrap();
+      toast.success("Vendor updated successfully!");
+      setIsEditModalOpen(false);
+      setEditingVendor(null);
+      refetch();
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.data?.message || err.message || "Failed to update vendor.");
+    }
   };
 
   // Actions
@@ -277,6 +308,17 @@ export default function VendorsManagementPage() {
                   className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2 font-medium"
                 >
                   <Eye size={14} className="text-slate-400" /> View Details
+                </button>
+
+                <button
+                  onClick={() => { 
+                    setEditingVendor(user); 
+                    setIsEditModalOpen(true); 
+                    setOpenDropdownId(null); 
+                  }}
+                  className="w-full text-left px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2 font-medium"
+                >
+                  <Edit size={14} className="text-slate-400" /> Edit Vendor
                 </button>
 
                 {user.status !== "active" && (
@@ -414,22 +456,24 @@ export default function VendorsManagementPage() {
               <form onSubmit={handleCreateProfile} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Profile Type</label>
-                  <select name="type" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all">
-                    <option value="personal">Personal / Freelancer</option>
-                    <option value="company">Company / Agency</option>
-                  </select>
+                  <CustomSelect
+                    options={[
+                      { value: "personal", label: "Personal / Freelancer" },
+                      { value: "company", label: "Company / Agency" }
+                    ]}
+                    value={profileType}
+                    onChange={(val) => setProfileType(val)}
+                  />
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Categories (Hold Ctrl/Cmd to select multiple)</label>
-                  <select multiple name="category_ids" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all h-24">
-                    {isCategoriesLoading ? (
-                      <option value="" disabled>Loading categories...</option>
-                    ) : (
-                      allCategories.map((c: any) => (
-                        <option key={c.id} value={c.id}>{c.name}</option>
-                      ))
-                    )}
-                  </select>
+                  <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Categories</label>
+                  <CustomSelect
+                    isMulti
+                    options={allCategories.map((c: any) => ({ value: String(c.id), label: c.name }))}
+                    value={selectedCategoryIds.map(String)}
+                    onChange={(val) => setSelectedCategoryIds(Array.isArray(val) ? val.map(Number) : [])}
+                    placeholder={isCategoriesLoading ? "Loading categories..." : "Select Categories..."}
+                  />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Company / Business Name (Optional)</label>
@@ -521,6 +565,51 @@ export default function VendorsManagementPage() {
           </div>
         </div>
       )}
+
+      {/* Edit Modal */}
+      {isEditModalOpen && editingVendor && (
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4">
+          <div className="absolute inset-0 bg-slate-900/40 backdrop-blur-sm" onClick={() => setIsEditModalOpen(false)} />
+          <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl relative z-10 overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div className="px-6 py-4 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
+              <h2 className="text-lg font-extrabold text-slate-800">Edit Vendor</h2>
+              <button onClick={() => setIsEditModalOpen(false)} className="text-slate-400 hover:text-slate-600 bg-slate-50 hover:bg-slate-100 rounded-full p-1.5 transition-all">
+                <XCircle size={24} />
+              </button>
+            </div>
+            
+            <div className="p-6">
+              <form onSubmit={handleEditVendor} className="space-y-4">
+                <div>
+                  <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Full Name</label>
+                  <input name="name" type="text" defaultValue={editingVendor.name} required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Email Address</label>
+                  <input name="email" type="email" defaultValue={editingVendor.email} required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Phone Number</label>
+                  <input name="phone" type="tel" defaultValue={editingVendor.phone || ""} required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" />
+                </div>
+                <div>
+                  <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Commission Percentage (%)</label>
+                  <input name="commission_percentage" type="number" min="0" max="100" defaultValue={editingVendor.commission_percentage || 0} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" />
+                </div>
+                <div className="pt-4 flex justify-end gap-3 border-t border-slate-100">
+                  <button type="button" onClick={() => setIsEditModalOpen(false)} className="px-5 py-2.5 text-sm font-bold text-slate-600 bg-slate-100 hover:bg-slate-200 rounded-xl transition-all">
+                    Cancel
+                  </button>
+                  <button type="submit" className="px-5 py-2.5 text-sm font-bold text-white bg-brand-primary hover:bg-brand-dark rounded-xl transition-all">
+                    Save Changes
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+      )}
+
     </div>
   );
 }

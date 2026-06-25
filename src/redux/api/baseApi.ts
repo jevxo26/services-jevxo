@@ -2,8 +2,9 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolkit/query';
 import { getAccessToken, getRefreshToken, setTokens, clearTokens } from '@/lib/token';
 
-const API_BASE_URL = "https://rajseba-api-production.up.railway.app";
+const API_BASE_URL = "http://localhost:8000";
 // "http://localhost:8000"
+// https://rajseba-api-production.up.railway.app
 const baseQuery = fetchBaseQuery({
   baseUrl: API_BASE_URL,
   prepareHeaders: (headers) => {
@@ -79,5 +80,5 @@ export const baseApi = createApi({
   reducerPath: 'api',
   baseQuery: baseQueryWithReauth,
   endpoints: () => ({}),
-  tagTypes: ['Admin', 'Landing', 'Agent', 'Client', 'Vendor', 'Category', 'Service', 'NestedService', 'SubService', 'Package', 'Profile', 'Withdraw', 'Booking', 'Devision', 'District', 'Area', 'Chat'],
+  tagTypes: ['Admin', 'Landing', 'Agent', 'Client', 'Vendor', 'Category', 'Service', 'NestedService', 'SubService', 'Package', 'Profile', 'Withdraw', 'Booking', 'Devision', 'District', 'Area', 'Chat', 'Getways'],
 });

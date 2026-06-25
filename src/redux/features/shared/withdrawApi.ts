@@ -4,6 +4,7 @@ export interface Withdraw {
   id: number;
   amount: number;
   status: 'pending' | 'approved' | 'rejected';
+  admin_note?: string;
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
@@ -17,6 +18,14 @@ export interface Withdraw {
     id: number;
     total_price: number;
     date?: string;
+    service?: { name: string; id: number };
+    pkg?: { name: string; id: number };
+    user?: { name: string; id: number };
+  };
+  getway?: {
+    id: number;
+    getway_type: string;
+    info: any;
   };
 }
 
@@ -30,10 +39,12 @@ export interface CreateWithdrawRequest {
   amount?: number;
   bookingId?: number;
   vendorId?: number;
+  gatewayId?: number;
 }
 
 export interface UpdateWithdrawStatusRequest {
   status: 'pending' | 'approved' | 'rejected';
+  admin_note?: string;
 }
 
 export const withdrawApi = baseApi.injectEndpoints({

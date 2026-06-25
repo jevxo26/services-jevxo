@@ -155,8 +155,8 @@ export default function BookingDetailsPage() {
                   <select
                     value={booking.status}
                     onChange={(e) => handleStatusChange(e.target.value)}
-                    disabled={isUpdating || (typeof rawRole === 'string' && rawRole.toLowerCase() === 'agent')}
-                    className="w-full bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-extrabold text-slate-700 pl-4 pr-10 py-3 appearance-none focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary/40 transition-all cursor-pointer disabled:opacity-50"
+                    disabled={isUpdating || (typeof rawRole === 'string' && rawRole.toLowerCase() === 'agent') || booking.status === 'completed'}
+                    className="w-full bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-extrabold text-slate-700 pl-4 pr-10 py-3 appearance-none focus:outline-none focus:ring-2 focus:ring-brand-primary/20 focus:border-brand-primary/40 transition-all cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <option value="pending">Pending Approval</option>
                     <option value="assigned">Vendor Assigned</option>

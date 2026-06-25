@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import { CustomTable } from "@/components/ui/table";
+import { CustomSelect } from "@/components/ui/select";
 import { Calendar, User, Package as PkgIcon, MapPin, Search, ChevronDown, CheckCircle, XCircle, Clock, Trash2, ShieldCheck, Briefcase } from "lucide-react";
 import { toast } from "sonner";
 import {
@@ -18,7 +19,7 @@ import { useGetAllUsersQuery } from "@/redux/features/admin/user";
 export default function BookingsManagementPage() {
   const { data: bookingsRes, isLoading } = useGetAllBookingsQuery();
   const { data: servicesRes } = useGetAllServicesQuery();
-  const { data: usersRes } = useGetAllUsersQuery();
+
   
   const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
   const currentUser = useAppSelector((state) => state.auth.user);
@@ -26,14 +27,16 @@ export default function BookingsManagementPage() {
   const roleName = typeof rawRole === 'string' ? rawRole.toLowerCase() : (rawRole as any)?.name?.toLowerCase() || "superadmin";
   
   const [updateStatus] = useUpdateBookingStatusMutation();
-  const [deleteBooking] = useDeleteBookingMutation();
+  const [deleteBooking, { isLoading: isDeleting }] = useDeleteBookingMutation();
   const [createBooking, { isLoading: isCreating }] = useCreateBookingMutation();
 
   const [searchTerm, setSearchTerm] = useState("");
   const [filterStatus, setFilterStatus] = useState<string>("all");
   
-  // Create Modal State
+  // Modals State
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
+  const [deleteModalBookingId, setDeleteModalBookingId] = useState<number | null>(null);
+  
   const [newBooking, setNewBooking] = useState<any>({
     user_id: "",
     vendor_id: "",
@@ -48,14 +51,19 @@ export default function BookingsManagementPage() {
     notes: ""
   });
 
+  const { data: vendorsRes } = useGetAllUsersQuery({ role: 'Vendor' });
+  const { data: clientsRes } = useGetAllUsersQuery({ role: 'Client' });
+  
   const bookings = bookingsRes?.data || [];
   const services = servicesRes?.data || [];
-  const users = usersRes?.data || [];
-  const vendors = users.filter((u: any) => u.role?.name === 'Vendor' || u.role === 'Vendor');
-  const clients = users.filter((u: any) => u.role?.name === 'Client' || u.role === 'Client');
+  const vendors = vendorsRes?.data || [];
+  const clients = clientsRes?.data || [];
 
   // Filtering dependent dropdowns
-  const selectedVendorServices = services.filter((s: any) => s.vendor?.id?.toString() === newBooking.vendor_id);
+  const selectedVendorServices = services.filter((s: any) => 
+    s.vendor_id?.toString() === newBooking.vendor_id || 
+    s.vendor?.id?.toString() === newBooking.vendor_id
+  );
   const selectedService = services.find((s: any) => s.id?.toString() === newBooking.service_id);
   const selectedNestedService = selectedService?.nestedServices?.find((ns: any) => ns.id?.toString() === newBooking.nested_service_id);
 
@@ -82,11 +90,12 @@ export default function BookingsManagementPage() {
     }
   };
 
-  const handleDelete = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this booking?")) return;
+  const handleDeleteConfirm = async () => {
+    if (!deleteModalBookingId) return;
     try {
-      await deleteBooking(id).unwrap();
+      await deleteBooking(deleteModalBookingId).unwrap();
       toast.success("Booking deleted successfully");
+      setDeleteModalBookingId(null);
     } catch (error: any) {
       toast.error(error.data?.message || "Failed to delete booking");
     }
@@ -237,12 +246,21 @@ export default function BookingsManagementPage() {
       header: "Actions",
       accessorKey: "actions",
       render: (item: any) => (
-        <Link 
-          href={`/dashbord/manage-bookings/${item.id}`}
-          className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
-        >
-          View Details
-        </Link>
+        <div className="flex items-center gap-2">
+          <Link 
+            href={`/dashbord/manage-bookings/${item.id}`}
+            className="inline-flex items-center gap-1.5 px-4 py-1.5 bg-white border border-slate-200 rounded-lg text-xs font-bold text-slate-700 hover:bg-slate-50 transition-colors shadow-sm"
+          >
+            View Details
+          </Link>
+          <button
+            onClick={() => setDeleteModalBookingId(item.id)}
+            className="p-1.5 rounded-lg border border-rose-200 hover:border-rose-500 hover:text-white hover:bg-rose-500 text-rose-500 bg-rose-50 transition-all shadow-sm"
+            title="Delete Booking"
+          >
+            <Trash2 size={16} />
+          </button>
+        </div>
       )
     }
   ];
@@ -350,33 +368,23 @@ export default function BookingsManagementPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
                   <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Select Client *</label>
-                  <select
-                    required
+                  <CustomSelect
+                    options={clients.map((c: any) => ({ value: String(c.id), label: `${c.name} (${c.email})` }))}
                     value={newBooking.user_id}
-                    onChange={(e) => setNewBooking({...newBooking, user_id: e.target.value})}
-                    className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-primary focus:border-brand-primary block p-3 outline-none transition-all"
-                  >
-                    <option value="">-- Choose a Client --</option>
-                    {clients.map((c: any) => (
-                      <option key={c.id} value={c.id}>{c.name} ({c.email})</option>
-                    ))}
-                  </select>
+                    onChange={(val) => setNewBooking({...newBooking, user_id: val})}
+                    placeholder="-- Choose a Client --"
+                  />
                 </div>
 
                 {roleName !== "vendor" && (
                   <div className="space-y-2">
                     <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Select Vendor *</label>
-                    <select
-                      required
+                    <CustomSelect
+                      options={vendors.map((v: any) => ({ value: String(v.id), label: v.profile?.companyName || v.name }))}
                       value={newBooking.vendor_id}
-                      onChange={(e) => setNewBooking({...newBooking, vendor_id: e.target.value, service_id: "", sub_service_ids: [], package_id: ""})}
-                      className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-primary focus:border-brand-primary block p-3 outline-none transition-all"
-                    >
-                      <option value="">-- Choose a Vendor --</option>
-                      {vendors.map((v: any) => (
-                        <option key={v.id} value={v.id}>{v.name}</option>
-                      ))}
-                    </select>
+                      onChange={(val) => setNewBooking({...newBooking, vendor_id: val, service_id: "", sub_service_ids: [], package_id: ""})}
+                      placeholder="-- Choose a Vendor --"
+                    />
                   </div>
                 )}
               </div>
@@ -422,31 +430,23 @@ export default function BookingsManagementPage() {
                   <div className="space-y-4">
                     <div className="space-y-2">
                       <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Select Service</label>
-                      <select
+                      <CustomSelect
+                        options={selectedVendorServices.map((s: any) => ({ value: String(s.id), label: s.name }))}
                         value={newBooking.service_id}
-                        onChange={(e) => setNewBooking({...newBooking, service_id: e.target.value, nested_service_id: "", sub_service_ids: [], package_id: ""})}
-                        className="w-full bg-white border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-primary focus:border-brand-primary block p-2.5 outline-none transition-all"
-                      >
-                        <option value="">-- Choose a Service --</option>
-                        {selectedVendorServices.map((s: any) => (
-                          <option key={s.id} value={s.id}>{s.name}</option>
-                        ))}
-                      </select>
+                        onChange={(val) => setNewBooking({...newBooking, service_id: val, nested_service_id: "", sub_service_ids: [], package_id: ""})}
+                        placeholder="-- Choose a Service --"
+                      />
                     </div>
 
                     {newBooking.service_id && (
                       <div className="space-y-2 animate-in fade-in slide-in-from-top-2">
                         <label className="text-xs font-bold text-slate-500 uppercase tracking-wider">Select Nested Service</label>
-                        <select
+                        <CustomSelect
+                          options={selectedService?.nestedServices?.map((ns: any) => ({ value: String(ns.id), label: ns.name })) || []}
                           value={newBooking.nested_service_id}
-                          onChange={(e) => setNewBooking({...newBooking, nested_service_id: e.target.value, sub_service_ids: []})}
-                          className="w-full bg-white border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-primary focus:border-brand-primary block p-2.5 outline-none transition-all"
-                        >
-                          <option value="">-- Choose a Nested Service --</option>
-                          {selectedService?.nestedServices?.map((ns: any) => (
-                            <option key={ns.id} value={ns.id}>{ns.name}</option>
-                          ))}
-                        </select>
+                          onChange={(val) => setNewBooking({...newBooking, nested_service_id: val, sub_service_ids: []})}
+                          placeholder="-- Choose a Nested Service --"
+                        />
                       </div>
                     )}
                   </div>
@@ -457,17 +457,14 @@ export default function BookingsManagementPage() {
                         <input type="radio" name="selection_type" value="nested" checked={newBooking.selection_type === 'nested'} onChange={(e) => setNewBooking({...newBooking, selection_type: e.target.value, package_id: ""})} />
                         Sub-Services Options (Multi-select)
                       </label>
-                      <select
-                        multiple
+                      <CustomSelect
+                        isMulti
                         disabled={newBooking.selection_type !== 'nested' || !newBooking.nested_service_id}
+                        options={selectedNestedService?.subServices?.map((ss: any) => ({ value: String(ss.id), label: `${ss.name} - ৳${ss.price}` })) || []}
                         value={newBooking.sub_service_ids}
-                        onChange={(e) => setNewBooking({...newBooking, sub_service_ids: Array.from(e.target.selectedOptions, option => option.value)})}
-                        className="w-full bg-white border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-primary focus:border-brand-primary block p-2.5 outline-none transition-all disabled:opacity-50 min-h-[100px]"
-                      >
-                        {selectedNestedService?.subServices?.map((ss: any) => (
-                          <option key={ss.id} value={ss.id}>{ss.name} - ৳{ss.price}</option>
-                        ))}
-                      </select>
+                        onChange={(val) => setNewBooking({...newBooking, sub_service_ids: val})}
+                        placeholder="-- Choose Sub-Services --"
+                      />
                       {!newBooking.nested_service_id && newBooking.selection_type === 'nested' && (
                         <p className="text-[10px] text-amber-600 mt-1">Please select a Nested Service first.</p>
                       )}
@@ -478,19 +475,17 @@ export default function BookingsManagementPage() {
                         <input type="radio" name="selection_type" value="package" checked={newBooking.selection_type === 'package'} onChange={(e) => setNewBooking({...newBooking, selection_type: e.target.value, sub_service_ids: []})} />
                         Service Package
                       </label>
-                      <select
+                      <CustomSelect
                         disabled={newBooking.selection_type !== 'package'}
+                        options={
+                          selectedService 
+                            ? (selectedService.packages || []).map((p: any) => ({ value: String(p.id), label: `${p.name} - ৳${p.price}` }))
+                            : selectedVendorServices.flatMap((s: any) => s.packages || []).map((p: any) => ({ value: String(p.id), label: `${p.name} - ৳${p.price}` }))
+                        }
                         value={newBooking.package_id}
-                        onChange={(e) => setNewBooking({...newBooking, package_id: e.target.value})}
-                        className="w-full bg-white border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-primary focus:border-brand-primary block p-2.5 outline-none transition-all disabled:opacity-50"
-                      >
-                        <option value="">-- Choose Package --</option>
-                        {selectedService ? selectedService.packages?.map((p: any) => (
-                          <option key={p.id} value={p.id}>{p.name} - ৳{p.price}</option>
-                        )) : selectedVendorServices.flatMap((s: any) => s.packages || []).map((p: any) => (
-                          <option key={p.id} value={p.id}>{p.name} - ৳{p.price}</option>
-                        ))}
-                      </select>
+                        onChange={(val) => setNewBooking({...newBooking, package_id: val})}
+                        placeholder="-- Choose Package --"
+                      />
                     </div>
                   </div>
 
@@ -533,6 +528,41 @@ export default function BookingsManagementPage() {
                 </button>
               </div>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteModalBookingId && (
+        <div className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center z-50 p-4 animate-in fade-in duration-200">
+          <div className="bg-white rounded-3xl shadow-xl w-full max-w-sm overflow-hidden animate-in zoom-in-95 duration-200 p-6 text-center border border-slate-100">
+            <div className="w-16 h-16 bg-rose-50 text-rose-500 rounded-full flex items-center justify-center mx-auto mb-4 border border-rose-100 shadow-sm">
+              <Trash2 size={28} />
+            </div>
+            <h2 className="text-xl font-bold text-slate-800 mb-2">Delete Booking?</h2>
+            <p className="text-sm text-slate-500 mb-6 leading-relaxed">
+              Are you sure you want to permanently delete this booking? This action cannot be undone.
+            </p>
+            <div className="flex gap-3 justify-center">
+              <button
+                onClick={() => setDeleteModalBookingId(null)}
+                className="flex-1 px-5 py-2.5 text-sm font-bold text-slate-600 bg-slate-50 border border-slate-200 hover:bg-slate-100 rounded-xl transition-all shadow-sm"
+                disabled={isDeleting}
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleDeleteConfirm}
+                disabled={isDeleting}
+                className="flex-1 px-5 py-2.5 text-sm font-bold text-white bg-rose-500 hover:bg-rose-600 rounded-xl transition-all shadow-md disabled:opacity-70 flex items-center justify-center gap-2"
+              >
+                {isDeleting ? (
+                  <><div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Deleting...</>
+                ) : (
+                  "Yes, Delete"
+                )}
+              </button>
+            </div>
           </div>
         </div>
       )}
