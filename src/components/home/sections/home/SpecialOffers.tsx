@@ -2,54 +2,38 @@
 
 import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Tag, Clock, ArrowRight, Zap, Gift, Percent } from "lucide-react";
+import { Tag, Clock, ArrowRight, Zap, Gift, Percent, Sparkles, Loader2 } from "lucide-react";
 import Link from "next/link";
+import { useGetPublicPackagesQuery } from "@/redux/features/landing/landingApi";
 
-const OFFERS = [
+// Premium styles for cards matching the brand color palette (#FF7C71)
+const DESIGN_ASSETS = [
   {
-    id: 1,
     badge: "🔥 Hot Deal",
-    badgeColor: "bg-rose-100 text-rose-600",
-    title: "Deep Home Cleaning",
-    subtitle: "Full apartment • Up to 3 rooms",
-    discount: "30% OFF",
-    originalPrice: "৳2,500",
-    salePrice: "৳1,750",
-    expires: "Ends tonight",
-    icon: Zap,
-    gradient: "from-[#FF7C71] to-rose-600",
-    bg: "from-rose-50 to-orange-50",
-    border: "border-rose-200",
+    badgeColor: "bg-[#FF7C71]/10 text-[#FF7C71] border-[#FF7C71]/20",
+    gradient: "from-[#FF7C71] via-rose-500 to-rose-600",
+    bg: "bg-gradient-to-br from-[#FF7C71]/5 via-white to-[#FF7C71]/2",
+    border: "hover:border-[#FF7C71]/40 border-slate-100",
+    iconColor: "text-[#FF7C71]",
+    glow: "shadow-[#FF7C71]/5",
   },
   {
-    id: 2,
     badge: "🎁 New User",
-    badgeColor: "bg-emerald-100 text-emerald-600",
-    title: "First Booking Free",
-    subtitle: "Any service • New accounts only",
-    discount: "FREE",
-    originalPrice: "৳1,200",
-    salePrice: "৳0",
-    expires: "Limited slots",
-    icon: Gift,
-    gradient: "from-emerald-500 to-teal-600",
-    bg: "from-emerald-50 to-teal-50",
-    border: "border-emerald-200",
+    badgeColor: "bg-[#FF7C71]/10 text-[#FF7C71] border-[#FF7C71]/20",
+    gradient: "from-[#FF7C71] via-orange-400 to-orange-500",
+    bg: "bg-gradient-to-br from-[#FF7C71]/4 via-white to-[#FF7C71]/1",
+    border: "hover:border-[#FF7C71]/40 border-slate-100",
+    iconColor: "text-[#FF7C71]",
+    glow: "shadow-[#FF7C71]/5",
   },
   {
-    id: 3,
     badge: "⚡ Flash Sale",
-    badgeColor: "bg-amber-100 text-amber-600",
-    title: "AC Service + Clean",
-    subtitle: "Split AC • Includes gas refill check",
-    discount: "25% OFF",
-    originalPrice: "৳3,200",
-    salePrice: "৳2,400",
-    expires: "48 hrs left",
-    icon: Percent,
-    gradient: "from-amber-500 to-orange-500",
-    bg: "from-amber-50 to-orange-50",
-    border: "border-amber-200",
+    badgeColor: "bg-rose-500/10 text-rose-600 border-rose-500/20",
+    gradient: "from-[#FF7C71] via-rose-450 to-pink-500",
+    bg: "bg-gradient-to-br from-[#FF7C71]/5 via-white to-[#FF7C71]/2",
+    border: "hover:border-[#FF7C71]/40 border-slate-100",
+    iconColor: "text-[#FF7C71]",
+    glow: "shadow-[#FF7C71]/5",
   },
 ];
 
@@ -77,106 +61,192 @@ function useCountdown(hours: number) {
 }
 
 export default function SpecialOffers() {
-  const countdown = useCountdown(8);
+  const countdown = useCountdown(6);
+  const { data: packagesRes, isLoading } = useGetPublicPackagesQuery();
+
+  const packagesData = packagesRes?.data || (Array.isArray(packagesRes) ? packagesRes : []);
+
+  // Map API packages to premium cards, fallback to mock details if API contains no items
+  const offers = packagesData.length > 0
+    ? packagesData.map((pkg: any, idx: number) => {
+        const design = DESIGN_ASSETS[idx % DESIGN_ASSETS.length];
+        const discountAmount = pkg.originalPrice && pkg.price ? Math.round(((pkg.originalPrice - pkg.price) / pkg.originalPrice) * 100) : 0;
+        
+        return {
+          id: pkg.id,
+          badge: discountAmount > 0 ? `🔥 ${discountAmount}% Off` : "✨ Package Deal",
+          badgeColor: design.badgeColor,
+          title: pkg.name,
+          subtitle: pkg.description || "Premium service package",
+          discount: discountAmount > 0 ? `${discountAmount}% OFF` : "SAVE BIG",
+          originalPrice: pkg.originalPrice ? `৳${pkg.originalPrice}` : `৳${pkg.price + 300}`,
+          salePrice: `৳${pkg.price}`,
+          expires: "Limited time offer",
+          gradient: design.gradient,
+          bg: design.bg,
+          border: design.border,
+          glow: design.glow,
+          iconColor: design.iconColor,
+        };
+      })
+    : [
+        {
+          id: 1,
+          badge: "🔥 30% Off",
+          badgeColor: DESIGN_ASSETS[0].badgeColor,
+          title: "Deep Home Cleaning Pack",
+          subtitle: "Full apartment service • Complete sanitization & dust removal",
+          discount: "30% OFF",
+          originalPrice: "৳2,500",
+          salePrice: "৳1,750",
+          expires: "Ends tonight",
+          gradient: DESIGN_ASSETS[0].gradient,
+          bg: DESIGN_ASSETS[0].bg,
+          border: DESIGN_ASSETS[0].border,
+          glow: DESIGN_ASSETS[0].glow,
+          iconColor: DESIGN_ASSETS[0].iconColor,
+        },
+        {
+          id: 2,
+          badge: "🎁 New User Offer",
+          badgeColor: DESIGN_ASSETS[1].badgeColor,
+          title: "Premium AC Tuneup",
+          subtitle: "Jet wash + filter clean + safety check for 1 Unit",
+          discount: "FREE TRIAL",
+          originalPrice: "৳1,200",
+          salePrice: "৳0",
+          expires: "First 100 users",
+          gradient: DESIGN_ASSETS[1].gradient,
+          bg: DESIGN_ASSETS[1].bg,
+          border: DESIGN_ASSETS[1].border,
+          glow: DESIGN_ASSETS[1].glow,
+          iconColor: DESIGN_ASSETS[1].iconColor,
+        },
+        {
+          id: 3,
+          badge: "⚡ Flash Deal",
+          badgeColor: DESIGN_ASSETS[2].badgeColor,
+          title: "All-in-One Appliance Care",
+          subtitle: "Refrigerator, washing machine, and microwave checkup",
+          discount: "25% OFF",
+          originalPrice: "৳3,200",
+          salePrice: "৳2,400",
+          expires: "48 hours left",
+          gradient: DESIGN_ASSETS[2].gradient,
+          bg: DESIGN_ASSETS[2].bg,
+          border: DESIGN_ASSETS[2].border,
+          glow: DESIGN_ASSETS[2].glow,
+          iconColor: DESIGN_ASSETS[2].iconColor,
+        },
+      ];
 
   return (
     <section className="py-12 md:py-16 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
+        
         {/* Header */}
         <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-10">
           <div>
             <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
-              <Tag size={13} />
-              Limited Time Offers
+              <Sparkles size={13} />
+              Featured Promotions
             </div>
             <h2 className="text-2xl md:text-3xl font-bold text-slate-900 flex items-center gap-2">
               <Zap className="w-7 h-7 text-[#FF7C71]" />
-              Special Deals
+              Special Deals & Packages
             </h2>
             <p className="text-slate-500 text-sm mt-1 max-w-md">
-              Grab exclusive discounts on top home services — limited slots available.
+              Grab exclusive deals and combo service packages prepared for your home care.
             </p>
           </div>
 
           {/* Live Countdown */}
-          <div className="flex items-center gap-2.5 bg-slate-900 text-white px-4 py-2.5 rounded-2xl self-start sm:self-auto">
-            <Clock size={15} className="text-[#FF7C71]" />
-            <span className="text-xs font-semibold text-slate-400">Flash ends in</span>
+          <div className="flex items-center gap-2.5 bg-slate-900 text-white px-4 py-2.5 rounded-2xl self-start sm:self-auto shadow-lg shadow-slate-900/10">
+            <Clock size={15} className="text-[#FF7C71] animate-pulse" />
+            <span className="text-xs font-semibold text-slate-400">Offer ends in</span>
             <span className="text-sm font-black tabular-nums text-[#FF7C71]">{countdown}</span>
           </div>
         </div>
 
+        {/* Loading State */}
+        {isLoading && (
+          <div className="flex items-center justify-center py-20">
+            <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+          </div>
+        )}
+
         {/* Offer Cards */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-5"
-        >
-          {OFFERS.map((offer) => {
-            const Icon = offer.icon;
-            return (
-              <motion.div
-                key={offer.id}
-                variants={itemVariants}
-                whileHover={{ y: -4, scale: 1.01 }}
-                className={`relative rounded-3xl border ${offer.border} bg-gradient-to-br ${offer.bg} p-6 flex flex-col gap-4 overflow-hidden cursor-pointer group transition-shadow hover:shadow-xl hover:shadow-slate-200/60`}
-              >
-                {/* Decorative blob */}
-                <div className={`absolute -top-8 -right-8 w-32 h-32 rounded-full bg-gradient-to-br ${offer.gradient} opacity-10 blur-2xl pointer-events-none`} />
+        {!isLoading && (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
+            {offers.slice(0, 3).map((offer: any) => {
+              return (
+                <motion.div
+                  key={offer.id}
+                  variants={itemVariants}
+                  whileHover={{ y: -5, scale: 1.01 }}
+                  className={`relative rounded-[2rem] border ${offer.border} ${offer.bg} p-6 md:p-7 flex flex-col justify-between min-h-[300px] overflow-hidden cursor-pointer group transition-all duration-300 shadow-sm ${offer.glow} hover:shadow-xl hover:shadow-slate-200/50`}
+                >
+                  {/* Decorative modern gradient mesh blur */}
+                  <div className={`absolute -top-12 -right-12 w-36 h-36 rounded-full bg-gradient-to-br ${offer.gradient} opacity-[0.08] blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500`} />
 
-                {/* Badge + discount */}
-                <div className="flex items-center justify-between">
-                  <span className={`text-xs font-bold px-3 py-1 rounded-full ${offer.badgeColor}`}>
-                    {offer.badge}
-                  </span>
-                  <div className={`flex items-center justify-center w-10 h-10 rounded-xl bg-gradient-to-br ${offer.gradient} text-white shadow-lg`}>
-                    <Icon size={18} />
+                  {/* Top Badge Row */}
+                  <div className="flex items-center justify-between z-10">
+                    <span className={`text-[11px] font-extrabold px-3 py-1 rounded-full border ${offer.badgeColor} uppercase tracking-wider`}>
+                      {offer.badge}
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+                      <Percent size={14} className={offer.iconColor} />
+                    </div>
                   </div>
-                </div>
 
-                {/* Content */}
-                <div>
-                  <h3 className="text-lg font-extrabold text-slate-900">{offer.title}</h3>
-                  <p className="text-xs text-slate-500 font-medium mt-0.5">{offer.subtitle}</p>
-                </div>
-
-                {/* Pricing */}
-                <div className="flex items-end gap-3">
-                  <span className={`text-3xl font-black bg-gradient-to-br ${offer.gradient} bg-clip-text text-transparent`}>
-                    {offer.discount}
-                  </span>
-                  <div className="flex flex-col pb-0.5">
-                    <span className="text-xs text-slate-400 line-through">{offer.originalPrice}</span>
-                    <span className="text-sm font-black text-slate-800">{offer.salePrice}</span>
+                  {/* Main Title & Description */}
+                  <div className="my-6 z-10 flex-1 flex flex-col justify-center">
+                    <h3 className="text-xl font-black text-slate-900 group-hover:text-[#FF7C71] transition-colors leading-tight mb-2">
+                      {offer.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-3">
+                      {offer.subtitle}
+                    </p>
                   </div>
-                </div>
 
-                {/* Footer */}
-                <div className="flex items-center justify-between pt-3 border-t border-slate-200/60">
-                  <span className="text-[11px] font-bold text-slate-400 flex items-center gap-1">
-                    <Clock size={11} /> {offer.expires}
-                  </span>
-                  <Link
-                    href="/services"
-                    className={`inline-flex items-center gap-1 text-xs font-bold bg-gradient-to-r ${offer.gradient} bg-clip-text text-transparent group-hover:underline`}
-                  >
-                    Book Now <ArrowRight size={13} />
-                  </Link>
-                </div>
-              </motion.div>
-            );
-          })}
-        </motion.div>
+                  {/* Pricing and Action row */}
+                  <div className="pt-4 border-t border-slate-100 z-10 flex items-center justify-between">
+                    <div>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Special price</p>
+                      <div className="flex items-baseline gap-2 mt-0.5">
+                        <span className="text-xl font-black text-slate-950">{offer.salePrice}</span>
+                        <span className="text-xs text-slate-400 line-through font-semibold">{offer.originalPrice}</span>
+                      </div>
+                    </div>
 
-        {/* CTA row */}
-        <div className="mt-8 text-center">
+                    <Link
+                      href="/services"
+                      className={`inline-flex items-center gap-1.5 text-xs font-extrabold px-4 py-2.5 rounded-xl bg-gradient-to-r ${offer.gradient} text-white shadow-md shadow-rose-300/30 group-hover:shadow-lg group-hover:shadow-rose-400/40 transition-all`}
+                    >
+                      Book Deal
+                      <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
+              );
+            })}
+          </motion.div>
+        )}
+
+        {/* Footer Link */}
+        <div className="mt-10 text-center">
           <Link
             href="/services"
-            className="inline-flex items-center gap-2 text-sm font-bold text-[#FF7C71] hover:underline"
+            className="inline-flex items-center gap-1.5 text-sm font-bold text-[#FF7C71] hover:underline group"
           >
-            View all offers <ArrowRight size={15} />
+            Explore all service packages 
+            <ArrowRight size={15} className="group-hover:translate-x-0.5 transition-transform" />
           </Link>
         </div>
       </div>

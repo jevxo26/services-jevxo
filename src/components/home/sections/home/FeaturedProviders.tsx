@@ -17,7 +17,7 @@ const PROVIDERS = [
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=rahim&backgroundColor=b6e3f4",
     tags: ["Cleaning", "Laundry"],
     badge: "Top Rated",
-    badgeColor: "bg-amber-100 text-amber-700",
+    badgeColor: "bg-[#FF7C71]/10 text-[#FF7C71] border-[#FF7C71]/20 border",
   },
   {
     id: 2,
@@ -30,7 +30,7 @@ const PROVIDERS = [
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=suman&backgroundColor=c0aede",
     tags: ["AC Service", "Electrical"],
     badge: "Verified Pro",
-    badgeColor: "bg-emerald-100 text-emerald-700",
+    badgeColor: "bg-orange-500/10 text-orange-600 border-orange-500/20 border",
   },
   {
     id: 3,
@@ -43,7 +43,7 @@ const PROVIDERS = [
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=farida&backgroundColor=ffdfbf",
     tags: ["Organization", "Cleaning"],
     badge: "5★ Provider",
-    badgeColor: "bg-rose-100 text-rose-700",
+    badgeColor: "bg-rose-500/10 text-rose-600 border-rose-500/20 border",
   },
   {
     id: 4,
@@ -56,7 +56,7 @@ const PROVIDERS = [
     avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=karim&backgroundColor=d1f4d1",
     tags: ["Plumbing", "Renovation"],
     badge: "Trusted",
-    badgeColor: "bg-blue-100 text-blue-700",
+    badgeColor: "bg-amber-500/10 text-amber-600 border-amber-500/20 border",
   },
 ];
 
