@@ -297,21 +297,23 @@ export function SpecializedServices({
                         {service.subServices?.map((sub) => {
                           const isChecked = selectedSubServices.includes(sub.id);
                           return (
-                            <label
+                            <div
                               key={sub.id}
-                              className={`flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${
+                              onClick={() => handleSubServiceToggle(sub.id)}
+                              className={`flex items-center justify-between p-3.5 rounded-2xl border transition-all cursor-pointer select-none ${
                                 isChecked
-                                  ? "bg-white border-[#FF7C71] shadow-xs"
+                                  ? "bg-white border-[#FF7C71] shadow-xs scale-[1.01]"
                                   : "bg-white/80 border-slate-100 hover:border-slate-200"
                               }`}
                             >
                               <div className="flex items-center gap-3">
-                                <input
-                                  type="checkbox"
-                                  checked={isChecked}
-                                  onChange={() => handleSubServiceToggle(sub.id)}
-                                  className="accent-[#FF7C71] w-4 h-4 rounded"
-                                />
+                                <div className={`w-5 h-5 rounded-lg border flex items-center justify-center transition-all ${
+                                  isChecked
+                                    ? "bg-[#FF7C71] border-[#FF7C71] text-white"
+                                    : "border-slate-200 bg-white"
+                                }`}>
+                                  {isChecked && <CheckCircle className="w-3.5 h-3.5 fill-current text-white" strokeWidth={3} />}
+                                </div>
                                 <span className="text-sm font-bold text-slate-800">
                                   {sub.name}
                                 </span>
@@ -319,7 +321,7 @@ export function SpecializedServices({
                               <span className="text-sm font-black text-[#FF7C71]">
                                 ৳{Number(sub.price).toLocaleString()}
                               </span>
-                            </label>
+                            </div>
                           );
                         })}
                       </div>
@@ -368,6 +370,35 @@ export function SpecializedServices({
                 <X size={20} />
               </button>
             </div>
+
+            {/* Selected Subservices summary in modal */}
+            {(() => {
+              const activeNestedService = displayServices.find((ds) => ds.id === expandedId);
+              const selectedSubs = activeNestedService?.subServices?.filter((ss) => selectedSubServices.includes(ss.id)) || [];
+              const totalPrice = selectedSubs.reduce((sum, ss) => sum + Number(ss.price || 0), 0);
+
+              if (selectedSubs.length === 0) return null;
+              return (
+                <div className="px-6 py-4 bg-[#FFF8F7] border-b border-slate-100/60 space-y-2.5">
+                  <div className="text-xs font-bold text-[#FF7C71] uppercase tracking-wider flex items-center gap-1">
+                    <Info size={12} />
+                    Selected Services Summary
+                  </div>
+                  <div className="max-h-24 overflow-y-auto space-y-1.5 pr-1">
+                    {selectedSubs.map((ss) => (
+                      <div key={ss.id} className="flex justify-between items-center text-xs font-bold text-slate-600">
+                        <span>• {ss.name}</span>
+                        <span className="text-slate-800">৳{Number(ss.price).toLocaleString()}</span>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="flex justify-between items-center pt-2 border-t border-slate-100/70 text-sm font-black text-slate-800">
+                    <span>Total Est. Price</span>
+                    <span className="text-[#FF7C71] text-base">৳{totalPrice.toLocaleString()}</span>
+                  </div>
+                </div>
+              );
+            })()}
 
             <form onSubmit={handleConfirmBooking} className="p-6 space-y-5">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">

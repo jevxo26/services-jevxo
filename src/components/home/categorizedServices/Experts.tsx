@@ -92,8 +92,13 @@ export function Experts({ employees }: { employees?: any[] }) {
           </h2>
         </div>
 
-        {/* Marquee Container */}
-        <div className="relative">
+        {/* Marquee Container with Fading Edges */}
+        <div className="relative overflow-hidden">
+          {/* Left Fade */}
+          <div className="absolute top-0 bottom-0 left-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
+          {/* Right Fade */}
+          <div className="absolute top-0 bottom-0 right-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
+          
           <motion.div
             className="flex gap-6"
             animate={{

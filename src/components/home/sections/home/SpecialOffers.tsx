@@ -103,97 +103,103 @@ export default function SpecialOffers() {
           </div>
         )}
 
-        {/* Offer Cards Sectioned by Service */}
-        {!isLoading && packagesData.length > 0 && packagesData.map((section: any, sectionIdx: number) => {
-          const serviceName = section.service?.name || "Featured Packages";
-          const sectionOffers = section.packages.map((pkg: any, idx: number) => {
-            const design = DESIGN_ASSETS[idx % DESIGN_ASSETS.length];
-            const discountAmount = pkg.originalPrice && pkg.price ? Math.round(((pkg.originalPrice - pkg.price) / pkg.originalPrice) * 100) : 0;
-            return {
-              id: pkg.id,
-              badge: discountAmount > 0 ? `🔥 ${discountAmount}% Off` : "✨ Package Deal",
-              badgeColor: design.badgeColor,
-              title: pkg.name,
-              subtitle: pkg.description || "Premium service package",
-              discount: discountAmount > 0 ? `${discountAmount}% OFF` : "SAVE BIG",
-              originalPrice: pkg.originalPrice ? `৳${pkg.originalPrice}` : `৳${pkg.price + 300}`,
-              salePrice: `৳${pkg.price}`,
-              expires: "Limited time offer",
-              gradient: design.gradient,
-              bg: design.bg,
-              border: design.border,
-              glow: design.glow,
-              iconColor: design.iconColor,
-            };
-          });
+        {/* All Packages — Flat Grid */}
+        {!isLoading && packagesData.length > 0 && (() => {
+          // Flatten all packages from all services into one list
+          const allOffers = packagesData.flatMap((section: any) =>
+            (section.packages || []).map((pkg: any, idx: number) => {
+              const design = DESIGN_ASSETS[idx % DESIGN_ASSETS.length];
+              const discountAmount =
+                pkg.originalPrice && pkg.price
+                  ? Math.round(((pkg.originalPrice - pkg.price) / pkg.originalPrice) * 100)
+                  : 0;
+              return {
+                id: pkg.id,
+                badge: discountAmount > 0 ? ` ${discountAmount}% Off` : "✨ Package Deal",
+                badgeColor: design.badgeColor,
+                title: pkg.name,
+                subtitle: pkg.description || "Premium service package",
+                originalPrice: pkg.originalPrice ? `৳${pkg.originalPrice}` : `৳${Number(pkg.price) + 300}`,
+                salePrice: `৳${pkg.price}`,
+                gradient: design.gradient,
+                bg: design.bg,
+                border: design.border,
+                glow: design.glow,
+                iconColor: design.iconColor,
+                serviceId: section.service?.id,
+                serviceName: section.service?.name,
+              };
+            })
+          );
 
           return (
-            <div key={section.service?.id || sectionIdx} className="mb-12 last:mb-0">
-              <h3 className="text-xl md:text-2xl font-bold text-slate-800 mb-6 flex items-center gap-2">
-                <span className="w-2 h-6 bg-[#FF7C71] rounded-full inline-block"></span>
-                {serviceName}
-              </h3>
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, margin: "-60px" }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {sectionOffers.map((offer: any) => (
-                  <motion.div
-                    key={offer.id}
-                    variants={itemVariants}
-                    whileHover={{ y: -5, scale: 1.01 }}
-                    className={`relative rounded-[2rem] border ${offer.border} ${offer.bg} p-6 md:p-7 flex flex-col justify-between min-h-[300px] overflow-hidden cursor-pointer group transition-all duration-300 shadow-sm ${offer.glow} hover:shadow-xl hover:shadow-slate-200/50`}
-                  >
-                    {/* Decorative modern gradient mesh blur */}
-                    <div className={`absolute -top-12 -right-12 w-36 h-36 rounded-full bg-gradient-to-br ${offer.gradient} opacity-[0.08] blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500`} />
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {allOffers.map((offer: any) => (
+                <motion.div
+                  key={offer.id}
+                  variants={itemVariants}
+                  whileHover={{ y: -5, scale: 1.01 }}
+                  className={`relative rounded-[2rem] border ${offer.border} ${offer.bg} p-6 md:p-7 flex flex-col justify-between min-h-[300px] overflow-hidden cursor-pointer group transition-all duration-300 shadow-sm ${offer.glow} hover:shadow-xl hover:shadow-slate-200/50`}
+                >
+                  {/* Decorative gradient mesh */}
+                  <div className={`absolute -top-12 -right-12 w-36 h-36 rounded-full bg-gradient-to-br ${offer.gradient} opacity-[0.08] blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500`} />
 
-                    {/* Top Badge Row */}
-                    <div className="flex items-center justify-between z-10">
-                      <span className={`text-[11px] font-extrabold px-3 py-1 rounded-full border ${offer.badgeColor} uppercase tracking-wider`}>
-                        {offer.badge}
+                  {/* Top Badge Row */}
+                  <div className="flex items-center justify-between z-10">
+                    <span className={`text-[11px] font-extrabold px-3 py-1 rounded-full border ${offer.badgeColor} uppercase tracking-wider`}>
+                      {offer.badge}
+                    </span>
+                    <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
+                      <Percent size={14} className={offer.iconColor} />
+                    </div>
+                  </div>
+
+                  {/* Main Title & Description */}
+                  <div className="my-6 z-10 flex-1 flex flex-col justify-center">
+                    {offer.serviceName && (
+                      <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1.5 flex items-center gap-1">
+                        <Tag size={10} />
+                        {offer.serviceName}
                       </span>
-                      <div className="w-8 h-8 rounded-full bg-white flex items-center justify-center shadow-sm">
-                        <Percent size={14} className={offer.iconColor} />
+                    )}
+                    <h3 className="text-xl font-black text-slate-900 group-hover:text-[#FF7C71] transition-colors leading-tight mb-2">
+                      {offer.title}
+                    </h3>
+                    <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-3">
+                      {offer.subtitle}
+                    </p>
+                  </div>
+
+                  {/* Pricing and Action row */}
+                  <div className="pt-4 border-t border-slate-100 z-10 flex items-center justify-between">
+                    <div>
+                      <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Special price</p>
+                      <div className="flex items-baseline gap-2 mt-0.5">
+                        <span className="text-xl font-black text-slate-950">{offer.salePrice}</span>
+                        <span className="text-xs text-slate-400 line-through font-semibold">{offer.originalPrice}</span>
                       </div>
                     </div>
 
-                    {/* Main Title & Description */}
-                    <div className="my-6 z-10 flex-1 flex flex-col justify-center">
-                      <h3 className="text-xl font-black text-slate-900 group-hover:text-[#FF7C71] transition-colors leading-tight mb-2">
-                        {offer.title}
-                      </h3>
-                      <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-3">
-                        {offer.subtitle}
-                      </p>
-                    </div>
-
-                    {/* Pricing and Action row */}
-                    <div className="pt-4 border-t border-slate-100 z-10 flex items-center justify-between">
-                      <div>
-                        <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">Special price</p>
-                        <div className="flex items-baseline gap-2 mt-0.5">
-                          <span className="text-xl font-black text-slate-950">{offer.salePrice}</span>
-                          <span className="text-xs text-slate-400 line-through font-semibold">{offer.originalPrice}</span>
-                        </div>
-                      </div>
-
-                      <Link
-                        href={`/services/${section.service?.id || ''}`}
-                        className={`inline-flex items-center gap-1.5 text-xs font-extrabold px-4 py-2.5 rounded-xl bg-gradient-to-r ${offer.gradient} text-white shadow-md shadow-rose-300/30 group-hover:shadow-lg group-hover:shadow-rose-400/40 transition-all`}
-                      >
-                        Book Deal
-                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
-                      </Link>
-                    </div>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
+                    <Link
+                      href={offer.serviceId ? `/services/${offer.serviceId}` : "/services"}
+                      className={`inline-flex items-center gap-1.5 text-xs font-extrabold px-4 py-2.5 rounded-xl bg-gradient-to-r ${offer.gradient} text-white shadow-md shadow-rose-300/30 group-hover:shadow-lg group-hover:shadow-rose-400/40 transition-all`}
+                    >
+                      Book Deal
+                      <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
+                    </Link>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
           );
-        })}
+        })()}
+
 
         {/* Fallback mock data if API is empty */}
         {!isLoading && packagesData.length === 0 && (
