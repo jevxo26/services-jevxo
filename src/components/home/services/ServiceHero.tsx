@@ -168,8 +168,8 @@ const ServiceHero = () => {
 
               // Toggle category selection
               const pillHref = isActive
-                ? `/services?location=${encodeURIComponent(location)}&q=${encodeURIComponent(searchQuery)}`
-                : `/services?category=${slug}&location=${encodeURIComponent(location)}&q=${encodeURIComponent(searchQuery)}`;
+                ? `/services?devision=${encodeURIComponent(selectedDivision)}&q=${encodeURIComponent(searchQuery)}`
+                : `/services?category=${slug}&devision=${encodeURIComponent(selectedDivision)}&q=${encodeURIComponent(searchQuery)}`;
 
               return (
                 <Link
