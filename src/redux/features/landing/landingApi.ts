@@ -48,6 +48,22 @@ export const landingApi = baseApi.injectEndpoints({
       providesTags: ['Service'],
     }),
 
+    // GET /services/search — filter by category, division, or keyword
+    searchPublicServices: builder.query<
+      any,
+      { category_id?: number; devision_id?: number; q?: string }
+    >({
+      query: (params) => {
+        const search = new URLSearchParams();
+        if (params.category_id) search.set('category_id', String(params.category_id));
+        if (params.devision_id) search.set('devision_id', String(params.devision_id));
+        if (params.q) search.set('q', params.q);
+        const qs = search.toString();
+        return `/services/search${qs ? `?${qs}` : ''}`;
+      },
+      providesTags: ['Service'],
+    }),
+
     // GET /services/:id — public, returns a single service details (nestedServices, packages, employees, category)
     getPublicServiceById: builder.query<any, number>({
       query: (id) => `/services/${id}`,
@@ -86,6 +102,7 @@ export const {
   useGetPublicReviewsByServiceQuery,
   useGetPublicReviewsByNestedServiceQuery,
   useGetPublicServicesQuery,
+  useSearchPublicServicesQuery,
   useGetPublicServiceByIdQuery,
   useGetPublicServiceBySlugQuery,
   useGetPublicPackagesQuery,

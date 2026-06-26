@@ -6,6 +6,7 @@ import { CustomSelect } from "@/components/ui/select";
 import {
   useGetPublicCategoriesQuery,
   useGetPublicServicesQuery,
+  useSearchPublicServicesQuery,
 } from "@/redux/features/landing/landingApi";
 import { FaBolt, FaBug, FaFaucet, FaLeaf, FaPaintRoller, FaTv, FaHammer } from "react-icons/fa";
 import { MdOutlineCleaningServices, MdOutlineSecurity } from "react-icons/md";
@@ -38,6 +39,7 @@ interface FilterState {
   vendorId?: string;
   vendorName?: string;
   vendorCategories?: string[];
+  devisionId?: string;
 }
 
 const CATEGORY_ICON_MAP: Record<string, React.ComponentType<any>> = {
@@ -120,13 +122,40 @@ export default function ServiceListing({
     vendorId = "",
     vendorName = "",
     vendorCategories = [],
+    devisionId = "",
   } = filters;
+
+  const hasSearchFilters =
+    activeCategory !== "all" || !!devisionId || !!searchQuery;
+
+  const searchParams = {
+    category_id: activeCategory !== "all" ? Number(activeCategory) : undefined,
+    devision_id: devisionId ? Number(devisionId) : undefined,
+    q: searchQuery || undefined,
+  };
 
   const { data: categoriesRes, isLoading: isCategoriesLoading } = useGetPublicCategoriesQuery();
   const categories = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
 
-  const { data: servicesRes, isLoading: isServicesLoading } = useGetPublicServicesQuery();
-  const allServices = servicesRes?.data || (Array.isArray(servicesRes) ? servicesRes : []);
+  const { data: searchRes, isLoading: isSearchLoading } = useSearchPublicServicesQuery(
+    searchParams,
+    { skip: !hasSearchFilters },
+  );
+  const { data: servicesRes, isLoading: isServicesLoading } = useGetPublicServicesQuery(
+    undefined,
+    { skip: hasSearchFilters },
+  );
+
+  const isServicesLoadingCombined = hasSearchFilters ? isSearchLoading : isServicesLoading;
+  const allServices =
+    (hasSearchFilters ? searchRes?.data : servicesRes?.data) ||
+    (hasSearchFilters
+      ? Array.isArray(searchRes)
+        ? searchRes
+        : []
+      : Array.isArray(servicesRes)
+        ? servicesRes
+        : []);
 
   const mappedListings = useMemo(() => {
     return allServices.map((item: any) => {
@@ -209,11 +238,11 @@ export default function ServiceListing({
 
     if (vendorCategories.length > 0) {
       list = list.filter((s) => vendorCategories.includes((s as any).categoryId));
-    } else if (activeCategory !== "all") {
+    } else if (!hasSearchFilters && activeCategory !== "all") {
       list = list.filter((s) => s.category === activeCategory || (s as any).categoryId === activeCategory);
     }
 
-    if (searchQuery) {
+    if (!hasSearchFilters && searchQuery) {
       const q = searchQuery.toLowerCase();
       list = list.filter(
         (s) =>
@@ -253,6 +282,7 @@ export default function ServiceListing({
     selectedAvailability,
     vendorId,
     vendorCategories,
+    hasSearchFilters,
   ]);
 
   const totalPages = Math.ceil(filteredListings.length / PER_PAGE);
@@ -263,9 +293,9 @@ export default function ServiceListing({
 
   const ratingCounts = useMemo(() => {
     const base = mappedListings.filter((s: any) => {
-      if (activeCategory !== "all" && s.category !== activeCategory)
+      if (!hasSearchFilters && activeCategory !== "all" && s.category !== activeCategory)
         return false;
-      if (searchQuery) {
+      if (!hasSearchFilters && searchQuery) {
         const q = searchQuery.toLowerCase();
         if (
           !s.title.toLowerCase().includes(q) &&
@@ -287,18 +317,19 @@ export default function ServiceListing({
       ).length;
       return acc;
     }, {});
-  }, [mappedListings, activeCategory, searchQuery, priceMax, selectedAvailability]);
+  }, [mappedListings, activeCategory, searchQuery, priceMax, selectedAvailability, hasSearchFilters]);
 
   const activeFilterCount = useMemo(() => {
     let n = 0;
     if (activeCategory !== "all") n++;
+    if (devisionId) n++;
     if (vendorId) n++;
     if (vendorCategories.length > 0) n++;
     if (selectedRating) n++;
     if (priceMax < PRICE_CEIL) n++;
     n += selectedAvailability.length;
     return n;
-  }, [activeCategory, vendorId, vendorCategories, selectedRating, priceMax, selectedAvailability]);
+  }, [activeCategory, devisionId, vendorId, vendorCategories, selectedRating, priceMax, selectedAvailability]);
 
   const ratingDropdownOptions = useMemo(() => {
     return [
@@ -451,7 +482,7 @@ export default function ServiceListing({
           {/* Services Grid (spans remaining width) */}
           <div className="flex-1 min-w-0 w-full">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {isServicesLoading ? (
+              {isServicesLoadingCombined ? (
                 Array.from({ length: 6 }).map((_, idx) => (
                   <ServiceCardSkeleton key={idx} />
                 ))

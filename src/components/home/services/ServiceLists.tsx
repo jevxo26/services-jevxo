@@ -14,6 +14,7 @@ interface FilterState {
   vendorId: string;
   vendorName: string;
   vendorCategories: string[];
+  devisionId: string;
 }
 
 const PRICE_CEIL = 5000;
@@ -47,6 +48,7 @@ const ServiceLists = () => {
         vendorCategories: (searchParams.get("categories") || "")
           .split(",")
           .filter(Boolean),
+        devisionId: searchParams.get("devision") || "",
       });
 
         const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -67,6 +69,7 @@ const ServiceLists = () => {
             vendorId,
             vendorName,
             vendorCategories,
+            devisionId,
           } = filters;
           const params: Record<string, string> = {
             category: activeCategory !== "all" ? activeCategory : "",
@@ -79,6 +82,7 @@ const ServiceLists = () => {
             vendor: vendorId,
             vendor_name: vendorName,
             categories: vendorCategories.join(","),
+            devision: devisionId,
           };
           router.replace(pathname + buildURL(params), { scroll: false });
         }, [filters, router, pathname]);
@@ -106,6 +110,7 @@ const ServiceLists = () => {
             vendorId: "",
             vendorName: "",
             vendorCategories: [],
+            devisionId: "",
           });
         }, []);
 
