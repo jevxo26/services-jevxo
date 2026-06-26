@@ -26,13 +26,12 @@ export default function ProfilePage() {
   // Prefer API response, fall back to Redux store (which is persisted from localStorage)
   const apiUser = userRes?.data?.user || userRes?.data || userRes;
   const user = (apiUser && Object.keys(apiUser).length > 1 ? apiUser : null) || reduxUser || {};
+  const profile = apiUser?.profile;
 
   const name = (user as any).name || ((user as any).firstName ? `${(user as any).firstName} ${(user as any).lastName || ''}`.trim() : null) || "Unknown User";
   const email = (user as any).email || "No Email";
-  const phone = (user as any).phoneNumber || (user as any).phone || "No Phone";
-  const address = (user as any).address || "No Address Provided";
-  
-  const profile = apiUser?.profile;
+  const phone = (user as any).phone || (user as any).phoneNumber || "No Phone";
+  const address = profile?.location || "No Address Provided";
   const hasProfile = !!profile;
 
   const [selectedDevision, setSelectedDevision] = useState<string>("");
@@ -62,17 +61,21 @@ export default function ProfilePage() {
     const formData = new FormData(e.currentTarget);
     const updatedUserData = {
       name: formData.get("name") as string,
-      phoneNumber: formData.get("phone") as string,
-      address: formData.get("address") as string,
+      phone: formData.get("phone") as string,
     };
-    
-    const categoryIds = formData.getAll("category_ids").map(id => Number(id));
+
+    const primaryAddress = formData.get("address")?.toString().trim() || "";
+    const specificLocation = formData.get("location")?.toString().trim() || "";
+    const locationParts = [primaryAddress, specificLocation].filter(
+      (part, index, arr) => part && arr.indexOf(part) === index
+    );
+    const combinedLocation = locationParts.join(", ");
 
     const profileData = {
       user_id: user.id || user._id,
       category_ids: selectedCategories.map(id => Number(id)),
       type: selectedType,
-      location: formData.get("location")?.toString() || "",
+      location: combinedLocation,
       devision_id: selectedDevision ? Number(selectedDevision) : undefined,
       district_id: selectedDistrict ? Number(selectedDistrict) : undefined,
       area_id: selectedArea ? Number(selectedArea) : undefined,

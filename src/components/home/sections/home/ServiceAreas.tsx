@@ -1,19 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useMemo } from "react";
 import { motion } from "framer-motion";
-import { MapPin, CheckCircle2, Building2 } from "lucide-react";
-
-const AREAS = [
-  { city: "Dhaka", zones: ["Mirpur", "Gulshan", "Dhanmondi", "Uttara", "Mohammadpur", "Banani"], active: true, highlight: true },
-  { city: "Chittagong", zones: ["Agrabad", "Nasirabad", "Halishahar", "Panchlaish"], active: true, highlight: false },
-  { city: "Sylhet", zones: ["Zindabazar", "Amberkhana", "Shahjalal Upashahar"], active: true, highlight: false },
-  { city: "Rajshahi", zones: ["Boalia", "Rajpara", "Motihar"], active: true, highlight: false },
-  { city: "Khulna", zones: ["Sonadanga", "Khalishpur", "Daulatpur"], active: true, highlight: false },
-  { city: "Comilla", zones: ["Kotwali", "Sadar South"], active: false, highlight: false },
-  { city: "Gazipur", zones: ["Tongi", "Joydebpur", "Sreepur"], active: true, highlight: false },
-  { city: "Narayanganj", zones: ["Siddhirganj", "Fatullah", "Bandar"], active: false, highlight: false },
-];
+import { MapPin, CheckCircle2, Building2, Loader2 } from "lucide-react";
+import {
+  useGetAllDevisionsQuery,
+  useGetAllDistrictsQuery,
+} from "@/redux/features/admin/location";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -26,7 +19,35 @@ const itemVariants = {
 } as const;
 
 export default function ServiceAreas() {
-  const activeCount = AREAS.filter((a) => a.active).length;
+  const { data: divRes, isLoading: isDivisionsLoading } = useGetAllDevisionsQuery();
+  const { data: distRes, isLoading: isDistrictsLoading } = useGetAllDistrictsQuery();
+
+  const divisions = divRes?.data || [];
+  const allDistricts = distRes?.data || [];
+
+  const areas = useMemo(() => {
+    return divisions.map((division: any) => {
+      const nestedDistricts = division.districts || [];
+      const districts =
+        nestedDistricts.length > 0
+          ? nestedDistricts
+          : allDistricts.filter(
+              (district: any) => String(district.devision?.id) === String(division.id)
+            );
+
+      return {
+        id: division.id,
+        city: division.name,
+        zones: districts.map((district: any) => district.name),
+        active: districts.length > 0,
+        highlight: division.name?.toLowerCase() === "dhaka",
+      };
+    });
+  }, [divisions, allDistricts]);
+
+  const activeCount = areas.filter((area) => area.active).length;
+  const totalDistricts = areas.reduce((sum, area) => sum + area.zones.length, 0);
+  const isLoading = isDivisionsLoading || isDistrictsLoading;
 
   return (
     <section className="py-12 md:py-16 overflow-hidden">
@@ -43,15 +64,17 @@ export default function ServiceAreas() {
             We Serve Across Bangladesh
           </h2>
           <p className="text-slate-500 text-sm mt-2 max-w-md mx-auto leading-relaxed">
-            Rajseba is available in {activeCount} major cities with hundreds of verified professionals ready to serve you.
+            {isLoading
+              ? "Loading our coverage areas..."
+              : `Rajseba is available in ${activeCount} divisions with ${totalDistricts} districts and verified professionals ready to serve you.`}
           </p>
         </div>
 
         {/* Stats bar */}
         <div className="flex flex-wrap items-center justify-center gap-6 mb-10">
           {[
-            { value: `${activeCount}`, label: "Active Cities" },
-            { value: "50+", label: "Service Zones" },
+            { value: isLoading ? "—" : `${activeCount}`, label: "Active Divisions" },
+            { value: isLoading ? "—" : `${totalDistricts}`, label: "Districts" },
             { value: "500+", label: "Professionals" },
             { value: "24/7", label: "Availability" },
           ].map((stat) => (
@@ -62,64 +85,77 @@ export default function ServiceAreas() {
           ))}
         </div>
 
-        {/* City Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: "-60px" }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
-        >
-          {AREAS.map((area) => (
-            <motion.div
-              key={area.city}
-              variants={itemVariants}
-              className={`relative rounded-2xl border p-5 transition-all ${
-                area.highlight
-                  ? "bg-gradient-to-br from-[#FF7C71]/10 to-rose-50 border-[#FF7C71]/30 shadow-md"
-                  : area.active
-                  ? "bg-white border-slate-200 hover:border-[#FF7C71]/40 hover:shadow-md"
-                  : "bg-slate-50 border-slate-200 opacity-60"
-              }`}
-            >
-              {/* Status chip */}
-              <div className="flex items-center justify-between mb-3">
-                <div className="flex items-center gap-1.5">
-                  <MapPin size={15} className={area.active ? "text-[#FF7C71]" : "text-slate-400"} />
-                  <h3 className={`font-extrabold text-sm ${area.active ? "text-slate-900" : "text-slate-400"}`}>
-                    {area.city}
-                  </h3>
+        {/* Division Grid */}
+        {isLoading ? (
+          <div className="flex flex-col items-center justify-center py-16 gap-3">
+            <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+            <p className="text-xs font-bold text-slate-400">Loading divisions & districts...</p>
+          </div>
+        ) : areas.length === 0 ? (
+          <div className="text-center py-16 border border-dashed border-slate-200 rounded-2xl">
+            <p className="text-sm font-semibold text-slate-500">No coverage areas available yet.</p>
+          </div>
+        ) : (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-60px" }}
+            className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4"
+          >
+            {areas.map((area) => (
+              <motion.div
+                key={area.id}
+                variants={itemVariants}
+                className={`relative rounded-2xl border p-5 transition-all ${
+                  area.highlight
+                    ? "bg-gradient-to-br from-[#FF7C71]/10 to-rose-50 border-[#FF7C71]/30 shadow-md"
+                    : area.active
+                    ? "bg-white border-slate-200 hover:border-[#FF7C71]/40 hover:shadow-md"
+                    : "bg-slate-50 border-slate-200 opacity-60"
+                }`}
+              >
+                <div className="flex items-center justify-between mb-3">
+                  <div className="flex items-center gap-1.5">
+                    <MapPin size={15} className={area.active ? "text-[#FF7C71]" : "text-slate-400"} />
+                    <h3 className={`font-extrabold text-sm ${area.active ? "text-slate-900" : "text-slate-400"}`}>
+                      {area.city}
+                    </h3>
+                  </div>
+                  <span
+                    className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
+                      area.highlight
+                        ? "bg-[#FF7C71] text-white"
+                        : area.active
+                        ? "bg-emerald-100 text-emerald-700"
+                        : "bg-slate-200 text-slate-500"
+                    }`}
+                  >
+                    {area.highlight ? "🏙️ HQ" : area.active ? "Active" : "Coming Soon"}
+                  </span>
                 </div>
-                <span
-                  className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
-                    area.highlight
-                      ? "bg-[#FF7C71] text-white"
-                      : area.active
-                      ? "bg-emerald-100 text-emerald-700"
-                      : "bg-slate-200 text-slate-500"
-                  }`}
-                >
-                  {area.highlight ? "🏙️ HQ" : area.active ? "Active" : "Coming Soon"}
-                </span>
-              </div>
 
-              {/* Zones */}
-              <ul className="space-y-1">
-                {area.zones.slice(0, 4).map((zone) => (
-                  <li key={zone} className="flex items-center gap-1.5 text-[12px] text-slate-500 font-medium">
-                    <CheckCircle2 size={11} className={area.active ? "text-[#FF7C71]" : "text-slate-300"} />
-                    {zone}
-                  </li>
-                ))}
-                {area.zones.length > 4 && (
-                  <li className="text-[11px] text-slate-400 font-semibold pl-4">
-                    +{area.zones.length - 4} more zones
-                  </li>
+                {area.zones.length > 0 ? (
+                  <ul className="space-y-1">
+                    {area.zones.slice(0, 4).map((zone: string) => (
+                      <li key={zone} className="flex items-center gap-1.5 text-[12px] text-slate-500 font-medium">
+                        <CheckCircle2 size={11} className={area.active ? "text-[#FF7C71]" : "text-slate-300"} />
+                        {zone}
+                      </li>
+                    ))}
+                    {area.zones.length > 4 && (
+                      <li className="text-[11px] text-slate-400 font-semibold pl-4">
+                        +{area.zones.length - 4} more districts
+                      </li>
+                    )}
+                  </ul>
+                ) : (
+                  <p className="text-[12px] text-slate-400 font-medium">Districts coming soon</p>
                 )}
-              </ul>
-            </motion.div>
-          ))}
-        </motion.div>
+              </motion.div>
+            ))}
+          </motion.div>
+        )}
 
         {/* CTA */}
         <div className="mt-10 text-center bg-gradient-to-r from-[#FF7C71]/10 to-rose-50 border border-[#FF7C71]/20 rounded-3xl p-6">

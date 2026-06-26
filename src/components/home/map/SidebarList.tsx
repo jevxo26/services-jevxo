@@ -1,15 +1,18 @@
 "use client";
 
 import React, { useRef, useEffect } from "react";
-import { Search, SlidersHorizontal, Map as MapIcon, List as ListIcon, Star, CheckCircle2, MapPin, Info } from "lucide-react";
+import { Search, SlidersHorizontal, Map as MapIcon, List as ListIcon, Star, CheckCircle2, Info } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Expert } from "./types";
+import VendorCategoryTags from "./VendorCategoryTags";
+import VendorLocationInfo from "./VendorLocationInfo";
 
 interface SidebarListProps {
   searchQuery: string;
   setSearchQuery: (q: string) => void;
   selectedCategory: string;
   setSelectedCategory: (cat: string) => void;
+  categories: string[];
   activeTab: "map" | "list";
   setActiveTab: (tab: "map" | "list") => void;
   filteredExperts: Expert[];
@@ -18,33 +21,18 @@ interface SidebarListProps {
   onOpenFilters: () => void;
 }
 
-const CATEGORIES = [
-  "All Services",
-  "AC Repair",
-  "Plumbing",
-  "Cleaning",
-  "Electrical",
-  "Shifting",
-  "CCTV",
-  "Appliance Repair",
-  "Painting",
-  "Gardening",
-  "Pest Control",
-  "Home Salon",
-  "Carpentry"
-];
-
 export default function SidebarList({
   searchQuery,
   setSearchQuery,
   selectedCategory,
   setSelectedCategory,
+  categories,
   activeTab,
   setActiveTab,
   filteredExperts,
   selectedExpertId,
   setSelectedExpertId,
-  onOpenFilters
+  onOpenFilters,
 }: SidebarListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -63,7 +51,7 @@ export default function SidebarList({
   }, []);
 
   return (
-    <div className="w-full md:w-[380px] bg-white border border-slate-200 rounded-3xl flex flex-col h-[60vh] md:h-full z-10 shadow-md overflow-hidden">
+    <div className="w-full md:w-[380px] bg-white border border-slate-200 rounded-3xl flex flex-col h-[38vh] max-h-[340px] md:h-full md:max-h-none z-10 shadow-md overflow-hidden shrink-0">
       {/* Sidebar Header Filters */}
       <div className="p-4 border-b border-slate-100 space-y-4">
         {/* Search Bar */}
@@ -73,7 +61,7 @@ export default function SidebarList({
             type="text"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search services in Dhaka..."
+            placeholder="Search vendors or categories..."
             className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71] focus:ring-1 focus:ring-red-200 transition-all"
           />
         </div>
@@ -83,7 +71,7 @@ export default function SidebarList({
           ref={scrollRef}
           className="flex items-center gap-2 overflow-x-auto pb-1 scrollbar-none"
         >
-          {CATEGORIES.map((cat) => (
+          {categories.map((cat) => (
             <Button
               variant="ghost"
               key={cat}
@@ -144,7 +132,7 @@ export default function SidebarList({
           <div className="text-center py-12 bg-white rounded-2xl border border-slate-100 p-6">
             <Info className="w-8 h-8 text-slate-300 mx-auto mb-2" />
             <p className="text-sm font-bold text-slate-800">No experts found</p>
-            <p className="text-xs text-slate-400 mt-1">Try resetting search queries or matching filter ranges.</p>
+            <p className="text-xs text-slate-400 mt-1">Try another category or reset your filters.</p>
           </div>
         ) : (
           filteredExperts.map((expert) => {
@@ -166,29 +154,38 @@ export default function SidebarList({
                 </div>
 
                 {/* Top: Header Metadata */}
-                <div>
-                  <span className="text-[10px] font-extrabold tracking-wider bg-rose-50 border border-rose-100 text-[#FF7C71] px-2.5 py-0.5 rounded-full inline-block mb-2 uppercase">
-                    {expert.category}
-                  </span>
-                  
+                <div className="flex items-start gap-3">
+                  {expert.avatar ? (
+                    <img
+                      src={expert.avatar}
+                      alt={expert.name}
+                      className="w-11 h-11 rounded-full object-cover border border-slate-100 shrink-0"
+                    />
+                  ) : null}
+                  <div className="min-w-0 flex-1">
                   <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-1.5">
                     {expert.name}
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 fill-emerald-50" />
                   </h4>
 
-                  <p className="text-xs text-slate-500 mt-1 line-clamp-2 pr-12 leading-relaxed">
+                  <div className="mt-2 mb-2">
+                    <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                      Categories
+                    </p>
+                    <VendorCategoryTags categories={expert.categories} max={4} />
+                  </div>
+
+                  <p className="text-xs text-slate-500 mt-1 line-clamp-2 pr-4 leading-relaxed">
                     {expert.description}
                   </p>
+                  </div>
                 </div>
 
                 {/* Bottom: Location & Pricing */}
-                <div className="mt-4 pt-3 border-t border-slate-50 flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-1 text-slate-400 font-semibold">
-                    <MapPin className="w-3.5 h-3.5 flex-shrink-0 text-slate-400" />
-                    <span className="truncate max-w-[150px]">{expert.location} ({expert.distance})</span>
-                  </div>
-                  
-                  <div className="font-black text-slate-900 text-right">
+                <div className="mt-4 pt-3 border-t border-slate-50 space-y-3">
+                  <VendorLocationInfo expert={expert} compact />
+
+                  <div className="flex items-center justify-between text-xs">
                     <span className="text-[10px] text-slate-400 font-bold block">STARTING AT</span>
                     <span className="text-[#FF7C71] text-sm font-black">৳{expert.price}+</span>
                   </div>

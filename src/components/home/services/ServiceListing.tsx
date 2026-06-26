@@ -35,6 +35,9 @@ interface FilterState {
   priceMax: number;
   selectedAvailability: string[];
   currentPage: number;
+  vendorId?: string;
+  vendorName?: string;
+  vendorCategories?: string[];
 }
 
 const CATEGORY_ICON_MAP: Record<string, React.ComponentType<any>> = {
@@ -114,6 +117,9 @@ export default function ServiceListing({
     priceMax,
     selectedAvailability,
     currentPage,
+    vendorId = "",
+    vendorName = "",
+    vendorCategories = [],
   } = filters;
 
   const { data: categoriesRes, isLoading: isCategoriesLoading } = useGetPublicCategoriesQuery();
@@ -189,15 +195,24 @@ export default function ServiceListing({
         availability,
         daysAgo,
         slug: item.slug || "",
+        vendorId: String(item.vendor?.id || ""),
       };
     });
   }, [allServices]);
 
   const filteredListings = useMemo(() => {
     let list = [...mappedListings];
-    if (activeCategory !== "all")
-      // Match by category slug OR by category ID (for homepage direct links)
+
+    if (vendorId) {
+      list = list.filter((s) => (s as any).vendorId === vendorId);
+    }
+
+    if (vendorCategories.length > 0) {
+      list = list.filter((s) => vendorCategories.includes((s as any).categoryId));
+    } else if (activeCategory !== "all") {
       list = list.filter((s) => s.category === activeCategory || (s as any).categoryId === activeCategory);
+    }
+
     if (searchQuery) {
       const q = searchQuery.toLowerCase();
       list = list.filter(
@@ -236,6 +251,8 @@ export default function ServiceListing({
     sortBy,
     priceMax,
     selectedAvailability,
+    vendorId,
+    vendorCategories,
   ]);
 
   const totalPages = Math.ceil(filteredListings.length / PER_PAGE);
@@ -275,11 +292,13 @@ export default function ServiceListing({
   const activeFilterCount = useMemo(() => {
     let n = 0;
     if (activeCategory !== "all") n++;
+    if (vendorId) n++;
+    if (vendorCategories.length > 0) n++;
     if (selectedRating) n++;
     if (priceMax < PRICE_CEIL) n++;
     n += selectedAvailability.length;
     return n;
-  }, [activeCategory, selectedRating, priceMax, selectedAvailability]);
+  }, [activeCategory, vendorId, vendorCategories, selectedRating, priceMax, selectedAvailability]);
 
   const ratingDropdownOptions = useMemo(() => {
     return [
@@ -314,6 +333,20 @@ export default function ServiceListing({
             </p>
             <p className="text-xs text-slate-400 font-medium mt-1">
               Verified professionals ready to serve you in Dhaka, Bangladesh.
+            </p>
+          </div>
+        )}
+
+        {vendorId && vendorName && !categoryName && (
+          <div className="mb-5">
+            <p className="text-lg md:text-2xl font-black text-slate-900">
+              <span className="text-slate-500 font-semibold">
+                {filteredListings.length} service{filteredListings.length === 1 ? "" : "s"} from{" "}
+              </span>
+              <span className="text-[#FF7C71]">{vendorName}</span>
+            </p>
+            <p className="text-xs text-slate-400 font-medium mt-1">
+              Book directly from this verified vendor on Rajseba.
             </p>
           </div>
         )}

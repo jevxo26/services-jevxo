@@ -71,6 +71,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Layers, label: "Nested Services", href: "/dashbord/nested-services" },
           { icon: Layers, label: "Sub Services", href: "/dashbord/sub-services" },
           { icon: Package, label: "Manage Packages", href: "/dashbord/packages" },
+          { icon: Percent, label: "Manage Coupons", href: "/dashbord/coupons" },
           { icon: BarChart3, label: "System Analytics", href: "/dashbord/analytics" },
           { icon: Wallet, label: "Withdraw Requests", href: "/dashbord/withdraw" },
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },

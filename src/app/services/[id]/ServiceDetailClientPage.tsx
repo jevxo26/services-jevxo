@@ -100,6 +100,10 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
         />
         <Packages
           packages={service.packages}
+          serviceId={service.id}
+          vendorId={service.vendor?.id}
+          serviceName={service.name}
+          serviceImage={service.image}
         />
         <Experts
           employees={service.employees}

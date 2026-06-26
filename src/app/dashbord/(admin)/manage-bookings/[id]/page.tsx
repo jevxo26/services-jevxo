@@ -298,14 +298,20 @@ export default function BookingDetailsPage() {
                   Sub-Services
                 </span>
                 <div className="space-y-2">
-                  {booking.subServices.map((sub: any) => (
-                    <div key={sub.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
-                      <p className="text-xs font-extrabold text-slate-800 flex items-center gap-2">
-                        <Briefcase size={13} className="text-purple-500" /> {sub.name}
-                      </p>
-                      <p className="text-xs font-black text-rose-500">৳{sub.price}</p>
-                    </div>
-                  ))}
+                  {booking.subServices.map((sub: any) => {
+                    const qty = booking.sub_service_items?.find(
+                      (entry: any) => entry.sub_service_id === sub.id
+                    )?.quantity || 1;
+                    return (
+                      <div key={sub.id} className="flex items-center justify-between p-3 bg-slate-50 rounded-xl border border-slate-100">
+                        <p className="text-xs font-extrabold text-slate-800 flex items-center gap-2">
+                          <Briefcase size={13} className="text-purple-500" /> {sub.name}
+                          {qty > 1 ? <span className="text-[10px] text-purple-600 font-bold">×{qty}</span> : null}
+                        </p>
+                        <p className="text-xs font-black text-rose-500">৳{Number(sub.price) * qty}</p>
+                      </div>
+                    );
+                  })}
                 </div>
               </div>
             ) : booking.pkg ? (
@@ -314,7 +320,10 @@ export default function BookingDetailsPage() {
                   Selected Package
                 </span>
                 <div className="p-4 bg-purple-50/30 border border-purple-100/40 rounded-2xl">
-                  <p className="text-sm font-extrabold text-slate-800">{booking.pkg.name}</p>
+                  <p className="text-sm font-extrabold text-slate-800">
+                    {booking.pkg.name}
+                    {booking.quantity && booking.quantity > 1 ? ` ×${booking.quantity}` : ""}
+                  </p>
                 </div>
               </div>
             ) : (

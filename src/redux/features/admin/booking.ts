@@ -1,16 +1,26 @@
 import { baseApi } from '@/redux/api/baseApi';
 
+export interface SubServiceItem {
+  sub_service_id: number;
+  quantity: number;
+}
+
 export interface Booking {
   id: number;
   user?: any;
   vendor?: any;
   employees?: any[];
   subServices?: any[];
+  sub_service_items?: SubServiceItem[];
   nestedService?: any;
   pkg?: any;
   service?: any;
   agent?: any;
   package_id?: number;
+  quantity?: number;
+  subtotal?: number;
+  discount_amount?: number;
+  coupon_code?: string;
   date: string;
   time?: string;
   location: string;

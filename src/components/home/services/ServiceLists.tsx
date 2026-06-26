@@ -11,6 +11,9 @@ interface FilterState {
   priceMax: number;
   selectedAvailability: string[];
   currentPage: number;
+  vendorId: string;
+  vendorName: string;
+  vendorCategories: string[];
 }
 
 const PRICE_CEIL = 5000;
@@ -39,6 +42,11 @@ const ServiceLists = () => {
           .split(",")
           .filter(Boolean),
         currentPage: Number(searchParams.get("page")) || 1,
+        vendorId: searchParams.get("vendor") || "",
+        vendorName: searchParams.get("vendor_name") || "",
+        vendorCategories: (searchParams.get("categories") || "")
+          .split(",")
+          .filter(Boolean),
       });
 
         const [isFilterOpen, setIsFilterOpen] = useState(false);
@@ -56,6 +64,9 @@ const ServiceLists = () => {
             priceMax,
             selectedAvailability,
             currentPage,
+            vendorId,
+            vendorName,
+            vendorCategories,
           } = filters;
           const params: Record<string, string> = {
             category: activeCategory !== "all" ? activeCategory : "",
@@ -65,6 +76,9 @@ const ServiceLists = () => {
             price_max: priceMax < PRICE_CEIL ? String(priceMax) : "",
             availability: selectedAvailability.join(","),
             page: currentPage > 1 ? String(currentPage) : "",
+            vendor: vendorId,
+            vendor_name: vendorName,
+            categories: vendorCategories.join(","),
           };
           router.replace(pathname + buildURL(params), { scroll: false });
         }, [filters, router, pathname]);
@@ -89,6 +103,9 @@ const ServiceLists = () => {
             priceMax: PRICE_CEIL,
             selectedAvailability: [],
             currentPage: 1,
+            vendorId: "",
+            vendorName: "",
+            vendorCategories: [],
           });
         }, []);
 

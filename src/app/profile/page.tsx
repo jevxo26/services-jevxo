@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useGetUserProfileQuery } from "@/redux/features/auth/authApi";
 import { useUpdateUserMutation } from "@/redux/features/admin/user";
+import { useUpdateProfileMutation } from "@/redux/features/admin/profile";
 import { useAppSelector } from "@/redux/hooks";
 import { getRoleName } from "@/redux/features/auth/authSlice";
 import { motion, AnimatePresence } from "framer-motion";
@@ -56,6 +57,7 @@ export default function ProfilePage() {
   const role = useAppSelector((state) => state.auth.role) || "client";
   const { data: userRes, isLoading } = useGetUserProfileQuery();
   const [updateUserMut] = useUpdateUserMutation();
+  const [updateProfileMut] = useUpdateProfileMutation();
 
   const [activeTab, setActiveTab] = useState<TabType>("personal");
   const [profile, setProfile] = useState(INITIAL_PROFILE);
@@ -71,12 +73,13 @@ export default function ProfilePage() {
     if (userRes) {
       const user = userRes?.data?.user || userRes?.data || userRes || {};
       const name = user.name || (user.firstName ? `${user.firstName} ${user.lastName || ''}`.trim() : null) || "Unknown User";
+      const userProfile = user.profile;
       const newProfile = {
         ...INITIAL_PROFILE,
         name,
         email: user.email || "No Email",
-        phone: user.phoneNumber || user.phone || "No Phone",
-        address: user.address || "No Address Provided",
+        phone: user.phone || user.phoneNumber || "No Phone",
+        address: userProfile?.location || "No Address Provided",
         tier: getRoleName(role),
         tierColor: role === "superadmin" ? "from-rose-400 to-rose-600" : "from-emerald-400 to-emerald-600"
       };
@@ -116,7 +119,18 @@ export default function ProfilePage() {
     try {
       const user = userRes?.data?.user || userRes?.data || userRes || {};
       if (user.id || user._id) {
-        await updateUserMut({ id: user.id || user._id, data: { name: formData.name, phoneNumber: formData.phone, address: formData.address } }).unwrap();
+        await updateUserMut({
+          id: user.id || user._id,
+          data: { name: formData.name, phone: formData.phone },
+        }).unwrap();
+
+        if (user.profile?.id) {
+          await updateProfileMut({
+            id: user.profile.id,
+            data: { location: formData.address },
+          }).unwrap();
+        }
+
         setProfile(prev => ({ ...prev, ...formData }));
         setEditMode(false);
         showToast("Profile information updated successfully!");

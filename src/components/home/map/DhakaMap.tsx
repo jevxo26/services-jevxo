@@ -1,271 +1,304 @@
 "use client";
 
-import React, { useRef } from "react";
-import { Compass, Plus, Minus } from "lucide-react";
+import React, { useEffect, useRef } from "react";
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
+import L from "leaflet";
+import { Compass } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FaSnowflake, FaBroom, FaBolt, FaFaucet, FaPaintRoller } from "react-icons/fa";
 import { TbTruck, TbScissors } from "react-icons/tb";
 import { MdOutlineSecurity } from "react-icons/md";
-import { motion, AnimatePresence } from "framer-motion";
+import { LayoutGrid } from "lucide-react";
 import { Expert } from "./types";
+import "leaflet/dist/leaflet.css";
+import VendorCategoryTags from "./VendorCategoryTags";
+import VendorLocationInfo from "./VendorLocationInfo";
+
+const BANGLADESH_CENTER: [number, number] = [23.685, 90.3563];
+const DEFAULT_ZOOM = 7;
 
 interface DhakaMapProps {
   filteredExperts: Expert[];
   selectedExpertId: string;
   setSelectedExpertId: (id: string) => void;
-  zoom: number;
-  setZoom: React.Dispatch<React.SetStateAction<number>>;
-  pan: { x: number; y: number };
-  setPan: React.Dispatch<React.SetStateAction<{ x: number; y: number }>>;
-  isDragging: boolean;
-  setIsDragging: (dragging: boolean) => void;
-  mapContainerRef: React.RefObject<HTMLDivElement | null>;
+  onViewDetails?: (expert: Expert) => void;
+}
+
+function MapController({
+  selectedExpert,
+}: {
+  selectedExpert: Expert | undefined;
+}) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (selectedExpert) {
+      map.flyTo([selectedExpert.lat, selectedExpert.lng], 12, { duration: 0.8 });
+    }
+  }, [selectedExpert, map]);
+
+  return null;
+}
+
+function MapInvalidator() {
+  const map = useMap();
+
+  useEffect(() => {
+    const invalidate = () => map.invalidateSize();
+    const timers = [0, 100, 300, 600].map((delay) => window.setTimeout(invalidate, delay));
+    window.addEventListener("resize", invalidate);
+
+    return () => {
+      timers.forEach((timer) => window.clearTimeout(timer));
+      window.removeEventListener("resize", invalidate);
+    };
+  }, [map]);
+
+  return null;
+}
+
+function BoundsController({ experts }: { experts: Expert[] }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (experts.length === 0) return;
+    const bounds = L.latLngBounds(experts.map((expert) => [expert.lat, expert.lng] as [number, number]));
+    map.fitBounds(bounds, { padding: [40, 40], maxZoom: 12 });
+  }, [experts, map]);
+
+  return null;
+}
+function ResetController({ resetToken }: { resetToken: number }) {
+  const map = useMap();
+
+  useEffect(() => {
+    if (resetToken > 0) {
+      map.flyTo(BANGLADESH_CENTER, DEFAULT_ZOOM, { duration: 0.8 });
+    }
+  }, [resetToken, map]);
+
+  return null;
+}
+
+const renderCategoryIcon = (iconName: string, className = "w-4 h-4") => {
+  if (iconName === "ac") return <FaSnowflake className={className} />;
+  if (iconName === "cleaning") return <FaBroom className={className} />;
+  if (iconName === "plumbing") return <FaFaucet className={className} />;
+  if (iconName === "shifting") return <TbTruck className={className} />;
+  if (iconName === "painting") return <FaPaintRoller className={className} />;
+  if (iconName === "cctv") return <MdOutlineSecurity className={className} />;
+  if (iconName === "salon") return <TbScissors className={className} />;
+  if (iconName === "electric") return <FaBolt className={className} />;
+  return <LayoutGrid className={className} />;
+};
+
+function getMarkerLocationLabel(expert: Expert) {
+  const lines: string[] = [];
+  if (expert.district) lines.push(`District: ${expert.district}`);
+  if (expert.division) lines.push(`Division: ${expert.division}`);
+  return lines.join("<br/>");
+}
+
+function getMarkerShortLabel(expert: Expert) {
+  if (expert.district && expert.division && expert.district !== expert.division) {
+    return `${expert.district}, ${expert.division}`;
+  }
+  return expert.district || expert.division || expert.location.split(",")[0] || "Bangladesh";
+}
+
+function createMarkerIcon(expert: Expert, isSelected: boolean) {
+  const locationLabel = getMarkerLocationLabel(expert);
+  const shortLabel = getMarkerShortLabel(expert);
+  const safeName = expert.name.replace(/"/g, "'");
+  const safeShortLabel = shortLabel.replace(/"/g, "'");
+  const showFullLabel = isSelected && locationLabel;
+
+  return L.divIcon({
+    className: "custom-vendor-marker",
+    html: `
+      <div style="display:flex;flex-direction:column;align-items:center;gap:4px;">
+        <div style="
+          width: 44px;
+          height: 44px;
+          border-radius: 9999px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border: 2px solid ${isSelected ? "#ffffff" : "rgba(255,124,113,0.25)"};
+          background: ${isSelected ? "#FF7C71" : "#ffffff"};
+          color: ${isSelected ? "#ffffff" : "#FF7C71"};
+          box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
+          transform: scale(${isSelected ? 1.15 : 1});
+          transition: transform 0.2s ease;
+        ">
+          <span style="font-size: 16px; font-weight: 800;">${safeName.charAt(0).toUpperCase()}</span>
+        </div>
+        <div style="
+          max-width: 160px;
+          padding: ${showFullLabel ? "6px 10px" : "4px 8px"};
+          border-radius: 12px;
+          background: rgba(255,255,255,0.96);
+          border: 1px solid ${isSelected ? "rgba(255,124,113,0.45)" : "rgba(148,163,184,0.35)"};
+          color: #334155;
+          font-size: 10px;
+          font-weight: 700;
+          line-height: 1.35;
+          text-align: center;
+          box-shadow: 0 4px 12px rgba(15,23,42,0.12);
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        ">${showFullLabel ? locationLabel : safeShortLabel}</div>
+      </div>
+    `,
+    iconSize: [44, 78],
+    iconAnchor: [22, 22],
+    popupAnchor: [0, -40],
+  });
+}
+
+function VendorMarker({
+  expert,
+  isSelected,
+  onSelect,
+  onViewDetails,
+}: {
+  expert: Expert;
+  isSelected: boolean;
+  onSelect: () => void;
+  onViewDetails: () => void;
+}) {
+  const markerRef = useRef<L.Marker>(null);
+
+  useEffect(() => {
+    if (isSelected) {
+      markerRef.current?.openPopup();
+    }
+  }, [isSelected]);
+
+  return (
+    <Marker
+      ref={markerRef}
+      position={[expert.lat, expert.lng]}
+      icon={createMarkerIcon(expert, isSelected)}
+      eventHandlers={{ click: onSelect }}
+    >
+      <Popup>
+        <div className="min-w-[220px] space-y-2.5">
+          <div className="flex items-center gap-2">
+            {expert.avatar ? (
+              <img
+                src={expert.avatar}
+                alt={expert.name}
+                className="w-10 h-10 rounded-full object-cover border border-slate-200"
+              />
+            ) : null}
+            <div>
+              <p className="text-sm font-bold text-slate-900 leading-tight">{expert.name}</p>
+            </div>
+          </div>
+
+          <VendorLocationInfo expert={expert} compact />
+
+          <VendorCategoryTags categories={expert.categories} max={3} />
+
+          <p className="text-sm font-black text-[#FF7C71]">
+            ৳{expert.price.toLocaleString()}+
+          </p>
+
+          <button
+            type="button"
+            onClick={onViewDetails}
+            className="w-full rounded-lg bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-bold py-2 transition-colors cursor-pointer"
+          >
+            View Details
+          </button>
+        </div>
+      </Popup>
+    </Marker>
+  );
 }
 
 export default function DhakaMap({
   filteredExperts,
   selectedExpertId,
   setSelectedExpertId,
-  zoom,
-  setZoom,
-  pan,
-  setPan,
-  isDragging,
-  setIsDragging,
-  mapContainerRef
+  onViewDetails,
 }: DhakaMapProps) {
-  const dragStart = useRef({ x: 0, y: 0 });
-
-  // Handle Drag / Pan mouse events
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsDragging(true);
-    dragStart.current = { x: e.clientX - pan.x, y: e.clientY - pan.y };
-  };
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!isDragging) return;
-    setPan({
-      x: e.clientX - dragStart.current.x,
-      y: e.clientY - dragStart.current.y
-    });
-  };
-
-  const handleMouseUp = () => {
-    setIsDragging(false);
-  };
-
-  // Touch pan drag gestures for mobile layout compatibility
-  const handleTouchStart = (e: React.TouchEvent) => {
-    if (e.touches.length !== 1) return;
-    setIsDragging(true);
-    dragStart.current = { x: e.touches[0].clientX - pan.x, y: e.touches[0].clientY - pan.y };
-  };
-
-  const handleTouchMove = (e: React.TouchEvent) => {
-    if (!isDragging || e.touches.length !== 1) return;
-    setPan({
-      x: e.touches[0].clientX - dragStart.current.x,
-      y: e.touches[0].clientY - dragStart.current.y
-    });
-  };
-
-  const adjustZoom = (amount: number) => {
-    setZoom((prev) => Math.max(0.75, Math.min(3, prev + amount)));
-  };
-
-  const resetMap = () => {
-    setZoom(1.0);
-    setPan({ x: 0, y: 0 });
-    setSelectedExpertId("zaman-ac");
-  };
-
-  const renderCategoryIcon = (iconName: string, className: string = "w-4 h-4") => {
-    if (iconName === "ac") return <FaSnowflake className={className} />;
-    if (iconName === "cleaning") return <FaBroom className={className} />;
-    if (iconName === "plumbing") return <FaFaucet className={className} />;
-    if (iconName === "shifting") return <TbTruck className={className} />;
-    if (iconName === "painting") return <FaPaintRoller className={className} />;
-    if (iconName === "cctv") return <MdOutlineSecurity className={className} />;
-    if (iconName === "salon") return <TbScissors className={className} />;
-    return <FaBolt className={className} />;
-  };
+  const [resetToken, setResetToken] = React.useState(0);
+  const selectedExpert = filteredExperts.find((expert) => expert.id === selectedExpertId);
 
   return (
-    <div 
-      ref={mapContainerRef}
-      onMouseDown={handleMouseDown}
-      onMouseMove={handleMouseMove}
-      onMouseUp={handleMouseUp}
-      onMouseLeave={handleMouseUp}
-      onTouchStart={handleTouchStart}
-      onTouchMove={handleTouchMove}
-      onTouchEnd={handleMouseUp}
-      className="flex-1 h-[50vh] md:h-full bg-[#FFF5F2] rounded-3xl border border-slate-200 shadow-md relative overflow-hidden select-none outline-none"
-    >
-      {/* SVG-based Stylized Dhaka Map Canvas */}
-      <motion.div
-        animate={{
-          x: pan.x,
-          y: pan.y,
-          scale: zoom
-        }}
-        transition={isDragging ? { duration: 0 } : { type: "spring", stiffness: 100, damping: 20 }}
-        className="w-full h-full min-w-[800px] min-h-[600px] relative origin-center"
-        style={{ cursor: isDragging ? "grabbing" : "grab" }}
-      >
-        <svg
-          viewBox="0 0 1000 800"
-          className="w-full h-full object-cover select-none"
-          xmlns="http://www.w3.org/2000/svg"
+    <div className="flex-1 min-h-[480px] md:min-h-[600px] md:h-full rounded-3xl border border-slate-200 shadow-md relative overflow-hidden z-0">
+      <div className="absolute inset-0">
+        <MapContainer
+          center={BANGLADESH_CENTER}
+          zoom={DEFAULT_ZOOM}
+          className="h-full w-full"
+          style={{ height: "100%", width: "100%" }}
+          scrollWheelZoom
         >
-          {/* Soft Background */}
-          <rect width="1000" height="800" fill="#FFF5F2" />
-
-          {/* Water / Lakes Grid */}
-          {/* Banani Lake */}
-          <path 
-            d="M 320 50 Q 380 250 340 450 T 380 750" 
-            fill="none" 
-            stroke="#D6ECFF" 
-            strokeWidth="32" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-          />
-          {/* Gulshan Lake */}
-          <path 
-            d="M 520 80 Q 560 300 510 520 T 580 780" 
-            fill="none" 
-            stroke="#D6ECFF" 
-            strokeWidth="36" 
-            strokeLinecap="round" 
-            strokeLinejoin="round" 
-          />
-          {/* Dhanmondi Lake */}
-          <path 
-            d="M 120 450 C 140 500, 80 580, 160 680 S 130 750, 150 800" 
-            fill="none" 
-            stroke="#D6ECFF" 
-            strokeWidth="24" 
-            strokeLinecap="round" 
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
 
-          {/* Sector Accents */}
-          <path d="M 50 50 L 300 50 L 300 400 L 50 400 Z" fill="#FFFFFF" fillOpacity="0.15" />
-          <path d="M 360 80 L 500 80 L 500 500 L 360 500 Z" fill="#FFFFFF" fillOpacity="0.1" />
+          <MapInvalidator />
+          <BoundsController experts={filteredExperts} />
+          <MapController selectedExpert={selectedExpert} />
+          <ResetController resetToken={resetToken} />
 
-          {/* Major Roads Grid */}
-          {/* Kemal Ataturk Avenue */}
-          <line x1="100" y1="220" x2="520" y2="220" stroke="#FFFFFF" strokeWidth="10" strokeLinecap="round" />
-          <line x1="100" y1="220" x2="520" y2="220" stroke="#F1E3DF" strokeWidth="2" strokeLinecap="round" />
-          
-          {/* Gulshan Avenue */}
-          <line x1="440" y1="100" x2="440" y2="600" stroke="#FFFFFF" strokeWidth="12" strokeLinecap="round" />
-          <line x1="440" y1="100" x2="440" y2="600" stroke="#F1E3DF" strokeWidth="2" strokeLinecap="round" />
-
-          {/* Banani Road 11 */}
-          <line x1="330" y1="310" x2="440" y2="310" stroke="#FFFFFF" strokeWidth="8" strokeLinecap="round" />
-
-          {/* Mirpur Road */}
-          <line x1="80" y1="300" x2="260" y2="780" stroke="#FFFFFF" strokeWidth="14" strokeLinecap="round" />
-
-          {/* Satmasjid Road */}
-          <line x1="140" y1="380" x2="140" y2="750" stroke="#FFFFFF" strokeWidth="10" strokeLinecap="round" />
-
-          {/* Pragati Sarani */}
-          <line x1="680" y1="80" x2="720" y2="720" stroke="#FFFFFF" strokeWidth="16" strokeLinecap="round" />
-
-          {/* District Labels */}
-          <text x="210" y="160" fill="#EAD4CD" fontSize="18" fontWeight="900" letterSpacing="0.2em" textAnchor="middle">BANANI</text>
-          <text x="440" y="150" fill="#EAD4CD" fontSize="18" fontWeight="900" letterSpacing="0.2em" textAnchor="middle">GULSHAN 2</text>
-          <text x="630" y="120" fill="#EAD4CD" fontSize="18" fontWeight="900" letterSpacing="0.2em" textAnchor="middle">BARIDHARA</text>
-          <text x="180" y="550" fill="#EAD4CD" fontSize="18" fontWeight="900" letterSpacing="0.2em" textAnchor="middle">DHANMONDI</text>
-
-          {/* Landscaping Parks */}
-          <circle cx="440" cy="310" r="14" fill="#E1F3E2" />
-          <circle cx="210" cy="220" r="12" fill="#E1F3E2" />
-        </svg>
-
-        {/* Map Pins overlay layer */}
         {filteredExperts.map((expert) => {
           const isSelected = selectedExpertId === expert.id;
           return (
-            <motion.div
+            <VendorMarker
               key={expert.id}
-              style={{
-                left: `${expert.coords.x}%`,
-                top: `${expert.coords.y}%`
-              }}
-              className="absolute -translate-x-1/2 -translate-y-1/2 z-20 cursor-pointer"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedExpertId(expert.id);
-              }}
-            >
-              {/* Price Tooltip */}
-              <AnimatePresence>
-                {isSelected && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10, scale: 0.8 }}
-                    animate={{ opacity: 1, y: 0, scale: 1 }}
-                    exit={{ opacity: 0, y: 10, scale: 0.8 }}
-                    className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 bg-[#FF7C71] text-white text-xs font-black px-2.5 py-1 rounded-lg shadow-md whitespace-nowrap flex flex-col items-center"
-                  >
-                    <span>৳{expert.price}</span>
-                    <div className="w-2 h-2 bg-[#FF7C71] rotate-45 -mt-1" />
-                  </motion.div>
-                )}
-              </AnimatePresence>
-
-              {/* Map Pin Anchor Ring */}
-              <motion.div
-                animate={{
-                  scale: isSelected ? 1.25 : 1.0,
-                }}
-                className={`w-11 h-11 rounded-full flex items-center justify-center border-2 shadow-md transition-colors duration-300 relative ${
-                  isSelected
-                    ? "bg-[#FF7C71] border-white text-white"
-                    : "bg-white border-[#FF7C71]/20 text-[#FF7C71]"
-                }`}
-              >
-                {renderCategoryIcon(expert.icon, "w-4.5 h-4.5")}
-                
-                {/* Selected Pin Bottom Stem Line */}
-                {isSelected && (
-                  <div className="absolute top-full left-1/2 -translate-x-1/2 w-0.5 h-2 bg-[#FF7C71]" />
-                )}
-              </motion.div>
-            </motion.div>
+              expert={expert}
+              isSelected={isSelected}
+              onSelect={() => setSelectedExpertId(expert.id)}
+              onViewDetails={() => onViewDetails?.(expert)}
+            />
           );
         })}
-      </motion.div>
+        </MapContainer>
+      </div>
 
-      <div className="absolute bottom-6 right-6 flex flex-col gap-3 z-30">
+      <div className="absolute bottom-6 right-6 z-[500]">
         <Button
           variant="ghost"
-          onClick={resetMap}
+          onClick={() => {
+            setResetToken((prev) => prev + 1);
+            if (filteredExperts[0]) setSelectedExpertId(filteredExperts[0].id);
+          }}
           className="w-12 h-12 p-0 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-700 hover:text-[#FF7C71] shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer hover:bg-slate-50"
           title="Reset Map View"
         >
           <Compass className="w-5 h-5" />
         </Button>
-
-        <div className="bg-white rounded-2xl shadow-lg border border-slate-100 flex flex-col overflow-hidden">
-          <Button
-            variant="ghost"
-            onClick={() => adjustZoom(0.25)}
-            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF7C71] hover:bg-slate-50 transition-colors border-b border-slate-100 cursor-pointer shadow-none"
-          >
-            <Plus className="w-5 h-5" />
-          </Button>
-          <Button
-            variant="ghost"
-            onClick={() => adjustZoom(-0.25)}
-            className="w-12 h-12 p-0 rounded-none flex items-center justify-center text-slate-700 hover:text-[#FF7C71] hover:bg-slate-50 transition-colors cursor-pointer shadow-none"
-          >
-            <Minus className="w-5 h-5" />
-          </Button>
-        </div>
       </div>
+
+      {selectedExpert && (
+        <button
+          type="button"
+          onClick={() => onViewDetails?.(selectedExpert)}
+          className="absolute top-4 left-4 z-[500] bg-white/95 backdrop-blur-sm border border-slate-100 rounded-2xl px-4 py-3 shadow-md max-w-[280px] text-left hover:border-[#FF7C71]/30 transition-colors cursor-pointer"
+        >
+          <div className="flex items-start gap-2">
+            <div className="w-9 h-9 rounded-full bg-[#FFF8F7] text-[#FF7C71] flex items-center justify-center shrink-0">
+              {renderCategoryIcon(selectedExpert.icon, "w-4 h-4")}
+            </div>
+            <div className="min-w-0 flex-1">
+              <p className="text-sm font-extrabold text-slate-900 truncate">{selectedExpert.name}</p>
+              <div className="mt-1">
+                <VendorLocationInfo expert={selectedExpert} compact />
+              </div>
+              <p className="text-[10px] font-bold text-[#FF7C71] mt-2 uppercase tracking-wide">
+                Tap for vendor details
+              </p>
+            </div>
+          </div>
+        </button>
+      )}
     </div>
   );
 }

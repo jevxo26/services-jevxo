@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -5,18 +6,22 @@ import {
   Phone,
   ChevronDown,
   ChevronUp,
-  CheckCircle,
   Calendar,
   MapPin,
   Clock,
   Loader2,
   X,
   Plus,
+  Minus,
   Info,
+  ShoppingCart,
+  Trash2,
 } from "lucide-react";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import { useCreateBookingMutation } from "@/redux/features/admin/booking";
+import { ValidateCouponResult } from "@/redux/features/admin/coupon";
+import { CouponApply } from "@/components/home/booking/CouponApply";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 
@@ -67,7 +72,7 @@ export function SpecializedServices({
 
   // Accordion & Selection State
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [selectedSubServices, setSelectedSubServices] = useState<number[]>([]);
+  const [cartQuantities, setCartQuantities] = useState<Record<number, number>>({});
   const [activeService, setActiveService] = useState<SpecializedService | null>(null);
 
   // Booking Modal State
@@ -78,6 +83,7 @@ export function SpecializedServices({
     location: "",
     notes: "",
   });
+  const [appliedCoupon, setAppliedCoupon] = useState<ValidateCouponResult | null>(null);
 
   const displayServices: SpecializedService[] = nestedServices && nestedServices.length > 0
     ? nestedServices.map((ns, idx) => {
@@ -94,22 +100,27 @@ export function SpecializedServices({
     })
     : fallbackServices;
 
-  const toggleExpand = (id: string) => {
-    setExpandedId(expandedId === id ? null : id);
-  };
+  const getCartItems = () =>
+    displayServices.flatMap((service) =>
+      (service.subServices || []).map((sub) => ({
+        ...sub,
+        parentTitle: service.title,
+        quantity: cartQuantities[sub.id] || 0,
+      }))
+    ).filter((sub) => sub.quantity > 0);
 
-  const handleSubServiceToggle = (subServiceId: number) => {
-    setSelectedSubServices((prev) => {
-      const exists = prev.some((id) => String(id) === String(subServiceId));
-      if (exists) {
-        return prev.filter((id) => String(id) !== String(subServiceId));
-      } else {
-        return [...prev, subServiceId];
-      }
-    });
-  };
+  const cartItems = getCartItems();
+  const cartItemCount = cartItems.reduce((sum, item) => sum + item.quantity, 0);
+  const cartTotal = cartItems.reduce(
+    (sum, item) => sum + Number(item.price || 0) * item.quantity,
+    0
+  );
+  const payableTotal = appliedCoupon ? appliedCoupon.final_price : cartTotal;
 
-  const handleInitiateBooking = (service: SpecializedService) => {
+  const isInCart = (subId: number) => (cartQuantities[subId] || 0) > 0;
+  const getQuantity = (subId: number) => cartQuantities[subId] || 0;
+
+  const openBookingModal = (service?: SpecializedService | null) => {
     if (!authUser) {
       toast.error("Please login to proceed with booking!", {
         action: {
@@ -117,40 +128,80 @@ export function SpecializedServices({
           onClick: () => router.push("/login"),
         },
       });
-      return;
+      return false;
     }
 
-    const serviceSubs = service.subServices || [];
-    if (serviceSubs.length > 0) {
-      const selectedFromThisService = serviceSubs.filter((ss) =>
-        selectedSubServices.some(id => String(id) === String(ss.id))
-      );
-      if (selectedFromThisService.length === 0) {
-        toast.warning("Please select at least one sub-service option to book!");
-        return;
+    if (cartItems.length === 0 && service) {
+      const serviceSubs = service.subServices || [];
+      if (serviceSubs.length > 0) {
+        toast.warning("Please add at least one sub-service to your cart!");
+        return false;
       }
     }
 
-    setActiveService(service);
+    if (cartItems.length === 0 && !service) {
+      toast.warning("Your cart is empty. Add services before booking.");
+      return false;
+    }
+
+    setActiveService(service || null);
+    setAppliedCoupon(null);
     setIsModalOpen(true);
+    return true;
   };
 
-  // Called when user clicks "+ Add" on a sub-service card — select + immediately open modal
-  const handleAddAndBook = (service: SpecializedService, subId: number) => {
+  const toggleExpand = (id: string) => {
+    setExpandedId(expandedId === id ? null : id);
+  };
+
+  const handleInitiateBooking = (service: SpecializedService) => {
+    const serviceSubs = service.subServices || [];
+    if (serviceSubs.length > 0) {
+      const hasSelection = serviceSubs.some((ss) => isInCart(ss.id));
+      if (!hasSelection && cartItems.length === 0) {
+        toast.warning("Please add at least one sub-service to your cart!");
+        return;
+      }
+    }
+    openBookingModal(service);
+  };
+
+  const handleAddToCart = (service: SpecializedService, subId: number) => {
     if (!authUser) {
-      toast.error("Please login to book a service!", {
+      toast.error("Please login to add services!", {
         action: { label: "Login", onClick: () => router.push("/login") },
       });
       return;
     }
-    // Ensure this sub-service is selected
-    setSelectedSubServices((prev) => {
-      const exists = prev.some((id) => String(id) === String(subId));
-      return exists ? prev : [...prev, subId];
-    });
     setExpandedId(service.id);
-    setActiveService(service);
-    setIsModalOpen(true);
+    setCartQuantities((prev) => ({
+      ...prev,
+      [subId]: (prev[subId] || 0) + 1,
+    }));
+    toast.success("Added to booking cart", { duration: 1500 });
+  };
+
+  const handleUpdateQuantity = (subId: number, delta: number) => {
+    setCartQuantities((prev) => {
+      const nextQty = (prev[subId] || 0) + delta;
+      if (nextQty <= 0) {
+        const { [subId]: _, ...rest } = prev;
+        return rest;
+      }
+      return { ...prev, [subId]: nextQty };
+    });
+  };
+
+  const handleRemoveFromCart = (subId: number) => {
+    setCartQuantities((prev) => {
+      const { [subId]: _, ...rest } = prev;
+      return rest;
+    });
+  };
+
+  const handleClearCart = () => {
+    setCartQuantities({});
+    setActiveService(null);
   };
 
   const handleConfirmBooking = async (e: React.FormEvent) => {
@@ -161,13 +212,10 @@ export function SpecializedServices({
       return;
     }
 
-    // Filter subservices related to the active service (set when modal was triggered)
-    const activeNestedService = activeService || displayServices.find((ds) => ds.id === expandedId);
-    const activeSubServiceIds = activeNestedService?.subServices
-      ? activeNestedService.subServices
-        .filter((ss) => selectedSubServices.some(id => String(id) === String(ss.id)))
-        .map((ss) => ss.id)
-      : [];
+    const subServiceItems = cartItems.map((item) => ({
+      sub_service_id: item.id,
+      quantity: item.quantity,
+    }));
 
     const payload = {
       user_id: authUser?.id,
@@ -177,22 +225,29 @@ export function SpecializedServices({
       time: bookingDetails.time || undefined,
       location: bookingDetails.location,
       notes: bookingDetails.notes || undefined,
-      sub_service_ids: activeSubServiceIds,
+      sub_service_items: subServiceItems,
+      coupon_code: appliedCoupon?.coupon.code,
     };
 
     try {
       await createBooking(payload).unwrap();
-      toast.success("Booking placed successfully! ✅", {
+      toast.success(
+        cartItemCount > 1
+          ? `${cartItemCount} services booked successfully! ✅`
+          : "Booking placed successfully! ✅",
+        {
         description: "View and track your booking from your dashboard.",
         action: {
           label: "Track Booking →",
           onClick: () => router.push("/dashbord/bookings"),
         },
         duration: 6000,
-      });
+      }
+      );
       setIsModalOpen(false);
-      setSelectedSubServices([]);
+      setCartQuantities({});
       setActiveService(null);
+      setAppliedCoupon(null);
       setBookingDetails({ date: "", time: "", location: "", notes: "" });
     } catch (err: any) {
       toast.error(err?.data?.message || "Failed to place booking. Please try again.");
@@ -200,7 +255,7 @@ export function SpecializedServices({
   };
 
   return (
-    <section className="py-16 relative">
+    <section className={`py-16 relative ${cartItems.length > 0 ? "pb-32" : ""}`}>
       <div className="max-w-7xl mx-auto px-4 md:px-6">
 
         {/* Header */}
@@ -340,11 +395,12 @@ export function SpecializedServices({
                       <div className="bg-slate-50 border border-slate-100 p-5 rounded-[24px] space-y-4 shadow-inner mb-2">
                         <div className="text-xs font-bold text-slate-500 uppercase tracking-wider flex items-center gap-1.5">
                           <Info size={14} className="text-[#FF7C71]" />
-                          Explore & Add Sub-services
+                          Explore & Add to Cart
                         </div>
                         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                           {service.subServices?.map((sub) => {
-                            const isAdded = selectedSubServices.some(id => String(id) === String(sub.id));
+                            const isAdded = isInCart(sub.id);
+                            const quantity = getQuantity(sub.id);
                             return (
                               <div
                                 key={sub.id}
@@ -361,41 +417,69 @@ export function SpecializedServices({
                                     ৳{Number(sub.price).toLocaleString()}
                                   </div>
                                 </div>
-                                <button
-                                  onClick={(e) => {
-                                    e.stopPropagation();
-                                    if (isAdded) {
-                                      // If already added, just deselect
-                                      handleSubServiceToggle(sub.id);
-                                    } else {
-                                      // Select + open booking modal immediately
-                                      handleAddAndBook(service, sub.id);
-                                    }
-                                  }}
-                                  className={`mt-4 w-full py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 ${isAdded
-                                    ? "bg-rose-50 text-[#FF7C71] border border-rose-100 hover:bg-rose-100"
-                                    : "bg-[#FF7C71] text-white hover:bg-[#E5675D] shadow-sm shadow-rose-200"
-                                    }`}
-                                >
-                                  {isAdded ? (
-                                    <>
-                                      <CheckCircle size={14} strokeWidth={3} />
-                                      Added
-                                    </>
-                                  ) : (
-                                    <>
-                                      <Plus size={14} strokeWidth={3} />
-                                      Book Now
-                                    </>
-                                  )}
-                                </button>
+                                {isAdded ? (
+                                  <div className="mt-4 flex items-center justify-between gap-2">
+                                    <div className="flex items-center gap-2 bg-rose-50 border border-rose-100 rounded-xl p-1">
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleUpdateQuantity(sub.id, -1);
+                                        }}
+                                        className="w-8 h-8 rounded-lg bg-white text-[#FF7C71] flex items-center justify-center hover:bg-rose-100 transition-colors cursor-pointer"
+                                        aria-label="Decrease quantity"
+                                      >
+                                        <Minus size={14} strokeWidth={3} />
+                                      </button>
+                                      <span className="w-8 text-center text-sm font-black text-slate-800">
+                                        {quantity}
+                                      </span>
+                                      <button
+                                        type="button"
+                                        onClick={(e) => {
+                                          e.stopPropagation();
+                                          handleUpdateQuantity(sub.id, 1);
+                                        }}
+                                        className="w-8 h-8 rounded-lg bg-white text-[#FF7C71] flex items-center justify-center hover:bg-rose-100 transition-colors cursor-pointer"
+                                        aria-label="Increase quantity"
+                                      >
+                                        <Plus size={14} strokeWidth={3} />
+                                      </button>
+                                    </div>
+                                    <button
+                                      type="button"
+                                      onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleRemoveFromCart(sub.id);
+                                      }}
+                                      className="text-xs font-bold text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
+                                    >
+                                      Remove
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <button
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleAddToCart(service, sub.id);
+                                    }}
+                                    className="mt-4 w-full py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 bg-[#FF7C71] text-white hover:bg-[#E5675D] shadow-sm shadow-rose-200"
+                                  >
+                                    <Plus size={14} strokeWidth={3} />
+                                    Add to Cart
+                                  </button>
+                                )}
                               </div>
                             );
                           })}
                         </div>
                         <div className="pt-4 mt-2 border-t border-slate-200 flex justify-end">
                           {(() => {
-                            const hasSelection = service.subServices?.some(sub => selectedSubServices.some(id => String(id) === String(sub.id)));
+                            const hasSelection = service.subServices?.some((sub) => isInCart(sub.id));
+                            const selectedCount = service.subServices?.reduce(
+                              (sum, sub) => sum + getQuantity(sub.id),
+                              0
+                            ) || 0;
                             return (
                               <button
                                 onClick={(e) => { e.stopPropagation(); handleInitiateBooking(service); }}
@@ -405,7 +489,7 @@ export function SpecializedServices({
                                   : "bg-slate-200 text-slate-400 cursor-not-allowed shadow-none"
                                   }`}
                               >
-                                {hasSelection ? "Proceed to Book" : "Select an option to Book"}
+                                {hasSelection ? `Book Selected (${selectedCount})` : "Add services to cart"}
                               </button>
                             );
                           })()}
@@ -419,6 +503,47 @@ export function SpecializedServices({
           })}
         </div>
       </div>
+
+      {/* Multi-booking cart bar */}
+      {cartItems.length > 0 && (
+        <div className="fixed bottom-0 left-0 right-0 z-40 px-4 pb-4 pointer-events-none">
+          <div className="max-w-4xl mx-auto pointer-events-auto bg-white border border-slate-200 shadow-2xl rounded-2xl p-4 md:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-start gap-3 min-w-0">
+              <div className="w-11 h-11 rounded-xl bg-[#FFF8F7] text-[#FF7C71] flex items-center justify-center shrink-0">
+                <ShoppingCart size={20} />
+              </div>
+              <div className="min-w-0">
+                <p className="text-sm font-black text-slate-900">
+                  {cartItemCount} service{cartItemCount === 1 ? "" : "s"} in cart
+                </p>
+                <p className="text-xs text-slate-500 font-semibold truncate">
+                  {cartItems.map((item) => `${item.name}${item.quantity > 1 ? ` ×${item.quantity}` : ""}`).join(" · ")}
+                </p>
+                <p className="text-base font-black text-[#FF7C71] mt-1">
+                  Total: ৳{cartTotal.toLocaleString()}
+                </p>
+              </div>
+            </div>
+            <div className="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                onClick={handleClearCart}
+                className="px-4 py-2.5 rounded-xl text-xs font-bold text-slate-500 hover:bg-slate-50 border border-slate-200 transition-colors cursor-pointer flex items-center gap-1.5"
+              >
+                <Trash2 size={14} />
+                Clear
+              </button>
+              <button
+                type="button"
+                onClick={() => openBookingModal()}
+                className="px-6 py-2.5 rounded-xl text-sm font-bold text-white bg-[#FF7C71] hover:bg-[#E5675D] transition-colors shadow-md cursor-pointer"
+              >
+                Book All ({cartItemCount})
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Booking Form Modal */}
       {isModalOpen && (
@@ -437,36 +562,85 @@ export function SpecializedServices({
               </button>
             </div>
 
-            {/* Selected Subservices summary in modal */}
-            {(() => {
-              const currentSvc = activeService || displayServices.find((ds) => ds.id === expandedId);
-              const selectedSubs = currentSvc?.subServices?.filter((ss) => selectedSubServices.some(id => String(id) === String(ss.id))) || [];
-              const totalPrice = selectedSubs.reduce((sum, ss) => sum + Number(ss.price || 0), 0);
-
-              if (selectedSubs.length === 0) return null;
-              return (
+            {cartItems.length > 0 && (
                 <div className="px-6 py-4 bg-[#FFF8F7] border-b border-slate-100/60 space-y-2.5">
                   <div className="text-xs font-bold text-[#FF7C71] uppercase tracking-wider flex items-center gap-1">
-                    <Info size={12} />
-                    Selected Services Summary
+                    <ShoppingCart size={12} />
+                    Booking Cart ({cartItemCount} item{cartItemCount === 1 ? "" : "s"})
                   </div>
-                  <div className="max-h-24 overflow-y-auto space-y-1.5 pr-1">
-                    {selectedSubs.map((ss) => (
-                      <div key={ss.id} className="flex justify-between items-center text-xs font-bold text-slate-600">
-                        <span>• {ss.name}</span>
-                        <span className="text-slate-800">৳{Number(ss.price).toLocaleString()}</span>
+                  <div className="max-h-32 overflow-y-auto space-y-2 pr-1">
+                    {cartItems.map((item) => (
+                      <div key={item.id} className="flex justify-between items-start gap-3 text-xs">
+                        <div className="min-w-0">
+                          <p className="font-bold text-slate-700 truncate">
+                            {item.name}
+                            {item.quantity > 1 ? ` ×${item.quantity}` : ""}
+                          </p>
+                          <p className="text-slate-400 font-semibold truncate">{item.parentTitle}</p>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <div className="flex items-center gap-1 bg-white border border-slate-200 rounded-lg p-0.5">
+                            <button
+                              type="button"
+                              onClick={() => handleUpdateQuantity(item.id, -1)}
+                              className="w-6 h-6 rounded-md text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition-colors cursor-pointer"
+                              aria-label="Decrease quantity"
+                            >
+                              <Minus size={12} strokeWidth={3} />
+                            </button>
+                            <span className="w-5 text-center text-[11px] font-black text-slate-800">
+                              {item.quantity}
+                            </span>
+                            <button
+                              type="button"
+                              onClick={() => handleUpdateQuantity(item.id, 1)}
+                              className="w-6 h-6 rounded-md text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition-colors cursor-pointer"
+                              aria-label="Increase quantity"
+                            >
+                              <Plus size={12} strokeWidth={3} />
+                            </button>
+                          </div>
+                          <span className="font-black text-slate-800 min-w-[4.5rem] text-right">
+                            ৳{(Number(item.price) * item.quantity).toLocaleString()}
+                          </span>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveFromCart(item.id)}
+                            className="text-slate-400 hover:text-rose-500 transition-colors cursor-pointer"
+                            aria-label="Remove from cart"
+                          >
+                            <X size={14} />
+                          </button>
+                        </div>
                       </div>
                     ))}
                   </div>
                   <div className="flex justify-between items-center pt-2 border-t border-slate-100/70 text-sm font-black text-slate-800">
+                    <span>Subtotal</span>
+                    <span className="text-slate-700">৳{cartTotal.toLocaleString()}</span>
+                  </div>
+                  {appliedCoupon && (
+                    <div className="flex justify-between items-center text-sm font-bold text-emerald-600">
+                      <span>Coupon ({appliedCoupon.coupon.code})</span>
+                      <span>-৳{Number(appliedCoupon.discount_amount).toLocaleString()}</span>
+                    </div>
+                  )}
+                  <div className="flex justify-between items-center text-sm font-black text-slate-800">
                     <span>Total Est. Price</span>
-                    <span className="text-[#FF7C71] text-base">৳{totalPrice.toLocaleString()}</span>
+                    <span className="text-[#FF7C71] text-base">৳{payableTotal.toLocaleString()}</span>
                   </div>
                 </div>
-              );
-            })()}
+              )}
 
             <form onSubmit={handleConfirmBooking} className="p-6 space-y-5">
+              {cartItems.length > 0 && (
+                <CouponApply
+                  subtotal={cartTotal}
+                  serviceId={serviceId}
+                  onApplied={setAppliedCoupon}
+                />
+              )}
+
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div className="space-y-1.5">
                   <label className="text-xs font-bold text-slate-400 uppercase tracking-wider">
@@ -563,6 +737,8 @@ export function SpecializedServices({
                         <Loader2 size={16} className="animate-spin" />
                         Placing...
                       </>
+                    ) : cartItemCount > 1 ? (
+                      `Confirm ${cartItemCount} Services`
                     ) : (
                       "Confirm Booking"
                     )}

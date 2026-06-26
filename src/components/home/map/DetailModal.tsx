@@ -1,11 +1,14 @@
 "use client";
 
 import React from "react";
-import { Star, MapPin, CheckCircle2, Calendar, Phone, X } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { Star, CheckCircle2, Calendar, Phone, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Expert } from "./types";
-import { toast } from "sonner";
+import { buildVendorServicesUrl } from "./mapVendorUtils";
+import VendorCategoryTags from "./VendorCategoryTags";
+import VendorLocationInfo from "./VendorLocationInfo";
 
 interface DetailModalProps {
   expert: Expert | null;
@@ -13,6 +16,14 @@ interface DetailModalProps {
 }
 
 export default function DetailModal({ expert, onClose }: DetailModalProps) {
+  const router = useRouter();
+
+  const handleBookAppointment = () => {
+    if (!expert) return;
+    router.push(buildVendorServicesUrl(expert));
+    onClose();
+  };
+
   return (
     <AnimatePresence>
       {expert && (
@@ -44,16 +55,29 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
               >
                 <X className="w-5 h-5" />
               </Button>
-              
+
+              <div className="flex items-center gap-4">
+                {expert.avatar ? (
+                  <img
+                    src={expert.avatar}
+                    alt={expert.name}
+                    className="w-16 h-16 rounded-2xl object-cover border-2 border-white/30"
+                  />
+                ) : null}
+                <div>
               <span className="text-[10px] font-extrabold tracking-wider bg-white/20 px-2.5 py-0.5 rounded-full inline-block mb-2 uppercase">
                 {expert.badge}
               </span>
               
               <h3 className="text-2xl font-black tracking-tight">{expert.name}</h3>
-              <p className="text-xs text-white/95 mt-1 font-semibold flex items-center gap-1">
-                <MapPin className="w-3.5 h-3.5" />
-                {expert.location} ({expert.distance})
-              </p>
+              {expert.companyName && expert.companyName !== expert.name ? (
+                <p className="text-xs text-white/90 mt-1 font-semibold">{expert.companyName}</p>
+              ) : null}
+              <div className="mt-2">
+                <VendorLocationInfo expert={expert} variant="light" />
+              </div>
+                </div>
+              </div>
             </div>
 
             {/* Main Content (Scrollable) */}
@@ -84,6 +108,13 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
                 <p className="text-sm leading-relaxed text-slate-600">
                   {expert.description}
                 </p>
+              </div>
+
+              <div className="space-y-2">
+                <h4 className="text-xs font-bold text-slate-500 uppercase tracking-wider">
+                  Service Categories
+                </h4>
+                <VendorCategoryTags categories={expert.categories} max={12} size="md" />
               </div>
 
               {/* Details info */}
@@ -132,10 +163,7 @@ export default function DetailModal({ expert, onClose }: DetailModalProps) {
                   <Phone className="w-4 h-4" />
                 </a>
                 <Button
-                  onClick={() => {
-                    toast.success(`Successfully booked ${expert.name}!`);
-                    onClose();
-                  }}
+                  onClick={handleBookAppointment}
                   className="px-6 py-3 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold rounded-xl text-sm shadow-sm transition-all active:scale-97 border-none cursor-pointer h-auto"
                 >
                   Book Appointment

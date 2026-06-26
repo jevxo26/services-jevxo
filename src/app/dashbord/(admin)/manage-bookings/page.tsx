@@ -45,6 +45,7 @@ export default function BookingsManagementPage() {
     selection_type: "nested", // 'nested' or 'package'
     sub_service_ids: [] as string[],
     package_id: "",
+    quantity: 1,
     date: "",
     time: "",
     location: "",
@@ -78,7 +79,7 @@ export default function BookingsManagementPage() {
   } else if (newBooking.selection_type === 'package' && newBooking.package_id) {
     const allPackages = selectedService ? selectedService.packages || [] : selectedVendorServices.flatMap((s: any) => s.packages || []);
     const match = allPackages.find((p: any) => p.id?.toString() === newBooking.package_id);
-    estimatedTotalPrice = match ? Number(match.price || 0) : 0;
+    estimatedTotalPrice = match ? Number(match.price || 0) * Number(newBooking.quantity || 1) : 0;
   }
 
   const handleStatusChange = async (id: number, status: string) => {
@@ -118,17 +119,21 @@ export default function BookingsManagementPage() {
       notes: newBooking.notes || undefined,
     };
     if (newBooking.selection_type === 'nested' && newBooking.sub_service_ids.length > 0) {
-      payload.sub_service_ids = newBooking.sub_service_ids.map(Number);
+      payload.sub_service_items = newBooking.sub_service_ids.map((id: string) => ({
+        sub_service_id: Number(id),
+        quantity: 1,
+      }));
     }
     if (newBooking.selection_type === 'package' && newBooking.package_id) {
       payload.package_id = Number(newBooking.package_id);
+      payload.quantity = Number(newBooking.quantity || 1);
     }
 
     try {
       await createBooking(payload).unwrap();
       toast.success("Booking created successfully!");
       setIsAddModalOpen(false);
-      setNewBooking({ user_id: "", vendor_id: roleName === "vendor" ? String(currentUser?.id || "") : "", service_id: "", nested_service_id: "", selection_type: "nested", sub_service_ids: [], package_id: "", date: "", time: "", location: "", notes: "" });
+      setNewBooking({ user_id: "", vendor_id: roleName === "vendor" ? String(currentUser?.id || "") : "", service_id: "", nested_service_id: "", selection_type: "nested", sub_service_ids: [], package_id: "", quantity: 1, date: "", time: "", location: "", notes: "" });
     } catch (error: any) {
       toast.error(error.data?.message || "Failed to create booking");
     }
@@ -205,15 +210,20 @@ export default function BookingsManagementPage() {
         <div className="flex flex-col gap-1">
           {item.subServices && item.subServices.length > 0 ? (
             <div className="flex flex-wrap gap-1">
-              {item.subServices.map((ss: any) => (
-                <span key={ss.id} className="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-2 py-1 rounded-lg text-xs font-semibold">
-                  <Briefcase size={12} /> {ss.name}
-                </span>
-              ))}
+              {item.subServices.map((ss: any) => {
+                const qty = item.sub_service_items?.find(
+                  (entry: any) => entry.sub_service_id === ss.id
+                )?.quantity;
+                return (
+                  <span key={ss.id} className="inline-flex items-center gap-1.5 bg-indigo-50 text-indigo-700 px-2 py-1 rounded-lg text-xs font-semibold">
+                    <Briefcase size={12} /> {ss.name}{qty && qty > 1 ? ` ×${qty}` : ""}
+                  </span>
+                );
+              })}
             </div>
           ) : item.pkg ? (
             <span className="inline-flex items-center gap-1.5 bg-brand-primary/10 text-brand-primary px-2 py-1 rounded-lg text-xs font-semibold">
-              <PkgIcon size={12} /> {item.pkg.name}
+              <PkgIcon size={12} /> {item.pkg.name}{item.quantity && item.quantity > 1 ? ` ×${item.quantity}` : ""}
             </span>
           ) : (
             <span className="text-slate-400 italic text-xs font-medium">No service selected</span>
@@ -486,6 +496,18 @@ export default function BookingsManagementPage() {
                         onChange={(val) => setNewBooking({...newBooking, package_id: val})}
                         placeholder="-- Choose Package --"
                       />
+                      {newBooking.selection_type === 'package' && newBooking.package_id && (
+                        <div className="space-y-1.5">
+                          <label className="text-[10px] font-bold text-slate-500 uppercase tracking-wider">Package Quantity</label>
+                          <input
+                            type="number"
+                            min={1}
+                            value={newBooking.quantity}
+                            onChange={(e) => setNewBooking({ ...newBooking, quantity: Math.max(1, Number(e.target.value) || 1) })}
+                            className="w-full bg-white border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-brand-primary focus:border-brand-primary block p-3 outline-none transition-all"
+                          />
+                        </div>
+                      )}
                     </div>
                   </div>
 
