@@ -1,14 +1,21 @@
+"use client";
+
 import {
   Zap,
   ShieldCheck,
-  Heart,
   Star,
   Sparkles,
+  Calendar,
+  Heart,
 } from "lucide-react";
 import { motion } from "framer-motion";
-import { useAppSelector } from "@/redux/hooks"
-import { useGetSavedServicesQuery, useToggleSavedServiceMutation } from "@/redux/features/admin/user";
+import { useAppSelector } from "@/redux/hooks";
+import {
+  useGetSavedServicesQuery,
+  useToggleSavedServiceMutation,
+} from "@/redux/features/admin/user";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
 
 interface CategorizedHeroProps {
   id?: number;
@@ -31,9 +38,9 @@ export function CategorizedHero({
   reviewsCount = 0,
   bookingsCount = 0,
 }: CategorizedHeroProps) {
-  const displayName =
-    name || "Certified Electrical Experts in Dhaka";
+  const router = useRouter();
 
+  const displayName = name || "Certified Electrical Experts in Dhaka";
   const displayDesc =
     description ||
     "From flickering lights to full-house wiring, our certified technicians ensure your home's safety with premium electrical solutions.";
@@ -44,9 +51,12 @@ export function CategorizedHero({
     skip: !authUser,
   });
   const savedServices: any[] = savedRes?.data || [];
-  const isSaved = id ? savedServices.some((s) => String(s.id) === String(id)) : false;
+  const isSaved = id
+    ? savedServices.some((s) => String(s.id) === String(id))
+    : false;
 
-  const [toggleSaved, { isLoading: isToggling }] = useToggleSavedServiceMutation();
+  const [toggleSaved, { isLoading: isToggling }] =
+    useToggleSavedServiceMutation();
 
   const handleToggleSave = async () => {
     if (!authUser) {
@@ -62,70 +72,83 @@ export function CategorizedHero({
     }
   };
 
+  const handleBookNow = () => {
+    if (!authUser) {
+      toast.error("Please login to book a service!", {
+        action: {
+          label: "Login",
+          onClick: () => router.push("/login"),
+        },
+      });
+      return;
+    }
+    const target = document.getElementById("specialized-services");
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      router.push(`/booking/${id}`);
+    }
+  };
+
+  const handleViewRateCard = () => {
+    router.push(`/services/${id}/rate-card`);
+  };
+
   return (
-    <div className="py-12 md:py-16 relative overflow-hidden">
+    <div className="py-10 md:py-14 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center gap-10">
-          {/* Left Content */}
-          <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-[1fr_420px] lg:grid-cols-[1fr_460px] gap-8 md:gap-12 items-center">
+
+          {/* ── Left Content ── */}
+          <div className="flex flex-col gap-5">
             {/* Badges */}
-            <div className="flex flex-wrap gap-2.5">
-              <div className="inline-flex items-center gap-2 bg-[#fff0f0] text-[#FF7C71] px-4 py-1.5 rounded-full text-sm font-semibold">
-                <Zap className="w-4 h-4" />
+            <div className="flex flex-wrap gap-2">
+              <div className="inline-flex items-center gap-2 bg-[#fff0f0] text-[#FF7C71] px-4 py-1.5 rounded-full text-xs font-semibold">
+                <Zap className="w-3.5 h-3.5" />
                 Top Rated Services
               </div>
-
               {categoryName && (
-                <div className="inline-flex items-center gap-1.5 bg-[#FFF8F7] border border-[#FF7C71]/20 text-[#FF7C71] px-4 py-1.5 rounded-full text-sm font-medium">
-                  <Sparkles className="w-3.5 h-3.5" />
+                <div className="inline-flex items-center gap-1.5 bg-[#FFF8F7] border border-[#FF7C71]/20 text-[#FF7C71] px-4 py-1.5 rounded-full text-xs font-medium">
+                  <Sparkles className="w-3 h-3" />
                   {categoryName}
                 </div>
               )}
             </div>
 
-            {/* Title */}
-            <div className="flex items-start justify-between gap-4">
-              <h1 className="text-3xl md:text-5xl max-w-xl font-bold leading-tight text-slate-900">
+            {/* Title + Wishlist */}
+            <div className="flex items-start justify-between gap-3">
+              <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold leading-tight text-slate-900 max-w-xl">
                 {displayName}
               </h1>
-
-              {authUser && (
-                <motion.button
-                  whileHover={{ scale: 1.1 }}
-                  whileTap={{ scale: 0.9 }}
-                  onClick={handleToggleSave}
-                  className="p-3 bg-white rounded-full border border-slate-100 shadow-sm flex-shrink-0 focus:outline-none cursor-pointer"
-                >
-                  <Heart
-                    size={24}
-                    className={
-                      isSaved
-                        ? "fill-[#FF7C71] text-[#FF7C71]"
-                        : "text-slate-400"
-                    }
-                  />
-                </motion.button>
-              )}
+              <motion.button
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+                onClick={handleToggleSave}
+                disabled={isToggling}
+                className="p-2.5 bg-white rounded-full border border-slate-100 shadow-sm flex-shrink-0 focus:outline-none cursor-pointer disabled:opacity-60"
+              >
+                <Heart
+                  size={20}
+                  className={isSaved ? "fill-[#FF7C71] text-[#FF7C71]" : "text-slate-300"}
+                />
+              </motion.button>
             </div>
 
             {/* Ratings & Bookings */}
             {(Number(rating) > 0 || bookingsCount > 0) && (
-              <div className="flex flex-wrap items-center gap-3 text-sm font-semibold text-slate-500">
+              <div className="flex flex-wrap items-center gap-2 text-sm">
                 {Number(rating) > 0 && (
-                  <div className="flex items-center gap-1.5 bg-amber-50 text-amber-700 px-3 py-1 rounded-xl border border-amber-100/60">
-                    <Star className="w-4 h-4 fill-current text-amber-500" />
-                    <span>{rating} Rating</span>
+                  <div className="flex items-center gap-1.5 bg-amber-50 text-amber-700 px-3 py-1 rounded-xl border border-amber-100/60 font-semibold">
+                    <Star className="w-3.5 h-3.5 fill-current text-amber-500" />
+                    <span>{rating}</span>
                     <span className="text-slate-400 font-normal">
                       ({reviewsCount} reviews)
                     </span>
                   </div>
                 )}
-
                 {bookingsCount > 0 && (
-                  <div className="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-xl border border-emerald-100/60">
-                    <span className="font-bold text-emerald-800">
-                      {bookingsCount}
-                    </span>{" "}
+                  <div className="bg-emerald-50 text-emerald-700 px-3 py-1 rounded-xl border border-emerald-100/60 font-semibold">
+                    <span className="font-bold text-emerald-800">{bookingsCount}</span>{" "}
                     Bookings Done
                   </div>
                 )}
@@ -133,67 +156,86 @@ export function CategorizedHero({
             )}
 
             {/* Description */}
-            <p className="text-lg text-slate-600 max-w-lg leading-relaxed whitespace-pre-line line-clamp-6">
+            <p className="text-sm sm:text-base text-slate-500 max-w-lg leading-relaxed line-clamp-5">
               {displayDesc}
             </p>
 
-            {/* Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
+            {/* ── Action Buttons ── */}
+            <div className="flex flex-col sm:flex-row gap-3 pt-2 w-full sm:w-auto">
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-[#FF7C71] hover:bg-[#E5675D] text-white px-8 py-3.5 rounded-full font-semibold flex items-center gap-2 transition-all shadow-lg"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={handleBookNow}
+                className="flex items-center justify-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D]
+                  text-white px-7 py-3.5 rounded-full font-semibold text-sm
+                  transition-all shadow-lg shadow-rose-100 cursor-pointer w-full sm:w-auto"
               >
+                <Calendar className="w-4 h-4" />
                 Book Now
-                <span className="text-xl">→</span>
               </motion.button>
 
               <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.98 }}
-                className="bg-white border border-slate-200 hover:border-slate-300 px-8 py-3.5 rounded-full font-semibold text-slate-700 transition-all"
+                whileHover={{ scale: 1.03 }}
+                whileTap={{ scale: 0.97 }}
+                onClick={handleViewRateCard}
+                className="flex items-center justify-center gap-2 bg-white border border-slate-200
+                  hover:border-slate-300 hover:bg-slate-50
+                  px-7 py-3.5 rounded-full font-semibold text-slate-700 text-sm
+                  transition-all cursor-pointer w-full sm:w-auto"
               >
                 View Rate Card
               </motion.button>
             </div>
           </div>
 
-          {/* Right Image */}
-          <div className="relative mt-12 md:mt-0">
-            {image ? (
-              <div className="w-64 h-64 md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] rounded-2xl overflow-hidden border-4 border-white shadow-xl">
-                <img
-                  src={image}
-                  alt={displayName}
-                  className="w-full h-full object-cover"
-                />
+          {/* ── Right Image ── */}
+          <div className="relative w-full flex-shrink-0 order-first md:order-last">
+            {/*
+              KEY FIX: outer div is `relative` only, NO overflow-hidden here.
+              The inner image div has overflow-hidden + rounded corners.
+              Badge sits outside image div but inside this relative wrapper,
+              positioned at bottom-left overlapping the image edge.
+            */}
+            <div className="relative">
+              {/* Image frame */}
+              <div className="w-full h-56 sm:h-64 md:h-[320px] lg:h-[380px] rounded-[28px] overflow-hidden border-4 border-white shadow-xl">
+                {image ? (
+                  <img
+                    src={image}
+                    alt={displayName}
+                    className="w-full h-full object-cover"
+                  />
+                ) : (
+                  <div className="w-full h-full bg-rose-100" />
+                )}
               </div>
-            ) : (
-              <div className="bg-rose-100 w-64 h-64 md:w-[350px] md:h-[350px] lg:w-[450px] lg:h-[450px] rounded-2xl" />
-            )}
 
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.3 }}
-              className="bg-white absolute -bottom-5 left-1/2 -translate-x-1/2 md:left-10 lg:left-20 rounded-3xl shadow-xl p-6 md:p-8 w-full max-w-[340px] border border-slate-100"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-[#fff0f0] rounded-2xl flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-7 h-7 text-[#FF7C71]" />
+              {/* ── Verified badge — overlaps bottom-left of image ── */}
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.35 }}
+                className="absolute bottom-4 left-4
+                  bg-white/95 backdrop-blur-sm rounded-2xl shadow-lg
+                  px-3.5 py-2.5 flex items-center gap-2.5
+                  border border-slate-100/80"
+              >
+                {/* Green shield icon container */}
+                <div className="w-8 h-8 bg-emerald-50 rounded-xl flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
                 </div>
-
                 <div>
-                  <p className="font-semibold text-slate-900">
+                  <p className="text-xs font-bold text-slate-900 leading-none">
                     Verified Professional
                   </p>
-                  <p className="text-sm text-slate-500">
+                  <p className="text-[11px] text-slate-400 mt-0.5 leading-none">
                     Rajseba Guarantee
                   </p>
                 </div>
-              </div>
-            </motion.div>
+              </motion.div>
+            </div>
           </div>
+
         </div>
       </div>
     </div>

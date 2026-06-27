@@ -1,8 +1,6 @@
-import {
-  Star,
-  CheckCircle,
-  User,
-} from "lucide-react";
+"use client";
+
+import { Star, User } from "lucide-react";
 import { motion } from "framer-motion";
 
 interface Expert {
@@ -13,7 +11,7 @@ interface Expert {
   image?: string;
 }
 
-const experts: Expert[] = [
+const fallbackExperts: Expert[] = [
   {
     name: "Ariful Islam",
     title: "Senior Technician (8yr Exp)",
@@ -73,51 +71,60 @@ const experts: Expert[] = [
 ];
 
 export function Experts({ employees }: { employees?: any[] }) {
-  const displayExperts = employees && employees.length > 0
-    ? employees.map((emp, idx) => ({
+  const displayExperts =
+    employees && employees.length > 0
+      ? employees.map((emp, idx) => ({
         name: emp.name,
         title: emp.role || "Expert Technician",
-        rating: 4.8 + (idx % 3) * 0.1,
+        rating: parseFloat((4.8 + (idx % 3) * 0.1).toFixed(1)),
         jobs: `${120 + idx * 35}+ jobs`,
         image: emp.image || emp.avatar,
       }))
-    : experts;
+      : fallbackExperts;
+
+  /* Duplicate list 3× so the marquee loops smoothly */
+  const marqueeItems = [...displayExperts, ...displayExperts, ...displayExperts];
+
+  /* Each card is 280px wide + 24px gap = 304px per step */
+  const totalWidth = displayExperts.length * 304;
 
   return (
     <section className="py-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6 overflow-hidden">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-slate-900">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900">
             Meet Our Top Rated Experts
           </h2>
         </div>
 
-        {/* Marquee Container with Fading Edges */}
+        {/* Marquee container with fading edges */}
         <div className="relative overflow-hidden">
-          {/* Left Fade */}
+          {/* Left fade */}
           <div className="absolute top-0 bottom-0 left-0 w-20 bg-gradient-to-r from-slate-50 to-transparent z-10 pointer-events-none" />
-          {/* Right Fade */}
+          {/* Right fade */}
           <div className="absolute top-0 bottom-0 right-0 w-20 bg-gradient-to-l from-slate-50 to-transparent z-10 pointer-events-none" />
-          
+
           <motion.div
             className="flex gap-6"
-            animate={{
-              x: [0, -50 * displayExperts.length * 1.1], // Move left continuously
-            }}
+            animate={{ x: [0, -totalWidth] }}
             transition={{
-              duration: 10, // Adjust speed here (higher = slower)
+              duration: displayExperts.length * 3,
               repeat: Infinity,
               ease: "linear",
             }}
           >
-            {[...displayExperts, ...displayExperts, ...displayExperts].map((expert, index) => (
+            {marqueeItems.map((expert, index) => (
               <div key={index} className="min-w-[280px] flex-shrink-0">
                 <div className="bg-[#fff9f8] rounded-3xl p-8 text-center hover:shadow-xl hover:scale-105 hover:-translate-y-2 transition-all duration-300 group h-full">
-                  
-                  {/* Expert Avatar / Image */}
+
+                  {/* Avatar */}
                   <div className="w-16 h-16 mx-auto mb-6 rounded-full overflow-hidden border-2 border-rose-100/50 flex items-center justify-center shrink-0 shadow-sm bg-white">
                     {expert.image ? (
-                      <img src={expert.image} alt={expert.name} className="w-full h-full object-cover" />
+                      <img
+                        src={expert.image}
+                        alt={expert.name}
+                        className="w-full h-full object-cover"
+                      />
                     ) : (
                       <div className="w-full h-full bg-[#fff0f0] flex items-center justify-center text-[#FF7C71]">
                         <User className="w-6 h-6" />

@@ -147,8 +147,8 @@ export default function TopServices() {
               <Star size={14} className="fill-current" />
               Most Booked
             </div>
-            <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              Top Rated <span className="text-transparent bg-clip-text bg-gradient-to-r from-rose-500 to-orange-400">Services</span>
+            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Top Rated Services
             </h2>
             <p className="mt-4 text-slate-500 text-lg md:text-xl font-medium max-w-lg">
               Hand-picked professional services highly rated by our community.
@@ -227,11 +227,10 @@ export default function TopServices() {
                     aria-label="Add to wishlist"
                   >
                     <Heart
-                      className={`w-4 h-4 transition-colors ${
-                        savedServices.some((s) => String(s.id) === String(service.id))
-                          ? "fill-[#FF7C71] text-[#FF7C71]"
-                          : "text-slate-500"
-                      }`}
+                      className={`w-4 h-4 transition-colors ${savedServices.some((s) => String(s.id) === String(service.id))
+                        ? "fill-[#FF7C71] text-[#FF7C71]"
+                        : "text-slate-500"
+                        }`}
                     />
                   </Button>
                 </div>

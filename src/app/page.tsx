@@ -5,7 +5,6 @@ import Testimonials from "@/components/home/sections/home/Testimonials";
 import TopServices from "@/components/home/sections/home/TopServices";
 import WhyChooseUs from "@/components/home/sections/home/WhyChooseUs";
 import Stats from "@/components/home/sections/home/Stats";
-import AppDownload from "@/components/home/sections/home/AppDownload";
 import SpecialOffers from "@/components/home/sections/home/SpecialOffers";
 import FeaturedProviders from "@/components/home/sections/home/FeaturedProviders";
 import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
@@ -54,7 +53,6 @@ export default function Home() {
           {/* 🗺️ Coverage Map — shown after stats to answer "is this available near me?" */}
           <ServiceAreas />
           <HowItWorks />
-          <AppDownload />
           <Testimonials />
           {/* <PartnerCta /> */}
           <FAQ />

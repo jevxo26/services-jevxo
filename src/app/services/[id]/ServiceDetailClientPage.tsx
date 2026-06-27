@@ -91,12 +91,13 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
           bookingsCount={bookingsCount}
           reviewsCount={reviewsCount}
           categoryName={service.category?.name}
-        // subtitle={service.subtitle}   ← Removed: Not allowed in CategorizedHeroProps
         />
         <SpecializedServices
           nestedServices={service.nestedServices}
           serviceId={service.id}
           vendorId={service.vendor?.id}
+          serviceImage={service.image}
+          serviceName={service.name}
         />
         <Packages
           packages={service.packages}
