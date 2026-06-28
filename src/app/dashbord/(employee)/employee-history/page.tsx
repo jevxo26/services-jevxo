@@ -45,7 +45,7 @@ export default function EmployeeHistoryPage() {
         {/* Title Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+            <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
               <History className="w-6 h-6" />
             </div>
             <div>
@@ -151,7 +151,7 @@ export default function EmployeeHistoryPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+      <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

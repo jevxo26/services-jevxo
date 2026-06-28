@@ -15,7 +15,7 @@ const getStatusColor = (status: string) => {
     case 'assigned': return 'bg-blue-50 text-blue-600 border border-blue-200';
     case 'on_the_way': return 'bg-purple-50 text-purple-600 border border-purple-200';
     case 'completed': return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
-    case 'cancelled': return 'bg-[#FFF8F7] text-[#E5675D] border border-[#FF7C71]/30';
+    case 'cancelled': return 'bg-[#FFF8F4] text-[#E0530A] border border-[#FF6014]/30';
     default: return 'bg-slate-50 text-slate-600 border border-slate-200';
   }
 };
@@ -241,7 +241,7 @@ export default function BookingDetailsPage() {
                 <>
                   {/* Calendar Widget Graphic */}
                   <div className="flex flex-col items-center w-20 bg-slate-50 border border-slate-200/80 rounded-2xl overflow-hidden shadow-xs shrink-0">
-                    <div className="w-full bg-[#FF7C71] text-white text-[10px] font-black text-center py-1 uppercase tracking-wider">
+                    <div className="w-full bg-[#FF6014] text-white text-[10px] font-black text-center py-1 uppercase tracking-wider">
                       {new Date(booking.date).toLocaleDateString('en-US', { month: 'short' }).toUpperCase()}
                     </div>
                     <div className="text-2xl font-black text-slate-800 py-2">
@@ -380,7 +380,7 @@ export default function BookingDetailsPage() {
                             <label
                               key={emp.id}
                               className={`flex items-start gap-3 p-3 rounded-2xl cursor-pointer border transition-all ${isChecked
-                                  ? "bg-rose-50/20 border-[#FF7C71]/40 shadow-xs"
+                                  ? "bg-rose-50/20 border-[#FF6014]/40 shadow-xs"
                                   : "bg-slate-50/30 border-slate-100 hover:bg-slate-50 hover:border-slate-200"
                                 }`}
                             >
@@ -388,7 +388,7 @@ export default function BookingDetailsPage() {
                                 type="checkbox"
                                 checked={isChecked}
                                 onChange={() => handleToggleEmployee(emp.id)}
-                                className="mt-1 w-4 h-4 text-brand-primary border-slate-300 rounded focus:ring-brand-primary/20 accent-[#FF7C71]"
+                                className="mt-1 w-4 h-4 text-brand-primary border-slate-300 rounded focus:ring-brand-primary/20 accent-[#FF6014]"
                               />
                               <div className="flex-1 min-w-0">
                                 <p className="text-xs font-extrabold text-slate-800 truncate">{emp.name}</p>
@@ -443,7 +443,7 @@ export default function BookingDetailsPage() {
           <button
             onClick={handleDelete}
             disabled={isDeleting}
-            className="flex items-center gap-2 px-5 py-3 text-xs font-extrabold text-[#E5675D] bg-white border border-[#FF7C71]/30 hover:bg-[#FFF8F7] hover:border-[#FF7C71]/50 rounded-2xl transition-all shadow-xs active:scale-95 disabled:opacity-50"
+            className="flex items-center gap-2 px-5 py-3 text-xs font-extrabold text-[#E0530A] bg-white border border-[#FF6014]/30 hover:bg-[#FFF8F4] hover:border-[#FF6014]/50 rounded-2xl transition-all shadow-xs active:scale-95 disabled:opacity-50"
           >
             <Trash2 size={14} />
             {isDeleting ? "Deleting..." : "Delete Booking Record"}

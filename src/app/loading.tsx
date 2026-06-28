@@ -30,7 +30,7 @@ export default function Loading(): React.JSX.Element {
   return (
     <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-slate-50 dark:bg-slate-950 px-4">
       {/* Background Radial Glows for Premium Aesthetic */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] md:w-[450px] h-[250px] md:h-[450px] bg-[#FF7C71]/8 blur-[80px] md:blur-[110px] rounded-full pointer-events-none z-0" />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[250px] md:w-[450px] h-[250px] md:h-[450px] bg-[#FF6014]/8 blur-[80px] md:blur-[110px] rounded-full pointer-events-none z-0" />
 
       <div className="relative z-10 flex flex-col items-center gap-6">
         {/* Lottie Loading Animation */}
@@ -45,15 +45,15 @@ export default function Loading(): React.JSX.Element {
           ) : (
             // Premium fallback spinner matching application primary color
             <div className="relative w-16 h-16 flex items-center justify-center">
-              <div className="absolute w-16 h-16 border-4 border-slate-200 border-t-[#FF7C71] rounded-full animate-spin" />
-              <div className="w-8 h-8 bg-[#FF7C71]/10 rounded-full animate-ping" />
+              <div className="absolute w-16 h-16 border-4 border-slate-200 border-t-[#FF6014] rounded-full animate-spin" />
+              <div className="w-8 h-8 bg-[#FF6014]/10 rounded-full animate-ping" />
             </div>
           )}
         </div>
 
         {/* Loading text with premium pulsing effect */}
         <div className="flex flex-col items-center gap-1.5">
-          <p className="text-[#FF7C71] font-bold text-sm tracking-widest uppercase animate-pulse font-sans">
+          <p className="text-[#FF6014] font-bold text-sm tracking-widest uppercase animate-pulse font-sans">
             Please Wait
           </p>
           <p className="text-slate-400 dark:text-slate-500 text-xs font-medium font-sans">

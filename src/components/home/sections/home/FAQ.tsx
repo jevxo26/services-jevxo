@@ -42,7 +42,7 @@ export default function FAQ() {
 
           {/* Left — Text */}
           <div className="md:sticky md:top-24">
-            <span className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
+            <span className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
               Got questions?
             </span>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
@@ -54,7 +54,7 @@ export default function FAQ() {
 
             <a
               href="#"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#FF7C71] border border-[#FF7C71]/25 rounded-full px-5 py-2.5 hover:bg-[#FF7C71]/5 transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#FF6014] border border-[#FF6014]/25 rounded-full px-5 py-2.5 hover:bg-[#FF6014]/5 transition-colors duration-200"
             >
               <MessageCircle className="w-4 h-4" />
               Still need help? Contact us
@@ -69,7 +69,7 @@ export default function FAQ() {
                 <div
                   key={index}
                   className={`rounded-2xl border bg-white overflow-hidden transition-all duration-300 ${isOpen
-                    ? 'border-[#FF7C71]/40 shadow-sm'
+                    ? 'border-[#FF6014]/40 shadow-sm'
                     : 'border-slate-200 hover:border-slate-300'
                     }`}
                 >
@@ -82,7 +82,7 @@ export default function FAQ() {
                       {faq.question}
                     </span>
                     <div
-                      className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-[#FF7C71]/10 text-[#FF7C71]' : 'bg-slate-100 text-slate-400'
+                      className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-[#FF6014]/10 text-[#FF6014]' : 'bg-slate-100 text-slate-400'
                         }`}
                     >
                       <ChevronDown

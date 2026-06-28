@@ -27,7 +27,7 @@ export default function ExpertCard({ expert, onViewDetails }: ExpertCardProps) {
 
           <div className="flex-1 space-y-3">
             <div className="flex flex-wrap items-center gap-3">
-              <span className="text-xs font-extrabold tracking-wider bg-rose-50 border border-rose-100 text-[#FF7C71] px-3 py-1 rounded-full uppercase">
+              <span className="text-xs font-extrabold tracking-wider bg-rose-50 border border-rose-100 text-[#FF6014] px-3 py-1 rounded-full uppercase">
                 {expert.badge}
               </span>
 
@@ -81,7 +81,7 @@ export default function ExpertCard({ expert, onViewDetails }: ExpertCardProps) {
 
         <Button
           onClick={onViewDetails}
-          className="px-6 py-3 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold rounded-2xl text-sm md:text-base transition-all shadow-sm hover:shadow-md active:scale-97 text-center w-auto md:w-full cursor-pointer h-auto"
+          className="px-6 py-3 bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold rounded-2xl text-sm md:text-base transition-all shadow-sm hover:shadow-md active:scale-97 text-center w-auto md:w-full cursor-pointer h-auto"
         >
           View Details
         </Button>

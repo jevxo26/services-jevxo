@@ -35,12 +35,12 @@ const SectionHeader = ({ title, viewAllHref }: { title: string; viewAllHref?: st
       <h3 className="text-lg md:text-xl font-black text-slate-800 tracking-tight capitalize">
         {title}
       </h3>
-      <div className="absolute -bottom-[3px] left-0 w-12 h-[3px] bg-[#FF7C71] rounded-full" />
+      <div className="absolute -bottom-[3px] left-0 w-12 h-[3px] bg-[#FF6014] rounded-full" />
     </div>
     {viewAllHref && (
       <Link
         href={viewAllHref}
-        className="text-xs font-extrabold text-[#FF7C71] hover:text-[#E5675D] transition-colors flex items-center gap-1 uppercase tracking-wider"
+        className="text-xs font-extrabold text-[#FF6014] hover:text-[#E0530A] transition-colors flex items-center gap-1 uppercase tracking-wider"
       >
         View All <ArrowRight size={13} strokeWidth={2.5} />
       </Link>
@@ -92,7 +92,7 @@ export default function CategorizedSections() {
     return (
       <div className="flex justify-center items-center py-20">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
           <p className="text-xs font-bold text-slate-400">Loading categorized services...</p>
         </div>
       </div>
@@ -106,7 +106,7 @@ export default function CategorizedSections() {
   return (
     <div className="space-y-16 pb-16">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
+        <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
           <Sparkles size={13} />
           Explore By Category
         </div>
@@ -145,7 +145,7 @@ export default function CategorizedSections() {
                       key={item.id}
                       variants={itemVariants}
                       whileHover={{ y: -5, scale: 1.01 }}
-                      className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md hover:border-[#FF7C71]/20 transition-all duration-300 flex flex-col"
+                      className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md hover:border-[#FF6014]/20 transition-all duration-300 flex flex-col"
                     >
                       <div className="relative h-40 bg-slate-50 shrink-0">
                         <img
@@ -172,7 +172,7 @@ export default function CategorizedSections() {
                               {totalReviews} {totalReviews === 1 ? "Review" : "Reviews"}
                             </span>
                             <span className="flex items-center gap-1.5">
-                              <CalendarCheck size={12} className="text-[#FF7C71]" />
+                              <CalendarCheck size={12} className="text-[#FF6014]" />
                               {totalBookings} {totalBookings === 1 ? "Booking" : "Bookings"}
                             </span>
                           </div>
@@ -187,7 +187,7 @@ export default function CategorizedSections() {
                           </div>
                           <Link
                             href={`/services/${item.slug || item.id}`}
-                            className="text-xs font-bold text-[#FF7C71] hover:text-[#E5675D] transition-colors flex items-center gap-1"
+                            className="text-xs font-bold text-[#FF6014] hover:text-[#E0530A] transition-colors flex items-center gap-1"
                           >
                             Book Now <ArrowRight size={13} />
                           </Link>

@@ -199,7 +199,7 @@ export default function UsersPage() {
   if (!isAuthenticated) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
@@ -258,7 +258,7 @@ export default function UsersPage() {
         <span className={`inline-flex items-center px-2.5 py-1 rounded-full text-xs font-bold ${user.status === "active"
           ? "bg-emerald-50 text-emerald-700"
           : user.status === "blocked"
-            ? "bg-[#FFF8F7] text-[#E5675D]"
+            ? "bg-[#FFF8F4] text-[#E0530A]"
             : "bg-slate-100 text-slate-600"
           }`}>
           {user.status ? user.status.charAt(0).toUpperCase() + user.status.slice(1) : ''}
@@ -312,7 +312,7 @@ export default function UsersPage() {
                 {user.status !== "blocked" && (
                   <button
                     onClick={() => { handleBlock(user.id); setOpenDropdownId(null); }}
-                    className="w-full text-left px-4 py-2 text-sm text-[#E5675D] hover:bg-[#FFF8F7] flex items-center gap-2 font-medium"
+                    className="w-full text-left px-4 py-2 text-sm text-[#E0530A] hover:bg-[#FFF8F4] flex items-center gap-2 font-medium"
                   >
                     <XCircle size={14} /> Block User
                   </button>
@@ -323,7 +323,7 @@ export default function UsersPage() {
                     <div className="h-px bg-slate-100 my-1 mx-2" />
                     <button
                       onClick={() => { handleDelete(user.id); setOpenDropdownId(null); }}
-                      className="w-full text-left px-4 py-2 text-sm text-[#E5675D] hover:bg-[#FFF8F7] flex items-center gap-2 font-medium"
+                      className="w-full text-left px-4 py-2 text-sm text-[#E0530A] hover:bg-[#FFF8F4] flex items-center gap-2 font-medium"
                     >
                       <Trash2 size={14} /> Delete User
                     </button>
@@ -342,7 +342,7 @@ export default function UsersPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Users className="w-6 h-6" />
           </div>
           <div>
@@ -363,7 +363,7 @@ export default function UsersPage() {
       {/* Loading State */}
       {isUsersLoading ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
-          <div className="w-8 h-8 border-2 border-[#FF7C71] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+          <div className="w-8 h-8 border-2 border-[#FF6014] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
           <p className="text-sm text-slate-400 font-medium">Loading users...</p>
         </div>
       ) : users.length === 0 ? (
@@ -403,19 +403,19 @@ export default function UsersPage() {
               <form onSubmit={handleCreateUser} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Full Name</label>
-                  <input name="name" type="text" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="John Doe" />
+                  <input name="name" type="text" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="John Doe" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Email Address</label>
-                  <input name="email" type="email" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="john@example.com" />
+                  <input name="email" type="email" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="john@example.com" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Phone Number</label>
-                  <input name="phone" type="tel" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="01XXXXXXXXX" />
+                  <input name="phone" type="tel" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="01XXXXXXXXX" />
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Role</label>
-                  <select name="role" required defaultValue="" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all">
+                  <select name="role" required defaultValue="" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all">
                     <option value="" disabled>Select a role</option>
                     {isRolesLoading ? (
                       <option value="" disabled>Loading roles...</option>
@@ -441,14 +441,14 @@ export default function UsersPage() {
               <form onSubmit={handleCreateProfile} className="space-y-4">
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Profile Type</label>
-                  <select name="type" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all">
+                  <select name="type" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all">
                     <option value="personal">Personal / Freelancer</option>
                     <option value="company">Company / Agency</option>
                   </select>
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Categories (Hold Ctrl/Cmd to select multiple)</label>
-                  <select multiple name="category_ids" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all h-24">
+                  <select multiple name="category_ids" required className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all h-24">
                     {isCategoriesLoading ? (
                       <option value="" disabled>Loading categories...</option>
                     ) : (
@@ -460,7 +460,7 @@ export default function UsersPage() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Company / Business Name (Optional)</label>
-                  <input name="company_name" type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="Acme Services Ltd." />
+                  <input name="company_name" type="text" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="Acme Services Ltd." />
                 </div>
                 <div>
                   <LocationCascader
@@ -478,16 +478,16 @@ export default function UsersPage() {
                 </div>
                 <div>
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Description</label>
-                  <textarea name="description" rows={3} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none" placeholder="Briefly describe the user's services..."></textarea>
+                  <textarea name="description" rows={3} className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none" placeholder="Briefly describe the user's services..."></textarea>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   <div>
                     <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Min Starting Price</label>
-                    <input name="min_starting_price" type="number" step="0.01" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="0.00" />
+                    <input name="min_starting_price" type="number" step="0.01" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="0.00" />
                   </div>
                   <div>
                     <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Google Map Link</label>
-                    <input name="google_map_link" type="url" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="https://maps.google.com/..." />
+                    <input name="google_map_link" type="url" className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all" placeholder="https://maps.google.com/..." />
                   </div>
                 </div>
                 <div className="pt-4 flex justify-end gap-3 border-t border-slate-100">

@@ -154,7 +154,7 @@ function LiveChatContent() {
           <>
             {/* Chat Header */}
             <div className="h-16 bg-white border-b border-slate-100 flex items-center px-6 gap-4 shrink-0 shadow-sm z-10">
-              <div className="w-10 h-10 bg-gradient-to-br from-[#FF7C71] to-rose-400 rounded-full flex items-center justify-center text-white font-bold">
+              <div className="w-10 h-10 bg-gradient-to-br from-[#FF6014] to-rose-400 rounded-full flex items-center justify-center text-white font-bold">
                 {activeChatUser.name?.charAt(0) || "U"}
               </div>
               <div>
@@ -179,7 +179,7 @@ function LiveChatContent() {
                     <div key={idx} className={`flex ${isMe ? "justify-end" : "justify-start"}`}>
                       <div
                         className={`max-w-[70%] rounded-2xl px-5 py-3 ${isMe
-                          ? "bg-[#FF7C71] text-white rounded-br-sm shadow-md shadow-[#FF7C71]/20"
+                          ? "bg-[#FF6014] text-white rounded-br-sm shadow-md shadow-[#FF6014]/20"
                           : "bg-white text-slate-800 rounded-bl-sm border border-slate-100 shadow-sm"
                           }`}
                       >
@@ -203,12 +203,12 @@ function LiveChatContent() {
                   value={messageInput}
                   onChange={(e) => setMessageInput(e.target.value)}
                   placeholder="Type your message..."
-                  className="flex-1 bg-slate-50 border border-slate-200 rounded-full px-5 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#FF7C71]/50 focus:ring-2 focus:ring-[#FF7C71]/10 transition-all"
+                  className="flex-1 bg-slate-50 border border-slate-200 rounded-full px-5 py-3 text-sm text-slate-800 focus:outline-none focus:border-[#FF6014]/50 focus:ring-2 focus:ring-[#FF6014]/10 transition-all"
                 />
                 <button
                   type="submit"
                   disabled={!messageInput.trim()}
-                  className="w-12 h-12 bg-[#FF7C71] hover:bg-[#E5675D] rounded-full flex items-center justify-center text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-[#FF7C71]/20"
+                  className="w-12 h-12 bg-[#FF6014] hover:bg-[#E0530A] rounded-full flex items-center justify-center text-white transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-md shadow-[#FF6014]/20"
                 >
                   <Send size={18} className="ml-1" />
                 </button>

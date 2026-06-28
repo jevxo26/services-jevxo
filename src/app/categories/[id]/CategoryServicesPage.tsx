@@ -63,7 +63,7 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
   }, [categoryId]);
 
   return (
-    <div className="min-h-screen bg-[#FFF8F7] relative">
+    <div className="min-h-screen bg-[#FFF8F4] relative">
       {/* Subtle background pattern */}
       <div
         className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-[0.06] pointer-events-none z-0"
@@ -77,9 +77,9 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
 
             {/* Breadcrumb */}
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
-              <Link href="/" className="hover:text-[#FF7C71] transition-colors">Home</Link>
+              <Link href="/" className="hover:text-[#FF6014] transition-colors">Home</Link>
               <span>/</span>
-              <Link href="/services" className="hover:text-[#FF7C71] transition-colors">All Services</Link>
+              <Link href="/services" className="hover:text-[#FF6014] transition-colors">All Services</Link>
               <span>/</span>
               <span className="text-slate-600">{isCatLoading ? "..." : (category?.name || "Category")}</span>
             </div>
@@ -94,7 +94,7 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
                     className="w-full h-full object-cover"
                   />
                 ) : (
-                  <LayoutGrid className="w-7 h-7 text-[#FF7C71]" />
+                  <LayoutGrid className="w-7 h-7 text-[#FF6014]" />
                 )}
               </div>
 
@@ -120,7 +120,7 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
               {/* Back button */}
               <Link
                 href="/services"
-                className="hidden md:flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-[#FF7C71] transition-colors bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-100 px-4 py-2.5 rounded-xl shrink-0"
+                className="hidden md:flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-[#FF6014] transition-colors bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-100 px-4 py-2.5 rounded-xl shrink-0"
               >
                 <ArrowLeft size={15} />
                 Back

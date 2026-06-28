@@ -14,8 +14,8 @@ const safetyFeatures = [
 export function Commitments() {
   return (
     <section className="py-6 w-full">
-      <div className="bg-gradient-to-br from-[#FF7C71]/15 to-[#FF7C71]/5 rounded-[32px] p-6 md:p-8 border border-[#FF7C71]/10">
-        <h2 className="text-center text-xl md:text-2xl font-black text-[#FF7C71] mb-8">
+      <div className="bg-gradient-to-br from-[#FF6014]/15 to-[#FF6014]/5 rounded-[32px] p-6 md:p-8 border border-[#FF6014]/10">
+        <h2 className="text-center text-xl md:text-2xl font-black text-[#FF6014] mb-8">
           Committed to Zero-Risk Safety
         </h2>
 
@@ -30,7 +30,7 @@ export function Commitments() {
               className="flex flex-col items-center text-center group"
             >
               <div className="w-12 h-12 bg-white rounded-xl flex items-center justify-center mb-3 group-hover:scale-105 transition-transform shadow-xs border border-rose-100/50">
-                <feature.icon className="w-6 h-6 text-[#FF7C71]" />
+                <feature.icon className="w-6 h-6 text-[#FF6014]" />
               </div>
               <p className="font-bold text-slate-700 text-xs">{feature.label}</p>
             </motion.div>

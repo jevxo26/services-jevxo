@@ -60,12 +60,12 @@ const HowItWorks = () => {
   return (
     <div className="py-5 md:py-16 lg:py-20 overflow-hidden relative">
       {/* Decorative light blurs */}
-      {/* <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-[#FF7C71]/5 blur-[90px] rounded-full pointer-events-none" /> */}
+      {/* <div className="absolute top-1/4 left-1/4 w-[300px] h-[300px] bg-[#FF6014]/5 blur-[90px] rounded-full pointer-events-none" /> */}
 
       <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
         {/* Header Block */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <Workflow size={13} />
             Timeline
           </div>
@@ -82,7 +82,7 @@ const HowItWorks = () => {
           {/* Connecting SVG Arrow 1 (Desktop) */}
           <div className="absolute left-[15%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
-              className="w-full h-8 text-[#FF7C71]"
+              className="w-full h-8 text-[#FF6014]"
               viewBox="0 0 100 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -104,7 +104,7 @@ const HowItWorks = () => {
           {/* Connecting SVG Arrow 2 (Desktop) */}
           <div className="absolute left-[41%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
-              className="w-full h-8 text-[#FF7C71]"
+              className="w-full h-8 text-[#FF6014]"
               viewBox="0 0 100 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +126,7 @@ const HowItWorks = () => {
           {/* Connecting SVG Arrow 3 (Desktop) */}
           <div className="absolute left-[67%] w-[18%] top-6 hidden lg:block z-0 pointer-events-none">
             <svg
-              className="w-full h-8 text-[#FF7C71]"
+              className="w-full h-8 text-[#FF6014]"
               viewBox="0 0 100 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -162,14 +162,14 @@ const HowItWorks = () => {
                   {/* Timeline Step node bubble */}
                   <motion.div
                     whileHover={{ y: -2 }}
-                    className="w-20 h-20 bg-white group-hover:bg-primary group-hover:scale-105 border border-slate-200 text-slate-800 rounded-full flex items-center justify-center text-xl font-extrabold mb-6 shadow-lg relative z-10 group-hover:border-[#FF7C71]/40  group-hover:shadow-xl transition-all duration-300"
+                    className="w-20 h-20 bg-white group-hover:bg-primary group-hover:scale-105 border border-slate-200 text-slate-800 rounded-full flex items-center justify-center text-xl font-extrabold mb-6 shadow-lg relative z-10 group-hover:border-[#FF6014]/40  group-hover:shadow-xl transition-all duration-300"
                   >
                     <span className="text-primary group-hover:text-white">
                       {step.stepNumber}
                     </span>
                   </motion.div>
 
-                  <h3 className="font-extrabold text-slate-800 text-xl mb-3 group-hover:text-[#FF7C71] transition-colors duration-200">
+                  <h3 className="font-extrabold text-slate-800 text-xl mb-3 group-hover:text-[#FF6014] transition-colors duration-200">
                     {step.title}
                   </h3>
                   <p className="text-sm text-slate-500 leading-relaxed max-w-xs mx-auto">
@@ -179,7 +179,7 @@ const HowItWorks = () => {
 
                 {/* Vertical SVG Arrow for Mobile Screens */}
                 {i < HOW_IT_WORKS_CONTENT.steps.length - 1 && (
-                  <div className="flex sm:hidden my-2 items-center justify-center text-[#FF7C71] z-0 pointer-events-none">
+                  <div className="flex sm:hidden my-2 items-center justify-center text-[#FF6014] z-0 pointer-events-none">
                     <svg
                       className="w-6 h-10"
                       viewBox="0 0 24 40"

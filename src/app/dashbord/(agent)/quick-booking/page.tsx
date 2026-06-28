@@ -85,7 +85,7 @@ export default function AgentQuickBookingPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Zap className="w-6 h-6 fill-current" />
           </div>
           <div>
@@ -148,7 +148,7 @@ export default function AgentQuickBookingPage() {
                   placeholder="Street address, house number, area..."
                   value={clientAddress}
                   onChange={(e) => setClientAddress(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
                   required
                 />
               </div>
@@ -160,7 +160,7 @@ export default function AgentQuickBookingPage() {
                   placeholder="Any special instructions..."
                   value={notes}
                   onChange={(e) => setNotes(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
                 />
               </div>
             </div>
@@ -171,7 +171,7 @@ export default function AgentQuickBookingPage() {
             <button
               type="submit"
               disabled={submitting}
-              className="bg-[#FF7C71] hover:bg-[#E5675D] disabled:opacity-70 text-white font-bold px-8 py-3 rounded-xl text-sm shadow-md shadow-[#FF7C71]/10 transition-all active:scale-[0.98] flex items-center gap-2"
+              className="bg-[#FF6014] hover:bg-[#E0530A] disabled:opacity-70 text-white font-bold px-8 py-3 rounded-xl text-sm shadow-md shadow-[#FF6014]/10 transition-all active:scale-[0.98] flex items-center gap-2"
             >
               {submitting ? <Loader2 size={16} className="animate-spin" /> : null}
               Submit Order
@@ -186,7 +186,7 @@ export default function AgentQuickBookingPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+      <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

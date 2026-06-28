@@ -44,7 +44,7 @@ export default function EmployeeTasksPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
+        <Loader2 size={32} className="animate-spin text-[#FF6014]" />
       </div>
     )
   }
@@ -56,7 +56,7 @@ export default function EmployeeTasksPage() {
         {/* Title Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+            <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
               <Briefcase className="w-6 h-6" />
             </div>
             <div>
@@ -77,7 +77,7 @@ export default function EmployeeTasksPage() {
                 {/* Top Row: Service Name, Status */}
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#FFF8F7] border border-[#FFEBE9] rounded-2xl flex items-center justify-center text-[#FF7C71]">
+                    <div className="w-12 h-12 bg-[#FFF8F4] border border-[#FFF0EB] rounded-2xl flex items-center justify-center text-[#FF6014]">
                       <Briefcase size={22} className="stroke-[2.5]" />
                     </div>
                     <div>
@@ -85,8 +85,8 @@ export default function EmployeeTasksPage() {
                         {booking.nestedService?.name || booking.pkg?.name || "Service Booking"}
                       </h3>
                       <div className="flex items-center gap-2 mt-1.5">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF8F7] text-[#E5675D]">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E5675D] animate-pulse" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF8F4] text-[#E0530A]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#E0530A] animate-pulse" />
                           {booking.status.toUpperCase()}
                         </span>
                         <span className="text-[10px] font-bold text-slate-400">Order #{booking.id}</span>
@@ -146,7 +146,7 @@ export default function EmployeeTasksPage() {
                     {booking.vendor && (
                       <Link 
                         href={`/dashbord/live-chat?userId=${booking.vendor.id}&userName=${encodeURIComponent(booking.vendor.name || 'Vendor')}`}
-                        className="text-xs font-bold text-slate-500 hover:text-[#FF7C71] transition-colors flex items-center gap-1.5"
+                        className="text-xs font-bold text-slate-500 hover:text-[#FF6014] transition-colors flex items-center gap-1.5"
                       >
                         <MessageSquare size={14} />
                         Chat with Vendor
@@ -183,7 +183,7 @@ export default function EmployeeTasksPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+      <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

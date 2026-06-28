@@ -12,8 +12,8 @@ import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker"
 const calendarTheme = createTheme({
   palette: {
     primary: {
-      main: "#FF7C71", // brand-primary
-      light: "#FFF8F7", // brand-bg
+      main: "#FF6014", // brand-primary
+      light: "#FFF8F4", // brand-bg
       dark: "#E03B40",
       contrastText: "#FFFFFF",
     },
@@ -37,21 +37,21 @@ const calendarTheme = createTheme({
           transition: "all 0.2s ease-out",
           margin: "2px",
           "&:hover": {
-            backgroundColor: "#FFF8F7",
-            color: "#FF7C71",
+            backgroundColor: "#FFF8F4",
+            color: "#FF6014",
           },
           "&.Mui-selected": {
-            background: "linear-gradient(135deg, #FF7C71, #FF7C71)",
+            background: "linear-gradient(135deg, #FF6014, #FF6014)",
             color: "#FFFFFF",
             boxShadow: "0 4px 12px rgba(255, 70, 76, 0.2)",
             "&:hover": {
-              background: "linear-gradient(135deg, #FF7C71, #FF7C71)",
+              background: "linear-gradient(135deg, #FF6014, #FF6014)",
               color: "#FFFFFF",
             },
           },
           "&.MuiPickersDay-today": {
-            borderColor: "#FF7C71",
-            color: "#FF7C71",
+            borderColor: "#FF6014",
+            color: "#FF6014",
             "&.Mui-selected": {
               color: "#FFFFFF",
             },
@@ -195,7 +195,7 @@ export function CustomCalendar({
                         boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
                       },
                       "&.Mui-focused": {
-                        borderColor: "#FF7C71",
+                        borderColor: "#FF6014",
                         boxShadow: "0 0 0 4px rgba(255, 70, 76, 0.08)",
                       },
                       "& input": {
@@ -205,8 +205,8 @@ export function CustomCalendar({
                         color: "#64748B",
                         marginRight: "4px",
                         "&:hover": {
-                          backgroundColor: "#FFF8F7",
-                          color: "#FF7C71",
+                          backgroundColor: "#FFF8F4",
+                          color: "#FF6014",
                         },
                       },
                     },

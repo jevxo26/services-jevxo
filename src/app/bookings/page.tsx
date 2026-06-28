@@ -40,10 +40,10 @@ const STATUS_CONFIG: Record<
   confirmed: {
     label: "Confirmed",
     pillBg: "bg-rose-50 border-rose-100",
-    pillText: "text-[#E5675D]",
-    borderColor: "border-l-[#FF7C71]",
-    iconBg: "bg-[#FFF8F7]",
-    iconText: "text-[#E5675D]",
+    pillText: "text-[#E0530A]",
+    borderColor: "border-l-[#FF6014]",
+    iconBg: "bg-[#FFF8F4]",
+    iconText: "text-[#E0530A]",
   },
   assigned: {
     label: "Assigned",
@@ -161,8 +161,8 @@ export default function BookingsPage() {
   // If still checking authentication, show a premium layout loader
   if (isAuthLoading) {
     return (
-      <div className="min-h-screen bg-[#FFF8F7]/20 flex flex-col justify-center items-center py-16">
-        <div className="w-10 h-10 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin mb-4" />
+      <div className="min-h-screen bg-[#FFF8F4]/20 flex flex-col justify-center items-center py-16">
+        <div className="w-10 h-10 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin mb-4" />
         <p className="text-sm font-semibold text-slate-500 animate-pulse">Initializing bookings page...</p>
       </div>
     );
@@ -171,14 +171,14 @@ export default function BookingsPage() {
   // 1. GUEST STATE (UNAUTHENTICATED)
   if (!isAuthenticated) {
     return (
-      <section className="min-h-screen bg-gradient-to-b from-[#FFF8F7]/50 via-white to-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden flex items-center">
+      <section className="min-h-screen bg-gradient-to-b from-[#FFF8F4]/50 via-white to-white py-16 px-4 sm:px-6 lg:px-8 relative overflow-hidden flex items-center">
         {/* Soft premium background glows */}
-        <div className="absolute top-[10%] left-[-10%] w-[300px] h-[300px] bg-[#FF7C71]/4 blur-[100px] rounded-full pointer-events-none" />
+        <div className="absolute top-[10%] left-[-10%] w-[300px] h-[300px] bg-[#FF6014]/4 blur-[100px] rounded-full pointer-events-none" />
         <div className="absolute bottom-[10%] right-[-10%] w-[400px] h-[400px] bg-cyan-500/3 blur-[120px] rounded-full pointer-events-none" />
 
         <div className="mx-auto max-w-2xl w-full text-center relative z-10">
           {/* Lock Icon */}
-          <div className="inline-flex p-4 bg-[#FFF8F7] text-[#FF7C71] rounded-3xl border border-rose-100/50 shadow-sm mb-6 animate-bounce">
+          <div className="inline-flex p-4 bg-[#FFF8F4] text-[#FF6014] rounded-3xl border border-rose-100/50 shadow-sm mb-6 animate-bounce">
             <Lock className="w-8 h-8" />
           </div>
 
@@ -206,7 +206,7 @@ export default function BookingsPage() {
               <p className="text-xs text-slate-400 mt-1 leading-normal">Release funds only when you are satisfied.</p>
             </div>
             <div className="bg-white p-4 rounded-2xl border border-slate-100 shadow-sm col-span-2 sm:col-span-1">
-              <div className="w-8 h-8 bg-rose-50 text-[#FF7C71] rounded-lg flex items-center justify-center mb-3">
+              <div className="w-8 h-8 bg-rose-50 text-[#FF6014] rounded-lg flex items-center justify-center mb-3">
                 <TrendingUp className="w-4 h-4" />
               </div>
               <h3 className="text-sm font-bold text-slate-800">Premium Perks</h3>
@@ -217,7 +217,7 @@ export default function BookingsPage() {
           {/* CTAs */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link href="/login" className="w-full sm:w-auto">
-              <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-extrabold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer">
+              <button className="w-full sm:w-auto flex items-center justify-center gap-2 bg-[#FF6014] hover:bg-[#E0530A] text-white font-extrabold py-3 px-8 rounded-xl shadow-md hover:shadow-lg transition-all hover:scale-105 active:scale-95 cursor-pointer">
                 <LogIn className="w-4 h-4" />
                 Sign In Now
               </button>
@@ -236,9 +236,9 @@ export default function BookingsPage() {
 
   // 2. AUTHENTICATED STATE
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#FFF8F7]/30 via-white to-white px-4 py-10  lg:px-8 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-b from-[#FFF8F4]/30 via-white to-white px-4 py-10  lg:px-8 relative overflow-hidden">
       {/* Background radial depth glow */}
-      <div className="absolute top-[5%] left-[-10%] w-[350px] h-[350px] bg-[#FF7C71]/3 blur-[120px] rounded-full pointer-events-none" />
+      <div className="absolute top-[5%] left-[-10%] w-[350px] h-[350px] bg-[#FF6014]/3 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[450px] h-[450px] bg-cyan-500/2 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="mx-auto max-w-4xl relative z-10">
@@ -246,7 +246,7 @@ export default function BookingsPage() {
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-8">
           <div className="flex items-center gap-3">
-            <div className="p-3 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl border border-rose-100/50 shadow-sm">
+            <div className="p-3 bg-[#FFF8F4] text-[#FF6014] rounded-2xl border border-rose-100/50 shadow-sm">
               <Calendar className="w-6 h-6" />
             </div>
             <div>
@@ -285,7 +285,7 @@ export default function BookingsPage() {
         {/* Filters and Search Bar Container */}
         <div className="bg-white p-4 rounded-3xl border border-slate-100 shadow-premium mb-6 space-y-4">
           {/* Search bar */}
-          <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 focus-within:border-[#FF7C71]/40 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#FF7C71]/5 transition-all">
+          <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50 px-4 py-3 focus-within:border-[#FF6014]/40 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#FF6014]/5 transition-all">
             <Search className="h-4.5 w-4.5 shrink-0 text-slate-400" />
             <input
               type="text"
@@ -311,8 +311,8 @@ export default function BookingsPage() {
                 key={f.value}
                 onClick={() => setActiveFilter(f.value)}
                 className={`rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer ${activeFilter === f.value
-                    ? "bg-[#FF7C71] text-white shadow-sm shadow-[#FF7C71]/20"
-                    : "bg-[#FFF8F7] text-[#E5675D] hover:bg-[#FFEBE9]/50 border border-rose-100/30"
+                    ? "bg-[#FF6014] text-white shadow-sm shadow-[#FF6014]/20"
+                    : "bg-[#FFF8F4] text-[#E0530A] hover:bg-[#FFF0EB]/50 border border-rose-100/30"
                   }`}
               >
                 {f.label}
@@ -325,7 +325,7 @@ export default function BookingsPage() {
         <div className="space-y-4">
           {isBookingsLoading ? (
             <div className="py-16 text-center bg-white rounded-3xl border border-slate-100">
-              <div className="w-8 h-8 border-2 border-[#FF7C71] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
+              <div className="w-8 h-8 border-2 border-[#FF6014] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
               <p className="text-sm font-semibold text-slate-500 animate-pulse">Loading your bookings...</p>
             </div>
           ) : filtered.length === 0 ? (
@@ -337,7 +337,7 @@ export default function BookingsPage() {
               </p>
               {!search && (
                 <Link href="/services" className="inline-block mt-4">
-                  <button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-bold py-2 px-5 rounded-xl transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm">
+                  <button className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold py-2 px-5 rounded-xl transition-all hover:scale-105 active:scale-95 cursor-pointer shadow-sm">
                     Book a Service
                   </button>
                 </Link>
@@ -380,7 +380,7 @@ export default function BookingsPage() {
                     <div className="flex items-center gap-2">
                       <button
                         onClick={() => setSelectedBooking(booking)}
-                        className="rounded-xl border border-slate-200 hover:border-[#FF7C71] hover:text-[#FF7C71] bg-slate-50 hover:bg-[#FFF8F7]/30 px-4 py-2 text-xs font-bold text-slate-650 transition-all hover:scale-105 active:scale-95 cursor-pointer"
+                        className="rounded-xl border border-slate-200 hover:border-[#FF6014] hover:text-[#FF6014] bg-slate-50 hover:bg-[#FFF8F4]/30 px-4 py-2 text-xs font-bold text-slate-650 transition-all hover:scale-105 active:scale-95 cursor-pointer"
                       >
                         View Details
                       </button>

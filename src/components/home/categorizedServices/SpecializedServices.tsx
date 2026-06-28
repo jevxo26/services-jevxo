@@ -115,7 +115,7 @@ export function SpecializedServices({
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
         <div>
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             Available Services
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
@@ -127,7 +127,7 @@ export function SpecializedServices({
         </div>
         <Link
           href="/services"
-          className="text-[#FF7C71] hover:text-[#E5675D] font-bold text-sm flex items-center gap-1 group self-start sm:self-auto"
+          className="text-[#FF6014] hover:text-[#E0530A] font-bold text-sm flex items-center gap-1 group self-start sm:self-auto"
         >
           View All Services{" "}
           <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -154,7 +154,7 @@ export function SpecializedServices({
               >
                 {/* Glow */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <div className="absolute top-0 right-10 w-48 h-48 bg-[#FF7C71]/20 rounded-full blur-[60px]" />
+                  <div className="absolute top-0 right-10 w-48 h-48 bg-[#FF6014]/20 rounded-full blur-[60px]" />
                 </div>
 
                 <h3 className="text-xl sm:text-2xl font-black mb-2 z-10">
@@ -167,7 +167,7 @@ export function SpecializedServices({
                 <div className="flex flex-wrap gap-3 mt-auto z-10">
                   <a
                     href="tel:+8801335106726"
-                    className="inline-flex items-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D]
+                    className="inline-flex items-center gap-2 bg-[#FF6014] hover:bg-[#E0530A]
                       px-6 py-3 rounded-full font-bold text-xs text-white
                       transition shadow-lg shadow-rose-900/20 cursor-pointer"
                   >
@@ -177,7 +177,7 @@ export function SpecializedServices({
                 </div>
 
                 <div className="absolute bottom-6 right-8 text-right hidden sm:block z-10">
-                  <div className="text-5xl font-black text-[#FF7C71] leading-none">60</div>
+                  <div className="text-5xl font-black text-[#FF6014] leading-none">60</div>
                   <div className="text-[9px] uppercase tracking-[2px] font-bold text-slate-400 mt-1">
                     Minute Arrival
                   </div>
@@ -196,10 +196,10 @@ export function SpecializedServices({
                 onClick={() => hasSubServices && toggleExpand(service.id)}
                 className={`rounded-[32px] p-6 md:p-8 border transition-all duration-300 group flex flex-col sm:flex-row sm:items-center justify-between gap-6
                   ${isExpanded
-                    ? "bg-gradient-to-br from-white via-white to-[#FFF8F7]/30 border-[#FF7C71]/45 shadow-md shadow-[#FF7C71]/5 -translate-y-0.5"
+                    ? "bg-gradient-to-br from-white via-white to-[#FFF8F4]/30 border-[#FF6014]/45 shadow-md shadow-[#FF6014]/5 -translate-y-0.5"
                     : "bg-white border-slate-100/90 shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5"
                   }
-                  ${hasSubServices ? "cursor-pointer hover:border-[#FF7C71]/30" : ""}`}
+                  ${hasSubServices ? "cursor-pointer hover:border-[#FF6014]/30" : ""}`}
               >
                 <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-6 min-w-0 flex-1">
                   {service.image ? (
@@ -210,11 +210,11 @@ export function SpecializedServices({
                     />
                   ) : (
                     <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-rose-50 rounded-[24px] flex items-center justify-center flex-shrink-0 border border-rose-100/50">
-                      <Droplet className="w-8 h-8 text-[#FF7C71]" />
+                      <Droplet className="w-8 h-8 text-[#FF6014]" />
                     </div>
                   )}
                   <div className="min-w-0 space-y-1">
-                    <h3 className="text-lg md:text-xl font-black text-slate-800 group-hover:text-[#FF7C71] transition-colors leading-snug">
+                    <h3 className="text-lg md:text-xl font-black text-slate-800 group-hover:text-[#FF6014] transition-colors leading-snug">
                       {service.title}
                     </h3>
                     <p className="text-xs sm:text-sm text-slate-500 leading-relaxed font-semibold max-w-xl">
@@ -229,7 +229,7 @@ export function SpecializedServices({
                       <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">
                         Starting Price
                       </span>
-                      <div className="text-[#FF7C71] font-black text-lg sm:text-xl">
+                      <div className="text-[#FF6014] font-black text-lg sm:text-xl">
                         ৳{Number(service.price).toLocaleString()}
                       </div>
                     </div>
@@ -241,7 +241,7 @@ export function SpecializedServices({
                         e.stopPropagation();
                         handleInitiateBooking(service);
                       }}
-                      className="inline-flex items-center gap-1.5 bg-[#FF7C71] hover:bg-[#E5675D]
+                      className="inline-flex items-center gap-1.5 bg-[#FF6014] hover:bg-[#E0530A]
                         text-white px-5 py-2.5 rounded-full text-xs font-bold
                         transition shadow-md shadow-rose-100 cursor-pointer active:scale-95"
                     >
@@ -251,8 +251,8 @@ export function SpecializedServices({
                   ) : (
                     <div className={`flex items-center gap-1.5 px-4 py-2 rounded-full border text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95
                       ${isExpanded
-                        ? "bg-[#FFF8F7] text-[#FF7C71] border-[#FF7C71]/40 hover:bg-[#FF7C71]/10"
-                        : "bg-slate-50/65 text-slate-500 border-slate-100 hover:bg-rose-50 hover:text-[#FF7C71] hover:border-[#FF7C71]/20"
+                        ? "bg-[#FFF8F4] text-[#FF6014] border-[#FF6014]/40 hover:bg-[#FF6014]/10"
+                        : "bg-slate-50/65 text-slate-500 border-slate-100 hover:bg-rose-50 hover:text-[#FF6014] hover:border-[#FF6014]/20"
                       }`}
                     >
                       {isExpanded ? "Close" : "Explore"}
@@ -275,9 +275,9 @@ export function SpecializedServices({
                     exit={{ opacity: 0, height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="bg-[#FFF8F7]/30 border border-slate-100 p-5 rounded-[28px] space-y-4 shadow-xs mt-3">
+                    <div className="bg-[#FFF8F4]/30 border border-slate-100 p-5 rounded-[28px] space-y-4 shadow-xs mt-3">
                       <div className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5 px-1">
-                        <Info size={13} className="text-[#FF7C71]" />
+                        <Info size={13} className="text-[#FF6014]" />
                         Select options to add to cart
                       </div>
 
@@ -289,7 +289,7 @@ export function SpecializedServices({
                             <div
                               key={sub.id}
                               className={`flex flex-col sm:flex-row sm:items-center justify-between p-4 rounded-2xl border bg-white transition-all gap-4 ${isAdded
-                                ? "border-[#FF7C71]/40 shadow-xs ring-1 ring-[#FF7C71]/10 bg-gradient-to-br from-white to-[#FFF8F7]/30"
+                                ? "border-[#FF6014]/40 shadow-xs ring-1 ring-[#FF6014]/10 bg-gradient-to-br from-white to-[#FFF8F4]/30"
                                 : "border-slate-100 hover:border-slate-200 hover:shadow-xs"
                                 }`}
                             >
@@ -297,7 +297,7 @@ export function SpecializedServices({
                                 <h4 className="text-sm font-bold text-slate-800 leading-snug">
                                   {sub.name}
                                 </h4>
-                                <div className="text-[#FF7C71] text-base font-black mt-1">
+                                <div className="text-[#FF6014] text-base font-black mt-1">
                                   ৳{Number(sub.price).toLocaleString()}
                                 </div>
                               </div>
@@ -305,14 +305,14 @@ export function SpecializedServices({
                               <div className="shrink-0 w-full sm:w-28">
                                 {isAdded ? (
                                   <div className="flex flex-col items-center">
-                                    <div className="flex items-center gap-1 bg-[#FFF8F7] border border-[#FF7C71]/20 rounded-xl p-0.5 w-full justify-between">
+                                    <div className="flex items-center gap-1 bg-[#FFF8F4] border border-[#FF6014]/20 rounded-xl p-0.5 w-full justify-between">
                                       <button
                                         type="button"
                                         onClick={(e) => {
                                           e.stopPropagation();
                                           onUpdateQuantity(sub.id, -1);
                                         }}
-                                        className="w-7 h-7 rounded-lg bg-white text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
+                                        className="w-7 h-7 rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
                                         aria-label="Decrease"
                                       >
                                         <Minus size={11} strokeWidth={3} />
@@ -326,7 +326,7 @@ export function SpecializedServices({
                                           e.stopPropagation();
                                           onUpdateQuantity(sub.id, 1);
                                         }}
-                                        className="w-7 h-7 rounded-lg bg-white text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
+                                        className="w-7 h-7 rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
                                         aria-label="Increase"
                                       >
                                         <Plus size={11} strokeWidth={3} />
@@ -351,7 +351,7 @@ export function SpecializedServices({
                                     }}
                                     className="w-full py-2 rounded-xl text-xs font-bold transition-all
                                       flex items-center justify-center gap-1 cursor-pointer active:scale-95
-                                      bg-[#FF7C71] text-white hover:bg-[#E5675D] shadow-xs"
+                                      bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-xs"
                                   >
                                     <Plus size={12} strokeWidth={3} />
                                     Add
@@ -382,7 +382,7 @@ export function SpecializedServices({
                               className={`px-7 py-3 rounded-full text-xs font-bold transition cursor-pointer w-full sm:w-auto
                                 flex items-center justify-center gap-2
                                 ${hasSelection
-                                  ? "bg-[#FF7C71] hover:bg-[#E5675D] text-white shadow-md shadow-rose-100"
+                                  ? "bg-[#FF6014] hover:bg-[#E0530A] text-white shadow-md shadow-rose-100"
                                   : "bg-slate-200 text-slate-400 cursor-not-allowed"
                                 }`}
                               disabled={!hasSelection}

@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import { Star, BadgeCheck, MapPin, ThumbsUp, Briefcase, Users } from "lucide-react";
 import { useGetPublicProfilesQuery } from "@/redux/features/landing/landingApi";
 
-/* ─── animation variants ─── */
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.1 } },
@@ -20,34 +19,29 @@ const itemVariants = {
   },
 } as const;
 
-/* ─── badge colours cycling ─── */
-const BADGE_COLORS = [
-  "bg-[#FF7C71]/10 text-[#FF7C71] border-[#FF7C71]/20 border",
-  "bg-orange-500/10 text-orange-600 border-orange-500/20 border",
-  "bg-rose-500/10 text-rose-600 border-rose-500/20 border",
-  "bg-amber-500/10 text-amber-600 border-amber-500/20 border",
-  "bg-violet-500/10 text-violet-600 border-violet-500/20 border",
+const BADGE_CONFIGS = [
+  { label: "Top Rated", cls: "bg-[#FF6014] text-white" },
+  { label: "Verified Pro", cls: "bg-violet-600 text-white" },
+  { label: "5★ Provider", cls: "bg-amber-500 text-white" },
+  { label: "Trusted", cls: "bg-teal-600 text-white" },
+  { label: "Expert", cls: "bg-slate-800 text-white" },
 ];
 
-const BADGE_LABELS = ["Top Rated", "Verified Pro", "5★ Provider", "Trusted", "Expert"];
-
-/* ─── skeleton card ─── */
 function SkeletonCard() {
   return (
-    <div className="relative bg-white rounded-3xl border border-slate-100 p-5 flex flex-col gap-4 shadow-sm animate-pulse">
-      <div className="flex flex-col items-center gap-2 pt-2">
-        <div className="w-20 h-20 rounded-full bg-slate-100" />
-        <div className="h-4 w-28 bg-slate-100 rounded-full" />
-        <div className="h-3 w-20 bg-slate-100 rounded-full" />
+    <div className="bg-white rounded-2xl border border-slate-100 overflow-hidden animate-pulse">
+      <div className="h-20 bg-slate-100 relative">
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-14 h-14 rounded-full bg-slate-200 border-4 border-white" />
       </div>
-      <div className="h-3 w-24 bg-slate-100 rounded-full mx-auto" />
-      <div className="flex gap-4 justify-center py-3 border-y border-slate-100">
-        <div className="h-8 w-14 bg-slate-100 rounded-xl" />
-        <div className="h-8 w-14 bg-slate-100 rounded-xl" />
-      </div>
-      <div className="flex gap-1.5 justify-center flex-wrap">
-        <div className="h-5 w-16 bg-slate-100 rounded-full" />
-        <div className="h-5 w-20 bg-slate-100 rounded-full" />
+      <div className="pt-10 p-5 flex flex-col gap-3">
+        <div className="h-4 w-28 bg-slate-100 rounded-full mx-auto" />
+        <div className="h-3 w-20 bg-slate-100 rounded-full mx-auto" />
+        <div className="h-10 bg-slate-100 rounded-xl" />
+        <div className="flex gap-2 justify-center">
+          <div className="h-5 w-16 bg-slate-100 rounded-full" />
+          <div className="h-5 w-20 bg-slate-100 rounded-full" />
+        </div>
+        <div className="h-9 bg-slate-100 rounded-xl" />
       </div>
     </div>
   );
@@ -56,30 +50,21 @@ function SkeletonCard() {
 export default function FeaturedProviders() {
   const { data: profilesRes, isLoading } = useGetPublicProfilesQuery();
 
-  /* normalise API response — shape: { data: Profile[] } */
   const rawProfiles: any[] = profilesRes?.data ?? (Array.isArray(profilesRes) ? profilesRes : []);
 
-  /* take up to 8 profiles */
   const providers = rawProfiles.slice(0, 8).map((p: any, idx: number) => {
     const user = p.user ?? {};
 
-    /* services from categories array */
     const services: string[] = Array.isArray(p.categories) && p.categories.length > 0
       ? p.categories.map((c: any) => c.name ?? c).slice(0, 3)
       : [];
 
-    /* min_starting_price as a display tag */
     if (p.min_starting_price && !isNaN(Number(p.min_starting_price))) {
       services.push(`From ৳${Number(p.min_starting_price).toLocaleString()}`);
     }
 
-    /* location — capitalise words */
     const rawLoc =
-      p.area?.name ??
-      p.district?.name ??
-      p.devision?.name ??
-      p.location ??
-      "Bangladesh";
+      p.area?.name ?? p.district?.name ?? p.devision?.name ?? p.location ?? "Bangladesh";
     const location = String(rawLoc)
       .split(/[,\s]+/)
       .map((w: string) => w.charAt(0).toUpperCase() + w.slice(1).toLowerCase())
@@ -90,15 +75,14 @@ export default function FeaturedProviders() {
       : (4.5 + (idx * 0.07) % 0.5).toFixed(1);
 
     const reviews = p.total_reviews ?? Math.floor(80 + (idx * 37) % 300);
-    const jobs    = p.total_projects > 0
+    const jobs = p.total_projects > 0
       ? `${p.total_projects}+`
       : `${Math.floor(50 + (idx * 83) % 400)}+`;
 
     const avatarSeed = encodeURIComponent(user.name ?? user.email ?? `profile-${idx}`);
-    const bgColors   = ["b6e3f4", "c0aede", "ffdfbf", "d1f4d1", "ffd5dc", "b6f4d8"];
-    const bg         = bgColors[idx % bgColors.length];
+    const bgColors = ["b6e3f4", "c0aede", "ffdfbf", "d1f4d1", "ffd5dc", "b6f4d8"];
+    const bg = bgColors[idx % bgColors.length];
 
-    /* specialty: prefer company name → description → generic */
     const specialty =
       p.company_name ||
       (p.description ? p.description.slice(0, 45) : null) ||
@@ -112,14 +96,12 @@ export default function FeaturedProviders() {
       rating,
       reviews,
       jobs,
-      phone: user.phone ?? null,
       avatar:
         user.profileImage ??
         user.avatar ??
         `https://api.dicebear.com/7.x/avataaars/svg?seed=${avatarSeed}&backgroundColor=${bg}`,
       services,
-      badge: BADGE_LABELS[idx % BADGE_LABELS.length],
-      badgeColor: BADGE_COLORS[idx % BADGE_COLORS.length],
+      badge: BADGE_CONFIGS[idx % BADGE_CONFIGS.length],
     };
   });
 
@@ -127,14 +109,14 @@ export default function FeaturedProviders() {
     <section className="py-5 md:py-16 lg:py-20 overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
 
-        {/* ── Header ── */}
+        {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <BadgeCheck size={13} />
             Verified Professionals
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <ThumbsUp className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
+            <ThumbsUp className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
             Our Top Providers
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
@@ -142,12 +124,10 @@ export default function FeaturedProviders() {
           </p>
         </div>
 
-        {/* ── Cards ── */}
+        {/* Cards */}
         {isLoading ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {Array.from({ length: 4 }).map((_, i) => (
-              <SkeletonCard key={i} />
-            ))}
+            {Array.from({ length: 4 }).map((_, i) => <SkeletonCard key={i} />)}
           </div>
         ) : providers.length === 0 ? (
           <div className="flex flex-col items-center justify-center py-20 text-center">
@@ -169,72 +149,85 @@ export default function FeaturedProviders() {
                 key={provider.id}
                 variants={itemVariants}
                 whileHover={{ y: -5, scale: 1.015 }}
-                className="relative bg-white rounded-3xl border border-slate-100 p-5 flex flex-col gap-4 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 transition-all cursor-pointer group"
+                className="relative bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 overflow-hidden flex flex-col transition-all cursor-pointer group"
               >
-                {/* Badge */}
-                <div className="absolute top-4 right-4">
-                  <span className={`text-[11px] font-bold px-2.5 py-0.5 rounded-full ${provider.badgeColor}`}>
-                    {provider.badge}
+                {/* Top colour band */}
+                <div className="relative h-20 flex-shrink-0 bg-gradient-to-br from-[#fff5f0] to-[#ffe8da]">
+                  {/* Badge */}
+                  <span className={`absolute top-2.5 right-2.5 text-[10px] font-bold px-2.5 py-1 rounded-full ${provider.badge.cls}`}>
+                    {provider.badge.label}
                   </span>
-                </div>
 
-                {/* Avatar */}
-                <div className="flex flex-col items-center text-center gap-2 pt-2">
-                  <div className="relative">
-                    <img
-                      src={provider.avatar}
-                      alt={provider.name}
-                      className="w-20 h-20 rounded-full border-4 border-[#FF7C71]/20 object-cover bg-slate-100"
-                    />
-                    <div className="absolute bottom-0 right-0 w-5 h-5 bg-emerald-400 rounded-full border-2 border-white" />
-                  </div>
-                  <div>
-                    <h3 className="font-extrabold text-slate-900 text-base">{provider.name}</h3>
-                    <p className="text-xs text-[#FF7C71] font-semibold line-clamp-1">{provider.specialty}</p>
-                  </div>
-                </div>
-
-                {/* Location */}
-                <div className="flex items-center justify-center gap-1 text-xs text-slate-400 font-medium">
-                  <MapPin size={12} />
-                  {provider.location}
-                </div>
-
-                {/* Rating + Jobs */}
-                <div className="flex items-center justify-center gap-4 py-3 border-y border-slate-100">
-                  <div className="text-center">
-                    <div className="flex items-center gap-1 justify-center">
-                      <Star size={13} className="fill-amber-400 text-amber-400" />
-                      <span className="text-sm font-black text-slate-800">{provider.rating}</span>
+                  {/* Avatar */}
+                  <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2">
+                    <div className="relative">
+                      <img
+                        src={provider.avatar}
+                        alt={provider.name}
+                        className="w-14 h-14 rounded-full object-cover bg-slate-100 border-4 border-white shadow-md"
+                      />
+                      <div className="absolute bottom-0.5 right-0.5 w-3.5 h-3.5 bg-emerald-400 rounded-full border-2 border-white" />
                     </div>
-                    <p className="text-[10px] text-slate-400 font-semibold mt-0.5">{provider.reviews} reviews</p>
-                  </div>
-                  <div className="w-px h-8 bg-slate-100" />
-                  <div className="text-center">
-                    <div className="flex items-center gap-1 justify-center">
-                      <Briefcase size={12} className="text-slate-400" />
-                      <p className="text-sm font-black text-slate-800">{provider.jobs}</p>
-                    </div>
-                    <p className="text-[10px] text-slate-400 font-semibold mt-0.5">Jobs done</p>
                   </div>
                 </div>
 
-                {/* Services / Tags */}
-                <div className="flex flex-wrap gap-1.5 justify-center min-h-[28px]">
-                  {provider.services.length > 0 ? (
-                    provider.services.map((tag: string) => (
-                      <span
-                        key={tag}
-                        className="text-[11px] font-semibold text-slate-600 bg-slate-100 px-2.5 py-0.5 rounded-full"
-                      >
-                        {tag}
-                      </span>
-                    ))
-                  ) : (
-                    <span className="text-[11px] font-semibold text-slate-400 bg-slate-50 px-2.5 py-0.5 rounded-full">
-                      General Services
-                    </span>
-                  )}
+                {/* Body */}
+                <div className="pt-10 px-4 pb-4 flex flex-col gap-3 flex-1">
+
+                  {/* Name + specialty */}
+                  <div className="text-center">
+                    <h3 className="font-extrabold text-[15px] leading-tight text-slate-900">
+                      {provider.name}
+                    </h3>
+                    <p className="text-[11px] font-semibold mt-0.5 line-clamp-1 text-[#FF6014]">
+                      {provider.specialty}
+                    </p>
+                  </div>
+
+                  {/* Location */}
+                  <div className="flex items-center justify-center gap-1 text-[11px] font-medium text-slate-400">
+                    <MapPin size={11} />
+                    {provider.location}
+                  </div>
+
+                  {/* Stats row */}
+                  <div className="flex items-stretch rounded-xl overflow-hidden border border-slate-100">
+                    <div className="flex-1 py-2 text-center bg-slate-50">
+                      <div className="flex items-center justify-center gap-1 text-[13px] font-black text-slate-800">
+                        <Star size={12} className="fill-amber-400 text-amber-400" />
+                        {provider.rating}
+                      </div>
+                      <p className="text-[10px] font-semibold mt-0.5 text-slate-400">
+                        {provider.reviews} reviews
+                      </p>
+                    </div>
+                    <div className="w-px bg-slate-100" />
+                    <div className="flex-1 py-2 text-center bg-slate-50">
+                      <div className="flex items-center justify-center gap-1 text-[13px] font-black text-slate-800">
+                        <Briefcase size={11} className="text-slate-400" />
+                        {provider.jobs}
+                      </div>
+                      <p className="text-[10px] font-semibold mt-0.5 text-slate-400">
+                        Jobs done
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Service tags */}
+                  <div className="flex flex-wrap gap-1.5 justify-center min-h-[24px]">
+                    {provider.services.length > 0 ? (
+                      provider.services.map((tag: string) => (
+                        <span
+                          key={tag}
+                          className="text-[10px] font-semibold px-2.5 py-0.5 rounded-full bg-slate-50 text-slate-500 border border-slate-200"
+                        >
+                          {tag}
+                        </span>
+                      ))
+                    ) : ""}
+                  </div>
+
+
                 </div>
               </motion.div>
             ))}

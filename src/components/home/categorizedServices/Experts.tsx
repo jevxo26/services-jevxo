@@ -65,7 +65,7 @@ export function Experts({ employees }: { employees?: any[] }) {
     <section className="py-6 w-full overflow-hidden">
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             Top Professionals
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
@@ -105,7 +105,7 @@ export function Experts({ employees }: { employees?: any[] }) {
                       className="w-full h-full object-cover"
                     />
                   ) : (
-                    <div className="w-full h-full bg-[#fff0f0] flex items-center justify-center text-[#FF7C71]">
+                    <div className="w-full h-full bg-[#fff0f0] flex items-center justify-center text-[#FF6014]">
                       <User className="w-6 h-6" />
                     </div>
                   )}
@@ -117,7 +117,7 @@ export function Experts({ employees }: { employees?: any[] }) {
                 <p className="text-slate-400 text-xs font-semibold mb-3">{expert.title}</p>
 
                 <div className="flex items-center justify-center gap-1">
-                  <Star className="w-4 h-4 fill-[#FF7C71] text-[#FF7C71]" />
+                  <Star className="w-4 h-4 fill-[#FF6014] text-[#FF6014]" />
                   <span className="font-extrabold text-sm text-slate-800">
                     {expert.rating}
                   </span>

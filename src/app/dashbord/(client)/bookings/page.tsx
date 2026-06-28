@@ -60,7 +60,7 @@ export default function BookingsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
+        <Loader2 size={32} className="animate-spin text-[#FF6014]" />
       </div>
     )
   }
@@ -69,36 +69,46 @@ export default function BookingsPage() {
     <div className="w-full animate-in fade-in duration-200">
       <div className="w-full space-y-8 relative z-10">
 
-        {/* Title Header */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
-              <Calendar className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-extrabold text-slate-900">My Bookings</h1>
-              <p className="text-xs text-slate-400 mt-0.5">Manage and track your service requests at Rajseba.</p>
+        {/* Premium Greeting & Stats Card */}
+        <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15 animate-in fade-in duration-300">
+          {/* Decorative Glow Circles */}
+          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#FF6014]/25 blur-3xl pointer-events-none" />
+          <div className="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+
+          <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <div className="flex items-center gap-4">
+              <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-[#FF6014] border border-white/10 flex-shrink-0">
+                <Calendar className="w-6 h-6" />
+              </div>
+              <div>
+                <h1 className="text-xl md:text-2xl font-black tracking-tight text-white">My Bookings</h1>
+                <p className="text-xs md:text-sm text-slate-300 mt-1 font-semibold leading-relaxed">
+                  Manage, track, and chat about your service requests at Rajseba.
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Status Filter Tab Pill Bar */}
-        <div className="bg-[#FFF8F7]/30 border border-[#FFEBE9]/30 p-1.5 rounded-full flex gap-1 w-fit">
-          {(["All", "Pending", "Assigned", "On The Way", "Completed", "Cancelled"] as const).map((tab) => {
-            const isActive = filter === tab;
-            return (
-              <button
-                key={tab}
-                onClick={() => setFilter(tab)}
-                className={`px-6 py-2 rounded-full text-xs font-bold transition-all focus:outline-none ${isActive
-                  ? "bg-[#FF7C71] text-white shadow-sm shadow-[#FF7C71]/10"
-                  : "text-slate-500 hover:text-slate-800 hover:bg-slate-50/50"
-                  }`}
-              >
-                {tab}
-              </button>
-            )
-          })}
+        {/* Status Filter Tab Pill Bar (Scrollable on Mobile) */}
+        <div className="overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+          <div className="bg-[#FFF8F4]/40 border border-[#FFF0EB]/40 p-1.5 rounded-full flex gap-1 w-max">
+            {(["All", "Pending", "Assigned", "On The Way", "Completed", "Cancelled"] as const).map((tab) => {
+              const isActive = filter === tab;
+              return (
+                <button
+                  key={tab}
+                  onClick={() => setFilter(tab)}
+                  className={`px-5 py-2 rounded-full text-xs font-bold transition-all focus:outline-none whitespace-nowrap ${isActive
+                    ? "bg-[#FF6014] text-white shadow-sm shadow-[#FF6014]/10"
+                    : "text-slate-500 hover:text-slate-800 hover:bg-slate-50/50"
+                    }`}
+                >
+                  {tab}
+                </button>
+              )
+            })}
+          </div>
         </div>
 
         {/* Bookings List */}
@@ -112,7 +122,7 @@ export default function BookingsPage() {
                 {/* Top Row: Service Name, Status, Price */}
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-center gap-4">
-                    <div className="w-12 h-12 bg-[#FFF8F7] border border-[#FFEBE9] rounded-2xl flex items-center justify-center text-[#FF7C71]">
+                    <div className="w-12 h-12 bg-[#FFF8F4] border border-[#FFF0EB] rounded-2xl flex items-center justify-center text-[#FF6014]">
                       <Briefcase size={22} className="stroke-[2.5]" />
                     </div>
                     <div>
@@ -120,8 +130,8 @@ export default function BookingsPage() {
                         {booking.nestedService?.name || booking.pkg?.name || "Service Booking"}
                       </h3>
                       <div className="flex items-center gap-2 mt-1.5">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF8F7] text-[#E5675D]">
-                          <span className="w-1.5 h-1.5 rounded-full bg-[#E5675D] animate-pulse" />
+                        <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF8F4] text-[#E0530A]">
+                          <span className="w-1.5 h-1.5 rounded-full bg-[#E0530A] animate-pulse" />
                           {STATUS_TEXT[booking.status] || booking.status}
                         </span>
                         <span className="text-[10px] font-bold text-slate-400">Order #{booking.id}</span>
@@ -144,7 +154,7 @@ export default function BookingsPage() {
                     <div className="flex flex-col gap-2">
                       {booking.vendor && (
                         <div className="flex items-center gap-2.5">
-                          <div className="w-8 h-8 rounded-full bg-[#FFEBE9] flex items-center justify-center text-[#E5675D] font-bold text-xs border border-[#FF7C71]/30">
+                          <div className="w-8 h-8 rounded-full bg-[#FFF0EB] flex items-center justify-center text-[#E0530A] font-bold text-xs border border-[#FF6014]/30">
                             {booking.vendor?.name?.[0] || "V"}
                           </div>
                           <div>
@@ -205,12 +215,12 @@ export default function BookingsPage() {
                 </div>
 
                 {/* Bottom Row: Actions */}
-                <div className="flex items-center justify-between pt-4 border-t border-slate-50">
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pt-4 border-t border-slate-50">
                   <div className="flex items-center gap-2 flex-wrap">
                     {booking.vendor && (
                       <button
                         onClick={() => router.push(`/dashbord/live-chat?receiverId=${booking.vendor.id}&receiverName=${encodeURIComponent(booking.vendor.name)}`)}
-                        className="flex items-center gap-1.5 text-[#FF7C71] bg-[#FFF8F7] hover:bg-[#FFEBE9] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus:outline-none"
+                        className="flex items-center gap-1.5 text-[#FF6014] bg-[#FFF8F4] hover:bg-[#FFF0EB] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus:outline-none"
                       >
                         <MessageCircle size={14} />
                         <span>Chat Vendor</span>
@@ -233,16 +243,16 @@ export default function BookingsPage() {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 w-full sm:w-auto">
                     <button
                       onClick={() => router.push(`/dashbord/bookings/${booking.id}`)}
-                      className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-2.5 px-6 rounded-2xl transition-colors active:scale-[0.98]"
+                      className="flex-1 sm:flex-none bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-2.5 px-4 sm:px-6 rounded-2xl transition-colors active:scale-[0.98]"
                     >
                       View Details
                     </button>
                     <Link
                       href={`/dashbord/bookings/track/${booking.id}`}
-                      className="bg-[#FF7C71] hover:bg-[#FF7C71] text-white text-xs font-bold py-2.5 px-6 rounded-2xl transition-all shadow-sm shadow-[#FF7C71]/10 active:scale-[0.98] inline-block text-center"
+                      className="flex-1 sm:flex-none bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold py-2.5 px-4 sm:px-6 rounded-2xl transition-all shadow-sm shadow-[#FF6014]/10 active:scale-[0.98] inline-block text-center"
                     >
                       Track Order
                     </Link>
@@ -265,7 +275,7 @@ export default function BookingsPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+      <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

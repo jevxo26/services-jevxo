@@ -151,13 +151,13 @@ function RevenueChart() {
         <defs>
           {/* Main bar gradient */}
           <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF7C71" />
+            <stop offset="0%" stopColor="#FF6014" />
             <stop offset="100%" stopColor="#FFBAB4" stopOpacity="0.75" />
           </linearGradient>
           {/* Hover bar gradient — richer */}
           <linearGradient id="barGradHover" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#E05A50" />
-            <stop offset="60%" stopColor="#FF7C71" />
+            <stop offset="60%" stopColor="#FF6014" />
             <stop offset="100%" stopColor="#FFB3AD" stopOpacity="0.8" />
           </linearGradient>
           {/* Gloss overlay */}
@@ -168,7 +168,7 @@ function RevenueChart() {
           </linearGradient>
           {/* Hover glow */}
           <filter id="barGlow" x="-30%" y="-10%" width="160%" height="140%">
-            <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#FF7C71" floodOpacity="0.28" />
+            <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#FF6014" floodOpacity="0.28" />
           </filter>
           {/* Subtle track shadow */}
           <filter id="trackShadow" x="-5%" y="-2%" width="110%" height="110%">
@@ -285,7 +285,7 @@ function RevenueChart() {
                   y={by - 5}
                   textAnchor="middle"
                   fontSize={9.5}
-                  fill="#FF7C71"
+                  fill="#FF6014"
                   fontFamily="Inter, ui-sans-serif, sans-serif"
                   fontWeight={700}
                   letterSpacing="-0.2"
@@ -412,7 +412,7 @@ function SuperAdminDashboard() {
       {/* ── Premium Header ── */}
       <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
         {/* Decorative gradient blob */}
-        <div className="absolute -top-10 -right-10 w-56 h-56 bg-gradient-to-br from-[#FF7C71]/10 to-[#FFB3AD]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-10 -right-10 w-56 h-56 bg-gradient-to-br from-[#FF6014]/10 to-[#FFB3AD]/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-indigo-100/40 to-transparent rounded-full blur-2xl pointer-events-none" />
 
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -423,7 +423,7 @@ function SuperAdminDashboard() {
               Live Dashboard
             </div>
             <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              Hello, <span className="text-[#FF7C71]">{authUser?.name || "Admin"}</span>!
+              Hello, <span className="text-[#FF6014]">{authUser?.name || "Admin"}</span>!
             </h1>
             <p className="text-slate-400 mt-1.5 text-sm font-medium">Real-time statistics and administrative insights for Rajseba.</p>
           </div>
@@ -437,7 +437,7 @@ function SuperAdminDashboard() {
               <span className="text-[10px] text-slate-400 font-medium mt-0.5">Bangladesh Standard Time</span>
             </div>
             <div className="w-px h-8 bg-slate-100 hidden sm:block" />
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF7C71] to-[#E5675D] flex items-center justify-center shadow-lg shadow-[#FF7C71]/25">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF6014] to-[#E0530A] flex items-center justify-center shadow-lg shadow-[#FF6014]/25">
               <Sparkles size={18} className="text-white" />
             </div>
           </div>
@@ -478,7 +478,7 @@ function SuperAdminDashboard() {
             </div>
             <div className="flex items-center gap-2.5">
               <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold">
-                <span className="inline-block w-3 h-3 rounded-sm bg-gradient-to-b from-[#FF7C71] to-[#FFBAB4]" />
+                <span className="inline-block w-3 h-3 rounded-sm bg-gradient-to-b from-[#FF6014] to-[#FFBAB4]" />
                 Revenue
               </div>
               <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full">
@@ -495,7 +495,7 @@ function SuperAdminDashboard() {
           {/* Summary row — premium */}
           <div className="mx-6 mb-5 mt-1 grid grid-cols-3 divide-x divide-slate-100 bg-slate-50/70 rounded-2xl border border-slate-100 overflow-hidden">
             {[
-              { label: "Peak Month", value: "Jun 2026", sub: "৳1,14,000", accent: "text-[#FF7C71]" },
+              { label: "Peak Month", value: "Jun 2026", sub: "৳1,14,000", accent: "text-[#FF6014]" },
               { label: "Avg / Month", value: "৳79,000", sub: "6-month avg", accent: "text-indigo-500" },
               { label: "Growth Rate", value: "+137%", sub: "Jan → Jun", accent: "text-emerald-500" },
             ].map((s, i) => (
@@ -512,7 +512,7 @@ function SuperAdminDashboard() {
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
           <div className="flex justify-between items-center mb-6">
             <h3 className="text-lg font-bold text-slate-900">Pending Approvals</h3>
-            <span className="text-xs font-semibold text-[#FF7C71] bg-[#FFF8F7] px-2 py-0.5 rounded-lg">18 New</span>
+            <span className="text-xs font-semibold text-[#FF6014] bg-[#FFF8F4] px-2 py-0.5 rounded-lg">18 New</span>
           </div>
 
           <div className="space-y-4">
@@ -522,7 +522,7 @@ function SuperAdminDashboard() {
                   <h5 className="text-sm font-semibold text-slate-800">{p.company_name || p.user?.name || "Provider"}</h5>
                   <span className="text-xs text-slate-400">{p.category?.name || "Service Provider"} • {p.location || "Dhaka"}</span>
                 </div>
-                <button className="text-xs font-semibold bg-[#FF7C71] hover:bg-[#E5675D] text-white px-3 py-1.5 rounded-lg transition-all active:scale-[0.97]">
+                <button className="text-xs font-semibold bg-[#FF6014] hover:bg-[#E0530A] text-white px-3 py-1.5 rounded-lg transition-all active:scale-[0.97]">
                   Verify
                 </button>
               </div>
@@ -538,7 +538,7 @@ function SuperAdminDashboard() {
       <div className="space-y-4">
         <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
           <h3 className="text-lg font-bold text-slate-900">Recent Booking Log</h3>
-          <button className="text-xs font-semibold text-[#FF7C71] hover:underline flex items-center gap-0.5">
+          <button className="text-xs font-semibold text-[#FF6014] hover:underline flex items-center gap-0.5">
             View All Bookings <ArrowUpRight size={14} />
           </button>
         </div>
@@ -672,7 +672,7 @@ function ProviderDashboard() {
           <div className="flex items-center gap-3 bg-white border border-slate-100 p-3 rounded-2xl shadow-sm shrink-0">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-sm font-semibold text-slate-700">Online &amp; Available</span>
-            <button className="text-xs font-semibold text-[#FF7C71] bg-[#FFF8F7] hover:bg-[#FFEBE9]/50 px-3 py-1.5 rounded-xl transition-all">
+            <button className="text-xs font-semibold text-[#FF6014] bg-[#FFF8F4] hover:bg-[#FFF0EB]/50 px-3 py-1.5 rounded-xl transition-all">
               Toggle Offline
             </button>
           </div>
@@ -711,12 +711,12 @@ function ProviderDashboard() {
                 <div
                   key={job.id}
                   onClick={() => setActiveJob(job.id)}
-                  className={`p-4 border rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md cursor-pointer transition-all ${activeJob === job.id ? "border-[#FF7C71]/40 bg-[#FFF8F7]/20" : "border-slate-100"
+                  className={`p-4 border rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md cursor-pointer transition-all ${activeJob === job.id ? "border-[#FF6014]/40 bg-[#FFF8F4]/20" : "border-slate-100"
                     }`}
                 >
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-[#FF7C71]">#{job.id}</span>
+                      <span className="text-sm font-bold text-[#FF6014]">#{job.id}</span>
                       <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${currentStatus === "completed" ? "bg-emerald-50 text-emerald-700"
                           : currentStatus === "on_the_way" ? "bg-indigo-50 text-indigo-700"
                             : currentStatus === "assigned" ? "bg-amber-50 text-amber-700"
@@ -757,7 +757,7 @@ function ProviderDashboard() {
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
                   <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">Client Contact</p>
                   <h5 className="text-sm font-bold text-slate-850">{activeJobDetails.customer}</h5>
-                  <p className="text-xs font-semibold text-[#FF7C71] flex items-center gap-1">
+                  <p className="text-xs font-semibold text-[#FF6014] flex items-center gap-1">
                     <Phone size={12} /> {activeJobDetails.phone}
                   </p>
                 </div>
@@ -808,7 +808,7 @@ function ProviderDashboard() {
               {!isEditingProfile && !isCreatingProfile && myProfile && (
                 <button
                   onClick={() => setIsEditingProfile(true)}
-                  className="text-xs font-semibold text-[#FF7C71] hover:text-[#E5675D] px-3 py-1.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-100/50 transition-colors"
+                  className="text-xs font-semibold text-[#FF6014] hover:text-[#E0530A] px-3 py-1.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-100/50 transition-colors"
                 >
                   Edit
                 </button>
@@ -840,7 +840,7 @@ function ProviderDashboard() {
                         <select
                           name="type"
                           defaultValue={myProfile?.type || 'personal'}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF7C71]/40"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
                           required
                         >
                           <option value="personal">Personal</option>
@@ -854,7 +854,7 @@ function ProviderDashboard() {
                           type="number"
                           placeholder="800"
                           defaultValue={myProfile?.min_starting_price}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF7C71]/40"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
                           required
                         />
                       </div>
@@ -867,7 +867,7 @@ function ProviderDashboard() {
                         type="text"
                         placeholder="e.g. Rana AC Services"
                         defaultValue={myProfile?.company_name}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF7C71]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
                         required
                       />
                     </div>
@@ -877,7 +877,7 @@ function ProviderDashboard() {
                       <select
                         name="category_id"
                         defaultValue={myProfile?.category?.id || ""}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF7C71]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
                       >
                         <option value="">Select a Category</option>
                         {categoriesRes?.data?.map((cat: any) => (
@@ -895,7 +895,7 @@ function ProviderDashboard() {
                         type="text"
                         placeholder="e.g. Mirpur, Dhaka"
                         defaultValue={myProfile?.location}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF7C71]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
                         required
                       />
                     </div>
@@ -907,7 +907,7 @@ function ProviderDashboard() {
                         rows={3}
                         placeholder="Describe your expertise and service quality..."
                         defaultValue={myProfile?.description}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF7C71]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
                         required
                       />
                     </div>
@@ -919,7 +919,7 @@ function ProviderDashboard() {
                         type="url"
                         placeholder="https://maps.google.com/..."
                         defaultValue={myProfile?.google_map_link}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF7C71]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
                       />
                     </div>
 
@@ -927,7 +927,7 @@ function ProviderDashboard() {
                       <button
                         type="submit"
                         disabled={isCreating || isUpdating}
-                        className="flex-1 py-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+                        className="flex-1 py-2 bg-[#FF6014] hover:bg-[#E0530A] text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
                       >
                         {isCreating || isUpdating ? "Saving..." : "Save Details"}
                       </button>
@@ -948,7 +948,7 @@ function ProviderDashboard() {
             ) : (
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#FFF8F7] rounded-xl flex items-center justify-center text-[#FF7C71] font-bold shrink-0">
+                  <div className="w-12 h-12 bg-[#FFF8F4] rounded-xl flex items-center justify-center text-[#FF6014] font-bold shrink-0">
                     <Building size={20} />
                   </div>
                   <div>
@@ -1003,7 +1003,7 @@ function ProviderDashboard() {
                           href={myProfile.google_map_link}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-[#FF7C71] hover:underline font-semibold"
+                          className="text-[#FF6014] hover:underline font-semibold"
                         >
                           View on Google Maps
                         </a>
@@ -1038,7 +1038,7 @@ function CustomerDashboard() {
     { label: "Active Orders", value: `${activeBookings.length} Service(s)`, desc: activeBookings.length > 0 ? "Provider is assigned" : "No active orders", icon: Clock, color: "text-amber-600 bg-amber-50" },
     { label: "Completed Bookings", value: `${completedBookings.length} Service(s)`, desc: "Expert home care received", icon: CheckCircle2, color: "text-emerald-600 bg-emerald-50" },
     { label: "Total Spent", value: `৳${totalSpent.toLocaleString()}`, desc: "Lifetime expenditure", icon: DollarSign, color: "text-teal-600 bg-teal-50" },
-    { label: "Active Promos", value: "3 Available", desc: "Up to 20% off next booking", icon: Sparkles, color: "text-[#E5675D] bg-[#FFF8F7]" },
+    { label: "Active Promos", value: "3 Available", desc: "Up to 20% off next booking", icon: Sparkles, color: "text-[#E0530A] bg-[#FFF8F4]" },
   ];
 
   const customerBookings = [...myBookings].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()).map(b => ({
@@ -1080,7 +1080,7 @@ function CustomerDashboard() {
         b.vendorId ? (
           <button
             onClick={() => router.push(`/dashbord/live-chat?receiverId=${b.vendorId}&receiverName=${encodeURIComponent(b.provider)}`)}
-            className="text-xs bg-[#FFF8F7] text-[#FF7C71] px-3 py-1.5 rounded-lg font-bold hover:bg-[#FFEBE9] transition-colors"
+            className="text-xs bg-[#FFF8F4] text-[#FF6014] px-3 py-1.5 rounded-lg font-bold hover:bg-[#FFF0EB] transition-colors"
           >
             Chat Provider
           </button>
@@ -1093,7 +1093,7 @@ function CustomerDashboard() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Header */}
       <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
-        <div className="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-[#FF7C71]/10 to-amber-100/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-[#FF6014]/10 to-amber-100/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-100 text-amber-600 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
@@ -1101,11 +1101,11 @@ function CustomerDashboard() {
               Client Portal
             </div>
             <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-              Welcome back, <span className="text-[#FF7C71]">{authUser?.name || "Client"}</span>!
+              Welcome back, <span className="text-[#FF6014]">{authUser?.name || "Client"}</span>!
             </h1>
             <p className="text-slate-400 mt-1.5 text-sm font-medium">Keep track of your active services and book premium care for your home.</p>
           </div>
-          <button className="shrink-0 bg-gradient-to-br from-[#FF7C71] to-[#E5675D] hover:from-[#E5675D] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/25 text-sm transition-all active:scale-[0.985] flex items-center gap-2">
+          <button className="shrink-0 bg-gradient-to-br from-[#FF6014] to-[#E0530A] hover:from-[#E0530A] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF6014]/25 text-sm transition-all active:scale-[0.985] flex items-center gap-2">
             <Plus size={16} /> Book a New Service
           </button>
         </div>
@@ -1136,7 +1136,7 @@ function CustomerDashboard() {
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2 space-y-6">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold text-slate-900">Active Service Tracker</h3>
-            <span className="text-xs text-[#FF7C71] font-semibold bg-[#FFF8F7] px-2.5 py-1 rounded-lg">Real-time update</span>
+            <span className="text-xs text-[#FF6014] font-semibold bg-[#FFF8F4] px-2.5 py-1 rounded-lg">Real-time update</span>
           </div>
 
           {activeBookings.length > 0 ? activeBookings.map((activeBooking: any) => (
@@ -1144,7 +1144,7 @@ function CustomerDashboard() {
               <div className="flex flex-col sm:flex-row justify-between gap-4 border-b border-slate-200 pb-4">
                 <div>
                   <span className="text-xs text-slate-400 font-bold uppercase">Booking ID</span>
-                  <p className="text-base font-bold text-[#FF7C71]">RS-{activeBooking.id}</p>
+                  <p className="text-base font-bold text-[#FF6014]">RS-{activeBooking.id}</p>
                 </div>
                 <div>
                   <span className="text-xs text-slate-400 font-bold uppercase">Service Category</span>
@@ -1163,20 +1163,20 @@ function CustomerDashboard() {
                     {activeBooking.vendor?.id && (
                       <button
                         onClick={() => router.push(`/dashbord/live-chat?receiverId=${activeBooking.vendor.id}&receiverName=${encodeURIComponent(activeBooking.vendor.name)}`)}
-                        className="bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#FF7C71] border border-[#FF7C71]/20 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
+                        className="bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#FF6014] border border-[#FF6014]/20 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
                       >
                         <MessageCircle size={14} /> Chat
                       </button>
                     )}
                     <button
                       onClick={() => router.push(`/dashbord/bookings/track/${activeBooking.id}`)}
-                      className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
+                      className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
                     >
                       <MapPin size={14} /> Track Flow
                     </button>
                   </div>
                 </div>
-                <div className="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#FFEBE9]">
+                <div className="relative pl-6 space-y-6 before:absolute before:left-2 before:top-2 before:bottom-2 before:w-0.5 before:bg-[#FFF0EB]">
                   {[
                     { title: "Booking Confirmed", desc: "Your booking was accepted.", done: true, current: activeBooking.status === "pending" },
                     { title: "Expert Assigned", desc: "A provider has been assigned.", done: activeBooking.status === "assigned" || activeBooking.status === "on_the_way", current: activeBooking.status === "assigned" },
@@ -1184,8 +1184,8 @@ function CustomerDashboard() {
                     { title: "Service Complete", desc: "Final verification and payment completion", done: false, current: false },
                   ].map((step, i) => (
                     <div key={i} className="relative">
-                      <span className={`absolute -left-[22px] top-1.5 w-3 h-3 rounded-full border-2 ring-4 ring-white ${step.done ? "bg-[#FF7C71] border-[#FF7C71]"
-                          : step.current ? "bg-[#FF7C71] border-[#FF7C71] animate-pulse"
+                      <span className={`absolute -left-[22px] top-1.5 w-3 h-3 rounded-full border-2 ring-4 ring-white ${step.done ? "bg-[#FF6014] border-[#FF6014]"
+                          : step.current ? "bg-[#FF6014] border-[#FF6014] animate-pulse"
                             : "bg-slate-200 border-slate-200"
                         }`} />
                       <div>
@@ -1216,9 +1216,9 @@ function CustomerDashboard() {
               { code: "ACCOOL20", discount: "20% OFF", service: "Valid on AC Repairs", expiry: "Exp: June 30" },
               { code: "CLEANHOMY", discount: "৳500 OFF", service: "Valid on Deep Cleaning", expiry: "Exp: July 05" },
             ].map((promo, i) => (
-              <div key={i} className="p-4 bg-[#FFF8F7] border border-[#FFEBE9]/50 rounded-2xl relative overflow-hidden">
-                <div className="absolute right-0 top-0 w-16 h-16 bg-[#FF7C71]/5 rounded-bl-full flex items-center justify-center font-bold text-[#FF7C71] text-xs">%</div>
-                <span className="text-xs font-bold text-[#E5675D] tracking-wider bg-[#FFEBE9]/60 px-2 py-0.5 rounded-lg">{promo.code}</span>
+              <div key={i} className="p-4 bg-[#FFF8F4] border border-[#FFF0EB]/50 rounded-2xl relative overflow-hidden">
+                <div className="absolute right-0 top-0 w-16 h-16 bg-[#FF6014]/5 rounded-bl-full flex items-center justify-center font-bold text-[#FF6014] text-xs">%</div>
+                <span className="text-xs font-bold text-[#E0530A] tracking-wider bg-[#FFF0EB]/60 px-2 py-0.5 rounded-lg">{promo.code}</span>
                 <h4 className="text-lg font-bold text-slate-800 mt-2">{promo.discount}</h4>
                 <p className="text-xs text-slate-500 mt-1">{promo.service}</p>
                 <span className="text-[10px] text-slate-400 mt-3 block font-semibold">{promo.expiry}</span>
@@ -1270,7 +1270,7 @@ function AgentDashboard() {
   const totalCommission = myBookings.reduce((sum: number, b: any) => sum + ((Number(b.total_price || 0) * Number(b.service?.agent_commission_percentage || authUser?.commission_percentage || 0)) / 100), 0);
 
   const stats = [
-    { label: "Bookings Placed", value: `${totalBookings} Orders`, desc: `${thisWeekBookings} active this week`, icon: Briefcase, color: "text-[#E5675D] bg-[#FFF8F7]" },
+    { label: "Bookings Placed", value: `${totalBookings} Orders`, desc: `${thisWeekBookings} active this week`, icon: Briefcase, color: "text-[#E0530A] bg-[#FFF8F4]" },
     { label: "Total Order Volume", value: `৳${totalOrderVolume.toLocaleString()}`, desc: "Lifetime booking value", icon: Zap, color: "text-amber-600 bg-amber-50" },
     { label: "Est. Commission", value: `৳${totalCommission.toLocaleString()}`, desc: "Total potential earnings", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
     { label: "Wallet Balance", value: `৳${authUser?.wallet_balance || 0}`, desc: "Available for withdrawal", icon: Clock, color: "text-indigo-600 bg-indigo-50" },
@@ -1330,7 +1330,7 @@ function AgentDashboard() {
           </div>
           <Link
             href="/dashbord/quick-booking"
-            className="shrink-0 bg-gradient-to-br from-[#FF7C71] to-[#E5675D] hover:from-[#E5675D] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/25 text-sm transition-all active:scale-[0.985] text-center flex items-center gap-2 w-fit"
+            className="shrink-0 bg-gradient-to-br from-[#FF6014] to-[#E0530A] hover:from-[#E0530A] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF6014]/25 text-sm transition-all active:scale-[0.985] text-center flex items-center gap-2 w-fit"
           >
             <Zap size={15} /> Quick Booking Console
           </Link>
@@ -1362,7 +1362,7 @@ function AgentDashboard() {
         <div className="lg:col-span-2 space-y-4">
           <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
             <h3 className="text-lg font-bold text-slate-900">Recent Placed Orders</h3>
-            <Link href="/dashbord/orders" className="text-xs font-semibold text-[#FF7C71] hover:underline">
+            <Link href="/dashbord/orders" className="text-xs font-semibold text-[#FF6014] hover:underline">
               View All Orders
             </Link>
           </div>
@@ -1382,10 +1382,10 @@ function AgentDashboard() {
           <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl space-y-4">
             <div className="flex justify-between items-center text-xs font-bold text-slate-400 uppercase">
               <span>Current Default Rate</span>
-              <span className="text-[#FF7C71] text-sm">{authUser?.commission_percentage || 0}% Commission</span>
+              <span className="text-[#FF6014] text-sm">{authUser?.commission_percentage || 0}% Commission</span>
             </div>
             <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
-              <div className="h-full bg-[#FF7C71] rounded-full w-3/4" />
+              <div className="h-full bg-[#FF6014] rounded-full w-3/4" />
             </div>
             <p className="text-xs text-slate-400 font-medium">
               Complete 26 more bookings to unlock **18% Silver Partner commission** rate!
@@ -1400,7 +1400,7 @@ function AgentDashboard() {
                 { title: "Custom Agent Coupons", desc: "Offer 5% off to your clients" },
               ].map((b, idx) => (
                 <div key={idx} className="flex gap-3 text-xs">
-                  <span className="text-[#FF7C71] font-bold">✓</span>
+                  <span className="text-[#FF6014] font-bold">✓</span>
                   <div>
                     <h5 className="font-semibold text-slate-800">{b.title}</h5>
                     <p className="text-slate-400">{b.desc}</p>

@@ -155,7 +155,7 @@ export default function CouponsManagementPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center">
-        <ShieldAlert size={48} className="text-[#FF7C71] mb-4" />
+        <ShieldAlert size={48} className="text-[#FF6014] mb-4" />
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
         <p className="text-sm text-slate-500 mt-2">Only superadmin can manage coupons.</p>
       </div>
@@ -174,7 +174,7 @@ export default function CouponsManagementPage() {
       key: "discount",
       header: "Discount",
       render: (item: Coupon) => (
-        <span className="font-bold text-[#FF7C71]">
+        <span className="font-bold text-[#FF6014]">
           {item.discount_type === "percentage"
             ? `${item.discount_value}%`
             : `৳${Number(item.discount_value).toLocaleString()}`}
@@ -241,7 +241,7 @@ export default function CouponsManagementPage() {
     <div className="space-y-8 animate-in fade-in duration-200">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Tag className="w-6 h-6" />
           </div>
           <div>
@@ -253,7 +253,7 @@ export default function CouponsManagementPage() {
         </div>
         <button
           onClick={openCreate}
-          className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-md flex items-center gap-2"
+          className="bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-md flex items-center gap-2"
         >
           <PlusCircle size={18} />
           Create Coupon
@@ -452,7 +452,7 @@ export default function CouponsManagementPage() {
                   type="checkbox"
                   checked={form.is_active}
                   onChange={(e) => setForm({ ...form, is_active: e.target.checked })}
-                  className="rounded border-slate-300 text-[#FF7C71] focus:ring-[#FF7C71]"
+                  className="rounded border-slate-300 text-[#FF6014] focus:ring-[#FF6014]"
                 />
                 Active coupon
               </label>
@@ -468,7 +468,7 @@ export default function CouponsManagementPage() {
                 <button
                   type="submit"
                   disabled={isCreating || isUpdating}
-                  className="px-6 py-2.5 text-sm font-bold text-white bg-[#FF7C71] hover:bg-[#E5675D] rounded-xl disabled:opacity-70"
+                  className="px-6 py-2.5 text-sm font-bold text-white bg-[#FF6014] hover:bg-[#E0530A] rounded-xl disabled:opacity-70"
                 >
                   {editingCoupon ? "Update Coupon" : "Create Coupon"}
                 </button>

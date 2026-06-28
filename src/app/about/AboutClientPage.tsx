@@ -53,7 +53,7 @@ const PILLARS = [
     description:
       "All service appointments are backed by Rajseba's damage protection guarantee for absolute peace of mind.",
     icon: Heart,
-    bg: "bg-rose-50 text-[#FF7C71]",
+    bg: "bg-rose-50 text-[#FF6014]",
   },
   {
     title: "24/7 Priority Support",
@@ -180,7 +180,7 @@ export default function AboutClientPage() {
         {/* Parallax glow styling */}
         <motion.div
           style={{ y: glowY }}
-          className="absolute -top-1/4 right-0 w-[400px] h-[400px] bg-[#FF7C71]/5 blur-[100px] rounded-full pointer-events-none"
+          className="absolute -top-1/4 right-0 w-[400px] h-[400px] bg-[#FF6014]/5 blur-[100px] rounded-full pointer-events-none"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 30]) }}
@@ -208,9 +208,9 @@ export default function AboutClientPage() {
                 className="text-2xl sm:text-3xl md:text-4xl font-black text-slate-900 tracking-tight leading-tight"
               >
                 Your Premier Partner for{" "}
-                <span className="text-[#FF7C71] relative inline-block">
+                <span className="text-[#FF6014] relative inline-block">
                   Expert Home Care
-                  <span className="absolute bottom-1 left-0 w-full h-1 bg-[#FF7C71]/15 rounded-full" />
+                  <span className="absolute bottom-1 left-0 w-full h-1 bg-[#FF6014]/15 rounded-full" />
                 </span>
               </motion.h1>
 
@@ -260,7 +260,7 @@ export default function AboutClientPage() {
               >
                 <Link href="/services">
                   <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
-                    <Button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-6 py-3.5 h-auto rounded-xl border-none transition-colors cursor-pointer shadow-md hover:shadow-[0_8px_20px_rgba(255,90,95,0.3)] flex items-center gap-2">
+                    <Button className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-extrabold px-6 py-3.5 h-auto rounded-xl border-none transition-colors cursor-pointer shadow-md hover:shadow-[0_8px_20px_rgba(255,90,95,0.3)] flex items-center gap-2">
                       Book Service Now
                       <ArrowRight className="w-4 h-4" />
                     </Button>
@@ -314,7 +314,7 @@ export default function AboutClientPage() {
                 transition={{ duration: 0.4, delay: i * 0.08 }}
                 className="bg-slate-50/50 rounded-2xl p-4 text-center border border-slate-100"
               >
-                <p className="text-xl md:text-2xl font-black text-[#FF7C71] tracking-tight">
+                <p className="text-xl md:text-2xl font-black text-[#FF6014] tracking-tight">
                   {stat.value}
                 </p>
                 <p className="text-xs font-bold text-slate-800 uppercase tracking-wider mt-1">
@@ -382,7 +382,7 @@ export default function AboutClientPage() {
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <Reveal variants={fadeLeft} className="space-y-4">
-              <span className="inline-block text-[10px] font-extrabold text-[#FF7C71] uppercase tracking-widest bg-rose-50 px-3 py-1 rounded-full border border-rose-100/50">
+              <span className="inline-block text-[10px] font-extrabold text-[#FF6014] uppercase tracking-widest bg-rose-50 px-3 py-1 rounded-full border border-rose-100/50">
                 Services Range
               </span>
               <h2 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
@@ -395,14 +395,14 @@ export default function AboutClientPage() {
               <ul className="grid sm:grid-cols-2 gap-2 pt-2">
                 {SERVICES_COVERED.slice(0, 4).map((srv, idx) => (
                   <li key={idx} className="flex items-center gap-2 text-xs font-bold text-slate-700">
-                    <div className="w-1.5 h-1.5 rounded-full bg-[#FF7C71] shrink-0" />
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#FF6014] shrink-0" />
                     <span>{srv}</span>
                   </li>
                 ))}
               </ul>
               <div className="pt-2">
                 <Link href="/services">
-                  <span className="inline-flex items-center gap-1.5 text-xs font-black text-[#FF7C71] hover:underline cursor-pointer">
+                  <span className="inline-flex items-center gap-1.5 text-xs font-black text-[#FF6014] hover:underline cursor-pointer">
                     View Complete Rate Card & Services <ArrowRight className="w-3.5 h-3.5" />
                   </span>
                 </Link>
@@ -457,8 +457,8 @@ export default function AboutClientPage() {
             </Reveal>
 
             <Reveal variants={fadeRight}>
-              <div className="bg-slate-50/45 border border-slate-100 rounded-3xl p-6 md:p-8 space-y-3 hover:border-[#FF7C71]/10 transition-colors">
-                <div className="w-10 h-10 rounded-xl bg-rose-50 text-[#FF7C71] flex items-center justify-center shrink-0">
+              <div className="bg-slate-50/45 border border-slate-100 rounded-3xl p-6 md:p-8 space-y-3 hover:border-[#FF6014]/10 transition-colors">
+                <div className="w-10 h-10 rounded-xl bg-rose-50 text-[#FF6014] flex items-center justify-center shrink-0">
                   <Users className="w-5 h-5" />
                 </div>
                 <h3 className="text-base font-extrabold text-slate-900 tracking-wide">
@@ -477,7 +477,7 @@ export default function AboutClientPage() {
       <section className="py-8 md:py-12 bg-white border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <Reveal variants={stagger} className="text-center max-w-2xl mx-auto mb-8">
-            <span className="inline-block text-[10px] font-extrabold text-[#FF7C71] uppercase tracking-widest bg-rose-50 px-3 py-1 rounded-full border border-rose-100/50">
+            <span className="inline-block text-[10px] font-extrabold text-[#FF6014] uppercase tracking-widest bg-rose-50 px-3 py-1 rounded-full border border-rose-100/50">
               Leadership
             </span>
             <h2 className="text-xl md:text-2xl font-black text-slate-900 mt-2 tracking-tight">
@@ -507,7 +507,7 @@ export default function AboutClientPage() {
 
                 <div>
                   <h3 className="font-black text-slate-900 text-sm">{member.name}</h3>
-                  <p className="text-[10px] font-bold text-[#FF7C71] uppercase tracking-wider mt-0.5">
+                  <p className="text-[10px] font-bold text-[#FF6014] uppercase tracking-wider mt-0.5">
                     {member.role}
                   </p>
                 </div>

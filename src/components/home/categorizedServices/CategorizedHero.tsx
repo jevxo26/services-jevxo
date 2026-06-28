@@ -106,12 +106,12 @@ export function CategorizedHero({
           <div className="flex flex-col gap-5 min-w-0">
             {/* Badges */}
             <div className="flex flex-wrap gap-2">
-              <div className="inline-flex items-center gap-2 bg-[#fff0f0] text-[#FF7C71] px-4 py-1.5 rounded-full text-xs font-semibold">
+              <div className="inline-flex items-center gap-2 bg-[#fff0f0] text-[#FF6014] px-4 py-1.5 rounded-full text-xs font-semibold">
                 <Zap className="w-3.5 h-3.5" />
                 Top Rated Services
               </div>
               {categoryName && (
-                <div className="inline-flex items-center gap-1.5 bg-[#FFF8F7] border border-[#FF7C71]/20 text-[#FF7C71] px-4 py-1.5 rounded-full text-xs font-medium">
+                <div className="inline-flex items-center gap-1.5 bg-[#FFF8F4] border border-[#FF6014]/20 text-[#FF6014] px-4 py-1.5 rounded-full text-xs font-medium">
                   <Sparkles className="w-3 h-3" />
                   {categoryName}
                 </div>
@@ -132,7 +132,7 @@ export function CategorizedHero({
               >
                 <Heart
                   size={20}
-                  className={isSaved ? "fill-[#FF7C71] text-[#FF7C71]" : "text-slate-300"}
+                  className={isSaved ? "fill-[#FF6014] text-[#FF6014]" : "text-slate-300"}
                 />
               </motion.button>
             </div>
@@ -169,7 +169,7 @@ export function CategorizedHero({
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
                 onClick={handleBookNow}
-                className="flex items-center justify-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D]
+                className="flex items-center justify-center gap-2 bg-[#FF6014] hover:bg-[#E0530A]
                   text-white px-7 py-3.5 rounded-full font-semibold text-xs sm:text-sm
                   transition-all shadow-lg shadow-rose-100 cursor-pointer w-full sm:w-auto"
               >

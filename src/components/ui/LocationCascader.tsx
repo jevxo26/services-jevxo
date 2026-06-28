@@ -105,14 +105,14 @@ export function LocationCascader({
       padding: "2px",
       fontSize: "0.875rem", // text-sm
       fontWeight: "500", // font-medium
-      boxShadow: state.isFocused ? "0 0 0 2px #FFEBE9" : "none", // ring-rose-100
+      boxShadow: state.isFocused ? "0 0 0 2px #FFF0EB" : "none", // ring-rose-100
       "&:hover": {
         borderColor: state.isFocused ? "#fda4af" : "#cbd5e1"
       }
     }),
     option: (base: any, state: any) => ({
       ...base,
-      backgroundColor: state.isSelected ? "#f43f5e" : state.isFocused ? "#FFEBE9" : "white", // rose-500, rose-100
+      backgroundColor: state.isSelected ? "#f43f5e" : state.isFocused ? "#FFF0EB" : "white", // rose-500, rose-100
       color: state.isSelected ? "white" : "#0f172a", // slate-900
       fontSize: "0.875rem",
       "&:active": {

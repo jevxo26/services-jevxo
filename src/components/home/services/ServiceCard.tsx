@@ -85,8 +85,8 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
           aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
           className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-60 ${
             isWishlisted
-              ? "bg-[#FF7C71] text-white scale-110"
-              : "bg-white/90 text-slate-400 hover:bg-rose-50 hover:text-[#FF7C71] hover:scale-110"
+              ? "bg-[#FF6014] text-white scale-110"
+              : "bg-white/90 text-slate-400 hover:bg-rose-50 hover:text-[#FF6014] hover:scale-110"
           }`}
         >
           <Heart
@@ -105,7 +105,7 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
           {truncatedDesc}
         </p>
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#f3f4f6]">
-          <span className="text-base font-extrabold text-[#FF7C71]">
+          <span className="text-base font-extrabold text-[#FF6014]">
             {service.priceDisplay}
           </span>
           <span className="flex items-center gap-1 text-[10px] font-semibold text-[#9ca3af]">

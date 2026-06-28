@@ -47,7 +47,7 @@ function StatCard({ stat, triggered }: { stat: typeof stats[0]; triggered: boole
   return (
     <div className="flex flex-col items-center group">
       <div className="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
-        <stat.icon className="w-8 h-8 text-[#FF7C71]" />
+        <stat.icon className="w-8 h-8 text-[#FF6014]" />
       </div>
       <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2 tabular-nums">
         {triggered ? `${formatNumber(count)}${stat.suffix}` : '0'}
@@ -85,12 +85,12 @@ export default function Stats() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <TrendingUp size={13} />
             Our Impact
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
+            <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
             Our Platform Impact
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">

@@ -51,7 +51,7 @@ export default function AgentSupportPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <MessageCircle className="w-6 h-6" />
           </div>
           <div>
@@ -82,7 +82,7 @@ export default function AgentSupportPage() {
                       ? "bg-emerald-50 text-emerald-700"
                       : t.status === "In Progress"
                       ? "bg-indigo-50 text-indigo-700"
-                      : "bg-[#FFF8F7] text-[#E5675D]"
+                      : "bg-[#FFF8F4] text-[#E0530A]"
                   }`}>
                     {t.status}
                   </span>
@@ -106,7 +106,7 @@ export default function AgentSupportPage() {
         {/* Right 1 Column: Create ticket */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
           <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <MessageCircle size={20} className="text-[#FF7C71]" /> Open Priority Ticket
+            <MessageCircle size={20} className="text-[#FF6014]" /> Open Priority Ticket
           </h3>
 
           <form onSubmit={handleTicketSubmit} className="space-y-4">
@@ -115,7 +115,7 @@ export default function AgentSupportPage() {
               <select
                 value={category}
                 onChange={(e) => setCategory(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all cursor-pointer"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all cursor-pointer"
               >
                 <option>Commission & Payout</option>
                 <option>Booking Failures</option>
@@ -130,7 +130,7 @@ export default function AgentSupportPage() {
                 placeholder="Brief summary..."
                 value={subject}
                 onChange={(e) => setSubject(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                 required
               />
             </div>
@@ -142,14 +142,14 @@ export default function AgentSupportPage() {
                 placeholder="Explain the issue in detail..."
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]"
+              className="w-full bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]"
             >
               <Send size={14} /> Submit Ticket
             </button>
@@ -164,7 +164,7 @@ export default function AgentSupportPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+      <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

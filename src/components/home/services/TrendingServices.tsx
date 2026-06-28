@@ -144,7 +144,7 @@ export default function TrendingServices() {
 
   if (isLoading) {
     return (
-      <section className="py-14 bg-[#FFF8F7] relative overflow-hidden">
+      <section className="py-14 bg-[#FFF8F4] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="h-8 w-48 bg-slate-200/50 animate-pulse rounded-lg mb-8" />
           <div className="grid grid-cols-1 md:grid-cols-[1.5fr_1fr] gap-6">
@@ -158,7 +158,7 @@ export default function TrendingServices() {
 
   if (!allServices.length) {
     return (
-      <section className="py-14 bg-[#FFF8F7] relative overflow-hidden">
+      <section className="py-14 bg-[#FFF8F4] relative overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 md:px-6 text-center py-12">
           <h2 className="text-xl font-extrabold text-slate-800 mb-2">Trending Services</h2>
           <p className="text-sm text-slate-500">No trending services available at the moment.</p>
@@ -280,7 +280,7 @@ export default function TrendingServices() {
                     </span>
                     <Link
                       href={secondary.slug ? `/categories/service/${secondary.slug}?book=true` : `/services/${secondary.id}?book=true`}
-                      className="px-4 py-2 bg-slate-50 hover:bg-[#FF7C71] text-slate-700 hover:text-white border border-slate-100 hover:border-transparent text-xs font-bold rounded-xl transition-all shadow-sm cursor-pointer"
+                      className="px-4 py-2 bg-slate-50 hover:bg-[#FF6014] text-slate-700 hover:text-white border border-slate-100 hover:border-transparent text-xs font-bold rounded-xl transition-all shadow-sm cursor-pointer"
                     >
                       Book Now
                     </Link>

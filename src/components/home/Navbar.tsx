@@ -87,7 +87,8 @@ export function Navbar() {
     name: user.name || "User",
     email: user.email || "",
     roleName: roleName || "Client",
-    avatar: (user.name || "U").substring(0, 2).toUpperCase()
+    avatar: (user.name || "U").substring(0, 2).toUpperCase(),
+    avatarUrl: user.avatar
   } : null;
 
   const { scrollY } = useScroll();
@@ -180,7 +181,7 @@ export function Navbar() {
     <>
       <motion.nav
         style={{ boxShadow: headerShadow, borderBottomColor: borderColor }}
-        className="bg-[#FFF8F7]/50 backdrop-blur-lg border-b sticky top-0 z-50"
+        className="bg-[#FFF8F4]/50 backdrop-blur-lg border-b sticky top-0 z-50"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           {/* ─── TOP BAR ─── */}
@@ -223,8 +224,8 @@ export function Navbar() {
                       <button
                         type="button"
                         className={`flex items-center font-semibold text-xs lg:text-sm transition-colors cursor-pointer ${active
-                          ? "text-[#FF7C71]"
-                          : "text-slate-600 hover:text-[#FF7C71]"
+                          ? "text-[#FF6014]"
+                          : "text-slate-600 hover:text-[#FF6014]"
                           }`}
                       >
                         <Icon
@@ -237,7 +238,7 @@ export function Navbar() {
                         {active && (
                           <motion.span
                             layoutId="navIndicatorLeft"
-                            className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF7C71] rounded-full"
+                            className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF6014] rounded-full"
                           />
                         )}
                       </button>
@@ -267,7 +268,7 @@ export function Navbar() {
                                     onClick={() => setShowMenuDropdown(false)}
                                   >
                                     {/* ── FIXED: larger icon container, proper image sizing ── */}
-                                    <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/item:bg-[#FF7C71]/10 group-hover/item:border-rose-100 transition-all duration-200 overflow-hidden shrink-0">
+                                    <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/item:bg-[#FF6014]/10 group-hover/item:border-rose-100 transition-all duration-200 overflow-hidden shrink-0">
                                       {cat.icon ? (
                                         <img
                                           src={cat.icon}
@@ -275,10 +276,10 @@ export function Navbar() {
                                           className="w-full h-full object-cover"
                                         />
                                       ) : (
-                                        <LayoutGrid className="w-5 h-5 text-slate-400 group-hover/item:text-[#FF7C71]" />
+                                        <LayoutGrid className="w-5 h-5 text-slate-400 group-hover/item:text-[#FF6014]" />
                                       )}
                                     </div>
-                                    <span className="font-semibold text-sm text-slate-700 group-hover/item:text-[#FF7C71] transition-colors line-clamp-2 leading-snug">
+                                    <span className="font-semibold text-sm text-slate-700 group-hover/item:text-[#FF6014] transition-colors line-clamp-2 leading-snug">
                                       {cat.name}
                                     </span>
                                   </Link>
@@ -297,8 +298,8 @@ export function Navbar() {
                     key={i}
                     href={link.href}
                     className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active
-                      ? "text-[#FF7C71]"
-                      : "text-slate-600 hover:text-[#FF7C71]"
+                      ? "text-[#FF6014]"
+                      : "text-slate-600 hover:text-[#FF6014]"
                       }`}
                   >
                     <Icon
@@ -308,7 +309,7 @@ export function Navbar() {
                     {active && (
                       <motion.span
                         layoutId="navIndicatorLeft"
-                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF7C71] rounded-full"
+                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF6014] rounded-full"
                       />
                     )}
                   </Link>
@@ -327,7 +328,7 @@ export function Navbar() {
                     <label htmlFor="desktop-search" className="sr-only">
                       Search services
                     </label>
-                    <div className="flex items-center h-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
+                    <div className="flex items-center h-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF6014] focus-within:ring-2 focus-within:ring-[#FF6014]/10 transition-all">
                       <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
                       <input
                         id="desktop-search"
@@ -344,7 +345,7 @@ export function Navbar() {
                 <label htmlFor="desktop-search-2" className="sr-only">
                   Search services
                 </label>
-                <div className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
+                <div className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF6014] focus-within:ring-2 focus-within:ring-[#FF6014]/10 transition-all">
                   <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
                   <input
                     id="desktop-search-2"
@@ -370,8 +371,8 @@ export function Navbar() {
                     key={i}
                     href={link.href}
                     className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active
-                      ? "text-[#FF7C71]"
-                      : "text-slate-600 hover:text-[#FF7C71]"
+                      ? "text-[#FF6014]"
+                      : "text-slate-600 hover:text-[#FF6014]"
                       }`}
                   >
                     <Icon
@@ -381,7 +382,7 @@ export function Navbar() {
                     {active && (
                       <motion.span
                         layoutId="navIndicatorRight"
-                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF7C71] rounded-full"
+                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF6014] rounded-full"
                       />
                     )}
                   </Link>
@@ -407,8 +408,12 @@ export function Navbar() {
                     <p className="text-xs font-bold text-slate-800 leading-none">{profile.name}</p>
                     <p className="text-[10px] text-slate-400 mt-1 leading-none font-semibold">{profile.roleName}</p>
                   </div>
-                  <div className="w-9 h-9 bg-rose-100 text-[#FF7C71] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-sm hover:scale-105 transition-transform duration-200 select-none">
-                    {profile.avatar}
+                  <div className="w-9 h-9 bg-rose-100 text-[#FF6014] font-bold rounded-full flex items-center justify-center overflow-hidden border border-rose-200 shadow-sm hover:scale-105 transition-transform duration-200 select-none shrink-0">
+                    {profile.avatarUrl ? (
+                      <img src={profile.avatarUrl} alt={profile.name} className="w-full h-full object-cover" />
+                    ) : (
+                      profile.avatar
+                    )}
                   </div>
                 </button>
 
@@ -424,14 +429,14 @@ export function Navbar() {
                       <div className="px-4 py-3 border-b border-slate-50 bg-slate-50/40">
                         <p className="text-sm font-bold text-slate-800 truncate">{profile.name}</p>
                         <p className="text-xs text-slate-400 truncate mt-0.5 font-medium">{profile.email}</p>
-                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF7C71] bg-rose-50 border border-rose-100/50 rounded-full mt-2">
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF6014] bg-rose-50 border border-rose-100/50 rounded-full mt-2">
                           {profile.roleName}
                         </span>
                       </div>
                       <div className="p-1 space-y-0.5">
                         <Link
                           href={role === "client" ? "/dashbord/overview" : "/dashbord"}
-                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF6014] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
                           <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500"><LayoutGrid size={15} /></div>
@@ -439,7 +444,7 @@ export function Navbar() {
                         </Link>
                         <Link
                           href="/dashbord/profile"
-                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF6014] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
                           <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500"><User size={15} /></div>
@@ -447,7 +452,7 @@ export function Navbar() {
                         </Link>
                         <Link
                           href="/dashbord/settings"
-                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
+                          className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF6014] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
                           <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500"><Settings size={15} /></div>
@@ -458,7 +463,7 @@ export function Navbar() {
                           onClick={() => { setProfileDropdownOpen(false); dispatch(authLogout()); }}
                           className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-rose-600 hover:bg-rose-50 transition-all font-semibold"
                         >
-                          <div className="p-1.5 rounded-lg bg-rose-50 text-[#FF7C71]"><LogOut size={15} /></div>
+                          <div className="p-1.5 rounded-lg bg-rose-50 text-[#FF6014]"><LogOut size={15} /></div>
                           <span>Sign Out</span>
                         </button>
                       </div>
@@ -470,14 +475,14 @@ export function Navbar() {
               <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
                 <Link
                   href="/login"
-                  className="flex items-center gap-2 font-semibold text-slate-700 text-[#FF7C71] bg-rose-100 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
+                  className="flex items-center gap-2 font-semibold text-slate-700 text-[#FF6014] bg-rose-100 py-2 px-3 rounded-lg text-sm lg:text-[15px] transition-colors"
                 >
                   <LogIn className="w-4 h-4" />
                   Login
                 </Link>
                 <Link
                   href="/signup"
-                  className="flex items-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
+                  className="flex items-center gap-2 bg-[#FF6014] hover:bg-[#E0530A] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
                 >
                   <UserPlus className="w-4 h-4" />
                   Signup
@@ -491,8 +496,8 @@ export function Navbar() {
                 variant="ghost"
                 onClick={handleMobileSearchToggle}
                 className={`p-2.5 h-auto rounded-lg transition-colors ${mobileSearchOpen
-                  ? "text-[#FF7C71] bg-rose-50 hover:bg-rose-50 hover:text-[#FF7C71]"
-                  : "text-slate-600 hover:text-[#FF7C71] hover:bg-slate-50"
+                  ? "text-[#FF6014] bg-rose-50 hover:bg-rose-50 hover:text-[#FF6014]"
+                  : "text-slate-600 hover:text-[#FF6014] hover:bg-slate-50"
                   }`}
                 aria-label={mobileSearchOpen ? "Close search" : "Open search"}
                 aria-expanded={mobileSearchOpen}
@@ -503,8 +508,8 @@ export function Navbar() {
                 variant="ghost"
                 onClick={handleMenuToggle}
                 className={`p-2.5 h-auto rounded-lg transition-colors ${isOpen
-                  ? "text-[#FF7C71] bg-rose-50 hover:bg-rose-50 hover:text-[#FF7C71]"
-                  : "text-slate-600 hover:text-[#FF7C71] hover:bg-slate-50"
+                  ? "text-[#FF6014] bg-rose-50 hover:bg-rose-50 hover:text-[#FF6014]"
+                  : "text-slate-600 hover:text-[#FF6014] hover:bg-slate-50"
                   }`}
                 aria-label={isOpen ? "Close menu" : "Open menu"}
                 aria-expanded={isOpen}
@@ -528,7 +533,7 @@ export function Navbar() {
               >
                 <div className="py-3 px-1">
                   <label htmlFor="mobile-search" className="sr-only">Search services</label>
-                  <div className="flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 h-11 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
+                  <div className="flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 h-11 gap-2 focus-within:border-[#FF6014] focus-within:ring-2 focus-within:ring-[#FF6014]/10 transition-all">
                     <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
                     <input
                       id="mobile-search"
@@ -556,7 +561,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.22, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden border-t border-slate-100/80 bg-[#FFF8F7]/80 backdrop-blur-lg"
+              className="md:hidden overflow-hidden border-t border-slate-100/80 bg-[#FFF8F4]/80 backdrop-blur-lg"
             >
               <div className="px-4 py-4 space-y-1">
                 {ALL_NAV_LINKS.map((link, i) => {
@@ -572,8 +577,8 @@ export function Navbar() {
                           type="button"
                           onClick={() => setShowMobileAccordion(!showMobileAccordion)}
                           className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${active
-                            ? "text-[#FF7C71] bg-rose-50"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71]"
+                            ? "text-[#FF6014] bg-rose-50"
+                            : "text-slate-700 hover:bg-slate-50 hover:text-[#FF6014]"
                             }`}
                         >
                           <div className="flex items-center gap-2.5">
@@ -604,8 +609,8 @@ export function Navbar() {
                                       key={cat.id}
                                       href={`/categories/${cat.id}`}
                                       className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all text-sm font-medium ${isCategoryActive
-                                        ? "bg-rose-50 text-[#FF7C71] font-semibold border border-rose-100"
-                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF7C71] border border-transparent hover:border-slate-100"
+                                        ? "bg-rose-50 text-[#FF6014] font-semibold border border-rose-100"
+                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF6014] border border-transparent hover:border-slate-100"
                                         }`}
                                       onClick={() => { setIsOpen(false); setShowMobileAccordion(false); }}
                                     >
@@ -618,12 +623,12 @@ export function Navbar() {
                                             className="w-full h-full object-cover"
                                           />
                                         ) : (
-                                          <LayoutGrid className={`w-7 h-7 ${isCategoryActive ? "text-[#FF7C71]" : "text-slate-400"}`} />
+                                          <LayoutGrid className={`w-7 h-7 ${isCategoryActive ? "text-[#FF6014]" : "text-slate-400"}`} />
                                         )}
                                       </div>
                                       <span className="line-clamp-2 text-center text-xs leading-snug">{cat.name}</span>
                                       {isCategoryActive && (
-                                        <div className="w-1.5 h-1.5 bg-[#FF7C71] rounded-full" />
+                                        <div className="w-1.5 h-1.5 bg-[#FF6014] rounded-full" />
                                       )}
                                     </Link>
                                   );
@@ -641,8 +646,8 @@ export function Navbar() {
                       key={i}
                       href={link.href}
                       className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors ${active
-                        ? "text-[#FF7C71] bg-rose-50"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71]"
+                        ? "text-[#FF6014] bg-rose-50"
+                        : "text-slate-700 hover:bg-slate-50 hover:text-[#FF6014]"
                         }`}
                       onClick={() => setIsOpen(false)}
                     >
@@ -666,13 +671,17 @@ export function Navbar() {
                 ) : isAuthenticated && profile ? (
                   <div className="pt-4 border-t border-slate-100 mt-1 space-y-4">
                     <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                      <div className="w-12 h-12 bg-rose-100 text-[#FF7C71] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-inner select-none shrink-0">
-                        {profile.avatar}
+                      <div className="w-12 h-12 bg-rose-100 text-[#FF6014] font-bold rounded-full flex items-center justify-center overflow-hidden border border-rose-200 shadow-inner select-none shrink-0">
+                        {profile.avatarUrl ? (
+                          <img src={profile.avatarUrl} alt={profile.name} className="w-full h-full object-cover" />
+                        ) : (
+                          profile.avatar
+                        )}
                       </div>
                       <div className="min-w-0 flex-grow">
                         <p className="text-sm font-bold text-slate-800 truncate leading-none">{profile.name}</p>
                         <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">{profile.email}</p>
-                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF7C71] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5">
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF6014] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5">
                           {profile.roleName}
                         </span>
                       </div>
@@ -680,7 +689,7 @@ export function Navbar() {
                     <div className="grid grid-cols-3 gap-2">
                       <Link
                         href={role === "client" ? "/dashbord/overview" : "/dashbord"}
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF7C71] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF6014] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <LayoutGrid size={18} className="text-slate-400" />
@@ -688,7 +697,7 @@ export function Navbar() {
                       </Link>
                       <Link
                         href="/dashbord/profile"
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF7C71] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF6014] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <User size={18} className="text-slate-400" />
@@ -696,7 +705,7 @@ export function Navbar() {
                       </Link>
                       <Link
                         href="/dashbord/settings"
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF7C71] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF6014] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <Settings size={18} className="text-slate-400" />
@@ -715,7 +724,7 @@ export function Navbar() {
                   <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 mt-1">
                     <Link
                       href="/login"
-                      className="flex items-center justify-center gap-2 py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF7C71] hover:text-[#FF7C71] hover:bg-rose-50 transition-colors"
+                      className="flex items-center justify-center gap-2 py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF6014] hover:text-[#FF6014] hover:bg-rose-50 transition-colors"
                       onClick={() => setIsOpen(false)}
                     >
                       <LogIn className="w-4 h-4" />
@@ -723,7 +732,7 @@ export function Navbar() {
                     </Link>
                     <Link
                       href="/register"
-                      className="flex items-center justify-center gap-2 py-3 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
+                      className="flex items-center justify-center gap-2 py-3 bg-[#FF6014] hover:bg-[#E0530A] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
                       onClick={() => setIsOpen(false)}
                     >
                       <UserPlus className="w-4 h-4" />
@@ -744,7 +753,7 @@ export function Navbar() {
         transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.1 }}
         className="md:hidden fixed bottom-0 left-0 right-0 z-50 safe-bottom"
       >
-        <div className="absolute inset-0 bg-[#FFF8F7]/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
+        <div className="absolute inset-0 bg-[#FFF8F4]/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
 
         <div className="relative grid grid-cols-6 gap-0 max-w-lg mx-auto px-1 py-1.5">
           {bottomLinks.map((link, i) => {
@@ -775,7 +784,7 @@ export function Navbar() {
                 {active && (
                   <motion.div
                     layoutId="bottomNavPill"
-                    className="absolute inset-x-1.5 inset-y-0.5 bg-[#FFF8F7] rounded-2xl border border-rose-100/50"
+                    className="absolute inset-x-1.5 inset-y-0.5 bg-[#FFF8F4] rounded-2xl border border-rose-100/50"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -788,12 +797,16 @@ export function Navbar() {
                   {showAvatar ? (
                     <motion.div
                       animate={active ? { scale: 1.1 } : { scale: 1 }}
-                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold border select-none ${active
-                        ? "bg-rose-100 text-[#FF7C71] border-rose-200 shadow-sm"
+                      className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold border select-none overflow-hidden ${active
+                        ? "bg-rose-100 text-[#FF6014] border-rose-200 shadow-sm"
                         : "bg-slate-100 text-slate-500 border-slate-200"
                         }`}
                     >
-                      {profile?.avatar}
+                      {profile?.avatarUrl ? (
+                        <img src={profile.avatarUrl} alt={profile?.name} className="w-full h-full object-cover" />
+                      ) : (
+                        profile?.avatar
+                      )}
                     </motion.div>
                   ) : (
                     <motion.div
@@ -802,7 +815,7 @@ export function Navbar() {
                     >
                       <Icon
                         className={`w-[21px] h-[21px] transition-colors duration-200 ${active
-                          ? "text-[#FF7C71] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
+                          ? "text-[#FF6014] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
                           : "text-slate-400 group-hover:text-slate-600"
                           }`}
                         strokeWidth={active ? 2.4 : 1.8}
@@ -814,7 +827,7 @@ export function Navbar() {
                 <motion.span
                   animate={active ? { y: -1, opacity: 1 } : { y: 0, opacity: 0.7 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF7C71]" : "text-slate-400 group-hover:text-slate-600"}`}
+                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF6014]" : "text-slate-400 group-hover:text-slate-600"}`}
                 >
                   {showAvatar ? "Profile" : link.label}
                 </motion.span>
@@ -826,7 +839,7 @@ export function Navbar() {
                       animate={{ scale: 1, opacity: 1 }}
                       exit={{ scale: 0, opacity: 0 }}
                       transition={{ type: "spring", stiffness: 500, damping: 25 }}
-                      className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF7C71] rounded-full shadow-[0_0_6px_2px_rgba(255,90,95,0.4)] z-10"
+                      className="absolute -top-0.5 left-1/2 -translate-x-1/2 w-1 h-1 bg-[#FF6014] rounded-full shadow-[0_0_6px_2px_rgba(255,90,95,0.4)] z-10"
                     />
                   )}
                 </AnimatePresence>

@@ -9,9 +9,9 @@ import { useAppSelector } from "@/redux/hooks";
 /* ── Premium full-screen loading spinner ───────────────────────────────── */
 function DashboardLoader() {
   return (
-    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#FFF8F7]">
+    <div className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#FFF8F4]">
       {/* Soft background blobs */}
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-[#FF7C71]/10 blur-[100px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[420px] h-[420px] rounded-full bg-[#FF6014]/10 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-1/4 left-1/3 w-[280px] h-[280px] rounded-full bg-rose-200/20 blur-[80px] pointer-events-none" />
 
       {/* Spinner stack */}
@@ -20,8 +20,8 @@ function DashboardLoader() {
         <span
           className="absolute w-24 h-24 rounded-full border-[3px] border-transparent"
           style={{
-            borderTopColor: "#FF7C71",
-            borderRightColor: "#FF7C71",
+            borderTopColor: "#FF6014",
+            borderRightColor: "#FF6014",
             animation: "spin 1.6s linear infinite",
             opacity: 0.25,
           }}
@@ -30,14 +30,14 @@ function DashboardLoader() {
         <span
           className="absolute w-16 h-16 rounded-full border-[3px] border-transparent"
           style={{
-            borderTopColor: "#FF7C71",
-            borderLeftColor: "#FF7C71",
+            borderTopColor: "#FF6014",
+            borderLeftColor: "#FF6014",
             animation: "spin 1s linear infinite reverse",
             opacity: 0.5,
           }}
         />
         {/* Inner solid dot */}
-        <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FF7C71] to-rose-500 shadow-lg shadow-rose-300/40" />
+        <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#FF6014] to-rose-500 shadow-lg shadow-rose-300/40" />
       </div>
 
       {/* Brand wordmark */}
@@ -99,7 +99,7 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#FFF8F7] text-slate-900 relative">
+    <div className="flex h-screen overflow-hidden bg-[#FFF8F4] text-slate-900 relative">
       {/* Tiled watermark backgrounds */}
       <div className="absolute inset-0 pointer-events-none opacity-[0.16] z-0">
         <div className="absolute inset-0 bg-repeat" style={{ backgroundImage: "url('/Group1.png')", backgroundSize: "800px 800px" }} />
@@ -115,7 +115,7 @@ export default function DashboardLayout({
         <TopNavbar onMenuClick={() => setSidebarOpen(true)} />
 
         {/* Page Content */}
-        <main className="flex-1 overflow-auto bg-transparent p-4 md:pb-0 pb-8 sm:p-6">
+        <main className="flex-1 overflow-auto bg-transparent p-4 pb-8 sm:p-6 sm:pb-12 md:pb-12">
           {children}
         </main>
       </div>

@@ -143,7 +143,7 @@ export default function CategoryManagementPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
@@ -160,7 +160,7 @@ export default function CategoryManagementPage() {
       header: "Category Name",
       render: (cat: Category) => (
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#FFF8F7] text-[#FF7C71] font-bold rounded-xl flex items-center justify-center overflow-hidden shrink-0">
+          <div className="w-10 h-10 bg-[#FFF8F4] text-[#FF6014] font-bold rounded-xl flex items-center justify-center overflow-hidden shrink-0">
             {cat.icon ? (
               cat.icon.startsWith("http") || cat.icon.startsWith("/") ? (
                 <img src={cat.icon} alt={cat.name} className="w-full h-full object-cover" />
@@ -222,7 +222,7 @@ export default function CategoryManagementPage() {
           </button>
           <button
             onClick={() => openDeleteModal(cat)}
-            className="bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#E5675D] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
+            className="bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#E0530A] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
           >
             <Trash2 size={14} /> Delete
           </button>
@@ -247,7 +247,7 @@ export default function CategoryManagementPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Grid className="w-6 h-6" />
           </div>
           <div>
@@ -268,7 +268,7 @@ export default function CategoryManagementPage() {
       {/* Table */}
       {isCategoriesLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-premium">
-          <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : (
         <CustomTable
@@ -319,7 +319,7 @@ export default function CategoryManagementPage() {
                   placeholder="Provide a brief description of the category..."
                   value={description}
                   onChange={(e) => setDescription(e.target.value)}
-                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF7C71]/20/10 focus-visible:border-rose-400/80 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
+                  className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6014]/20/10 focus-visible:border-rose-400/80 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
                 />
               </div>
 
@@ -487,7 +487,7 @@ export default function CategoryManagementPage() {
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="bg-[#FF7C71] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
+                  className="bg-[#FF6014] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
                 >
                   Delete
                 </button>

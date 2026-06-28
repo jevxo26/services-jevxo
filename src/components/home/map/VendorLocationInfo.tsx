@@ -27,7 +27,7 @@ export default function VendorLocationInfo({
   const mutedClass = isLight ? "text-white/80" : "text-slate-500";
   const labelClass = isLight ? "text-white/60" : "text-slate-400";
   const strongClass = isLight ? "text-white font-semibold" : "text-slate-600 font-semibold";
-  const pinClass = isLight ? "text-white" : "text-[#FF7C71]";
+  const pinClass = isLight ? "text-white" : "text-[#FF6014]";
 
   if (!hasDistrict && !hasDivision) {
     return (

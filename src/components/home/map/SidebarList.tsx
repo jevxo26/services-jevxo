@@ -64,7 +64,7 @@ export default function SidebarList({
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             placeholder="Search vendors or categories..."
-            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71] focus:ring-1 focus:ring-red-200 transition-all"
+            className="w-full pl-10 pr-4 py-2.5 bg-slate-50 border border-slate-200 rounded-full text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#FF6014] focus:ring-1 focus:ring-red-200 transition-all"
           />
         </div>
 
@@ -80,8 +80,8 @@ export default function SidebarList({
               onClick={() => setSelectedCategory(cat)}
               className={`px-4 py-1.5 h-auto rounded-full text-xs font-bold whitespace-nowrap tracking-wide border transition-all duration-200 cursor-pointer flex-shrink-0 hover:bg-slate-50 ${
                 selectedCategory === cat
-                  ? "bg-[#FF7C71] border-[#FF7C71] text-white shadow-sm hover:bg-[#FF7C71] hover:text-white"
-                  : "bg-white border-slate-200 text-slate-600 hover:border-[#FF7C71] hover:text-[#FF7C71]"
+                  ? "bg-[#FF6014] border-[#FF6014] text-white shadow-sm hover:bg-[#FF6014] hover:text-white"
+                  : "bg-white border-slate-200 text-slate-600 hover:border-[#FF6014] hover:text-[#FF6014]"
               }`}
             >
               {cat}
@@ -96,7 +96,7 @@ export default function SidebarList({
               onClick={() => setActiveTab("map")}
               className={`flex-1 py-1 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer ${
                 activeTab === "map"
-                  ? "bg-[#FF7C71] hover:bg-[#FF7C71]/90 text-white shadow-sm"
+                  ? "bg-[#FF6014] hover:bg-[#FF6014]/90 text-white shadow-sm"
                   : "text-slate-500 hover:text-slate-800"
               }`}
             >
@@ -145,7 +145,7 @@ export default function SidebarList({
                 onClick={() => setSelectedExpertId(expert.id)}
                 className={`p-4 rounded-2xl border transition-all duration-300 cursor-pointer flex flex-col justify-between relative bg-white ${
                   isSelected
-                    ? "border-[#FF7C71] shadow-[0_8px_30px_rgb(255,90,95,0.06)] ring-1 ring-red-100"
+                    ? "border-[#FF6014] shadow-[0_8px_30px_rgb(255,90,95,0.06)] ring-1 ring-red-100"
                     : "border-slate-100 hover:border-slate-300 shadow-sm"
                 }`}
               >
@@ -190,7 +190,7 @@ export default function SidebarList({
                   <div className="flex items-center justify-between text-xs pt-1">
                     <div>
                       <span className="text-[10px] text-slate-400 font-bold block">STARTING AT</span>
-                      <span className="text-[#FF7C71] text-sm font-black">৳{expert.price}+</span>
+                      <span className="text-[#FF6014] text-sm font-black">৳{expert.price}+</span>
                     </div>
                     {isSelected && (
                       <Button
@@ -199,7 +199,7 @@ export default function SidebarList({
                           e.stopPropagation();
                           onViewDetails?.(expert);
                         }}
-                        className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-[11px] font-extrabold px-3 py-1.5 h-auto rounded-xl shadow-xs cursor-pointer border-none"
+                        className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-[11px] font-extrabold px-3 py-1.5 h-auto rounded-xl shadow-xs cursor-pointer border-none"
                       >
                         View Profile
                       </Button>

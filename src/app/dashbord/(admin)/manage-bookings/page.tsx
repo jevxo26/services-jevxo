@@ -163,7 +163,7 @@ export default function BookingsManagementPage() {
       case 'assigned': return 'bg-blue-50 text-blue-600 border border-blue-200';
       case 'on_the_way': return 'bg-purple-50 text-purple-600 border border-purple-200';
       case 'completed': return 'bg-emerald-50 text-emerald-600 border border-emerald-200';
-      case 'cancelled': return 'bg-[#FFF8F7] text-[#E5675D] border border-[#FF7C71]/30';
+      case 'cancelled': return 'bg-[#FFF8F4] text-[#E0530A] border border-[#FF6014]/30';
       default: return 'bg-slate-100 text-slate-600';
     }
   };
@@ -279,7 +279,7 @@ export default function BookingsManagementPage() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Calendar className="w-6 h-6" />
           </div>
           <div>

@@ -26,8 +26,6 @@ import {
 import Link from "next/link"
 import { CustomTable } from "@/components/ui/table"
 import { useGetAllBookingsQuery } from "@/redux/features/admin/booking"
-import { useGetAllServicesQuery } from "@/redux/features/admin/service"
-import { useGetUserProfileQuery } from "@/redux/features/auth/authApi"
 
 export default function UnifiedOverviewPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
@@ -45,7 +43,6 @@ export default function UnifiedOverviewPage() {
 function CustomerOverview() {
   const authUser = useAppSelector((state) => state.auth.user)
   const { data: bookingsRes, isLoading: loadingBookings } = useGetAllBookingsQuery()
-  const { data: servicesRes, isLoading: loadingServices } = useGetAllServicesQuery()
 
   const allBookings = bookingsRes?.data || []
   const userId = authUser?.id || authUser?._id
@@ -53,9 +50,6 @@ function CustomerOverview() {
   const activeBookings = myBookings.filter((b: any) => ["assigned", "on_the_way"].includes(b.status))
   const completedBookings = myBookings.filter((b: any) => b.status === "completed")
   const recentHistory = completedBookings.slice(0, 5)
-
-  const services = servicesRes?.data || []
-  const recommendedServices = services.slice(0, 3)
 
   const customerColumns = [
     {
@@ -98,35 +92,52 @@ function CustomerOverview() {
     <div className="w-full animate-in fade-in duration-200">
       <div className="w-full space-y-8 relative z-10">
 
-        {/* Header Title & Top Counters */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 border-b border-slate-100 pb-5">
-          <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
-              <Sparkles className="w-6 h-6" />
-            </div>
-            <div>
-              <h1 className="text-xl font-extrabold text-slate-900">Hello, {authUser?.name || "Client"}</h1>
-              <p className="text-xs text-slate-400 mt-0.5 font-semibold">It's a great day to refresh your home.</p>
-            </div>
-          </div>
+        {/* Premium Greeting & Stats Card */}
+        <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15">
+          {/* Decorative Glow Circles */}
+          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#FF6014]/25 blur-3xl pointer-events-none" />
+          <div className="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
-          <div className="flex items-center gap-4">
-            <div className="bg-white px-5 py-2.5 rounded-2xl border border-slate-100 shadow-sm text-center min-w-[90px]">
-              {loadingBookings ? (
-                <Loader2 size={16} className="animate-spin text-[#FF7C71] mx-auto" />
-              ) : (
-                <span className="text-xl font-black text-[#FF7C71] block leading-tight">{activeBookings.length.toString().padStart(2, "0")}</span>
-              )}
-              <span className="text-[9px] font-extrabold text-slate-400 tracking-wider uppercase">Active</span>
+          <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
+            {/* Left side: User Profile Greeting */}
+            <div className="space-y-3">
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold text-[#FFF0EB]">
+                <Sparkles className="w-3.5 h-3.5 text-[#FF6014] animate-pulse" />
+                <span>Client Dashboard</span>
+              </div>
+              <div>
+                <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white">
+                  Hello, {authUser?.name || "Client"}
+                </h1>
+                <p className="text-xs md:text-sm text-slate-300 mt-1 font-medium">
+                  It's a great day to refresh your home with Rajseba.
+                </p>
+              </div>
             </div>
 
-            <div className="bg-white px-5 py-2.5 rounded-2xl border border-slate-100 shadow-sm text-center min-w-[90px]">
-              {loadingBookings ? (
-                <Loader2 size={16} className="animate-spin text-[#FF7C71] mx-auto" />
-              ) : (
-                <span className="text-xl font-black text-[#FF7C71] block leading-tight">{completedBookings.length}</span>
-              )}
-              <span className="text-[9px] font-extrabold text-slate-400 tracking-wider uppercase">Completed</span>
+            {/* Right side: Modern Counters */}
+            <div className="flex items-center gap-3 sm:gap-4 self-stretch md:self-auto">
+              <div className="flex-1 md:flex-none bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3 md:p-4 min-w-[105px] text-center hover:bg-white/15 transition-all">
+                {loadingBookings ? (
+                  <Loader2 size={18} className="animate-spin text-[#FF6014] mx-auto" />
+                ) : (
+                  <span className="text-2xl md:text-3xl font-black text-[#FF6014] block leading-tight">
+                    {activeBookings.length.toString().padStart(2, "0")}
+                  </span>
+                )}
+                <span className="text-[9px] font-bold text-slate-300 tracking-wider uppercase mt-1 block">Active</span>
+              </div>
+
+              <div className="flex-1 md:flex-none bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3 md:p-4 min-w-[105px] text-center hover:bg-white/15 transition-all">
+                {loadingBookings ? (
+                  <Loader2 size={18} className="animate-spin text-emerald-400 mx-auto" />
+                ) : (
+                  <span className="text-2xl md:text-3xl font-black text-emerald-400 block leading-tight">
+                    {completedBookings.length.toString().padStart(2, "0")}
+                  </span>
+                )}
+                <span className="text-[9px] font-bold text-slate-300 tracking-wider uppercase mt-1 block">Completed</span>
+              </div>
             </div>
           </div>
         </div>
@@ -134,8 +145,8 @@ function CustomerOverview() {
         {/* Action Banners Row */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
-            href="/dashbord/quick-booking"
-            className="relative overflow-hidden bg-[#FF7C71] text-white p-6 rounded-[28px] shadow-lg shadow-[#FF7C71]/10 flex items-center justify-between group hover:opacity-95 transition-all"
+            href="/services"
+            className="relative overflow-hidden bg-[#FF6014] text-white p-6 rounded-[28px] shadow-lg shadow-[#FF6014]/10 flex items-center justify-between group hover:opacity-95 transition-all"
           >
             <div className="flex items-center gap-4">
               <div className="p-3 bg-white/20 rounded-full border border-white/10">
@@ -152,7 +163,7 @@ function CustomerOverview() {
 
           <div className="bg-white p-6 rounded-[28px] border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-[#FFF8F7] rounded-2xl text-[#FF7C71]">
+              <div className="p-3 bg-[#FFF8F4] rounded-2xl text-[#FF6014]">
                 <Share2 size={22} />
               </div>
               <div>
@@ -160,7 +171,7 @@ function CustomerOverview() {
                 <p className="text-xs text-slate-400 mt-0.5 font-semibold">Earn credits for sharing</p>
               </div>
             </div>
-            <button className="p-2.5 bg-[#FF7C71] text-white rounded-full hover:bg-[#E5675D] transition-colors shadow-sm focus:outline-none">
+            <button className="p-2.5 bg-[#FF6014] text-white rounded-full hover:bg-[#E0530A] transition-colors shadow-sm focus:outline-none">
               <ChevronRight size={16} />
             </button>
           </div>
@@ -171,7 +182,7 @@ function CustomerOverview() {
           <div className="space-y-4">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">Active Bookings</h2>
-              <Link href="/dashbord/bookings" className="text-xs font-bold text-[#FF7C71] hover:underline">
+              <Link href="/dashbord/bookings" className="text-xs font-bold text-[#FF6014] hover:underline">
                 View All &rarr;
               </Link>
             </div>
@@ -181,13 +192,13 @@ function CustomerOverview() {
                 <div key={booking.id} className="bg-white p-6 rounded-[28px] border border-slate-100/80 shadow-sm space-y-4 flex flex-col justify-between">
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-extrabold text-[#FF7C71] text-base">
+                      <h3 className="font-extrabold text-[#FF6014] text-base">
                         {booking.nestedService?.name || booking.pkg?.name || "Service Booking"}
                       </h3>
                       <span className="text-[10px] font-bold text-slate-400 block mt-0.5">ID: #{booking.id}</span>
                     </div>
                     <span className={`text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider ${
-                      booking.status === "on_the_way" ? "text-[#E5675D] bg-[#FFF8F7]" : "text-amber-600 bg-amber-50"
+                      booking.status === "on_the_way" ? "text-[#E0530A] bg-[#FFF8F4]" : "text-amber-600 bg-amber-50"
                     }`}>
                       {booking.status === "on_the_way" ? "On the Way" : booking.status}
                     </span>
@@ -195,7 +206,7 @@ function CustomerOverview() {
 
                   <div className="flex items-center justify-between bg-slate-50/50 p-3 rounded-2xl border border-slate-100/40">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#FFEBE9] flex items-center justify-center text-[#E5675D] font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-[#FFF0EB] flex items-center justify-center text-[#E0530A] font-bold text-sm">
                         {booking.vendor?.name?.[0] || "V"}
                       </div>
                       <div>
@@ -203,7 +214,7 @@ function CustomerOverview() {
                         <p className="text-[10px] font-semibold text-slate-400">Verified Specialist</p>
                       </div>
                     </div>
-                    <button className="p-2 bg-white text-[#FF7C71] rounded-xl hover:bg-[#FFF8F7] border border-slate-100 shadow-sm transition-colors">
+                    <button className="p-2 bg-white text-[#FF6014] rounded-xl hover:bg-[#FFF8F4] border border-slate-100 shadow-sm transition-colors">
                       <MessageCircle size={16} />
                     </button>
                   </div>
@@ -213,55 +224,6 @@ function CustomerOverview() {
                     <span>{booking.date ? new Date(booking.date).toLocaleDateString("en-BD") : "Date TBD"}</span>
                     <span className="mx-1">•</span>
                     <span className="truncate max-w-[140px]">{booking.location || "Location not set"}</span>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* Recommended Services Grid */}
-        {!loadingServices && recommendedServices.length > 0 && (
-          <div className="space-y-4">
-            <h2 className="text-xl font-bold text-slate-900 tracking-tight">Recommended for You</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {recommendedServices.map((service: any, idx: number) => (
-                <div
-                  key={idx}
-                  className="bg-white rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-md transition-all flex flex-col group relative"
-                >
-                  <div className="relative aspect-[4/3] w-full bg-slate-50 overflow-hidden">
-                    {service.image ? (
-                      <img
-                        src={service.image}
-                        alt={service.name}
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                      />
-                    ) : (
-                      <div className="w-full h-full bg-[#FFF8F7] flex items-center justify-center text-rose-300">
-                        <Sparkles size={40} />
-                      </div>
-                    )}
-                    <button className="absolute top-4 right-4 p-2 bg-white/90 backdrop-blur-sm rounded-xl text-slate-500 hover:text-[#FF7C71] transition-colors shadow-sm focus:outline-none">
-                      <Heart size={14} className="fill-current" />
-                    </button>
-                  </div>
-
-                  <div className="p-5 flex-1 flex flex-col justify-between gap-4">
-                    <div className="space-y-1.5">
-                      <h3 className="font-extrabold text-slate-800 text-sm">{service.name}</h3>
-                      <p className="text-xs text-slate-400 leading-relaxed font-semibold">{service.subtitle || service.description || ""}</p>
-                    </div>
-
-                    <div className="flex items-center justify-between pt-3 border-t border-slate-50">
-                      <div>
-                        <span className="text-[9px] text-slate-400 font-extrabold uppercase tracking-wider block">Category</span>
-                        <span className="text-sm font-black text-slate-800">{service.category?.name || "—"}</span>
-                      </div>
-                      <button className="w-8 h-8 bg-[#FF7C71] hover:bg-[#E5675D] text-white rounded-full flex items-center justify-center shadow-md shadow-[#FF7C71]/10 transition-transform active:scale-90 focus:outline-none">
-                        <Plus size={16} />
-                      </button>
-                    </div>
                   </div>
                 </div>
               ))}
@@ -315,7 +277,7 @@ function AgentOverview() {
   }).length
 
   const stats = [
-    { label: "Total Bookings", value: isLoading ? "—" : `${totalOrders}`, desc: "All time bookings", icon: Briefcase, color: "text-[#E5675D] bg-[#FFF8F7]" },
+    { label: "Total Bookings", value: isLoading ? "—" : `${totalOrders}`, desc: "All time bookings", icon: Briefcase, color: "text-[#E0530A] bg-[#FFF8F4]" },
     { label: "Today's Bookings", value: isLoading ? "—" : `${todayOrders}`, desc: "Placed today", icon: Zap, color: "text-amber-600 bg-amber-50" },
     { label: "Completed", value: isLoading ? "—" : `${allBookings.filter((b: any) => b.status === "completed").length}`, desc: "Total completed orders", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
     { label: "Pending", value: isLoading ? "—" : `${allBookings.filter((b: any) => b.status === "pending").length}`, desc: "Awaiting assignment", icon: Clock, color: "text-indigo-600 bg-indigo-50" },
@@ -364,7 +326,7 @@ function AgentOverview() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Sparkles className="w-6 h-6" />
           </div>
           <div>
@@ -374,7 +336,7 @@ function AgentOverview() {
         </div>
         <Link
           href="/dashbord/quick-booking"
-          className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/20 text-sm transition-all active:scale-[0.985] text-center"
+          className="bg-[#FF6014] hover:bg-[#E0530A] text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF6014]/20 text-sm transition-all active:scale-[0.985] text-center"
         >
           Book a New Lead
         </Link>
@@ -403,14 +365,14 @@ function AgentOverview() {
       <div className="space-y-4">
         <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
           <h3 className="text-lg font-bold text-slate-900">Recent Lead Orders</h3>
-          <Link href="/dashbord/orders" className="text-xs font-bold text-[#FF7C71] hover:underline">
+          <Link href="/dashbord/orders" className="text-xs font-bold text-[#FF6014] hover:underline">
             View All &rarr;
           </Link>
         </div>
 
         {isLoading ? (
           <div className="flex items-center justify-center h-32">
-            <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
+            <Loader2 size={32} className="animate-spin text-[#FF6014]" />
           </div>
         ) : (
           <CustomTable

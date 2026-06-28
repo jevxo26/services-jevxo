@@ -33,7 +33,7 @@ export default function Home() {
       <Hero />
       <div className="relative overflow-hidden">
         {/* Soft premium radial glows for depth and premium aesthetic */}
-        <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#FF7C71]/4 blur-[130px] rounded-full pointer-events-none z-0" />
+        <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#FF6014]/4 blur-[130px] rounded-full pointer-events-none z-0" />
         <div className="absolute top-[40%] right-[-10%] w-[500px] md:w-[700px] h-[500px] md:h-[700px] bg-cyan-500/3 blur-[150px] rounded-full pointer-events-none z-0" />
         <div className="absolute bottom-[10%] left-[-5%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-emerald-500/3 blur-[130px] rounded-full pointer-events-none z-0" />
 
@@ -42,7 +42,7 @@ export default function Home() {
           className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
           style={{ backgroundSize: 'auto' }}
         />
-        <div className="relative z-10 flex flex-col gap-6 md:gap-10">
+        <div className="relative z-10 flex flex-col gap-6 md:gap-6">
           <HomeMotionWrapper>
             <ExploreCategories />
           </HomeMotionWrapper>
@@ -83,7 +83,7 @@ export default function Home() {
           </HomeMotionWrapper>
 
           {/* <PartnerCta /> */}
-          
+
           <HomeMotionWrapper>
             <FAQ />
           </HomeMotionWrapper>

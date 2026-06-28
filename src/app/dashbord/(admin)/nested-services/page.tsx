@@ -222,7 +222,7 @@ export default function NestedServicesManagementPage() {
   if (role !== "superadmin" && role !== "vendor") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
@@ -261,7 +261,7 @@ export default function NestedServicesManagementPage() {
       key: "service",
       header: "Parent Service",
       render: (item: NestedService) => (
-        <span className="inline-flex items-center gap-1.5 bg-[#FFF8F7]/70 text-[#E5675D] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#FFEBE9]/50">
+        <span className="inline-flex items-center gap-1.5 bg-[#FFF8F4]/70 text-[#E0530A] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#FFF0EB]/50">
           <Wrench size={12} />
           {item.service?.name || "—"}
         </span>
@@ -299,7 +299,7 @@ export default function NestedServicesManagementPage() {
           </button>
           <button
             onClick={() => openDeleteModal(item)}
-            className="bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#E5675D] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
+            className="bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#E0530A] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
           >
             <Trash2 size={14} /> Delete
           </button>
@@ -313,7 +313,7 @@ export default function NestedServicesManagementPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Layers className="w-6 h-6" />
           </div>
           <div>
@@ -340,7 +340,7 @@ export default function NestedServicesManagementPage() {
       {/* Table */}
       {isNestedLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-premium">
-          <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : nestedServices.length === 0 ? (
         <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -353,7 +353,7 @@ export default function NestedServicesManagementPage() {
           </p>
           <button
             onClick={openCreateModal}
-            className="mt-4 bg-[#FFF8F7] hover:bg-[#FFEBE9] text-[#FF7C71] font-bold px-4 py-2 rounded-xl text-xs transition-all"
+            className="mt-4 bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#FF6014] font-bold px-4 py-2 rounded-xl text-xs transition-all"
           >
             Add New Sub-Service
           </button>
@@ -474,7 +474,7 @@ export default function NestedServicesManagementPage() {
                         <button
                           type="button"
                           onClick={() => setSubServices(subServices.filter((_, i) => i !== idx))}
-                          className="p-2 text-[#FF7C71] hover:bg-[#FFEBE9] rounded-lg transition-all shrink-0"
+                          className="p-2 text-[#FF6014] hover:bg-[#FFF0EB] rounded-lg transition-all shrink-0"
                         >
                           <Trash2 size={16} />
                         </button>
@@ -613,7 +613,7 @@ export default function NestedServicesManagementPage() {
                 </button>
                 <button
                   onClick={handleDelete}
-                  className="bg-[#FF7C71] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
+                  className="bg-[#FF6014] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
                 >
                   Delete
                 </button>

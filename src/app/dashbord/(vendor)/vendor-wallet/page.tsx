@@ -139,7 +139,7 @@ export default function VendorWalletPage() {
   if (!isAuthenticated || (normalizedRole !== "vendor" && normalizedRole !== "agent")) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4"><ShieldAlert size={48} /></div>
+        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4"><ShieldAlert size={48} /></div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
         <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Vendors only.</p>
       </div>
@@ -156,7 +156,7 @@ export default function VendorWalletPage() {
     const map: Record<string, string> = {
       pending: "bg-amber-50 text-amber-700 border-amber-100",
       approved: "bg-emerald-50 text-emerald-700 border-emerald-100",
-      rejected: "bg-[#FFF8F7] text-[#E5675D] border-[#FFEBE9]",
+      rejected: "bg-[#FFF8F4] text-[#E0530A] border-[#FFF0EB]",
     };
     const icons: Record<string, React.ReactNode> = {
       pending: <Clock size={11} />,
@@ -275,7 +275,7 @@ export default function VendorWalletPage() {
         <button
           onClick={() => handleRequestWithdrawClick(item.id)}
           disabled={isRequesting}
-          className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-all shadow-sm shadow-[#FF7C71]/20 disabled:opacity-50"
+          className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-all shadow-sm shadow-[#FF6014]/20 disabled:opacity-50"
         >
           {isRequesting ? "Wait..." : "Request Commission"}
         </button>
@@ -288,7 +288,7 @@ export default function VendorWalletPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Wallet className="w-6 h-6" />
           </div>
           <div>
@@ -317,7 +317,7 @@ export default function VendorWalletPage() {
         </div>
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Commission Rate</p>
-          <p className="text-3xl font-bold text-[#FF7C71] mt-1">{commissionPct}%</p>
+          <p className="text-3xl font-bold text-[#FF6014] mt-1">{commissionPct}%</p>
           <p className="text-xs text-slate-400 mt-1">Per completed booking</p>
         </div>
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
@@ -381,7 +381,7 @@ export default function VendorWalletPage() {
         <h2 className="text-lg font-bold text-slate-900 mb-4">Earnings Ready to Withdraw</h2>
         {isBookingsLoading ? (
           <div className="flex items-center justify-center py-10 bg-white border border-slate-100 rounded-3xl shadow-sm">
-            <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : withdrawableBookings.length === 0 ? (
           <div className="bg-white border border-slate-100 rounded-3xl p-10 text-center shadow-sm">
@@ -405,7 +405,7 @@ export default function VendorWalletPage() {
         <h2 className="text-lg font-bold text-slate-900 mb-4">Withdrawal History</h2>
         {isWithdrawsLoading ? (
           <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-sm">
-            <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : withdraws.length === 0 ? (
           <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -448,7 +448,7 @@ export default function VendorWalletPage() {
                 <select
                   value={newGatewayType}
                   onChange={(e) => setNewGatewayType(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF7C71] focus:border-[#FF7C71] block p-3 outline-none"
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF6014] focus:border-[#FF6014] block p-3 outline-none"
                 >
                   <option value="bkash">bKash</option>
                   <option value="nagad">Nagad</option>
@@ -465,7 +465,7 @@ export default function VendorWalletPage() {
                   placeholder="e.g. +88017XXXXXXXX or Account No."
                   value={newGatewayInfo}
                   onChange={(e) => setNewGatewayInfo(e.target.value)}
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF7C71] focus:border-[#FF7C71] block p-3 outline-none"
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF6014] focus:border-[#FF6014] block p-3 outline-none"
                 />
                 <p className="text-xs text-slate-500 mt-2">Enter the phone number, email, or account details for this method.</p>
               </div>
@@ -498,7 +498,7 @@ export default function VendorWalletPage() {
                 <label className="block text-sm font-bold text-slate-700 mb-2">Select Payment Method</label>
                 <div className="space-y-2">
                   {gateways.map((g) => (
-                    <label key={g.id} className={`flex items-center p-3 border rounded-xl cursor-pointer transition-all ${selectedGatewayId === g.id ? 'border-brand-primary bg-[#FFF8F7]' : 'border-slate-200 bg-slate-50 hover:bg-slate-100'}`}>
+                    <label key={g.id} className={`flex items-center p-3 border rounded-xl cursor-pointer transition-all ${selectedGatewayId === g.id ? 'border-brand-primary bg-[#FFF8F4]' : 'border-slate-200 bg-slate-50 hover:bg-slate-100'}`}>
                       <input
                         type="radio"
                         name="gateway"

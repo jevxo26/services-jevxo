@@ -23,7 +23,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
     <section className="py-6 w-full">
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             Service Partner
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
@@ -41,7 +41,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
 
         {/* Left Column: Vendor Main Profile */}
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-5 z-10">
-          <div className="w-16 h-16 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-[#FF7C71] shrink-0 shadow-inner">
+          <div className="w-16 h-16 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-[#FF6014] shrink-0 shadow-inner">
             <Building className="w-8 h-8" />
           </div>
 
@@ -88,7 +88,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
             {vendor.phone && (
               <a
                 href={`tel:${vendor.phone}`}
-                className="flex items-center gap-2.5 text-xs font-bold text-slate-500 hover:text-[#FF7C71] transition-colors"
+                className="flex items-center gap-2.5 text-xs font-bold text-slate-500 hover:text-[#FF6014] transition-colors"
               >
                 <div className="w-7 h-7 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400">
                   <Phone className="w-3.5 h-3.5" />
@@ -99,7 +99,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
             {vendor.email && (
               <a
                 href={`mailto:${vendor.email}`}
-                className="flex items-center gap-2.5 text-xs font-bold text-slate-500 hover:text-[#FF7C71] transition-colors"
+                className="flex items-center gap-2.5 text-xs font-bold text-slate-500 hover:text-[#FF6014] transition-colors"
               >
                 <div className="w-7 h-7 rounded-lg bg-slate-50 flex items-center justify-center text-slate-400">
                   <Mail className="w-3.5 h-3.5" />
@@ -121,7 +121,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
                 )}`
               )
             }
-            className="bg-[#FF7C71] hover:bg-[#E5675D] text-white px-6 py-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-100 hover:shadow-lg cursor-pointer w-full sm:w-auto"
+            className="bg-[#FF6014] hover:bg-[#E0530A] text-white px-6 py-3 rounded-2xl font-bold text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-100 hover:shadow-lg cursor-pointer w-full sm:w-auto"
           >
             <MessageSquare className="w-3.5 h-3.5" />
             Chat with Provider

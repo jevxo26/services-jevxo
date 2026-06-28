@@ -144,8 +144,8 @@ export default function TopServices() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-[#FF7C71] text-xs font-bold uppercase tracking-wider mb-3">
-            <Star size={13} className="fill-[#FF7C71]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-[#FF6014] text-xs font-bold uppercase tracking-wider mb-3">
+            <Star size={13} className="fill-[#FF6014]" />
             Most Booked
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight">
@@ -220,7 +220,7 @@ export default function TopServices() {
                   >
                     <Heart
                       className={`w-4 h-4 transition-colors ${savedServices.some((s) => String(s.id) === String(service.id))
-                        ? "fill-[#FF7C71] text-[#FF7C71]"
+                        ? "fill-[#FF6014] text-[#FF6014]"
                         : "text-slate-500"
                         }`}
                     />
@@ -235,8 +235,8 @@ export default function TopServices() {
                         {service.name}
                       </h3>
                       <div className="flex flex-col items-end">
-                        <div className="flex items-center gap-0.5 text-[#FF7C71] font-black text-sm whitespace-nowrap">
-                          <Star className="w-3 h-3 fill-[#FF7C71]" />
+                        <div className="flex items-center gap-0.5 text-[#FF6014] font-black text-sm whitespace-nowrap">
+                          <Star className="w-3 h-3 fill-[#FF6014]" />
                           <span>{averageRating}</span>
                         </div>
                         <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">{totalReviews} Reviews</span>
@@ -262,7 +262,7 @@ export default function TopServices() {
                       )}
                     </div>
                     <Link href={`/services/${service.id}`}>
-                      <Button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-extrabold px-4 py-2 h-auto rounded-xl transition-all cursor-pointer hover:scale-105 border-none shadow-md hover:shadow-lg">
+                      <Button className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-extrabold px-4 py-2 h-auto rounded-xl transition-all cursor-pointer hover:scale-105 border-none shadow-md hover:shadow-lg">
                         Details
                       </Button>
                     </Link>
@@ -276,7 +276,7 @@ export default function TopServices() {
         {/* View All Button */}
         {!isLoading && !isError && displayServices.length > 0 && (
           <div className="flex justify-center mt-10 md:mt-12">
-            <Button variant="outline" className="rounded-xl font-bold h-12 px-6 border-slate-200 hover:border-[#FF7C71] hover:text-[#FF7C71] hover:bg-rose-50/50 group" asChild>
+            <Button variant="outline" className="rounded-xl font-bold h-12 px-6 border-slate-200 hover:border-[#FF6014] hover:text-[#FF6014] hover:bg-rose-50/50 group" asChild>
               <Link href="/services">
                 View All Services
                 <svg className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

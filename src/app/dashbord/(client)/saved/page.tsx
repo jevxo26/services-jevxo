@@ -46,7 +46,7 @@ export default function SavedServicesPage() {
         {/* Title Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+            <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
               <Heart className="w-6 h-6" />
             </div>
             <div>
@@ -62,7 +62,7 @@ export default function SavedServicesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {isLoading ? (
             <div className="col-span-full flex items-center justify-center py-16">
-              <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+              <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
             </div>
           ) : savedServices.length === 0 ? (
             <div className="col-span-full bg-white p-12 rounded-[24px] border border-dashed border-slate-200 text-center shadow-sm">
@@ -75,7 +75,7 @@ export default function SavedServicesPage() {
               </p>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm"
+                className="inline-flex items-center gap-2 bg-[#FF6014] hover:bg-[#E0530A] text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm"
               >
                 <BookOpen size={14} />
                 Browse Services
@@ -104,7 +104,7 @@ export default function SavedServicesPage() {
                     {/* Remove heart */}
                     <button
                       onClick={() => handleUnsave(service.id, service.name)}
-                      className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-[#FF7C71] text-white shadow-md hover:scale-110 transition-all cursor-pointer"
+                      className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-[#FF6014] text-white shadow-md hover:scale-110 transition-all cursor-pointer"
                       aria-label="Remove from wishlist"
                     >
                       <Heart size={14} className="fill-white" />
@@ -137,7 +137,7 @@ export default function SavedServicesPage() {
                       </Link>
                       <Link
                         href={`/categories/service/${service.slug || service.id}`}
-                        className="flex-1 text-center bg-[#FF7C71] hover:bg-[#E5675D] text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm"
+                        className="flex-1 text-center bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm"
                       >
                         Book Now
                       </Link>
@@ -147,9 +147,12 @@ export default function SavedServicesPage() {
               ))}
 
               {/* Discover More Card */}
-              <div className="bg-white/80 backdrop-blur-md rounded-3xl border border-dashed border-slate-200 p-6 flex flex-col justify-between items-center text-center shadow-sm">
+              <Link
+                href="/services"
+                className="bg-white/80 backdrop-blur-md rounded-3xl border border-dashed border-slate-200 p-6 flex flex-col justify-between items-center text-center shadow-sm hover:shadow-md transition-all group"
+              >
                 <div className="my-auto space-y-4">
-                  <div className="w-12 h-12 bg-[#FFF8F7] rounded-full flex items-center justify-center text-[#FF7C71] mx-auto border border-[#FFEBE9]">
+                  <div className="w-12 h-12 bg-[#FFF8F4] rounded-full flex items-center justify-center text-[#FF6014] mx-auto border border-[#FFF0EB] group-hover:scale-110 transition-transform">
                     <Plus size={20} />
                   </div>
                   <div className="space-y-1.5">
@@ -159,13 +162,12 @@ export default function SavedServicesPage() {
                     </p>
                   </div>
                 </div>
-                <Link
-                  href="/services"
-                  className="mt-6 w-full bg-white hover:bg-slate-50 border border-slate-100 text-[#FF7C71] text-xs font-bold py-2.5 rounded-2xl transition-colors text-center flex items-center justify-center gap-1"
+                <div
+                  className="mt-6 w-full bg-white group-hover:bg-slate-50 border border-slate-100 text-[#FF6014] text-xs font-bold py-2.5 rounded-2xl transition-colors text-center flex items-center justify-center gap-1"
                 >
-                  Find More Services <ChevronRight size={12} />
-                </Link>
-              </div>
+                  Find More Services <ChevronRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
+                </div>
+              </Link>
             </>
           )}
         </div>
@@ -178,7 +180,7 @@ export default function SavedServicesPage() {
 function AccessDenied({ roleRequired }: { roleRequired: string }) {
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+      <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>

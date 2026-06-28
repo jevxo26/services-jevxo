@@ -169,13 +169,13 @@ export default function RegisterPage() {
       <div className="hidden lg:flex lg:w-[48%] xl:w-[50%] flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-rose-50 via-orange-50 to-amber-50">
 
         {/* Soft background circles */}
-        <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-[#FF7C71]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-[#FF6014]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-[-60px] right-[-60px] w-64 h-64 bg-orange-300/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col items-center text-center px-10">
           {/* Brand badge */}
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-4 py-1.5 rounded-full text-xs font-bold mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF7C71] animate-pulse" />
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-4 py-1.5 rounded-full text-xs font-bold mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014] animate-pulse" />
             Bangladesh's #1 Home Service Platform
           </div>
 
@@ -191,7 +191,7 @@ export default function RegisterPage() {
 
           <h2 className="text-2xl xl:text-3xl font-black text-slate-800 leading-tight mt-4">
             Start your journey with{" "}
-            <span className="text-[#FF7C71]">Rajseba</span>
+            <span className="text-[#FF6014]">Rajseba</span>
           </h2>
           <p className="text-slate-500 text-sm font-medium mt-3 max-w-sm leading-relaxed">
             Join 50,000+ happy customers who trust Rajseba for professional home services every day.
@@ -224,7 +224,7 @@ export default function RegisterPage() {
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{
-            backgroundImage: "radial-gradient(circle, #FF7C71 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #FF6014 1px, transparent 1px)",
             backgroundSize: "28px 28px",
           }}
         />
@@ -233,7 +233,7 @@ export default function RegisterPage() {
         <div className="relative z-10 px-5 sm:px-8 pt-5">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-[#FF7C71] transition-colors group"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-[#FF6014] transition-colors group"
           >
             <ChevronLeft size={17} className="group-hover:-translate-x-0.5 transition-transform" />
             Back to Home
@@ -250,7 +250,7 @@ export default function RegisterPage() {
               {/* Centered Branded Header */}
               <div className="flex flex-col items-center text-center mb-8">
                 <Link href="/" className="flex flex-col items-center gap-2.5 group mb-5">
-                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF7C71] to-rose-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-rose-400/25 group-hover:scale-105 transition-transform">
+                  <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-[#FF6014] to-rose-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-rose-400/25 group-hover:scale-105 transition-transform">
                     <Sparkles size={26} className="stroke-[2]" />
                   </div>
                   <span className="font-black text-xl sm:text-2xl text-slate-900 tracking-tight">Rajseba</span>
@@ -282,7 +282,7 @@ export default function RegisterPage() {
                       value={formData.name}
                       onChange={handleChange}
                       placeholder="John Doe"
-                      className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#FF7C71] focus:ring-4 focus:ring-[#FF7C71]/10 focus:outline-none transition-all text-sm font-medium text-slate-900 placeholder-slate-400"
+                      className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 focus:outline-none transition-all text-sm font-medium text-slate-900 placeholder-slate-400"
                       required
                     />
                   </div>
@@ -303,7 +303,7 @@ export default function RegisterPage() {
                       value={formData.email}
                       onChange={handleChange}
                       placeholder="name@company.com"
-                      className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#FF7C71] focus:ring-4 focus:ring-[#FF7C71]/10 focus:outline-none transition-all text-sm font-medium text-slate-900 placeholder-slate-400"
+                      className="w-full pl-11 pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 focus:outline-none transition-all text-sm font-medium text-slate-900 placeholder-slate-400"
                       required
                     />
                   </div>
@@ -325,7 +325,7 @@ export default function RegisterPage() {
                       value={formData.phone}
                       onChange={handleChange}
                       placeholder="01712-XXXXXX"
-                      className="w-full pl-[84px] pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#FF7C71] focus:ring-4 focus:ring-[#FF7C71]/10 focus:outline-none transition-all text-sm font-medium text-slate-900 placeholder-slate-400"
+                      className="w-full pl-[84px] pr-4 py-3.5 rounded-xl bg-slate-50 border border-slate-200 focus:bg-white focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 focus:outline-none transition-all text-sm font-medium text-slate-900 placeholder-slate-400"
                       required
                     />
                   </div>
@@ -342,15 +342,15 @@ export default function RegisterPage() {
                         className="sr-only"
                         required
                       />
-                      <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${agreeTerms ? "bg-[#FF7C71] border-[#FF7C71]" : "bg-white border-slate-300 group-hover:border-[#FF7C71]/50"}`}>
+                      <div className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${agreeTerms ? "bg-[#FF6014] border-[#FF6014]" : "bg-white border-slate-300 group-hover:border-[#FF6014]/50"}`}>
                         {agreeTerms && <Check size={12} className="text-white stroke-[3]" />}
                       </div>
                     </div>
                     <span className="text-xs text-slate-500 font-medium select-none leading-relaxed">
                       I agree to the{" "}
-                      <Link href="/terms" className="text-[#FF7C71] hover:underline font-semibold">Terms of Use</Link>{" "}
+                      <Link href="/terms" className="text-[#FF6014] hover:underline font-semibold">Terms of Use</Link>{" "}
                       and{" "}
-                      <Link href="/privacy" className="text-[#FF7C71] hover:underline font-semibold">Privacy Policy</Link>.
+                      <Link href="/privacy" className="text-[#FF6014] hover:underline font-semibold">Privacy Policy</Link>.
                     </span>
                   </label>
                 </div>
@@ -359,7 +359,7 @@ export default function RegisterPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full mt-1 bg-[#FF7C71] hover:bg-[#FF7C71]/90 disabled:opacity-70 text-white text-[15px] font-bold py-4 rounded-xl shadow-lg shadow-[#FF7C71]/25 hover:shadow-[#FF7C71]/35 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
+                  className="w-full mt-1 bg-[#FF6014] hover:bg-[#FF6014]/90 disabled:opacity-70 text-white text-[15px] font-bold py-4 rounded-xl shadow-lg shadow-[#FF6014]/25 hover:shadow-[#FF6014]/35 transition-all flex items-center justify-center gap-2 active:scale-[0.98]"
                 >
                   {isLoading ? (
                     <Loader2 size={18} className="animate-spin" />
@@ -375,7 +375,7 @@ export default function RegisterPage() {
               {/* Login link */}
               <p className="text-center text-sm text-slate-500 font-medium mt-6">
                 Already have an account?{" "}
-                <Link href="/login" className="text-[#FF7C71] hover:underline font-bold">
+                <Link href="/login" className="text-[#FF6014] hover:underline font-bold">
                   Login
                 </Link>
               </p>
@@ -401,7 +401,7 @@ export default function RegisterPage() {
             /* ===== OTP Verification Screen ===== */
             <div className="flex-1 flex items-center justify-center px-4 sm:px-8 pb-8 pt-4 relative z-10">
               <div className="w-full max-w-[420px] bg-white rounded-3xl sm:rounded-none border border-slate-200 sm:border-0 shadow-xl sm:shadow-none px-6 py-8 sm:px-2 sm:py-0 flex flex-col items-center text-center">
-                <div className="w-16 h-16 bg-gradient-to-br from-[#FF7C71] to-rose-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-6 shadow-xl shadow-rose-400/30">
+                <div className="w-16 h-16 bg-gradient-to-br from-[#FF6014] to-rose-600 rounded-2xl flex items-center justify-center text-white mx-auto mb-6 shadow-xl shadow-rose-400/30">
                   <ShieldCheck size={30} className="stroke-[2]" />
                 </div>
 
@@ -425,8 +425,8 @@ export default function RegisterPage() {
                         onChange={(e) => handleOtpChange(e.target.value, idx)}
                         onKeyDown={(e) => handleOtpKeyDown(e.key, idx)}
                         className={`w-14 h-16 rounded-2xl border-2 text-center text-2xl font-black focus:outline-none transition-all shadow-sm ${digit
-                          ? "border-[#FF7C71] bg-rose-50 text-[#FF7C71]"
-                          : "border-slate-200 bg-slate-50 text-slate-800 focus:border-[#FF7C71] focus:bg-white focus:ring-4 focus:ring-[#FF7C71]/10"
+                          ? "border-[#FF6014] bg-rose-50 text-[#FF6014]"
+                          : "border-slate-200 bg-slate-50 text-slate-800 focus:border-[#FF6014] focus:bg-white focus:ring-4 focus:ring-[#FF6014]/10"
                           }`}
                         required
                       />
@@ -434,14 +434,14 @@ export default function RegisterPage() {
                   </div>
 
                   {/* Timer */}
-                  <div className="text-xs text-[#FF7C71] font-extrabold tracking-wide">
+                  <div className="text-xs text-[#FF6014] font-extrabold tracking-wide">
                     {timeLeft > 0 ? (
                       `Resend code in 0${Math.floor(timeLeft / 60)}:${timeLeft % 60 < 10 ? "0" + (timeLeft % 60) : timeLeft % 60}`
                     ) : (
                       <button
                         type="button"
                         onClick={handleResendOtp}
-                        className="text-[#FF7C71] hover:underline font-black focus:outline-none"
+                        className="text-[#FF6014] hover:underline font-black focus:outline-none"
                       >
                         Resend Code
                       </button>
@@ -451,7 +451,7 @@ export default function RegisterPage() {
                   <button
                     type="submit"
                     disabled={isVerifying}
-                    className="w-full bg-[#FF7C71] hover:bg-[#FF7C71]/90 disabled:opacity-75 text-white text-sm font-black py-4 rounded-xl shadow-lg shadow-rose-400/25 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 focus:outline-none"
+                    className="w-full bg-[#FF6014] hover:bg-[#FF6014]/90 disabled:opacity-75 text-white text-sm font-black py-4 rounded-xl shadow-lg shadow-rose-400/25 active:scale-[0.99] transition-all flex items-center justify-center gap-1.5 focus:outline-none"
                   >
                     {isVerifying ? (
                       <Loader2 size={18} className="animate-spin" />
@@ -485,8 +485,8 @@ export default function RegisterPage() {
         <div className="text-center py-5 text-[11px] text-slate-400 font-medium relative z-10 border-t border-slate-100 mx-6 space-y-1">
           <div>
             © {new Date().getFullYear()} Rajseba Services Ltd. · All rights reserved.
-            <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#FF7C71] transition-colors">Privacy</Link>
-            <Link href="/terms" className="ml-3 text-slate-400 hover:text-[#FF7C71] transition-colors">Terms</Link>
+            <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#FF6014] transition-colors">Privacy</Link>
+            <Link href="/terms" className="ml-3 text-slate-400 hover:text-[#FF6014] transition-colors">Terms</Link>
           </div>
           <div>
             Developed by{" "}
@@ -494,7 +494,7 @@ export default function RegisterPage() {
               href="https://jevxo.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#FF7C71] hover:underline font-semibold"
+              className="text-[#FF6014] hover:underline font-semibold"
             >
               Jevxo
             </a>

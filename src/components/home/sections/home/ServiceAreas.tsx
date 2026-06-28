@@ -55,12 +55,12 @@ export default function ServiceAreas() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <MapPin size={13} />
             Coverage Areas
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <Building2 className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
+            <Building2 className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
             We Serve Across Bangladesh
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
@@ -79,7 +79,7 @@ export default function ServiceAreas() {
             { value: "24/7", label: "Availability" },
           ].map((stat) => (
             <div key={stat.label} className="text-center px-6 border-r border-slate-200 last:border-0">
-              <p className="text-2xl font-black text-[#FF7C71]">{stat.value}</p>
+              <p className="text-2xl font-black text-[#FF6014]">{stat.value}</p>
               <p className="text-xs font-semibold text-slate-400 mt-0.5">{stat.label}</p>
             </div>
           ))}
@@ -88,7 +88,7 @@ export default function ServiceAreas() {
         {/* Division Grid */}
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-16 gap-3">
-            <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
             <p className="text-xs font-bold text-slate-400">Loading divisions & districts...</p>
           </div>
         ) : areas.length === 0 ? (
@@ -109,15 +109,15 @@ export default function ServiceAreas() {
                 variants={itemVariants}
                 className={`relative rounded-2xl border p-5 transition-all ${
                   area.highlight
-                    ? "bg-gradient-to-br from-[#FF7C71]/10 to-rose-50 border-[#FF7C71]/30 shadow-md"
+                    ? "bg-gradient-to-br from-[#FF6014]/10 to-rose-50 border-[#FF6014]/30 shadow-md"
                     : area.active
-                    ? "bg-white border-slate-200 hover:border-[#FF7C71]/40 hover:shadow-md"
+                    ? "bg-white border-slate-200 hover:border-[#FF6014]/40 hover:shadow-md"
                     : "bg-slate-50 border-slate-200 opacity-60"
                 }`}
               >
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-1.5">
-                    <MapPin size={15} className={area.active ? "text-[#FF7C71]" : "text-slate-400"} />
+                    <MapPin size={15} className={area.active ? "text-[#FF6014]" : "text-slate-400"} />
                     <h3 className={`font-extrabold text-sm ${area.active ? "text-slate-900" : "text-slate-400"}`}>
                       {area.city}
                     </h3>
@@ -125,7 +125,7 @@ export default function ServiceAreas() {
                   <span
                     className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${
                       area.highlight
-                        ? "bg-[#FF7C71] text-white"
+                        ? "bg-[#FF6014] text-white"
                         : area.active
                         ? "bg-emerald-100 text-emerald-700"
                         : "bg-slate-200 text-slate-500"
@@ -139,7 +139,7 @@ export default function ServiceAreas() {
                   <ul className="space-y-1">
                     {area.zones.slice(0, 4).map((zone: string) => (
                       <li key={zone} className="flex items-center gap-1.5 text-[12px] text-slate-500 font-medium">
-                        <CheckCircle2 size={11} className={area.active ? "text-[#FF7C71]" : "text-slate-300"} />
+                        <CheckCircle2 size={11} className={area.active ? "text-[#FF6014]" : "text-slate-300"} />
                         {zone}
                       </li>
                     ))}
@@ -158,14 +158,14 @@ export default function ServiceAreas() {
         )}
 
         {/* CTA */}
-        <div className="mt-10 text-center bg-gradient-to-r from-[#FF7C71]/10 to-rose-50 border border-[#FF7C71]/20 rounded-3xl p-6">
+        <div className="mt-10 text-center bg-gradient-to-r from-[#FF6014]/10 to-rose-50 border border-[#FF6014]/20 rounded-3xl p-6">
           <p className="text-slate-700 font-semibold text-sm">
             📍 Don't see your area? We're expanding fast!
           </p>
           <p className="text-slate-500 text-xs mt-1">
             Leave your location and we'll notify you when Rajseba arrives near you.
           </p>
-          <button className="mt-4 inline-flex items-center gap-2 bg-[#FF7C71] hover:bg-[#FF7C71]/90 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-rose-300/30 transition-all active:scale-[0.98]">
+          <button className="mt-4 inline-flex items-center gap-2 bg-[#FF6014] hover:bg-[#FF6014]/90 text-white text-sm font-bold px-6 py-2.5 rounded-xl shadow-lg shadow-rose-300/30 transition-all active:scale-[0.98]">
             <MapPin size={14} />
             Request My Area
           </button>

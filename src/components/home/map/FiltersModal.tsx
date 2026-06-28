@@ -73,7 +73,7 @@ export default function FiltersModal({
                     type="number"
                     value={tempPriceRange.min}
                     onChange={(e) => setTempPriceRange({ ...tempPriceRange, min: parseInt(e.target.value) || 0 })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF6014]"
                   />
                 </div>
                 <div className="space-y-1">
@@ -82,7 +82,7 @@ export default function FiltersModal({
                     type="number"
                     value={tempPriceRange.max}
                     onChange={(e) => setTempPriceRange({ ...tempPriceRange, max: parseInt(e.target.value) || 0 })}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF7C71]"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm font-bold text-slate-800 outline-none focus:bg-white focus:border-[#FF6014]"
                   />
                 </div>
               </div>
@@ -102,7 +102,7 @@ export default function FiltersModal({
                       onClick={() => setTempMinRating(val)}
                       className={`py-2.5 rounded-xl text-xs font-bold border transition-colors flex items-center justify-center gap-1 cursor-pointer h-auto ${
                         isSelected
-                          ? "bg-rose-50 border-[#FF7C71] text-[#FF7C71] hover:bg-rose-50 hover:text-[#FF7C71]"
+                          ? "bg-rose-50 border-[#FF6014] text-[#FF6014] hover:bg-rose-50 hover:text-[#FF6014]"
                           : "bg-white border-slate-200 text-slate-600 hover:border-slate-350 hover:bg-slate-50"
                       }`}
                     >
@@ -119,7 +119,7 @@ export default function FiltersModal({
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:bg-white focus:border-[#FF7C71]"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:bg-white focus:border-[#FF6014]"
               >
                 <option>Recommended</option>
                 <option>Price: Low to High</option>
@@ -141,7 +141,7 @@ export default function FiltersModal({
               <Button
                 type="button"
                 onClick={onApplyFilters}
-                className="flex-1 py-3 h-auto bg-[#FF7C71] hover:bg-[#E5675D] text-white text-sm font-bold rounded-xl transition-all shadow-sm cursor-pointer border-none"
+                className="flex-1 py-3 h-auto bg-[#FF6014] hover:bg-[#E0530A] text-white text-sm font-bold rounded-xl transition-all shadow-sm cursor-pointer border-none"
               >
                 Apply Filters
               </Button>

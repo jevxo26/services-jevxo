@@ -61,7 +61,7 @@ export default function ClientBookingDetailsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 size={32} className="animate-spin text-[#FF7C71]" />
+        <Loader2 size={32} className="animate-spin text-[#FF6014]" />
       </div>
     );
   }
@@ -70,7 +70,7 @@ export default function ClientBookingDetailsPage() {
     return (
       <div className="flex flex-col items-center justify-center min-h-[60vh] text-slate-500">
         <h2 className="text-xl font-bold text-slate-800">Booking not found</h2>
-        <Link href="/dashbord/bookings" className="text-[#FF7C71] hover:underline mt-2">Return to Bookings</Link>
+        <Link href="/dashbord/bookings" className="text-[#FF6014] hover:underline mt-2">Return to Bookings</Link>
       </div>
     );
   }
@@ -93,7 +93,7 @@ export default function ClientBookingDetailsPage() {
         <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
             <div className="flex gap-4">
-              <div className="w-14 h-14 bg-[#FFF8F7] border border-[#FFEBE9] rounded-2xl flex items-center justify-center text-[#FF7C71] shrink-0">
+              <div className="w-14 h-14 bg-[#FFF8F4] border border-[#FFF0EB] rounded-2xl flex items-center justify-center text-[#FF6014] shrink-0">
                 <Briefcase size={24} className="stroke-[2.5]" />
               </div>
               <div>
@@ -106,11 +106,11 @@ export default function ClientBookingDetailsPage() {
 
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <Calendar size={16} className="text-[#FF7C71]" />
+                    <Calendar size={16} className="text-[#FF6014]" />
                     <span className="font-semibold">{new Date(booking.createdAt).toLocaleDateString("en-BD", { dateStyle: 'medium' })}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <MapPin size={16} className="text-[#FF7C71]" />
+                    <MapPin size={16} className="text-[#FF6014]" />
                     <span className="font-semibold">{booking.location || "Location not provided"}</span>
                   </div>
                 </div>
@@ -206,7 +206,7 @@ export default function ClientBookingDetailsPage() {
         {booking.status === 'completed' && (
           <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm mt-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-2xl bg-[#FFF8F7] text-[#FF7C71] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center">
                 <Star size={20} className="fill-current" />
               </div>
               <div>
@@ -244,7 +244,7 @@ export default function ClientBookingDetailsPage() {
                     <select
                       value={reviewTarget}
                       onChange={(e) => setReviewTarget(e.target.value)}
-                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FF7C71]/20 focus:border-[#FF7C71]/40 transition-all"
+                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 transition-all"
                     >
                       <option value="service">Overall Service</option>
                       {booking.employees.map((emp: any) => (
@@ -261,7 +261,7 @@ export default function ClientBookingDetailsPage() {
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     placeholder="Tell us about your experience..."
-                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FF7C71]/20 focus:border-[#FF7C71]/40 transition-all min-h-[120px] resize-none"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 transition-all min-h-[120px] resize-none"
                     required
                   />
                 </div>
@@ -269,7 +269,7 @@ export default function ClientBookingDetailsPage() {
                 <button
                   type="submit"
                   disabled={isSubmittingReview}
-                  className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-sm font-bold py-3.5 px-8 rounded-2xl transition-all shadow-sm shadow-[#FF7C71]/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+                  className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-sm font-bold py-3.5 px-8 rounded-2xl transition-all shadow-sm shadow-[#FF6014]/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
                 >
                   {isSubmittingReview ? <Loader2 size={16} className="animate-spin" /> : null}
                   Submit Review

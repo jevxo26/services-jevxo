@@ -27,7 +27,7 @@ const DhakaMap = dynamic(() => import("@/components/home/map/DhakaMap"), {
   loading: () => (
     <div className="flex-1 min-h-[480px] md:min-h-[600px] md:h-full rounded-3xl border border-slate-200 bg-slate-100 flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
-        <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
         <p className="text-xs font-bold text-slate-400">Loading map...</p>
       </div>
     </div>
@@ -154,7 +154,7 @@ export default function MapPage() {
     return (
       <div className="min-h-screen bg-background flex items-center justify-center">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-[#FF7C71]" />
+          <Loader2 className="w-10 h-10 animate-spin text-[#FF6014]" />
           <p className="text-sm font-semibold text-slate-500">Loading vendor profiles...</p>
         </div>
       </div>
@@ -213,7 +213,7 @@ export default function MapPage() {
                 </Button>
                 <Button
                   onClick={() => setActiveTab("list")}
-                  className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#FF7C71] hover:bg-[#FF7C71]/90 text-white shadow-sm"
+                  className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#FF6014] hover:bg-[#FF6014]/90 text-white shadow-sm"
                 >
                   <ListIcon className="w-3.5 h-3.5" />
                   List
@@ -264,7 +264,7 @@ export default function MapPage() {
                     </p>
                     <Button
                       onClick={handleClearFilters}
-                      className="mt-6 px-6 py-2.5 h-auto bg-[#FF7C71] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#E5675D] transition-colors cursor-pointer"
+                      className="mt-6 px-6 py-2.5 h-auto bg-[#FF6014] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#E0530A] transition-colors cursor-pointer"
                     >
                       Clear Filters
                     </Button>

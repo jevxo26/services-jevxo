@@ -25,65 +25,70 @@ export function PackageOfferCard({
   return (
     <motion.div
       variants={itemVariants}
-      className={`rounded-3xl relative flex flex-col h-full transition-all hover:-translate-y-1 overflow-hidden ${
-        pkg.variant === "popular"
-          ? "border-2 border-[#FF7C71] bg-rose-50/50 shadow-xl"
+      className={`rounded-3xl relative flex flex-col h-full transition-all hover:-translate-y-1 overflow-hidden ${pkg.variant === "popular"
+          ? "border-2 border-[#FF6014] bg-rose-50/50 shadow-xl"
           : pkg.variant === "dark"
             ? "bg-[#261817] text-white"
             : "bg-white border border-slate-100 shadow-sm"
-      }`}
+        }`}
     >
+      {/* Badge */}
       {pkg.badge && (
-        <div className="absolute top-3 right-3 bg-[#FF7C71] text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-sm">
+        <div className="absolute top-3 right-3 bg-[#FF6014] text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-sm">
           {pkg.badge}
         </div>
       )}
 
+      {/* Image Block */}
       {pkg.image ? (
-        <div className="relative h-40 w-full overflow-hidden">
+        <div className="relative h-44 w-full overflow-hidden flex-shrink-0">
           <img
             src={pkg.image}
             alt={pkg.title}
             className="w-full h-full object-cover transition-transform duration-500 hover:scale-105"
           />
+          {/* Gradient overlay so bottom text is always readable */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/10 to-transparent" />
+
+          {/* Service label bottom-left */}
           {pkg.serviceName && (
-            <div className="absolute bottom-2 left-3 bg-black/50 backdrop-blur-sm text-white text-[10px] font-semibold px-2.5 py-1 rounded-full">
-              {pkg.serviceName}
+            <div className="absolute bottom-3 left-3 z-10">
+              <span className="text-[11px] font-semibold text-white bg-black/40 backdrop-blur-sm px-2.5 py-1 rounded-full border border-white/15">
+                {pkg.serviceName}
+              </span>
             </div>
           )}
         </div>
       ) : pkg.serviceName ? (
+        /* No image — show service pill at top */
         <div className="px-6 pt-6 pb-2">
           <span
-            className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${
-              pkg.variant === "dark"
+            className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${pkg.variant === "dark"
                 ? "bg-white/10 text-slate-300"
-                : "bg-[#FF7C71]/10 text-[#FF7C71]"
-            }`}
+                : "bg-[#FF6014]/10 text-[#FF6014]"
+              }`}
           >
             {pkg.serviceName}
           </span>
         </div>
       ) : null}
 
+      {/* Card Body */}
       <div
-        className={`p-6 flex flex-col flex-1 ${
-          !pkg.image && !pkg.serviceName ? "pt-8" : ""
-        }`}
+        className={`p-6 flex flex-col flex-1 ${!pkg.image && !pkg.serviceName ? "pt-8" : ""
+          }`}
       >
         <div className="mb-5">
           <h3
-            className={`text-base font-bold mb-1 leading-snug ${
-              pkg.variant === "dark" ? "text-white" : "text-slate-900"
-            }`}
+            className={`text-base font-bold mb-1 leading-snug ${pkg.variant === "dark" ? "text-white" : "text-slate-900"
+              }`}
           >
             {pkg.title}
           </h3>
           {pkg.description && (
             <p
-              className={`text-xs mb-3 leading-relaxed ${
-                pkg.variant === "dark" ? "text-slate-400" : "text-slate-500"
-              }`}
+              className={`text-xs mb-3 leading-relaxed ${pkg.variant === "dark" ? "text-slate-400" : "text-slate-500"
+                }`}
             >
               {pkg.description}
             </p>
@@ -91,9 +96,8 @@ export function PackageOfferCard({
           {pkg.price ? (
             <div className="flex items-baseline gap-1">
               <span
-                className={`text-3xl font-extrabold ${
-                  pkg.variant === "dark" ? "text-white" : "text-[#FF7C71]"
-                }`}
+                className={`text-3xl font-extrabold ${pkg.variant === "dark" ? "text-white" : "text-[#FF6014]"
+                  }`}
               >
                 ৳{pkg.price}
               </span>
@@ -108,7 +112,7 @@ export function PackageOfferCard({
           <ul className="space-y-2.5 mb-6 flex-1">
             {pkg.features.map((feature, i) => (
               <li key={i} className="flex items-start gap-2.5 text-sm">
-                <Check className="w-4 h-4 text-[#FF7C71] mt-0.5 flex-shrink-0" />
+                <Check className="w-4 h-4 text-[#FF6014] mt-0.5 flex-shrink-0" />
                 <span
                   className={
                     pkg.variant === "dark" ? "text-slate-300" : "text-slate-600"
@@ -130,13 +134,12 @@ export function PackageOfferCard({
         <button
           type="button"
           onClick={() => onBook?.(pkg)}
-          className={`w-full py-3 rounded-2xl font-bold text-sm transition-all cursor-pointer active:scale-[0.98] ${
-            pkg.variant === "dark"
+          className={`w-full py-3 rounded-2xl font-bold text-sm transition-all cursor-pointer active:scale-[0.98] ${pkg.variant === "dark"
               ? "bg-white text-slate-900 hover:bg-slate-100"
               : pkg.variant === "popular"
-                ? "bg-[#FF7C71] text-white hover:bg-[#E5675D] shadow-md shadow-[#FF7C71]/20"
+                ? "bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-md shadow-[#FF6014]/20"
                 : "bg-slate-900 text-white hover:bg-black"
-          }`}
+            }`}
         >
           {pkg.buttonText}
         </button>

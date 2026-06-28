@@ -142,13 +142,13 @@ export default function LoginPage() {
       <div className="hidden lg:flex lg:w-[48%] xl:w-[50%] flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-rose-50 via-orange-50 to-amber-50">
 
         {/* Soft background circles */}
-        <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-[#FF7C71]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-[#FF6014]/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-[-60px] right-[-60px] w-64 h-64 bg-orange-300/10 rounded-full blur-3xl pointer-events-none" />
 
         <div className="relative z-10 flex flex-col items-center text-center px-10">
           {/* Brand badge */}
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-4 py-1.5 rounded-full text-xs font-bold mb-6">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF7C71] animate-pulse" />
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-4 py-1.5 rounded-full text-xs font-bold mb-6">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014] animate-pulse" />
             Bangladesh's #1 Home Service Platform
           </div>
 
@@ -164,7 +164,7 @@ export default function LoginPage() {
 
           <h2 className="text-2xl xl:text-3xl font-black text-slate-800 leading-tight mt-4">
             Welcome back to{" "}
-            <span className="text-[#FF7C71]">Rajseba</span>
+            <span className="text-[#FF6014]">Rajseba</span>
           </h2>
 
 
@@ -172,8 +172,8 @@ export default function LoginPage() {
           <ul className="mt-6 space-y-2.5 text-left w-full max-w-xs">
             {features.map((f, i) => (
               <li key={i} className="flex items-center gap-3 text-sm text-slate-600 font-medium">
-                <div className="w-5 h-5 rounded-full bg-[#FF7C71]/15 border border-[#FF7C71]/25 flex items-center justify-center shrink-0">
-                  <CheckCircle2 size={12} className="text-[#FF7C71]" />
+                <div className="w-5 h-5 rounded-full bg-[#FF6014]/15 border border-[#FF6014]/25 flex items-center justify-center shrink-0">
+                  <CheckCircle2 size={12} className="text-[#FF6014]" />
                 </div>
                 {f}
               </li>
@@ -205,7 +205,7 @@ export default function LoginPage() {
         <div
           className="absolute inset-0 pointer-events-none opacity-[0.025]"
           style={{
-            backgroundImage: "radial-gradient(circle, #FF7C71 1px, transparent 1px)",
+            backgroundImage: "radial-gradient(circle, #FF6014 1px, transparent 1px)",
             backgroundSize: "28px 28px"
           }}
         />
@@ -214,7 +214,7 @@ export default function LoginPage() {
         <div className="relative z-10 px-6 sm:px-10 pt-6">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-[#FF7C71] transition-colors group"
+            className="inline-flex items-center gap-1.5 text-sm font-semibold text-slate-500 hover:text-[#FF6014] transition-colors group"
           >
             <ChevronLeft size={17} className="group-hover:-translate-x-0.5 transition-transform" />
             Back to Home
@@ -226,10 +226,10 @@ export default function LoginPage() {
           {/* Mobile logo */}
           <div className="lg:hidden mb-8 flex flex-col items-center">
             <Link href="/" className="flex flex-col items-center gap-2.5 group">
-              <div className="w-12 h-12 bg-gradient-to-br from-[#FF7C71] to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/25">
+              <div className="w-12 h-12 bg-gradient-to-br from-[#FF6014] to-rose-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-rose-500/25">
                 <Sparkles size={20} className="stroke-[2.5]" />
               </div>
-              <span className="font-extrabold text-[#FF7C71] text-xl tracking-tight">Rajseba</span>
+              <span className="font-extrabold text-[#FF6014] text-xl tracking-tight">Rajseba</span>
             </Link>
           </div>
 
@@ -240,7 +240,7 @@ export default function LoginPage() {
               {/* Centered Header */}
               <div className="flex flex-col items-center text-center mb-8">
                 <Link href="/" className="flex flex-col items-center gap-2.5 group mb-5 lg:flex hidden">
-                  <div className="w-14 h-14 bg-gradient-to-br from-[#FF7C71] to-rose-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-rose-400/25 group-hover:scale-105 transition-transform">
+                  <div className="w-14 h-14 bg-gradient-to-br from-[#FF6014] to-rose-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-rose-400/25 group-hover:scale-105 transition-transform">
                     <Sparkles size={24} className="stroke-[2]" />
                   </div>
                   <span className="font-black text-xl text-slate-900 tracking-tight">Rajseba</span>
@@ -308,7 +308,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isLoading}
-                  className="w-full bg-gradient-to-r from-[#FF7C71] to-rose-600 hover:from-[#FF7C71] hover:to-rose-700 disabled:opacity-60 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 hover:shadow-rose-500/35 transition-all flex items-center justify-center gap-2 focus:outline-none active:scale-[0.99] mt-1"
+                  className="w-full bg-gradient-to-r from-[#FF6014] to-rose-600 hover:from-[#FF6014] hover:to-rose-700 disabled:opacity-60 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 hover:shadow-rose-500/35 transition-all flex items-center justify-center gap-2 focus:outline-none active:scale-[0.99] mt-1"
                 >
                   {isLoading ? (
                     <Loader2 size={18} className="animate-spin" />
@@ -326,7 +326,7 @@ export default function LoginPage() {
               {/* Sign up link */}
               <p className="text-center text-sm text-slate-500 font-medium mt-8">
                 Don't have an account?{" "}
-                <Link href="/signup" className="text-[#FF7C71] hover:underline font-bold">
+                <Link href="/signup" className="text-[#FF6014] hover:underline font-bold">
                   Create one free →
                 </Link>
               </p>
@@ -410,7 +410,7 @@ export default function LoginPage() {
                 <button
                   type="submit"
                   disabled={isVerifying || otp.join("").length < 4}
-                  className="w-full bg-gradient-to-r from-[#FF7C71] to-rose-600 hover:from-[#FF7C71] hover:to-rose-700 disabled:opacity-50 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 active:scale-[0.99] transition-all flex items-center justify-center gap-2 focus:outline-none"
+                  className="w-full bg-gradient-to-r from-[#FF6014] to-rose-600 hover:from-[#FF6014] hover:to-rose-700 disabled:opacity-50 text-white text-sm font-black py-4 rounded-2xl shadow-xl shadow-rose-500/25 active:scale-[0.99] transition-all flex items-center justify-center gap-2 focus:outline-none"
                 >
                   {isVerifying ? (
                     <Loader2 size={18} className="animate-spin" />
@@ -444,8 +444,8 @@ export default function LoginPage() {
         <div className="text-center py-5 text-[11px] text-slate-400 font-medium relative z-10 border-t border-slate-100 mx-6 space-y-1">
           <div>
             © {new Date().getFullYear()} Rajseba Services Ltd. · All rights reserved.
-            <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#FF7C71] transition-colors">Privacy</Link>
-            <Link href="/terms" className="ml-3 text-slate-400 hover:text-[#FF7C71] transition-colors">Terms</Link>
+            <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#FF6014] transition-colors">Privacy</Link>
+            <Link href="/terms" className="ml-3 text-slate-400 hover:text-[#FF6014] transition-colors">Terms</Link>
           </div>
           <div>
             Developed by{" "}
@@ -453,7 +453,7 @@ export default function LoginPage() {
               href="https://jevxo.com"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-[#FF7C71] hover:underline font-semibold"
+              className="text-[#FF6014] hover:underline font-semibold"
             >
               Jevxo
             </a>

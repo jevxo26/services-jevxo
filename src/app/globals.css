@@ -70,11 +70,11 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --color-brand-primary: #FF7C71;
+  --color-brand-primary: #FF6014;
   --color-brand-light: #FF9E96;
-  --color-brand-dark: #E5675D;
-  --color-brand-bg: #FFF8F7;
-  --color-brand-hover: #FFEBE9;
+  --color-brand-dark: #E0530A;
+  --color-brand-bg: #FFF8F4;
+  --color-brand-hover: #FFF0EB;
 
   --color-premium-slate: #0F172A;
   --color-premium-gray: #64748B;
@@ -85,7 +85,7 @@
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
 
-  --primary: #FF7C71;
+  --primary: #FF6014;
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -94,12 +94,12 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
 
-  --accent: #FF7C71;
+  --accent: #FF6014;
   --accent-foreground: oklch(0.985 0 0);
 
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: #FF7C71;
+  --ring: #FF6014;
 
   --radius: 0.625rem;
 
@@ -119,18 +119,18 @@
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #FF7C71;
+  --sidebar-primary: #FF6014;
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: #FF7C71;
+  --sidebar-ring: #FF6014;
 }
 
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --primary: #FF7C71;
+  --primary: #FF6014;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --muted: oklch(0.269 0 0);
@@ -140,12 +140,12 @@
   --popover-foreground: oklch(0.985 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: #FF7C71;
+  --accent: #FF6014;
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: #FF7C71;
+  --ring: #FF6014;
 }
 
 /* ============== Bai Jamjuree Font ============== */
@@ -191,16 +191,16 @@ body {
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #FF7C71;
+    background: #FF6014;
   }
 }
 
 @utility bg-brand-gradient {
-  background: #FF7C71;
+  background: #FF6014;
 }
 
 @utility bg-brand-gradient-hover {
-  background: #E5675D;
+  background: #E0530A;
 }
 
 @utility shadow-premium {
@@ -232,7 +232,7 @@ body {
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #FF7C71;
+    background: #FF6014;
   }
 }
 

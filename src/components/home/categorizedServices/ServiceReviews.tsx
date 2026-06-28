@@ -37,7 +37,7 @@ export function ServiceReviews({ reviews = [] }: { reviews?: Review[] }) {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 mb-8">
         <div>
-          <div className="inline-flex items-center gap-1.5 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-1.5 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <Award size={12} />
             Verified Feedback
           </div>
@@ -49,9 +49,9 @@ export function ServiceReviews({ reviews = [] }: { reviews?: Review[] }) {
           </p>
         </div>
         {totalReviews > 0 && (
-          <div className="inline-flex items-center gap-2 bg-[#FFF8F7] border border-[#FF7C71]/10 px-4 py-2 rounded-2xl self-start sm:self-auto">
-            <ThumbsUp size={13} className="text-[#FF7C71]" />
-            <span className="text-xs font-bold text-[#FF7C71]">
+          <div className="inline-flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/10 px-4 py-2 rounded-2xl self-start sm:self-auto">
+            <ThumbsUp size={13} className="text-[#FF6014]" />
+            <span className="text-xs font-bold text-[#FF6014]">
               {satisfactionPct}% satisfied
             </span>
           </div>
@@ -119,8 +119,8 @@ export function ServiceReviews({ reviews = [] }: { reviews?: Review[] }) {
 
             {/* Trust pill */}
             {totalReviews > 0 && (
-              <div className="mt-4 bg-[#FFF8F7] border border-[#FF7C71]/10 rounded-2xl p-3 flex items-center gap-2.5">
-                <div className="w-7 h-7 bg-[#FF7C71] rounded-xl flex items-center justify-center shrink-0">
+              <div className="mt-4 bg-[#FFF8F4] border border-[#FF6014]/10 rounded-2xl p-3 flex items-center gap-2.5">
+                <div className="w-7 h-7 bg-[#FF6014] rounded-xl flex items-center justify-center shrink-0">
                   <ThumbsUp size={12} className="text-white" />
                 </div>
                 <div>
@@ -142,7 +142,7 @@ export function ServiceReviews({ reviews = [] }: { reviews?: Review[] }) {
             /* Empty state */
             <div className="bg-white border border-dashed border-slate-200 rounded-[28px] flex flex-col items-center justify-center gap-4 py-12 px-6 min-h-[220px]">
               <div className="w-12 h-12 bg-rose-50 rounded-2xl flex items-center justify-center">
-                <MessageSquare size={20} className="text-[#FF7C71]" />
+                <MessageSquare size={20} className="text-[#FF6014]" />
               </div>
               <div className="text-center">
                 <h4 className="text-xs font-bold text-slate-800 mb-1">No reviews yet</h4>
@@ -183,7 +183,7 @@ export function ServiceReviews({ reviews = [] }: { reviews?: Review[] }) {
                         <div
                           className="w-9 h-9 rounded-xl flex items-center justify-center text-[10px] font-black text-white shrink-0 select-none"
                           style={{
-                            background: "linear-gradient(135deg, #FF7C71 0%, #E5675D 100%)",
+                            background: "linear-gradient(135deg, #FF6014 0%, #E0530A 100%)",
                           }}
                         >
                           {initials}
@@ -225,7 +225,7 @@ export function ServiceReviews({ reviews = [] }: { reviews?: Review[] }) {
                     <div className="relative pl-5">
                       <Quote
                         size={12}
-                        className="absolute left-0 top-0.5 text-[#FF7C71]/30 fill-[#FF7C71]/10"
+                        className="absolute left-0 top-0.5 text-[#FF6014]/30 fill-[#FF6014]/10"
                       />
                       <p className="text-xs sm:text-[13px] text-slate-600 leading-relaxed font-medium">
                         {review.comment ||
@@ -235,7 +235,7 @@ export function ServiceReviews({ reviews = [] }: { reviews?: Review[] }) {
 
                     {/* Verified badge */}
                     <div className="mt-3 flex items-center gap-1.5">
-                      <div className="w-3.5 h-3.5 rounded-full bg-[#FF7C71] flex items-center justify-center shrink-0">
+                      <div className="w-3.5 h-3.5 rounded-full bg-[#FF6014] flex items-center justify-center shrink-0">
                         <svg width="6" height="4" viewBox="0 0 8 6" fill="none">
                           <path
                             d="M1 3L3 5L7 1"

@@ -172,7 +172,7 @@ export default function ContactClientPage() {
 
   const inputBase =
     "w-full text-xs px-4 py-3 rounded-xl border bg-white text-slate-800 outline-none transition-all placeholder:text-slate-400 font-semibold";
-  const inputNormal = `${inputBase} border-slate-200 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/10`;
+  const inputNormal = `${inputBase} border-slate-200 focus:border-[#FF6014] focus:ring-2 focus:ring-[#FF6014]/10`;
   const inputError = `${inputBase} border-rose-300 focus:border-rose-400 focus:ring-2 focus:ring-rose-300/10 bg-rose-50/40`;
 
   return (
@@ -184,7 +184,7 @@ export default function ContactClientPage() {
       >
         <motion.div
           style={{ y: glowY }}
-          className="pointer-events-none absolute -top-24 right-0 w-[450px] h-[450px] bg-[#FF7C71]/6 blur-[110px] rounded-full"
+          className="pointer-events-none absolute -top-24 right-0 w-[450px] h-[450px] bg-[#FF6014]/6 blur-[110px] rounded-full"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 20]) }}
@@ -198,9 +198,9 @@ export default function ContactClientPage() {
 
           <h1 className="text-2xl md:text-3.5xl font-black text-slate-900 tracking-tight leading-tight">
             How Can We{" "}
-            <span className="text-[#FF7C71] relative inline-block">
+            <span className="text-[#FF6014] relative inline-block">
               Help You Today?
-              <span className="absolute bottom-1 left-0 w-full h-1 bg-[#FF7C71]/15 rounded-full" />
+              <span className="absolute bottom-1 left-0 w-full h-1 bg-[#FF6014]/15 rounded-full" />
             </span>
           </h1>
 
@@ -281,7 +281,7 @@ export default function ContactClientPage() {
                       <div className="grid md:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
                           <label htmlFor="name" className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">
-                            Full Name <span className="text-[#FF7C71]">*</span>
+                            Full Name <span className="text-[#FF6014]">*</span>
                           </label>
                           <input
                             id="name"
@@ -299,7 +299,7 @@ export default function ContactClientPage() {
 
                         <div className="space-y-1.5">
                           <label htmlFor="email" className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">
-                            Email Address <span className="text-[#FF7C71]">*</span>
+                            Email Address <span className="text-[#FF6014]">*</span>
                           </label>
                           <input
                             id="email"
@@ -335,7 +335,7 @@ export default function ContactClientPage() {
 
                         <div className="space-y-1.5">
                           <label htmlFor="subject" className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">
-                            Subject Topic <span className="text-[#FF7C71]">*</span>
+                            Subject Topic <span className="text-[#FF6014]">*</span>
                           </label>
                           <select
                             id="subject"
@@ -360,7 +360,7 @@ export default function ContactClientPage() {
                       {/* Message Box */}
                       <div className="space-y-1.5">
                         <label htmlFor="message" className="text-[10px] font-bold text-slate-500 uppercase tracking-wide">
-                          Details & Context <span className="text-[#FF7C71]">*</span>
+                          Details & Context <span className="text-[#FF6014]">*</span>
                         </label>
                         <textarea
                           id="message"
@@ -379,7 +379,7 @@ export default function ContactClientPage() {
                       <Button
                         type="submit"
                         disabled={loading}
-                        className="w-full bg-[#FF7C71] hover:bg-[#e84e53] disabled:opacity-60 text-white text-xs font-extrabold py-3.5 h-auto rounded-xl border-none transition-colors shadow-sm flex items-center justify-center gap-2"
+                        className="w-full bg-[#FF6014] hover:bg-[#e84e53] disabled:opacity-60 text-white text-xs font-extrabold py-3.5 h-auto rounded-xl border-none transition-colors shadow-sm flex items-center justify-center gap-2"
                       >
                         {loading ? "Sending Enquiry..." : "Submit Inquiry"}
                         <Send className="w-3.5 h-3.5" />
@@ -425,7 +425,7 @@ export default function ContactClientPage() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/80 via-slate-900/10 to-transparent" />
                 <div className="relative z-10 p-5 space-y-1 text-white">
-                  <span className="inline-block text-[9px] font-black tracking-widest text-[#FF7C71] bg-white/95 px-2 py-0.5 rounded-full uppercase">
+                  <span className="inline-block text-[9px] font-black tracking-widest text-[#FF6014] bg-white/95 px-2 py-0.5 rounded-full uppercase">
                     Headquarters
                   </span>
                   <h3 className="font-extrabold text-sm">Banani Operations Center</h3>
@@ -438,7 +438,7 @@ export default function ContactClientPage() {
               {/* Office Hours Card */}
               <div className="bg-white border border-slate-100 rounded-2xl p-5 space-y-3">
                 <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4 text-[#FF7C71]" />
+                  <Clock className="w-4 h-4 text-[#FF6014]" />
                   <h4 className="font-black text-slate-900 text-xs uppercase tracking-wider">
                     Office Hours
                   </h4>
@@ -458,7 +458,7 @@ export default function ContactClientPage() {
               </div>
 
               {/* Social Channels */}
-              <div className="bg-[#FFF8F7] border border-rose-100 rounded-2xl p-5 space-y-3">
+              <div className="bg-[#FFF8F4] border border-rose-100 rounded-2xl p-5 space-y-3">
                 <h4 className="font-black text-slate-900 text-xs">Join Our Community</h4>
                 <p className="text-[11px] text-slate-500 font-semibold leading-relaxed">
                   Get updates about discount offers, appliance safety codes, and local technician audits.
@@ -470,7 +470,7 @@ export default function ContactClientPage() {
                       href={href}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="w-8 h-8 rounded-full bg-white border border-rose-100 text-[#FF7C71] flex items-center justify-center hover:bg-[#FF7C71] hover:text-white transition-colors duration-200"
+                      className="w-8 h-8 rounded-full bg-white border border-rose-100 text-[#FF6014] flex items-center justify-center hover:bg-[#FF6014] hover:text-white transition-colors duration-200"
                     >
                       <Icon className="w-3.5 h-3.5" />
                     </a>
@@ -516,7 +516,7 @@ export default function ContactClientPage() {
                       <span>{faq.question}</span>
                       <ChevronDown
                         className={`w-3.5 h-3.5 text-slate-400 transition-transform ${
-                          isOpen ? "rotate-180 text-[#FF7C71]" : ""
+                          isOpen ? "rotate-180 text-[#FF6014]" : ""
                         }`}
                       />
                     </button>
@@ -536,7 +536,7 @@ export default function ContactClientPage() {
 
       {/* ══ CTA STRIP SECTION ════════════════════════════════════ */}
       <RevealSection>
-        <section className="bg-[#FF7C71] py-8 md:py-10 relative overflow-hidden">
+        <section className="bg-[#FF6014] py-8 md:py-10 relative overflow-hidden">
           <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-4 relative z-10">
             <h2 className="text-lg md:text-xl font-black text-white tracking-tight">
               Ready to Book an Expert Technician?
@@ -547,7 +547,7 @@ export default function ContactClientPage() {
             <div className="flex flex-wrap gap-2.5 justify-center">
               <a
                 href="/services"
-                className="inline-flex items-center gap-2 bg-white text-[#FF7C71] text-[10px] font-extrabold px-5 py-3 rounded-xl hover:bg-rose-50 transition-colors shadow-sm"
+                className="inline-flex items-center gap-2 bg-white text-[#FF6014] text-[10px] font-extrabold px-5 py-3 rounded-xl hover:bg-rose-50 transition-colors shadow-sm"
               >
                 Explore Services
               </a>

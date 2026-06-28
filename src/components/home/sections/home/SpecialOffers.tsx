@@ -62,12 +62,12 @@ export default function SpecialOffers() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <Sparkles size={13} />
             Featured Promotions
           </div>
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <Zap className="w-6 h-6 md:w-8 md:h-8 text-[#FF7C71]" />
+            <Zap className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
             Special Deals & Packages
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
@@ -76,16 +76,16 @@ export default function SpecialOffers() {
 
           {/* Live Countdown */}
           <div className="mt-5 flex items-center gap-2.5 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-lg shadow-slate-900/10">
-            <Clock size={15} className="text-[#FF7C71] animate-pulse" />
+            <Clock size={15} className="text-[#FF6014] animate-pulse" />
             <span className="text-xs font-semibold text-slate-400">Offer ends in</span>
-            <span className="text-sm font-black tabular-nums text-[#FF7C71]">{countdown}</span>
+            <span className="text-sm font-black tabular-nums text-[#FF6014]">{countdown}</span>
           </div>
         </div>
 
         {/* Loading State */}
         {isLoading && (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
           </div>
         )}
 
@@ -124,7 +124,7 @@ export default function SpecialOffers() {
         {/* Empty state if API has no packages */}
         {!isLoading && packagesData.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center text-[#FF7C71] mb-4">
+            <div className="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center text-[#FF6014] mb-4">
               <Gift size={28} />
             </div>
             <h3 className="text-lg font-bold text-slate-700 mb-1">No packages available yet</h3>

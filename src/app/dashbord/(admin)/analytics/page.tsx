@@ -11,7 +11,7 @@ export default function AnalyticsPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4">
+        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
@@ -23,7 +23,7 @@ export default function AnalyticsPage() {
   }
 
   const categoryBreakdown = [
-    { name: "AC Servicing & Repair", percentage: 42, color: "bg-[#FF7C71]", count: "348 Bookings" },
+    { name: "AC Servicing & Repair", percentage: 42, color: "bg-[#FF6014]", count: "348 Bookings" },
     { name: "Deep Home Cleaning", percentage: 28, color: "bg-teal-500", count: "230 Bookings" },
     { name: "Expert Plumbing", percentage: 15, color: "bg-indigo-500", count: "124 Bookings" },
     { name: "Wall Painting & Decor", percentage: 10, color: "bg-amber-500", count: "82 Bookings" },
@@ -42,7 +42,7 @@ export default function AnalyticsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <BarChart3 className="w-6 h-6" />
           </div>
           <div>
@@ -69,7 +69,7 @@ export default function AnalyticsPage() {
                   <span className="text-slate-800">{cat.name}</span>
                   <div className="flex gap-2">
                     <span className="text-slate-400">{cat.count}</span>
-                    <span className="text-[#FF7C71]">{cat.percentage}%</span>
+                    <span className="text-[#FF6014]">{cat.percentage}%</span>
                   </div>
                 </div>
                 <div className="h-2.5 w-full bg-slate-50 border border-slate-100 rounded-full overflow-hidden">
@@ -94,7 +94,7 @@ export default function AnalyticsPage() {
             {regionalActivity.map((region, i) => (
               <div key={i} className="flex items-center justify-between p-3 border border-slate-100 rounded-xl hover:bg-slate-50/50 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-xl">
+                  <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-xl">
                     <MapPin size={18} />
                   </div>
                   <div>

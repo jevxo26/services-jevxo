@@ -2,7 +2,7 @@
 
 import { useAppSelector } from "@/redux/hooks";
 import { getRoleName } from "@/redux/features/auth/authSlice";
-import { User as UserIcon, Phone, MapPin, Mail, Save } from "lucide-react";
+import { User as UserIcon, Phone, MapPin, Mail, Save, Camera, Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import { useGetUserProfileQuery } from "@/redux/features/auth/authApi";
 import { useUpdateUserMutation } from "@/redux/features/admin/user";
@@ -11,6 +11,7 @@ import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
 import { useState, useEffect } from "react";
 import { LocationCascader } from "@/components/ui/LocationCascader";
 import { CustomSelect } from "@/components/ui/select";
+import { uploadImage } from "@/lib/upload";
 
 export default function ProfilePage() {
   const role = useAppSelector((state) => state.auth.role) || "client";
@@ -40,6 +41,42 @@ export default function ProfilePage() {
   const [selectedType, setSelectedType] = useState<string>("personal");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
 
+  const [avatarUrl, setAvatarUrl] = useState<string>("");
+  const [isUploadingAvatar, setIsUploadingAvatar] = useState(false);
+
+  useEffect(() => {
+    if (user?.avatar) {
+      setAvatarUrl(user.avatar);
+    }
+  }, [user?.avatar]);
+
+  const handleAvatarUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    setIsUploadingAvatar(true);
+    try {
+      const url = await uploadImage(file);
+      setAvatarUrl(url);
+
+      if (user.id || user._id) {
+        await updateUserMut({
+          id: user.id || user._id,
+          data: { avatar: url },
+        }).unwrap();
+        toast.success("Avatar updated successfully!");
+        refetch();
+      } else {
+        toast.error("User ID not found. Save form to apply changes.");
+      }
+    } catch (err: any) {
+      console.error(err);
+      toast.error(err.message || "Failed to upload avatar");
+    } finally {
+      setIsUploadingAvatar(false);
+    }
+  };
+
   useEffect(() => {
     if (profile && !selectedDevision && !selectedDistrict && !selectedArea) {
       if (profile.devision?.id) setSelectedDevision(profile.devision.id.toString());
@@ -62,6 +99,7 @@ export default function ProfilePage() {
     const updatedUserData = {
       name: formData.get("name") as string,
       phone: formData.get("phone") as string,
+      avatar: avatarUrl || undefined,
     };
 
     const primaryAddress = formData.get("address")?.toString().trim() || "";
@@ -115,15 +153,25 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="space-y-8 animate-in fade-in duration-200">
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
-        <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
-            <UserIcon className="w-6 h-6" />
-          </div>
-          <div>
-            <h1 className="text-xl font-extrabold text-slate-900">My Profile</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage personal contact card, addresses, and emergency backup details.</p>
+    <div className="space-y-6 md:space-y-8 pb-12 sm:pb-16 animate-in fade-in duration-200">
+      {/* Premium Profile Page Header */}
+      <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15">
+        {/* Decorative Glow Circles */}
+        <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#FF6014]/25 blur-3xl pointer-events-none" />
+        <div className="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
+
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div className="flex items-center gap-4">
+            <div className="p-3 bg-white/10 backdrop-blur-md text-[#FF6014] rounded-2xl border border-white/10">
+              <UserIcon className="w-6 h-6" />
+            </div>
+            <div>
+              <span className="text-[10px] font-bold text-[#FF6014] tracking-widest uppercase bg-[#FF6014]/10 px-2.5 py-1 rounded-md border border-[#FF6014]/20">
+                User Profile
+              </span>
+              <h1 className="text-xl md:text-2xl font-black tracking-tight text-white mt-2">My Profile</h1>
+              <p className="text-xs text-slate-300 mt-1">Manage personal contact card, addresses, and account details.</p>
+            </div>
           </div>
         </div>
       </div>
@@ -132,15 +180,35 @@ export default function ProfilePage() {
         
         {/* Left Column: Premium ID Card */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col items-center text-center space-y-4">
-          <div className="w-24 h-24 bg-[#FFEBE9] text-[#E5675D] rounded-full flex items-center justify-center font-black text-3xl shadow-inner relative">
-            {name?.substring(0, 2).toUpperCase() || "UU"}
-            <span className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 rounded-full border-4 border-white flex items-center justify-center text-[10px] text-white">
+          <div className="w-24 h-24 bg-[#FFF0EB] text-[#E0530A] rounded-full flex items-center justify-center font-black text-3xl shadow-inner relative overflow-hidden group/avatar">
+            {isUploadingAvatar ? (
+              <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
+            ) : avatarUrl ? (
+              <img src={avatarUrl} alt={name} className="w-full h-full object-cover" />
+            ) : (
+              name?.substring(0, 2).toUpperCase() || "UU"
+            )}
+            
+            {/* Camera Overlay button */}
+            <label className="absolute inset-0 bg-black/45 flex flex-col items-center justify-center text-white opacity-0 group-hover/avatar:opacity-100 transition-opacity cursor-pointer z-10">
+              <Camera size={20} className="mb-0.5" />
+              <span className="text-[9px] font-bold tracking-wider uppercase">Upload</span>
+              <input
+                type="file"
+                accept="image/*"
+                className="hidden"
+                onChange={handleAvatarUpload}
+                disabled={isUploadingAvatar}
+              />
+            </label>
+
+            <span className="absolute bottom-1 right-1 w-5 h-5 bg-emerald-500 rounded-full border-4 border-white flex items-center justify-center text-[10px] text-white z-20">
               ✓
             </span>
           </div>
           <div>
             <h3 className="text-lg font-bold text-slate-800">{name}</h3>
-            <span className="text-xs font-semibold text-[#FF7C71] bg-[#FFF8F7] px-2.5 py-0.5 rounded-lg mt-1 inline-block capitalize">
+            <span className="text-xs font-semibold text-[#FF6014] bg-[#FFF8F4] px-2.5 py-0.5 rounded-lg mt-1 inline-block capitalize">
               {getRoleName(role)}
             </span>
           </div>
@@ -173,7 +241,7 @@ export default function ProfilePage() {
                   name="name"
                   type="text"
                   defaultValue={name !== "Unknown User" ? name : ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                   required
                 />
               </div>
@@ -184,7 +252,7 @@ export default function ProfilePage() {
                   name="phone"
                   type="tel"
                   defaultValue={phone !== "No Phone" ? phone : ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                 />
               </div>
 
@@ -194,7 +262,7 @@ export default function ProfilePage() {
                   name="address"
                   type="text"
                   defaultValue={address !== "No Address Provided" ? address : ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                   required
                 />
               </div>
@@ -245,7 +313,7 @@ export default function ProfilePage() {
                   name="company_name"
                   type="text"
                   defaultValue={profile?.company_name || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="Leave blank if personal"
                 />
               </div>
@@ -267,7 +335,7 @@ export default function ProfilePage() {
                   name="location"
                   type="text"
                   defaultValue={profile?.location || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="e.g. Block C, House 12"
                 />
               </div>
@@ -278,7 +346,7 @@ export default function ProfilePage() {
                   name="description"
                   rows={4}
                   defaultValue={profile?.description || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none font-medium"
                   placeholder="Describe the services and expertise..."
                 ></textarea>
               </div>
@@ -290,7 +358,7 @@ export default function ProfilePage() {
                   type="number"
                   step="0.01"
                   defaultValue={profile?.min_starting_price || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="0.00"
                 />
               </div>
@@ -301,7 +369,7 @@ export default function ProfilePage() {
                   name="google_map_link"
                   type="url"
                   defaultValue={profile?.google_map_link || ""}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF7C71]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
                   placeholder="https://maps.app.goo.gl/..."
                 />
               </div>
@@ -311,7 +379,7 @@ export default function ProfilePage() {
               <button
                 type="submit"
                 disabled={isSaving}
-                className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-bold px-6 py-2.5 rounded-xl text-sm flex items-center gap-1.5 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full sm:w-auto bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold px-6 py-3 sm:py-2.5 rounded-xl text-sm flex items-center justify-center gap-1.5 transition-all active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 <Save size={16} /> {isSaving ? "Saving..." : "Save Changes"}
               </button>

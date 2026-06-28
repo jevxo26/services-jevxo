@@ -62,7 +62,7 @@ export function CouponApply({
   return (
     <div className="space-y-2">
       <label className="text-xs font-bold text-slate-400 uppercase tracking-wider flex items-center gap-1.5">
-        <Tag size={12} className="text-[#FF7C71]" />
+        <Tag size={12} className="text-[#FF6014]" />
         Coupon Code
       </label>
       <div className="flex gap-2">
@@ -72,7 +72,7 @@ export function CouponApply({
           onChange={(e) => setCode(e.target.value.toUpperCase())}
           placeholder="Enter coupon code"
           disabled={!!applied}
-          className="flex-1 bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#FF7C71] focus:border-[#FF7C71] block p-3 outline-none transition-all font-semibold uppercase disabled:opacity-70"
+          className="flex-1 bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#FF6014] focus:border-[#FF6014] block p-3 outline-none transition-all font-semibold uppercase disabled:opacity-70"
         />
         {applied ? (
           <button
@@ -87,7 +87,7 @@ export function CouponApply({
             type="button"
             onClick={handleApply}
             disabled={isLoading}
-            className="px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-[#FF7C71] hover:bg-[#E5675D] transition-colors cursor-pointer disabled:opacity-70 flex items-center gap-1.5"
+            className="px-4 py-2.5 rounded-xl text-sm font-bold text-white bg-[#FF6014] hover:bg-[#E0530A] transition-colors cursor-pointer disabled:opacity-70 flex items-center gap-1.5"
           >
             {isLoading ? <Loader2 size={14} className="animate-spin" /> : null}
             Apply

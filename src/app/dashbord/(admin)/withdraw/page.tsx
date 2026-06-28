@@ -67,7 +67,7 @@ export default function AdminWithdrawPage() {
     const map: Record<string, string> = {
       pending: "bg-amber-50 text-amber-700 border-amber-100",
       approved: "bg-emerald-50 text-emerald-700 border-emerald-100",
-      rejected: "bg-[#FFF8F7] text-[#E5675D] border-[#FFEBE9]",
+      rejected: "bg-[#FFF8F4] text-[#E0530A] border-[#FFF0EB]",
     };
     const icons: Record<string, React.ReactNode> = {
       pending: <Clock size={11} />,
@@ -86,7 +86,7 @@ export default function AdminWithdrawPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F7] rounded-2xl text-[#FF7C71] mb-4"><ShieldAlert size={48} /></div>
+        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4"><ShieldAlert size={48} /></div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
         <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Administrators only.</p>
       </div>
@@ -185,7 +185,7 @@ export default function AdminWithdrawPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F7] text-[#FF7C71] rounded-2xl">
+          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
             <Wallet className="w-6 h-6" />
           </div>
           <div>
@@ -220,7 +220,7 @@ export default function AdminWithdrawPage() {
       {/* Table */}
       {isLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-premium">
-          <div className="w-8 h-8 border-4 border-[#FF7C71] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : withdraws.length === 0 ? (
         <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -290,7 +290,7 @@ export default function AdminWithdrawPage() {
                       type="text"
                       id="adminNoteInput"
                       placeholder="e.g., TrxID 123456"
-                      className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF7C71] focus:border-[#FF7C71] block p-2.5 outline-none"
+                      className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF6014] focus:border-[#FF6014] block p-2.5 outline-none"
                     />
                   </div>
                 )}
@@ -316,7 +316,7 @@ export default function AdminWithdrawPage() {
                         handleUpdateStatus(selectedItem.id, "rejected", note); 
                         setSelectedItem(null); 
                       }}
-                      className="bg-[#FF7C71] hover:bg-[#E5675D] disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all"
+                      className="bg-[#FF6014] hover:bg-[#E0530A] disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all"
                     >
                       Reject
                     </button>
@@ -360,7 +360,7 @@ export default function AdminWithdrawPage() {
                   type="text"
                   id="actionModalNoteInput"
                   placeholder={actionModal.type === "approved" ? "e.g., TrxID 123456" : "e.g., Invalid gateway"}
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF7C71] focus:border-[#FF7C71] block p-3 outline-none"
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF6014] focus:border-[#FF6014] block p-3 outline-none"
                 />
               </div>
               <div className="flex gap-3 justify-end pt-2">
@@ -377,7 +377,7 @@ export default function AdminWithdrawPage() {
                     handleUpdateStatus(actionModal.item.id, actionModal.type, note); 
                     setActionModal(null); 
                   }}
-                  className={`${actionModal.type === "approved" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-[#FF7C71] hover:bg-[#E5675D]"} disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all flex-1 capitalize`}
+                  className={`${actionModal.type === "approved" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-[#FF6014] hover:bg-[#E0530A]"} disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all flex-1 capitalize`}
                 >
                   Confirm {actionModal.type}
                 </button>

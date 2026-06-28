@@ -88,7 +88,7 @@ const ExploreCategories = () => {
     <div className="max-w-7xl mx-auto px-4 md:px-6 py-5 md:py-16 lg:py-20 overflow-hidden">
       {/* Header */}
       <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-        <div className="inline-flex items-center gap-2 bg-[#FF7C71]/10 border border-[#FF7C71]/20 text-[#FF7C71] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+        <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
           <LayoutGrid size={13} />
           Categories
         </div>
@@ -103,7 +103,7 @@ const ExploreCategories = () => {
       {/* Loading state */}
       {isLoading && (
         <div className="flex justify-center items-center py-16">
-          <Loader2 className="w-8 h-8 animate-spin text-[#FF7C71]" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
         </div>
       )}
 

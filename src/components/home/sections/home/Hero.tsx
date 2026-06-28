@@ -112,7 +112,7 @@ const Hero = () => {
     <div
       className="relative w-full min-h-0 sm:min-h-[60vh] md:min-h-[66vh] lg:min-h-[70vh] flex items-center justify-center py-10 md:py-24"
     >
-      <div className="absolute inset-0 z-0 bg-[#FFF8F7] overflow-hidden">
+      <div className="absolute inset-0 z-0 bg-[#FFF8F4] overflow-hidden">
         <div className="absolute inset-0 w-full h-full opacity-15 md:opacity-20 pointer-events-none select-none">
           <Image
             src="/bg-icons-design.png"
@@ -124,7 +124,7 @@ const Hero = () => {
         </div>
 
         <div className="absolute inset-0 bg-gradient-to-b from-white/55 sm:from-white/40 via-white/70 sm:via-white/55 to-background backdrop-blur-[1.5px] sm:backdrop-blur-[1px] md:hidden" />
-        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#FFF8F7]/60 via-[#FFF8F7]/40 to-transparent pointer-events-none" />
+        <div className="hidden md:block absolute inset-0 bg-gradient-to-r from-[#FFF8F4]/60 via-[#FFF8F4]/40 to-transparent pointer-events-none" />
         <div className="hidden md:block absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background pointer-events-none" />
       </div>
 
@@ -139,14 +139,14 @@ const Hero = () => {
           className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight md:leading-[1.15] mb-4 sm:mb-5"
         >
           {HERO_CONTENT.titleText}{" "}
-          <span className="text-[#FF7C71]">{HERO_CONTENT.accentTitleText}</span>
+          <span className="text-[#FF6014]">{HERO_CONTENT.accentTitleText}</span>
           <br />
           {HERO_CONTENT.subtitleText}
         </motion.h1>
 
         <motion.p
           variants={itemVariants}
-          className="text-sm sm:text-base md:text-lg text-[#FF7C71] font-bold max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-12 leading-relaxed"
+          className="text-sm sm:text-base md:text-lg text-[#FF6014] font-bold max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-12 leading-relaxed"
         >
           {HERO_CONTENT.description}
         </motion.p>
@@ -200,7 +200,7 @@ const Hero = () => {
           className="grid grid-cols-2 lg:flex items-center justify-center gap-2.5 sm:gap-6 md:gap-8 mt-8 sm:mt-10 text-slate-500 font-semibold text-[10px] sm:text-xs md:text-sm w-full max-w-sm lg:max-w-none mx-auto"
         >
           <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs justify-center w-full lg:w-auto">
-            <span className="text-[#FF7C71] text-xs sm:text-sm">★</span>
+            <span className="text-[#FF6014] text-xs sm:text-sm">★</span>
             <span>
               <strong className="text-slate-800 font-extrabold">
                 4.9/5 Rating
@@ -210,7 +210,7 @@ const Hero = () => {
           </div>
 
           <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs justify-center w-full lg:w-auto">
-            <span className="text-[#FF7C71] text-xs sm:text-sm">⚡</span>
+            <span className="text-[#FF6014] text-xs sm:text-sm">⚡</span>
             <span>
               <strong className="text-slate-800 font-extrabold">
                 30 Min
@@ -220,7 +220,7 @@ const Hero = () => {
           </div>
 
           <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs justify-center w-full col-span-2 lg:col-span-1 lg:w-auto">
-            <span className="text-[#FF7C71] text-xs sm:text-sm">🛡️</span>
+            <span className="text-[#FF6014] text-xs sm:text-sm">🛡️</span>
             <span>
               <strong className="text-slate-800 font-extrabold">
                 100%

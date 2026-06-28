@@ -40,7 +40,7 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   }, []);
 
   const rolesList: { value: UserRole; label: string; desc: string; icon: React.ComponentType<any>; color: string }[] = [
-    { value: "superadmin", label: "Super Admin", desc: "System control", icon: Shield, color: "text-[#FF7C71] bg-[#FFF8F7]" },
+    { value: "superadmin", label: "Super Admin", desc: "System control", icon: Shield, color: "text-[#FF6014] bg-[#FFF8F4]" },
     { value: "agent", label: "Agent", desc: "Booking agent", icon: Briefcase, color: "text-emerald-500 bg-emerald-50" },
     { value: "vendor", label: "Vendor", desc: "Service professional", icon: HardHat, color: "text-teal-500 bg-teal-50" },
     { value: "client", label: "Client", desc: "Client profile", icon: CircleUser, color: "text-indigo-500 bg-indigo-50" },
@@ -50,23 +50,23 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const name = mounted && authUser?.name ? authUser.name : "User";
   const email = mounted ? (authUser?.email || authUser?.phone || "") : "";
   const avatar = name.substring(0, 2).toUpperCase();
-  const activeRoleConfig = mounted 
-    ? (rolesList.find((x) => x.value === role) || rolesList[3]) 
+  const activeRoleConfig = mounted
+    ? (rolesList.find((x) => x.value === role) || rolesList[3])
     : rolesList[3];
 
   return (
-    <header className="bg-[#FFF8F7]/95 backdrop-blur-md border-b border-slate-100 px-4 sm:px-8 py-4 flex items-center justify-between z-30 sticky top-0 shadow-sm">
+    <header className="bg-[#FFF8F4]/95 backdrop-blur-md border-b border-slate-100 px-4 sm:px-8 py-4 flex items-center justify-between z-30 sticky top-0 shadow-sm">
       {/* Search Bar */}
       <div className="flex items-center gap-2 sm:gap-4 flex-1">
         <button onClick={onMenuClick} className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl md:hidden shrink-0 focus:outline-none transition-colors">
           <Menu size={20} />
         </button>
         <div className="relative w-full max-w-md hidden md:block group">
-          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF7C71] transition-colors" size={16} />
+          <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF6014] transition-colors" size={16} />
           <input
             type="text"
             placeholder="Search booking ID, service, client..."
-            className="w-full bg-slate-50 border border-slate-100 hover:border-slate-200 rounded-2xl pl-11 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#FF7C71]/30 focus:ring-4 focus:ring-[#FFF8F7] transition-all shadow-sm"
+            className="w-full bg-slate-50 border border-slate-100 hover:border-slate-200 rounded-2xl pl-11 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#FF6014]/30 focus:ring-4 focus:ring-[#FFF8F4] transition-all shadow-sm"
           />
         </div>
       </div>
@@ -77,7 +77,7 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
         {/* Notifications Button */}
         <button className="p-2.5 hover:bg-slate-50 rounded-full relative text-slate-500 hover:text-slate-900 transition-all border border-transparent hover:border-slate-100 hover:shadow-sm">
           <Bell size={18} />
-          <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#FF7C71] rounded-full ring-2 ring-white"></span>
+          <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#FF6014] rounded-full ring-2 ring-white"></span>
         </button>
 
         {/* Profile Info & Dropdown */}
@@ -90,19 +90,27 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
               <p className="text-sm font-bold text-slate-800 leading-none">{name}</p>
               <p className="text-[11px] text-slate-400 mt-1.5 font-medium leading-none">{roleName}</p>
             </div>
-            <div className="w-10 h-10 bg-gradient-to-br from-[#FF7C71] to-[#FF7C71] text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-[#FF7C71]/20 select-none transition-transform hover:scale-105">
-              {avatar}
+            <div className="w-10 h-10 bg-gradient-to-br from-[#FF6014] to-[#FF6014] text-white font-bold rounded-xl flex items-center justify-center overflow-hidden shadow-md shadow-[#FF6014]/20 select-none transition-transform hover:scale-105 shrink-0">
+              {mounted && authUser?.avatar ? (
+                <img src={authUser.avatar} alt={name} className="w-full h-full object-cover" />
+              ) : (
+                avatar
+              )}
             </div>
           </button>
 
           {profileDropdownOpen && (
-            <div className="absolute right-0 mt-3 w-64 bg-[#FFF8F7] border border-slate-100 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+            <div className="absolute right-0 mt-3 w-64 bg-[#FFF8F4] border border-slate-100 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
 
               {/* User Info Header */}
               <div className="px-4 py-3 border-b border-slate-100">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-br from-[#FF7C71] to-[#FF7C71] text-white font-bold rounded-xl flex items-center justify-center shadow-md shadow-[#FF7C71]/20 select-none shrink-0">
-                    {avatar}
+                  <div className="w-10 h-10 bg-gradient-to-br from-[#FF6014] to-[#FF6014] text-white font-bold rounded-xl flex items-center justify-center overflow-hidden shadow-md shadow-[#FF6014]/20 select-none shrink-0">
+                    {mounted && authUser?.avatar ? (
+                      <img src={authUser.avatar} alt={name} className="w-full h-full object-cover" />
+                    ) : (
+                      avatar
+                    )}
                   </div>
                   <div className="min-w-0">
                     <p className="text-sm font-bold text-slate-800 truncate leading-none">{name}</p>
@@ -146,9 +154,9 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
                     setProfileDropdownOpen(false);
                     logout();
                   }}
-                  className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-[#E5675D] hover:bg-[#FFF8F7] transition-all"
+                  className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-[#E0530A] hover:bg-[#FFF8F4] transition-all"
                 >
-                  <div className="p-1.5 rounded-lg bg-[#FFF8F7] text-[#FF7C71]">
+                  <div className="p-1.5 rounded-lg bg-[#FFF8F4] text-[#FF6014]">
                     <LogOut size={16} />
                   </div>
                   <span className="font-semibold">Sign Out</span>

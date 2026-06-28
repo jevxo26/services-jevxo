@@ -303,7 +303,7 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50/50">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-[#FF7C71]" />
+          <Loader2 className="w-10 h-10 animate-spin text-[#FF6014]" />
           <p className="text-sm font-semibold text-slate-500">Loading service details...</p>
         </div>
       </div>
@@ -325,7 +325,7 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
           </p>
           <Link
             href="/services"
-            className="inline-flex items-center justify-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 bg-[#FF6014] hover:bg-[#E0530A] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md cursor-pointer"
           >
             <ArrowLeft size={16} /> Back to Services
           </Link>
@@ -343,7 +343,7 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
     : "0.0";
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#FFFDFD] via-slate-50/70 to-[#FFF8F7] relative pb-16">
+    <div className="min-h-screen bg-gradient-to-br from-[#FFFDFD] via-slate-50/70 to-[#FFF8F4] relative pb-16">
       <div
         className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-[0.015] pointer-events-none z-0"
         style={{ backgroundSize: "auto" }}
@@ -361,7 +361,7 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
         />
 
         {/* Sticky Section Tabs Navigation */}
-        <div className="sticky top-[72px] z-30 bg-[#FFF8F7]/50 backdrop-blur-lg border-b border-slate-100 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.02)] hidden md:block">
+        <div className="sticky top-[72px] z-30 bg-[#FFF8F4]/50 backdrop-blur-lg border-b border-slate-100 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.02)] hidden md:block">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex gap-2">
             {[
               { id: "specialized-services", label: "Services" },
@@ -374,7 +374,7 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
                 key={tab.id}
                 onClick={() => scrollToSection(tab.id)}
                 className={`text-xs font-bold px-4 py-2.5 rounded-full transition-all duration-300 cursor-pointer ${activeTab === tab.id
-                  ? "text-white bg-[#FF7C71] shadow-md shadow-rose-100"
+                  ? "text-white bg-[#FF6014] shadow-md shadow-rose-100"
                   : "text-slate-400 hover:text-slate-700 hover:bg-slate-50"
                   }`}
               >
@@ -471,14 +471,14 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
                 flex items-center justify-between gap-3"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-10 h-10 rounded-xl bg-[#FFF8F7] text-[#FF7C71] flex items-center justify-center shrink-0 border border-[#FF7C71]/10">
+                <div className="w-10 h-10 rounded-xl bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center shrink-0 border border-[#FF6014]/10">
                   <ShoppingCart size={18} />
                 </div>
                 <div className="min-w-0">
                   <p className="text-sm font-black text-slate-900 leading-tight">
                     {cartItemCount} service{cartItemCount === 1 ? "" : "s"}
                   </p>
-                  <p className="text-xs font-black text-[#FF7C71] mt-0.5">
+                  <p className="text-xs font-black text-[#FF6014] mt-0.5">
                     ৳{payableTotal.toLocaleString()}
                   </p>
                 </div>
@@ -488,7 +488,7 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
                 type="button"
                 onClick={() => setIsModalOpen(true)}
                 className="px-6 py-3 rounded-xl text-sm font-bold text-white
-                  bg-[#FF7C71] hover:bg-[#E5675D] transition shadow-md cursor-pointer active:scale-95 shrink-0"
+                  bg-[#FF6014] hover:bg-[#E0530A] transition shadow-md cursor-pointer active:scale-95 shrink-0"
               >
                 Book Now
               </button>
@@ -551,19 +551,19 @@ function DesktopBookingSidebar({
           </div>
         ) : (
           <div className="w-full aspect-[4/3] rounded-[24px] bg-rose-50/50 flex items-center justify-center border border-slate-100">
-            <ShoppingCart className="w-12 h-12 text-[#FF7C71]/30" />
+            <ShoppingCart className="w-12 h-12 text-[#FF6014]/30" />
           </div>
         )}
 
         <div className="space-y-4">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-[#FF7C71]">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-[#FF6014]">
             Why Choose Rajseba
           </p>
           <div className="space-y-3.5">
             {trustPoints.map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-3">
-                <div className="w-9 h-9 bg-[#FFF8F7] rounded-xl flex items-center justify-center shrink-0 border border-[#FF7C71]/10">
-                  <Icon className="w-4 h-4 text-[#FF7C71]" />
+                <div className="w-9 h-9 bg-[#FFF8F4] rounded-xl flex items-center justify-center shrink-0 border border-[#FF6014]/10">
+                  <Icon className="w-4 h-4 text-[#FF6014]" />
                 </div>
                 <span className="text-sm text-slate-600 font-semibold">{text}</span>
               </div>
@@ -582,7 +582,7 @@ function DesktopBookingSidebar({
     <div className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-xl space-y-5 max-h-[calc(100vh-170px)] overflow-y-auto [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-rose-200 [&::-webkit-scrollbar-thumb]:rounded-full">
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <h3 className="font-black text-slate-900 flex items-center gap-2">
-          <ShoppingCart size={18} className="text-[#FF7C71]" />
+          <ShoppingCart size={18} className="text-[#FF6014]" />
           Booking Summary
         </h3>
         <button
@@ -608,7 +608,7 @@ function DesktopBookingSidebar({
                 <button
                   type="button"
                   onClick={() => onUpdateQuantity(item.id, -1)}
-                  className="w-5 h-5 rounded-md text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
+                  className="w-5 h-5 rounded-md text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
                 >
                   <Minus size={10} strokeWidth={3} />
                 </button>
@@ -616,7 +616,7 @@ function DesktopBookingSidebar({
                 <button
                   type="button"
                   onClick={() => onUpdateQuantity(item.id, 1)}
-                  className="w-5 h-5 rounded-md text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
+                  className="w-5 h-5 rounded-md text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
                 >
                   <Plus size={10} strokeWidth={3} />
                 </button>
@@ -645,7 +645,7 @@ function DesktopBookingSidebar({
       </div>
 
       {/* Bill details */}
-      <div className="bg-[#FFF8F7] rounded-2xl p-4 border border-[#FF7C71]/10 space-y-2 text-xs">
+      <div className="bg-[#FFF8F4] rounded-2xl p-4 border border-[#FF6014]/10 space-y-2 text-xs">
         <div className="flex justify-between items-center text-slate-600 font-semibold">
           <span>Subtotal</span>
           <span>৳{cartTotal.toLocaleString()}</span>
@@ -658,7 +658,7 @@ function DesktopBookingSidebar({
         )}
         <div className="flex justify-between items-center text-sm font-black text-slate-800 pt-2 border-t border-slate-200/50">
           <span>Total Price</span>
-          <span className="text-[#FF7C71] text-base">৳{payableTotal.toLocaleString()}</span>
+          <span className="text-[#FF6014] text-base">৳{payableTotal.toLocaleString()}</span>
         </div>
       </div>
 
@@ -699,7 +699,7 @@ function DesktopBookingSidebar({
             placeholder="Street address, house no, area..."
             value={bookingDetails.location}
             onChange={(e) => setBookingDetails({ ...bookingDetails, location: e.target.value })}
-            className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
+            className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF6014] focus:ring-2 focus:ring-[#FF6014]/15 text-slate-800 text-xs rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
           />
         </div>
 
@@ -710,14 +710,14 @@ function DesktopBookingSidebar({
             placeholder="Specific requests..."
             value={bookingDetails.notes}
             onChange={(e) => setBookingDetails({ ...bookingDetails, notes: e.target.value })}
-            className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
+            className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF6014] focus:ring-2 focus:ring-[#FF6014]/15 text-slate-800 text-xs rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
           />
         </div>
 
         <button
           type="submit"
           disabled={isBooking}
-          className="w-full py-3.5 mt-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-extrabold rounded-2xl text-sm transition-all shadow-md shadow-rose-100 hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
+          className="w-full py-3.5 mt-2 bg-[#FF6014] hover:bg-[#E0530A] text-white font-extrabold rounded-2xl text-sm transition-all shadow-md shadow-rose-100 hover:shadow-lg cursor-pointer flex items-center justify-center gap-2"
         >
           {isBooking ? (
             <>
@@ -790,7 +790,7 @@ function MobileBookingDrawer({
             {/* Header */}
             <div className="px-6 pb-4 border-b border-slate-100 flex items-center justify-between shrink-0">
               <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
-                <Calendar size={18} className="text-[#FF7C71]" />
+                <Calendar size={18} className="text-[#FF6014]" />
                 Complete Booking Info
               </h3>
               <button
@@ -807,8 +807,8 @@ function MobileBookingDrawer({
               <div className="overflow-y-auto flex-1 p-5 space-y-5 [&::-webkit-scrollbar]:w-0.5">
                 {/* Selected items list */}
                 {cartItems.length > 0 && (
-                  <div className="bg-[#FFF8F7] border border-[#FF7C71]/10 rounded-2xl p-4 space-y-3">
-                    <div className="flex justify-between items-center text-xs font-bold text-[#FF7C71] uppercase tracking-wider pb-2 border-b border-[#FF7C71]/10">
+                  <div className="bg-[#FFF8F4] border border-[#FF6014]/10 rounded-2xl p-4 space-y-3">
+                    <div className="flex justify-between items-center text-xs font-bold text-[#FF6014] uppercase tracking-wider pb-2 border-b border-[#FF6014]/10">
                       <span className="flex items-center gap-1">
                         <ShoppingCart size={12} />
                         Selected Services ({cartItemCount})
@@ -829,7 +829,7 @@ function MobileBookingDrawer({
                               <button
                                 type="button"
                                 onClick={() => onUpdateQuantity(item.id, -1)}
-                                className="w-5 h-5 rounded-md text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
+                                className="w-5 h-5 rounded-md text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
                               >
                                 <Minus size={10} strokeWidth={3} />
                               </button>
@@ -837,7 +837,7 @@ function MobileBookingDrawer({
                               <button
                                 type="button"
                                 onClick={() => onUpdateQuantity(item.id, 1)}
-                                className="w-5 h-5 rounded-md text-[#FF7C71] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
+                                className="w-5 h-5 rounded-md text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"
                               >
                                 <Plus size={10} strokeWidth={3} />
                               </button>
@@ -858,7 +858,7 @@ function MobileBookingDrawer({
                     </div>
 
                     {/* totals */}
-                    <div className="pt-2 border-t border-[#FF7C71]/10 space-y-1.5 text-xs">
+                    <div className="pt-2 border-t border-[#FF6014]/10 space-y-1.5 text-xs">
                       <div className="flex justify-between text-slate-600 font-semibold">
                         <span>Subtotal</span>
                         <span>৳{cartTotal.toLocaleString()}</span>
@@ -871,7 +871,7 @@ function MobileBookingDrawer({
                       )}
                       <div className="flex justify-between items-center text-sm font-black text-slate-800 pt-1.5 border-t border-slate-100">
                         <span>Total Price</span>
-                        <span className="text-[#FF7C71] text-base">৳{payableTotal.toLocaleString()}</span>
+                        <span className="text-[#FF6014] text-base">৳{payableTotal.toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
@@ -920,7 +920,7 @@ function MobileBookingDrawer({
                       placeholder="Enter your street address, house no, area..."
                       value={bookingDetails.location}
                       onChange={(e) => setBookingDetails({ ...bookingDetails, location: e.target.value })}
-                      className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
+                      className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF6014] focus:ring-2 focus:ring-[#FF6014]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
                     />
                   </div>
 
@@ -931,7 +931,7 @@ function MobileBookingDrawer({
                       placeholder="Any specific requests or instructions..."
                       value={bookingDetails.notes}
                       onChange={(e) => setBookingDetails({ ...bookingDetails, notes: e.target.value })}
-                      className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
+                      className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF6014] focus:ring-2 focus:ring-[#FF6014]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none"
                     />
                   </div>
                 </div>
@@ -949,7 +949,7 @@ function MobileBookingDrawer({
                 <button
                   type="submit"
                   disabled={isBooking}
-                  className="px-6 py-3 text-sm font-bold text-white bg-[#FF7C71] hover:bg-[#E5675D] rounded-xl transition shadow-md disabled:opacity-70 flex-1 flex items-center justify-center gap-2 cursor-pointer"
+                  className="px-6 py-3 text-sm font-bold text-white bg-[#FF6014] hover:bg-[#E0530A] rounded-xl transition shadow-md disabled:opacity-70 flex-1 flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {isBooking ? (
                     <>
