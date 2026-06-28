@@ -197,21 +197,39 @@ const Hero = () => {
 
         <motion.div
           variants={itemVariants}
-          className="flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-6 md:gap-8 mt-8 sm:mt-10 text-slate-500 font-semibold text-[10px] sm:text-xs md:text-sm w-full max-w-sm sm:max-w-none mx-auto"
+          className="grid grid-cols-2 lg:flex items-center justify-center gap-2.5 sm:gap-6 md:gap-8 mt-8 sm:mt-10 text-slate-500 font-semibold text-[10px] sm:text-xs md:text-sm w-full max-w-sm lg:max-w-none mx-auto"
         >
-          <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs w-full sm:w-auto justify-center">
+          <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs justify-center w-full lg:w-auto">
             <span className="text-[#FF7C71] text-xs sm:text-sm">★</span>
-            <span><strong className="text-slate-800 font-extrabold">4.9/5 Rating</strong> (20k+ Reviews)</span>
+            <span>
+              <strong className="text-slate-800 font-extrabold">
+                4.9/5 Rating
+              </strong>{" "}
+              (20k+ Reviews)
+            </span>
           </div>
-          <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs w-full sm:w-auto justify-center">
+
+          <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs justify-center w-full lg:w-auto">
             <span className="text-[#FF7C71] text-xs sm:text-sm">⚡</span>
-            <span><strong className="text-slate-800 font-extrabold">30 Min</strong> Express Response</span>
+            <span>
+              <strong className="text-slate-800 font-extrabold">
+                30 Min
+              </strong>{" "}
+              Express Response
+            </span>
           </div>
-          <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs w-full sm:w-auto justify-center">
+
+          <div className="flex items-center gap-2 bg-white/60 backdrop-blur-md px-3.5 py-2 rounded-full border border-slate-200/40 shadow-xs justify-center w-full col-span-2 lg:col-span-1 lg:w-auto">
             <span className="text-[#FF7C71] text-xs sm:text-sm">🛡️</span>
-            <span><strong className="text-slate-800 font-extrabold">100%</strong> Satisfaction Insured</span>
+            <span>
+              <strong className="text-slate-800 font-extrabold">
+                100%
+              </strong>{" "}
+              Satisfaction Insured
+            </span>
           </div>
         </motion.div>
+
       </motion.div>
     </div>
   );

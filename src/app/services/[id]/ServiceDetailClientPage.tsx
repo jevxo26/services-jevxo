@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useMemo, useEffect } from "react";
+import React, { useState, useMemo, useEffect, useRef } from "react";
 import { CategorizedHero } from '@/components/home/categorizedServices/CategorizedHero';
 import { SpecializedServices } from '@/components/home/categorizedServices/SpecializedServices';
 import { Packages } from '@/components/home/categorizedServices/Packages';
@@ -31,6 +31,26 @@ import { ValidateCouponResult } from "@/redux/features/admin/coupon";
 import { CouponApply } from "@/components/home/booking/CouponApply";
 import { toast } from "sonner";
 import { motion, AnimatePresence } from "framer-motion";
+import dayjs from "dayjs";
+import { CustomCalendar } from "@/components/ui/calendar";
+import { CustomSelect } from "@/components/ui/select";
+
+const TIME_SLOT_OPTIONS = [
+  { value: "08:00 AM", label: "08:00 AM", desc: "Morning Slot" },
+  { value: "09:00 AM", label: "09:00 AM", desc: "Morning Slot" },
+  { value: "10:00 AM", label: "10:00 AM", desc: "Morning Slot" },
+  { value: "11:00 AM", label: "11:00 AM", desc: "Morning Slot" },
+  { value: "12:00 PM", label: "12:00 PM", desc: "Noon Slot" },
+  { value: "01:00 PM", label: "01:00 PM", desc: "Noon Slot" },
+  { value: "02:00 PM", label: "02:00 PM", desc: "Afternoon Slot" },
+  { value: "03:00 PM", label: "03:00 PM", desc: "Afternoon Slot" },
+  { value: "04:00 PM", label: "04:00 PM", desc: "Late Afternoon Slot" },
+  { value: "05:00 PM", label: "05:00 PM", desc: "Evening Slot" },
+  { value: "06:00 PM", label: "06:00 PM", desc: "Evening Slot" },
+  { value: "07:00 PM", label: "07:00 PM", desc: "Night Slot" },
+  { value: "08:00 PM", label: "08:00 PM", desc: "Night Slot" },
+  { value: "09:00 PM", label: "09:00 PM", desc: "Night Slot" },
+];
 
 const fallbackServices = [
   {
@@ -93,6 +113,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
   const [activeTab, setActiveTab] = useState("specialized-services");
 
   const [createBooking, { isLoading: isBooking }] = useCreateBookingMutation();
+  const hasAutoBooked = useRef(false);
 
   const displayServices = useMemo(() => {
     const nested = service?.nestedServices;
@@ -157,9 +178,8 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
 
   const handleAddToCart = (item: any, subId: number) => {
     if (!authUser) {
-      toast.error("Please login to add services!", {
-        action: { label: "Login", onClick: () => router.push("/login") },
-      });
+      const currentPath = window.location.pathname + window.location.search;
+      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
       return;
     }
     setCartQuantities((prev) => ({ ...prev, [subId]: (prev[subId] || 0) + 1 }));
@@ -168,9 +188,8 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
 
   const handleInitiateBooking = (item: any) => {
     if (!authUser) {
-      toast.error("Please login to proceed with booking!", {
-        action: { label: "Login", onClick: () => router.push("/login") },
-      });
+      const currentPath = window.location.pathname + window.location.search;
+      router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
       return;
     }
     setIsModalOpen(true);
@@ -260,6 +279,32 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Automatically open booking modal if ?book=true is passed
+  useEffect(() => {
+    if (isLoading || !service || hasAutoBooked.current) return;
+
+    const shouldBook = searchParams.get("book") === "true";
+    if (shouldBook) {
+      hasAutoBooked.current = true;
+      // Find the first sub-service to select
+      const firstSubService = displayServices.find(
+        (s: any) => s.subServices && s.subServices.length > 0
+      )?.subServices[0];
+
+      if (firstSubService) {
+        setCartQuantities({ [firstSubService.id]: 1 });
+      }
+
+      if (!authUser) {
+        const currentPath = window.location.pathname + window.location.search;
+        router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
+        return;
+      }
+
+      setIsModalOpen(true);
+    }
+  }, [isLoading, service, searchParams, displayServices, authUser, router]);
 
   if (isLoading) {
     return (
@@ -626,24 +671,30 @@ function DesktopBookingSidebar({
       </div>
 
       <form onSubmit={onSubmit} className="space-y-4 pt-2">
-        <div className="grid grid-cols-2 gap-3">
-          <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Date *</label>
-            <input
-              type="date"
-              required
-              value={bookingDetails.date}
-              onChange={(e) => setBookingDetails({ ...bookingDetails, date: e.target.value })}
-              className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs rounded-2xl p-3 outline-none transition-all font-semibold"
+        <div className="grid grid-cols-2 gap-3 items-end">
+          <div className="space-y-1 w-full">
+            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Date *</label>
+            <CustomCalendar
+              value={bookingDetails.date ? dayjs(bookingDetails.date) : null}
+              onChange={(date) =>
+                setBookingDetails({
+                  ...bookingDetails,
+                  date: date ? date.format("YYYY-MM-DD") : "",
+                })
+              }
+              placeholder="Select Date"
+              minDate={dayjs()}
+              className="w-full"
             />
           </div>
-          <div className="space-y-1">
-            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Time</label>
-            <input
-              type="time"
+          <div className="space-y-1 w-full">
+            <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Time</label>
+            <CustomSelect
+              options={TIME_SLOT_OPTIONS}
               value={bookingDetails.time}
-              onChange={(e) => setBookingDetails({ ...bookingDetails, time: e.target.value })}
-              className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs rounded-2xl p-3 outline-none transition-all font-semibold"
+              onChange={(val) => setBookingDetails({ ...bookingDetails, time: val })}
+              placeholder="Select Time"
+              className="w-full"
             />
           </div>
         </div>
@@ -723,7 +774,7 @@ function MobileBookingDrawer({
   return (
     <AnimatePresence>
       {isOpen && (
-        <div className="fixed inset-0 z-[1000] flex items-end justify-center">
+        <div className="fixed inset-0 z-[1000] flex items-end md:items-center justify-center p-0 md:p-4">
           {/* Backdrop */}
           <motion.div
             initial={{ opacity: 0 }}
@@ -739,10 +790,10 @@ function MobileBookingDrawer({
             animate={{ y: 0 }}
             exit={{ y: "100%" }}
             transition={{ type: "spring", damping: 25, stiffness: 240 }}
-            className="relative bg-white w-full rounded-t-[32px] shadow-2xl max-h-[90dvh] flex flex-col overflow-hidden z-10 border-t border-slate-100"
+            className="relative bg-white w-full max-w-2xl rounded-t-[32px] md:rounded-[32px] shadow-2xl max-h-[90dvh] md:max-h-[85vh] flex flex-col overflow-hidden z-10 border-t md:border border-slate-100"
           >
             {/* Grab handle indicator */}
-            <div className="w-12 h-1 bg-slate-200 rounded-full mx-auto my-3 shrink-0" />
+            <div className="w-12 h-1 bg-slate-200 rounded-full mx-auto my-3 shrink-0 md:hidden" />
 
             {/* Header */}
             <div className="px-6 pb-4 border-b border-slate-100 flex items-center justify-between shrink-0">
@@ -841,24 +892,30 @@ function MobileBookingDrawer({
                     onApplied={setAppliedCoupon}
                   />
 
-                  <div className="grid grid-cols-2 gap-3">
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Date *</label>
-                      <input
-                        type="date"
-                        required
-                        value={bookingDetails.date}
-                        onChange={(e) => setBookingDetails({ ...bookingDetails, date: e.target.value })}
-                        className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold"
+                  <div className="grid grid-cols-2 gap-3 items-end">
+                    <div className="space-y-1 w-full animate-none">
+                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Date *</label>
+                      <CustomCalendar
+                        value={bookingDetails.date ? dayjs(bookingDetails.date) : null}
+                        onChange={(date) =>
+                          setBookingDetails({
+                            ...bookingDetails,
+                            date: date ? date.format("YYYY-MM-DD") : "",
+                          })
+                        }
+                        placeholder="Select Date"
+                        minDate={dayjs()}
+                        className="w-full"
                       />
                     </div>
-                    <div className="space-y-1">
-                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Time</label>
-                      <input
-                        type="time"
+                    <div className="space-y-1 w-full animate-none">
+                      <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">Time</label>
+                      <CustomSelect
+                        options={TIME_SLOT_OPTIONS}
                         value={bookingDetails.time}
-                        onChange={(e) => setBookingDetails({ ...bookingDetails, time: e.target.value })}
-                        className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#FF7C71] focus:ring-2 focus:ring-[#FF7C71]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold"
+                        onChange={(val) => setBookingDetails({ ...bookingDetails, time: val })}
+                        placeholder="Select Time"
+                        className="w-full"
                       />
                     </div>
                   </div>

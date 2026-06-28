@@ -48,8 +48,8 @@ export default function ExpertCard({ expert, onViewDetails }: ExpertCardProps) {
               <div className="flex flex-wrap items-center gap-4 mt-2 text-xs font-semibold text-slate-500">
                 <VendorLocationInfo expert={expert} />
                 <div className="w-1.5 h-1.5 rounded-full bg-slate-200" />
-                <div className="flex items-center gap-1.5 text-emerald-600">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                <div className="flex items-center gap-1.5 text-blue-600">
+                  <ShieldCheck className="w-4 h-4 text-blue-500" />
                   {expert.status}
                 </div>
               </div>

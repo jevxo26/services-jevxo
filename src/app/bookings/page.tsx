@@ -5,19 +5,19 @@ import { useGetAllBookingsQuery, useUpdateBookingStatusMutation, useDeleteBookin
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
 import Link from "next/link";
-import { 
-  MapPin, 
-  Calendar, 
-  Clock, 
-  Briefcase, 
-  Package as PkgIcon, 
-  User, 
-  X, 
-  Search, 
-  Lock, 
-  LogIn, 
-  UserPlus, 
-  CheckCircle2, 
+import {
+  MapPin,
+  Calendar,
+  Clock,
+  Briefcase,
+  Package as PkgIcon,
+  User,
+  X,
+  Search,
+  Lock,
+  LogIn,
+  UserPlus,
+  CheckCircle2,
   ShieldAlert,
   ArrowRight,
   TrendingUp,
@@ -236,13 +236,13 @@ export default function BookingsPage() {
 
   // 2. AUTHENTICATED STATE
   return (
-    <section className="min-h-screen bg-gradient-to-b from-[#FFF8F7]/30 via-white to-white px-4 py-10 sm:px-6 lg:px-8 relative overflow-hidden">
+    <section className="min-h-screen bg-gradient-to-b from-[#FFF8F7]/30 via-white to-white px-4 py-10  lg:px-8 relative overflow-hidden">
       {/* Background radial depth glow */}
       <div className="absolute top-[5%] left-[-10%] w-[350px] h-[350px] bg-[#FF7C71]/3 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[450px] h-[450px] bg-cyan-500/2 blur-[150px] rounded-full pointer-events-none" />
 
       <div className="mx-auto max-w-4xl relative z-10">
-        
+
         {/* Page Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 mb-8">
           <div className="flex items-center gap-3">
@@ -295,8 +295,8 @@ export default function BookingsPage() {
               className="flex-1 bg-transparent text-sm text-slate-800 placeholder-slate-400 outline-none"
             />
             {search && (
-              <button 
-                onClick={() => setSearch("")} 
+              <button
+                onClick={() => setSearch("")}
                 className="p-1 rounded-full hover:bg-slate-200 text-slate-400 hover:text-slate-650 transition-colors"
               >
                 <X size={14} />
@@ -310,11 +310,10 @@ export default function BookingsPage() {
               <button
                 key={f.value}
                 onClick={() => setActiveFilter(f.value)}
-                className={`rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer ${
-                  activeFilter === f.value
+                className={`rounded-xl px-4 py-2 text-xs font-bold transition-all cursor-pointer ${activeFilter === f.value
                     ? "bg-[#FF7C71] text-white shadow-sm shadow-[#FF7C71]/20"
                     : "bg-[#FFF8F7] text-[#E5675D] hover:bg-[#FFEBE9]/50 border border-rose-100/30"
-                }`}
+                  }`}
               >
                 {f.label}
               </button>
@@ -348,10 +347,10 @@ export default function BookingsPage() {
             filtered.map((booking: any) => {
               const cfg = STATUS_CONFIG[booking.status as BookingStatus] || STATUS_CONFIG['pending'];
               const serviceName = booking.nestedService?.name || booking.pkg?.name || "Premium Home Service";
-              const dateStr = booking.date 
-                ? new Date(booking.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' }) 
+              const dateStr = booking.date
+                ? new Date(booking.date).toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' })
                 : "Scheduled Date N/A";
-              
+
               return (
                 <div
                   key={booking.id}
@@ -379,13 +378,13 @@ export default function BookingsPage() {
                       {cfg.label}
                     </span>
                     <div className="flex items-center gap-2">
-                      <button 
+                      <button
                         onClick={() => setSelectedBooking(booking)}
                         className="rounded-xl border border-slate-200 hover:border-[#FF7C71] hover:text-[#FF7C71] bg-slate-50 hover:bg-[#FFF8F7]/30 px-4 py-2 text-xs font-bold text-slate-650 transition-all hover:scale-105 active:scale-95 cursor-pointer"
                       >
                         View Details
                       </button>
-                      <button 
+                      <button
                         onClick={() => handleDelete(booking.id)}
                         disabled={isDeleting}
                         className="p-2 rounded-xl border border-rose-200 hover:border-rose-500 hover:text-white hover:bg-rose-500 text-rose-500 bg-rose-50 transition-all hover:scale-105 active:scale-95 cursor-pointer disabled:opacity-50"
@@ -411,14 +410,14 @@ export default function BookingsPage() {
               <h2 className="text-lg font-extrabold text-slate-800">
                 Booking Information
               </h2>
-              <button 
+              <button
                 onClick={() => setSelectedBooking(null)}
                 className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-colors cursor-pointer"
               >
                 <X size={18} />
               </button>
             </div>
-            
+
             {/* Modal Content */}
             <div className="p-6 space-y-6">
               <div className="flex justify-between items-start gap-4">
@@ -480,7 +479,7 @@ export default function BookingsPage() {
                   </div>
                 )}
               </div>
-              
+
               {/* Actions */}
               <div className="pt-2 border-t border-slate-100 flex flex-col gap-2">
                 {(selectedBooking.status === "pending" || selectedBooking.status === "assigned") && (
@@ -492,7 +491,7 @@ export default function BookingsPage() {
                     {isUpdating ? "Processing..." : "Cancel Booking Request"}
                   </button>
                 )}
-                
+
                 <button
                   onClick={() => handleDelete(selectedBooking.id)}
                   disabled={isDeleting}

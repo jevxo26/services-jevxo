@@ -9,6 +9,26 @@ import { ValidateCouponResult } from "@/redux/features/admin/coupon";
 import { CouponApply } from "@/components/home/booking/CouponApply";
 import { DisplayPackage } from "./packageOfferUtils";
 import { motion, AnimatePresence } from "framer-motion";
+import dayjs from "dayjs";
+import { CustomCalendar } from "@/components/ui/calendar";
+import { CustomSelect } from "@/components/ui/select";
+
+const TIME_SLOT_OPTIONS = [
+  { value: "08:00 AM", label: "08:00 AM", desc: "Morning Slot" },
+  { value: "09:00 AM", label: "09:00 AM", desc: "Morning Slot" },
+  { value: "10:00 AM", label: "10:00 AM", desc: "Morning Slot" },
+  { value: "11:00 AM", label: "11:00 AM", desc: "Morning Slot" },
+  { value: "12:00 PM", label: "12:00 PM", desc: "Noon Slot" },
+  { value: "01:00 PM", label: "01:00 PM", desc: "Noon Slot" },
+  { value: "02:00 PM", label: "02:00 PM", desc: "Afternoon Slot" },
+  { value: "03:00 PM", label: "03:00 PM", desc: "Afternoon Slot" },
+  { value: "04:00 PM", label: "04:00 PM", desc: "Late Afternoon Slot" },
+  { value: "05:00 PM", label: "05:00 PM", desc: "Evening Slot" },
+  { value: "06:00 PM", label: "06:00 PM", desc: "Evening Slot" },
+  { value: "07:00 PM", label: "07:00 PM", desc: "Night Slot" },
+  { value: "08:00 PM", label: "08:00 PM", desc: "Night Slot" },
+  { value: "09:00 PM", label: "09:00 PM", desc: "Night Slot" },
+];
 
 export function PackageBookingModal({
   selectedPackage,
@@ -180,32 +200,34 @@ export function PackageBookingModal({
               </div>
             </div>
 
-            <div className="grid grid-cols-2 gap-3">
-              <div className="space-y-1">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+            <div className="grid grid-cols-2 gap-3 items-end">
+              <div className="space-y-1 w-full">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
                   Booking Date *
                 </label>
-                <input
-                  type="date"
-                  required
-                  value={bookingDetails.date}
-                  onChange={(e) =>
-                    setBookingDetails({ ...bookingDetails, date: e.target.value })
+                <CustomCalendar
+                  value={bookingDetails.date ? dayjs(bookingDetails.date) : null}
+                  onChange={(date) =>
+                    setBookingDetails({
+                      ...bookingDetails,
+                      date: date ? date.format("YYYY-MM-DD") : "",
+                    })
                   }
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#FF7C71] focus:border-[#FF7C71] block p-3 outline-none transition font-semibold"
+                  placeholder="Select Date"
+                  minDate={dayjs()}
+                  className="w-full"
                 />
               </div>
-              <div className="space-y-1">
-                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">
+              <div className="space-y-1 w-full">
+                <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block mb-1">
                   Booking Time
                 </label>
-                <input
-                  type="time"
+                <CustomSelect
+                  options={TIME_SLOT_OPTIONS}
                   value={bookingDetails.time}
-                  onChange={(e) =>
-                    setBookingDetails({ ...bookingDetails, time: e.target.value })
-                  }
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#FF7C71] focus:border-[#FF7C71] block p-3 outline-none transition font-semibold"
+                  onChange={(val) => setBookingDetails({ ...bookingDetails, time: val })}
+                  placeholder="Select Time"
+                  className="w-full"
                 />
               </div>
             </div>

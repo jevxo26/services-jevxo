@@ -223,9 +223,9 @@ export function CategorizedHero({
                   px-3.5 py-2.5 flex items-center gap-2.5
                   border border-slate-100/80"
               >
-                {/* Green shield icon container */}
-                <div className="w-8 h-8 bg-emerald-50 rounded-xl flex items-center justify-center shrink-0">
-                  <ShieldCheck className="w-4 h-4 text-emerald-500" />
+                {/* Blue shield icon container */}
+                <div className="w-8 h-8 bg-blue-50 rounded-xl flex items-center justify-center shrink-0">
+                  <ShieldCheck className="w-4 h-4 text-blue-500" />
                 </div>
                 <div>
                   <p className="text-xs font-bold text-slate-900 leading-none">

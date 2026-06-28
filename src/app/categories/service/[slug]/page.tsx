@@ -8,7 +8,19 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const res = await fetch(`https://rajseba-api-production.up.railway.app/services/slug/${slug}`, {
+    const allRes = await fetch("https://rajseba-api-production.up.railway.app/services/public", {
+      next: { revalidate: 3600 },
+    });
+    const allJson = await allRes.json();
+    const serviceObj = allJson?.data?.find((s: any) => s.slug === slug);
+    if (!serviceObj) {
+      return {
+        title: "Category Details - Rajseba",
+        description: "Professional service category details.",
+      };
+    }
+
+    const res = await fetch(`https://rajseba-api-production.up.railway.app/services/${serviceObj.id}`, {
       next: { revalidate: 3600 },
     });
     const json = await res.json();

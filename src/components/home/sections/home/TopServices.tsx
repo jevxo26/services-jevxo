@@ -135,13 +135,13 @@ export default function TopServices() {
   };
 
   return (
-    <section className="py-5 md:py-16 lg:py-20 bg-white relative overflow-hidden">
+    <section className="py-5 md:py-16 lg:py-20  relative overflow-hidden">
       {/* Background decorations */}
-      <div className="absolute top-0 right-0 w-1/3 h-[500px] bg-gradient-to-bl from-rose-50/50 to-transparent rounded-bl-full pointer-events-none" />
+      <div className="absolute top-0 right-0 w-1/3 h-[500px]  rounded-bl-full pointer-events-none" />
       <div className="absolute -left-32 bottom-0 w-96 h-96 bg-blue-50/50 rounded-full mix-blend-multiply filter blur-3xl opacity-70 pointer-events-none" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
-        
+
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
           <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-[#FF7C71] text-xs font-bold uppercase tracking-wider mb-3">
@@ -198,7 +198,7 @@ export default function TopServices() {
 
                   {/* Verified badge */}
                   <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[9px] font-black tracking-wider flex items-center gap-1 shadow-sm text-slate-700 uppercase">
-                    <svg className="w-3 h-3 text-emerald-500" viewBox="0 0 20 20" fill="currentColor">
+                    <svg className="w-3 h-3 text-blue-500" viewBox="0 0 20 20" fill="currentColor">
                       <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l5-5z" clipRule="evenodd" />
                     </svg>
                     Verified

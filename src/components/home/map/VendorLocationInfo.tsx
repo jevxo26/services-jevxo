@@ -22,10 +22,10 @@ export default function VendorLocationInfo({
 }) {
   const hasDistrict = Boolean(expert.district);
   const hasDivision = Boolean(expert.division);
-  const textSize = compact ? "text-[11px]" : "text-xs";
+  const textSize = compact ? "text-[10px] sm:text-[11px]" : "text-[11px] sm:text-xs";
   const isLight = variant === "light";
   const mutedClass = isLight ? "text-white/80" : "text-slate-500";
-  const labelClass = isLight ? "text-white/70" : "text-slate-400";
+  const labelClass = isLight ? "text-white/60" : "text-slate-400";
   const strongClass = isLight ? "text-white font-semibold" : "text-slate-600 font-semibold";
   const pinClass = isLight ? "text-white" : "text-[#FF7C71]";
 
@@ -44,7 +44,7 @@ export default function VendorLocationInfo({
         <p className={`flex items-start gap-1.5 ${strongClass}`}>
           <MapPin className={`w-3.5 h-3.5 shrink-0 ${pinClass} mt-0.5`} />
           <span>
-            <span className={`${labelClass} font-bold uppercase tracking-wide text-[10px] mr-1`}>
+            <span className={`${labelClass} font-bold uppercase tracking-wide text-[8px] sm:text-[10px] mr-1`}>
               District
             </span>
             {formatLocationLabel(expert.district, expert.districtBangla)}
@@ -53,7 +53,7 @@ export default function VendorLocationInfo({
       )}
       {hasDivision && (
         <p className={`pl-5 font-medium ${mutedClass}`}>
-          <span className={`${labelClass} font-bold uppercase tracking-wide text-[10px] mr-1`}>
+          <span className={`${labelClass} font-bold uppercase tracking-wide text-[8px] sm:text-[10px] mr-1`}>
             Division
           </span>
           {formatLocationLabel(expert.division, expert.divisionBangla)}
@@ -61,13 +61,13 @@ export default function VendorLocationInfo({
       )}
       {expert.area ? (
         <p className={`pl-5 font-medium ${isLight ? "text-white/70" : "text-slate-400"}`}>
-          <span className="font-bold uppercase tracking-wide text-[10px] mr-1">Area</span>
+          <span className="font-bold uppercase tracking-wide text-[8px] sm:text-[10px] mr-1">Area</span>
           {expert.area}
         </p>
       ) : null}
       {expert.address ? (
         <p className={`pl-5 font-medium leading-relaxed ${isLight ? "text-white/70" : "text-slate-400"}`}>
-          <span className="font-bold uppercase tracking-wide text-[10px] mr-1">Address</span>
+          <span className="font-bold uppercase tracking-wide text-[8px] sm:text-[10px] mr-1">Address</span>
           {expert.address}
         </p>
       ) : null}

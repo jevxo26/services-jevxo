@@ -105,7 +105,7 @@ export default function TrendingServices() {
       // Calculate real rating & reviews if available
       const totalReviews = item.reviews?.length || 0;
       let averageRating = 4.5 + (hash % 6) * 0.1; // fallback
-      
+
       if (totalReviews > 0) {
         const sumRating = item.reviews.reduce((acc: number, cur: any) => acc + (cur.rating || 0), 0);
         averageRating = sumRating / totalReviews;
@@ -171,10 +171,9 @@ export default function TrendingServices() {
   const secondary = trendingListings[1];
 
   return (
-    <section className="py-14 relative overflow-hidden">
+    <section className="pt-4 pb-4 md:py-14 relative overflow-hidden">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
-        {/* Section Header */}
-        <div className="flex items-end justify-between mb-8">
+        <div className="flex flex-col items-center text-center md:items-start md:text-left mb-8">
           <div>
             <h2 className="text-2xl md:text-3xl font-extrabold text-slate-800 tracking-tight">
               Trending Services
@@ -183,120 +182,121 @@ export default function TrendingServices() {
               Highly requested by residents in Dhaka this month
             </p>
           </div>
-          <Link
-            href="/services"
-            className="text-xs font-extrabold text-[#FF7C71] hover:text-[#E5675D] hover:underline flex items-center gap-1 uppercase tracking-wider transition-all"
-          >
-            View all <ArrowRight size={14} />
-          </Link>
         </div>
 
         {/* Dynamic Cards Grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-6 items-stretch"
-        >
+        {trendingListings.length > 0 ? (
+          <motion.div
+            variants={containerVariants}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.1 }}
+            className="grid grid-cols-1 md:grid-cols-[1.6fr_1fr] gap-6 items-stretch"
+          >
 
-          {/* Featured Large Card */}
-          {featured && (
-            <motion.div
-              variants={itemVariants}
-              className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-3xl overflow-hidden border border-slate-100/60 hover-card-premium"
-            >
-              <div className="relative min-h-[220px] sm:min-h-full bg-slate-50">
-                <img
-                  src={featured.image}
-                  alt={featured.title}
-                  className="w-full h-full object-cover absolute inset-0"
-                />
-                {featured.badge && (
-                  <span className="absolute top-4 left-4 py-1.5 px-3 bg-[#8b1a1a] text-white text-[9px] font-extrabold tracking-wider rounded-lg uppercase shadow-sm z-10">
-                    {featured.badge}
-                  </span>
-                )}
-              </div>
-              <div className="p-6 flex flex-col justify-between gap-4">
-                <div className="space-y-3">
-                  <div className="flex items-center gap-2">
-                    <StarRating rating={featured.rating} />
-                    <span className="text-[11px] text-slate-400 font-bold">
-                      ({featured.rating} • {featured.reviews} reviews)
+            {/* Featured Large Card */}
+            {featured && (
+              <motion.div
+                variants={itemVariants}
+                className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-3xl overflow-hidden border border-slate-100/60 hover-card-premium"
+              >
+                <div className="relative min-h-[220px] sm:min-h-full bg-slate-50">
+                  <img
+                    src={featured.image}
+                    alt={featured.title}
+                    className="w-full h-full object-cover absolute inset-0"
+                  />
+                  {featured.badge && (
+                    <span className="absolute top-4 left-4 py-1.5 px-3 bg-[#8b1a1a] text-white text-[9px] font-extrabold tracking-wider rounded-lg uppercase shadow-sm z-10">
+                      {featured.badge}
                     </span>
-                  </div>
-                  <h3 className="text-xl font-extrabold text-slate-800 leading-snug">
-                    {featured.title}
-                  </h3>
-                  <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-3">
-                    {featured.description}
-                  </p>
+                  )}
                 </div>
-                <div className="flex items-end justify-between pt-4 border-t border-slate-100 mt-auto">
-                  <div>
-                    <p className="text-[9px] font-bold text-slate-400 tracking-wider uppercase mb-0.5">
-                      Starting from
-                    </p>
-                    <p className="text-lg font-black text-slate-800">
-                      ৳{featured.price.toLocaleString()}
-                    </p>
-                  </div>
-                  <Link
-                    href={featured.slug ? `/categories/service/${featured.slug}` : `/services/${featured.id}`}
-                    className="px-5 py-2.5 bg-[#1a1a1a] hover:bg-black text-white text-xs font-bold rounded-xl transition-all shadow-sm cursor-pointer"
-                  >
-                    Book Now
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
-
-          {/* Secondary Vertical Card */}
-          {secondary && (
-            <motion.div
-              variants={itemVariants}
-              className="bg-white rounded-3xl overflow-hidden border border-slate-100/60 flex flex-col hover-card-premium"
-            >
-              <div className="relative h-44 w-full bg-slate-50 shrink-0">
-                <img
-                  src={secondary.image}
-                  alt={secondary.title}
-                  className="w-full h-full object-cover absolute inset-0"
-                />
-              </div>
-              <div className="p-6 flex flex-col justify-between flex-grow gap-4">
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2">
-                    <h3 className="text-base font-extrabold text-slate-800 leading-snug">
-                      {secondary.title}
+                <div className="p-6 flex flex-col justify-between gap-4">
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-2">
+                      <StarRating rating={featured.rating} />
+                      <span className="text-[11px] text-slate-400 font-bold">
+                        ({featured.rating} • {featured.reviews} reviews)
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-extrabold text-slate-800 leading-snug">
+                      {featured.title}
                     </h3>
-                    <span className="flex items-center gap-1 bg-[#fff8e1] text-[#b45309] px-2 py-0.5 rounded-lg text-[10px] font-extrabold shrink-0">
-                      ★ {secondary.rating}
-                    </span>
+                    <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-3">
+                      {featured.description}
+                    </p>
                   </div>
-                  <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-2">
-                    {secondary.description}
-                  </p>
+                  <div className="flex items-end justify-between pt-4 border-t border-slate-100 mt-auto">
+                    <div>
+                      <p className="text-[9px] font-bold text-slate-400 tracking-wider uppercase mb-0.5">
+                        Starting from
+                      </p>
+                      <p className="text-lg font-black text-slate-800">
+                        ৳{featured.price.toLocaleString()}
+                      </p>
+                    </div>
+                    <Link
+                      href={featured.slug ? `/categories/service/${featured.slug}?book=true` : `/services/${featured.id}?book=true`}
+                      className="px-5 py-2.5 bg-[#1a1a1a] hover:bg-black text-white text-xs font-bold rounded-xl transition-all shadow-sm cursor-pointer"
+                    >
+                      Book Now
+                    </Link>
+                  </div>
                 </div>
-                <div className="flex items-end justify-between pt-4 border-t border-slate-100 mt-auto">
-                  <span className="text-lg font-black text-slate-800">
-                    ৳{secondary.price.toLocaleString()}
-                  </span>
-                  <Link
-                    href={secondary.slug ? `/categories/service/${secondary.slug}` : `/services/${secondary.id}`}
-                    className="w-9 h-9 flex items-center justify-center rounded-full bg-slate-50 hover:bg-[#FF7C71] text-slate-500 hover:text-white border border-slate-100 hover:border-transparent transition-all cursor-pointer shadow-sm"
-                    aria-label={`View ${secondary.title}`}
-                  >
-                    <ArrowRight size={14} strokeWidth={2.5} />
-                  </Link>
-                </div>
-              </div>
-            </motion.div>
-          )}
+              </motion.div>
+            )}
 
-        </motion.div>
+            {/* Secondary Vertical Card */}
+            {secondary && (
+              <motion.div
+                variants={itemVariants}
+                className="bg-white rounded-3xl overflow-hidden border border-slate-100/60 flex flex-col hover-card-premium"
+              >
+                <div className="relative h-44 w-full bg-slate-50 shrink-0">
+                  <img
+                    src={secondary.image}
+                    alt={secondary.title}
+                    className="w-full h-full object-cover absolute inset-0"
+                  />
+                </div>
+                <div className="p-6 flex flex-col justify-between flex-grow gap-4">
+                  <div className="space-y-2">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="text-base font-extrabold text-slate-800 leading-snug">
+                        {secondary.title}
+                      </h3>
+                      <span className="flex items-center gap-1 bg-[#fff8e1] text-[#b45309] px-2 py-0.5 rounded-lg text-[10px] font-extrabold shrink-0">
+                        ★ {secondary.rating}
+                      </span>
+                    </div>
+                    <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-2">
+                      {secondary.description}
+                    </p>
+                  </div>
+                  <div className="flex items-end justify-between pt-4 border-t border-slate-100 mt-auto">
+                    <span className="text-lg font-black text-slate-800">
+                      ৳{secondary.price.toLocaleString()}
+                    </span>
+                    <Link
+                      href={secondary.slug ? `/categories/service/${secondary.slug}?book=true` : `/services/${secondary.id}?book=true`}
+                      className="px-4 py-2 bg-slate-50 hover:bg-[#FF7C71] text-slate-700 hover:text-white border border-slate-100 hover:border-transparent text-xs font-bold rounded-xl transition-all shadow-sm cursor-pointer"
+                    >
+                      Book Now
+                    </Link>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+          </motion.div>
+        ) : (
+          <div className="flex flex-col items-center justify-center py-12 px-4 rounded-3xl bg-slate-50 border border-slate-100 text-center">
+            <p className="text-sm font-semibold text-slate-400">
+              No trending services available
+            </p>
+          </div>
+        )}
       </div>
     </section>
   );

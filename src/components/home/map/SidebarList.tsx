@@ -19,6 +19,7 @@ interface SidebarListProps {
   selectedExpertId: string;
   setSelectedExpertId: (id: string) => void;
   onOpenFilters: () => void;
+  onViewDetails?: (expert: Expert) => void;
 }
 
 export default function SidebarList({
@@ -33,6 +34,7 @@ export default function SidebarList({
   selectedExpertId,
   setSelectedExpertId,
   onOpenFilters,
+  onViewDetails,
 }: SidebarListProps) {
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -165,7 +167,7 @@ export default function SidebarList({
                   <div className="min-w-0 flex-1">
                   <h4 className="font-extrabold text-slate-900 text-base flex items-center gap-1.5">
                     {expert.name}
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 fill-emerald-50" />
+                    <CheckCircle2 className="w-4 h-4 text-blue-500 fill-blue-50" />
                   </h4>
 
                   <div className="mt-2 mb-2">
@@ -185,9 +187,23 @@ export default function SidebarList({
                 <div className="mt-4 pt-3 border-t border-slate-50 space-y-3">
                   <VendorLocationInfo expert={expert} compact />
 
-                  <div className="flex items-center justify-between text-xs">
-                    <span className="text-[10px] text-slate-400 font-bold block">STARTING AT</span>
-                    <span className="text-[#FF7C71] text-sm font-black">৳{expert.price}+</span>
+                  <div className="flex items-center justify-between text-xs pt-1">
+                    <div>
+                      <span className="text-[10px] text-slate-400 font-bold block">STARTING AT</span>
+                      <span className="text-[#FF7C71] text-sm font-black">৳{expert.price}+</span>
+                    </div>
+                    {isSelected && (
+                      <Button
+                        size="sm"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onViewDetails?.(expert);
+                        }}
+                        className="bg-[#FF7C71] hover:bg-[#E5675D] text-white text-[11px] font-extrabold px-3 py-1.5 h-auto rounded-xl shadow-xs cursor-pointer border-none"
+                      >
+                        View Profile
+                      </Button>
+                    )}
                   </div>
                 </div>
               </div>

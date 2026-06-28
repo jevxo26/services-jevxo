@@ -68,7 +68,6 @@ export function Navbar() {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
 
-  // Fetch API categories for Menu dropdown
   const { data: categoriesRes } = useGetPublicCategoriesQuery();
   const apiCategories: any[] = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
 
@@ -93,7 +92,6 @@ export function Navbar() {
 
   const { scrollY } = useScroll();
 
-  // Scroll-triggered search bar (desktop/tablet, homepage only)
   const searchOpacity = useTransform(scrollY, [150, 300], [0, 1]);
   const searchScale = useTransform(scrollY, [150, 300], [0.9, 1]);
   const searchY = useTransform(scrollY, [150, 300], [-8, 0]);
@@ -102,7 +100,6 @@ export function Navbar() {
   const scaleVal = isHomepage ? searchScale : 1;
   const yVal = isHomepage ? searchY : 0;
 
-  // Header shadow on scroll
   const headerShadow = useTransform(
     scrollY,
     [0, 80],
@@ -116,16 +113,11 @@ export function Navbar() {
 
   useEffect(() => {
     return scrollY.on("change", (latest) => {
-      if (latest > 50) {
-        setIsScrolled(true);
-      } else {
-        setIsScrolled(false);
-      }
+      setIsScrolled(latest > 50);
     });
   }, [scrollY]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setMounted(true);
     setCurrentHash(window.location.hash);
     const handleHashChange = () => setCurrentHash(window.location.hash);
@@ -133,16 +125,13 @@ export function Navbar() {
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
 
-  // Focus mobile search input when opened
   useEffect(() => {
     if (mobileSearchOpen && mobileSearchRef.current) {
       setTimeout(() => mobileSearchRef.current?.focus(), 100);
     }
   }, [mobileSearchOpen]);
 
-  // Close drawer on route change
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsOpen(false);
     setMobileSearchOpen(false);
     setShowMenuDropdown(false);
@@ -150,7 +139,6 @@ export function Navbar() {
     setProfileDropdownOpen(false);
   }, [pathname]);
 
-  // Close profile dropdown on click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
@@ -261,12 +249,12 @@ export function Navbar() {
                             animate={{ opacity: 1, y: 0, scale: 1 }}
                             exit={{ opacity: 0, y: 8, scale: 0.95 }}
                             transition={{ duration: 0.15 }}
-                            className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[500px] bg-white/70 backdrop-blur-lg rounded-2xl border border-slate-100/80 shadow-xl p-4 z-50"
+                            className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[520px] bg-white/90 backdrop-blur-lg rounded-2xl border border-slate-100/80 shadow-xl p-4 z-50"
                           >
                             {apiCategories.length === 0 ? (
-                              <div className="grid grid-cols-4 gap-2">
-                                {[1, 2, 3, 4, 5, 6, 7, 8].map((n) => (
-                                  <div key={n} className="h-12 bg-slate-50 rounded-xl animate-pulse" />
+                              <div className="grid grid-cols-2 gap-3">
+                                {[1, 2, 3, 4, 5, 6].map((n) => (
+                                  <div key={n} className="h-16 bg-slate-50 rounded-xl animate-pulse" />
                                 ))}
                               </div>
                             ) : (
@@ -275,17 +263,22 @@ export function Navbar() {
                                   <Link
                                     key={cat.id}
                                     href={`/categories/${cat.id}`}
-                                    className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/50 group/item transition-colors"
+                                    className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/60 group/item transition-all duration-200"
                                     onClick={() => setShowMenuDropdown(false)}
                                   >
-                                    <div className="w-9 h-9 rounded-lg bg-slate-50 flex items-center justify-center text-slate-500 group-hover/item:bg-[#FF7C71]/10 group-hover/item:text-[#FF7C71] transition-colors overflow-hidden shrink-0">
+                                    {/* ── FIXED: larger icon container, proper image sizing ── */}
+                                    <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/item:bg-[#FF7C71]/10 group-hover/item:border-rose-100 transition-all duration-200 overflow-hidden shrink-0">
                                       {cat.icon ? (
-                                        <img src={cat.icon} alt={cat.name} className="w-5 h-5 object-contain" />
+                                        <img
+                                          src={cat.icon}
+                                          alt={cat.name}
+                                          className="w-full h-full object-cover"
+                                        />
                                       ) : (
-                                        <LayoutGrid className="w-4 h-4" />
+                                        <LayoutGrid className="w-5 h-5 text-slate-400 group-hover/item:text-[#FF7C71]" />
                                       )}
                                     </div>
-                                    <span className="font-semibold text-sm text-slate-700 group-hover/item:text-slate-900 transition-colors line-clamp-1">
+                                    <span className="font-semibold text-sm text-slate-700 group-hover/item:text-[#FF7C71] transition-colors line-clamp-2 leading-snug">
                                       {cat.name}
                                     </span>
                                   </Link>
@@ -323,7 +316,7 @@ export function Navbar() {
               })}
             </nav>
 
-            {/* Center Search — desktop/tablet, appears on scroll (homepage) or always (other pages) */}
+            {/* Center Search */}
             {isHomepage ? (
               <div className="hidden md:flex flex-1 justify-center max-w-xs lg:max-w-sm mx-4 relative h-10">
                 {mounted && (
@@ -335,10 +328,7 @@ export function Navbar() {
                       Search services
                     </label>
                     <div className="flex items-center h-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
-                      <Search
-                        className="w-4 h-4 text-slate-400 flex-shrink-0"
-                        aria-hidden="true"
-                      />
+                      <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
                       <input
                         id="desktop-search"
                         type="text"
@@ -355,10 +345,7 @@ export function Navbar() {
                   Search services
                 </label>
                 <div className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
-                  <Search
-                    className="w-4 h-4 text-slate-400 flex-shrink-0"
-                    aria-hidden="true"
-                  />
+                  <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
                   <input
                     id="desktop-search-2"
                     type="text"
@@ -402,9 +389,8 @@ export function Navbar() {
               })}
             </nav>
 
-            {/* Auth Buttons or Profile Dropdown (desktop/tablet) */}
+            {/* Auth Buttons or Profile Dropdown */}
             {!mounted || authLoading ? (
-              // Skeleton while auth initializes — prevents Login/Signup flash for logged-in users
               <div className="hidden md:flex items-center gap-2">
                 <div className="w-20 h-8 bg-slate-100 rounded-lg animate-pulse" />
                 <div className="w-9 h-9 bg-slate-100 rounded-full animate-pulse" />
@@ -418,12 +404,8 @@ export function Navbar() {
                   aria-expanded={profileDropdownOpen}
                 >
                   <div className="text-right hidden lg:block">
-                    <p className="text-xs font-bold text-slate-800 leading-none">
-                      {profile.name}
-                    </p>
-                    <p className="text-[10px] text-slate-400 mt-1 leading-none font-semibold">
-                      {profile.roleName}
-                    </p>
+                    <p className="text-xs font-bold text-slate-800 leading-none">{profile.name}</p>
+                    <p className="text-[10px] text-slate-400 mt-1 leading-none font-semibold">{profile.roleName}</p>
                   </div>
                   <div className="w-9 h-9 bg-rose-100 text-[#FF7C71] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-sm hover:scale-105 transition-transform duration-200 select-none">
                     {profile.avatar}
@@ -440,66 +422,43 @@ export function Navbar() {
                       className="absolute right-0 mt-2 w-56 bg-white/70 backdrop-blur-lg border border-slate-100/80 rounded-2xl shadow-xl py-2 z-50 overflow-hidden"
                     >
                       <div className="px-4 py-3 border-b border-slate-50 bg-slate-50/40">
-                        <p className="text-sm font-bold text-slate-800 truncate">
-                          {profile.name}
-                        </p>
-                        <p className="text-xs text-slate-400 truncate mt-0.5 font-medium">
-                          {profile.email}
-                        </p>
+                        <p className="text-sm font-bold text-slate-800 truncate">{profile.name}</p>
+                        <p className="text-xs text-slate-400 truncate mt-0.5 font-medium">{profile.email}</p>
                         <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF7C71] bg-rose-50 border border-rose-100/50 rounded-full mt-2">
                           {profile.roleName}
                         </span>
                       </div>
                       <div className="p-1 space-y-0.5">
                         <Link
-                          href={
-                            role === "client"
-                              ? "/dashbord/overview"
-                              : "/dashbord"
-                          }
+                          href={role === "client" ? "/dashbord/overview" : "/dashbord"}
                           className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
-                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
-                            <LayoutGrid size={15} />
-                          </div>
+                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500"><LayoutGrid size={15} /></div>
                           <span>Dashboard</span>
                         </Link>
-
                         <Link
                           href="/dashbord/profile"
                           className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
-                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
-                            <User size={15} />
-                          </div>
+                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500"><User size={15} /></div>
                           <span>My Profile</span>
                         </Link>
-
                         <Link
                           href="/dashbord/settings"
                           className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71] transition-all font-semibold"
                           onClick={() => setProfileDropdownOpen(false)}
                         >
-                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500">
-                            <Settings size={15} />
-                          </div>
+                          <div className="p-1.5 rounded-lg bg-slate-50 text-slate-500"><Settings size={15} /></div>
                           <span>Settings</span>
                         </Link>
-
                         <div className="my-1 border-t border-slate-100/60" />
-
                         <button
-                          onClick={() => {
-                            setProfileDropdownOpen(false);
-                            dispatch(authLogout());
-                          }}
+                          onClick={() => { setProfileDropdownOpen(false); dispatch(authLogout()); }}
                           className="w-full flex items-center gap-3 p-2 rounded-xl text-left text-sm text-rose-600 hover:bg-rose-50 transition-all font-semibold"
                         >
-                          <div className="p-1.5 rounded-lg bg-rose-50 text-[#FF7C71]">
-                            <LogOut size={15} />
-                          </div>
+                          <div className="p-1.5 rounded-lg bg-rose-50 text-[#FF7C71]"><LogOut size={15} /></div>
                           <span>Sign Out</span>
                         </button>
                       </div>
@@ -516,7 +475,6 @@ export function Navbar() {
                   <LogIn className="w-4 h-4" />
                   Login
                 </Link>
-
                 <Link
                   href="/signup"
                   className="flex items-center gap-2 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold py-2.5 px-5 rounded-lg text-sm lg:text-[15px] transition-all shadow-sm hover:shadow-md active:scale-95"
@@ -539,11 +497,7 @@ export function Navbar() {
                 aria-label={mobileSearchOpen ? "Close search" : "Open search"}
                 aria-expanded={mobileSearchOpen}
               >
-                {mobileSearchOpen ? (
-                  <X className="w-5 h-5" />
-                ) : (
-                  <Search className="w-5 h-5" />
-                )}
+                {mobileSearchOpen ? <X className="w-5 h-5" /> : <Search className="w-5 h-5" />}
               </Button>
               <Button
                 variant="ghost"
@@ -556,11 +510,7 @@ export function Navbar() {
                 aria-expanded={isOpen}
                 aria-controls="mobile-menu"
               >
-                {isOpen ? (
-                  <X className="w-[22px] h-[22px]" />
-                ) : (
-                  <Menu className="w-[22px] h-[22px]" />
-                )}
+                {isOpen ? <X className="w-[22px] h-[22px]" /> : <Menu className="w-[22px] h-[22px]" />}
               </Button>
             </div>
           </div>
@@ -577,14 +527,9 @@ export function Navbar() {
                 className="md:hidden overflow-hidden border-t border-slate-100"
               >
                 <div className="py-3 px-1">
-                  <label htmlFor="mobile-search" className="sr-only">
-                    Search services
-                  </label>
+                  <label htmlFor="mobile-search" className="sr-only">Search services</label>
                   <div className="flex items-center bg-slate-50 border border-slate-200 rounded-full px-4 h-11 gap-2 focus-within:border-[#FF7C71] focus-within:ring-2 focus-within:ring-[#FF7C71]/10 transition-all">
-                    <Search
-                      className="w-4 h-4 text-slate-400 flex-shrink-0"
-                      aria-hidden="true"
-                    />
+                    <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
                     <input
                       id="mobile-search"
                       ref={mobileSearchRef}
@@ -614,7 +559,6 @@ export function Navbar() {
               className="md:hidden overflow-hidden border-t border-slate-100/80 bg-[#FFF8F7]/80 backdrop-blur-lg"
             >
               <div className="px-4 py-4 space-y-1">
-                {/* Nav Links */}
                 {ALL_NAV_LINKS.map((link, i) => {
                   const active = link.hasDropdown
                     ? pathname.startsWith("/categories")
@@ -626,9 +570,7 @@ export function Navbar() {
                       <div key={i} className="space-y-1">
                         <button
                           type="button"
-                          onClick={() =>
-                            setShowMobileAccordion(!showMobileAccordion)
-                          }
+                          onClick={() => setShowMobileAccordion(!showMobileAccordion)}
                           className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${active
                             ? "text-[#FF7C71] bg-rose-50"
                             : "text-slate-700 hover:bg-slate-50 hover:text-[#FF7C71]"
@@ -638,9 +580,7 @@ export function Navbar() {
                             <Icon className="w-5 h-5 text-slate-500" />
                             <span>{link.label}</span>
                           </div>
-                          <ChevronDown
-                            className={`w-4 h-4 transition-transform duration-200 ${showMobileAccordion ? "rotate-180" : ""}`}
-                          />
+                          <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${showMobileAccordion ? "rotate-180" : ""}`} />
                         </button>
 
                         <AnimatePresence>
@@ -650,12 +590,12 @@ export function Navbar() {
                               animate={{ opacity: 1, height: "auto" }}
                               exit={{ opacity: 0, height: 0 }}
                               transition={{ duration: 0.2 }}
-                              className="overflow-hidden pl-4 pr-2 py-1 space-y-1"
+                              className="overflow-hidden pl-2 pr-2 py-1"
                             >
-                              <div className="grid grid-cols-2 gap-1.5">
+                              <div className="grid grid-cols-2 gap-2">
                                 {apiCategories.length === 0 ? (
                                   [1, 2, 3, 4].map((n) => (
-                                    <div key={n} className="h-12 bg-slate-50 rounded-xl animate-pulse" />
+                                    <div key={n} className="h-20 bg-slate-50 rounded-xl animate-pulse" />
                                   ))
                                 ) : apiCategories.map((cat: any) => {
                                   const isCategoryActive = pathname === `/categories/${cat.id}`;
@@ -663,25 +603,27 @@ export function Navbar() {
                                     <Link
                                       key={cat.id}
                                       href={`/categories/${cat.id}`}
-                                      className={`flex items-center gap-2.5 p-3 rounded-xl transition-all text-sm font-medium ${isCategoryActive
-                                          ? "bg-rose-50 text-[#FF7C71] font-semibold"
-                                          : "text-slate-600 hover:bg-slate-50 hover:text-[#FF7C71]"
+                                      className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all text-sm font-medium ${isCategoryActive
+                                        ? "bg-rose-50 text-[#FF7C71] font-semibold border border-rose-100"
+                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF7C71] border border-transparent hover:border-slate-100"
                                         }`}
-                                      onClick={() => {
-                                        setIsOpen(false);
-                                        setShowMobileAccordion(false);
-                                      }}
+                                      onClick={() => { setIsOpen(false); setShowMobileAccordion(false); }}
                                     >
-                                      <div className="w-5 h-5 flex items-center justify-center shrink-0 overflow-hidden">
+                                      {/* ── FIXED: square image thumbnail, fills container ── */}
+                                      <div className="w-full aspect-square max-w-[80px] rounded-lg overflow-hidden bg-slate-100 flex items-center justify-center">
                                         {cat.icon ? (
-                                          <img src={cat.icon} alt={cat.name} className={`w-4 h-4 object-contain ${isCategoryActive ? "" : "opacity-60"}`} />
+                                          <img
+                                            src={cat.icon}
+                                            alt={cat.name}
+                                            className="w-full h-full object-cover"
+                                          />
                                         ) : (
-                                          <LayoutGrid className={`w-4 h-4 flex-shrink-0 ${isCategoryActive ? "text-[#FF7C71]" : "text-slate-400"}`} />
+                                          <LayoutGrid className={`w-7 h-7 ${isCategoryActive ? "text-[#FF7C71]" : "text-slate-400"}`} />
                                         )}
                                       </div>
-                                      <span className="line-clamp-1">{cat.name}</span>
+                                      <span className="line-clamp-2 text-center text-xs leading-snug">{cat.name}</span>
                                       {isCategoryActive && (
-                                        <div className="ml-auto w-1.5 h-1.5 bg-[#FF7C71] rounded-full" />
+                                        <div className="w-1.5 h-1.5 bg-[#FF7C71] rounded-full" />
                                       )}
                                     </Link>
                                   );
@@ -723,30 +665,21 @@ export function Navbar() {
                   </div>
                 ) : isAuthenticated && profile ? (
                   <div className="pt-4 border-t border-slate-100 mt-1 space-y-4">
-                    {/* User profile card */}
                     <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
                       <div className="w-12 h-12 bg-rose-100 text-[#FF7C71] font-bold rounded-full flex items-center justify-center border border-rose-200 shadow-inner select-none shrink-0">
                         {profile.avatar}
                       </div>
                       <div className="min-w-0 flex-grow">
-                        <p className="text-sm font-bold text-slate-800 truncate leading-none">
-                          {profile.name}
-                        </p>
-                        <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">
-                          {profile.email}
-                        </p>
-                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF7C71] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5 font-semibold">
+                        <p className="text-sm font-bold text-slate-800 truncate leading-none">{profile.name}</p>
+                        <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">{profile.email}</p>
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF7C71] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5">
                           {profile.roleName}
                         </span>
                       </div>
                     </div>
-
-                    {/* Navigation Actions */}
                     <div className="grid grid-cols-3 gap-2">
                       <Link
-                        href={
-                          role === "client" ? "/dashbord/overview" : "/dashbord"
-                        }
+                        href={role === "client" ? "/dashbord/overview" : "/dashbord"}
                         className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF7C71] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
@@ -770,13 +703,8 @@ export function Navbar() {
                         <span className="text-[11px] font-bold">Settings</span>
                       </Link>
                     </div>
-
-                    {/* Sign Out */}
                     <button
-                      onClick={() => {
-                        setIsOpen(false);
-                        dispatch(authLogout());
-                      }}
+                      onClick={() => { setIsOpen(false); dispatch(authLogout()); }}
                       className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100/80 font-bold text-[15px] transition-all active:scale-[0.98]"
                     >
                       <LogOut size={16} />
@@ -793,7 +721,6 @@ export function Navbar() {
                       <LogIn className="w-4 h-4" />
                       Login
                     </Link>
-
                     <Link
                       href="/register"
                       className="flex items-center justify-center gap-2 py-3 bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
@@ -817,19 +744,13 @@ export function Navbar() {
         transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.1 }}
         className="md:hidden fixed bottom-0 left-0 right-0 z-50 safe-bottom"
       >
-        {/* Glassmorphism background */}
         <div className="absolute inset-0 bg-[#FFF8F7]/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
 
         <div className="relative grid grid-cols-6 gap-0 max-w-lg mx-auto px-1 py-1.5">
           {bottomLinks.map((link, i) => {
             const Icon = link.icon;
-
-            const isMenuActive =
-              link.hasDropdown && pathname.startsWith("/categories");
-
-            const active = link.hasDropdown
-              ? isMenuActive
-              : isActive(link.href);
+            const isMenuActive = link.hasDropdown && pathname.startsWith("/categories");
+            const active = link.hasDropdown ? isMenuActive : isActive(link.href);
 
             const handleClick = (e: React.MouseEvent) => {
               if (link.hasDropdown) {
@@ -841,7 +762,6 @@ export function Navbar() {
               }
             };
 
-            // Show avatar for authenticated user's profile/dashboard link
             const isProfileLink = link.label === "Dashboard" || link.label === "Login";
             const showAvatar = isProfileLink && mounted && isAuthenticated && profile;
 
@@ -852,7 +772,6 @@ export function Navbar() {
                 onClick={handleClick}
                 className="relative flex flex-col items-center justify-center py-1 group"
               >
-                {/* Active background pill */}
                 {active && (
                   <motion.div
                     layoutId="bottomNavPill"
@@ -861,7 +780,6 @@ export function Navbar() {
                   />
                 )}
 
-                {/* Icon */}
                 <motion.div
                   className="relative z-10"
                   whileTap={{ scale: 0.75 }}
@@ -893,17 +811,14 @@ export function Navbar() {
                   )}
                 </motion.div>
 
-                {/* Label */}
                 <motion.span
                   animate={active ? { y: -1, opacity: 1 } : { y: 0, opacity: 0.7 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF7C71]" : "text-slate-400 group-hover:text-slate-600"
-                    }`}
+                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF7C71]" : "text-slate-400 group-hover:text-slate-600"}`}
                 >
                   {showAvatar ? "Profile" : link.label}
                 </motion.span>
 
-                {/* Active dot indicator */}
                 <AnimatePresence>
                   {active && (
                     <motion.div

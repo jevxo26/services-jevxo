@@ -16,6 +16,8 @@ import {
   Calendar,
   ArrowRight,
   ChevronRight,
+  Sparkles,
+  Zap,
 } from "lucide-react";
 import { toast } from "sonner";
 import { useState } from "react";
@@ -32,15 +34,11 @@ const QUICK_LINKS = [
   { label: "Help Center", href: "/help" },
 ];
 
-
-
 const CONTACT_INFO = [
   { icon: Phone, label: "+880 1XXX-XXXXXX", href: "tel:+8801XXXXXXXXX" },
   { icon: Mail, label: "support@rajseba.com", href: "mailto:support@rajseba.com" },
   { icon: MapPin, label: "Dhaka, Bangladesh", href: "#" },
 ];
-
-
 
 const FacebookIcon = () => (
   <svg viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4">
@@ -94,7 +92,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-[#FFF8F7] text-slate-600 border-t border-rose-100">
+    <footer className="border-t border-rose-100">
 
 
 
@@ -133,8 +131,6 @@ export default function Footer() {
               ))}
             </div>
 
-
-
             {/* Socials */}
             <div className="flex items-center gap-2">
               {SOCIALS.map(({ Icon, label, href }) => (
@@ -172,11 +168,7 @@ export default function Footer() {
                   <li key={n} className="h-4 bg-slate-100 rounded animate-pulse w-3/4" />
                 ))
               }
-              <li>
-                <Link href="/services" className="flex items-center gap-1.5 text-[#FF7C71] hover:text-[#E5675D] font-semibold transition-colors text-xs mt-1">
-                  View All <ArrowRight className="w-3 h-3" />
-                </Link>
-              </li>
+
             </ul>
           </div>
 
@@ -198,12 +190,8 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Account + Newsletter */}
+          {/* Newsletter */}
           <div className="col-span-2 sm:col-span-2 lg:col-span-1 space-y-8">
-
-
-
-            {/* Newsletter */}
             <div className="space-y-3">
               <h3 className="text-xs font-bold tracking-widest text-slate-400 uppercase">Newsletter</h3>
               <p className="text-xs text-slate-400">Get latest offers & updates to your inbox.</p>
@@ -251,8 +239,6 @@ export default function Footer() {
           </div>
         </div>
       </div>
-
-
 
       {/* ── Bottom Bar ── */}
       <div className="border-t border-rose-100 bg-[#FFF8F7] py-5">

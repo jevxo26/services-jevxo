@@ -25,7 +25,7 @@ import {
   Plus,
   MessageCircle,
 } from "lucide-react";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { CustomTable } from "@/components/ui/table";
@@ -61,7 +61,6 @@ export default function DashboardPage() {
     return <DashboardSkeleton />;
   }
 
-  // Dynamic dashboard rendering based on active role
   switch (role) {
     case "superadmin":
       return <SuperAdminDashboard />;
@@ -82,6 +81,256 @@ export default function DashboardPage() {
         </div>
       );
   }
+}
+
+/* ==========================================================================
+   PROFESSIONAL REVENUE CHART COMPONENT
+   ========================================================================== */
+const chartData = [
+  { month: "Jan", value: 48000 },
+  { month: "Feb", value: 66000 },
+  { month: "Mar", value: 54000 },
+  { month: "Apr", value: 90000 },
+  { month: "May", value: 102000 },
+  { month: "Jun", value: 114000 },
+];
+
+function RevenueChart() {
+  const [tooltip, setTooltip] = useState<{ x: number; y: number; value: number; month: string; pct: number } | null>(null);
+  const [animatedHeights, setAnimatedHeights] = useState<number[]>(chartData.map(() => 0));
+  const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
+  const svgRef = useRef<SVGSVGElement>(null);
+
+  const W = 560;
+  const H = 240;
+  const PADDING = { top: 28, right: 24, bottom: 40, left: 60 };
+  const chartW = W - PADDING.left - PADDING.right;
+  const chartH = H - PADDING.top - PADDING.bottom;
+
+  const maxVal = Math.max(...chartData.map((d) => d.value));
+  const yMax = Math.ceil(maxVal / 30000) * 30000;
+  const yTicks = [0, yMax * 0.25, yMax * 0.5, yMax * 0.75, yMax];
+
+  const barWidth = (chartW / chartData.length) * 0.54;
+  const barGap = chartW / chartData.length;
+
+  const getBarX = (i: number) => PADDING.left + i * barGap + (barGap - barWidth) / 2;
+  const getBarH = (val: number) => (val / yMax) * chartH;
+
+  // Staggered animation on mount
+  useEffect(() => {
+    chartData.forEach((d, i) => {
+      setTimeout(() => {
+        setAnimatedHeights((prev) => {
+          const next = [...prev];
+          next[i] = getBarH(d.value);
+          return next;
+        });
+      }, 60 + i * 80);
+    });
+  }, []);
+
+  const formatVal = (v: number) =>
+    v >= 1000 ? `৳${(v / 1000).toFixed(0)}k` : `৳${v}`;
+
+  const prevVal = (i: number) => (i === 0 ? chartData[0].value : chartData[i - 1].value);
+  const pctChange = (i: number) => {
+    if (i === 0) return 0;
+    return Math.round(((chartData[i].value - prevVal(i)) / prevVal(i)) * 100);
+  };
+
+  return (
+    <div className="relative w-full select-none">
+      <svg
+        ref={svgRef}
+        viewBox={`0 0 ${W} ${H}`}
+        className="w-full overflow-visible"
+        style={{ maxHeight: 260 }}
+        onMouseLeave={() => { setTooltip(null); setHoveredIdx(null); }}
+      >
+        <defs>
+          {/* Main bar gradient */}
+          <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#FF7C71" />
+            <stop offset="100%" stopColor="#FFBAB4" stopOpacity="0.75" />
+          </linearGradient>
+          {/* Hover bar gradient — richer */}
+          <linearGradient id="barGradHover" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stopColor="#E05A50" />
+            <stop offset="60%" stopColor="#FF7C71" />
+            <stop offset="100%" stopColor="#FFB3AD" stopOpacity="0.8" />
+          </linearGradient>
+          {/* Gloss overlay */}
+          <linearGradient id="barGloss" x1="0" y1="0" x2="1" y2="0">
+            <stop offset="0%" stopColor="white" stopOpacity="0.22" />
+            <stop offset="50%" stopColor="white" stopOpacity="0.06" />
+            <stop offset="100%" stopColor="white" stopOpacity="0" />
+          </linearGradient>
+          {/* Hover glow */}
+          <filter id="barGlow" x="-30%" y="-10%" width="160%" height="140%">
+            <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#FF7C71" floodOpacity="0.28" />
+          </filter>
+          {/* Subtle track shadow */}
+          <filter id="trackShadow" x="-5%" y="-2%" width="110%" height="110%">
+            <feDropShadow dx="0" dy="1" stdDeviation="1" floodColor="#cbd5e1" floodOpacity="0.4" />
+          </filter>
+        </defs>
+
+        {/* Background subtle dot grid */}
+        <pattern id="dotGrid" x={PADDING.left} y={PADDING.top} width="40" height="20" patternUnits="userSpaceOnUse">
+          <circle cx="2" cy="2" r="0.8" fill="#e2e8f0" />
+        </pattern>
+        <rect x={PADDING.left} y={PADDING.top} width={chartW} height={chartH} fill="url(#dotGrid)" opacity="0.5" />
+
+        {/* Horizontal grid lines + Y-axis labels */}
+        {yTicks.map((tick, i) => {
+          const y = PADDING.top + chartH - (tick / yMax) * chartH;
+          const isZero = tick === 0;
+          return (
+            <g key={i}>
+              <line
+                x1={PADDING.left}
+                y1={y}
+                x2={W - PADDING.right}
+                y2={y}
+                stroke={isZero ? "#e2e8f0" : "#f1f5f9"}
+                strokeWidth={isZero ? 1.5 : 1}
+                strokeDasharray={isZero ? "none" : "4 4"}
+              />
+              <text
+                x={PADDING.left - 10}
+                y={y + 4}
+                textAnchor="end"
+                fontSize={10}
+                fill="#94a3b8"
+                fontFamily="Inter, ui-sans-serif, sans-serif"
+                fontWeight={500}
+                letterSpacing="-0.3"
+              >
+                {formatVal(tick)}
+              </text>
+            </g>
+          );
+        })}
+
+        {/* Bars */}
+        {chartData.map((d, i) => {
+          const bx = getBarX(i);
+          const animH = animatedHeights[i] ?? 0;
+          const by = PADDING.top + chartH - animH;
+          const isHov = hoveredIdx === i;
+          const r = 9; // corner radius
+
+          return (
+            <g key={d.month}>
+              {/* Track */}
+              <rect
+                x={bx}
+                y={PADDING.top}
+                width={barWidth}
+                height={chartH}
+                rx={r}
+                fill="#f8fafc"
+                filter="url(#trackShadow)"
+              />
+
+              {/* Main bar with CSS transition via style */}
+              <rect
+                x={bx}
+                y={by}
+                width={barWidth}
+                height={animH}
+                rx={r}
+                fill={isHov ? "url(#barGradHover)" : "url(#barGrad)"}
+                filter={isHov ? "url(#barGlow)" : undefined}
+                style={{
+                  transition: "y 0.6s cubic-bezier(.34,1.4,.64,1), height 0.6s cubic-bezier(.34,1.4,.64,1), filter 0.15s ease",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={() => {
+                  setHoveredIdx(i);
+                  const svgEl = svgRef.current;
+                  if (!svgEl) return;
+                  const rect = svgEl.getBoundingClientRect();
+                  const scaleX = rect.width / W;
+                  const scaleY = rect.height / H;
+                  setTooltip({
+                    x: bx * scaleX + (barWidth / 2) * scaleX,
+                    y: (by - 14) * scaleY,
+                    value: d.value,
+                    month: d.month,
+                    pct: pctChange(i),
+                  });
+                }}
+                onMouseLeave={() => { setHoveredIdx(null); setTooltip(null); }}
+              />
+
+              {/* Gloss overlay — only on bar area */}
+              {animH > 4 && (
+                <rect
+                  x={bx}
+                  y={by}
+                  width={barWidth * 0.55}
+                  height={animH}
+                  rx={r}
+                  fill="url(#barGloss)"
+                  style={{ pointerEvents: "none", transition: "y 0.6s cubic-bezier(.34,1.4,.64,1), height 0.6s cubic-bezier(.34,1.4,.64,1)" }}
+                />
+              )}
+
+              {/* Value label on top of bar when hovered */}
+              {isHov && animH > 8 && (
+                <text
+                  x={bx + barWidth / 2}
+                  y={by - 5}
+                  textAnchor="middle"
+                  fontSize={9.5}
+                  fill="#FF7C71"
+                  fontFamily="Inter, ui-sans-serif, sans-serif"
+                  fontWeight={700}
+                  letterSpacing="-0.2"
+                >
+                  {formatVal(d.value)}
+                </text>
+              )}
+
+              {/* Month label */}
+              <text
+                x={bx + barWidth / 2}
+                y={H - 8}
+                textAnchor="middle"
+                fontSize={11}
+                fill={isHov ? "#64748b" : "#94a3b8"}
+                fontFamily="Inter, ui-sans-serif, sans-serif"
+                fontWeight={isHov ? 700 : 600}
+              >
+                {d.month}
+              </text>
+            </g>
+          );
+        })}
+      </svg>
+
+      {/* Rich Floating Tooltip */}
+      {tooltip && (
+        <div
+          className="absolute pointer-events-none z-20 whitespace-nowrap -translate-x-1/2 -translate-y-full"
+          style={{ left: tooltip.x, top: tooltip.y }}
+        >
+          <div className="bg-slate-900 text-white rounded-2xl shadow-2xl px-4 py-3 min-w-[120px]">
+            <div className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider mb-1">{tooltip.month} 2026</div>
+            <div className="text-base font-bold leading-tight">৳{tooltip.value.toLocaleString()}</div>
+            {tooltip.pct !== 0 && (
+              <div className={`text-[11px] font-semibold mt-1 flex items-center gap-1 ${tooltip.pct > 0 ? "text-emerald-400" : "text-red-400"}`}>
+                {tooltip.pct > 0 ? "▲" : "▼"} {Math.abs(tooltip.pct)}% vs prev
+              </div>
+            )}
+          </div>
+          <div className="w-0 h-0 mx-auto border-l-[7px] border-r-[7px] border-t-[7px] border-l-transparent border-r-transparent border-t-slate-900" />
+        </div>
+      )}
+    </div>
+  );
 }
 
 /* ==========================================================================
@@ -127,18 +376,9 @@ function SuperAdminDashboard() {
       header: "Booking ID",
       render: (b: any) => <span className="font-bold text-brand-primary">#{b.id}</span>
     },
-    {
-      key: "customer",
-      header: "Customer"
-    },
-    {
-      key: "service",
-      header: "Service"
-    },
-    {
-      key: "provider",
-      header: "Provider"
-    },
+    { key: "customer", header: "Customer" },
+    { key: "service", header: "Service" },
+    { key: "provider", header: "Provider" },
     {
       key: "amount",
       header: "Amount",
@@ -149,15 +389,11 @@ function SuperAdminDashboard() {
       header: "Status",
       render: (b: any) => (
         <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold ${b.status === "completed"
-            ? "bg-emerald-50 text-emerald-700"
-            : b.status === "on_the_way"
-              ? "bg-indigo-50 text-indigo-700"
-              : b.status === "assigned"
-                ? "bg-amber-50 text-amber-700"
-                : b.status === "cancelled"
-                  ? "bg-red-50 text-red-700"
-                  : "bg-slate-50 text-slate-700"
+          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] uppercase tracking-wider font-bold ${b.status === "completed" ? "bg-emerald-50 text-emerald-700"
+              : b.status === "on_the_way" ? "bg-indigo-50 text-indigo-700"
+                : b.status === "assigned" ? "bg-amber-50 text-amber-700"
+                  : b.status === "cancelled" ? "bg-red-50 text-red-700"
+                    : "bg-slate-50 text-slate-700"
             }`}
         >
           {b.status.replace(/_/g, " ")}
@@ -171,28 +407,59 @@ function SuperAdminDashboard() {
     }
   ];
 
-
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
-      {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-slate-900">Hello, {authUser?.name || "Admin"}!</h1>
-        <p className="text-slate-500 mt-1">Real-time statistics and administrative insights for Rajseba.</p>
+      {/* ── Premium Header ── */}
+      <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
+        {/* Decorative gradient blob */}
+        <div className="absolute -top-10 -right-10 w-56 h-56 bg-gradient-to-br from-[#FF7C71]/10 to-[#FFB3AD]/5 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-indigo-100/40 to-transparent rounded-full blur-2xl pointer-events-none" />
+
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            {/* Live badge */}
+            <div className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 text-emerald-600 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse inline-block" />
+              Live Dashboard
+            </div>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              Hello, <span className="text-[#FF7C71]">{authUser?.name || "Admin"}</span>!
+            </h1>
+            <p className="text-slate-400 mt-1.5 text-sm font-medium">Real-time statistics and administrative insights for Rajseba.</p>
+          </div>
+
+          {/* Right side: date + quick actions */}
+          <div className="flex items-center gap-3 shrink-0">
+            <div className="hidden sm:flex flex-col items-end">
+              <span className="text-xs font-bold text-slate-700">
+                {new Date().toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" })}
+              </span>
+              <span className="text-[10px] text-slate-400 font-medium mt-0.5">Bangladesh Standard Time</span>
+            </div>
+            <div className="w-px h-8 bg-slate-100 hidden sm:block" />
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#FF7C71] to-[#E5675D] flex items-center justify-center shadow-lg shadow-[#FF7C71]/25">
+              <Sparkles size={18} className="text-white" />
+            </div>
+          </div>
+        </div>
       </div>
 
-      {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      {/* ── Premium Stats Cards ── */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
-              <div className={`p-3 rounded-xl ${stat.color}`}>
-                <Icon size={24} />
+            <div
+              key={i}
+              className="group bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-slate-100/80 hover:-translate-y-0.5 transition-all duration-200 cursor-default"
+            >
+              <div className={`p-2.5 sm:p-3 rounded-xl ${stat.color} group-hover:scale-110 transition-transform duration-200 shrink-0`}>
+                <Icon size={20} className="sm:w-6 sm:h-6" />
               </div>
-              <div>
-                <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
-                <h4 className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</h4>
-                <span className="text-xs text-slate-400 mt-1 block font-medium">{stat.desc}</span>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-slate-400 font-semibold truncate">{stat.label}</p>
+                <h4 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-0.5 leading-tight tracking-tight">{stat.value}</h4>
+                <span className="text-[10px] sm:text-xs text-slate-400 mt-1 block font-medium leading-tight">{stat.desc}</span>
               </div>
             </div>
           );
@@ -202,37 +469,40 @@ function SuperAdminDashboard() {
       {/* Main Grid: Revenue Chart & Pending Approvals */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
         {/* Left 2 Columns: Revenue Chart */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2">
-          <div className="flex justify-between items-center mb-6">
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm lg:col-span-2 overflow-hidden">
+          {/* Chart header with subtle gradient */}
+          <div className="px-6 pt-6 pb-4 flex justify-between items-start border-b border-slate-50">
             <div>
-              <h3 className="text-lg font-bold text-slate-900">Revenue Growth</h3>
-              <p className="text-xs text-slate-500">Monthly breakdown for 2026</p>
+              <h3 className="text-lg font-bold text-slate-900 tracking-tight">Revenue Growth</h3>
+              <p className="text-xs text-slate-400 mt-0.5 font-medium">Monthly breakdown — 2026</p>
             </div>
-            <span className="inline-flex items-center gap-1 text-xs font-semibold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-lg">
-              <TrendingUp size={14} /> +15% YoY
-            </span>
+            <div className="flex items-center gap-2.5">
+              <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold">
+                <span className="inline-block w-3 h-3 rounded-sm bg-gradient-to-b from-[#FF7C71] to-[#FFBAB4]" />
+                Revenue
+              </div>
+              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full">
+                <TrendingUp size={12} /> +15% YoY
+              </span>
+            </div>
           </div>
 
-          {/* Simple Visual Chart using Tailwind */}
-          <div className="h-64 flex items-end justify-between gap-4 pt-4 border-b border-slate-100">
+          {/* Chart area */}
+          <div className="px-4 pt-4 pb-2">
+            <RevenueChart />
+          </div>
+
+          {/* Summary row — premium */}
+          <div className="mx-6 mb-5 mt-1 grid grid-cols-3 divide-x divide-slate-100 bg-slate-50/70 rounded-2xl border border-slate-100 overflow-hidden">
             {[
-              { month: "Jan", val: 40 },
-              { month: "Feb", val: 55 },
-              { month: "Mar", val: 45 },
-              { month: "Apr", val: 75 },
-              { month: "May", val: 85 },
-              { month: "Jun", val: 95 },
-            ].map((bar, i) => (
-              <div key={i} className="flex-1 flex flex-col items-center gap-2 h-full justify-end">
-                <div
-                  style={{ height: `${bar.val}%` }}
-                  className="w-full bg-[#FF7C71] rounded-t-lg relative group transition-all duration-300 hover:brightness-105 hover:shadow-lg hover:shadow-[#FF7C71]/20"
-                >
-                  <div className="absolute -top-10 left-1/2 -translate-x-1/2 bg-slate-900 text-white text-[10px] font-bold px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity whitespace-nowrap shadow pointer-events-none">
-                    ৳{(bar.val * 1200).toLocaleString()}
-                  </div>
-                </div>
-                <span className="text-xs font-medium text-slate-400">{bar.month}</span>
+              { label: "Peak Month", value: "Jun 2026", sub: "৳1,14,000", accent: "text-[#FF7C71]" },
+              { label: "Avg / Month", value: "৳79,000", sub: "6-month avg", accent: "text-indigo-500" },
+              { label: "Growth Rate", value: "+137%", sub: "Jan → Jun", accent: "text-emerald-500" },
+            ].map((s, i) => (
+              <div key={i} className="text-center py-3 px-2">
+                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{s.label}</p>
+                <p className={`text-sm font-extrabold mt-1 ${s.accent}`}>{s.value}</p>
+                <p className="text-[10px] text-slate-400 font-medium">{s.sub}</p>
               </div>
             ))}
           </div>
@@ -298,7 +568,6 @@ function ProviderDashboard() {
   const [isEditingProfile, setIsEditingProfile] = useState(false);
   const [isCreatingProfile, setIsCreatingProfile] = useState(false);
 
-  // Find vendor's profile by user ID (matching string or number)
   const myProfile = profilesRes?.data?.find(
     (p: any) => p.user?.id === authUser?.id || p.user?.id === Number(authUser?.id) || p.user_id === authUser?.id || p.user_id === Number(authUser?.id)
   );
@@ -311,7 +580,6 @@ function ProviderDashboard() {
 
   const completedBookings = myBookings.filter(b => b.status === "completed");
   const todayEarnings = completedBookings.reduce((sum, b) => {
-    // Only count if it was completed today
     const completedDate = new Date(b.updatedAt).toDateString();
     const today = new Date().toDateString();
     if (completedDate === today) {
@@ -340,7 +608,6 @@ function ProviderDashboard() {
 
   const [activeJob, setActiveJob] = useState<string | null>(null);
 
-  // Automatically select first active job
   useEffect(() => {
     if (!activeJob && providerJobs.length > 0) {
       setActiveJob(providerJobs[0].id);
@@ -373,12 +640,10 @@ function ProviderDashboard() {
 
     try {
       if (myProfile) {
-        // Update existing profile
         await updateProfileMut({ id: myProfile.id, data: profileData }).unwrap();
         toast.success("Business profile updated successfully!");
         setIsEditingProfile(false);
       } else {
-        // Create new profile
         profileData.user_id = Number(authUser?.id);
         await createProfileMut(profileData).unwrap();
         toast.success("Business profile created successfully!");
@@ -392,34 +657,41 @@ function ProviderDashboard() {
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
-      {/* Header with toggle availability */}
-      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900">Provider Dashboard</h1>
-          <p className="text-slate-500 mt-1">Hello, {authUser?.name || myProfile?.company_name || "Provider"}! Manage your active schedules and monitor earnings.</p>
-        </div>
-        <div className="flex items-center gap-3 bg-white border border-slate-100 p-3 rounded-2xl shadow-sm">
-          <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
-          <span className="text-sm font-semibold text-slate-700">Online &amp; Available</span>
-          <button className="text-xs font-semibold text-[#FF7C71] bg-[#FFF8F7] hover:bg-[#FFEBE9]/50 px-3 py-1.5 rounded-xl transition-all">
-            Toggle Offline
-          </button>
+      {/* Header */}
+      <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
+        <div className="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-teal-100/40 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="relative flex flex-col md:flex-row md:items-center justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 bg-teal-50 border border-teal-100 text-teal-600 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-teal-500 animate-pulse inline-block" />
+              Provider Mode
+            </div>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Provider Dashboard</h1>
+            <p className="text-slate-400 mt-1.5 text-sm font-medium">Hello, <span className="text-slate-600 font-semibold">{authUser?.name || myProfile?.company_name || "Provider"}</span>! Manage your active schedules and monitor earnings.</p>
+          </div>
+          <div className="flex items-center gap-3 bg-white border border-slate-100 p-3 rounded-2xl shadow-sm shrink-0">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
+            <span className="text-sm font-semibold text-slate-700">Online &amp; Available</span>
+            <button className="text-xs font-semibold text-[#FF7C71] bg-[#FFF8F7] hover:bg-[#FFEBE9]/50 px-3 py-1.5 rounded-xl transition-all">
+              Toggle Offline
+            </button>
+          </div>
         </div>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
-              <div className={`p-3 rounded-xl ${stat.color}`}>
-                <Icon size={24} />
+            <div key={i} className="group bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-slate-100/80 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <div className={`p-2.5 sm:p-3 rounded-xl ${stat.color} group-hover:scale-110 transition-transform duration-200 shrink-0`}>
+                <Icon size={20} className="sm:w-6 sm:h-6" />
               </div>
-              <div>
-                <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
-                <h4 className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</h4>
-                <span className="text-xs text-slate-400 mt-1 block font-medium">{stat.desc}</span>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-slate-400 font-semibold truncate">{stat.label}</p>
+                <h4 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-0.5 leading-tight tracking-tight">{stat.value}</h4>
+                <span className="text-[10px] sm:text-xs text-slate-400 mt-1 block font-medium leading-tight">{stat.desc}</span>
               </div>
             </div>
           );
@@ -428,7 +700,7 @@ function ProviderDashboard() {
 
       {/* Main Jobs Section */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Jobs List (Left 2 columns) */}
+        {/* Jobs List */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2 space-y-6">
           <h3 className="text-lg font-bold text-slate-900">My Job Schedule</h3>
 
@@ -445,15 +717,11 @@ function ProviderDashboard() {
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
                       <span className="text-sm font-bold text-[#FF7C71]">#{job.id}</span>
-                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${currentStatus === "completed"
-                        ? "bg-emerald-50 text-emerald-700"
-                        : currentStatus === "on_the_way"
-                          ? "bg-indigo-50 text-indigo-700"
-                          : currentStatus === "assigned"
-                            ? "bg-amber-50 text-amber-700"
-                            : currentStatus === "cancelled"
-                              ? "bg-red-50 text-red-700"
-                              : "bg-slate-50 text-slate-700"
+                      <span className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${currentStatus === "completed" ? "bg-emerald-50 text-emerald-700"
+                          : currentStatus === "on_the_way" ? "bg-indigo-50 text-indigo-700"
+                            : currentStatus === "assigned" ? "bg-amber-50 text-amber-700"
+                              : currentStatus === "cancelled" ? "bg-red-50 text-red-700"
+                                : "bg-slate-50 text-slate-700"
                         }`}>
                         {currentStatus.replace(/_/g, " ")}
                       </span>
@@ -463,7 +731,6 @@ function ProviderDashboard() {
                       <MapPin size={14} /> {job.address}
                     </p>
                   </div>
-
                   <div className="flex items-center gap-4">
                     <div className="text-right">
                       <p className="text-sm font-semibold text-slate-900">{job.amount}</p>
@@ -477,9 +744,8 @@ function ProviderDashboard() {
           </div>
         </div>
 
-        {/* Right 1 Column: Job Console & Business Profile */}
+        {/* Right Column */}
         <div className="space-y-6">
-          {/* Job Actions Console */}
           {activeJobDetails && (
             <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
               <div>
@@ -503,8 +769,8 @@ function ProviderDashboard() {
                       <button
                         onClick={() => updateJobStatus(activeJobDetails.id, "On The Way")}
                         className={`w-full py-2.5 rounded-xl text-xs font-semibold border transition-all ${activeJobDetails.status === "on_the_way"
-                          ? "bg-amber-500 border-amber-500 text-white"
-                          : "border-slate-200 hover:bg-slate-50 text-slate-700"
+                            ? "bg-amber-500 border-amber-500 text-white"
+                            : "border-slate-200 hover:bg-slate-50 text-slate-700"
                           }`}
                       >
                         On The Way
@@ -791,36 +1057,22 @@ function CustomerDashboard() {
       header: "Booking ID",
       render: (b: any) => <span className="font-bold text-brand-primary">{b.id}</span>
     },
-    {
-      key: "service",
-      header: "Service Booked"
-    },
-    {
-      key: "provider",
-      header: "Expert Provider"
-    },
-    {
-      key: "amount",
-      header: "Amount Paid"
-    },
+    { key: "service", header: "Service Booked" },
+    { key: "provider", header: "Expert Provider" },
+    { key: "amount", header: "Amount Paid" },
     {
       key: "status",
       header: "Status",
       render: (b: any) => (
-        <span
-          className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${b.status === "completed"
-            ? "bg-emerald-50 text-emerald-700"
-            : b.status === "cancelled" ? "bg-red-50 text-red-700" : "bg-amber-50 text-amber-700"
-            }`}
-        >
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${b.status === "completed" ? "bg-emerald-50 text-emerald-700"
+            : b.status === "cancelled" ? "bg-red-50 text-red-700"
+              : "bg-amber-50 text-amber-700"
+          }`}>
           {b.status.replace('_', ' ')}
         </span>
       )
     },
-    {
-      key: "date",
-      header: "Date Completed"
-    },
+    { key: "date", header: "Date Completed" },
     {
       key: "actions",
       header: "Actions",
@@ -840,29 +1092,38 @@ function CustomerDashboard() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900">Welcome back, {authUser?.name || "Client"}!</h1>
-          <p className="text-slate-500 mt-1">Keep track of your active services and book premium care for your home.</p>
+      <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
+        <div className="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-[#FF7C71]/10 to-amber-100/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-100 text-amber-600 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block" />
+              Client Portal
+            </div>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
+              Welcome back, <span className="text-[#FF7C71]">{authUser?.name || "Client"}</span>!
+            </h1>
+            <p className="text-slate-400 mt-1.5 text-sm font-medium">Keep track of your active services and book premium care for your home.</p>
+          </div>
+          <button className="shrink-0 bg-gradient-to-br from-[#FF7C71] to-[#E5675D] hover:from-[#E5675D] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/25 text-sm transition-all active:scale-[0.985] flex items-center gap-2">
+            <Plus size={16} /> Book a New Service
+          </button>
         </div>
-        <button className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/20 text-sm transition-all active:scale-[0.985]">
-          Book a New Service
-        </button>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
-              <div className={`p-3 rounded-xl ${stat.color}`}>
-                <Icon size={24} />
+            <div key={i} className="group bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-slate-100/80 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <div className={`p-2.5 sm:p-3 rounded-xl ${stat.color} group-hover:scale-110 transition-transform duration-200 shrink-0`}>
+                <Icon size={20} className="sm:w-6 sm:h-6" />
               </div>
-              <div>
-                <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
-                <h4 className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</h4>
-                <span className="text-xs text-slate-400 mt-1 block font-medium">{stat.desc}</span>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-slate-400 font-semibold truncate">{stat.label}</p>
+                <h4 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-0.5 leading-tight tracking-tight">{stat.value}</h4>
+                <span className="text-[10px] sm:text-xs text-slate-400 mt-1 block font-medium leading-tight">{stat.desc}</span>
               </div>
             </div>
           );
@@ -871,7 +1132,7 @@ function CustomerDashboard() {
 
       {/* Tracking Active Booking & Quick Book Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Active Booking Tracker (Left 2 columns) */}
+        {/* Active Booking Tracker */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2 space-y-6">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold text-slate-900">Active Service Tracker</h3>
@@ -895,7 +1156,6 @@ function CustomerDashboard() {
                 </div>
               </div>
 
-              {/* Tracker Step Bar */}
               <div className="space-y-4">
                 <div className="flex justify-between items-center">
                   <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Service Timeline</p>
@@ -924,14 +1184,10 @@ function CustomerDashboard() {
                     { title: "Service Complete", desc: "Final verification and payment completion", done: false, current: false },
                   ].map((step, i) => (
                     <div key={i} className="relative">
-                      <span
-                        className={`absolute -left-[22px] top-1.5 w-3 h-3 rounded-full border-2 ring-4 ring-white ${step.done
-                          ? "bg-[#FF7C71] border-[#FF7C71]"
-                          : step.current
-                            ? "bg-[#FF7C71] border-[#FF7C71] animate-pulse"
+                      <span className={`absolute -left-[22px] top-1.5 w-3 h-3 rounded-full border-2 ring-4 ring-white ${step.done ? "bg-[#FF7C71] border-[#FF7C71]"
+                          : step.current ? "bg-[#FF7C71] border-[#FF7C71] animate-pulse"
                             : "bg-slate-200 border-slate-200"
-                          }`}
-                      />
+                        }`} />
                       <div>
                         <h5 className={`text-sm font-semibold ${step.done || step.current ? "text-slate-800" : "text-slate-400"}`}>
                           {step.title}
@@ -951,7 +1207,7 @@ function CustomerDashboard() {
           )}
         </div>
 
-        {/* Promo Code Banners (Right 1 column) */}
+        {/* Promo Code Banners */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
           <h3 className="text-lg font-bold text-slate-900">Active Offers</h3>
 
@@ -961,9 +1217,7 @@ function CustomerDashboard() {
               { code: "CLEANHOMY", discount: "৳500 OFF", service: "Valid on Deep Cleaning", expiry: "Exp: July 05" },
             ].map((promo, i) => (
               <div key={i} className="p-4 bg-[#FFF8F7] border border-[#FFEBE9]/50 rounded-2xl relative overflow-hidden">
-                <div className="absolute right-0 top-0 w-16 h-16 bg-[#FF7C71]/5 rounded-bl-full flex items-center justify-center font-bold text-[#FF7C71] text-xs">
-                  %
-                </div>
+                <div className="absolute right-0 top-0 w-16 h-16 bg-[#FF7C71]/5 rounded-bl-full flex items-center justify-center font-bold text-[#FF7C71] text-xs">%</div>
                 <span className="text-xs font-bold text-[#E5675D] tracking-wider bg-[#FFEBE9]/60 px-2 py-0.5 rounded-lg">{promo.code}</span>
                 <h4 className="text-lg font-bold text-slate-800 mt-2">{promo.discount}</h4>
                 <p className="text-xs text-slate-500 mt-1">{promo.service}</p>
@@ -1038,18 +1292,9 @@ function AgentDashboard() {
       header: "Order ID",
       render: (o: any) => <span className="font-bold text-brand-primary">{o.id}</span>
     },
-    {
-      key: "customer",
-      header: "Client"
-    },
-    {
-      key: "service",
-      header: "Service"
-    },
-    {
-      key: "amount",
-      header: "Price"
-    },
+    { key: "customer", header: "Client" },
+    { key: "service", header: "Service" },
+    { key: "amount", header: "Price" },
     {
       key: "commission",
       header: "Commission",
@@ -1059,9 +1304,9 @@ function AgentDashboard() {
       key: "status",
       header: "Status",
       render: (o: any) => (
-        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${o.status === "completed" ? "bg-emerald-50 text-emerald-700" :
-          o.status === "cancelled" ? "bg-red-50 text-red-700" :
-            "bg-amber-50 text-amber-700"
+        <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-bold capitalize ${o.status === "completed" ? "bg-emerald-50 text-emerald-700"
+            : o.status === "cancelled" ? "bg-red-50 text-red-700"
+              : "bg-amber-50 text-amber-700"
           }`}>
           {o.status.replace('_', ' ')}
         </span>
@@ -1072,32 +1317,39 @@ function AgentDashboard() {
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold text-slate-900">Agent Partner Desk</h1>
-          <p className="text-slate-500 mt-1">Hello, {authUser?.name || "Agent"}! Book services on behalf of clients and track your commissions.</p>
+      <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
+        <div className="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-indigo-100/50 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div className="inline-flex items-center gap-1.5 bg-indigo-50 border border-indigo-100 text-indigo-600 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
+              <span className="w-1.5 h-1.5 rounded-full bg-indigo-400 animate-pulse inline-block" />
+              Agent Partner
+            </div>
+            <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">Agent Partner Desk</h1>
+            <p className="text-slate-400 mt-1.5 text-sm font-medium">Hello, <span className="text-slate-600 font-semibold">{authUser?.name || "Agent"}</span>! Book services on behalf of clients and track your commissions.</p>
+          </div>
+          <Link
+            href="/dashbord/quick-booking"
+            className="shrink-0 bg-gradient-to-br from-[#FF7C71] to-[#E5675D] hover:from-[#E5675D] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/25 text-sm transition-all active:scale-[0.985] text-center flex items-center gap-2 w-fit"
+          >
+            <Zap size={15} /> Quick Booking Console
+          </Link>
         </div>
-        <Link
-          href="/dashbord/quick-booking"
-          className="bg-[#FF7C71] hover:bg-[#E5675D] text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF7C71]/20 text-sm transition-all active:scale-[0.985] text-center"
-        >
-          Quick Booking Console
-        </Link>
       </div>
 
       {/* Stats Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {stats.map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <div key={i} className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4">
-              <div className={`p-3 rounded-xl ${stat.color}`}>
-                <Icon size={24} />
+            <div key={i} className="group bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-slate-100/80 hover:-translate-y-0.5 transition-all duration-200 cursor-default">
+              <div className={`p-2.5 sm:p-3 rounded-xl ${stat.color} group-hover:scale-110 transition-transform duration-200 shrink-0`}>
+                <Icon size={20} className="sm:w-6 sm:h-6" />
               </div>
-              <div>
-                <p className="text-sm text-slate-500 font-medium">{stat.label}</p>
-                <h4 className="text-2xl font-bold text-slate-900 mt-1">{stat.value}</h4>
-                <span className="text-xs text-slate-400 mt-1 block font-medium">{stat.desc}</span>
+              <div className="min-w-0">
+                <p className="text-xs sm:text-sm text-slate-400 font-semibold truncate">{stat.label}</p>
+                <h4 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-0.5 leading-tight tracking-tight">{stat.value}</h4>
+                <span className="text-[10px] sm:text-xs text-slate-400 mt-1 block font-medium leading-tight">{stat.desc}</span>
               </div>
             </div>
           );
@@ -1106,8 +1358,7 @@ function AgentDashboard() {
 
       {/* Commission Analytics & Recent Bookings */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-
-        {/* Recent Orders Booked */}
+        {/* Recent Orders */}
         <div className="lg:col-span-2 space-y-4">
           <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
             <h3 className="text-lg font-bold text-slate-900">Recent Placed Orders</h3>
@@ -1124,7 +1375,7 @@ function AgentDashboard() {
           />
         </div>
 
-        {/* Commission Tier Progress */}
+        {/* Commission Tier */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-6">
           <h3 className="text-lg font-bold text-slate-900">Commission Tier</h3>
 
@@ -1159,7 +1410,6 @@ function AgentDashboard() {
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );
@@ -1168,91 +1418,65 @@ function AgentDashboard() {
 function DashboardSkeleton() {
   return (
     <div className="w-full min-h-screen bg-slate-50/50 p-4 sm:p-6 md:p-8 space-y-8 animate-pulse">
-      {/* ── Top Header Placeholder ── */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
         <div className="space-y-2">
-          {/* Title bar */}
           <div className="h-8 w-48 bg-slate-200 rounded-xl" />
-          {/* Subtitle bar */}
           <div className="h-4 w-72 bg-slate-200/80 rounded-lg" />
         </div>
-        {/* Action Button placeholder */}
         <div className="h-10 w-32 bg-slate-200 rounded-xl self-start sm:self-auto" />
       </div>
 
-      {/* ── Metric Cards Placeholder (Grid of 4) ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
         {[1, 2, 3, 4].map((i) => (
           <div key={i} className="bg-white border border-slate-100 p-6 rounded-3xl shadow-sm space-y-4">
             <div className="flex justify-between items-center">
-              {/* Icon circle placeholder */}
               <div className="w-12 h-12 bg-slate-100 rounded-2xl" />
-              {/* Trend pill placeholder */}
               <div className="w-16 h-6 bg-slate-100 rounded-full" />
             </div>
             <div className="space-y-2">
-              {/* Title bar */}
               <div className="h-4 w-24 bg-slate-200 rounded-lg" />
-              {/* Number bar */}
               <div className="h-7 w-16 bg-slate-200 rounded-xl" />
             </div>
           </div>
         ))}
       </div>
 
-      {/* ── Main Dashboard Content Grid ── */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Large Table/Chart Card (Col span 2) */}
         <div className="lg:col-span-2 bg-white border border-slate-100 rounded-3xl shadow-sm p-6 space-y-6">
           <div className="flex justify-between items-center">
-            {/* Table title */}
             <div className="h-6 w-36 bg-slate-200 rounded-lg" />
-            {/* Table action */}
             <div className="h-8 w-20 bg-slate-100 rounded-xl" />
           </div>
-          {/* Table Header */}
           <div className="space-y-3 pt-2">
             <div className="grid grid-cols-4 gap-4 pb-2 border-b border-slate-100">
               <div className="h-4 bg-slate-200 rounded col-span-2" />
               <div className="h-4 bg-slate-200 rounded" />
               <div className="h-4 bg-slate-200 rounded" />
             </div>
-            {/* Table Rows (5 rows) */}
             {[1, 2, 3, 4, 5].map((row) => (
               <div key={row} className="grid grid-cols-4 gap-4 py-3 border-b border-slate-50 last:border-0 items-center">
                 <div className="flex items-center gap-3 col-span-2">
-                  {/* Avatar circle */}
                   <div className="w-8 h-8 rounded-full bg-slate-100 shrink-0" />
-                  {/* Name */}
                   <div className="h-4 w-24 bg-slate-200 rounded-lg" />
                 </div>
-                {/* Info Column */}
                 <div className="h-4 w-16 bg-slate-100 rounded-lg" />
-                {/* Status Column */}
                 <div className="h-6 w-20 bg-slate-100 rounded-full" />
               </div>
             ))}
           </div>
         </div>
 
-        {/* Sidebar Mini-feed / List Card */}
         <div className="bg-white border border-slate-100 rounded-3xl shadow-sm p-6 space-y-6">
           <div className="flex justify-between items-center">
-            {/* Title */}
             <div className="h-6 w-32 bg-slate-200 rounded-lg" />
-            {/* More link */}
             <div className="h-4 w-12 bg-slate-100 rounded-lg" />
           </div>
-          {/* List items (4 items) */}
           <div className="space-y-4">
             {[1, 2, 3, 4].map((item) => (
               <div key={item} className="flex gap-4 items-start pb-4 border-b border-slate-50 last:border-0 last:pb-0">
-                {/* Icon or image placeholder */}
                 <div className="w-10 h-10 bg-slate-100 rounded-xl shrink-0" />
                 <div className="space-y-2 flex-1">
-                  {/* Title bar */}
                   <div className="h-4 w-4/5 bg-slate-200 rounded-lg" />
-                  {/* Description bar */}
                   <div className="h-3 w-1/2 bg-slate-100 rounded-md" />
                 </div>
               </div>
