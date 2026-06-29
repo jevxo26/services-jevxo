@@ -23,6 +23,7 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { getAccessToken } from "@/lib/token";
 
 
 
@@ -165,6 +166,7 @@ export default function AboutClientPage() {
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
   const [statsData, setStatsData] = useState<any>(null);
+  const [teamMembers, setTeamMembers] = useState<any[]>(TEAM_MEMBERS);
 
   useEffect(() => {
     fetch("https://rajseba-api-production.up.railway.app/stats")
@@ -175,6 +177,39 @@ export default function AboutClientPage() {
         }
       })
       .catch((err) => console.error("Error fetching stats:", err));
+
+    // Fetch team members (SuperAdmins) from users API
+    const token = getAccessToken();
+    const headers: any = {
+      "Content-Type": "application/json",
+    };
+    if (token) {
+      headers["Authorization"] = `Bearer ${token}`;
+    }
+
+    fetch("https://rajseba-api-production.up.railway.app/users", {
+      headers,
+    })
+      .then((res) => res.json())
+      .then((json) => {
+        const users = json.data || (Array.isArray(json) ? json : []);
+        if (Array.isArray(users) && users.length > 0) {
+          const admins = users.filter((u: any) => {
+            const roleName = (u.role?.name || u.role || "").toLowerCase();
+            return roleName === "superadmin" || roleName === "super admin";
+          });
+          if (admins.length > 0) {
+            const mappedTeam = admins.map((u: any) => ({
+              name: u.name || `${u.firstName || ""} ${u.lastName || ""}`.trim() || "Super Admin",
+              role: u.role?.name || (typeof u.role === "string" ? u.role : "Super Admin"),
+              bio: u.profile?.description || u.description || "Leading operations, technology, and service standards to change the home service sector in Bangladesh.",
+              avatar: u.profile?.avatar || u.profile?.images?.[0] || u.profile?.picture || u.avatar || u.picture || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
+            }));
+            setTeamMembers(mappedTeam);
+          }
+        }
+      })
+      .catch((err) => console.error("Error fetching users for team:", err));
   }, []);
 
   const displayStats = [
@@ -518,7 +553,7 @@ export default function AboutClientPage() {
           </Reveal>
 
           <Reveal variants={stagger} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {TEAM_MEMBERS.map((member, i) => (
+            {teamMembers.map((member, i) => (
               <motion.div
                 key={i}
                 variants={cardVariant}
