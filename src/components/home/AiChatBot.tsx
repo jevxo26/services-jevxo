@@ -54,9 +54,9 @@ export function AiChatBot() {
             key={matchIndex}
             href={url}
             onClick={() => {
-              // Optionally close chatbot on navigation if desired
+              setIsOpen(false);
             }}
-            className="text-amber-600 hover:text-amber-700 underline font-bold inline-flex items-center gap-0.5"
+            className="inline-flex items-center gap-1 bg-[#FF6014]/10 hover:bg-[#FF6014]/20 text-[#FF6014] px-2.5 py-1 rounded-full text-[10px] font-extrabold transition-all border border-[#FF6014]/20 hover:scale-[1.03] my-0.5 ml-1"
           >
             {label}
           </Link>
@@ -68,7 +68,7 @@ export function AiChatBot() {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-amber-600 hover:text-amber-700 underline font-bold inline-flex items-center gap-0.5"
+            className="inline-flex items-center gap-1 bg-[#FF6014]/10 hover:bg-[#FF6014]/20 text-[#FF6014] px-2.5 py-1 rounded-full text-[10px] font-extrabold transition-all border border-[#FF6014]/20 hover:scale-[1.03] my-0.5 ml-1"
           >
             {label}
           </a>
