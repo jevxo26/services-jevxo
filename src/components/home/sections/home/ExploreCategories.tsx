@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { TbAirConditioning, TbTruck, TbScissors } from "react-icons/tb";
@@ -80,6 +81,11 @@ const cardVariants = {
 
 const ExploreCategories = () => {
   const { data: categoriesRes, isLoading, isError } = useGetPublicCategoriesQuery();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Support both { data: [...] } and [...] shapes
   const categories: any[] = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
@@ -101,21 +107,21 @@ const ExploreCategories = () => {
       </div>
 
       {/* Loading state */}
-      {isLoading && (
+      {(!isMounted || isLoading) && (
         <div className="flex justify-center items-center py-16">
           <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
         </div>
       )}
 
       {/* Error fallback */}
-      {isError && (
+      {isMounted && isError && (
         <p className="text-center text-slate-400 text-sm py-8">
           Unable to load categories right now. Please try again later.
         </p>
       )}
 
       {/* Grid — real data */}
-      {!isLoading && !isError && categories.length > 0 && (
+      {isMounted && !isLoading && !isError && categories.length > 0 && (
         <motion.div
           variants={containerVariants}
           initial="hidden"
@@ -205,7 +211,7 @@ const ExploreCategories = () => {
       )}
 
       {/* Empty state */}
-      {!isLoading && !isError && categories.length === 0 && (
+      {isMounted && !isLoading && !isError && categories.length === 0 && (
         <p className="text-center text-slate-400 text-sm py-8">No categories found.</p>
       )}
     </div>

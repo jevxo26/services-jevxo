@@ -84,11 +84,24 @@ export const landingApi = baseApi.injectEndpoints({
       query: (serviceId) => `/packages/service/${serviceId}`,
     }),
 
+    // GET /stats — public, returns platform impact statistics
+    getPublicStats: builder.query<any, void>({
+      query: () => '/stats',
+    }),
+
     // GET /profiles — public, no auth required, returns all profiles with user info
     getPublicProfiles: builder.query<any, void>({
       query: () => '/profiles',
     }),
 
+    // POST /contact — public, for submitting contact form
+    submitContact: builder.mutation<any, { name: string; email: string; phone?: string; subject: string; message: string }>({
+      query: (data) => ({
+        url: '/contact',
+        method: 'POST',
+        body: data,
+      }),
+    }),
   }),
   overrideExisting: false,
 });
@@ -107,5 +120,7 @@ export const {
   useGetPublicServiceBySlugQuery,
   useGetPublicPackagesQuery,
   useGetPublicPackagesByServiceQuery,
+  useGetPublicStatsQuery,
   useGetPublicProfilesQuery,
+  useSubmitContactMutation,
 } = landingApi;

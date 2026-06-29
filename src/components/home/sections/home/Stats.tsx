@@ -2,8 +2,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Users, Wrench, Star, ShieldCheck, TrendingUp, BarChart3 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { useGetPublicStatsQuery } from '@/redux/features/landing/landingApi';
 
-const stats = [
+const DEFAULT_STATS = [
   { id: 1, label: 'Happy Customers', value: 50000, suffix: '+', display: '50,000+', icon: Users },
   { id: 2, label: 'Services Completed', value: 120000, suffix: '+', display: '120,000+', icon: Wrench },
   { id: 3, label: 'Verified Experts', value: 2500, suffix: '+', display: '2,500+', icon: ShieldCheck },
@@ -36,7 +37,7 @@ function useCountUp(target: number, duration: number = 2000, isDecimal = false, 
   return count;
 }
 
-function StatCard({ stat, triggered }: { stat: typeof stats[0]; triggered: boolean }) {
+function StatCard({ stat, triggered }: { stat: typeof DEFAULT_STATS[0]; triggered: boolean }) {
   const count = useCountUp(stat.value, 2200, stat.isDecimal, triggered);
 
   const formatNumber = (n: number) => {
@@ -60,6 +61,16 @@ function StatCard({ stat, triggered }: { stat: typeof stats[0]; triggered: boole
 export default function Stats() {
   const ref = useRef<HTMLDivElement>(null);
   const [triggered, setTriggered] = useState(false);
+  const { data: statsRes } = useGetPublicStatsQuery();
+  
+  // Merge API data with default stats
+  const apiData = statsRes?.data || {};
+  const stats = [
+    { ...DEFAULT_STATS[0], value: apiData.happyCustomers ?? apiData.customers ?? DEFAULT_STATS[0].value },
+    { ...DEFAULT_STATS[1], value: apiData.servicesCompleted ?? apiData.services ?? DEFAULT_STATS[1].value },
+    { ...DEFAULT_STATS[2], value: apiData.verifiedExperts ?? apiData.experts ?? DEFAULT_STATS[2].value },
+    { ...DEFAULT_STATS[3], value: apiData.averageRating ?? apiData.rating ?? DEFAULT_STATS[3].value },
+  ];
 
   useEffect(() => {
     const el = ref.current;

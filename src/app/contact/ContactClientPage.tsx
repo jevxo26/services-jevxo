@@ -2,6 +2,7 @@
 
 import { useState, useRef } from "react";
 import Image from "next/image";
+import { useSubmitContactMutation } from "@/redux/features/landing/landingApi";
 import {
   motion,
   AnimatePresence,
@@ -135,7 +136,7 @@ export default function ContactClientPage() {
   const [form, setForm] = useState<FormState>(INITIAL_FORM);
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [submitContact, { isLoading }] = useSubmitContactMutation();
   const [activeFaq, setActiveFaq] = useState<number | null>(0);
 
   const heroRef = useRef<HTMLElement>(null);
@@ -167,32 +168,13 @@ export default function ContactClientPage() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validate()) return;
-    setLoading(true);
 
     try {
-      const response = await fetch("https://rajseba-api-production.up.railway.app/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: form.name,
-          email: form.email,
-          phone: form.phone,
-          subject: form.subject,
-          message: form.message,
-        }),
-      });
-
-      if (!response.ok && response.status !== 404) {
-        throw new Error("Failed to send inquiry");
-      }
-
+      await submitContact(form).unwrap();
       setSubmitted(true);
       setForm(INITIAL_FORM);
-    } catch (error) {
-      console.error("Contact API error:", error);
-      alert("Something went wrong sending your inquiry. Please call our hotline at +8801335106726.");
-    } finally {
-      setLoading(false);
+    } catch (err) {
+      console.error("Failed to submit contact form", err);
     }
   };
 
@@ -447,20 +429,11 @@ export default function ContactClientPage() {
 
                       <Button
                         type="submit"
-                        disabled={loading}
-                        className="w-full relative bg-[#FF6014] hover:bg-[#E8520F] disabled:opacity-60 text-white text-[11px] font-extrabold tracking-wide py-3.5 h-auto rounded-xl border-none transition-all duration-200 shadow-[0_4px_16px_rgba(255,96,20,0.3)] hover:shadow-[0_6px_20px_rgba(255,96,20,0.4)] hover:-translate-y-0.5 flex items-center justify-center gap-2 active:translate-y-0"
+                        disabled={isLoading}
+                        className="w-full bg-[#FF6014] hover:bg-[#e84e53] disabled:opacity-60 text-white text-xs font-extrabold py-3.5 h-auto rounded-xl border-none transition-colors shadow-sm flex items-center justify-center gap-2"
                       >
-                        {loading ? (
-                          <>
-                            <span className="w-3.5 h-3.5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                            Sending Enquiry…
-                          </>
-                        ) : (
-                          <>
-                            Submit Inquiry
-                            <Send className="w-3.5 h-3.5" />
-                          </>
-                        )}
+                        {isLoading ? "Sending Enquiry..." : "Submit Inquiry"}
+                        <Send className="w-3.5 h-3.5" />
                       </Button>
 
                       <p className="text-center text-[10px] text-slate-300 font-medium pt-1">

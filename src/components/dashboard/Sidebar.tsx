@@ -27,6 +27,7 @@ import {
   MapPin,
   History,
   MessageSquare,
+  Mail,
   X
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -74,6 +75,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Percent, label: "Manage Coupons", href: "/dashbord/coupons" },
           { icon: BarChart3, label: "System Analytics", href: "/dashbord/analytics" },
           { icon: Wallet, label: "Withdraw Requests", href: "/dashbord/withdraw" },
+          { icon: Mail, label: "Contacts", href: "/dashbord/contacts" },
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
 
