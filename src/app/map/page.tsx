@@ -152,8 +152,12 @@ export default function MapPage() {
 
   if (isProfilesLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="flex flex-col items-center gap-3">
+      <div className="min-h-screen bg-transparent flex items-center justify-center relative">
+        <div
+          className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+          style={{ backgroundSize: 'auto' }}
+        />
+        <div className="flex flex-col items-center gap-3 relative z-10">
           <Loader2 className="w-10 h-10 animate-spin text-[#FF6014]" />
           <p className="text-sm font-semibold text-slate-500">Loading vendor profiles...</p>
         </div>
@@ -162,10 +166,14 @@ export default function MapPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col font-sans">
-      <div className="flex-1 flex flex-col relative">
+    <div className="min-h-screen bg-transparent flex flex-col font-sans relative">
+      <div
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+        style={{ backgroundSize: 'auto' }}
+      />
+      <div className="flex-1 flex flex-col relative z-10">
         {activeTab === "map" && (
-          <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex-1 flex flex-col md:flex-row gap-4 md:gap-6 py-4 md:py-5 h-[calc(100vh-72px)] min-h-[680px] overflow-hidden relative">
+          <div className="w-full flex-1 flex flex-col md:flex-row h-[calc(100vh-64px)] md:h-[calc(100vh-68px)] overflow-hidden relative">
             <SidebarList
               searchQuery={searchQuery}
               setSearchQuery={setSearchQuery}

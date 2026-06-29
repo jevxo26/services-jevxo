@@ -229,7 +229,7 @@ export default function DhakaMap({
   const selectedExpert = filteredExperts.find((expert) => expert.id === selectedExpertId);
 
   return (
-    <div className="flex-1 min-h-[480px] md:min-h-[600px] md:h-full rounded-3xl border border-slate-200 shadow-md relative overflow-hidden z-0">
+    <div className="flex-1 min-h-0 md:h-full rounded-none border-none relative overflow-hidden z-0">
       <div className="absolute inset-0">
         <MapContainer
           center={BANGLADESH_CENTER}

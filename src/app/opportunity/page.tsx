@@ -176,7 +176,11 @@ function OpportunityPageContent() {
 
   if (!selectedRole) {
     return (
-      <div className="min-h-[80vh] bg-white flex flex-col justify-center py-20 px-4 md:px-6 relative overflow-hidden font-sans">
+      <div className="min-h-[80vh] bg-transparent flex flex-col justify-center py-20 px-4 md:px-6 relative overflow-hidden font-sans">
+        <div
+          className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+          style={{ backgroundSize: 'auto' }}
+        />
 
         {/* Ambient glows */}
         <div className="pointer-events-none absolute -top-32 -right-32 w-96 h-96 bg-[#FF6014]/5 blur-[120px] rounded-full" />
@@ -241,8 +245,12 @@ function OpportunityPageContent() {
   }
 
   return (
-    <div className="bg-white min-h-[85vh] flex flex-col justify-center py-10 md:py-16">
-      <div className="max-w-7xl mx-auto w-full px-4 md:px-6">
+    <div className="bg-transparent min-h-[85vh] flex flex-col justify-center py-10 md:py-16 relative overflow-hidden">
+      <div
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+        style={{ backgroundSize: 'auto' }}
+      />
+      <div className="max-w-7xl mx-auto w-full px-4 md:px-6 relative z-10">
 
         {/* Dynamic Back Navigation */}
         <button
