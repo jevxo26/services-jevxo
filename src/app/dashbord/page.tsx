@@ -357,13 +357,6 @@ function SuperAdminDashboard() {
     value: c.amount
   }));
 
-  const stats = [
-    { label: "Total Revenue", value: `৳${overview.revenue.total.toLocaleString()}`, desc: "All time completed", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
-    { label: "Today's Revenue", value: `৳${overview.revenue.today.toLocaleString()}`, desc: "Revenue generated today", icon: TrendingUp, color: "text-indigo-600 bg-indigo-50" },
-    { label: "Total Withdraws", value: `৳${overview.withdraws.totalAmount.toLocaleString()}`, desc: "Total approved withdraws", icon: Briefcase, color: "text-amber-600 bg-amber-50" },
-    { label: "Total Users", value: String(overview.users.totalClients + overview.users.totalVendors + overview.users.totalAgents), desc: `${overview.users.totalVendors} Vendors | ${overview.users.totalAgents} Agents`, icon: Users, color: "text-teal-600 bg-teal-50" },
-  ];
-
   const recentBookings = [...allBookings]
     .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
     .slice(0, 5)
@@ -418,13 +411,11 @@ function SuperAdminDashboard() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* ── Premium Header ── */}
       <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
-        {/* Decorative gradient blob */}
         <div className="absolute -top-10 -right-10 w-56 h-56 bg-gradient-to-br from-[#FF6014]/10 to-[#FFB3AD]/5 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-indigo-100/40 to-transparent rounded-full blur-2xl pointer-events-none" />
 
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            {/* Live badge */}
             <div className="inline-flex items-center gap-1.5 bg-emerald-50 border border-emerald-100 text-emerald-600 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
               <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse inline-block" />
               Live Dashboard
@@ -435,7 +426,6 @@ function SuperAdminDashboard() {
             <p className="text-slate-400 mt-1.5 text-sm font-medium">Real-time statistics and administrative insights for Rajseba.</p>
           </div>
 
-          {/* Right side: date + quick actions */}
           <div className="flex items-center gap-3 shrink-0">
             <div className="hidden sm:flex flex-col items-end">
               <span className="text-xs font-bold text-slate-700">
@@ -451,105 +441,115 @@ function SuperAdminDashboard() {
         </div>
       </div>
 
-      {/* ── Premium Stats Cards ── */}
+      {/* ── Key Performance Metrics (Revenue & Withdrawals) ── */}
+      <h2 className="text-xl font-bold text-slate-800 -mb-2 mt-4 px-1">Financial Overview</h2>
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
-        {stats.map((stat, i) => {
+        {[
+          { label: "Total Revenue", value: `৳${overview.revenue.total.toLocaleString()}`, sub: "All time", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
+          { label: "Today's Revenue", value: `৳${overview.revenue.today.toLocaleString()}`, sub: "Today", icon: TrendingUp, color: "text-indigo-600 bg-indigo-50" },
+          { label: "Total Withdraws", value: `৳${overview.withdraws.totalAmount.toLocaleString()}`, sub: "All time", icon: Briefcase, color: "text-amber-600 bg-amber-50" },
+          { label: "Today's Withdraws", value: `৳${overview.withdraws.todayAmount.toLocaleString()}`, sub: "Today", icon: AlertCircle, color: "text-red-600 bg-red-50" },
+        ].map((stat, i) => {
           const Icon = stat.icon;
           return (
-            <div
-              key={i}
-              className="group bg-white p-5 sm:p-6 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-3 sm:gap-4 hover:shadow-lg hover:shadow-slate-100/80 hover:-translate-y-0.5 transition-all duration-200 cursor-default"
-            >
-              <div className={`p-2.5 sm:p-3 rounded-xl ${stat.color} group-hover:scale-110 transition-transform duration-200 shrink-0`}>
-                <Icon size={20} className="sm:w-6 sm:h-6" />
+            <div key={i} className="group bg-white p-5 rounded-2xl border border-slate-100 shadow-sm flex items-start gap-4 hover:shadow-md transition-all duration-200">
+              <div className={`p-3 rounded-xl ${stat.color} shrink-0`}>
+                <Icon size={22} />
               </div>
-              <div className="min-w-0">
-                <p className="text-xs sm:text-sm text-slate-400 font-semibold truncate">{stat.label}</p>
-                <h4 className="text-lg sm:text-2xl font-extrabold text-slate-900 mt-0.5 leading-tight tracking-tight">{stat.value}</h4>
-                <span className="text-[10px] sm:text-xs text-slate-400 mt-1 block font-medium leading-tight">{stat.desc}</span>
+              <div>
+                <p className="text-xs text-slate-400 font-semibold">{stat.label}</p>
+                <h4 className="text-lg sm:text-xl font-extrabold text-slate-900 mt-1">{stat.value}</h4>
+                <p className="text-[10px] text-slate-400 mt-1 font-medium">{stat.sub}</p>
               </div>
             </div>
           );
         })}
       </div>
 
-      {/* Main Grid: Revenue Chart & Pending Approvals */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left 2 Columns: Revenue Chart */}
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm lg:col-span-2 overflow-hidden">
-          {/* Chart header with subtle gradient */}
-          <div className="px-6 pt-6 pb-4 flex justify-between items-start border-b border-slate-50">
-            <div>
-              <h3 className="text-lg font-bold text-slate-900 tracking-tight">Revenue Growth</h3>
-              <p className="text-xs text-slate-400 mt-0.5 font-medium">Monthly breakdown — 2026</p>
+      {/* ── User & Booking Metrics ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        {/* User Stats Grid */}
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+          <div className="flex justify-between items-center mb-5">
+            <h3 className="text-lg font-bold text-slate-900">User Demographics</h3>
+            <div className="p-1.5 bg-blue-50 text-blue-600 rounded-lg"><Users size={18} /></div>
+          </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-slate-50 rounded-xl border border-slate-100/50">
+              <p className="text-2xl font-extrabold text-slate-800">{overview.users.totalClients}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wider">Clients</p>
             </div>
-            <div className="flex items-center gap-2.5">
-              <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold">
-                <span className="inline-block w-3 h-3 rounded-sm bg-gradient-to-b from-[#FF6014] to-[#FFBAB4]" />
-                Revenue
-              </div>
-              <span className="inline-flex items-center gap-1 text-[11px] font-bold text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full">
-                <TrendingUp size={12} /> +15% YoY
-              </span>
+            <div className="text-center p-4 bg-slate-50 rounded-xl border border-slate-100/50">
+              <p className="text-2xl font-extrabold text-slate-800">{overview.users.totalVendors}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wider">Vendors</p>
+            </div>
+            <div className="text-center p-4 bg-slate-50 rounded-xl border border-slate-100/50">
+              <p className="text-2xl font-extrabold text-slate-800">{overview.users.totalAgents}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wider">Agents</p>
             </div>
           </div>
-
-          {/* Chart area */}
-          <div className="px-4 pt-4 pb-2">
-            <RevenueChart data={dynamicChartData} />
-          </div>
-
-          {/* Summary row — premium */}
-          <div className="mx-6 mb-5 mt-1 grid grid-cols-3 divide-x divide-slate-100 bg-slate-50/70 rounded-2xl border border-slate-100 overflow-hidden">
-            {[
-              { label: "This Month", value: `৳${overview.revenue.monthly.toLocaleString()}`, sub: "Revenue", accent: "text-[#FF6014]" },
-              { label: "This Week", value: `৳${overview.revenue.weekly.toLocaleString()}`, sub: "Revenue", accent: "text-indigo-500" },
-              { label: "Month Withdraws", value: `৳${overview.withdraws.monthlyAmount.toLocaleString()}`, sub: "Withdraws", accent: "text-emerald-500" },
-            ].map((s, i) => (
-              <div key={i} className="text-center py-3 px-2">
-                <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{s.label}</p>
-                <p className={`text-sm font-extrabold mt-1 ${s.accent}`}>{s.value}</p>
-                <p className="text-[10px] text-slate-400 font-medium">{s.sub}</p>
-              </div>
-            ))}
+          <div className="mt-4 pt-4 border-t border-slate-50 flex justify-between items-center px-2">
+            <span className="text-sm font-semibold text-slate-500">Total Registered Users</span>
+            <span className="text-lg font-bold text-[#FF6014]">{overview.users.totalClients + overview.users.totalVendors + overview.users.totalAgents}</span>
           </div>
         </div>
 
-        {/* Right 1 Column: Additional Stats */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col gap-4">
-          <div className="flex justify-between items-center mb-2">
-            <h3 className="text-lg font-bold text-slate-900">Today's Snapshot</h3>
-            <span className="text-xs font-semibold text-[#FF6014] bg-[#FFF8F4] px-2 py-0.5 rounded-lg">Live</span>
+        {/* Booking Stats Grid */}
+        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-6">
+          <div className="flex justify-between items-center mb-5">
+            <h3 className="text-lg font-bold text-slate-900">Booking Pipeline</h3>
+            <div className="p-1.5 bg-emerald-50 text-emerald-600 rounded-lg"><CheckCircle2 size={18} /></div>
           </div>
+          <div className="grid grid-cols-3 gap-4">
+            <div className="text-center p-4 bg-slate-50 rounded-xl border border-slate-100/50">
+              <p className="text-2xl font-extrabold text-emerald-600">{overview.bookings.completed}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wider">Completed</p>
+            </div>
+            <div className="text-center p-4 bg-slate-50 rounded-xl border border-slate-100/50">
+              <p className="text-2xl font-extrabold text-amber-500">{overview.bookings.pending}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wider">Pending</p>
+            </div>
+            <div className="text-center p-4 bg-slate-50 rounded-xl border border-slate-100/50">
+              <p className="text-2xl font-extrabold text-indigo-500">{overview.bookings.todayAssigned}</p>
+              <p className="text-xs font-semibold text-slate-500 mt-1 uppercase tracking-wider">Assigned</p>
+            </div>
+          </div>
+          <div className="mt-4 pt-4 border-t border-slate-50 flex justify-between items-center px-2">
+            <span className="text-sm font-semibold text-slate-500">Active Pipeline Total</span>
+            <span className="text-lg font-bold text-slate-800">{overview.bookings.completed + overview.bookings.pending + overview.bookings.todayAssigned}</span>
+          </div>
+        </div>
+      </div>
 
-          <div className="grid grid-cols-2 gap-4">
-            <div className="p-4 bg-slate-50 rounded-xl">
-              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Bookings</p>
-              <h4 className="text-xl font-extrabold text-slate-900 mt-1">{overview.bookings.todayAssigned}</h4>
-              <p className="text-[10px] text-emerald-600 font-semibold mt-1">Assigned Today</p>
-            </div>
-            <div className="p-4 bg-slate-50 rounded-xl">
-              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Withdraws</p>
-              <h4 className="text-xl font-extrabold text-slate-900 mt-1">৳{overview.withdraws.todayAmount.toLocaleString()}</h4>
-              <p className="text-[10px] text-slate-500 font-semibold mt-1">Processed Today</p>
+      {/* Main Grid: Revenue Chart */}
+      <div className="bg-white rounded-2xl border border-slate-100 shadow-sm overflow-hidden">
+        <div className="px-6 pt-6 pb-4 flex justify-between items-start border-b border-slate-50">
+          <div>
+            <h3 className="text-lg font-bold text-slate-900 tracking-tight">Revenue Trends</h3>
+            <p className="text-xs text-slate-400 mt-0.5 font-medium">Daily breakdown (Last 7 Days)</p>
+          </div>
+          <div className="flex items-center gap-2.5">
+            <div className="flex items-center gap-1.5 text-[11px] text-slate-400 font-semibold">
+              <span className="inline-block w-3 h-3 rounded-sm bg-gradient-to-b from-[#FF6014] to-[#FFBAB4]" />
+              Revenue
             </div>
           </div>
-          
-          <div className="mt-2 pt-4 border-t border-slate-100">
-             <div className="flex justify-between items-center mb-3">
-               <span className="text-sm font-semibold text-slate-700">Total Bookings</span>
-             </div>
-             <div className="flex flex-col gap-2">
-               <div className="flex justify-between text-xs">
-                 <span className="text-slate-500">Completed</span>
-                 <span className="font-bold text-emerald-600">{overview.bookings.completed}</span>
-               </div>
-               <div className="flex justify-between text-xs">
-                 <span className="text-slate-500">Pending</span>
-                 <span className="font-bold text-amber-600">{overview.bookings.pending}</span>
-               </div>
-             </div>
-          </div>
+        </div>
+        <div className="px-4 pt-4 pb-2">
+          <RevenueChart data={dynamicChartData} />
+        </div>
+        <div className="mx-6 mb-5 mt-1 grid grid-cols-4 divide-x divide-slate-100 bg-slate-50/70 rounded-2xl border border-slate-100 overflow-hidden">
+          {[
+            { label: "This Month Rev", value: `৳${overview.revenue.monthly.toLocaleString()}`, accent: "text-[#FF6014]" },
+            { label: "This Week Rev", value: `৳${overview.revenue.weekly.toLocaleString()}`, accent: "text-indigo-500" },
+            { label: "Month Withdraws", value: `৳${overview.withdraws.monthlyAmount.toLocaleString()}`, accent: "text-emerald-500" },
+            { label: "Week Withdraws", value: `৳${overview.withdraws.weeklyAmount.toLocaleString()}`, accent: "text-amber-500" },
+          ].map((s, i) => (
+            <div key={i} className="text-center py-3 px-2">
+              <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{s.label}</p>
+              <p className={`text-sm font-extrabold mt-1 ${s.accent}`}>{s.value}</p>
+            </div>
+          ))}
         </div>
       </div>
 
@@ -557,9 +557,9 @@ function SuperAdminDashboard() {
       <div className="space-y-4">
         <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
           <h3 className="text-lg font-bold text-slate-900">Recent Booking Log</h3>
-          <button className="text-xs font-semibold text-[#FF6014] hover:underline flex items-center gap-0.5">
+          <Link href="/dashbord/manage-bookings" className="text-xs font-semibold text-[#FF6014] hover:underline flex items-center gap-0.5">
             View All Bookings <ArrowUpRight size={14} />
-          </button>
+          </Link>
         </div>
         <CustomTable
           columns={adminColumns}
