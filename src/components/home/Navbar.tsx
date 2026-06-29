@@ -24,7 +24,8 @@ import {
   LogIn,
   UserPlus,
   PhoneCall,
-  MapPin
+  MapPin,
+  TrendingUp
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useGetPublicCategoriesQuery } from "@/redux/features/landing/landingApi";
@@ -48,7 +49,7 @@ const RIGHT_NAV_LINKS: NavLink[] = [
   { label: "Map", href: "/map", icon: MapPin },
   { label: "About Us", href: "/about", icon: Info },
   { label: "Contact", href: "/contact", icon: PhoneCall },
-  { label: "Booking", href: "/bookings", icon: Calendar },
+  { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
 ];
 
 const ALL_NAV_LINKS: NavLink[] = [...LEFT_NAV_LINKS, ...RIGHT_NAV_LINKS];
@@ -56,7 +57,7 @@ const ALL_NAV_LINKS: NavLink[] = [...LEFT_NAV_LINKS, ...RIGHT_NAV_LINKS];
 const MOBILE_BOTTOM_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
   { label: "Menu", href: "#menu", icon: LayoutGrid, hasDropdown: true },
-  { label: "Services", href: "/services", icon: Briefcase },
+  { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
   { label: "Map", href: "/map", icon: MapPin },
   { label: "Booking", href: "/bookings", icon: Calendar },
   { label: "Login", href: "/login", icon: User },

@@ -27,6 +27,7 @@ export interface Booking {
   total_price?: number;
   notes?: string;
   status: 'pending' | 'assigned' | 'on_the_way' | 'completed' | 'cancelled';
+  payment_status?: string;
   createdAt: string;
   updatedAt: string;
 }
@@ -45,6 +46,10 @@ export const bookingApi = baseApi.injectEndpoints({
     }),
     getBookingById: builder.query<BookingApiResponse<Booking>, string | number>({
       query: (id) => `/bookings/${id}`,
+      providesTags: ['Booking'],
+    }),
+    getBookingTracking: builder.query<BookingApiResponse<Booking>, string | number>({
+      query: (id) => `/bookings/track/${id}`,
       providesTags: ['Booking'],
     }),
     getBookingsByVendor: builder.query<BookingApiResponse<Booking[]>, string | number>({
@@ -101,6 +106,7 @@ export const bookingApi = baseApi.injectEndpoints({
 export const {
   useGetAllBookingsQuery,
   useGetBookingByIdQuery,
+  useGetBookingTrackingQuery,
   useGetBookingsByVendorQuery,
   useGetBookingsByUserQuery,
   useCreateBookingMutation,

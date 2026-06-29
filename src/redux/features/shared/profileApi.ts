@@ -55,6 +55,7 @@ export interface UpdateProfileRequest {
    ========================================================================== */
 
 export const profileApi = baseApi.injectEndpoints({
+  overrideExisting: true,
   endpoints: (builder) => ({
     getAllProfiles: builder.query<ProfileApiResponse<Profile[]>, void>({
       query: () => '/profiles',
@@ -91,7 +92,6 @@ export const profileApi = baseApi.injectEndpoints({
       invalidatesTags: ['Profile'],
     }),
   }),
-  overrideExisting: false,
 });
 
 export const {

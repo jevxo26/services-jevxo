@@ -28,6 +28,7 @@ import {
   History,
   MessageSquare,
   Mail,
+  Search,
   X
 } from "lucide-react";
 import { useState, useEffect } from "react";
@@ -46,6 +47,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
   const dispatch = useAppDispatch();
   const [collapsed, setCollapsed] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const [searchQuery, setSearchQuery] = useState("");
   const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
   const role = (typeof rawRole === 'string' ? rawRole.toLowerCase().replace(/\s+/g, '') : "client") as UserRole;
   const roleName = getRoleName(role);
@@ -78,7 +80,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Mail, label: "Contacts", href: "/dashbord/contacts" },
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
-
+          // { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       case "agent":
         return [
@@ -89,6 +91,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Wallet, label: "Wallet & Earnings", href: "/dashbord/vendor-wallet" },
           { icon: HelpCircle, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
+          // { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       case "vendor":
         return [
@@ -103,6 +106,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: Wallet, label: "Wallet & Earnings", href: "/dashbord/vendor-wallet" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
+          // { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       case "client":
         return [
@@ -110,9 +114,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Calendar, label: "My Bookings", href: "/dashbord/bookings" },
           { icon: Heart, label: "Saved Services", href: "/dashbord/saved" },
 
-          { icon: Wallet, label: "Wallet", href: "/dashbord/client-wallet" },
+          // { icon: Wallet, label: "Wallet", href: "/dashbord/client-wallet" },
           { icon: HelpCircle, label: "Help", href: "/dashbord/help" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
+          // { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       case "employee":
         return [
@@ -121,6 +126,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: History, label: "Task History", href: "/dashbord/employee-history" },
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
+          // { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       default:
         return [];
@@ -131,6 +137,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
     { icon: Home, label: "Home Page", href: "/" },
     ...getMenuItems(role)
   ];
+
+  const filteredMenuItems = menuItems.filter(item =>
+    item.label.toLowerCase().includes(searchQuery.toLowerCase())
+  );
 
   const handleLogout = () => {
     dispatch(authLogout());
@@ -177,9 +187,25 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           </button>
         </div>
 
+        {/* Search Bar */}
+        {!collapsed && (
+          <div className="px-4 pt-4 pb-2">
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" size={16} />
+              <input
+                type="text"
+                placeholder="Search menu..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="w-full bg-white/50 border border-slate-200 rounded-xl py-2 pl-9 pr-4 text-sm text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#FF6014] focus:ring-1 focus:ring-[#FF6014]/20 transition-all"
+              />
+            </div>
+          </div>
+        )}
+
         {/* Nav Menu */}
         <nav className="flex-1 p-4 space-y-2 overflow-y-auto">
-          {menuItems.map((item, index) => {
+          {filteredMenuItems.map((item, index) => {
             const isActive = pathname === item.href;
             return (
               <Link

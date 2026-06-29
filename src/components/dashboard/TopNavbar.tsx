@@ -6,6 +6,7 @@ import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { UserRole, setRole as setAuthRole, getRoleName } from "@/redux/features/auth/authSlice";
 import { logout as authLogout } from "@/redux/features/auth/authSlice";
 import Link from "next/link";
+import { useGetNotificationsQuery, useMarkNotificationAsReadMutation } from "@/redux/features/notification/notificationApi";
 
 export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const [mounted, setMounted] = useState(false);
@@ -25,6 +26,14 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
 
+  const [notificationDropdownOpen, setNotificationDropdownOpen] = useState(false);
+  const notificationDropdownRef = useRef<HTMLDivElement>(null);
+
+  const { data: notifications = [], refetch } = useGetNotificationsQuery(undefined, { skip: !mounted });
+  const [markAsRead] = useMarkNotificationAsReadMutation();
+
+  const unreadCount = notifications.filter(n => !n.isRead).length;
+
   // Close dropdowns on click outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -33,6 +42,9 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
       }
       if (profileDropdownRef.current && !profileDropdownRef.current.contains(event.target as Node)) {
         setProfileDropdownOpen(false);
+      }
+      if (notificationDropdownRef.current && !notificationDropdownRef.current.contains(event.target as Node)) {
+        setNotificationDropdownOpen(false);
       }
     }
     document.addEventListener("mousedown", handleClickOutside);
@@ -76,10 +88,50 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
       <div className="flex items-center gap-5">
 
         {/* Notifications Button */}
-        <button className="p-2.5 hover:bg-slate-50 rounded-full relative text-slate-500 hover:text-slate-900 transition-all border border-transparent hover:border-slate-100 hover:shadow-sm">
-          <Bell size={18} />
-          <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#FF6014] rounded-full ring-2 ring-white"></span>
-        </button>
+        <div className="relative" ref={notificationDropdownRef}>
+          <button 
+            onClick={() => setNotificationDropdownOpen(!notificationDropdownOpen)}
+            className="p-2.5 hover:bg-slate-50 rounded-full relative text-slate-500 hover:text-slate-900 transition-all border border-transparent hover:border-slate-100 hover:shadow-sm"
+          >
+            <Bell size={18} />
+            {unreadCount > 0 && (
+              <span className="absolute top-2 right-2.5 w-2 h-2 bg-[#FF6014] rounded-full ring-2 ring-white"></span>
+            )}
+          </button>
+          
+          {notificationDropdownOpen && (
+            <div className="absolute right-0 mt-3 w-80 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[400px] overflow-y-auto">
+              <div className="px-4 py-3 border-b border-slate-100 flex justify-between items-center">
+                <h3 className="font-semibold text-slate-800">Notifications</h3>
+                <span className="text-xs bg-[#FF6014]/10 text-[#FF6014] px-2 py-1 rounded-full font-medium">{unreadCount} new</span>
+              </div>
+              <div className="divide-y divide-slate-50">
+                {notifications.length === 0 ? (
+                  <div className="px-4 py-8 text-center text-slate-500 text-sm">No notifications yet</div>
+                ) : (
+                  notifications.map(notification => (
+                    <div 
+                      key={notification.id} 
+                      className={`px-4 py-3 hover:bg-slate-50 transition-colors cursor-pointer ${!notification.isRead ? 'bg-[#FF6014]/5' : ''}`}
+                      onClick={() => {
+                        if (!notification.isRead) {
+                          markAsRead(notification.id);
+                        }
+                      }}
+                    >
+                      <p className={`text-sm ${!notification.isRead ? 'text-slate-900 font-medium' : 'text-slate-600'}`}>
+                        {notification.message}
+                      </p>
+                      <span className="text-xs text-slate-400 mt-1 block">
+                        {new Date(notification.createdAt).toLocaleString()}
+                      </span>
+                    </div>
+                  ))
+                )}
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Profile Info & Dropdown */}
         <div className="relative" ref={profileDropdownRef}>

@@ -56,9 +56,11 @@ export default function DashboardLayout({
   children: React.ReactNode;
 }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
   const isAuthLoading = useAppSelector((state) => state.auth.isLoading);
 
   useEffect(() => {
+    setMounted(true);
     document.documentElement.classList.add("dashboard-html");
 
     // Mutation observer to detect when a modal (custom or Radix UI) is open in the DOM
@@ -94,7 +96,7 @@ export default function DashboardLayout({
   }, []);
 
   /* Show global spinner while auth state is hydrating from localStorage */
-  if (isAuthLoading) {
+  if (!mounted || isAuthLoading) {
     return <DashboardLoader />;
   }
 

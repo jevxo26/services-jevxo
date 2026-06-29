@@ -11,6 +11,11 @@ export const landingApi = baseApi.injectEndpoints({
       providesTags: ['Category'],
     }),
 
+    // GET /roles/public - public, returns roles
+    getPublicRoles: builder.query<any, void>({
+      query: () => '/roles/public',
+    }),
+
 
     // GET /category/:id
     getPublicCategoryById: builder.query<any, number>({
@@ -107,6 +112,7 @@ export const landingApi = baseApi.injectEndpoints({
 });
 
 export const {
+  useGetPublicRolesQuery,
   useGetPublicCategoriesQuery,
   useGetPublicCategoryByIdQuery,
   useGetPublicNestedServicesQuery,
