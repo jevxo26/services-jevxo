@@ -160,7 +160,11 @@ export default function ProfilePage() {
   }
 
   return (
-    <div className="space-y-6 md:space-y-8 pb-12 sm:pb-16 animate-in fade-in duration-200">
+    <div className="space-y-6 md:space-y-8 pb-12 sm:pb-16 animate-in fade-in duration-200 relative">
+      <div
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+        style={{ backgroundSize: 'auto' }}
+      />
       {/* Premium Profile Page Header */}
       <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15">
         {/* Decorative Glow Circles */}

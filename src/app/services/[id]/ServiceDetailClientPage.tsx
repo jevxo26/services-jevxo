@@ -352,7 +352,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFFDFD] via-slate-50/70 to-[#FFF8F4] relative pb-16">
       <div
-        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-[0.015] pointer-events-none z-0"
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
         style={{ backgroundSize: "auto" }}
       />
       <div className="relative z-10">

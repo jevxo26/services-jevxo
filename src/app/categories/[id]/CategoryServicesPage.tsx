@@ -66,7 +66,7 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
     <div className="min-h-screen bg-[#FFF8F4] relative">
       {/* Subtle background pattern */}
       <div
-        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-[0.06] pointer-events-none z-0"
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
         style={{ backgroundSize: "auto" }}
       />
 

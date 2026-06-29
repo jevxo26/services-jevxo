@@ -185,14 +185,18 @@ export default function ContactClientPage() {
   const inputError = `${inputBase} border-rose-300 focus:border-rose-400 focus:ring-rose-200/40 bg-rose-50/40`;
 
   return (
-    <div className="min-h-screen bg-white overflow-x-hidden text-slate-800">
+    <div className="min-h-screen ">
+      <div
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+        style={{ backgroundSize: 'auto' }}
+      />
 
       {/* ══════════════════════════════════════════════════════════
           HERO
       ══════════════════════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative bg-white border-b border-slate-100 pt-12 pb-10 md:pt-16 md:pb-12 overflow-hidden"
+        className="relative  pt-12 pb-10 md:pt-16 md:pb-12 "
       >
         {/* Ambient glows */}
         <motion.div
@@ -557,7 +561,7 @@ export default function ContactClientPage() {
       {/* ══════════════════════════════════════════════════════════
           FAQ SECTION
       ══════════════════════════════════════════════════════════ */}
-      <section className="bg-[#FAFAF9] border-t border-slate-100 py-10 md:py-14">
+      <section className="  py-10 md:py-14">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <RevealSection className="text-center mb-8">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#FF6014]/20 mb-4">

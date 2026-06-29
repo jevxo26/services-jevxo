@@ -242,16 +242,20 @@ export default function AboutClientPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-slate-50/30 overflow-x-hidden text-slate-800">
+    <div className="min-h-screen   ">
+      <div
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+        style={{ backgroundSize: 'auto' }}
+      />
       {/* ══ HERO SECTION ════════════════════════════════════════ */}
       <section
         ref={heroRef}
-        className="relative bg-white border-b border-slate-100/80 py-8 md:py-12 overflow-hidden"
+        className="relative  border-b border-slate-100/80 py-8 md:py-12 overflow-hidden"
       >
         {/* Parallax glow styling */}
         <motion.div
           style={{ y: glowY }}
-          className="absolute -top-1/4 right-0 w-[400px] h-[400px] bg-[#FF6014]/5 blur-[100px] rounded-full pointer-events-none"
+          className="absolute -top-1/4 right-0 w-[400px] h-[400px] bg-[#FF6014]/5  rounded-full pointer-events-none"
         />
         <motion.div
           style={{ y: useTransform(scrollYProgress, [0, 1], [0, 30]) }}
@@ -448,7 +452,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* ══ REAL CONTENT: SERVICES COVERED ══════════════════════ */}
-      <section className="py-8 md:py-12 bg-slate-50/50 border-y border-slate-100">
+      <section className="py-8 md:py-12  ">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-2 gap-8 items-center">
             <Reveal variants={fadeLeft} className="space-y-4">

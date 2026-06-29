@@ -256,6 +256,10 @@ export default function BookingsPage() {
         {/* Soft premium background glows */}
         <div className="absolute top-[10%] left-[-10%] w-[350px] h-[350px] bg-[#FF6014]/4 blur-[110px] rounded-full pointer-events-none" />
         <div className="absolute bottom-[10%] right-[-10%] w-[450px] h-[450px] bg-[#FF6014]/2 blur-[130px] rounded-full pointer-events-none" />
+        <div
+          className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+          style={{ backgroundSize: 'auto' }}
+        />
 
         <div className="mx-auto max-w-2xl w-full text-center relative z-10 space-y-6">
           {/* Lock Icon */}
@@ -355,6 +359,10 @@ export default function BookingsPage() {
       {/* Background radial depth glow */}
       <div className="absolute top-[5%] left-[-10%] w-[350px] h-[350px] bg-[#FF6014]/3 blur-[120px] rounded-full pointer-events-none" />
       <div className="absolute bottom-[20%] right-[-10%] w-[450px] h-[450px] bg-[#FF6014]/2 blur-[150px] rounded-full pointer-events-none" />
+      <div
+        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+        style={{ backgroundSize: 'auto' }}
+      />
 
       <div className="mx-auto max-w-5xl relative z-10">
 
