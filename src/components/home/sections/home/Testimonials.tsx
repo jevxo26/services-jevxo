@@ -3,50 +3,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Star, MessageSquare, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useGetPublicReviewsQuery } from "@/redux/features/landing/landingApi";
 
-const FALLBACK_TESTIMONIALS = [
-  {
-    name: "Adnan Sami",
-    location: "Gulshan, Dhaka",
-    rating: 5,
-    comment: "The AC service was professional and on-time. Best service experience in Dhaka so far.",
-    avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=150&auto=format&fit=crop",
-  },
-  {
-    name: "Mehjabin R.",
-    location: "Uttara, Dhaka",
-    rating: 5,
-    comment: "Finding a reliable plumber was impossible before Rajseba. Life-changing app!",
-    avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=150&auto=format&fit=crop",
-  },
-  {
-    name: "Saif Islam",
-    location: "Banani, Dhaka",
-    rating: 5,
-    comment: "Fast, reliable and high-quality cleaning service. I highly recommend them to everyone.",
-    avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=150&auto=format&fit=crop",
-  },
-  {
-    name: "Tasnim Jahan",
-    location: "Dhanmondi, Dhaka",
-    rating: 5,
-    comment: "Very satisfied with the plumbing repair. Diagnosed and fixed quickly at a great price.",
-    avatar: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=150&auto=format&fit=crop",
-  },
-  {
-    name: "Adnan Chowdhury",
-    location: "Mirpur, Dhaka",
-    rating: 5,
-    comment: "Courteous electricians who fixed my wiring issues professionally. Even cleaned up after!",
-    avatar: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop",
-  },
-  {
-    name: "Sabrina Yasmin",
-    location: "Dhanmondi, Dhaka",
-    rating: 5,
-    comment: "Booked a deep cleaning — they exceeded expectations. Spotless corners, great team!",
-    avatar: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=150&auto=format&fit=crop",
-  },
-];
 
 const GAP = 20;
 
@@ -74,10 +30,7 @@ const Testimonials = () => {
         `https://ui-avatars.com/api/?name=${encodeURIComponent(r.user?.name || "U")}&background=FF7C71&color=fff&size=100`,
     }));
 
-  const testimonials =
-    realReviews.length >= 5
-      ? realReviews
-      : [...realReviews, ...FALLBACK_TESTIMONIALS.slice(0, 6 - realReviews.length)];
+  const testimonials = realReviews;
 
   const cardsToShow = windowWidth < 640 ? 1 : windowWidth < 1024 ? 2 : 3;
   const maxIndex = Math.max(0, testimonials.length - cardsToShow);
@@ -177,6 +130,10 @@ const Testimonials = () => {
         </div>
       </div>
     );
+  }
+
+  if (testimonials.length === 0 && !isLoading) {
+    return null;
   }
 
   return (
