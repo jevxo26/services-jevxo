@@ -6,7 +6,6 @@ import {
   Home,
   Users,
   BarChart3,
-  Settings,
   LogOut,
   Menu,
   Briefcase,
@@ -76,7 +75,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Wallet, label: "Withdraw Requests", href: "/dashbord/withdraw" },
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
-          { icon: Settings, label: "Settings", href: "/dashbord/settings" },
+
         ];
       case "agent":
         return [
@@ -87,7 +86,6 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Wallet, label: "Wallet & Earnings", href: "/dashbord/vendor-wallet" },
           { icon: HelpCircle, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
-          { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       case "vendor":
         return [
@@ -102,7 +100,6 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: Wallet, label: "Wallet & Earnings", href: "/dashbord/vendor-wallet" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
-          { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       case "client":
         return [
@@ -113,7 +110,6 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: Wallet, label: "Wallet", href: "/dashbord/client-wallet" },
           { icon: HelpCircle, label: "Help", href: "/dashbord/help" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
-          { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       case "employee":
         return [
@@ -122,7 +118,6 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           { icon: History, label: "Task History", href: "/dashbord/employee-history" },
           { icon: MessageSquare, label: "Live Chat", href: "/dashbord/live-chat" },
           { icon: User, label: "My Profile", href: "/dashbord/profile" },
-          { icon: Settings, label: "Settings", href: "/dashbord/settings" },
         ];
       default:
         return [];

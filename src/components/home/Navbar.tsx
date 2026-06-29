@@ -93,13 +93,6 @@ export function Navbar() {
 
   const { scrollY } = useScroll();
 
-  const searchOpacity = useTransform(scrollY, [150, 300], [0, 1]);
-  const searchScale = useTransform(scrollY, [150, 300], [0.9, 1]);
-  const searchY = useTransform(scrollY, [150, 300], [-8, 0]);
-
-  const opacityVal = isHomepage ? searchOpacity : 1;
-  const scaleVal = isHomepage ? searchScale : 1;
-  const yVal = isHomepage ? searchY : 0;
 
   const headerShadow = useTransform(
     scrollY,
@@ -203,11 +196,12 @@ export function Navbar() {
             </Link>
 
             {/* Left Desktop Nav Links */}
+            {/* Desktop Navigation Links */}
             <nav
-              className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0"
-              aria-label="Left navigation"
+              className="hidden md:flex flex-1 justify-center items-center gap-4 lg:gap-6"
+              aria-label="Desktop navigation"
             >
-              {LEFT_NAV_LINKS.map((link, i) => {
+              {ALL_NAV_LINKS.map((link, i) => {
                 const active = link.hasDropdown
                   ? pathname.startsWith("/categories")
                   : isActive(link.href);
@@ -237,7 +231,7 @@ export function Navbar() {
                         />
                         {active && (
                           <motion.span
-                            layoutId="navIndicatorLeft"
+                            layoutId="navIndicator"
                             className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF6014] rounded-full"
                           />
                         )}
@@ -308,80 +302,7 @@ export function Navbar() {
                     <span>{link.label}</span>
                     {active && (
                       <motion.span
-                        layoutId="navIndicatorLeft"
-                        className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF6014] rounded-full"
-                      />
-                    )}
-                  </Link>
-                );
-              })}
-            </nav>
-
-            {/* Center Search */}
-            {isHomepage ? (
-              <div className="hidden md:flex flex-1 justify-center max-w-xs lg:max-w-sm mx-4 relative h-10">
-                {mounted && (
-                  <motion.div
-                    style={{ opacity: opacityVal, scale: scaleVal, y: yVal }}
-                    className="absolute inset-0"
-                  >
-                    <label htmlFor="desktop-search" className="sr-only">
-                      Search services
-                    </label>
-                    <div className="flex items-center h-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF6014] focus-within:ring-2 focus-within:ring-[#FF6014]/10 transition-all">
-                      <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
-                      <input
-                        id="desktop-search"
-                        type="text"
-                        placeholder="What service do you need?"
-                        className="bg-transparent text-sm text-slate-700 outline-none w-full placeholder-slate-400"
-                      />
-                    </div>
-                  </motion.div>
-                )}
-              </div>
-            ) : (
-              <div className="hidden md:flex flex-1 justify-center max-w-xs lg:max-w-sm mx-4">
-                <label htmlFor="desktop-search-2" className="sr-only">
-                  Search services
-                </label>
-                <div className="flex items-center h-10 w-full bg-slate-50 border border-slate-200 rounded-full px-4 gap-2 focus-within:border-[#FF6014] focus-within:ring-2 focus-within:ring-[#FF6014]/10 transition-all">
-                  <Search className="w-4 h-4 text-slate-400 flex-shrink-0" aria-hidden="true" />
-                  <input
-                    id="desktop-search-2"
-                    type="text"
-                    placeholder="What service do you need?"
-                    className="bg-transparent text-sm text-slate-700 outline-none w-full placeholder-slate-400"
-                  />
-                </div>
-              </div>
-            )}
-
-            {/* Right Desktop Nav Links */}
-            <nav
-              className="hidden md:flex items-center gap-3 lg:gap-4 flex-shrink-0"
-              aria-label="Right navigation"
-            >
-              {RIGHT_NAV_LINKS.map((link, i) => {
-                const active = isActive(link.href);
-                const Icon = link.icon;
-
-                return (
-                  <Link
-                    key={i}
-                    href={link.href}
-                    className={`relative flex items-center font-semibold text-xs lg:text-sm py-2 transition-colors ${active
-                      ? "text-[#FF6014]"
-                      : "text-slate-600 hover:text-[#FF6014]"
-                      }`}
-                  >
-                    <Icon
-                      className={`stroke-[2.2] transition-all duration-300 ease-in-out ${isScrolled || !isHomepage ? "w-0 h-0 opacity-0 mr-0 scale-0" : "w-[15px] h-[15px] opacity-100 mr-1.5 scale-100"}`}
-                    />
-                    <span>{link.label}</span>
-                    {active && (
-                      <motion.span
-                        layoutId="navIndicatorRight"
+                        layoutId="navIndicator"
                         className="absolute inset-x-0 -bottom-px h-0.5 bg-[#FF6014] rounded-full"
                       />
                     )}
