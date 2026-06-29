@@ -36,6 +36,7 @@ import {
 } from "@/redux/features/shared/profileApi";
 import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
 import { useGetAllBookingsQuery, useUpdateBookingStatusMutation } from "@/redux/features/admin/booking";
+import { useGetOverviewStatsQuery } from "@/redux/features/admin/dashboardApi";
 import { toast } from "sonner";
 
 export default function DashboardPage() {
@@ -95,9 +96,10 @@ const chartData = [
   { month: "Jun", value: 114000 },
 ];
 
-function RevenueChart() {
+function RevenueChart({ data }: { data?: { month: string; value: number }[] }) {
+  const chartDataToUse = data && data.length > 0 ? data : chartData;
   const [tooltip, setTooltip] = useState<{ x: number; y: number; value: number; month: string; pct: number } | null>(null);
-  const [animatedHeights, setAnimatedHeights] = useState<number[]>(chartData.map(() => 0));
+  const [animatedHeights, setAnimatedHeights] = useState<number[]>(chartDataToUse.map(() => 0));
   const [hoveredIdx, setHoveredIdx] = useState<number | null>(null);
   const svgRef = useRef<SVGSVGElement>(null);
 
@@ -107,19 +109,20 @@ function RevenueChart() {
   const chartW = W - PADDING.left - PADDING.right;
   const chartH = H - PADDING.top - PADDING.bottom;
 
-  const maxVal = Math.max(...chartData.map((d) => d.value));
-  const yMax = Math.ceil(maxVal / 30000) * 30000;
+  const maxVal = Math.max(...chartDataToUse.map((d) => d.value), 1);
+  const yMax = Math.ceil(maxVal / 30000) * 30000 || 30000;
   const yTicks = [0, yMax * 0.25, yMax * 0.5, yMax * 0.75, yMax];
 
-  const barWidth = (chartW / chartData.length) * 0.54;
-  const barGap = chartW / chartData.length;
+  const barWidth = (chartW / chartDataToUse.length) * 0.54;
+  const barGap = chartW / chartDataToUse.length;
 
   const getBarX = (i: number) => PADDING.left + i * barGap + (barGap - barWidth) / 2;
   const getBarH = (val: number) => (val / yMax) * chartH;
 
   // Staggered animation on mount
   useEffect(() => {
-    chartData.forEach((d, i) => {
+    setAnimatedHeights(chartDataToUse.map(() => 0));
+    chartDataToUse.forEach((d, i) => {
       setTimeout(() => {
         setAnimatedHeights((prev) => {
           const next = [...prev];
@@ -128,15 +131,15 @@ function RevenueChart() {
         });
       }, 60 + i * 80);
     });
-  }, []);
+  }, [chartDataToUse]);
 
   const formatVal = (v: number) =>
     v >= 1000 ? `৳${(v / 1000).toFixed(0)}k` : `৳${v}`;
 
-  const prevVal = (i: number) => (i === 0 ? chartData[0].value : chartData[i - 1].value);
+  const prevVal = (i: number) => (i === 0 ? chartDataToUse[0].value : chartDataToUse[i - 1].value);
   const pctChange = (i: number) => {
     if (i === 0) return 0;
-    return Math.round(((chartData[i].value - prevVal(i)) / prevVal(i)) * 100);
+    return Math.round(((chartDataToUse[i].value - prevVal(i)) / prevVal(i)) * 100) || 0;
   };
 
   return (
@@ -214,7 +217,7 @@ function RevenueChart() {
         })}
 
         {/* Bars */}
-        {chartData.map((d, i) => {
+        {chartDataToUse.map((d, i) => {
           const bx = getBarX(i);
           const animH = animatedHeights[i] ?? 0;
           const by = PADDING.top + chartH - animH;
@@ -339,22 +342,26 @@ function RevenueChart() {
 function SuperAdminDashboard() {
   const authUser = useAppSelector((state) => state.auth.user);
   const { data: bookingsRes, isLoading: isBookingsLoading } = useGetAllBookingsQuery(undefined);
-  const { data: profilesRes, isLoading: isProfilesLoading } = useGetAllProfilesQuery(undefined);
-
+  const { data: overviewRes, isLoading: isOverviewLoading } = useGetOverviewStatsQuery();
+  
   const allBookings = bookingsRes?.data || [];
-  const allProfiles = profilesRes?.data || [];
+  const overview = overviewRes?.data || {
+    revenue: { total: 0, today: 0, weekly: 0, monthly: 0, chart: [] },
+    users: { totalClients: 0, totalVendors: 0, totalAgents: 0 },
+    bookings: { todayAssigned: 0, completed: 0, pending: 0 },
+    withdraws: { totalAmount: 0, todayAmount: 0, weeklyAmount: 0, monthlyAmount: 0 }
+  };
 
-  const completedBookings = allBookings.filter((b: any) => b.status === "completed");
-  const activeBookingsList = allBookings.filter((b: any) => b.status !== "completed" && b.status !== "cancelled");
-  const totalRevenue = completedBookings.reduce((sum: number, b: any) => sum + Number(b.total_price || 0), 0);
-
-  const providerProfiles = allProfiles.filter((p: any) => p.type === "company" || p.category_id);
+  const dynamicChartData = overview.revenue.chart.map((c: any) => ({
+    month: c.date,
+    value: c.amount
+  }));
 
   const stats = [
-    { label: "Total Revenue", value: `৳${totalRevenue.toLocaleString()}`, desc: "From completed bookings", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
-    { label: "Providers", value: providerProfiles.length.toString(), desc: "Registered business profiles", icon: HardHat, color: "text-teal-600 bg-teal-50" },
-    { label: "Active Bookings", value: activeBookingsList.length.toString(), desc: "In progress/pending", icon: Briefcase, color: "text-indigo-600 bg-indigo-50" },
-    { label: "Platform Rating", value: "4.92 / 5", desc: "Based on platform reviews", icon: Star, color: "text-amber-600 bg-amber-50" },
+    { label: "Total Revenue", value: `৳${overview.revenue.total.toLocaleString()}`, desc: "All time completed", icon: DollarSign, color: "text-emerald-600 bg-emerald-50" },
+    { label: "Today's Revenue", value: `৳${overview.revenue.today.toLocaleString()}`, desc: "Revenue generated today", icon: TrendingUp, color: "text-indigo-600 bg-indigo-50" },
+    { label: "Total Withdraws", value: `৳${overview.withdraws.totalAmount.toLocaleString()}`, desc: "Total approved withdraws", icon: Briefcase, color: "text-amber-600 bg-amber-50" },
+    { label: "Total Users", value: String(overview.users.totalClients + overview.users.totalVendors + overview.users.totalAgents), desc: `${overview.users.totalVendors} Vendors | ${overview.users.totalAgents} Agents`, icon: Users, color: "text-teal-600 bg-teal-50" },
   ];
 
   const recentBookings = [...allBookings]
@@ -489,15 +496,15 @@ function SuperAdminDashboard() {
 
           {/* Chart area */}
           <div className="px-4 pt-4 pb-2">
-            <RevenueChart />
+            <RevenueChart data={dynamicChartData} />
           </div>
 
           {/* Summary row — premium */}
           <div className="mx-6 mb-5 mt-1 grid grid-cols-3 divide-x divide-slate-100 bg-slate-50/70 rounded-2xl border border-slate-100 overflow-hidden">
             {[
-              { label: "Peak Month", value: "Jun 2026", sub: "৳1,14,000", accent: "text-[#FF6014]" },
-              { label: "Avg / Month", value: "৳79,000", sub: "6-month avg", accent: "text-indigo-500" },
-              { label: "Growth Rate", value: "+137%", sub: "Jan → Jun", accent: "text-emerald-500" },
+              { label: "This Month", value: `৳${overview.revenue.monthly.toLocaleString()}`, sub: "Revenue", accent: "text-[#FF6014]" },
+              { label: "This Week", value: `৳${overview.revenue.weekly.toLocaleString()}`, sub: "Revenue", accent: "text-indigo-500" },
+              { label: "Month Withdraws", value: `৳${overview.withdraws.monthlyAmount.toLocaleString()}`, sub: "Withdraws", accent: "text-emerald-500" },
             ].map((s, i) => (
               <div key={i} className="text-center py-3 px-2">
                 <p className="text-[9px] text-slate-400 font-bold uppercase tracking-widest">{s.label}</p>
@@ -508,28 +515,40 @@ function SuperAdminDashboard() {
           </div>
         </div>
 
-        {/* Right 1 Column: Pending Verification */}
-        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm">
-          <div className="flex justify-between items-center mb-6">
-            <h3 className="text-lg font-bold text-slate-900">Pending Approvals</h3>
-            <span className="text-xs font-semibold text-[#FF6014] bg-[#FFF8F4] px-2 py-0.5 rounded-lg">18 New</span>
+        {/* Right 1 Column: Additional Stats */}
+        <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col gap-4">
+          <div className="flex justify-between items-center mb-2">
+            <h3 className="text-lg font-bold text-slate-900">Today's Snapshot</h3>
+            <span className="text-xs font-semibold text-[#FF6014] bg-[#FFF8F4] px-2 py-0.5 rounded-lg">Live</span>
           </div>
 
-          <div className="space-y-4">
-            {providerProfiles.slice(0, 3).map((p: any, i: number) => (
-              <div key={i} className="flex items-center justify-between p-3 rounded-xl border border-slate-50 hover:bg-slate-50 transition-colors">
-                <div>
-                  <h5 className="text-sm font-semibold text-slate-800">{p.company_name || p.user?.name || "Provider"}</h5>
-                  <span className="text-xs text-slate-400">{p.category?.name || "Service Provider"} • {p.location || "Dhaka"}</span>
-                </div>
-                <button className="text-xs font-semibold bg-[#FF6014] hover:bg-[#E0530A] text-white px-3 py-1.5 rounded-lg transition-all active:scale-[0.97]">
-                  Verify
-                </button>
-              </div>
-            ))}
-            {providerProfiles.length === 0 && (
-              <div className="text-xs text-slate-400 text-center py-4">No pending approvals</div>
-            )}
+          <div className="grid grid-cols-2 gap-4">
+            <div className="p-4 bg-slate-50 rounded-xl">
+              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Bookings</p>
+              <h4 className="text-xl font-extrabold text-slate-900 mt-1">{overview.bookings.todayAssigned}</h4>
+              <p className="text-[10px] text-emerald-600 font-semibold mt-1">Assigned Today</p>
+            </div>
+            <div className="p-4 bg-slate-50 rounded-xl">
+              <p className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">Withdraws</p>
+              <h4 className="text-xl font-extrabold text-slate-900 mt-1">৳{overview.withdraws.todayAmount.toLocaleString()}</h4>
+              <p className="text-[10px] text-slate-500 font-semibold mt-1">Processed Today</p>
+            </div>
+          </div>
+          
+          <div className="mt-2 pt-4 border-t border-slate-100">
+             <div className="flex justify-between items-center mb-3">
+               <span className="text-sm font-semibold text-slate-700">Total Bookings</span>
+             </div>
+             <div className="flex flex-col gap-2">
+               <div className="flex justify-between text-xs">
+                 <span className="text-slate-500">Completed</span>
+                 <span className="font-bold text-emerald-600">{overview.bookings.completed}</span>
+               </div>
+               <div className="flex justify-between text-xs">
+                 <span className="text-slate-500">Pending</span>
+                 <span className="font-bold text-amber-600">{overview.bookings.pending}</span>
+               </div>
+             </div>
           </div>
         </div>
       </div>
