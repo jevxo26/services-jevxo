@@ -355,3 +355,9 @@ html.dashboard-html {
     padding: 16px !important;
   }
 }
+
+/* Reduce backdrop blur globally inside the dashboard modals */
+.dashboard-html [class*="backdrop-blur"] {
+  backdrop-filter: blur(1.5px) !important;
+  -webkit-backdrop-filter: blur(1.5px) !important;
+}

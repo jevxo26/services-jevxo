@@ -350,28 +350,48 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                       <div className="absolute left-1.5 w-1 h-5 bg-white rounded-full" />
                     )}
                     <group.icon size={18} className={isDirectActive ? "text-white" : "text-slate-400 group-hover:text-slate-600 transition-colors"} />
-                    {!collapsed && <span className="text-[13px]">{group.label}</span>}
+                    {!collapsed && <span className="text-[14px]">{group.label}</span>}
                   </Link>
                 ) : (
                   <button
                     onClick={handleToggle}
                     className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group border relative ${
                       containsActive
-                        ? "bg-[#FFF8F4] border-[#FF6014]/15 text-[#FF6014] font-extrabold shadow-sm"
+                        ? isExpanded
+                          ? "bg-[#FFF8F4] border-[#FF6014]/15 text-[#FF6014] font-extrabold shadow-sm"
+                          : "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-extrabold shadow-md shadow-[#FF6014]/20 scale-[1.01] border-transparent"
                         : "border-transparent text-slate-600 hover:bg-slate-50/70 hover:text-slate-900 hover:translate-x-1 font-semibold"
                     }`}
                   >
-                    {containsActive && (
+                    {containsActive && isExpanded && (
                       <div className="absolute left-1.5 w-1 h-5 bg-[#FF6014] rounded-full" />
                     )}
+                    {containsActive && !isExpanded && (
+                      <div className="absolute left-1.5 w-1 h-5 bg-white rounded-full" />
+                    )}
                     <div className="flex items-center gap-3">
-                      <group.icon size={18} className={containsActive ? "text-[#FF6014]" : "text-slate-400 group-hover:text-slate-600 transition-colors"} />
-                      {!collapsed && <span className="text-[13px]">{group.label}</span>}
+                      <group.icon
+                        size={18}
+                        className={
+                          containsActive
+                            ? isExpanded
+                              ? "text-[#FF6014]"
+                              : "text-white"
+                            : "text-slate-400 group-hover:text-slate-600 transition-colors"
+                        }
+                      />
+                      {!collapsed && <span className="text-[14px]">{group.label}</span>}
                     </div>
                     {!collapsed && (
                       <ChevronDown
                         size={14}
-                        className={`text-slate-400 transition-transform duration-200 ${isExpanded ? "rotate-180" : ""}`}
+                        className={`transition-transform duration-200 ${
+                          containsActive
+                            ? isExpanded
+                              ? "text-[#FF6014]/70"
+                              : "text-white/70"
+                            : "text-slate-400"
+                        } ${isExpanded ? "rotate-180" : ""}`}
                       />
                     )}
                   </button>
@@ -398,7 +418,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                               key={cIdx}
                               href={child.href}
                               onClick={onClose}
-                              className={`flex items-center gap-2.5 pl-9 pr-3 py-2.5 rounded-xl text-[12px] font-bold transition-all relative group border ${
+                              className={`flex items-center gap-2.5 pl-9 pr-3 py-2.5 rounded-xl text-[13px] font-bold transition-all relative group border ${
                                 isChildActive
                                   ? "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white shadow-md shadow-[#FF6014]/15 border-transparent scale-[1.01]"
                                   : "border-transparent text-slate-500 hover:bg-slate-50/50 hover:text-slate-800 hover:translate-x-1.5"
