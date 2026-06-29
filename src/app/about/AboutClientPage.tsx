@@ -24,6 +24,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { getAccessToken } from "@/lib/token";
+import { getRoleName } from "@/redux/features/auth/authSlice";
 
 
 
@@ -195,16 +196,21 @@ export default function AboutClientPage() {
         const users = json.data || (Array.isArray(json) ? json : []);
         if (Array.isArray(users) && users.length > 0) {
           const admins = users.filter((u: any) => {
-            const roleName = (u.role?.name || u.role || "").toLowerCase();
-            return roleName === "superadmin" || roleName === "super admin";
+            const uRole = (typeof u.role === "string" ? u.role : u.role?.name || "").toLowerCase();
+            return uRole === "superadmin" || uRole === "super admin";
           });
           if (admins.length > 0) {
-            const mappedTeam = admins.map((u: any) => ({
-              name: u.name || `${u.firstName || ""} ${u.lastName || ""}`.trim() || "Super Admin",
-              role: u.role?.name || (typeof u.role === "string" ? u.role : "Super Admin"),
-              bio: u.profile?.description || u.description || "Leading operations, technology, and service standards to change the home service sector in Bangladesh.",
-              avatar: u.profile?.avatar || u.profile?.images?.[0] || u.profile?.picture || u.avatar || u.picture || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
-            }));
+            const mappedTeam = admins.map((u: any) => {
+              const uRole = (typeof u.role === "string" ? u.role : u.role?.name || "").toLowerCase();
+              const roleName = getRoleName(uRole as any) || "Super Admin";
+              const profileImg = u?.profile?.avatar || u?.profile?.images?.[0] || u?.profile?.picture || u?.avatar;
+              return {
+                name: u.name || `${u.firstName || ""} ${u.lastName || ""}`.trim() || "Super Admin",
+                role: roleName,
+                bio: u.profile?.description || u.description || "Leading operations, technology, and service standards to change the home service sector in Bangladesh.",
+                avatar: profileImg || "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop"
+              };
+            });
             setTeamMembers(mappedTeam);
           }
         }
