@@ -9,6 +9,7 @@ import ExpertCard from "@/components/home/map/ExpertCard";
 import FiltersModal from "@/components/home/map/FiltersModal";
 import DetailModal from "@/components/home/map/DetailModal";
 import { useMapState } from "@/app/map/hooks/useMapState";
+import "@/components/home/map/leaflet-custom.css";
 
 const DhakaMap = dynamic(() => import("@/components/home/map/DhakaMap"), {
   ssr: false,
