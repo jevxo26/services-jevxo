@@ -8,7 +8,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { id } = await params;
   try {
-    const res = await fetch(`https://rajseba-api-production.up.railway.app/services/${id}`, {
+    const res = await fetch(`https://api.rajseba.com/services/${id}`, {
       next: { revalidate: 3600 },
     });
     const json = await res.json();

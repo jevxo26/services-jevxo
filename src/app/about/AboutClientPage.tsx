@@ -170,7 +170,7 @@ export default function AboutClientPage() {
   const [teamMembers, setTeamMembers] = useState<any[]>(TEAM_MEMBERS);
 
   useEffect(() => {
-    fetch("https://rajseba-api-production.up.railway.app/stats")
+    fetch("https://api.rajseba.com/stats")
       .then((res) => res.json())
       .then((json) => {
         if (json.success && json.data) {
@@ -188,7 +188,7 @@ export default function AboutClientPage() {
       headers["Authorization"] = `Bearer ${token}`;
     }
 
-    fetch("https://rajseba-api-production.up.railway.app/users", {
+    fetch("https://api.rajseba.com/users", {
       headers,
     })
       .then((res) => res.json())
