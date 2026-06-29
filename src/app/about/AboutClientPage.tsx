@@ -1,5 +1,5 @@
 "use client";
-import { useRef } from "react";
+import { useRef, useState, useEffect } from "react";
 import Image from "next/image";
 import {
   motion,
@@ -24,13 +24,7 @@ import {
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
-/* ─── Real Service Statistics ───────────────────────────────── */
-const STATS = [
-  { value: "15,000+", label: "Bookings Done", desc: "Across Dhaka City" },
-  { value: "500+", label: "Verified Experts", desc: "Background screened" },
-  { value: "4.8/5.0", label: "Average Rating", desc: "From real clients" },
-  { value: "100%", label: "Satisfaction", desc: "Rajseba Guarantee" },
-];
+
 
 /* ─── Real Operational Pillars ───────────────────────────────── */
 const PILLARS = [
@@ -170,6 +164,42 @@ export default function AboutClientPage() {
   const glowY = useTransform(scrollYProgress, [0, 1], [0, 60]);
   const imgScale = useTransform(scrollYProgress, [0, 1], [1, 1.05]);
 
+  const [statsData, setStatsData] = useState<any>(null);
+
+  useEffect(() => {
+    fetch("https://rajseba-api-production.up.railway.app/stats")
+      .then((res) => res.json())
+      .then((json) => {
+        if (json.success && json.data) {
+          setStatsData(json.data);
+        }
+      })
+      .catch((err) => console.error("Error fetching stats:", err));
+  }, []);
+
+  const displayStats = [
+    {
+      value: statsData?.servicesCompleted ? `${statsData.servicesCompleted.toLocaleString()}+` : "120,000+",
+      label: "Bookings Done",
+      desc: "Across Dhaka City"
+    },
+    {
+      value: statsData?.verifiedExperts ? `${statsData.verifiedExperts.toLocaleString()}+` : "2,500+",
+      label: "Verified Experts",
+      desc: "Background screened"
+    },
+    {
+      value: statsData?.averageRating ? `${statsData.averageRating.toFixed(1)}/5.0` : "4.0/5.0",
+      label: "Average Rating",
+      desc: "From real clients"
+    },
+    {
+      value: statsData?.happyCustomers ? `${statsData.happyCustomers.toLocaleString()}+` : "50,000+",
+      label: "Happy Customers",
+      desc: "Rajseba Guarantee"
+    }
+  ];
+
   return (
     <div className="min-h-screen bg-slate-50/30 overflow-x-hidden text-slate-800">
       {/* ══ HERO SECTION ════════════════════════════════════════ */}
@@ -304,7 +334,7 @@ export default function AboutClientPage() {
       <section className="bg-white border-b border-slate-100 py-6 md:py-8">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-            {STATS.map((stat, i) => (
+            {displayStats.map((stat, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 15 }}
