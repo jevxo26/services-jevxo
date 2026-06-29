@@ -105,7 +105,7 @@ function LiveChatContent() {
   useEffect(() => {
     if (!user?.id && !user?._id) return;
 
-    const newSocket = io("http://localhost:8000", {
+    const newSocket = io("https://api.rajseba.com", {
       query: { userId: user.id || user._id },
     });
 
