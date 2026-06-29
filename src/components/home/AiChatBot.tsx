@@ -74,18 +74,51 @@ export function AiChatBot() {
     <>
       {/* Floating Trigger Button */}
       <div className="fixed bottom-[84px] right-4 md:bottom-6 md:right-6 z-[999]">
-        <motion.button
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          onClick={() => setIsOpen(!isOpen)}
-          className="w-14 h-14 bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#FF6014]/25 hover:shadow-xl cursor-pointer relative"
-          aria-label="AI Assistant"
-        >
-          {isOpen ? <X size={24} /> : <Headphones size={24} />}
-          {!isOpen && (
-            <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white animate-pulse" />
-          )}
-        </motion.button>
+        <div className="relative flex items-center justify-center">
+          {/* Breathing aura glow */}
+          <motion.span
+            animate={{
+              scale: [1, 1.35, 1],
+              opacity: [0.4, 0, 0.4],
+            }}
+            transition={{
+              duration: 2.2,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-[#FF6014] to-[#FF7C71] blur-md pointer-events-none z-[-1]"
+          />
+
+          <motion.button
+            whileHover={{ 
+              scale: 1.08,
+              boxShadow: "0 14px 32px rgba(255, 96, 20, 0.45)"
+            }}
+            whileTap={{ scale: 0.92 }}
+            onClick={() => setIsOpen(!isOpen)}
+            className="w-14 h-14 bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#FF6014]/25 cursor-pointer relative overflow-hidden"
+            aria-label="AI Assistant"
+          >
+            {/* Shimmer sweep effect */}
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-transparent via-white/15 to-transparent -translate-x-full hover:translate-x-full transition-transform duration-1000 ease-out pointer-events-none" />
+
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={isOpen ? "open" : "closed"}
+                initial={{ rotate: -90, scale: 0.8, opacity: 0 }}
+                animate={{ rotate: 0, scale: 1, opacity: 1 }}
+                exit={{ rotate: 90, scale: 0.8, opacity: 0 }}
+                transition={{ duration: 0.22 }}
+              >
+                {isOpen ? <X size={24} /> : <Headphones size={24} />}
+              </motion.div>
+            </AnimatePresence>
+
+            {!isOpen && (
+              <span className="absolute -top-1 -right-1 w-4 h-4 bg-emerald-500 rounded-full border-2 border-white animate-pulse" />
+            )}
+          </motion.button>
+        </div>
       </div>
 
       {/* Chat Window */}

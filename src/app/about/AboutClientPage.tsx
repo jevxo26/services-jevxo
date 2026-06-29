@@ -242,7 +242,7 @@ export default function AboutClientPage() {
   ];
 
   return (
-    <div className="min-h-screen   ">
+    <div className="min-h-screen relative bg-transparent">
       <div
         className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
         style={{ backgroundSize: 'auto' }}
@@ -376,7 +376,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* ══ STATS SECTION ════════════════════════════════════════ */}
-      <section className="bg-white border-b border-slate-100 py-6 md:py-8">
+      <section className="bg-transparent border-b border-slate-100 py-6 md:py-8">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
             {displayStats.map((stat, i) => (
@@ -404,7 +404,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* ══ CORE VALUE PILLARS ═══════════════════════════════════ */}
-      <section className="py-8 md:py-12 bg-white">
+      <section className="py-8 md:py-12 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <Reveal variants={stagger} className="text-center max-w-2xl mx-auto mb-8">
             <span className="inline-block text-[10px] font-extrabold text-[#FF6014] uppercase tracking-widest bg-[#FFF8F4] px-3 py-1 rounded-full border border-[#FF6014]/20">
@@ -513,7 +513,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* ══ MISSION & VISION SECTION ═════════════════════════════ */}
-      <section className="py-8 md:py-12 bg-white">
+      <section className="py-8 md:py-12 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid md:grid-cols-2 gap-6 lg:gap-8">
             <Reveal variants={fadeLeft}>
@@ -548,7 +548,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* ══ LEADERSHIP TEAM SECTION ══════════════════════════════ */}
-      <section className="py-8 md:py-12 bg-white border-t border-slate-100">
+      <section className="py-8 md:py-12 bg-transparent border-t border-slate-100">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <Reveal variants={stagger} className="text-center max-w-2xl mx-auto mb-8">
             <span className="inline-block text-[10px] font-extrabold text-[#FF6014] uppercase tracking-widest bg-rose-50 px-3 py-1 rounded-full border border-rose-100/50">

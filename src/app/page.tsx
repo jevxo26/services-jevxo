@@ -11,6 +11,7 @@ import ServiceAreas from "@/components/home/sections/home/ServiceAreas";
 // import PartnerCta from "@/components/home/sections/home/PartnerCta";
 import FAQ from "@/components/home/sections/home/FAQ";
 import HomeMotionWrapper from "@/components/home/HomeMotionWrapper";
+import ScrollToTop from "@/components/home/ScrollToTop";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -89,6 +90,7 @@ export default function Home() {
           </HomeMotionWrapper>
         </div>
       </div>
+      {/* <ScrollToTop /> */}
     </div>
   );
 }

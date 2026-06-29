@@ -185,7 +185,7 @@ export default function ContactClientPage() {
   const inputError = `${inputBase} border-rose-300 focus:border-rose-400 focus:ring-rose-200/40 bg-rose-50/40`;
 
   return (
-    <div className="min-h-screen ">
+    <div className="min-h-screen relative bg-transparent">
       <div
         className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
         style={{ backgroundSize: 'auto' }}
@@ -268,7 +268,7 @@ export default function ContactClientPage() {
       {/* ══════════════════════════════════════════════════════════
           CHANNEL CARDS
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-6 md:py-8 bg-[#FAFAF9] border-b border-slate-100">
+      <section className="py-6 md:py-8 bg-transparent border-b border-slate-100">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <RevealSection>
             <div className="grid md:grid-cols-3 gap-3">
@@ -311,7 +311,7 @@ export default function ContactClientPage() {
       {/* ══════════════════════════════════════════════════════════
           FORM + SIDEBAR
       ══════════════════════════════════════════════════════════ */}
-      <section className="py-8 md:py-12 bg-white">
+      <section className="py-8 md:py-12 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="grid lg:grid-cols-12 gap-6 items-start">
 
@@ -622,45 +622,6 @@ export default function ContactClientPage() {
         </div>
       </section>
 
-      {/* ══════════════════════════════════════════════════════════
-          CTA STRIP
-      ══════════════════════════════════════════════════════════ */}
-      <RevealSection>
-        <section className="relative bg-[#FF6014] py-10 md:py-14 overflow-hidden">
-          {/* Decorative circles */}
-          <div className="pointer-events-none absolute -top-16 -right-12 w-56 h-56 rounded-full bg-white/5 border border-white/8" />
-          <div className="pointer-events-none absolute -bottom-10 -left-8 w-40 h-40 rounded-full bg-white/5 border border-white/8" />
-          <div className="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full bg-white/3" />
-
-          <div className="max-w-4xl mx-auto px-4 md:px-6 text-center space-y-5 relative z-10">
-            <div className="inline-flex items-center gap-1.5 text-[10px] font-bold text-white/70 uppercase tracking-[.1em] bg-white/10 border border-white/15 px-3 py-1.5 rounded-full mb-1">
-              <Sparkles className="w-3 h-3" />
-              Verified Professionals
-            </div>
-            <h2 className="text-[20px] md:text-[26px] font-black text-white tracking-tight leading-tight">
-              Ready to book an expert technician?
-            </h2>
-            <p className="text-[12px] text-white/65 max-w-md mx-auto font-medium leading-relaxed">
-              Explore rates, choose a calendar slot, and get matched with background-verified professionals in Dhaka.
-            </p>
-            <div className="flex flex-wrap gap-3 justify-center pt-1">
-              <a
-                href="/services"
-                className="inline-flex items-center gap-2 bg-white text-[#FF6014] text-[11px] font-extrabold px-6 py-3 rounded-xl hover:bg-orange-50 transition-colors shadow-[0_4px_16px_rgba(0,0,0,0.12)]"
-              >
-                Explore Services
-              </a>
-              <a
-                href="tel:+8809612725732"
-                className="inline-flex items-center gap-2 bg-white/10 border border-white/20 text-white text-[11px] font-bold px-6 py-3 rounded-xl hover:bg-white/20 transition-colors backdrop-blur-sm"
-              >
-                <Phone className="w-3.5 h-3.5" />
-                Call Hotline
-              </a>
-            </div>
-          </div>
-        </section>
-      </RevealSection>
 
     </div>
   );
