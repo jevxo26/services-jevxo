@@ -25,7 +25,19 @@ import {
   UserPlus,
   PhoneCall,
   MapPin,
-  TrendingUp
+  TrendingUp,
+  Truck,
+  Flame,
+  Sparkles,
+  Wind,
+  Droplet,
+  Zap,
+  Paintbrush,
+  Laptop,
+  Scissors,
+  Car,
+  Hammer,
+  HeartPulse
 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useGetPublicCategoriesQuery, useSearchPublicServicesQuery } from "@/redux/features/landing/landingApi";
@@ -39,10 +51,28 @@ interface NavLink {
   hasDropdown?: boolean;
 }
 
+function getCategoryIcon(name: string): LucideIcon {
+  const cleanName = (name || "").toLowerCase().trim();
+  if (cleanName.includes("shift")) return Truck;
+  if (cleanName.includes("clean")) return Sparkles;
+  if (cleanName.includes("ac ") || cleanName.includes("air condition") || cleanName.includes("cooling")) return Wind;
+  if (cleanName.includes("oven") || cleanName.includes("gas") || cleanName.includes("stove")) return Flame;
+  if (cleanName.includes("plumb") || cleanName.includes("water") || cleanName.includes("pipe")) return Droplet;
+  if (cleanName.includes("electr") || cleanName.includes("power") || cleanName.includes("wiring") || cleanName.includes("generator")) return Zap;
+  if (cleanName.includes("paint") || cleanName.includes("decorat")) return Paintbrush;
+  if (cleanName.includes("comput") || cleanName.includes("laptop") || cleanName.includes("device") || cleanName.includes("mobile")) return Laptop;
+  if (cleanName.includes("salon") || cleanName.includes("beauty") || cleanName.includes("hair") || cleanName.includes("cut")) return Scissors;
+  if (cleanName.includes("car") || cleanName.includes("driver") || cleanName.includes("vehic")) return Car;
+  if (cleanName.includes("carpenter") || cleanName.includes("wood") || cleanName.includes("furnit") || cleanName.includes("repair")) return Hammer;
+  if (cleanName.includes("health") || cleanName.includes("doctor") || cleanName.includes("care") || cleanName.includes("nurse")) return HeartPulse;
+  return LayoutGrid;
+}
+
 const LEFT_NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
   { label: "Menu", href: "#menu", icon: LayoutGrid, hasDropdown: true },
   { label: "Services", href: "/services", icon: Briefcase },
+  { label: "Booking", href: "/bookings", icon: Calendar },
 ];
 
 const RIGHT_NAV_LINKS: NavLink[] = [
@@ -284,17 +314,13 @@ export function Navbar() {
                                     className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/60 group/item transition-all duration-200"
                                     onClick={() => setShowMenuDropdown(false)}
                                   >
-                                    {/* ── FIXED: larger icon container, proper image sizing ── */}
-                                    <div className="w-12 h-12 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/item:bg-[#FF6014]/10 group-hover/item:border-rose-100 transition-all duration-200 overflow-hidden shrink-0">
-                                      {cat.icon ? (
-                                        <img
-                                          src={cat.icon}
-                                          alt={cat.name}
-                                          className="w-full h-full object-cover"
-                                        />
-                                      ) : (
-                                        <LayoutGrid className="w-5 h-5 text-slate-400 group-hover/item:text-[#FF6014]" />
-                                      )}
+                                    <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/item:bg-[#FF6014]/10 group-hover/item:border-rose-100 transition-all duration-200 shrink-0">
+                                      {(() => {
+                                        const CatIcon = getCategoryIcon(cat.name);
+                                        return (
+                                          <CatIcon className="w-5 h-5 text-slate-400 group-hover/item:text-[#FF6014] transition-colors duration-200" />
+                                        );
+                                      })()}
                                     </div>
                                     <span className="font-semibold text-sm text-slate-700 group-hover/item:text-[#FF6014] transition-colors line-clamp-2 leading-snug">
                                       {cat.name}
@@ -616,17 +642,13 @@ export function Navbar() {
                                         }`}
                                       onClick={() => { setIsOpen(false); setShowMobileAccordion(false); }}
                                     >
-                                      {/* ── FIXED: square image thumbnail, fills container ── */}
-                                      <div className="w-full aspect-square max-w-[80px] rounded-lg overflow-hidden bg-slate-100 flex items-center justify-center">
-                                        {cat.icon ? (
-                                          <img
-                                            src={cat.icon}
-                                            alt={cat.name}
-                                            className="w-full h-full object-cover"
-                                          />
-                                        ) : (
-                                          <LayoutGrid className={`w-7 h-7 ${isCategoryActive ? "text-[#FF6014]" : "text-slate-400"}`} />
-                                        )}
+                                      <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center shrink-0">
+                                        {(() => {
+                                          const CatIcon = getCategoryIcon(cat.name);
+                                          return (
+                                            <CatIcon className={`w-5 h-5 ${isCategoryActive ? "text-[#FF6014]" : "text-slate-400"}`} />
+                                          );
+                                        })()}
                                       </div>
                                       <span className="line-clamp-2 text-center text-xs leading-snug">{cat.name}</span>
                                       {isCategoryActive && (

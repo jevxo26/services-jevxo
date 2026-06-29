@@ -68,24 +68,27 @@ export default function CategorizedSections() {
   const groupedData = useMemo(() => {
     if (!categories.length) return [];
 
-    return categories.map((cat: any) => {
-      const catSlug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || "";
+    return categories
+      .map((cat: any) => {
+        const catSlug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || "";
 
-      const servicesForCategory = allServices.filter((service: any) => {
-        const serviceCategory = service.category;
-        if (!serviceCategory) return false;
-        return (
-          String(serviceCategory.id) === String(cat.id) ||
-          serviceCategory.slug === cat.slug
-        );
-      });
+        const servicesForCategory = allServices.filter((service: any) => {
+          const serviceCategoryId = service.category_id || service.category?.id;
+          const serviceCategorySlug = service.category?.slug;
+          if (!serviceCategoryId) return false;
+          return (
+            String(serviceCategoryId) === String(cat.id) ||
+            serviceCategorySlug === cat.slug
+          );
+        });
 
-      return {
-        ...cat,
-        slug: catSlug,
-        services: servicesForCategory,
-      };
-    });
+        return {
+          ...cat,
+          slug: catSlug,
+          services: servicesForCategory,
+        };
+      })
+      .filter((cat: any) => cat.services.length > 0);
   }, [categories, allServices]);
 
   if (isCategoriesLoading || isServicesLoading) {
@@ -186,7 +189,7 @@ export default function CategorizedSections() {
                             </span>
                           </div>
                           <Link
-                            href={`/services/${item.slug || item.id}`}
+                            href={`/services/${item.id}`}
                             className="text-xs font-bold text-[#FF6014] hover:text-[#E0530A] transition-colors flex items-center gap-1"
                           >
                             Book Now <ArrowRight size={13} />

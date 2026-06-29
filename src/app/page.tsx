@@ -43,7 +43,7 @@ export default function Home() {
           className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
           style={{ backgroundSize: 'auto' }}
         />
-        <div className="relative z-10 flex flex-col gap-12 md:gap-24 lg:gap-32">
+        <div className="relative z-10 flex flex-col gap-5">
           <HomeMotionWrapper>
             <ExploreCategories />
           </HomeMotionWrapper>

@@ -1,6 +1,6 @@
 "use client";
 
-import { Clock, Heart, Star } from "lucide-react";
+import { Clock, Heart, Star, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import { useToggleSavedServiceMutation, useGetSavedServicesQuery } from "@/redux/features/admin/user";
@@ -105,13 +105,19 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
           {truncatedDesc}
         </p>
         <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#f3f4f6]">
-          <span className="text-base font-extrabold text-[#FF6014]">
-            {service.priceDisplay}
-          </span>
-          <span className="flex items-center gap-1 text-[10px] font-semibold text-[#9ca3af]">
-            <Clock size={10} strokeWidth={2.5} />
-            {service.done}
-          </span>
+          <div className="flex flex-col">
+            <span className="text-base font-extrabold text-[#FF6014]">
+              {service.priceDisplay}
+            </span>
+            <span className="flex items-center gap-1 text-[10px] font-semibold text-[#9ca3af] mt-0.5">
+              <Clock size={10} strokeWidth={2.5} />
+              {service.done}
+            </span>
+          </div>
+          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 text-[10px] font-bold text-[#FF6014] group-hover:bg-[#FF6014] group-hover:text-white transition-all duration-300">
+            Details
+            <ArrowRight size={12} strokeWidth={2.5} className="group-hover:translate-x-0.5 transition-transform duration-300" />
+          </div>
         </div>
       </div>
     </Link>

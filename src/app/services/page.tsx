@@ -4,6 +4,7 @@ import ServiceLists from '@/components/home/services/ServiceLists';
 import TrendingServices from '@/components/home/services/TrendingServices';
 import CategorizedSections from '@/components/home/services/CategorizedSections';
 import { Metadata } from 'next';
+import { Suspense } from 'react';
 
 export const metadata: Metadata = {
   title: "Professional Home Services Directory - Rajseba",
@@ -29,7 +30,13 @@ const Services = () => {
       />
       <div className="relative space-y-16 md:space-y-24 lg:space-y-32">
         <TrendingServices />
-        <ServiceLists />
+        <Suspense fallback={
+          <div className="flex justify-center items-center py-20">
+            <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#FF6014]" />
+          </div>
+        }>
+          <ServiceLists />
+        </Suspense>
         <CategorizedSections />
         <CustomQuote />
       </div>
