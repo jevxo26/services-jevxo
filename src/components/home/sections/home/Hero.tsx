@@ -143,7 +143,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[160px] md:min-h-[66vh] lg:min-h-[70vh] flex items-center justify-center py-8 md:py-24">
+    <div className="relative w-full min-h-[240px] md:min-h-[66vh] lg:min-h-[70vh] flex items-center justify-center py-8 md:py-24">
       <div className="absolute inset-0 z-0 bg-[#FFF8F4] overflow-hidden">
         {/* Sliding images background */}
         {slides.length > 0 && activeImage && (
@@ -175,156 +175,9 @@ const Hero = () => {
         animate="visible"
         className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 text-center"
       >
-        {/* Desktop View: Title & Subtitle */}
-        <div className="hidden md:block">
-          <motion.h1
-            variants={itemVariants}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight md:leading-[1.15] mb-4 sm:mb-5"
-          >
-            {HERO_CONTENT.titleText}{" "}
-            <span className="text-[#FF6014]">{HERO_CONTENT.accentTitleText}</span>
-            <br />
-            {HERO_CONTENT.subtitleText}
-          </motion.h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-sm sm:text-base md:text-lg text-[#FF6014] font-bold max-w-2xl mx-auto mb-6 sm:mb-8 md:mb-12 leading-relaxed"
-          >
-            {HERO_CONTENT.description}
-          </motion.p>
-        </div>
 
-        {/* Mobile View: API-provided text and CTA button */}
-        <div className="md:hidden flex flex-col items-center gap-3 px-4 mb-6 text-center">
-          <motion.h1
-            variants={itemVariants}
-            className="text-xl font-black text-white tracking-tight leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)]"
-          >
-            {activeHero?.text || "Expert Home Services, Simplified."}
-          </motion.h1>
 
-          <motion.p
-            variants={itemVariants}
-            className="text-xs text-white/90 font-bold leading-relaxed drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.85)] max-w-[280px]"
-          >
-            {activeHero?.subtext || "Premium marketplace for all your household needs in Bangladesh."}
-          </motion.p>
-
-          <motion.div variants={itemVariants} className="mt-1">
-            <Link
-              href={activeHero?.link || "/services"}
-              className="inline-flex items-center justify-center bg-[#FF6014] hover:bg-[#E0530A] text-white py-2 px-6 rounded-full font-bold text-xs transition-all shadow-md active:scale-95"
-            >
-              Book Now
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Search Bar - Desktop Only */}
-        <div className="hidden md:block relative w-full max-w-2xl mx-auto mb-10" ref={dropdownRef}>
-          <motion.form
-            variants={itemVariants}
-            style={{
-              opacity: searchOpacity,
-              scale: searchScale,
-              y: searchY,
-            }}
-            onSubmit={handleSearch}
-            className="w-full bg-[#FF6014]/5 rounded-2xl md:rounded-full shadow-[0_10px_30px_rgba(255,96,20,0.04)] border border-[#FF6014]/10 p-2 sm:p-3 flex items-center"
-          >
-            <div className="flex items-center gap-3 flex-1 w-full px-4 py-2 relative">
-              <Search className="text-[#FF6014] w-5 h-5 flex-shrink-0" />
-              <input
-                type="text"
-                placeholder="Search services..."
-                value={searchQuery}
-                onChange={(e) => {
-                  setSearchQuery(e.target.value);
-                  setShowResults(true);
-                }}
-                onFocus={() => setShowResults(true)}
-                onKeyDown={(e) => e.key === 'Enter' && handleSearch()}
-                className="w-full border-none bg-transparent outline-none text-slate-700 font-medium placeholder:text-slate-400 focus:ring-0"
-              />
-            </div>
-
-            {/* Round Search Button */}
-            <button
-              type="submit"
-              onClick={() => handleSearch()}
-              className="bg-[#FF6014] hover:bg-[#FF5000] text-white rounded-full p-3 sm:p-4 flex items-center justify-center transition-all duration-200 shadow-md hover:shadow-lg active:scale-95 flex-shrink-0"
-            >
-              <Search className="w-5 h-5" />
-            </button>
-          </motion.form>
-
-          {/* Search Results Dropdown */}
-          {showResults && searchQuery && (
-            <div className="absolute top-full left-0 right-0 mt-3 bg-[#FFFDFB] rounded-2xl shadow-xl border border-[#FF6014]/20 overflow-hidden z-50 max-h-[400px] overflow-y-auto text-left">
-              {isSearching ? (
-                <div className="p-8 flex justify-center items-center">
-                  <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
-                </div>
-              ) : searchResults.length > 0 ? (
-                <div className="flex flex-col">
-                  {searchResults.map((service: any) => (
-                    <Link
-                      key={service.id}
-                      href={`/services/${service.id}`}
-                      onClick={() => setShowResults(false)}
-                      className="group flex items-center gap-4 p-4 hover:bg-[#FF6014]/5 transition-all border-b border-[#FF6014]/10 last:border-0"
-                    >
-                      <div className="w-12 h-12 bg-[#FF6014]/10 rounded-xl flex items-center justify-center flex-shrink-0 group-hover:scale-105 transition-transform duration-200">
-                        <Search className="w-6 h-6 text-[#FF6014]" />
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-slate-800 text-sm md:text-base group-hover:text-[#FF6014] transition-colors duration-200">
-                          {service.name}
-                        </h4>
-                        <p className="text-xs md:text-sm text-slate-500 font-medium">
-                          {service.category?.name || 'Service'} • {service.price ? `৳${service.price}` : 'Price varies'}
-                        </p>
-                      </div>
-                    </Link>
-                  ))}
-                </div>
-              ) : (
-                <div className="p-8 text-center">
-                  <p className="text-[#FF6014]/80 font-bold">No services found.</p>
-                  <p className="text-slate-500 text-sm mt-1 font-medium">Try adjusting your search criteria</p>
-                </div>
-              )}
-            </div>
-          )}
-        </div>
-
-        {/* Trust Badges - Desktop Only */}
-        <motion.div
-          variants={itemVariants}
-          className="hidden md:grid lg:flex items-center justify-center gap-2.5 sm:gap-6 md:gap-8 mt-8 sm:mt-10 text-slate-500 font-semibold text-[10px] sm:text-xs md:text-sm w-full max-w-sm lg:max-w-none mx-auto"
-        >
-          <div className="flex items-center gap-2 bg-[#FF6014]/5 backdrop-blur-md px-3.5 py-2 rounded-full border border-[#FF6014]/15 shadow-xs justify-center w-full lg:w-auto transition-all duration-200 hover:bg-[#FF6014]/10 hover:border-[#FF6014]/30">
-            <span className="text-[#FF6014] text-xs sm:text-sm">★</span>
-            <span className="text-slate-600">
-              <strong className="text-[#FF6014] font-extrabold">4.9/5 Rating</strong> (20k+ Reviews)
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 bg-[#FF6014]/5 backdrop-blur-md px-3.5 py-2 rounded-full border border-[#FF6014]/15 shadow-xs justify-center w-full lg:w-auto transition-all duration-200 hover:bg-[#FF6014]/10 hover:border-[#FF6014]/30">
-            <span className="text-[#FF6014] text-xs sm:text-sm">⚡</span>
-            <span className="text-slate-600">
-              <strong className="text-[#FF6014] font-extrabold">30 Min</strong> Express Response
-            </span>
-          </div>
-
-          <div className="flex items-center gap-2 bg-[#FF6014]/5 backdrop-blur-md px-3.5 py-2 rounded-full border border-[#FF6014]/15 shadow-xs justify-center w-full col-span-2 lg:col-span-1 lg:w-auto transition-all duration-200 hover:bg-[#FF6014]/10 hover:border-[#FF6014]/30">
-            <span className="text-[#FF6014] text-xs sm:text-sm">🛡️</span>
-            <span className="text-slate-600">
-              <strong className="text-[#FF6014] font-extrabold">100%</strong> Satisfaction Insured
-            </span>
-          </div>
-        </motion.div>
       </motion.div>
     </div>
   );
