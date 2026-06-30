@@ -60,6 +60,20 @@ export default function TrackingPage() {
 
   const serviceLabel = booking.service?.name || booking.pkg?.name || booking.subServices?.map((s: any) => s.name).join(', ') || 'Service';
 
+  const steps = [
+    { id: 'pending', label: 'Pending' },
+    { id: 'assigned', label: 'Assigned' },
+    { id: 'on_the_way', label: 'On The Way' },
+    { id: 'completed', label: 'Completed' }
+  ];
+  const statusMap: Record<string, number> = {
+    pending: 0,
+    assigned: 1,
+    on_the_way: 2,
+    completed: 3
+  };
+  const currentStepIndex = statusMap[booking.status] ?? 0;
+
   return (
     <div className="min-h-screen bg-gray-50 py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-2xl mx-auto bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
@@ -94,6 +108,48 @@ export default function TrackingPage() {
           </p>
         </div>
 
+        {/* Tracking Flow */}
+        {booking.status !== 'cancelled' && (
+          <div className="p-6 sm:p-8 pb-2 border-b border-gray-100 overflow-x-auto">
+            <div className="flex items-center min-w-[500px] justify-between">
+              {steps.map((step, index) => {
+                const isActive = index === currentStepIndex;
+                const isCompleted = index <= currentStepIndex;
+                
+                return (
+                  <React.Fragment key={step.id}>
+                    <div className="flex flex-col items-center gap-2">
+                      <div className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-colors ${
+                        isActive ? 'bg-primary text-white ring-4 ring-primary/20' :
+                        isCompleted ? 'bg-primary text-white' : 'bg-gray-100 text-gray-400'
+                      }`}>
+                        {isCompleted ? (
+                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+                          </svg>
+                        ) : (
+                          index + 1
+                        )}
+                      </div>
+                      <span className={`text-xs font-medium ${isActive ? 'text-primary' : isCompleted ? 'text-gray-800' : 'text-gray-400'}`}>
+                        {step.label}
+                      </span>
+                    </div>
+                    
+                    {index < steps.length - 1 && (
+                      <div className={`flex-1 flex items-center justify-center -mt-5 ${isCompleted && index < currentStepIndex ? 'text-primary' : 'text-gray-200'}`}>
+                        <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                        </svg>
+                      </div>
+                    )}
+                  </React.Fragment>
+                );
+              })}
+            </div>
+          </div>
+        )}
+
         {/* Content */}
         <div className="p-6 sm:p-8 space-y-8">
           
@@ -101,8 +157,20 @@ export default function TrackingPage() {
           <div>
             <h3 className="text-sm font-medium text-gray-500 uppercase tracking-wider mb-3">Service Details</h3>
             <div className="bg-gray-50 rounded-xl p-4 border border-gray-100">
-              <p className="font-medium text-gray-900">{serviceLabel}</p>
-              <div className="mt-2 text-sm text-gray-600 flex flex-col sm:flex-row sm:gap-6 gap-2">
+              <p className="font-medium text-gray-900">{booking.service?.name || booking.pkg?.name || 'Service'}</p>
+              
+              {booking.subServices && booking.subServices.length > 0 && (
+                <div className="mt-3 mb-1 space-y-2">
+                  {booking.subServices.map((sub: any, idx: number) => (
+                    <div key={idx} className="flex items-center justify-between text-sm bg-white p-2.5 px-3 rounded-lg border border-gray-100 shadow-sm">
+                      <span className="text-gray-700 font-medium">{sub.name}</span>
+                      <span className="text-gray-500 text-xs bg-gray-50 px-2 py-1 rounded">Qty: {sub.quantity || 1}</span>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="mt-3 pt-3 border-t border-gray-200/60 text-sm text-gray-600 flex flex-col sm:flex-row sm:gap-6 gap-2">
                 <div className="flex items-center gap-1.5">
                   <svg className="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
