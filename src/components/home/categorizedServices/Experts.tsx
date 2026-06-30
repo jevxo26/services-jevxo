@@ -53,7 +53,7 @@ export function Experts({ employees }: { employees?: any[] }) {
         jobs: `${120 + idx * 35}+ jobs`,
         image: emp.image || emp.avatar,
       }))
-      : fallbackExperts;
+      : [];
 
   /* Duplicate list 3× so the marquee loops smoothly */
   const marqueeItems = [...displayExperts, ...displayExperts, ...displayExperts];
@@ -77,57 +77,66 @@ export function Experts({ employees }: { employees?: any[] }) {
         </div>
       </div>
 
-      {/* Marquee container with fading edges */}
-      <div className="relative overflow-hidden rounded-[32px] bg-slate-50/30 border border-slate-100 p-6 shadow-inner">
-        {/* Left fade */}
-        <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-slate-50/80 to-transparent z-10 pointer-events-none" />
-        {/* Right fade */}
-        <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-slate-50/80 to-transparent z-10 pointer-events-none" />
+      {displayExperts.length === 0 ? (
+        <div className="flex flex-col items-center justify-center py-10 px-4 rounded-[32px] bg-slate-50/50 border border-slate-100 border-dashed text-center">
+          <div className="w-12 h-12 rounded-full bg-[#FF6014]/5 flex items-center justify-center text-[#FF6014]/60 mb-3">
+            <User size={20} className="stroke-[2.2]" />
+          </div>
+          <p className="text-slate-800 text-sm font-bold">No experts assigned yet</p>
+          <p className="text-slate-400 text-xs mt-1 font-medium">We will assign our best technician to your service once booked.</p>
+        </div>
+      ) : (
+        <div className="relative overflow-hidden rounded-[32px] bg-slate-50/30 border border-slate-100 p-6 shadow-inner">
+          {/* Left fade */}
+          <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-slate-50/80 to-transparent z-10 pointer-events-none" />
+          {/* Right fade */}
+          <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-slate-50/80 to-transparent z-10 pointer-events-none" />
 
-        <motion.div
-          className="flex gap-6"
-          animate={{ x: [0, -totalWidth] }}
-          transition={{
-            duration: Math.max(12, displayExperts.length * 4),
-            repeat: Infinity,
-            ease: "linear",
-          }}
-        >
-          {marqueeItems.map((expert, index) => (
-            <div key={index} className="min-w-[280px] flex-shrink-0">
-              <div className="bg-white border border-slate-100 rounded-3xl p-6 text-center hover:shadow-md transition-all duration-300 group h-full">
-                {/* Avatar */}
-                <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden border-2 border-rose-100/50 flex items-center justify-center shrink-0 shadow-xs bg-white">
-                  {expert.image ? (
-                    <img
-                      src={expert.image}
-                      alt={expert.name}
-                      className="w-full h-full object-cover"
-                    />
-                  ) : (
-                    <div className="w-full h-full bg-[#fff0f0] flex items-center justify-center text-[#FF6014]">
-                      <User className="w-6 h-6" />
-                    </div>
-                  )}
-                </div>
+          <motion.div
+            className="flex gap-6"
+            animate={{ x: [0, -totalWidth] }}
+            transition={{
+              duration: Math.max(12, displayExperts.length * 4),
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            {marqueeItems.map((expert, index) => (
+              <div key={index} className="min-w-[280px] flex-shrink-0">
+                <div className="bg-white border border-slate-100 rounded-3xl p-6 text-center hover:shadow-md transition-all duration-300 group h-full">
+                  {/* Avatar */}
+                  <div className="w-16 h-16 mx-auto mb-4 rounded-full overflow-hidden border-2 border-rose-100/50 flex items-center justify-center shrink-0 shadow-xs bg-white">
+                    {expert.image ? (
+                      <img
+                        src={expert.image}
+                        alt={expert.name}
+                        className="w-full h-full object-cover"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-[#fff0f0] flex items-center justify-center text-[#FF6014]">
+                        <User className="w-6 h-6" />
+                      </div>
+                    )}
+                  </div>
 
-                <h3 className="font-bold text-base text-slate-800 mb-0.5">
-                  {expert.name}
-                </h3>
-                <p className="text-slate-400 text-xs font-semibold mb-3">{expert.title}</p>
+                  <h3 className="font-bold text-base text-slate-800 mb-0.5">
+                    {expert.name}
+                  </h3>
+                  <p className="text-slate-400 text-xs font-semibold mb-3">{expert.title}</p>
 
-                <div className="flex items-center justify-center gap-1">
-                  <Star className="w-4 h-4 fill-[#FF6014] text-[#FF6014]" />
-                  <span className="font-extrabold text-sm text-slate-800">
-                    {expert.rating}
-                  </span>
-                  <p className="text-slate-400 text-xs font-medium">({expert.jobs})</p>
+                  <div className="flex items-center justify-center gap-1">
+                    <Star className="w-4 h-4 fill-[#FF6014] text-[#FF6014]" />
+                    <span className="font-extrabold text-sm text-slate-800">
+                      {expert.rating}
+                    </span>
+                    <p className="text-slate-400 text-xs font-medium">({expert.jobs})</p>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </motion.div>
-      </div>
+            ))}
+          </motion.div>
+        </div>
+      )}
     </section>
   );
 }

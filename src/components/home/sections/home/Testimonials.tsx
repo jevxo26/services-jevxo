@@ -1,20 +1,11 @@
 "use client";
-import React, { useState, useEffect, useRef } from "react";
-import { Star, MessageSquare, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Star, MessageSquare, Loader2 } from "lucide-react";
 import { useGetPublicReviewsQuery } from "@/redux/features/landing/landingApi";
-
-
-const GAP = 20;
+import { motion } from "framer-motion";
 
 const Testimonials = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(1024);
   const [mounted, setMounted] = useState(false);
-  const autoplayRef = useRef<NodeJS.Timeout | null>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-  const wrapperRef = useRef<HTMLDivElement>(null);
-  const [cardWidth, setCardWidth] = useState(0);
-
   const { data: reviewsRes, isLoading } = useGetPublicReviewsQuery();
   const rawReviews: any[] = reviewsRes?.data || (Array.isArray(reviewsRes) ? reviewsRes : []);
 
@@ -30,95 +21,21 @@ const Testimonials = () => {
         `https://ui-avatars.com/api/?name=${encodeURIComponent(r.user?.name || "U")}&background=FF7C71&color=fff&size=100`,
     }));
 
-  const testimonials = realReviews;
-
-  const cardsToShow = windowWidth < 640 ? 1 : windowWidth < 1024 ? 2 : 3;
-  const maxIndex = Math.max(0, testimonials.length - cardsToShow);
-
-  // Recalculate card width from actual DOM
-  const recalc = () => {
-    if (!wrapperRef.current) return;
-    const wrapperW = wrapperRef.current.offsetWidth;
-    const cw = (wrapperW - GAP * (cardsToShow - 1)) / cardsToShow;
-    setCardWidth(cw);
-  };
-
   useEffect(() => {
     setMounted(true);
-    setWindowWidth(window.innerWidth);
   }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    const handleResize = () => {
-      setWindowWidth(window.innerWidth);
-      recalc();
-    };
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, [mounted, cardsToShow]);
-
-  useEffect(() => {
-    if (mounted) {
-      recalc();
-    }
-  }, [cardsToShow, isLoading, mounted]);
-
-  // Apply transform directly — no framer-motion percentage bugs
-  useEffect(() => {
-    if (!trackRef.current || cardWidth === 0) return;
-    const offset = activeIndex * (cardWidth + GAP);
-    trackRef.current.style.transform = `translateX(-${offset}px)`;
-  }, [activeIndex, cardWidth]);
-
-  useEffect(() => {
-    if (activeIndex > maxIndex) setActiveIndex(maxIndex);
-  }, [maxIndex]);
-
-  const startAutoplay = () => {
-    if (autoplayRef.current) clearInterval(autoplayRef.current);
-    autoplayRef.current = setInterval(() => {
-      setActiveIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 4000);
-  };
-
-  useEffect(() => {
-    if (mounted) {
-      startAutoplay();
-    }
-    return () => { if (autoplayRef.current) clearInterval(autoplayRef.current); };
-  }, [maxIndex, cardWidth, mounted]);
-
-  const goTo = (idx: number) => {
-    const clamped = Math.max(0, Math.min(maxIndex, idx));
-    setActiveIndex(clamped);
-    startAutoplay();
-  };
-
-  // Touch/drag support
-  const dragStart = useRef<number | null>(null);
-  const handlePointerDown = (e: React.PointerEvent) => { dragStart.current = e.clientX; };
-  const handlePointerUp = (e: React.PointerEvent) => {
-    if (dragStart.current === null) return;
-    const diff = dragStart.current - e.clientX;
-    if (diff > 50) goTo(activeIndex + 1);
-    else if (diff < -50) goTo(activeIndex - 1);
-    dragStart.current = null;
-  };
 
   if (!mounted) {
     return (
       <div className="py-5 md:py-16 lg:py-24 relative overflow-hidden bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          {/* Header */}
           <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
             <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
               <MessageSquare size={13} />
               Customer Reviews
             </div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              What our clients
-              <span className="text-[#FF6014]"> say about us</span>
+              What our clients <span className="text-[#FF6014]">say about us</span>
             </h2>
             <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
               Trusted by thousands of happy homes across Bangladesh.
@@ -132,9 +49,14 @@ const Testimonials = () => {
     );
   }
 
-  if (testimonials.length === 0 && !isLoading) {
+  if (realReviews.length === 0 && !isLoading) {
     return null;
   }
+
+  /* Each card is 340px wide + 24px gap = 364px per step */
+  const cardWidth = 340;
+  const marqueeItems = [...realReviews, ...realReviews, ...realReviews];
+  const totalWidth = realReviews.length * (cardWidth + 24);
 
   return (
     <div className="py-5 md:py-16 lg:py-24 relative overflow-hidden bg-transparent">
@@ -164,77 +86,69 @@ const Testimonials = () => {
           </div>
         )}
 
-        {/* Slider */}
-        {!isLoading && (
-          <>
-            <div
-              ref={wrapperRef}
-              className="overflow-hidden cursor-grab active:cursor-grabbing select-none"
-              onPointerDown={handlePointerDown}
-              onPointerUp={handlePointerUp}
+        {/* Marquee slider */}
+        {!isLoading && realReviews.length > 0 && (
+          <div className="relative overflow-hidden rounded-[32px] bg-slate-50/30 border border-slate-100 p-6 shadow-inner">
+            {/* Left fade */}
+            <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-slate-50/80 to-transparent z-10 pointer-events-none" />
+            {/* Right fade */}
+            <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-slate-50/80 to-transparent z-10 pointer-events-none" />
+
+            <motion.div
+              className="flex gap-6"
+              animate={{ x: [0, -totalWidth] }}
+              transition={{
+                duration: Math.max(15, realReviews.length * 5),
+                repeat: Infinity,
+                ease: "linear",
+              }}
             >
-              <div
-                ref={trackRef}
-                className="flex"
-                style={{
-                  gap: GAP,
-                  transition: "transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
-                  willChange: "transform",
-                }}
-              >
-                {testimonials.map((test: any, idx: number) => (
-                  <div
-                    key={idx}
-                    className="flex-shrink-0"
-                    style={{ width: cardWidth > 0 ? cardWidth : `calc(${100 / cardsToShow}% - ${(GAP * (cardsToShow - 1)) / cardsToShow}px)` }}
-                  >
-                    <div className="relative bg-white rounded-3xl border border-slate-100 p-7 shadow-sm hover:shadow-2xl hover:shadow-slate-200/60 hover:-translate-y-1 transition-all duration-300 flex flex-col h-full min-h-[240px]">
+              {marqueeItems.map((test: any, idx: number) => (
+                <div key={idx} className="min-w-[340px] flex-shrink-0" style={{ width: cardWidth }}>
+                  <div className="relative bg-white rounded-3xl border border-slate-100 p-7 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col h-full min-h-[250px]">
+                    {/* Decorative quote */}
+                    <span className="absolute top-4 right-6 text-8xl font-serif leading-none select-none pointer-events-none text-[#FF6014]/8">
+                      "
+                    </span>
 
-                      {/* Decorative quote */}
-                      <span className="absolute top-4 right-6 text-8xl font-serif leading-none select-none pointer-events-none text-[#FF6014]/8">
-                        "
-                      </span>
+                    {/* Stars */}
+                    <div className="flex gap-0.5 mb-4">
+                      {[...Array(Math.min(test.rating || 5, 5))].map((_, i) => (
+                        <Star key={i} size={15} className="text-amber-400 fill-amber-400" />
+                      ))}
+                    </div>
 
-                      {/* Stars */}
-                      <div className="flex gap-0.5 mb-4">
-                        {[...Array(Math.min(test.rating || 5, 5))].map((_, i) => (
-                          <Star key={i} size={15} className="text-amber-400 fill-amber-400" />
-                        ))}
+                    {/* Comment */}
+                    <p className="text-slate-700 text-[15px] leading-relaxed line-clamp-4 flex-1 mb-6">
+                      "{test.comment}"
+                    </p>
+
+                    {/* Accent line */}
+                    <div className="w-10 h-0.5 bg-[#FF6014]/30 mb-5" />
+
+                    {/* Author */}
+                    <div className="flex items-center gap-3">
+                      <div className="relative flex-shrink-0">
+                        <img
+                          src={test.avatar}
+                          alt={test.name}
+                          className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md"
+                          onError={(e) => {
+                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(test.name)}&background=FF5A5F&color=fff&size=80`;
+                          }}
+                        />
+                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white" />
                       </div>
-
-                      {/* Comment */}
-                      <p className="text-slate-700 text-[15px] leading-relaxed line-clamp-4 flex-1 mb-6">
-                        "{test.comment}"
-                      </p>
-
-                      {/* Accent line */}
-                      <div className="w-10 h-0.5 bg-[#FF6014]/30 mb-5" />
-
-                      {/* Author */}
-                      <div className="flex items-center gap-3">
-                        <div className="relative flex-shrink-0">
-                          <img
-                            src={test.avatar}
-                            alt={test.name}
-                            className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md"
-                            onError={(e) => {
-                              (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(test.name)}&background=FF5A5F&color=fff&size=80`;
-                            }}
-                          />
-                          <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white" />
-                        </div>
-                        <div>
-                          <h4 className="font-bold text-slate-900 text-sm leading-tight">{test.name}</h4>
-                          <p className="text-xs text-slate-400 font-medium mt-0.5">{test.location}</p>
-                        </div>
+                      <div>
+                        <h4 className="font-bold text-slate-900 text-sm leading-tight">{test.name}</h4>
+                        <p className="text-xs text-slate-400 font-medium mt-0.5">{test.location}</p>
                       </div>
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-          </>
+                </div>
+              ))}
+            </motion.div>
+          </div>
         )}
       </div>
     </div>

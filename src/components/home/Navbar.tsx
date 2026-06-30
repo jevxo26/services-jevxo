@@ -253,8 +253,8 @@ export function Navbar() {
               <Image
                 src="/rajshiblogo.png"
                 alt="Rajseba"
-                width={40}
-                height={40}
+                width={70}
+                height={80}
                 className="h-9 sm:h-10 w-auto object-contain"
                 priority
               />
