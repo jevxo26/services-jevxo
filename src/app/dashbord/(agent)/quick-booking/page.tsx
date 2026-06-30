@@ -6,7 +6,7 @@ import { CustomSelect } from "@/components/ui/select";
 
 import { useQuickBooking } from "./hooks/useQuickBooking";
 import { DesktopBookingSidebar } from "@/components/home/booking/DesktopBookingSidebar";
-import AccessDenied from "../../components/AccessDenied";
+import AccessDenied from "../../(client)/components/AccessDenied";
 
 export default function AgentQuickBookingPage() {
   const state = useQuickBooking();
