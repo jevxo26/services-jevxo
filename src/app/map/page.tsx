@@ -50,9 +50,50 @@ export default function MapPage() {
       <div className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0" style={{ backgroundSize: 'auto' }} />
       <div className="flex-1 flex flex-col relative z-10">
         {activeTab === "map" && (
-          <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex-1 flex flex-col md:flex-row gap-4 md:gap-6 py-4 md:py-5 h-[calc(100vh-72px)] min-h-[680px] overflow-hidden relative">
-            <SidebarList searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} categories={categories} activeTab={activeTab} setActiveTab={setActiveTab} filteredExperts={filteredExperts} selectedExpertId={selectedExpertId} setSelectedExpertId={setSelectedExpertId} onOpenFilters={() => setShowFiltersModal(true)} onViewDetails={setDetailExpert} />
-            <DhakaMap filteredExperts={filteredExperts} selectedExpertId={selectedExpertId} setSelectedExpertId={setSelectedExpertId} onViewDetails={setDetailExpert} />
+          <div className="max-w-7xl mx-auto px-4 md:px-6 w-full flex-1 flex flex-col gap-4 md:gap-5 py-4 md:py-5 h-[calc(100vh-72px)] min-h-[720px] overflow-hidden relative">
+            {/* Professional Help Header Section */}
+            <div className="bg-white border border-slate-100 p-4 md:p-5 rounded-[28px] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4 shrink-0">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-2xl bg-[#FFF8F4] flex items-center justify-center text-[#FF6014] shrink-0">
+                  <MapIcon className="w-5 h-5" />
+                </div>
+                <div>
+                  <h1 className="text-lg md:text-xl font-black text-slate-800 tracking-tight flex items-center gap-2">
+                    Live Vendor Locator Map
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-[#FF6014]/10 text-[#FF6014] uppercase tracking-wide">
+                      Live
+                    </span>
+                  </h1>
+                  <p className="text-xs text-slate-500 font-semibold mt-0.5">
+                    Locate verified service professionals, check starting rates, and book service partners in your region.
+                  </p>
+                </div>
+              </div>
+
+              {/* Instructions/Help guide */}
+              <div className="flex flex-wrap items-center gap-3 md:gap-4 lg:justify-end text-[11px] font-bold text-slate-500 bg-slate-50 p-2 md:p-3 rounded-2xl border border-slate-100/50">
+                <div className="flex items-center gap-1.5">
+                  <span className="w-5 h-5 rounded-full bg-[#FF6014] text-white flex items-center justify-center font-extrabold text-[10px]">1</span>
+                  <span>Select Category</span>
+                </div>
+                <div className="h-3 w-px bg-slate-200 hidden sm:block" />
+                <div className="flex items-center gap-1.5">
+                  <span className="w-5 h-5 rounded-full bg-[#FF6014] text-white flex items-center justify-center font-extrabold text-[10px]">2</span>
+                  <span>Tap Location Pin</span>
+                </div>
+                <div className="h-3 w-px bg-slate-200 hidden sm:block" />
+                <div className="flex items-center gap-1.5">
+                  <span className="w-5 h-5 rounded-full bg-[#FF6014] text-white flex items-center justify-center font-extrabold text-[10px]">3</span>
+                  <span>Click 'View Profile' & Book</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Sidebar + Map Container */}
+            <div className="flex-1 flex flex-col md:flex-row gap-4 md:gap-6 min-h-0 relative">
+              <SidebarList searchQuery={searchQuery} setSearchQuery={setSearchQuery} selectedCategory={selectedCategory} setSelectedCategory={setSelectedCategory} categories={categories} activeTab={activeTab} setActiveTab={setActiveTab} filteredExperts={filteredExperts} selectedExpertId={selectedExpertId} setSelectedExpertId={setSelectedExpertId} onOpenFilters={() => setShowFiltersModal(true)} onViewDetails={setDetailExpert} />
+              <DhakaMap filteredExperts={filteredExperts} selectedExpertId={selectedExpertId} setSelectedExpertId={setSelectedExpertId} onViewDetails={setDetailExpert} />
+            </div>
           </div>
         )}
 
