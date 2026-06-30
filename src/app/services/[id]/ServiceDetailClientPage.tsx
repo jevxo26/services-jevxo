@@ -8,7 +8,7 @@ import { Experts } from '@/components/home/categorizedServices/Experts';
 import { Commitments } from '@/components/home/categorizedServices/Commitments';
 import { VendorProfile } from '@/components/home/categorizedServices/VendorProfile';
 import { ServiceReviews } from '@/components/home/categorizedServices/ServiceReviews';
-import { useGetPublicServiceByIdQuery, useGetPublicServicesQuery } from "@/redux/features/landing/landingApi";
+import { useGetPublicServiceByIdQuery, useGetPublicServicesQuery, useGetPublicReviewsByServiceQuery } from "@/redux/features/landing/landingApi";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
@@ -29,6 +29,11 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
     : allServices.find((s: any) => s.slug === id)?.id;
 
   const { data: serviceRes, isLoading: isServiceLoading, isError } = useGetPublicServiceByIdQuery(
+    matchedId || 0,
+    { skip: !matchedId }
+  );
+
+  const { data: reviewsRes } = useGetPublicReviewsByServiceQuery(
     matchedId || 0,
     { skip: !matchedId }
   );
@@ -68,7 +73,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
     );
   }
 
-  const reviews = service.reviews || [];
+  const reviews = service.reviews?.length ? service.reviews : (reviewsRes?.data || []);
   const bookingsCount = (service.bookings || []).length;
   const reviewsCount = reviews.length;
   const rating = reviewsCount > 0

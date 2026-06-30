@@ -10,7 +10,7 @@ const Testimonials = () => {
   const rawReviews: any[] = reviewsRes?.data || (Array.isArray(reviewsRes) ? reviewsRes : []);
 
   const realReviews = rawReviews
-    .filter((r: any) => (r.comment || r.content || r.review || "").trim().length > 10)
+    .filter((r: any) => (r.comment || r.content || r.review || "").trim().length > 0)
     .map((r: any) => ({
       name: r.user?.name || "Valued Customer",
       location: r.user?.profile?.address || "Dhaka, Bangladesh",
