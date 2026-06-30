@@ -28,6 +28,9 @@ export interface Booking {
   notes?: string;
   status: 'pending' | 'assigned' | 'on_the_way' | 'completed' | 'cancelled';
   payment_status?: string;
+  assignedAt?: string;
+  onTheWayAt?: string;
+  completedAt?: string;
   createdAt: string;
   updatedAt: string;
 }
