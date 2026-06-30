@@ -2,10 +2,9 @@
 
 import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
-import { Search } from "lucide-react";
+import { Loader2 } from "lucide-react";
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
 import { useSearchPublicServicesQuery } from "@/redux/features/landing/landingApi";
 import { useGetAllHeroesQuery } from "@/redux/features/admin/hero";
 
@@ -94,6 +93,15 @@ const Hero = () => {
   const activeHero = activeSlide?.hero || heroes[0];
   const activeImage = activeSlide?.image;
 
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const [hasInitialLoaded, setHasInitialLoaded] = useState(false);
+
+  useEffect(() => {
+    if (activeImage) {
+      setIsImageLoading(true);
+    }
+  }, [activeImage]);
+
 
 
   const { scrollY } = useScroll();
@@ -143,8 +151,13 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full min-h-[240px] lg:min-h-[50vh] flex items-center max-w-7xl mx-auto pt-0 md:pt-6 ounded-[0px]  md:rounded-[26px] overflow-hidden justify-center py-8 md:py-24">
-      <div className="absolute inset-0 z-0 bg-[#FFF8F4] overflow-hidden">
+    <div className="relative w-full min-h-[240px] lg:min-h-[50vh] mt-0 md:mt-2 flex items-center max-w-7xl mx-auto pt-0 md:pt-6 rounded-none md:rounded-[26px] overflow-hidden justify-center py-8 md:py-24">
+      {isImageLoading && !hasInitialLoaded && (
+        <div className="absolute inset-0 z-[5] flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
+          <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
+        </div>
+      )}
+      <div className="absolute inset-0 z-0  overflow-hidden">
         {/* Sliding images background */}
         {slides.length > 0 && activeImage && (
           <div className="absolute inset-0 w-full h-full overflow-hidden">
@@ -159,6 +172,10 @@ const Hero = () => {
                 transition={{ type: "tween", ease: "easeInOut", duration: 1.0 }}
                 className="absolute inset-0 w-full h-full object-cover"
                 loading="eager"
+                onLoad={() => {
+                  setIsImageLoading(false);
+                  setHasInitialLoaded(true);
+                }}
               />
             </AnimatePresence>
           </div>
@@ -179,6 +196,27 @@ const Hero = () => {
 
 
       </motion.div>
+
+      {/* Slide Indicators */}
+      {slides.length > 1 && (
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 z-20 flex gap-1.5 items-center justify-center">
+          {slides.map((_, index) => {
+            const isActive = index === currentSlideIndex;
+            return (
+              <button
+                key={index}
+                onClick={() => setCurrentSlideIndex(index)}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  isActive
+                    ? "w-7 bg-white shadow-sm"
+                    : "w-2.5 bg-white/40 hover:bg-white/60"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 };

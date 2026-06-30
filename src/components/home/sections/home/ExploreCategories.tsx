@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Fragment } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { TbAirConditioning, TbTruck } from "react-icons/tb";
@@ -149,87 +149,158 @@ const ExploreCategories = () => {
             animate="visible"
             className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6"
           >
-            {categories.map((cat: any) => {
+            {categories.map((cat: any, index: number) => {
               // EXACT name match only — no partial/dynamic matching
               const IconComponent = CATEGORY_ICON_MAP[cat.name?.trim()] || FALLBACK_ICON;
 
               const slug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id);
 
-              return (
-                <motion.div
-                  key={cat.id}
-                  variants={cardVariants}
-                  whileTap={{ scale: 0.97 }}
-                  className="h-full"
-                >
-                  <Link href={`/categories/${cat.id}`} className="block h-full">
-                    <div
-                      className="
-                        group relative overflow-hidden
-                        flex flex-col items-center justify-center
-                        h-full rounded-2xl md:rounded-[28px] p-3 md:p-8
-                        bg-gradient-to-br from-white to-[#e8eaed]
-                        border border-white/80
-                        cursor-pointer
-                        hover-card-premium
-                      "
-                    >
-                      {/* Gloss sheen */}
-                      <span
-                        className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl md:rounded-t-[28px] bg-gradient-to-b from-white/65 to-transparent"
-                        aria-hidden
-                      />
+              const isNinthItem = index === 8;
+              const isAfterNinthItem = index > 8;
 
-                      {/* Icon orb */}
+              return (
+                <Fragment key={cat.id}>
+                  {/* Category Card */}
+                  <motion.div
+                    variants={cardVariants}
+                    whileTap={{ scale: 0.97 }}
+                    className={`h-full ${isNinthItem || isAfterNinthItem ? "hidden md:block" : "block"}`}
+                  >
+                    <Link href={`/categories/${cat.id}`} className="block h-full">
                       <div
                         className="
-                          relative overflow-hidden
-                          w-12 h-12 md:w-20 md:h-20 rounded-full mb-2 md:mb-4
-                          flex items-center justify-center
-                          bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
-                          ring-1 ring-white/60
-                          shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)] md:shadow-[6px_6px_14px_rgba(174,180,190,0.45),_-6px_-6px_14px_rgba(255,255,255,0.95),inset_0_1px_1px_rgba(255,255,255,0.8)]
-                          transition-all duration-500 ease-out
-                          group-hover:scale-110
-                          group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
-                          group-hover:ring-[#ff6014]/30
-                          group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
+                          group relative overflow-hidden
+                          flex flex-col items-center justify-center
+                          h-full rounded-2xl md:rounded-[28px] p-3 md:p-8
+                          bg-gradient-to-br from-white to-[#e8eaed]
+                          border border-white/80
+                          cursor-pointer
+                          hover-card-premium
                         "
                       >
                         {/* Gloss sheen */}
                         <span
-                          className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 md:top-[6px] md:left-[10px] md:w-10 md:h-5 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
+                          className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl md:rounded-t-[28px] bg-gradient-to-b from-white/65 to-transparent"
                           aria-hidden
                         />
-                        {/* Soft inner glow on hover */}
-                        <span
-                          className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
-                          aria-hidden
-                        />
-                        {/* If category has an image, show it; else show manually-mapped icon */}
-                        {cat.image ? (
-                          <img
-                            src={cat.image}
-                            alt={cat.name}
-                            className="relative w-6 h-6 md:w-10 md:h-10 object-cover rounded-full drop-shadow-sm group-hover:brightness-0 group-hover:invert transition-all duration-500"
-                          />
-                        ) : (
-                          <IconComponent
-                            className="relative w-5 h-5 md:w-9 md:h-9 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
-                            strokeWidth={1.75}
-                          />
-                        )}
-                      </div>
 
-                      {/* Label */}
-                      <span
-                        className="font-semibold text-[10px] md:text-base text-center text-slate-700 mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] md:min-h-[auto] flex items-center justify-center"
-                      >
-                        {cat.name}
-                      </span>
-                    </div>
-                  </Link>
-                </motion.div>
+                        {/* Icon orb */}
+                        <div
+                          className="
+                            relative overflow-hidden
+                            w-12 h-12 md:w-20 md:h-20 rounded-full mb-2 md:mb-4
+                            flex items-center justify-center
+                            bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
+                            ring-1 ring-white/60
+                            shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)] md:shadow-[6px_6px_14px_rgba(174,180,190,0.45),_-6px_-6px_14px_rgba(255,255,255,0.95),inset_0_1px_1px_rgba(255,255,255,0.8)]
+                            transition-all duration-500 ease-out
+                            group-hover:scale-110
+                            group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
+                            group-hover:ring-[#ff6014]/30
+                            group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
+                          "
+                        >
+                          {/* Gloss sheen */}
+                          <span
+                            className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 md:top-[6px] md:left-[10px] md:w-10 md:h-5 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
+                            aria-hidden
+                          />
+                          {/* Soft inner glow on hover */}
+                          <span
+                            className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
+                            aria-hidden
+                          />
+                          {/* If category has an image, show it; else show manually-mapped icon */}
+                          {cat.image ? (
+                            <img
+                              src={cat.image}
+                              alt={cat.name}
+                              className="relative w-6 h-6 md:w-10 md:h-10 object-cover rounded-full drop-shadow-sm group-hover:brightness-0 group-hover:invert transition-all duration-500"
+                            />
+                          ) : (
+                            <IconComponent
+                              className="relative w-5 h-5 md:w-9 md:h-9 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                              strokeWidth={1.75}
+                            />
+                          )}
+                        </div>
+
+                        {/* Label */}
+                        <span
+                          className="font-semibold text-[10px] md:text-base text-center text-slate-700 mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] md:min-h-[auto] flex items-center justify-center"
+                        >
+                          {cat.name}
+                        </span>
+                      </div>
+                    </Link>
+                  </motion.div>
+
+                  {/* See More Card on Mobile */}
+                  {isNinthItem && (
+                    <motion.div
+                      variants={cardVariants}
+                      whileTap={{ scale: 0.97 }}
+                      className="h-full block md:hidden"
+                    >
+                      <Link href="/services" className="block h-full">
+                        <div
+                          className="
+                            group relative overflow-hidden
+                            flex flex-col items-center justify-center
+                            h-full rounded-2xl p-3
+                            bg-gradient-to-br from-white to-[#e8eaed]
+                            border border-white/80
+                            cursor-pointer
+                            hover-card-premium
+                          "
+                        >
+                          {/* Gloss sheen */}
+                          <span
+                            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/65 to-transparent"
+                            aria-hidden
+                          />
+
+                          {/* Icon orb */}
+                          <div
+                            className="
+                              relative overflow-hidden
+                              w-12 h-12 rounded-full mb-2
+                              flex items-center justify-center
+                              bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
+                              ring-1 ring-white/60
+                              shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
+                              transition-all duration-500 ease-out
+                              group-hover:scale-110
+                              group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
+                              group-hover:ring-[#ff6014]/30
+                              group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
+                            "
+                          >
+                            <span
+                              className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
+                              aria-hidden
+                            />
+                            <span
+                              className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
+                              aria-hidden
+                            />
+                            <LayoutGrid
+                              className="relative w-5 h-5 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                              strokeWidth={1.75}
+                            />
+                          </div>
+
+                          {/* Label */}
+                          <span
+                            className="font-semibold text-[10px] text-center text-[#ff6014] mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] flex items-center justify-center"
+                          >
+                            See More
+                          </span>
+                        </div>
+                      </Link>
+                    </motion.div>
+                  )}
+                </Fragment>
               );
             })}
           </motion.div>

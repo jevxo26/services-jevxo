@@ -41,7 +41,7 @@ export default function FAQ() {
         >
 
           {/* Left — Text */}
-          <div className="md:sticky md:top-24">
+          <div className="md:sticky md:top-24 flex flex-col items-center text-center md:items-start md:text-left">
             <span className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
               Got questions?
             </span>

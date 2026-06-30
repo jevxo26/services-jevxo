@@ -31,7 +31,6 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <div className="min-h-screen bg-background font-sans">
-      <Hero />
       <div className="relative overflow-hidden">
         {/* Soft premium radial glows for depth and premium aesthetic */}
         <div className="absolute top-[10%] left-[-10%] w-[400px] md:w-[600px] h-[400px] md:h-[600px] bg-[#FF6014]/4 blur-[130px] rounded-full pointer-events-none z-0" />
@@ -44,6 +43,7 @@ export default function Home() {
           style={{ backgroundSize: 'auto' }}
         />
         <div className="relative z-10 flex flex-col gap-5">
+          <Hero />
           <HomeMotionWrapper>
             <ExploreCategories />
           </HomeMotionWrapper>

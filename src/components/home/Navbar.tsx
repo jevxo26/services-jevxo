@@ -239,7 +239,7 @@ export function Navbar() {
     <>
       <motion.nav
         style={{ boxShadow: headerShadow, borderBottomColor: borderColor }}
-        className="bg-[#FFF8F4]/95 md:bg-[#FFF8F4]/50 backdrop-blur-lg border-b sticky top-0 z-50 transition-colors duration-300"
+        className="bg-[#FFF8F4]/95 md:bg-[#FFF8F4]/50  backdrop-blur-lg border-b sticky top-0 z-50 transition-colors duration-300"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           {/* ─── TOP BAR ─── */}
