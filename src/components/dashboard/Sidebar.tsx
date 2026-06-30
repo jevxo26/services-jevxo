@@ -101,7 +101,8 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
               { label: "Services", href: "/dashbord/services", icon: Wrench },
               { label: "Nested Services", href: "/dashbord/nested-services", icon: Layers },
               { label: "Sub Services", href: "/dashbord/sub-services", icon: Layers },
-              { label: "Packages", href: "/dashbord/packages", icon: Package }
+              { label: "Packages", href: "/dashbord/packages", icon: Package },
+              { label: "Hero Management", href: "/dashbord/hero", icon: LayoutGrid }
             ]
           },
           {

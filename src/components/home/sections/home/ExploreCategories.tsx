@@ -3,17 +3,18 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { TbAirConditioning, TbTruck, TbScissors } from "react-icons/tb";
+import { TbAirConditioning, TbTruck } from "react-icons/tb";
 import {
   FaFaucet,
   FaBolt,
-  FaTv,
+  FaCouch,
   FaPaintRoller,
-  FaLeaf,
-  FaBug,
-  FaHammer,
+  FaTint,
+  FaHotTub,
+  FaHouseDamage,
+  FaHeadset,
 } from "react-icons/fa";
-import { MdOutlineCleaningServices, MdOutlineSecurity } from "react-icons/md";
+import { MdOutlineCleaningServices, MdLocalLaundryService } from "react-icons/md";
 import { LayoutGrid, Loader2 } from "lucide-react";
 import { useGetPublicCategoriesQuery } from "@/redux/features/landing/landingApi";
 
@@ -22,39 +23,38 @@ export const CATEGORIES_CONTENT = {
   title: "Explore Categories",
   subtitle: "Choose from our wide range of professional, verified home services",
   categories: [
-    { label: "AC Repair", slug: "ac-repair", icon: TbAirConditioning },
-    { label: "Plumbing", slug: "plumbing", icon: FaFaucet },
-    { label: "Cleaning", slug: "cleaning", icon: MdOutlineCleaningServices },
-    { label: "Electrical", slug: "electrical", icon: FaBolt },
-    { label: "Shifting", slug: "shifting", icon: TbTruck },
-    { label: "CCTV", slug: "cctv", icon: MdOutlineSecurity },
-    { label: "Appliance Repair", slug: "appliance-repair", icon: FaTv },
-    { label: "Painting", slug: "painting", icon: FaPaintRoller },
-    { label: "Gardening", slug: "gardening", icon: FaLeaf },
-    { label: "Pest Control", slug: "pest-control", icon: FaBug },
-    { label: "Home Salon", slug: "home-salon", icon: TbScissors },
-    { label: "Carpentry", slug: "carpentry", icon: FaHammer },
+    { label: "AC Service & Repair", slug: "ac-service-repair", icon: TbAirConditioning },
+    { label: "Home & Office Shifting", slug: "home-office-shifting", icon: TbTruck },
+    { label: "Plumbing Service", slug: "plumbing-service", icon: FaFaucet },
+    { label: "Home Appliance Repair", slug: "home-appliance-repair", icon: MdLocalLaundryService },
+    { label: "Home & Office Cleaning", slug: "home-office-cleaning", icon: MdOutlineCleaningServices },
+    { label: "Water Purifier Installation", slug: "water-purifier-installation", icon: FaTint },
+    { label: "Home & Office Painting", slug: "home-office-painting", icon: FaPaintRoller },
+    { label: "Geyser Installation & Repair", slug: "geyser-installation-repair", icon: FaHotTub },
+    { label: "Electrical Service", slug: "electrical-service", icon: FaBolt },
+    { label: "Home & Office Renovation", slug: "home-office-renovation", icon: FaHouseDamage },
+    { label: "PPM Service", slug: "ppm-service", icon: FaHeadset },
+    { label: "Sofa & Carpet Deep Cleaning", slug: "sofa-carpet-deep-cleaning", icon: FaCouch },
   ],
 };
 
-// Icon map: category name → icon (fallback for categories without images)
+// ─── Manual icon map: exact backend category name → icon ────────────────────
+// NOTE: এখানে কোনো dynamic/partial string matching ব্যবহার করা হয়নি।
+// API থেকে আসা category.name এই ১২টি নামের সাথে EXACT মিলতে হবে।
+// নতুন category backend এ যোগ হলে এখানে নতুন entry ম্যানুয়ালি যোগ করতে হবে।
 const CATEGORY_ICON_MAP: Record<string, React.ComponentType<any>> = {
-  "AC Repair": TbAirConditioning,
-  "AC": TbAirConditioning,
-  "Plumbing": FaFaucet,
-  "Cleaning": MdOutlineCleaningServices,
-  "Electrical": FaBolt,
-  "Shifting": TbTruck,
-  "CCTV": MdOutlineSecurity,
-  "Security": MdOutlineSecurity,
-  "Appliance Repair": FaTv,
-  "Appliance": FaTv,
-  "Painting": FaPaintRoller,
-  "Gardening": FaLeaf,
-  "Pest Control": FaBug,
-  "Salon": TbScissors,
-  "Home Salon": TbScissors,
-  "Carpentry": FaHammer,
+  "AC Service & Repair": TbAirConditioning,
+  "Home & Office Shifting": TbTruck,
+  "Plumbing Service": FaFaucet,
+  "Home Appliance Repair": MdLocalLaundryService,
+  "Home & Office Cleaning": MdOutlineCleaningServices,
+  "Water Purifier Installation": FaTint,
+  "Home & Office Painting": FaPaintRoller,
+  "Geyser Installation & Repair": FaHotTub,
+  "Electrical Service": FaBolt,
+  "Home & Office Renovation": FaHouseDamage,
+  "PPM Service": FaHeadset,
+  "Sofa & Carpet Deep Cleaning": FaCouch,
 };
 
 const FALLBACK_ICON = LayoutGrid;
@@ -130,13 +130,8 @@ const ExploreCategories = () => {
           className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-5 md:gap-6"
         >
           {categories.map((cat: any) => {
-            // Try to find icon by name, otherwise use fallback
-            const IconComponent =
-              CATEGORY_ICON_MAP[cat.name] ||
-              CATEGORY_ICON_MAP[Object.keys(CATEGORY_ICON_MAP).find((k) =>
-                cat.name?.toLowerCase().includes(k.toLowerCase())
-              ) || ""] ||
-              FALLBACK_ICON;
+            // EXACT name match only — no partial/dynamic matching
+            const IconComponent = CATEGORY_ICON_MAP[cat.name?.trim()] || FALLBACK_ICON;
 
             const slug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id);
 
@@ -171,27 +166,37 @@ const ExploreCategories = () => {
                         relative overflow-hidden
                         w-20 h-20 rounded-full mb-4
                         flex items-center justify-center
-                        bg-gradient-to-br from-[#f5f7fa] to-[#e8eaed]
-                        shadow-[4px_4px_10px_rgba(174,180,190,0.5),_-4px_-4px_10px_rgba(255,255,255,1)]
-                        transition-all duration-300
-                        group-hover:from-[#ff6b6b] group-hover:to-[#e53935]
-                        group-hover:shadow-[4px_4px_14px_rgba(229,57,53,0.35),_-3px_-3px_10px_rgba(255,200,200,0.6)]
+                        bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
+                        ring-1 ring-white/60
+                        shadow-[6px_6px_14px_rgba(174,180,190,0.45),_-6px_-6px_14px_rgba(255,255,255,0.95),inset_0_1px_1px_rgba(255,255,255,0.8)]
+                        transition-all duration-500 ease-out
+                        group-hover:scale-110
+                        group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
+                        group-hover:ring-[#ff6014]/30
+                        group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
                       "
                     >
+                      {/* Gloss sheen */}
                       <span
-                        className="pointer-events-none absolute top-[6px] left-[10px] w-10 h-5 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.75)_0%,transparent_70%)]"
+                        className="pointer-events-none absolute top-[6px] left-[10px] w-10 h-5 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
                         aria-hidden
                       />
-                      {/* If category has an image, show it; else show icon */}
+                      {/* Soft inner glow on hover */}
+                      <span
+                        className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
+                        aria-hidden
+                      />
+                      {/* If category has an image, show it; else show manually-mapped icon */}
                       {cat.image ? (
                         <img
                           src={cat.image}
                           alt={cat.name}
-                          className="w-10 h-10 object-cover rounded-full group-hover:brightness-0 group-hover:invert transition-all"
+                          className="relative w-10 h-10 object-cover rounded-full drop-shadow-sm group-hover:brightness-0 group-hover:invert transition-all duration-500"
                         />
                       ) : (
                         <IconComponent
-                          className="w-7 h-7 md:w-8 md:h-8 text-primary transition-colors duration-300 group-hover:text-white"
+                          className="relative w-8 h-8 md:w-9 md:h-9 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                          strokeWidth={1.75}
                         />
                       )}
                     </div>
