@@ -4,7 +4,7 @@ import React from "react";
 import { Zap, Loader2 } from "lucide-react";
 import { CustomSelect } from "@/components/ui/select";
 
-import { useQuickBooking } from "./hooks/useQuickBooking";
+import { useQuickBooking } from "../../quick-booking/hooks/useQuickBooking";
 import { DesktopBookingSidebar } from "@/components/home/booking/DesktopBookingSidebar";
 import AccessDenied from "../../(client)/components/AccessDenied";
 
