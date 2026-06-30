@@ -125,6 +125,17 @@ export function useBookingCartState({ service, isLoading }: UseBookingCartStateP
       router.push(`/login?redirect=${encodeURIComponent(currentPath)}`);
       return;
     }
+
+    // Automatically select the first available sub-service if the cart is empty
+    if (cartItems.length === 0) {
+      const firstSubService = displayServices.find(
+        (s: any) => s.subServices && s.subServices.length > 0
+      )?.subServices[0];
+      if (firstSubService) {
+        setCartQuantities({ [firstSubService.id]: 1 });
+      }
+    }
+
     setIsModalOpen(true);
   };
 

@@ -139,7 +139,7 @@ export function SpecializedServices({
         {displayServices.map((service, index) => {
           const isExpanded = expandedId === service.id;
           const hasSubServices =
-            service.subServices && service.subServices.length > 0;
+            service.subServices && service.subServices.length > 1;
 
           /* Emergency card */
           if (service.type === "emergency") {

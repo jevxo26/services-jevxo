@@ -109,24 +109,45 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
         </div>
       </div>
 
-      <AnimatePresence>
-        {state.cartItems.length > 0 && (
-          <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 100, opacity: 0 }} className="fixed bottom-0 left-0 right-0 z-40 px-4 pb-[calc(env(safe-area-inset-bottom)+82px)] pointer-events-none md:hidden">
-            <div className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-white/60 shadow-[0_12px_40px_rgba(255,96,20,0.15)] rounded-[28px] p-4 px-5 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-12 h-12 rounded-[18px] bg-gradient-to-br from-[#FFF8F4] to-[#FFEFE6] text-[#FF6014] flex items-center justify-center shrink-0 border border-[#FF6014]/20 shadow-inner">
-                  <ShoppingCart size={20} className="stroke-[2.2]" />
+      {/* Mobile Sticky Bottom CTA Bar */}
+      <div className="fixed bottom-0 left-0 right-0 z-40 px-4 pb-[calc(env(safe-area-inset-bottom)+82px)] pointer-events-none md:hidden">
+        <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/50 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] rounded-[24px] p-3 flex items-center justify-between gap-3">
+          {state.cartItems.length > 0 ? (
+            <>
+              <div className="flex items-center gap-3 min-w-0 pl-1">
+                <div className="w-10 h-10 rounded-xl bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center shrink-0 border border-[#FF6014]/10">
+                  <ShoppingCart size={18} className="stroke-[2.5]" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-extrabold text-slate-500 leading-none">{state.cartItemCount} service{state.cartItemCount === 1 ? "" : "s"}</p>
-                  <p className="text-[17px] font-black text-slate-900 mt-1 leading-none">৳{state.payableTotal.toLocaleString()}</p>
+                  <p className="text-[10px] font-bold text-slate-400 leading-none">{state.cartItemCount} item{state.cartItemCount === 1 ? "" : "s"}</p>
+                  <p className="text-base font-black text-slate-900 mt-0.5 leading-none">৳{state.payableTotal.toLocaleString()}</p>
                 </div>
               </div>
-              <button type="button" onClick={() => state.setIsModalOpen(true)} className="px-6 py-3.5 rounded-[20px] text-sm font-extrabold text-white bg-gradient-to-r from-[#FF6014] to-[#FF7C71] hover:opacity-95 transition-all duration-200 shadow-md shadow-[#FF6014]/25 cursor-pointer active:scale-95 shrink-0">Book Now</button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+              <button
+                type="button"
+                onClick={() => state.setIsModalOpen(true)}
+                className="px-6 py-3 rounded-xl text-xs font-black text-white bg-[#FF6014] hover:bg-[#E0530A] transition-all duration-250 shadow-md active:scale-95 shrink-0"
+              >
+                Proceed to Book
+              </button>
+            </>
+          ) : (
+            <>
+              <div className="flex flex-col justify-center pl-2">
+                <p className="text-xs font-black text-slate-800">Quick Booking</p>
+                <p className="text-[10px] font-medium text-slate-400 mt-0.5">Book instantly in 2 taps</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => state.handleInitiateBooking()}
+                className="px-8 py-3 rounded-xl text-xs font-black text-white bg-[#FF6014] hover:bg-[#E0530A] transition-all duration-250 shadow-md active:scale-95 shrink-0"
+              >
+                Book Now
+              </button>
+            </>
+          )}
+        </div>
+      </div>
 
       <MobileBookingDrawer isOpen={state.isModalOpen} onClose={() => state.setIsModalOpen(false)} cartItems={state.cartItems} cartItemCount={state.cartItemCount} cartTotal={state.cartTotal} payableTotal={state.payableTotal} appliedCoupon={state.appliedCoupon} setAppliedCoupon={state.setAppliedCoupon} bookingDetails={state.bookingDetails} setBookingDetails={state.setBookingDetails} isBooking={state.isBooking} onSubmit={state.handleConfirmBooking} serviceId={service.id} onUpdateQuantity={state.handleUpdateQuantity} onRemoveFromCart={state.handleRemoveFromCart} onClearCart={state.handleClearCart} />
     </div>

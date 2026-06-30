@@ -60,17 +60,19 @@ const Hero = () => {
   const { data: apiHeroesRes } = useGetAllHeroesQuery();
   const heroes = apiHeroesRes?.data || (Array.isArray(apiHeroesRes) ? apiHeroesRes : []);
 
-  const slides = heroes.flatMap((hero: any) => {
-    const imgs = Array.isArray(hero.images)
-      ? hero.images
-      : typeof hero.images === 'string'
-        ? hero.images.split(',').filter(Boolean)
-        : [];
-    return imgs.map((img: string) => ({
-      image: img,
-      hero: hero,
-    }));
-  });
+  const slides = heroes.length > 0
+    ? heroes.flatMap((hero: any) => {
+      const imgs = Array.isArray(hero.images)
+        ? hero.images
+        : typeof hero.images === 'string'
+          ? hero.images.split(',').filter(Boolean)
+          : [];
+      return imgs.map((img: string) => ({
+        image: img,
+        hero: hero,
+      }));
+    })
+    : [{ image: HERO_CONTENT.bgImage, hero: null }];
 
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
 
@@ -78,7 +80,7 @@ const Hero = () => {
     if (slides.length <= 1) return;
     const interval = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
-    }, 20000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
@@ -91,6 +93,8 @@ const Hero = () => {
   const activeSlide = slides[currentSlideIndex];
   const activeHero = activeSlide?.hero || heroes[0];
   const activeImage = activeSlide?.image;
+
+
 
   const { scrollY } = useScroll();
 
@@ -139,7 +143,7 @@ const Hero = () => {
   };
 
   return (
-    <div className="relative w-full min-h-0 sm:min-h-[60vh] md:min-h-[66vh] lg:min-h-[70vh] flex items-center justify-center py-10 md:py-24">
+    <div className="relative w-full min-h-[300px] sm:min-h-[60vh] md:min-h-[66vh] lg:min-h-[70vh] flex items-center justify-center py-8 md:py-24">
       <div className="absolute inset-0 z-0 bg-[#FFF8F4] overflow-hidden">
         {/* Sliding images background */}
         {slides.length > 0 && activeImage && (
@@ -154,6 +158,7 @@ const Hero = () => {
                 exit={{ x: "-100%" }}
                 transition={{ type: "tween", ease: "easeInOut", duration: 1.0 }}
                 className="absolute inset-0 w-full h-full object-cover"
+                loading="eager"
               />
             </AnimatePresence>
           </div>
@@ -191,17 +196,17 @@ const Hero = () => {
         </div>
 
         {/* Mobile View: API-provided text and CTA button */}
-        <div className="md:hidden flex flex-col items-center gap-3.5 px-4 mb-6">
+        <div className="md:hidden flex flex-col items-center gap-3 px-4 mb-6 text-center">
           <motion.h1
             variants={itemVariants}
-            className="text-xl font-black text-slate-900 tracking-tight leading-tight"
+            className="text-xl font-black text-white tracking-tight leading-tight drop-shadow-[0_2px_4px_rgba(0,0,0,0.85)]"
           >
             {activeHero?.text || "Expert Home Services, Simplified."}
           </motion.h1>
 
           <motion.p
             variants={itemVariants}
-            className="text-xs text-slate-500 font-bold max-w-xs leading-relaxed"
+            className="text-xs text-white/90 font-bold leading-relaxed drop-shadow-[0_1.5px_3px_rgba(0,0,0,0.85)] max-w-[280px]"
           >
             {activeHero?.subtext || "Premium marketplace for all your household needs in Bangladesh."}
           </motion.p>
@@ -209,9 +214,9 @@ const Hero = () => {
           <motion.div variants={itemVariants} className="mt-1">
             <Link
               href={activeHero?.link || "/services"}
-              className="inline-flex items-center justify-center bg-[#FF6014] hover:bg-[#E0530A] text-white py-2.5 px-5 rounded-full font-bold text-xs transition-all shadow-md active:scale-95"
+              className="inline-flex items-center justify-center bg-[#FF6014] hover:bg-[#E0530A] text-white py-2 px-6 rounded-full font-bold text-xs transition-all shadow-md active:scale-95"
             >
-              Get Started
+              Book Now
             </Link>
           </motion.div>
         </div>
