@@ -150,9 +150,9 @@ export function useBookingCartState({ service, isLoading }: UseBookingCartStateP
       quantity: item.quantity,
     }));
     const payload = {
-      user_id: authUser?.id,
-      vendor_id: service?.vendor?.id || 1,
-      service_id: service?.id,
+      user_id: Number(authUser?.id),
+      vendor_id: Number(service?.vendor?.id || 1),
+      service_id: Number(service?.id),
       date: bookingDetails.date,
       time: bookingDetails.time || undefined,
       location: bookingDetails.location,

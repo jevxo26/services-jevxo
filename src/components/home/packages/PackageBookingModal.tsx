@@ -83,10 +83,10 @@ export function PackageBookingModal({
     }
 
     const payload = {
-      user_id: authUser?.id,
-      package_id: selectedPackage.id,
-      service_id: selectedPackage.serviceId,
-      vendor_id: selectedPackage.vendorId || 1,
+      user_id: Number(authUser?.id),
+      package_id: Number(selectedPackage.id),
+      service_id: Number(selectedPackage.serviceId),
+      vendor_id: Number(selectedPackage.vendorId || 1),
       quantity: packageQuantity,
       coupon_code: appliedCoupon?.coupon.code,
       date: bookingDetails.date,

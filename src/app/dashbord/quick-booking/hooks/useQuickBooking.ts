@@ -136,7 +136,8 @@ export function useQuickBooking() {
         notes: bookingDetails.notes || undefined,
         date: bookingDetails.date,
         time: bookingDetails.time || undefined,
-        user_id: selectedClientId || authUser?.id, // Admin can select client, otherwise defaults to agent
+        user_id: Number(selectedClientId || authUser?.id), // Admin can select client, otherwise defaults to agent
+        vendor_id: Number(currentService?.vendor?.id || currentService?.vendor_id || 1),
         service_id: Number(selectedServiceId),
         sub_service_items: subServiceItems,
         coupon_code: appliedCoupon?.coupon?.code,
