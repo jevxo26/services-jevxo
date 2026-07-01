@@ -59,15 +59,13 @@ export function DesktopBookingSidebar({
   if (cartItems.length === 0) {
     return (
       <div className="bg-white border border-slate-100 rounded-[32px] p-6 shadow-[0_8px_30px_rgba(0,0,0,0.02)] space-y-6">
-        {serviceImage ? (
-          <div className="w-full aspect-[4/3] rounded-[24px] overflow-hidden border border-slate-50 shadow-xs">
-            <img src={serviceImage} alt={serviceName} className="w-full h-full object-cover" />
-          </div>
-        ) : (
-          <div className="w-full aspect-[4/3] rounded-[24px] bg-rose-50/50 flex items-center justify-center border border-slate-100">
-            <ShoppingCart className="w-12 h-12 text-[#FF6014]/30" />
-          </div>
-        )}
+        <div className="flex items-center gap-2 pb-3 border-b border-slate-100">
+          <ShoppingCart size={18} className="text-[#FF6014]" />
+          <h3 className="font-black text-slate-900 text-sm md:text-base">Booking Summary</h3>
+        </div>
+        <div className="bg-[#FFF8F4] border border-[#FF6014]/10 rounded-2xl p-4 text-center">
+          <p className="text-xs font-bold text-slate-500">Select services from the list to start booking.</p>
+        </div>
         <div className="space-y-4">
           <p className="text-[10px] font-bold uppercase tracking-widest text-[#FF6014]">Why Choose Rajseba</p>
           <div className="space-y-3.5">
@@ -80,9 +78,6 @@ export function DesktopBookingSidebar({
               </div>
             ))}
           </div>
-        </div>
-        <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 text-center">
-          <p className="text-xs font-bold text-slate-400">Select services from the list to start booking.</p>
         </div>
       </div>
     );

@@ -239,17 +239,24 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
                 </div>
               )}
 
+              <div id="reviews">
+                <ServiceReviews reviews={reviews} />
+              </div>
+            </div>
+
+            {/* Sidebar Column */}
+            <div className="space-y-6 md:space-y-8 sticky top-[136px] z-20">
               <div id="vendor">
                 <VendorProfile vendor={service.vendor} serviceRating={rating} />
               </div>
 
               {service.faq && service.faq.length > 0 && (
                 <div id="faq" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
-                  <h3 className="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2">
-                    <span className="w-1.5 h-6 bg-[#FF6014] rounded-full" />
-                    Frequently Asked Questions
+                  <h3 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <span className="w-1.5 h-5 bg-[#FF6014] rounded-full" />
+                    FAQ
                   </h3>
-                  <p className="text-xs text-slate-400 mb-6 font-medium">Find answers to common questions about this service</p>
+                  <p className="text-xs text-slate-400 mb-4 font-medium">Common questions about this service</p>
                   <div className="divide-y divide-slate-100">
                     {service.faq.map((item: any, idx: number) => {
                       const question = item.question || item.q || item.title || "";
@@ -261,27 +268,24 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
                 </div>
               )}
 
-              <div id="reviews">
-                <ServiceReviews reviews={reviews} />
-              </div>
-              
               <Commitments />
-            </div>
-
-            <div className="hidden lg:block sticky top-[136px] z-20">
-              <DesktopBookingSidebar cartItems={state.cartItems} cartItemCount={state.cartItemCount} cartTotal={state.cartTotal} payableTotal={state.payableTotal} appliedCoupon={state.appliedCoupon} setAppliedCoupon={state.setAppliedCoupon} bookingDetails={state.bookingDetails} setBookingDetails={state.setBookingDetails} isBooking={state.isBooking} onSubmit={state.handleConfirmBooking} serviceId={service.id} serviceImage={service.image} serviceName={service.name} onUpdateQuantity={state.handleUpdateQuantity} onRemoveFromCart={state.handleRemoveFromCart} onClearCart={state.handleClearCart} />
             </div>
           </div>
         </div>
       </div>
 
-      {/* Mobile Sticky Bottom CTA Bar */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 px-4 pb-[calc(env(safe-area-inset-bottom)+82px)] pointer-events-none md:hidden">
-        <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/50 shadow-[0_-8px_30px_rgba(0,0,0,0.08)] rounded-[24px] p-3 flex items-center justify-between gap-3">
-          {state.cartItems.length > 0 ? (
-            <>
+      {/* Floating Sticky Bottom CTA Bar */}
+      <AnimatePresence>
+        {state.cartItems.length > 0 && (
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center"
+          >
+            <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/50 shadow-[0_12px_40px_rgba(255,96,20,0.15)] rounded-[24px] p-3 flex items-center justify-between gap-6 w-full max-w-md animate-none">
               <div className="flex items-center gap-3 min-w-0 pl-1">
-                <div className="w-10 h-10 rounded-xl bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center shrink-0 border border-[#FF6014]/10">
+                <div className="w-10 h-10 rounded-xl bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center shrink-0 border border-[#FF6014]/10 animate-none">
                   <ShoppingCart size={18} className="stroke-[2.5]" />
                 </div>
                 <div className="min-w-0">
@@ -292,28 +296,14 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
               <button
                 type="button"
                 onClick={() => state.setIsModalOpen(true)}
-                className="px-6 py-3 rounded-xl text-xs font-black text-white bg-[#FF6014] hover:bg-[#E0530A] transition-all duration-250 shadow-md active:scale-95 shrink-0"
+                className="px-6 py-3 rounded-xl text-xs font-black text-white bg-[#FF6014] hover:bg-[#E0530A] transition-all duration-250 shadow-md active:scale-95 shrink-0 cursor-pointer"
               >
                 Proceed to Book
               </button>
-            </>
-          ) : (
-            <>
-              <div className="flex flex-col justify-center pl-2">
-                <p className="text-xs font-black text-slate-800">Quick Booking</p>
-                <p className="text-[10px] font-medium text-slate-400 mt-0.5">Book instantly in 2 taps</p>
-              </div>
-              <button
-                type="button"
-                onClick={() => state.handleInitiateBooking()}
-                className="px-8 py-3 rounded-xl text-xs font-black text-white bg-[#FF6014] hover:bg-[#E0530A] transition-all duration-250 shadow-md active:scale-95 shrink-0"
-              >
-                Book Now
-              </button>
-            </>
-          )}
-        </div>
-      </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       <MobileBookingDrawer isOpen={state.isModalOpen} onClose={() => state.setIsModalOpen(false)} cartItems={state.cartItems} cartItemCount={state.cartItemCount} cartTotal={state.cartTotal} payableTotal={state.payableTotal} appliedCoupon={state.appliedCoupon} setAppliedCoupon={state.setAppliedCoupon} bookingDetails={state.bookingDetails} setBookingDetails={state.setBookingDetails} isBooking={state.isBooking} onSubmit={state.handleConfirmBooking} serviceId={service.id} onUpdateQuantity={state.handleUpdateQuantity} onRemoveFromCart={state.handleRemoveFromCart} onClearCart={state.handleClearCart} />
     </div>

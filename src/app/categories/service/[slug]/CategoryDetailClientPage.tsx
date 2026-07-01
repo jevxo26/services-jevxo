@@ -1,6 +1,42 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+
+const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-slate-100 last:border-b-0 py-4">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between text-left font-bold text-slate-800 hover:text-[#FF6014] transition-colors gap-4 py-2 focus:outline-none"
+      >
+        <span className="text-sm md:text-base">{question}</span>
+        <span className={`w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#FF6014]/10 text-[#FF6014]' : 'text-slate-400'}`}>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="pb-4 pt-2 text-sm text-slate-500 leading-relaxed whitespace-pre-line">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 import { CategorizedHero } from '@/components/home/categorizedServices/CategorizedHero';
 import { SpecializedServices } from '@/components/home/categorizedServices/SpecializedServices';
 import { Packages } from '@/components/home/categorizedServices/Packages';
@@ -67,15 +103,26 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
     ? (reviews.reduce((acc: number, r: any) => acc + (r.rating || 5), 0) / reviewsCount).toFixed(1)
     : "0.0";
 
+  const tabs = [
+    { id: "specialized-services", label: "Services" },
+    ...(service.packages?.length ? [{ id: "packages", label: "Packages" }] : []),
+    ...(service.overview ? [{ id: "overview", label: "Overview" }] : []),
+    ...(service.details ? [{ id: "details", label: "Details" }] : []),
+    ...(service.employees?.length ? [{ id: "experts", label: "Experts" }] : []),
+    { id: "vendor", label: "Vendor Profile" },
+    ...(service.faq?.length ? [{ id: "faq", label: "FAQ" }] : []),
+    { id: "reviews", label: "Reviews" },
+  ];
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFFDFD] via-slate-50/70 to-[#FFF8F4] relative pb-16">
       <div className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0" style={{ backgroundSize: "auto" }} />
       <div className="relative z-10">
         <CategorizedHero id={service.id} name={service.name} description={service.description} image={service.image} rating={rating} bookingsCount={bookingsCount} reviewsCount={reviewsCount} categoryName={service.category?.name} />
 
-        <div className="sticky top-[72px] z-30 bg-[#FFF8F4]/50 backdrop-blur-lg border-b border-slate-100 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.02)] hidden md:block">
+        <div className="sticky top-[72px] z-30 max-w-7xl mx-auto bg-[#FFF8F4]/50 backdrop-blur-lg border-b border-slate-100 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.02)] hidden md:block">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex gap-2">
-            {[{ id: "specialized-services", label: "Services" }, { id: "packages", label: "Packages" }, { id: "experts", label: "Experts" }, { id: "vendor", label: "Vendor Profile" }, { id: "reviews", label: "Reviews" }].map((tab) => (
+            {tabs.map((tab) => (
               <button key={tab.id} onClick={() => state.scrollToSection(tab.id)} className={`text-xs font-bold px-4 py-2.5 rounded-full transition-all duration-300 cursor-pointer ${state.activeTab === tab.id ? "text-white bg-[#FF6014] shadow-md shadow-rose-100" : "text-slate-400 hover:text-slate-700 hover:bg-slate-50"}`}>{tab.label}</button>
             ))}
           </div>
@@ -87,15 +134,49 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
               <div id="specialized-services">
                 <SpecializedServices nestedServices={service.nestedServices} serviceId={service.id} vendorId={service.vendor?.id} serviceImage={service.image} serviceName={service.name} cartQuantities={state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})} onUpdateQuantity={state.handleUpdateQuantity} onAddToCart={state.handleAddToCart} onRemoveFromCart={state.handleRemoveFromCart} onInitiateBooking={state.handleInitiateBooking} />
               </div>
-              <div id="packages"><Packages packages={service.packages} serviceId={service.id} vendorId={service.vendor?.id} serviceName={service.name} serviceImage={service.image} /></div>
-              <div id="experts"><Experts employees={service.employees} /></div>
-              <div id="vendor"><VendorProfile vendor={service.vendor} serviceRating={rating} /></div>
-              <div id="reviews"><ServiceReviews reviews={reviews} /></div>
-              <Commitments />
+              
+              {service.packages && service.packages.length > 0 && (
+                <div id="packages">
+                  <Packages packages={service.packages} serviceId={service.id} vendorId={service.vendor?.id} serviceName={service.name} serviceImage={service.image} />
+                </div>
+              )}
+
+              {service.employees && service.employees.length > 0 && (
+                <div id="experts">
+                  <Experts employees={service.employees} />
+                </div>
+              )}
+
+              <div id="reviews">
+                <ServiceReviews reviews={reviews} />
+              </div>
             </div>
 
-            <div className="hidden lg:block sticky top-[136px] z-20">
-              <DesktopBookingSidebar cartItems={state.cartItems} cartItemCount={state.cartItemCount} cartTotal={state.cartTotal} payableTotal={state.payableTotal} appliedCoupon={state.appliedCoupon} setAppliedCoupon={state.setAppliedCoupon} bookingDetails={state.bookingDetails} setBookingDetails={state.setBookingDetails} isBooking={state.isBooking} onSubmit={state.handleConfirmBooking} serviceId={service.id} serviceImage={service.image} serviceName={service.name} onUpdateQuantity={state.handleUpdateQuantity} onRemoveFromCart={state.handleRemoveFromCart} onClearCart={state.handleClearCart} />
+            {/* Sidebar Column */}
+            <div className="space-y-6 md:space-y-8 sticky top-[136px] z-20">
+              <div id="vendor">
+                <VendorProfile vendor={service.vendor} serviceRating={rating} />
+              </div>
+
+              {service.faq && service.faq.length > 0 && (
+                <div id="faq" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
+                  <h3 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <span className="w-1.5 h-5 bg-[#FF6014] rounded-full" />
+                    FAQ
+                  </h3>
+                  <p className="text-xs text-slate-400 mb-4 font-medium">Common questions about this service</p>
+                  <div className="divide-y divide-slate-100">
+                    {service.faq.map((item: any, idx: number) => {
+                      const question = item.question || item.q || item.title || "";
+                      const answer = item.answer || item.a || item.content || "";
+                      if (!question || !answer) return null;
+                      return <FAQItem key={idx} question={question} answer={answer} />;
+                    })}
+                  </div>
+                </div>
+              )}
+
+              <Commitments />
             </div>
           </div>
         </div>
@@ -103,18 +184,29 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
 
       <AnimatePresence>
         {state.cartItems.length > 0 && (
-          <motion.div initial={{ y: 100, opacity: 0 }} animate={{ y: 0, opacity: 1 }} exit={{ y: 100, opacity: 0 }} className="fixed bottom-0 left-0 right-0 z-40 px-4 pb-[calc(env(safe-area-inset-bottom)+82px)] pointer-events-none md:hidden">
-            <div className="pointer-events-auto bg-white/90 backdrop-blur-xl border border-white/60 shadow-[0_12px_40px_rgba(255,96,20,0.15)] rounded-[28px] p-4 px-5 flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3.5 min-w-0">
-                <div className="w-12 h-12 rounded-[18px] bg-gradient-to-br from-[#FFF8F4] to-[#FFEFE6] text-[#FF6014] flex items-center justify-center shrink-0 border border-[#FF6014]/20 shadow-inner">
-                  <ShoppingCart size={20} className="stroke-[2.2]" />
+          <motion.div
+            initial={{ y: 100, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ y: 100, opacity: 0 }}
+            className="fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center"
+          >
+            <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/50 shadow-[0_12px_40px_rgba(255,96,20,0.15)] rounded-[24px] p-3 flex items-center justify-between gap-6 w-full max-w-md animate-none">
+              <div className="flex items-center gap-3 min-w-0 pl-1">
+                <div className="w-10 h-10 rounded-xl bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center shrink-0 border border-[#FF6014]/10 animate-none">
+                  <ShoppingCart size={18} className="stroke-[2.5]" />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-xs font-extrabold text-slate-500 leading-none">{state.cartItemCount} service{state.cartItemCount === 1 ? "" : "s"}</p>
-                  <p className="text-[17px] font-black text-slate-900 mt-1 leading-none">৳{state.payableTotal.toLocaleString()}</p>
+                  <p className="text-[10px] font-bold text-slate-400 leading-none">{state.cartItemCount} item{state.cartItemCount === 1 ? "" : "s"}</p>
+                  <p className="text-base font-black text-slate-900 mt-0.5 leading-none">৳{state.payableTotal.toLocaleString()}</p>
                 </div>
               </div>
-              <button type="button" onClick={() => state.setIsModalOpen(true)} className="px-6 py-3.5 rounded-[20px] text-sm font-extrabold text-white bg-gradient-to-r from-[#FF6014] to-[#FF7C71] hover:opacity-95 transition-all duration-200 shadow-md shadow-[#FF6014]/25 cursor-pointer active:scale-95 shrink-0">Book Now</button>
+              <button
+                type="button"
+                onClick={() => state.setIsModalOpen(true)}
+                className="px-6 py-3 rounded-xl text-xs font-black text-white bg-[#FF6014] hover:bg-[#E0530A] transition-all duration-250 shadow-md active:scale-95 shrink-0 cursor-pointer"
+              >
+                Proceed to Book
+              </button>
             </div>
           </motion.div>
         )}
