@@ -199,7 +199,7 @@ export function useBookingCartState({ service, isLoading }: UseBookingCartStateP
 
   // Keep active tab updated on scroll
   useEffect(() => {
-    const sections = ["specialized-services", "packages", "experts", "vendor", "reviews"];
+    const sections = ["specialized-services", "packages", "overview", "details", "experts", "vendor", "faq", "reviews"];
     const handleScroll = () => {
       const scrollPos = window.scrollY + 200;
       for (const section of sections) {

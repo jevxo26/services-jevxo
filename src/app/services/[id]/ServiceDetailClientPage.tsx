@@ -1,6 +1,98 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+
+const renderFormattedText = (text: string) => {
+  if (!text) return null;
+  const lines = text.split("\n").filter(line => line.trim() !== "");
+  
+  return (
+    <ul className="space-y-3">
+      {lines.map((line, idx) => {
+        const isHeader = line.endsWith("?") || line.endsWith(":");
+        if (isHeader) {
+          return (
+            <li key={idx} className="font-extrabold text-slate-800 text-base mt-5 first:mt-0 list-none">
+              {line}
+            </li>
+          );
+        }
+        return (
+          <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014] mt-2 shrink-0" />
+            <span>{line.replace(/^[•\-*]\s*/, "")}</span>
+          </li>
+        );
+      })}
+    </ul>
+  );
+};
+
+const renderDetailsText = (text: string) => {
+  if (!text) return null;
+  const lines = text.split("\n").filter(line => line.trim() !== "");
+  
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {lines.map((line, idx) => {
+        const isHeader = line.endsWith("?") || line.endsWith(":") || line.toLowerCase().includes("key features") || line.toLowerCase().includes("specifications");
+        if (isHeader) {
+          return (
+            <div key={idx} className="col-span-full font-extrabold text-slate-800 text-base mt-4 first:mt-0 border-b border-slate-100 pb-2 mb-2">
+              {line}
+            </div>
+          );
+        }
+        return (
+          <div key={idx} className="flex items-start gap-3 bg-slate-50/40 hover:bg-slate-50 p-4 rounded-2xl border border-slate-100 transition-colors duration-200">
+            <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
+              <svg className="w-3 h-3 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
+              </svg>
+            </span>
+            <span className="text-sm text-slate-600 leading-relaxed font-semibold">{line.replace(/^[•\-*]\s*/, "")}</span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  return (
+    <div className="border-b border-slate-100 last:border-b-0 py-4">
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className="w-full flex items-center justify-between text-left font-bold text-slate-800 hover:text-[#FF6014] transition-colors gap-4 py-2 focus:outline-none"
+      >
+        <span className="text-sm md:text-base">{question}</span>
+        <span className={`w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#FF6014]/10 text-[#FF6014]' : 'text-slate-400'}`}>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+          </svg>
+        </span>
+      </button>
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.25, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <div className="pb-4 pt-2 text-sm text-slate-500 leading-relaxed whitespace-pre-line">
+              {answer}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+};
+
 import { CategorizedHero } from '@/components/home/categorizedServices/CategorizedHero';
 import { SpecializedServices } from '@/components/home/categorizedServices/SpecializedServices';
 import { Packages } from '@/components/home/categorizedServices/Packages';
@@ -79,6 +171,16 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
   const rating = reviewsCount > 0
     ? (reviews.reduce((acc: number, r: any) => acc + (r.rating || 5), 0) / reviewsCount).toFixed(1)
     : "0.0";
+  const tabs = [
+    { id: "specialized-services", label: "Services" },
+    ...(service.packages?.length ? [{ id: "packages", label: "Packages" }] : []),
+    ...(service.overview ? [{ id: "overview", label: "Overview" }] : []),
+    ...(service.details ? [{ id: "details", label: "Details" }] : []),
+    ...(service.employees?.length ? [{ id: "experts", label: "Experts" }] : []),
+    { id: "vendor", label: "Vendor Profile" },
+    ...(service.faq?.length ? [{ id: "faq", label: "FAQ" }] : []),
+    { id: "reviews", label: "Reviews" },
+  ];
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#FFFDFD] via-slate-50/70 to-[#FFF8F4] relative pb-16">
@@ -88,7 +190,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
 
         <div className="sticky top-[72px] z-30 max-w-7xl mx-auto bg-[#FFF8F4]/50 backdrop-blur-lg border-b border-slate-100 shadow-[0_4px_24px_-6px_rgba(0,0,0,0.02)] hidden md:block">
           <div className="max-w-7xl mx-auto px-4 md:px-6 py-2 flex gap-2">
-            {[{ id: "specialized-services", label: "Services" }, { id: "packages", label: "Packages" }, { id: "experts", label: "Experts" }, { id: "vendor", label: "Vendor Profile" }, { id: "reviews", label: "Reviews" }].map((tab) => (
+            {tabs.map((tab) => (
               <button key={tab.id} onClick={() => state.scrollToSection(tab.id)} className={`text-xs font-bold px-4 py-2.5 rounded-full transition-all duration-300 cursor-pointer ${state.activeTab === tab.id ? "text-white bg-[#FF6014] shadow-md shadow-rose-100" : "text-slate-400 hover:text-slate-700 hover:bg-slate-50"}`}>{tab.label}</button>
             ))}
           </div>
@@ -100,10 +202,69 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
               <div id="specialized-services">
                 <SpecializedServices nestedServices={service.nestedServices} serviceId={service.id} vendorId={service.vendor?.id} serviceImage={service.image} serviceName={service.name} cartQuantities={state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})} onUpdateQuantity={state.handleUpdateQuantity} onAddToCart={state.handleAddToCart} onRemoveFromCart={state.handleRemoveFromCart} onInitiateBooking={state.handleInitiateBooking} />
               </div>
-              <div id="packages"><Packages packages={service.packages} serviceId={service.id} vendorId={service.vendor?.id} serviceName={service.name} serviceImage={service.image} /></div>
-              <div id="experts"><Experts employees={service.employees} /></div>
-              <div id="vendor"><VendorProfile vendor={service.vendor} serviceRating={rating} /></div>
-              <div id="reviews"><ServiceReviews reviews={reviews} /></div>
+              
+              {service.packages && service.packages.length > 0 && (
+                <div id="packages">
+                  <Packages packages={service.packages} serviceId={service.id} vendorId={service.vendor?.id} serviceName={service.name} serviceImage={service.image} />
+                </div>
+              )}
+
+              {service.overview && (
+                <div id="overview" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
+                  <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <span className="w-1.5 h-6 bg-[#FF6014] rounded-full" />
+                    Overview
+                  </h3>
+                  <div className="prose prose-slate text-sm text-slate-600 leading-relaxed">
+                    {renderFormattedText(service.overview)}
+                  </div>
+                </div>
+              )}
+
+              {service.details && (
+                <div id="details" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
+                  <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
+                    <span className="w-1.5 h-6 bg-[#FF6014] rounded-full" />
+                    Key Features & Details
+                  </h3>
+                  <div className="prose prose-slate text-sm text-slate-600 leading-relaxed">
+                    {renderDetailsText(service.details)}
+                  </div>
+                </div>
+              )}
+
+              {service.employees && service.employees.length > 0 && (
+                <div id="experts">
+                  <Experts employees={service.employees} />
+                </div>
+              )}
+
+              <div id="vendor">
+                <VendorProfile vendor={service.vendor} serviceRating={rating} />
+              </div>
+
+              {service.faq && service.faq.length > 0 && (
+                <div id="faq" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
+                  <h3 className="text-xl font-bold text-slate-800 mb-2 flex items-center gap-2">
+                    <span className="w-1.5 h-6 bg-[#FF6014] rounded-full" />
+                    Frequently Asked Questions
+                  </h3>
+                  <p className="text-xs text-slate-400 mb-6 font-medium">Find answers to common questions about this service</p>
+                  <div className="divide-y divide-slate-100">
+                    {service.faq.map((item: any, idx: number) => {
+                      const question = item.question || item.q || item.title || "";
+                      const answer = item.answer || item.a || item.content || "";
+                      if (!question || !answer) return null;
+                      return <FAQItem key={idx} question={question} answer={answer} />;
+                    })}
+                  </div>
+                </div>
+              )}
+
+              <div id="reviews">
+                <ServiceReviews reviews={reviews} />
+              </div>
+              
               <Commitments />
             </div>
 

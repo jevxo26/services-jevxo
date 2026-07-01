@@ -86,6 +86,7 @@ const cardVariants = {
 const ExploreCategories = () => {
   const { data: categoriesRes, isLoading, isError } = useGetPublicCategoriesQuery();
   const [isMounted, setIsMounted] = useState(false);
+  const [showAllMobile, setShowAllMobile] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -157,6 +158,7 @@ const ExploreCategories = () => {
 
               const isNinthItem = index === 8;
               const isAfterNinthItem = index > 8;
+              const isLastItem = index === categories.length - 1;
 
               return (
                 <Fragment key={cat.id}>
@@ -164,7 +166,7 @@ const ExploreCategories = () => {
                   <motion.div
                     variants={cardVariants}
                     whileTap={{ scale: 0.97 }}
-                    className={`h-full ${isNinthItem || isAfterNinthItem ? "hidden md:block" : "block"}`}
+                    className={`h-full ${(isNinthItem || isAfterNinthItem) && !showAllMobile ? "hidden md:block" : "block"}`}
                   >
                     <Link href={`/categories/${cat.id}`} className="block h-full">
                       <div
@@ -175,7 +177,7 @@ const ExploreCategories = () => {
                           bg-gradient-to-br from-white to-[#e8eaed]
                           border border-white/80
                           cursor-pointer
-                          hover-card-premium
+                          category-card-blue-animated
                         "
                       >
                         {/* Gloss sheen */}
@@ -236,13 +238,16 @@ const ExploreCategories = () => {
                   </motion.div>
 
                   {/* See More Card on Mobile */}
-                  {isNinthItem && (
+                  {isNinthItem && !showAllMobile && (
                     <motion.div
                       variants={cardVariants}
                       whileTap={{ scale: 0.97 }}
                       className="h-full block md:hidden"
                     >
-                      <Link href="/services" className="block h-full">
+                      <button
+                        onClick={() => setShowAllMobile(true)}
+                        className="w-full text-left block h-full focus:outline-none"
+                      >
                         <div
                           className="
                             group relative overflow-hidden
@@ -251,7 +256,7 @@ const ExploreCategories = () => {
                             bg-gradient-to-br from-white to-[#e8eaed]
                             border border-white/80
                             cursor-pointer
-                            hover-card-premium
+                            category-card-blue-animated
                           "
                         >
                           {/* Gloss sheen */}
@@ -297,7 +302,76 @@ const ExploreCategories = () => {
                             See More
                           </span>
                         </div>
-                      </Link>
+                      </button>
+                    </motion.div>
+                  )}
+
+                  {/* See Less Card on Mobile */}
+                  {isLastItem && showAllMobile && (
+                    <motion.div
+                      variants={cardVariants}
+                      whileTap={{ scale: 0.97 }}
+                      className="h-full block md:hidden"
+                    >
+                      <button
+                        onClick={() => setShowAllMobile(false)}
+                        className="w-full text-left block h-full focus:outline-none"
+                      >
+                        <div
+                          className="
+                            group relative overflow-hidden
+                            flex flex-col items-center justify-center
+                            h-full rounded-2xl p-3
+                            bg-gradient-to-br from-white to-[#e8eaed]
+                            border border-white/80
+                            cursor-pointer
+                            category-card-blue-animated
+                          "
+                        >
+                          {/* Gloss sheen */}
+                          <span
+                            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/65 to-transparent"
+                            aria-hidden
+                          />
+
+                          {/* Icon orb */}
+                          <div
+                            className="
+                              relative overflow-hidden
+                              w-12 h-12 rounded-full mb-2
+                              flex items-center justify-center
+                              bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
+                              ring-1 ring-white/60
+                              shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
+                              transition-all duration-500 ease-out
+                              group-hover:scale-110
+                              group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
+                              group-hover:ring-[#ff6014]/30
+                              group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
+                            "
+                          >
+                            <span
+                              className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
+                              aria-hidden
+                            />
+                            <span
+                              className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
+                              aria-hidden
+                            />
+                            <LayoutGrid
+                              className="relative w-5 h-5 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                              strokeWidth={1.75}
+                            />
+                          </div>
+
+                          {/* Label */}
+                          <span
+                            className="font-semibold text-[10px] text-center text-[#ff6014] mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] flex items-center justify-center"
+                          >
+                            See Less
+                          </span>
+                        </div>
+                      </button>
                     </motion.div>
                   )}
                 </Fragment>

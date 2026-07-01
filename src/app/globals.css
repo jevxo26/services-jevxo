@@ -255,6 +255,7 @@ body.modal-open nav {
 html:not(.dashboard-html):not(.modal-open) {
   overflow-y: scroll !important;
 }
+
 html.dashboard-html {
   overflow: hidden !important;
 }
@@ -288,6 +289,7 @@ html.dashboard-html {
    Responsive Dashboard Modals for Mobile Viewports
    ======================================================== */
 @media (max-w: 768px) {
+
   /* 1. Target the fixed overlay containers */
   div[class*="fixed"][class*="inset-0"][class*="z-50"],
   div[class*="fixed"][class*="inset-0"][class*="z-40"],
@@ -302,9 +304,9 @@ html.dashboard-html {
   }
 
   /* 2. Target the modal card content */
-  div[class*="fixed"][class*="inset-0"][class*="z-50"] > div,
-  div[class*="fixed"][class*="inset-0"][class*="z-40"] > div,
-  div[class*="fixed"][class*="inset-0"][class*="z-[60]"] > div {
+  div[class*="fixed"][class*="inset-0"][class*="z-50"]>div,
+  div[class*="fixed"][class*="inset-0"][class*="z-40"]>div,
+  div[class*="fixed"][class*="inset-0"][class*="z-[60]"]>div {
     margin: auto !important;
     width: 100% !important;
     max-width: 100% !important;
@@ -316,7 +318,7 @@ html.dashboard-html {
   }
 
   /* 3. Handle forms nested inside the modal card */
-  div[class*="fixed"][class*="inset-0"] > div > form {
+  div[class*="fixed"][class*="inset-0"]>div>form {
     display: flex !important;
     flex-direction: column !important;
     flex: 1 1 auto !important;
@@ -327,23 +329,23 @@ html.dashboard-html {
   }
 
   /* 4. Keep Modal Header sticky/non-shrinkable */
-  div[class*="fixed"][class*="inset-0"] > div > div:first-child,
-  div[class*="fixed"][class*="inset-0"] > div > form > div:first-child {
+  div[class*="fixed"][class*="inset-0"]>div>div:first-child,
+  div[class*="fixed"][class*="inset-0"]>div>form>div:first-child {
     flex-shrink: 0 !important;
   }
 
   /* 5. Keep Modal Footer sticky/non-shrinkable */
-  div[class*="fixed"][class*="inset-0"] > div .border-t,
-  div[class*="fixed"][class*="inset-0"] > div form .border-t {
+  div[class*="fixed"][class*="inset-0"]>div .border-t,
+  div[class*="fixed"][class*="inset-0"]>div form .border-t {
     flex-shrink: 0 !important;
     margin-top: auto !important;
   }
 
   /* 6. Make the body content of the modal card scrollable */
   /* Scroll body inside direct div elements */
-  div[class*="fixed"][class*="inset-0"] > div > div:not(:first-child):not(.border-t),
+  div[class*="fixed"][class*="inset-0"]>div>div:not(:first-child):not(.border-t),
   /* Scroll body inside form elements */
-  div[class*="fixed"][class*="inset-0"] > div > form > div:not(.border-t) {
+  div[class*="fixed"][class*="inset-0"]>div>form>div:not(.border-t) {
     overflow-y: auto !important;
     flex: 1 1 auto !important;
     -webkit-overflow-scrolling: touch;
