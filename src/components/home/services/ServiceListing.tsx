@@ -372,7 +372,7 @@ export default function ServiceListing({
 
   return (
     <section className="py-6 bg-slate-50/30">
-      <div className="max-w-[1400px] mx-auto px-4">
+      <div className="max-w-7xl mx-auto px-4 md:px-6">
 
         {/* Results count heading — shown only when a category name is provided (e.g. from category page) */}
         {categoryName && (
@@ -405,10 +405,10 @@ export default function ServiceListing({
 
 
         {/* Top Search & Actions bar */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 bg-white p-4 rounded-2xl border border-slate-100 shadow-sm">
+        <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-8 bg-white p-5 rounded-[24px] border border-slate-100 shadow-[0_4px_25px_rgba(0,0,0,0.015)]">
           <div className="flex flex-1 flex-col md:flex-row md:items-center gap-4">
-            <div className="relative flex-1 max-w-md w-full">
-              <span className="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+            <div className="relative flex-1 max-w-lg w-full">
+              <span className="absolute inset-y-0 left-0 flex items-center pl-4 pointer-events-none text-slate-400">
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" strokeWidth="2.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                 </svg>
@@ -418,54 +418,54 @@ export default function ServiceListing({
                 placeholder="Search for services, repairs..."
                 value={searchQuery}
                 onChange={(e) => setFilters({ searchQuery: e.target.value, currentPage: 1 })}
-                className="w-full pl-10 pr-4 py-2.5 bg-slate-50/50 border border-slate-100 rounded-xl text-sm font-semibold placeholder-slate-400 text-slate-700 focus:outline-none focus:border-[#FF6014] transition-all"
+                className="w-full pl-11 pr-4 py-3 bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 focus:bg-white rounded-2xl text-xs sm:text-sm font-bold placeholder-slate-400 text-slate-700 focus:outline-none focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/5 transition-all shadow-[inset_0_1px_2px_rgba(0,0,0,0.02)]"
                 suppressHydrationWarning
               />
             </div>
 
             {/* Desktop Sort By and Min Rating select dropdowns */}
-            <div className="hidden md:flex items-center gap-3">
+            <div className="flex items-center gap-3">
               {/* Min Rating Select */}
-              <div className="relative min-w-[140px]">
+              <div className="relative min-w-[175px]">
                 <CustomSelect
                   options={ratingDropdownOptions}
                   value={selectedRating || "all"}
                   onChange={(val) => setFilters({ selectedRating: val === "all" ? "" : val, currentPage: 1 })}
                   placeholder="Min Rating (All)"
-                  triggerClassName="bg-slate-50/50 border border-slate-100 hover:border-slate-300 rounded-xl px-4 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:border-[#FF6014] focus-visible:ring-0 focus:ring-0 transition-all cursor-pointer h-[40px] shadow-none"
+                  triggerClassName="bg-slate-50/70 border border-slate-200/80 hover:border-slate-300 rounded-2xl px-4 py-2.5 text-xs font-extrabold text-slate-700 focus:outline-none focus:border-[#FF6014] focus-visible:ring-0 focus:ring-0 transition-all cursor-pointer h-[46px] shadow-none"
                 />
               </div>
 
               {/* Sort By Select */}
-              <div className="relative min-w-[160px]">
+              <div className="relative min-w-[200px]">
                 <CustomSelect
                   options={sortDropdownOptions}
                   value={sortBy}
                   onChange={(val) => setFilters({ sortBy: val, currentPage: 1 })}
                   placeholder="Sort: Popularity"
-                  triggerClassName="bg-slate-50/50 border border-slate-100 hover:border-slate-300 rounded-xl px-4 py-2 text-xs font-bold text-slate-700 focus:outline-none focus:border-[#FF6014] focus-visible:ring-0 focus:ring-0 transition-all cursor-pointer h-[40px] shadow-none"
+                  triggerClassName="bg-slate-50/70 border border-[#e5e7eb] hover:border-slate-300 rounded-2xl px-4 py-2.5 text-xs font-extrabold text-slate-700 focus:outline-none focus:border-[#FF6014] focus-visible:ring-0 focus:ring-0 transition-all cursor-pointer h-[46px] shadow-none"
                 />
               </div>
             </div>
           </div>
 
-          <div className="flex items-center justify-between sm:justify-end gap-3 w-full sm:w-auto">
+          <div className="flex items-center justify-between lg:justify-end gap-3 w-full lg:w-auto pt-3 lg:pt-0 border-t border-slate-100 lg:border-none">
             {/* Filter Toggle Button for Mobile Only */}
             <button
               type="button"
               onClick={() => setIsFilterOpen(true)}
-              className="flex md:hidden items-center gap-2 px-4 py-2.5 rounded-xl border border-slate-100 bg-white text-xs font-extrabold text-slate-700 shadow-sm cursor-pointer"
+              className="flex md:hidden items-center gap-2 px-5 py-3 rounded-2xl border border-slate-200 bg-white text-xs font-black text-slate-700 hover:bg-slate-50 shadow-sm active:scale-98 transition-all cursor-pointer h-[46px]"
             >
               <SlidersHorizontal size={14} className="text-[#FF6014]" strokeWidth={2.5} />
               Filters
               {activeFilterCount > 0 && (
-                <span className="flex items-center justify-center min-w-[18px] h-4.5 px-1 rounded-full bg-[#FF6014] text-white text-[9px] font-bold">
+                <span className="flex items-center justify-center min-w-[18px] h-4.5 px-1.5 rounded-full bg-[#FF6014] text-white text-[9px] font-black">
                   {activeFilterCount}
                 </span>
               )}
             </button>
 
-            <span className="text-xs font-semibold text-slate-400 bg-slate-50 px-3 py-2 rounded-xl">
+            <span className="text-xs font-extrabold text-slate-500 bg-slate-100/85 px-4 py-2.5 rounded-2xl border border-slate-200/40">
               {filteredListings.length} {filteredListings.length === 1 ? "result" : "results"}
             </span>
           </div>

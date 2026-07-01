@@ -42,6 +42,21 @@ const itemVariants = {
   },
 } as const;
 
+const slideVariants = {
+  enter: (direction: number) => ({
+    x: direction > 0 ? "100%" : direction < 0 ? "-100%" : 0,
+    opacity: 0,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+  },
+  exit: (direction: number) => ({
+    x: direction < 0 ? "100%" : direction > 0 ? "-100%" : 0,
+    opacity: 0,
+  }),
+};
+
 const Hero = () => {
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
@@ -73,19 +88,34 @@ const Hero = () => {
     })
     : [{ image: HERO_CONTENT.bgImage, hero: null }];
 
-  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [[currentSlideIndex, direction], setSlideState] = useState([0, 0]);
+
+  const paginate = (newDirection: number) => {
+    if (slides.length <= 1) return;
+    setSlideState(([prevIndex]) => {
+      let nextIndex = (prevIndex + newDirection) % slides.length;
+      if (nextIndex < 0) nextIndex = slides.length - 1;
+      return [nextIndex, newDirection];
+    });
+  };
+
+  const handleIndicatorClick = (index: number) => {
+    if (index === currentSlideIndex) return;
+    const clickDirection = index > currentSlideIndex ? 1 : -1;
+    setSlideState([index, clickDirection]);
+  };
 
   useEffect(() => {
     if (slides.length <= 1) return;
     const interval = setInterval(() => {
-      setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
+      paginate(1);
     }, 4000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
   useEffect(() => {
     if (currentSlideIndex >= slides.length) {
-      setCurrentSlideIndex(0);
+      setSlideState([0, 0]);
     }
   }, [slides.length, currentSlideIndex]);
 
@@ -150,27 +180,57 @@ const Hero = () => {
     router.push(qs ? `/services?${qs}` : "/services");
   };
 
+  const handleSlideClick = () => {
+    const link = activeSlide?.hero?.link;
+    if (link) {
+      if (link.startsWith("http")) {
+        window.open(link, "_blank", "noopener,noreferrer");
+      } else {
+        router.push(link);
+      }
+    }
+  };
+
   return (
-    <div className="relative w-full min-h-[240px] lg:min-h-[50vh] mt-0 md:mt-2 flex items-center max-w-7xl mx-auto pt-0 md:pt-6 rounded-none md:rounded-[26px] overflow-hidden justify-center py-8 md:py-24">
+    <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-2 flex items-center max-w-7xl mx-auto pt-0 md:pt-6 rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
       {isImageLoading && !hasInitialLoaded && (
         <div className="absolute inset-0 z-[5] flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
           <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
         </div>
       )}
-      <div className="absolute inset-0 z-0  overflow-hidden">
+      <div className="absolute inset-0 z-0 overflow-hidden">
         {/* Sliding images background */}
         {slides.length > 0 && activeImage && (
           <div className="absolute inset-0 w-full h-full overflow-hidden">
-            <AnimatePresence initial={false}>
+            <AnimatePresence initial={false} custom={direction}>
               <motion.img
                 key={currentSlideIndex}
                 src={activeImage}
                 alt="Hero Slide Background"
-                initial={{ x: "100%" }}
-                animate={{ x: 0 }}
-                exit={{ x: "-100%" }}
-                transition={{ type: "tween", ease: "easeInOut", duration: 1.0 }}
-                className="absolute inset-0 w-full h-full object-cover"
+                custom={direction}
+                variants={slideVariants}
+                initial="enter"
+                animate="center"
+                exit="exit"
+                transition={{
+                  x: { type: "spring", stiffness: 300, damping: 30 },
+                  opacity: { duration: 0.25 }
+                }}
+                drag="x"
+                dragConstraints={{ left: 0, right: 0 }}
+                dragElastic={0.2}
+                onDragEnd={(event, info) => {
+                  const swipe = info.offset.x;
+                  if (swipe < -50) {
+                    paginate(1);
+                  } else if (swipe > 50) {
+                    paginate(-1);
+                  }
+                }}
+                className={`absolute inset-0 w-full h-full object-fill md:object-cover ${
+                  activeSlide?.hero?.link ? "cursor-pointer" : ""
+                }`}
+                onClick={handleSlideClick}
                 loading="eager"
                 onLoad={() => {
                   setIsImageLoading(false);
@@ -180,10 +240,6 @@ const Hero = () => {
             </AnimatePresence>
           </div>
         )}
-
-
-
-
       </div>
 
       <motion.div
@@ -205,7 +261,7 @@ const Hero = () => {
             return (
               <button
                 key={index}
-                onClick={() => setCurrentSlideIndex(index)}
+                onClick={() => handleIndicatorClick(index)}
                 className={`h-1.5 rounded-full transition-all duration-300 ${
                   isActive
                     ? "w-7 bg-white shadow-sm"

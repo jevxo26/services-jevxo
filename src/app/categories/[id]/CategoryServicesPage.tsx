@@ -71,60 +71,57 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
       />
 
       <div className="relative z-10">
-        {/* ── Premium Category Hero Header ── */}
-        <div className="bg-white/95 backdrop-blur-md border-b border-slate-100/80 shadow-sm sticky top-16 md:top-[68px] z-40">
-          <div className="max-w-7xl mx-auto px-4 md:px-6 py-5 md:py-7">
-
-            {/* Breadcrumb */}
-            <div className="flex items-center gap-2 text-xs font-semibold text-slate-400 mb-4">
-              <Link href="/" className="hover:text-[#FF6014] transition-colors">Home</Link>
-              <span>/</span>
-              <Link href="/services" className="hover:text-[#FF6014] transition-colors">All Services</Link>
-              <span>/</span>
-              <span className="text-slate-600">{isCatLoading ? "..." : (category?.name || "Category")}</span>
-            </div>
-
-            <div className="flex items-center gap-4">
-              {/* Category icon / image */}
-              <div className="w-14 h-14 md:w-16 md:h-16 rounded-2xl overflow-hidden bg-[#FFF0EF] border border-rose-100/50 flex items-center justify-center shrink-0 shadow-sm">
-                {!isCatLoading && category?.icon ? (
-                  <img
-                    src={category.icon}
-                    alt={category?.name}
-                    className="w-full h-full object-cover"
-                  />
-                ) : (
-                  <LayoutGrid className="w-7 h-7 text-[#FF6014]" />
-                )}
-              </div>
-
+        {/* ── Premium Compact Category Header ── */}
+        <div className="sticky top-16 md:top-[68px] z-40 w-full transition-all duration-300">
+          <div className="max-w-7xl mx-auto px-4 md:px-6 pt-2">
+            <div className="bg-white/95 backdrop-blur-md border border-slate-100 rounded-2xl shadow-[0_4px_20px_rgba(0,0,0,0.02)] py-3.5 md:py-4 px-4 md:px-6 flex items-center justify-between gap-4">
+              
               <div className="flex-1 min-w-0">
-                {isCatLoading ? (
-                  <div className="space-y-2">
-                    <div className="h-6 w-40 bg-slate-200 animate-pulse rounded-lg" />
-                    <div className="h-4 w-64 bg-slate-100 animate-pulse rounded-lg" />
+                {/* Breadcrumb */}
+                <div className="flex items-center gap-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
+                  <Link href="/" className="hover:text-[#FF6014] transition-colors">Home</Link>
+                  <span>/</span>
+                  <Link href="/services" className="hover:text-[#FF6014] transition-colors">All Services</Link>
+                  <span>/</span>
+                  <span className="text-[#FF6014] font-black">{isCatLoading ? "..." : (category?.name || "Category")}</span>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  {/* Category icon / image */}
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden bg-gradient-to-br from-white to-[#FFF4EE] border border-[#FF6014]/15 flex items-center justify-center shrink-0 shadow-sm p-0.5">
+                    {!isCatLoading && category?.icon ? (
+                      <img
+                        src={category.icon}
+                        alt={category?.name}
+                        className="w-full h-full object-cover rounded-lg"
+                      />
+                    ) : (
+                      <LayoutGrid className="w-5 h-5 text-[#FF6014]" />
+                    )}
                   </div>
-                ) : (
-                  <>
-                    <h1 className="text-xl md:text-3xl font-black text-slate-900 leading-tight tracking-tight">
+
+                  <div className="min-w-0">
+                    <h1 className="text-sm md:text-lg font-black text-slate-900 leading-tight tracking-tight">
                       {category?.name || "Category"}
                     </h1>
-                    <p className="text-sm text-slate-500 mt-1 font-medium max-w-xl line-clamp-2">
-                      {category?.description ||
-                        `Browse and book verified expert ${category?.name || ""} services in Dhaka, Bangladesh.`}
+                    <p className="text-[10px] md:text-xs text-slate-400 font-semibold mt-0.5 max-w-xl line-clamp-1 leading-none">
+                      {!category?.description || category.description.trim() === category.name.trim()
+                        ? `Experience top-rated verified local professionals ready to assist you instantly.`
+                        : category.description}
                     </p>
-                  </>
-                )}
+                  </div>
+                </div>
               </div>
 
               {/* Back button */}
               <Link
                 href="/services"
-                className="hidden md:flex items-center gap-2 text-sm font-bold text-slate-500 hover:text-[#FF6014] transition-colors bg-slate-50 hover:bg-rose-50 border border-slate-100 hover:border-rose-100 px-4 py-2.5 rounded-xl shrink-0"
+                className="flex items-center gap-1.5 text-[10px] sm:text-xs font-extrabold text-[#FF6014] hover:text-[#E0530A] transition-all bg-[#FFF4EE] hover:bg-[#FFE8DD] border border-[#FF6014]/15 px-3.5 py-2 rounded-xl shrink-0 shadow-sm active:scale-95"
               >
-                <ArrowLeft size={15} />
-                Back
+                <ArrowLeft size={13} strokeWidth={2.5} />
+                <span>Back</span>
               </Link>
+
             </div>
           </div>
         </div>

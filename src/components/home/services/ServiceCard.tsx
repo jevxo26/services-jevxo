@@ -54,27 +54,27 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
   };
 
   const truncatedDesc = service.description
-    ? service.description.length > 150
-      ? service.description.slice(0, 150) + "..."
+    ? service.description.length > 95
+      ? service.description.slice(0, 95) + "..."
       : service.description
     : "";
 
   return (
     <Link
       href={`/services/${service.id}`}
-      className="group bg-white border border-[#e5e7eb] rounded-2xl overflow-hidden shadow-sm no-underline flex flex-col hover-card-premium"
+      className="group bg-white border border-slate-100 hover:border-[#FF6014]/20 rounded-3xl overflow-hidden shadow-sm hover:shadow-md no-underline flex flex-col hover-card-premium transition-all duration-300 h-full"
     >
       <div className="relative h-48 overflow-hidden">
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+          className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
         />
-        <span className="absolute top-3 left-3 py-1 px-2.5 bg-white/95 text-[#1a1a1a] text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-sm">
+        <span className="absolute top-3 left-3 py-1 px-2.5 bg-white/95 backdrop-blur-sm text-slate-800 text-[10px] font-extrabold rounded-lg uppercase tracking-wider shadow-sm border border-slate-100/50">
           {service.categoryLabel}
         </span>
-        <span className="absolute top-3 right-3 flex items-center gap-1 py-1 px-2 bg-white/95 rounded-lg text-[10px] font-bold text-[#1a1a1a] shadow-sm">
-          <Star size={10} className="fill-[#f59e0b] text-[#f59e0b]" strokeWidth={0} />
+        <span className="absolute top-3 right-3 flex items-center gap-1 py-1 px-2 bg-white/95 backdrop-blur-sm rounded-lg text-[10px] font-extrabold text-[#FF6014] shadow-sm border border-slate-100/50">
+          <Star size={11} className="fill-[#FF6014] text-[#FF6014]" strokeWidth={0} />
           {service.rating}
         </span>
 
@@ -83,38 +83,40 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
           onClick={handleWishlist}
           disabled={isToggling}
           aria-label={isWishlisted ? "Remove from wishlist" : "Add to wishlist"}
-          className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-60 ${
+          className={`absolute bottom-3 right-3 w-8 h-8 rounded-full flex items-center justify-center shadow-md transition-all duration-200 cursor-pointer disabled:opacity-60 z-20 ${
             isWishlisted
               ? "bg-[#FF6014] text-white scale-110"
               : "bg-white/90 text-slate-400 hover:bg-rose-50 hover:text-[#FF6014] hover:scale-110"
           }`}
         >
           <Heart
-            size={15}
+            size={14}
             className={isWishlisted ? "fill-white" : ""}
-            strokeWidth={2}
+            strokeWidth={2.5}
           />
         </button>
       </div>
 
-      <div className="p-4 flex flex-col flex-1">
-        <h3 className="text-sm font-bold text-[#1a1a1a] mb-1 leading-snug">
-          {service.title}
-        </h3>
-        <p className="text-xs text-[#6b7280] leading-relaxed flex-1 line-clamp-3">
-          {truncatedDesc}
-        </p>
-        <div className="flex items-center justify-between mt-4 pt-3 border-t border-[#f3f4f6]">
+      <div className="p-5 flex flex-col flex-1 justify-between">
+        <div>
+          <h3 className="text-sm font-black text-slate-800 mb-1.5 leading-snug group-hover:text-[#FF6014] transition-colors duration-200">
+            {service.title}
+          </h3>
+          <p className="text-xs text-slate-400 font-semibold leading-relaxed line-clamp-3">
+            {truncatedDesc}
+          </p>
+        </div>
+        <div className="flex items-center justify-between mt-5 pt-4 border-t border-slate-50">
           <div className="flex flex-col">
-            <span className="text-base font-extrabold text-[#FF6014]">
+            <span className="text-base font-black text-[#FF6014]">
               {service.priceDisplay}
             </span>
-            <span className="flex items-center gap-1 text-[10px] font-semibold text-[#9ca3af] mt-0.5">
-              <Clock size={10} strokeWidth={2.5} />
+            <span className="flex items-center gap-1 text-[10px] font-extrabold text-[#9ca3af] mt-0.5 uppercase tracking-wider">
+              <Clock size={10} strokeWidth={2.5} className="text-[#FF6014]/75" />
               {service.done}
             </span>
           </div>
-          <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-50 text-[10px] font-bold text-[#FF6014] group-hover:bg-[#FF6014] group-hover:text-white transition-all duration-300">
+          <div className="flex items-center gap-1.5 px-3 py-2 rounded-xl bg-slate-50 text-[10px] font-extrabold text-[#FF6014] group-hover:bg-[#FF6014] group-hover:text-white transition-all duration-300 border border-slate-100 group-hover:border-[#FF6014]">
             Details
             <ArrowRight size={12} strokeWidth={2.5} className="group-hover:translate-x-0.5 transition-transform duration-300" />
           </div>

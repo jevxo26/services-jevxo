@@ -14,7 +14,7 @@ export default function ContactClientPage() {
   const { form, errors, submitted, setSubmitted, activeFaq, setActiveFaq, isLoading, heroRef, glowY, glowY2, handleChange, handleSubmit } = useContactState();
 
   return (
-    <div className="min-h-screen relative bg-transparent">
+    <div className="relative bg-transparent flex-1 flex flex-col">
       <div className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0" style={{ backgroundSize: 'auto' }} />
 
       {/* HERO */}
@@ -109,7 +109,7 @@ export default function ContactClientPage() {
       </section>
 
       {/* FAQ */}
-      <section className="py-10 md:py-14">
+      <section className="pt-10 pb-4 md:py-14">
         <div className="max-w-3xl mx-auto px-4 md:px-6">
           <RevealSection className="text-center mb-8">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#FF6014]/20 mb-4"><HelpCircle className="w-3 h-3" />General Help</span>

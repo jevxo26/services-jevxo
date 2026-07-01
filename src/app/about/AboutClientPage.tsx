@@ -21,11 +21,11 @@ export default function AboutClientPage() {
   const glowY2 = useTransform(scrollYProgress, [0, 1], [0, 40]);
 
   return (
-    <div className="min-h-screen bg-transparent overflow-hidden">
+    <div className="bg-transparent overflow-hidden flex-1 flex flex-col relative">
       <div className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0" style={{ backgroundSize: 'auto' }} />
 
       {/* HERO */}
-      <section ref={heroRef} className="relative pt-14 pb-12 md:pt-20 md:pb-16 lg:pt-24 overflow-hidden">
+      <section ref={heroRef} className="relative pt-8 pb-6 md:pt-12 md:pb-10 lg:pt-16 overflow-hidden">
         <motion.div style={{ y: glowY }} className="pointer-events-none absolute -top-20 right-[-10%] w-[600px] h-[600px] rounded-full bg-[#FF6014]/5 blur-[130px]" />
         <motion.div style={{ y: glowY2 }} className="pointer-events-none absolute bottom-0 left-[-5%] w-[400px] h-[400px] rounded-full bg-orange-200/8 blur-[100px]" />
         <div className="pointer-events-none absolute top-0 right-0 w-72 h-72 border-l border-b border-[#FF6014]/6 rounded-bl-full" />
@@ -76,7 +76,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* STATS */}
-      <section className="py-10 md:py-14 bg-transparent border-t border-slate-100/60">
+      <section className="py-6 md:py-8 bg-transparent border-t border-slate-100/60">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <RevealSection variants={stagger}>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -93,7 +93,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* PILLARS */}
-      <section className="py-10 md:py-16 bg-transparent">
+      <section className="py-6 md:py-10 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <RevealSection className="text-center mb-10">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#FF6014]/20 mb-4"><Target className="w-3.5 h-3.5" />The Rajseba Standard</span>
@@ -115,7 +115,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* MISSION + SERVICES */}
-      <section className="py-10 md:py-16 bg-transparent">
+      <section className="py-6 md:py-10 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
           <RevealSection variants={fadeLeft}>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#FF6014]/20 mb-5"><Users className="w-3 h-3" />Our Mission</span>
@@ -148,7 +148,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* TEAM */}
-      <section className="py-10 md:py-16 bg-transparent">
+      <section className="py-6 md:py-10 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <RevealSection className="text-center mb-10">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#FF6014]/20 mb-4"><Users className="w-3.5 h-3.5" />Our Leadership</span>
@@ -176,7 +176,7 @@ export default function AboutClientPage() {
       </section>
 
       {/* CTA */}
-      <section className="py-12 md:py-16 bg-transparent border-t border-slate-100/60">
+      <section className="pt-6 pb-4 md:pt-8 md:pb-6 bg-transparent border-t border-slate-100/60">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <RevealSection>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#FF6014]/20 mb-5"><Sparkles className="w-3.5 h-3.5" />Ready to Get Started?</span>

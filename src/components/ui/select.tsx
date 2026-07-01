@@ -283,9 +283,9 @@ export function CustomSelect({
   const CustomSingleValue = (props: any) => {
     const { data } = props;
     return (
-      <div className="flex items-center gap-2 text-sm font-medium text-slate-800 absolute inset-0 pt-2 px-3">
-        {data.icon && <data.icon className="size-4 text-slate-400" />}
-        <span>{data.label}</span>
+      <div className="flex items-center gap-1.5 text-xs font-extrabold text-slate-700 absolute inset-y-0 left-0 pl-3 pr-8 whitespace-nowrap truncate max-w-full">
+        {data.icon && <data.icon className="size-3.5 text-slate-400 shrink-0" />}
+        <span className="truncate">{data.label}</span>
       </div>
     );
   };

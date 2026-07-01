@@ -28,7 +28,7 @@ function OpportunityPageContent() {
 
   if (!selectedRole) {
     return (
-      <div className="min-h-[80vh] bg-transparent flex flex-col justify-center py-20 px-4 md:px-6 relative overflow-hidden font-sans">
+      <div className="flex-1 bg-transparent flex flex-col justify-center py-20 px-4 md:px-6 relative overflow-hidden font-sans">
         <div className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0" style={{ backgroundSize: 'auto' }} />
         <div className="pointer-events-none absolute -top-32 -right-32 w-96 h-96 bg-[#FF6014]/5 blur-[120px] rounded-full" />
         <div className="pointer-events-none absolute -bottom-32 -left-32 w-96 h-96 bg-orange-300/5 blur-[120px] rounded-full" />
@@ -48,7 +48,7 @@ function OpportunityPageContent() {
               <button key={role} onClick={() => handleSelectRole(role)} className="bg-white border border-slate-100/90 rounded-3xl p-8 hover:border-[#FF6014]/20 hover:shadow-[0_12px_40px_rgba(255,96,20,0.06)] hover:-translate-y-1 transition-all duration-300 text-left group cursor-pointer relative overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-[#FF6014]/[0.01] to-transparent pointer-events-none" />
                 <div className="w-14 h-14 bg-[#FFF4EE] border border-[#FF6014]/15 rounded-2xl flex items-center justify-center text-[#FF6014] mb-6 group-hover:scale-110 transition-transform"><Icon size={26} /></div>
-                <h2 className="text-xl font-black text-slate-900 mb-2.5">{title}</h2>
+                <div className="text-xl font-black text-slate-900 mb-2.5">{title}</div>
                 <p className="text-slate-400 text-xs font-semibold leading-relaxed mb-6">{desc}</p>
                 <div className="flex items-center text-[#FF6014] font-extrabold text-xs uppercase tracking-wider">{label} <ArrowRight size={14} className="ml-1.5 group-hover:translate-x-1 transition-transform" /></div>
               </button>
@@ -62,7 +62,7 @@ function OpportunityPageContent() {
   const benefits = selectedRole === "Vendor" ? vendorBenefits : agentBenefits;
 
   return (
-    <div className="bg-transparent min-h-[85vh] flex flex-col justify-center py-10 md:py-16 relative overflow-hidden">
+    <div className="bg-transparent flex-1 flex flex-col justify-center py-10 md:py-16 relative overflow-hidden">
       <div className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0" style={{ backgroundSize: 'auto' }} />
       <div className="max-w-7xl mx-auto w-full px-4 md:px-6 relative z-10">
         <button onClick={() => handleBack(selectedRole)} className="mb-8 text-xs font-black uppercase tracking-wider text-slate-400 hover:text-[#FF6014] flex items-center transition-colors cursor-pointer">

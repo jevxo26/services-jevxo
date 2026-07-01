@@ -68,18 +68,20 @@ export default function CategorizedSections() {
   const groupedData = useMemo(() => {
     if (!categories.length) return [];
 
-    return categories
+    const mapped = categories
       .map((cat: any) => {
         const catSlug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || "";
 
         const servicesForCategory = allServices.filter((service: any) => {
           const serviceCategoryId = service.category_id || service.category?.id;
+          if (serviceCategoryId && cat.id) {
+            return String(serviceCategoryId) === String(cat.id);
+          }
           const serviceCategorySlug = service.category?.slug;
-          if (!serviceCategoryId) return false;
-          return (
-            String(serviceCategoryId) === String(cat.id) ||
-            serviceCategorySlug === cat.slug
-          );
+          if (serviceCategorySlug && cat.slug) {
+            return serviceCategorySlug === cat.slug;
+          }
+          return false;
         });
 
         return {
@@ -87,8 +89,14 @@ export default function CategorizedSections() {
           slug: catSlug,
           services: servicesForCategory,
         };
-      })
-      .filter((cat: any) => cat.services.length > 0);
+      });
+
+    // Sort categories: active services at the top, empty categories at the bottom
+    return [...mapped].sort((a: any, b: any) => {
+      const aHasServices = a.services.length > 0 ? 1 : 0;
+      const bHasServices = b.services.length > 0 ? 1 : 0;
+      return bHasServices - aHasServices;
+    });
   }, [categories, allServices]);
 
   if (isCategoriesLoading || isServicesLoading) {
@@ -119,89 +127,89 @@ export default function CategorizedSections() {
       </div>
 
       {groupedData.map((category: any) => (
-          <section key={category.id} className="max-w-7xl mx-auto px-4 md:px-6">
-            <SectionHeader
-              title={category.name}
-              viewAllHref={`/services?category=${category.slug}`}
-            />
+        <section key={category.id} className="max-w-7xl mx-auto px-4 md:px-6">
+          <SectionHeader
+            title={category.name}
+            viewAllHref={`/services?category=${category.slug}`}
+          />
 
-            {category.services.length === 0 ? (
-              <div className="py-8 text-center text-slate-400 text-sm font-medium border border-dashed border-slate-200 rounded-2xl">
-                No services listed yet for this category.
-              </div>
-            ) : (
-              <motion.div
-                variants={containerVariants}
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: true, amount: 0.1 }}
-                className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
-              >
-                {category.services.slice(0, 6).map((item: any) => {
-                  const priceVal = getServicePrice(item);
-                  const totalReviews = item.reviews?.length || 0;
-                  const totalBookings = item.bookings?.length || 0;
-                  const serviceImage = item.image || "/images/service/service-1.png";
+          {category.services.length === 0 ? (
+            <div className="py-12 text-center text-slate-400 text-xs font-bold border border-dashed border-slate-200 rounded-3xl bg-slate-50/50">
+              No available services in this category.
+            </div>
+          ) : (
+            <motion.div
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.1 }}
+              className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"
+            >
+              {category.services.slice(0, 6).map((item: any) => {
+                const priceVal = getServicePrice(item);
+                const totalReviews = item.reviews?.length || 0;
+                const totalBookings = item.bookings?.length || 0;
+                const serviceImage = item.image || "/images/service/service-1.png";
 
-                  return (
-                    <motion.div
-                      key={item.id}
-                      variants={itemVariants}
-                      whileHover={{ y: -5, scale: 1.01 }}
-                      className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md hover:border-[#FF6014]/20 transition-all duration-300 flex flex-col"
-                    >
-                      <div className="relative h-40 bg-slate-50 shrink-0">
-                        <img
-                          src={serviceImage}
-                          alt={item.name}
-                          className="w-full h-full object-cover"
-                        />
-                        <span className="absolute top-3 left-3 py-1 px-2.5 bg-white/95 text-slate-800 text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-sm">
-                          {category.name}
-                        </span>
+                return (
+                  <motion.div
+                    key={item.id}
+                    variants={itemVariants}
+                    whileHover={{ y: -5, scale: 1.01 }}
+                    className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md hover:border-[#FF6014]/20 transition-all duration-300 flex flex-col"
+                  >
+                    <div className="relative h-40 bg-slate-50 shrink-0">
+                      <img
+                        src={serviceImage}
+                        alt={item.name}
+                        className="w-full h-full object-cover"
+                      />
+                      <span className="absolute top-3 left-3 py-1 px-2.5 bg-white/95 text-slate-800 text-[10px] font-bold rounded-lg uppercase tracking-wide shadow-sm">
+                        {category.name}
+                      </span>
+                    </div>
+
+                    <div className="p-5 flex flex-col flex-1 justify-between">
+                      <div>
+                        <h4 className="font-extrabold text-slate-800 text-sm mb-1 leading-snug line-clamp-1">
+                          {item.name}
+                        </h4>
+                        <p className="text-xs text-slate-500 font-medium leading-relaxed line-clamp-2 mb-3">
+                          {item.description || "Professional services tailored for your home needs."}
+                        </p>
+                        <div className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
+                          <span className="flex items-center gap-1.5">
+                            <Star size={12} className="text-amber-400 fill-amber-400" />
+                            {totalReviews} {totalReviews === 1 ? "Review" : "Reviews"}
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <CalendarCheck size={12} className="text-[#FF6014]" />
+                            {totalBookings} {totalBookings === 1 ? "Booking" : "Bookings"}
+                          </span>
+                        </div>
                       </div>
 
-                      <div className="p-5 flex flex-col flex-1 justify-between">
+                      <div className="flex items-center justify-between pt-3 border-t border-slate-100 mt-4">
                         <div>
-                          <h4 className="font-extrabold text-slate-800 text-sm mb-1 leading-snug line-clamp-1">
-                            {item.name}
-                          </h4>
-                          <p className="text-xs text-slate-500 font-medium leading-relaxed line-clamp-2 mb-3">
-                            {item.description || "Professional services tailored for your home needs."}
-                          </p>
-                          <div className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
-                            <span className="flex items-center gap-1.5">
-                              <Star size={12} className="text-amber-400 fill-amber-400" />
-                              {totalReviews} {totalReviews === 1 ? "Review" : "Reviews"}
-                            </span>
-                            <span className="flex items-center gap-1.5">
-                              <CalendarCheck size={12} className="text-[#FF6014]" />
-                              {totalBookings} {totalBookings === 1 ? "Booking" : "Bookings"}
-                            </span>
-                          </div>
+                          <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Price starts at</span>
+                          <span className="text-sm font-black text-slate-900">
+                            {priceVal > 0 ? `৳${priceVal.toLocaleString()}` : "Contact"}
+                          </span>
                         </div>
-
-                        <div className="flex items-center justify-between pt-3 border-t border-slate-100 mt-4">
-                          <div>
-                            <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider">Price starts at</span>
-                            <span className="text-sm font-black text-slate-900">
-                              {priceVal > 0 ? `৳${priceVal.toLocaleString()}` : "Contact"}
-                            </span>
-                          </div>
-                          <Link
-                            href={`/services/${item.id}`}
-                            className="text-xs font-bold text-[#FF6014] hover:text-[#E0530A] transition-colors flex items-center gap-1"
-                          >
-                            Book Now <ArrowRight size={13} />
-                          </Link>
-                        </div>
+                        <Link
+                          href={`/services/${item.id}`}
+                          className="text-xs font-bold text-[#FF6014] hover:text-[#E0530A] transition-colors flex items-center gap-1"
+                        >
+                          Book Now <ArrowRight size={13} />
+                        </Link>
                       </div>
-                    </motion.div>
-                  );
-                })}
-              </motion.div>
-            )}
-          </section>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </motion.div>
+          )}
+        </section>
       ))}
     </div>
   );

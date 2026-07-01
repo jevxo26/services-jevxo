@@ -30,9 +30,9 @@ const QUICK_LINKS = [
 ];
 
 const CONTACT_INFO = [
-  { icon: Phone, label: "+880 1XXX-XXXXXX", href: "tel:+8801XXXXXXXXX" },
+  { icon: Phone, label: "+880 9612-725732", href: "tel:+8809612725732" },
   { icon: Mail, label: "support@rajseba.com", href: "mailto:support@rajseba.com" },
-  { icon: MapPin, label: "Dhaka, Bangladesh", href: "#" },
+  { icon: MapPin, label: "Banani, Dhaka, Bangladesh", href: "https://maps.google.com/?q=Banani+Dhaka" },
 ];
 
 const APP_FEATURES = [
@@ -69,7 +69,7 @@ const YoutubeIcon = () => (
 const SOCIALS = [
   { Icon: FacebookIcon, label: "Facebook", href: "https://facebook.com/rajseba" },
   { Icon: InstagramIcon, label: "Instagram", href: "https://instagram.com/rajseba" },
-  { Icon: WhatsAppIcon, label: "WhatsApp", href: "https://wa.me/8801XXXXXXXXX" },
+  { Icon: WhatsAppIcon, label: "WhatsApp", href: "https://wa.me/8809612725732" },
   { Icon: YoutubeIcon, label: "YouTube", href: "https://youtube.com/@rajseba" },
 ];
 
@@ -92,43 +92,49 @@ export default function Footer() {
   };
 
   return (
-    <footer className="relative border-t border-slate-200/60 bg-white/60 backdrop-blur-xl">
+    <footer className="relative  bg-gradient-to-b pt-5 from-white/95 to-[#FFFDFB]/95 backdrop-blur-xl md:pb-0 pb-[calc(env(safe-area-inset-bottom)+80px)] overflow-hidden">
+      {/* Decorative top gradient line */}
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#FF6014]/40 to-transparent" />
+
+      {/* Ambient background glow */}
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#FF6014]/2 blur-[100px] rounded-full pointer-events-none" />
+
       {/* Main grid */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 py-10 md:py-14">
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-10">
-          {/* ── Brand ── */}
-          <div className="col-span-2 md:col-span-1 space-y-5 -mt-4">
-            <Link href="/" aria-label="Rajseba home">
+      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-4 pb-8 md:py-16 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 md:gap-x-8">
+          {/* ── Brand (4/12 columns on desktop, full width on mobile) ── */}
+          <div className="col-span-2 md:col-span-4 space-y-6">
+            <Link href="/" aria-label="Rajseba home" className="inline-block hover:opacity-90 transition-opacity">
               <Image
                 src="/logo.png"
                 alt="Rajseba"
-                width={120}
-                height={40}
+                width={125}
+                height={42}
                 style={{ width: "auto", height: "auto" }}
-                className="h-9 object-contain"
+                className="h-10 object-contain"
                 priority
               />
             </Link>
 
-            <p className="text-sm text-slate-500 leading-relaxed">
+            <p className="text-sm text-slate-600 leading-relaxed max-w-sm">
               Bangladesh's most trusted home services platform. Fast, safe, and affordable.
             </p>
 
-            {/* Feature pills */}
-            <div className="flex flex-wrap gap-1.5">
+            {/* Feature pills grid (2 columns) */}
+            <div className="grid grid-cols-2 gap-2 max-w-sm">
               {APP_FEATURES.map(({ icon: Icon, label }) => (
                 <div
                   key={label}
-                  className="flex items-center gap-1 bg-white/70 border border-slate-200/80 text-slate-600 text-xs font-semibold px-2.5 py-1 rounded-full"
+                  className="flex items-center gap-2 bg-white border border-slate-100 hover:border-rose-100/80 rounded-xl px-2.5 py-2 text-slate-700 text-xs font-semibold shadow-[0_2px_6px_rgba(0,0,0,0.015)] transition-all duration-200"
                 >
-                  <Icon className="w-3 h-3 text-[#FF6014]" />
-                  {label}
+                  <Icon className="w-3.5 h-3.5 text-[#FF6014] shrink-0" />
+                  <span className="truncate">{label}</span>
                 </div>
               ))}
             </div>
 
             {/* Socials */}
-            <div className="flex items-center gap-2 pt-1">
+            <div className="flex items-center gap-3 pt-1">
               {SOCIALS.map(({ Icon, label, href }) => (
                 <a
                   key={label}
@@ -136,7 +142,7 @@ export default function Footer() {
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="w-8 h-8 bg-white/70 border border-slate-200/80 rounded-full flex items-center justify-center text-slate-400 hover:text-[#FF6014] hover:border-[#FF6014]/40 transition-all"
+                  className="w-9 h-9 bg-white border border-slate-100 hover:border-[#FF6014]/40 hover:shadow-[0_4px_12px_rgba(255,96,20,0.1)] rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FF6014] transition-all duration-300"
                 >
                   <Icon />
                 </a>
@@ -144,20 +150,21 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* ── Categories ── */}
-          <div className="col-span-1 space-y-4">
-            <h3 className="text-xs font-bold tracking-widest text-slate-400 uppercase">
+          {/* ── Categories (1/2 on mobile, 3/12 on desktop) ── */}
+          <div className="col-span-1 md:col-span-3 space-y-5">
+            <h3 className="text-xs font-extrabold tracking-wider text-slate-800 uppercase flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014]" />
               Categories
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {apiCategories.length > 0
                 ? apiCategories.map((cat: any) => (
                   <li key={cat.id}>
                     <Link
                       href={`/categories/${cat.id}`}
-                      className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-[#FF6014] transition-colors group"
+                      className="flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#FF6014] transition-all duration-200 group/link"
                     >
-                      <ChevronRight className="w-3 h-3 text-slate-300 group-hover:text-[#FF6014] flex-shrink-0 transition-colors" />
+                      <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/link:text-[#FF6014] group-hover/link:translate-x-0.5 flex-shrink-0 transition-all duration-200" />
                       <span className="line-clamp-1">{cat.name}</span>
                     </Link>
                   </li>
@@ -168,89 +175,98 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* ── Quick Links ── */}
-          <div className="col-span-1 space-y-4">
-            <h3 className="text-xs font-bold tracking-widest text-slate-400 uppercase">
+          {/* ── Quick Links (1/2 on mobile, 2/12 on desktop) ── */}
+          <div className="col-span-1 md:col-span-2 space-y-5">
+            <h3 className="text-xs font-extrabold tracking-wider text-slate-800 uppercase flex items-center gap-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014]" />
               Quick Links
             </h3>
-            <ul className="space-y-2">
+            <ul className="space-y-2.5">
               {QUICK_LINKS.map((l) => (
                 <li key={l.label}>
                   <Link
                     href={l.href}
-                    className="flex items-center gap-1.5 text-sm text-slate-500 hover:text-[#FF6014] transition-colors group"
+                    className="flex items-center gap-1.5 text-[13px] text-slate-500 hover:text-[#FF6014] transition-all duration-200 group/link"
                   >
-                    <ChevronRight className="w-3 h-3 text-slate-300 group-hover:text-[#FF6014] flex-shrink-0 transition-colors" />
-                    {l.label}
+                    <ChevronRight className="w-3.5 h-3.5 text-slate-300 group-hover/link:text-[#FF6014] group-hover/link:translate-x-0.5 flex-shrink-0 transition-all duration-200" />
+                    <span>{l.label}</span>
                   </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* ── Contact + Newsletter ── */}
-          <div className="col-span-2 md:col-span-1 space-y-5">
-            <h3 className="text-xs font-bold tracking-widest text-slate-400 uppercase">
-              Get in Touch
-            </h3>
+          {/* ── Contact & Newsletter (full width on mobile, 3/12 on desktop) ── */}
+          <div className="col-span-2 md:col-span-3 space-y-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 gap-6">
+              {/* Contact Info */}
+              <div className="space-y-4">
+                <h3 className="text-xs font-extrabold tracking-wider text-slate-800 uppercase flex items-center gap-1.5">
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014]" />
+                  Get in Touch
+                </h3>
 
-            <ul className="space-y-2.5">
-              {CONTACT_INFO.map(({ icon: Icon, label, href }) => (
-                <li key={label}>
-                  <a
-                    href={href}
-                    className="flex items-center gap-2.5 text-sm text-slate-500 hover:text-[#FF6014] transition-colors group"
-                  >
-                    <span className="w-7 h-7 rounded-lg bg-white/70 border border-slate-200/80 flex items-center justify-center flex-shrink-0 group-hover:border-[#FF6014]/40 transition-colors">
-                      <Icon className="w-3.5 h-3.5" />
-                    </span>
-                    {label}
-                  </a>
-                </li>
-              ))}
-            </ul>
+                <ul className="space-y-3">
+                  {CONTACT_INFO.map(({ icon: Icon, label, href }) => (
+                    <li key={label}>
+                      <a
+                        href={href}
+                        target={href.startsWith("http") ? "_blank" : undefined}
+                        rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+                        className="flex items-center gap-3 text-[13px] text-slate-500 hover:text-[#FF6014] transition-all duration-200 group/item"
+                      >
+                        <span className="w-8 h-8 rounded-xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 group-item:border-[#FF6014]/20 group-item:bg-[#FF6014]/5 text-slate-400 group-item:text-[#FF6014] transition-all duration-300">
+                          <Icon className="w-4 h-4" />
+                        </span>
+                        <span className="font-medium">{label}</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </div>
 
-            {/* Newsletter */}
-            <div className="pt-1 space-y-2">
-              <p className="text-sm text-slate-400 font-medium">
-                Get offers & updates
-              </p>
-              {subscribed ? (
-                <div className="text-emerald-600 font-semibold bg-emerald-50 border border-emerald-100 rounded-xl px-3 py-2 text-sm">
-                  ✅ Subscribed!
-                </div>
-              ) : (
-                <form onSubmit={handleSubscribe} className="flex gap-2">
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="Email address"
-                    required
-                    className="flex-1 min-w-0 px-3 py-2 rounded-xl border border-slate-200/80 bg-white/70 text-sm focus:border-[#FF6014]/50 focus:outline-none transition-colors placeholder:text-slate-300"
-                  />
-                  <button
-                    type="submit"
-                    className="px-3 py-2 bg-[#FF6014] hover:bg-[#e0530a] text-white text-sm font-semibold rounded-xl transition-all flex-shrink-0"
-                  >
-                    Subscribed
-                  </button>
-                </form>
-              )}
+              {/* Newsletter */}
+              <div className="space-y-3">
+                <h4 className="text-xs font-bold text-slate-700">
+                  Subscribe to our Newsletter
+                </h4>
+                {subscribed ? (
+                  <div className="text-emerald-600 font-semibold bg-emerald-50/50 border border-emerald-100 rounded-xl px-3.5 py-2.5 text-xs flex items-center gap-2">
+                    <span>✅</span> Subscribed successfully!
+                  </div>
+                ) : (
+                  <form onSubmit={handleSubscribe} className="space-y-2">
+                    <input
+                      type="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      placeholder="Your email address"
+                      required
+                      className="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 bg-white text-xs text-slate-700 placeholder-slate-400 focus:border-[#FF6014] focus:ring-2 focus:ring-[#FF6014]/10 focus:outline-none transition-all"
+                    />
+                    <button
+                      type="submit"
+                      className="w-full py-2.5 bg-[#FF6014] hover:bg-[#E0530A] hover:shadow-[0_4px_12px_rgba(255,96,20,0.2)] text-white text-xs font-bold rounded-xl transition-all duration-300"
+                    >
+                      Subscribe
+                    </button>
+                  </form>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
 
       {/* ── Bottom bar ── */}
-      <div className="border-t border-slate-200/60 bg-white/40 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1 text-sm text-slate-600">
-            <span className="font-semibold">
-              © {new Date().getFullYear()} Rajseba
+      <div className="border-t border-slate-200/50 bg-slate-50/40 backdrop-blur-md relative z-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1.5 text-xs text-slate-500 font-medium">
+            <span>
+              © {new Date().getFullYear()} Rajseba. All rights reserved.
             </span>
             <span className="text-slate-300 hidden sm:inline">|</span>
-            <span className="text-slate-600">
+            <span>
               Developed by{" "}
               <Link
                 href="https://jevxo-core-ecosystem.vercel.app/"
@@ -262,24 +278,22 @@ export default function Footer() {
             </span>
             <span className="text-slate-300 hidden sm:inline">|</span>
             <Link href="/privacy" className="hover:text-[#FF6014] transition-colors">
-              Privacy
+              Privacy Policy
             </Link>
+            <span className="text-slate-200 hidden sm:inline">•</span>
             <Link href="/terms" className="hover:text-[#FF6014] transition-colors">
-              Terms
-            </Link>
-            <Link href="/contact" className="hover:text-[#FF6014] transition-colors">
-              Support
+              Terms of Service
             </Link>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2">
             <a
               href="https://rajseba.com"
               target="_blank"
               aria-label="Visit website"
-              className="w-7 h-7 bg-white/70 border border-slate-200/80 rounded-full flex items-center justify-center text-slate-400 hover:text-[#FF6014] hover:border-[#FF6014]/40 transition-all"
+              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FF6014] hover:border-[#FF6014]/20 transition-all duration-200"
             >
-              <Globe size={13} />
+              <Globe size={14} />
             </a>
             <button
               onClick={() => {
@@ -294,17 +308,17 @@ export default function Footer() {
                   toast.success("Link copied!");
                 }
               }}
-              className="w-7 h-7 bg-white/70 border border-slate-200/80 rounded-full flex items-center justify-center text-slate-400 hover:text-[#FF6014] hover:border-[#FF6014]/40 transition-all"
+              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FF6014] hover:border-[#FF6014]/20 transition-all duration-200"
               aria-label="Share"
             >
-              <Share2 size={13} />
+              <Share2 size={14} />
             </button>
             <Link
               href="/dashbord/live-chat"
               aria-label="Live Chat"
-              className="w-7 h-7 bg-white/70 border border-slate-200/80 rounded-full flex items-center justify-center text-slate-400 hover:text-[#FF6014] hover:border-[#FF6014]/40 transition-all"
+              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#FF6014] hover:border-[#FF6014]/20 transition-all duration-200"
             >
-              <MessageSquare size={13} />
+              <MessageSquare size={14} />
             </Link>
           </div>
         </div>
