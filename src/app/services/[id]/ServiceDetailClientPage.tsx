@@ -2,64 +2,38 @@
 
 import React, { useState } from "react";
 
-const renderFormattedText = (text: string) => {
-  if (!text) return null;
-  const lines = text.split("\n").filter(line => line.trim() !== "");
-  
+// ─── Helper to detect if a string is HTML ───────────────────────────────────
+const isHtml = (str: string) => /<[a-z]/.test(str);
+
+// ─── Renders either saved rich HTML or plain text with bullet list fallback ──
+const RichContent = ({ html, className = "" }: { html: string; className?: string }) => {
+  if (!html) return null;
+  if (isHtml(html)) {
+    return (
+      <div
+        className={`rich-content text-sm text-slate-600 leading-relaxed ${className}`}
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    );
+  }
+  // Fallback: plain text with bullet points
+  const lines = html.split("\n").filter(l => l.trim());
   return (
-    <ul className="space-y-3">
-      {lines.map((line, idx) => {
-        const isHeader = line.endsWith("?") || line.endsWith(":");
-        if (isHeader) {
-          return (
-            <li key={idx} className="font-extrabold text-slate-800 text-base mt-5 first:mt-0 list-none">
-              {line}
-            </li>
-          );
-        }
-        return (
-          <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014] mt-2 shrink-0" />
-            <span>{line.replace(/^[•\-*]\s*/, "")}</span>
-          </li>
-        );
-      })}
+    <ul className="space-y-2">
+      {lines.map((line, idx) => (
+        <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014] mt-2 shrink-0" />
+          <span>{line.replace(/^[•\-*]\s*/, "")}</span>
+        </li>
+      ))}
     </ul>
   );
 };
 
-const renderDetailsText = (text: string) => {
-  if (!text) return null;
-  const lines = text.split("\n").filter(line => line.trim() !== "");
-  
-  return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-      {lines.map((line, idx) => {
-        const isHeader = line.endsWith("?") || line.endsWith(":") || line.toLowerCase().includes("key features") || line.toLowerCase().includes("specifications");
-        if (isHeader) {
-          return (
-            <div key={idx} className="col-span-full font-extrabold text-slate-800 text-base mt-4 first:mt-0 border-b border-slate-100 pb-2 mb-2">
-              {line}
-            </div>
-          );
-        }
-        return (
-          <div key={idx} className="flex items-start gap-3 bg-slate-50/40 hover:bg-slate-50 p-4 rounded-2xl border border-slate-100 transition-colors duration-200">
-            <span className="w-5 h-5 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center shrink-0 mt-0.5 shadow-sm">
-              <svg className="w-3 h-3 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M5 13l4 4L19 7" />
-              </svg>
-            </span>
-            <span className="text-sm text-slate-600 leading-relaxed font-semibold">{line.replace(/^[•\-*]\s*/, "")}</span>
-          </div>
-        );
-      })}
-    </div>
-  );
-};
 
 const FAQItem = ({ question, answer }: { question: string, answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const isRichAnswer = /<[a-z]/.test(answer);
 
   return (
     <div className="border-b border-slate-100 last:border-b-0 py-4">
@@ -83,9 +57,16 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
             transition={{ duration: 0.25, ease: "easeInOut" }}
             className="overflow-hidden"
           >
-            <div className="pb-4 pt-2 text-sm text-slate-500 leading-relaxed whitespace-pre-line">
-              {answer}
-            </div>
+            {isRichAnswer ? (
+              <div
+                className="pb-4 pt-2 text-sm text-slate-500 leading-relaxed rich-content"
+                dangerouslySetInnerHTML={{ __html: answer }}
+              />
+            ) : (
+              <div className="pb-4 pt-2 text-sm text-slate-500 leading-relaxed whitespace-pre-line">
+                {answer}
+              </div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>
@@ -215,9 +196,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
                     <span className="w-1.5 h-6 bg-[#FF6014] rounded-full" />
                     Overview
                   </h3>
-                  <div className="prose prose-slate text-sm text-slate-600 leading-relaxed">
-                    {renderFormattedText(service.overview)}
-                  </div>
+                  <RichContent html={service.overview} />
                 </div>
               )}
 
@@ -227,9 +206,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
                     <span className="w-1.5 h-6 bg-[#FF6014] rounded-full" />
                     Key Features & Details
                   </h3>
-                  <div className="prose prose-slate text-sm text-slate-600 leading-relaxed">
-                    {renderDetailsText(service.details)}
-                  </div>
+                  <RichContent html={service.details} />
                 </div>
               )}
 
@@ -246,9 +223,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
 
             {/* Sidebar Column */}
             <div className="space-y-6 md:space-y-8 sticky top-[136px] z-20">
-              <div id="vendor">
-                <VendorProfile vendor={service.vendor} serviceRating={rating} />
-              </div>
+              {/* VendorProfile hidden as requested */}
 
               {service.faq && service.faq.length > 0 && (
                 <div id="faq" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">

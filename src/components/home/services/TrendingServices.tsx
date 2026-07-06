@@ -224,7 +224,7 @@ export default function TrendingServices() {
                       {featured.title}
                     </h3>
                     <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-3">
-                      {featured.description}
+                      {featured.description ? featured.description.replace(/<[^>]*>/g, "") : ""}
                     </p>
                   </div>
                   <div className="flex items-end justify-between pt-4 border-t border-slate-100 mt-auto">
@@ -271,7 +271,7 @@ export default function TrendingServices() {
                       </span>
                     </div>
                     <p className="text-xs text-slate-500 font-semibold leading-relaxed line-clamp-2">
-                      {secondary.description}
+                      {secondary.description ? secondary.description.replace(/<[^>]*>/g, "") : ""}
                     </p>
                   </div>
                   <div className="flex items-end justify-between pt-4 border-t border-slate-100 mt-auto">

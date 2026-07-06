@@ -175,7 +175,9 @@ export default function CategorizedSections() {
                           {item.name}
                         </h4>
                         <p className="text-xs text-slate-500 font-medium leading-relaxed line-clamp-2 mb-3">
-                          {item.description || "Professional services tailored for your home needs."}
+                          {item.description
+                            ? item.description.replace(/<[^>]*>/g, "")
+                            : "Professional services tailored for your home needs."}
                         </p>
                         <div className="flex items-center gap-4 text-[11px] font-semibold text-slate-500">
                           <span className="flex items-center gap-1.5">

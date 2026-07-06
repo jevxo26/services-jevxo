@@ -79,22 +79,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
             </div>
           </div>
 
-          {/* Action button */}
-          <motion.button
-            whileHover={{ scale: 1.02 }}
-            whileTap={{ scale: 0.98 }}
-            onClick={() =>
-              router.push(
-                `/dashbord/live-chat?receiverId=${vendor.id}&receiverName=${encodeURIComponent(
-                  vendor.name
-                )}`
-              )
-            }
-            className="bg-[#FF6014] hover:bg-[#E0530A] text-white py-3.5 rounded-2xl font-extrabold text-xs flex items-center justify-center gap-2 transition-all shadow-md shadow-rose-100 hover:shadow-lg cursor-pointer w-full"
-          >
-            <MessageSquare className="w-4 h-4 stroke-[2.5]" />
-            Chat with Provider
-          </motion.button>
+          {/* Chat option hidden as requested */}
         </div>
       </div>
     </div>

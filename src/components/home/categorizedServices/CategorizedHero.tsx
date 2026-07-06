@@ -156,9 +156,16 @@ export function CategorizedHero({
             )}
 
             {/* Description */}
-            <p className="text-sm sm:text-base text-slate-500 max-w-lg leading-relaxed line-clamp-5">
-              {displayDesc}
-            </p>
+            {/<[a-z]/.test(displayDesc) ? (
+              <div
+                className="text-sm sm:text-base text-slate-500 max-w-lg leading-relaxed rich-content line-clamp-5"
+                dangerouslySetInnerHTML={{ __html: displayDesc }}
+              />
+            ) : (
+              <p className="text-sm sm:text-base text-slate-500 max-w-lg leading-relaxed line-clamp-5">
+                {displayDesc}
+              </p>
+            )}
 
             {/* ── Action Buttons ── */}
             <div className="grid grid-cols-2 sm:flex sm:flex-row gap-3 pt-2 w-full sm:w-auto">

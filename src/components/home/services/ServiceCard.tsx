@@ -53,11 +53,10 @@ export default function ServiceCard({ service }: { service: ServiceListing }) {
     }
   };
 
-  const truncatedDesc = service.description
-    ? service.description.length > 95
-      ? service.description.slice(0, 95) + "..."
-      : service.description
-    : "";
+  const cleanDesc = service.description ? service.description.replace(/<[^>]*>/g, "") : "";
+  const truncatedDesc = cleanDesc.length > 95
+    ? cleanDesc.slice(0, 95) + "..."
+    : cleanDesc;
 
   return (
     <Link

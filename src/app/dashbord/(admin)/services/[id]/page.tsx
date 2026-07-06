@@ -115,7 +115,14 @@ export default function ServiceDetailsPage() {
               <Wrench size={18} className="text-brand-primary" /> Service Description
             </h3>
             {service.description ? (
-              <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-wrap">{service.description}</p>
+              /<[a-z]/.test(service.description) ? (
+                <div
+                  className="text-slate-600 text-sm leading-relaxed rich-content"
+                  dangerouslySetInnerHTML={{ __html: service.description }}
+                />
+              ) : (
+                <p className="text-slate-600 text-sm leading-relaxed whitespace-pre-wrap">{service.description}</p>
+              )
             ) : (
               <p className="text-slate-400 text-sm italic">No description provided.</p>
             )}

@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { CustomSelect } from "@/components/ui/select";
 import { Service } from "@/redux/features/admin/service";
+import RichTextEditor from "@/components/ui/RichTextEditor";
 
 interface ServiceModalProps {
   editingItem: Service | null;
@@ -82,7 +83,7 @@ export default function ServiceModal({
 }: ServiceModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
-      <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-3xl w-full max-w-lg md:max-w-3xl xl:max-w-4xl shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200">
         <div className="p-6 border-b border-slate-100 flex items-center justify-between">
           <h2 className="text-xl font-bold text-slate-900 flex items-center gap-2">
             <Sparkles className="text-rose-500" size={20} />
@@ -178,34 +179,31 @@ export default function ServiceModal({
             <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
               Description
             </label>
-            <Textarea
-              placeholder="Describe this service..."
+            <RichTextEditor
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              rows={2}
-              className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/10 focus-visible:border-rose-400/80 transition-all w-full"
+              onChange={setDescription}
+              placeholder="Describe this service..."
+              minHeight={100}
             />
           </div>
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
               Overview
             </label>
-            <Textarea
-              placeholder="Service overview..."
+            <RichTextEditor
               value={overview}
-              onChange={(e) => setOverview(e.target.value)}
-              rows={2}
-              className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/10 focus-visible:border-rose-400/80 transition-all w-full"
+              onChange={setOverview}
+              placeholder="Service overview..."
+              minHeight={100}
             />
           </div>
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">Details</label>
-            <Textarea
-              placeholder="Detailed information..."
+            <RichTextEditor
               value={details}
-              onChange={(e) => setDetails(e.target.value)}
-              rows={3}
-              className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500/10 focus-visible:border-rose-400/80 transition-all w-full"
+              onChange={setDetails}
+              placeholder="Detailed information..."
+              minHeight={130}
             />
           </div>
 
@@ -242,16 +240,15 @@ export default function ServiceModal({
                       setFaq(newFaq);
                     }}
                   />
-                  <Textarea
-                    placeholder="Answer"
-                    rows={2}
+                  <RichTextEditor
                     value={f.answer}
-                    onChange={(e) => {
-                      const newFaq = [...faq];
-                      newFaq[i].answer = e.target.value;
-                      setFaq(newFaq);
+                    onChange={(val) => {
+                      setFaq(faq.map((item, idx) =>
+                        idx === i ? { ...item, answer: val } : item
+                      ));
                     }}
-                    className="text-sm rounded-xl"
+                    placeholder="Answer"
+                    minHeight={80}
                   />
                 </div>
               ))}

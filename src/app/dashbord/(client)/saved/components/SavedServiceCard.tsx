@@ -53,7 +53,7 @@ export default function SavedServiceCard({ service, handleUnsave }: SavedService
             )}
           </div>
           <p className="text-xs text-slate-400 font-semibold line-clamp-2">
-            {service.subtitle || service.description || "Top-rated service."}
+            {service.subtitle || (service.description ? service.description.replace(/<[^>]*>/g, "") : "Top-rated service.")}
           </p>
         </div>
 
