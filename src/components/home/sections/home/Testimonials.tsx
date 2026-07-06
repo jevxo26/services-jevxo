@@ -68,8 +68,8 @@ const Testimonials = () => {
         <MessageSquare size={13} />
         Customer Reviews
       </div>
-      <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-2">
-        <MessageSquare className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
+      <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-2">
+        <MessageSquare className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
         What our clients <span className="text-[#FF6014]">say about us</span>
       </h2>
       <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
@@ -80,7 +80,7 @@ const Testimonials = () => {
 
   if (!mounted) {
     return (
-    <div className="py-5 md:py-8 lg:py-10 relative overflow-hidden bg-transparent">
+      <div className="py-5 md:py-8 lg:py-10 relative overflow-hidden bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <Header />
           <div className="flex justify-center py-12">
@@ -127,13 +127,12 @@ const Testimonials = () => {
                   animate="center"
                   exit="exit"
                   transition={{ type: "spring", stiffness: 280, damping: 30 }}
-                  className={`grid gap-5 ${
-                    visibleCount === 1
+                  className={`grid gap-5 ${visibleCount === 1
                       ? "grid-cols-1"
                       : visibleCount === 2
-                      ? "grid-cols-2"
-                      : "grid-cols-3"
-                  }`}
+                        ? "grid-cols-2"
+                        : "grid-cols-3"
+                    }`}
                 >
                   {visibleReviews.map((review, idx) => (
                     <div
@@ -201,9 +200,8 @@ const Testimonials = () => {
                     key={i}
                     onClick={() => { setDirection(i > page ? 1 : -1); setPage(i); }}
                     aria-label={`Go to page ${i + 1}`}
-                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
-                      i === page ? "w-6 bg-blue-500" : "w-2 bg-slate-200 hover:bg-blue-300"
-                    }`}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${i === page ? "w-6 bg-blue-500" : "w-2 bg-slate-200 hover:bg-blue-300"
+                      }`}
                   />
                 ))}
               </div>

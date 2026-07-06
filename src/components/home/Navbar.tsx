@@ -226,10 +226,10 @@ export function Navbar() {
   const bottomLinks = MOBILE_BOTTOM_LINKS.map((link) => {
     if (mounted && isAuthenticated && link.label === "Login") {
       return {
-        label: "Sign Out",
-        href: "#signout",
-        icon: LogOut,
-        isSignOut: true,
+        label: "Dashboard",
+        href: role === "client" ? "/dashbord/overview" : "/dashbord",
+        icon: LayoutGrid,
+        isDashboard: true,
       };
     }
     return link;
@@ -239,7 +239,7 @@ export function Navbar() {
     <>
       <motion.nav
         style={{ boxShadow: headerShadow, borderBottomColor: borderColor }}
-        className="bg-[#FFF8F4]/95 md:bg-[#FFF8F4]/50  backdrop-blur-lg border-b sticky top-0 z-50 transition-colors duration-300"
+        className="bg-white/80 md:bg-white/70 backdrop-blur-md border-b sticky top-0 z-50 transition-all duration-300"
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6">
           {/* ─── TOP BAR ─── */}
@@ -778,14 +778,14 @@ export function Navbar() {
 
       {/* ─── MOBILE BOTTOM NAVIGATION ─── */}
       <motion.div
-        initial={{ y: 100 }}
-        animate={{ y: 0 }}
-        transition={{ type: "spring", stiffness: 300, damping: 30, delay: 0.1 }}
-        className="md:hidden fixed bottom-0 left-0 right-0 z-50 safe-bottom"
+        initial={{ y: 100, opacity: 0 }}
+        animate={{ y: 0, opacity: 1 }}
+        transition={{ type: "spring", stiffness: 260, damping: 25, delay: 0.1 }}
+        className="md:hidden fixed bottom-4 left-4 right-4 max-w-md mx-auto z-50"
       >
-        <div className="absolute inset-0 bg-[#FFF8F4]/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
+        <div className="absolute inset-0 bg-white/70 backdrop-blur-xl rounded-[24px] border border-white/30 shadow-[0_12px_40px_rgba(0,0,0,0.08)]" />
 
-        <div className="relative grid grid-cols-6 gap-0 max-w-lg mx-auto px-1 py-1.5">
+        <div className="relative grid grid-cols-6 gap-0 px-1 py-1.5">
           {bottomLinks.map((link: any, i) => {
             const Icon = link.icon;
             const isMenuActive = link.hasDropdown && pathname.startsWith("/categories");
@@ -806,7 +806,7 @@ export function Navbar() {
               }
             };
 
-            const isProfileLink = link.label === "Login";
+            const isProfileLink = link.label === "Login" || link.isDashboard;
             const showAvatar = isProfileLink && mounted && isAuthenticated && profile;
 
             return (
@@ -819,7 +819,7 @@ export function Navbar() {
                 {active && (
                   <motion.div
                     layoutId="bottomNavPill"
-                    className="absolute inset-x-1.5 inset-y-0.5 bg-[#FFF8F4] rounded-2xl border border-rose-100/50"
+                    className="absolute inset-x-1.5 inset-y-0.5 bg-[#FF6014]/10 rounded-2xl border border-[#FF6014]/20"
                     transition={{ type: "spring", stiffness: 400, damping: 30 }}
                   />
                 )}
@@ -833,7 +833,7 @@ export function Navbar() {
                     <motion.div
                       animate={active ? { scale: 1.1 } : { scale: 1 }}
                       className={`w-6 h-6 rounded-full flex items-center justify-center text-[9px] font-bold border select-none overflow-hidden ${active
-                        ? "bg-rose-100 text-[#FF6014] border-rose-200 shadow-sm"
+                        ? "bg-orange-100 text-[#FF6014] border-[#FF6014]/50 ring-2 ring-[#FF6014]/15 shadow-sm"
                         : "bg-slate-100 text-slate-500 border-slate-200"
                         }`}
                     >
@@ -852,7 +852,7 @@ export function Navbar() {
                         className={`w-[21px] h-[21px] transition-colors duration-200 ${(link as any).isSignOut
                           ? "text-rose-500"
                           : active
-                            ? "text-[#FF6014] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
+                            ? "text-[#FF6014] drop-shadow-[0_0_8px_rgba(255,96,20,0.4)]"
                             : "text-slate-400 group-hover:text-slate-600"
                           }`}
                         strokeWidth={(link as any).isSignOut ? 2.2 : active ? 2.4 : 1.8}

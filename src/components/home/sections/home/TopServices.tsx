@@ -148,9 +148,9 @@ export default function TopServices() {
             <Star size={13} className="fill-[#FF6014]" />
             Most Booked
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold md:font-bold text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <Star className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014] fill-[#FF6014]" />
-            Top Rated Services
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight flex items-center justify-center gap-2">
+            <Star className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014] fill-[#FF6014]" />
+            Top Rated <span className="text-[#FF6014]">Services</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Hand-picked professional services highly rated by our community.
@@ -168,7 +168,7 @@ export default function TopServices() {
             const colors = COLOR_PAIRS[i % COLOR_PAIRS.length];
             const slug = service.slug || String(service.id);
             const categoryName = service.category?.name || "";
-            
+
             // Calculate starting price from service.price, or fall back to minimum price of nestedServices
             let price = service.price ? Number(service.price) : null;
             if (!price && service.nestedServices && service.nestedServices.length > 0) {
@@ -179,7 +179,7 @@ export default function TopServices() {
                 price = Math.min(...prices);
               }
             }
-            
+
             // Calculate original price (before discount)
             const originalPrice = price ? Math.round(price * 1.18) : null;
 

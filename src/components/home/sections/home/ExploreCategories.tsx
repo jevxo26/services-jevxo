@@ -97,20 +97,7 @@ const ExploreCategories = () => {
 
   return (
     <div className="max-w-7xl mx-auto px-4 md:px-6 py-5 md:py-8 lg:py-10 overflow-hidden">
-      {/* Header */}
-      <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-        <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
-          <LayoutGrid size={13} />
-          Categories
-        </div>
-        <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold  text-slate-900 tracking-tight flex items-center justify-center gap-2">
-          <LayoutGrid className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
-          Explore Categories
-        </h2>
-        <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-          Choose from our wide range of professional, verified home services
-        </p>
-      </div>
+
 
       <AnimatePresence mode="wait">
         {(!isMounted || isLoading) ? (

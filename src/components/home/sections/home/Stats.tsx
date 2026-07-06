@@ -62,7 +62,7 @@ export default function Stats() {
   const ref = useRef<HTMLDivElement>(null);
   const [triggered, setTriggered] = useState(false);
   const { data: statsRes } = useGetPublicStatsQuery();
-  
+
   // Merge API data with default stats
   const apiData = statsRes?.data || {};
   const stats = [
@@ -100,16 +100,16 @@ export default function Stats() {
             <TrendingUp size={13} />
             Our Impact
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold md:font-bold text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <BarChart3 className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
-            Our Platform Impact
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight flex items-center justify-center gap-2">
+            <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
+            Our Platform <span className="text-[#FF6014]">Impact</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Providing top-notch home services with trust and excellence
           </p>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.15 }}

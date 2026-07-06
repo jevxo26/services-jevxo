@@ -62,9 +62,9 @@ export default function WhyChooseUs() {
             <ShieldCheck size={13} />
             Safety First
           </div>
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold md:font-bold text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <ShieldCheck className="w-6 h-6 md:w-8 md:h-8 text-[#FF6014]" />
-            {WHY_CHOOSE_US_CONTENT.title}
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight flex items-center justify-center gap-2">
+            <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
+            Why Choose <span className="text-[#FF6014]">Us</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             {WHY_CHOOSE_US_CONTENT.subtitle}
