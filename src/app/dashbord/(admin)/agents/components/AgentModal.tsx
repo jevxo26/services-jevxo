@@ -19,6 +19,16 @@ interface AgentModalProps {
   setSelectedDistrict: (val: string) => void;
   selectedArea: string;
   setSelectedArea: (val: string) => void;
+  pictureFile: File | null;
+  setPictureFile: (val: File | null) => void;
+  shopImage1File: File | null;
+  setShopImage1File: (val: File | null) => void;
+  shopImage2File: File | null;
+  setShopImage2File: (val: File | null) => void;
+  nidFrontFile: File | null;
+  setNidFrontFile: (val: File | null) => void;
+  nidBackFile: File | null;
+  setNidBackFile: (val: File | null) => void;
 }
 
 export default function AgentModal({
@@ -36,10 +46,20 @@ export default function AgentModal({
   setSelectedDistrict,
   selectedArea,
   setSelectedArea,
+  pictureFile,
+  setPictureFile,
+  shopImage1File,
+  setShopImage1File,
+  shopImage2File,
+  setShopImage2File,
+  nidFrontFile,
+  setNidFrontFile,
+  nidBackFile,
+  setNidBackFile,
 }: AgentModalProps) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4 overflow-y-auto">
-      <div className="bg-white rounded-3xl shadow-xl w-full max-w-md p-6 my-8 animate-in fade-in zoom-in-95 duration-200">
+      <div className="bg-white rounded-[32px] shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-y-auto p-6 sm:p-8 animate-in fade-in zoom-in-95 duration-200 scrollbar-thin">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-xl font-bold text-slate-800">
             {step === 1 ? "Step 1: Agent Account" : "Step 2: Agent Profile"}
@@ -123,6 +143,121 @@ export default function AgentModal({
                 placeholder="199XXXXXXXXXX"
               />
             </div>
+            
+            {/* Profile / Logo picture */}
+            <div>
+              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Profile / Logo Picture</label>
+              <div className="relative border border-slate-200 bg-slate-50 hover:bg-white rounded-xl px-4 py-2.5 flex items-center justify-between cursor-pointer group transition-all">
+                <span className="text-xs font-bold text-slate-600 truncate max-w-[280px]">
+                  {pictureFile ? pictureFile.name : "Choose profile photo..."}
+                </span>
+                <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">Browse</span>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={(e) => { if (e.target.files && e.target.files.length > 0) setPictureFile(e.target.files[0]); }}
+                  required
+                  className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                />
+              </div>
+              {pictureFile && (
+                <div className="mt-2 relative w-20 h-20 rounded-xl overflow-hidden border border-slate-200 shadow-xs">
+                  <img src={URL.createObjectURL(pictureFile)} alt="Profile Preview" className="w-full h-full object-cover" />
+                </div>
+              )}
+            </div>
+
+            {/* Shop Images */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Shop Image 1</label>
+                <div className="relative border border-slate-200 bg-slate-50 hover:bg-white rounded-xl px-4 py-2.5 flex items-center justify-between cursor-pointer group transition-all">
+                  <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
+                    {shopImage1File ? shopImage1File.name : "Image 1"}
+                  </span>
+                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => { if (e.target.files && e.target.files.length > 0) setShopImage1File(e.target.files[0]); }}
+                    required
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                </div>
+                {shopImage1File && (
+                  <div className="mt-2 relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xs">
+                    <img src={URL.createObjectURL(shopImage1File)} alt="Shop 1 Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Shop Image 2</label>
+                <div className="relative border border-slate-200 bg-slate-50 hover:bg-white rounded-xl px-4 py-2.5 flex items-center justify-between cursor-pointer group transition-all">
+                  <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
+                    {shopImage2File ? shopImage2File.name : "Image 2"}
+                  </span>
+                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => { if (e.target.files && e.target.files.length > 0) setShopImage2File(e.target.files[0]); }}
+                    required
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                </div>
+                {shopImage2File && (
+                  <div className="mt-2 relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xs">
+                    <img src={URL.createObjectURL(shopImage2File)} alt="Shop 2 Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* NID Images */}
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">NID Front Page</label>
+                <div className="relative border border-slate-200 bg-slate-50 hover:bg-white rounded-xl px-4 py-2.5 flex items-center justify-between cursor-pointer group transition-all">
+                  <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
+                    {nidFrontFile ? nidFrontFile.name : "NID Front"}
+                  </span>
+                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => { if (e.target.files && e.target.files.length > 0) setNidFrontFile(e.target.files[0]); }}
+                    required
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                </div>
+                {nidFrontFile && (
+                  <div className="mt-2 relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xs">
+                    <img src={URL.createObjectURL(nidFrontFile)} alt="NID Front Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">NID Back Page</label>
+                <div className="relative border border-slate-200 bg-slate-50 hover:bg-white rounded-xl px-4 py-2.5 flex items-center justify-between cursor-pointer group transition-all">
+                  <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
+                    {nidBackFile ? nidBackFile.name : "NID Back"}
+                  </span>
+                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => { if (e.target.files && e.target.files.length > 0) setNidBackFile(e.target.files[0]); }}
+                    required
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                  />
+                </div>
+                {nidBackFile && (
+                  <div className="mt-2 relative w-full aspect-video rounded-xl overflow-hidden border border-slate-200 shadow-xs">
+                    <img src={URL.createObjectURL(nidBackFile)} alt="NID Back Preview" className="w-full h-full object-cover" />
+                  </div>
+                )}
+              </div>
+            </div>
             <div>
               <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">
                 Categories (Hold Ctrl/Cmd to select multiple - Optional)
@@ -175,27 +310,7 @@ export default function AgentModal({
                 placeholder="Briefly describe the agent's services..."
               ></textarea>
             </div>
-            <div className="grid grid-cols-2 gap-4">
-              <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Min Starting Price</label>
-                <input
-                  name="min_starting_price"
-                  type="number"
-                  step="0.01"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
-                  placeholder="0.00"
-                />
-              </div>
-              <div>
-                <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Google Map Link</label>
-                <input
-                  name="google_map_link"
-                  type="url"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
-                  placeholder="https://maps.google.com/..."
-                />
-              </div>
-            </div>
+
             <div className="pt-4 flex justify-end gap-3 border-t border-slate-100">
               <button
                 type="submit"

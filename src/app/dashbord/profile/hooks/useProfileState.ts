@@ -88,6 +88,7 @@ export function useProfileState() {
       if (profile.devision?.id) setSelectedDevision(profile.devision.id.toString());
       if (profile.district?.id) setSelectedDistrict(profile.district.id.toString());
       if (profile.area?.id) setSelectedArea(profile.area.id.toString());
+      else if (profile.area_name) setSelectedArea(profile.area_name);
     }
   }, [profile]);
 
@@ -120,7 +121,8 @@ export function useProfileState() {
       location: combinedLocation,
       devision_id: selectedDevision ? Number(selectedDevision) : undefined,
       district_id: selectedDistrict ? Number(selectedDistrict) : undefined,
-      area_id: selectedArea ? Number(selectedArea) : undefined,
+      area_id: selectedArea && !isNaN(Number(selectedArea)) ? Number(selectedArea) : undefined,
+      area_name: selectedArea && isNaN(Number(selectedArea)) ? selectedArea : undefined,
       description: formData.get("description")?.toString() || "",
       company_name: formData.get("company_name")?.toString() || "",
       min_starting_price: formData.get("min_starting_price") ? Number(formData.get("min_starting_price")) : 0,

@@ -155,7 +155,8 @@ export function useOpportunityState() {
         google_map_link: selectedRole === "Agent" ? "" : formData.google_map_link,
         devision_id: Number(formData.devision_id),
         district_id: Number(formData.district_id),
-        area_id: Number(formData.area_id),
+        area_id: formData.area_id && !isNaN(Number(formData.area_id)) ? Number(formData.area_id) : undefined,
+        area_name: formData.area_id && isNaN(Number(formData.area_id)) ? formData.area_id : undefined,
         
         shop_image1: shopImageUrl1 || undefined,
         shop_image2: shopImageUrl2 || undefined,

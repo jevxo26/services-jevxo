@@ -135,27 +135,59 @@ export function useAgentState() {
     const formData = new FormData(e.currentTarget);
     const categoryIds = formData.getAll("category_ids").map((id) => Number(id));
 
-    const profileData = {
-      user_id: createdUserId,
-      company_name: formData.get("company_name")?.toString() || "",
-      nid_number: formData.get("nid_number")?.toString() || "",
-      category_ids: categoryIds.length > 0 ? categoryIds : undefined,
-      type: "personal",
-      location: formData.get("location")?.toString() || "",
-      devision_id: selectedDevision ? Number(selectedDevision) : undefined,
-      district_id: selectedDistrict ? Number(selectedDistrict) : undefined,
-      area_id: selectedArea ? Number(selectedArea) : undefined,
-      description: formData.get("description")?.toString() || "",
-      min_starting_price: formData.get("min_starting_price") ? Number(formData.get("min_starting_price")) : 0,
-      google_map_link: formData.get("google_map_link")?.toString() || "",
-    };
+    if (!pictureFile) {
+      toast.error("Please upload a Profile / Logo picture.");
+      return;
+    }
+    if (!formData.get("nid_number")?.toString().trim()) {
+      toast.error("Please provide NID Number.");
+      return;
+    }
+    if (!nidFrontFile || !nidBackFile) {
+      toast.error("Please upload NID Front and Back pages.");
+      return;
+    }
+    if (!shopImage1File || !shopImage2File) {
+      toast.error("Please upload both Shop Images.");
+      return;
+    }
 
     try {
+      toast.loading("Uploading files...", { id: "profile-upload" });
+      const pictureUrl = await uploadImage(pictureFile);
+      const nidFrontUrl = await uploadImage(nidFrontFile);
+      const nidBackUrl = await uploadImage(nidBackFile);
+      const shopImageUrl1 = await uploadImage(shopImage1File);
+      const shopImageUrl2 = await uploadImage(shopImage2File);
+      toast.dismiss("profile-upload");
+
+      const profileData = {
+        user_id: createdUserId,
+        company_name: formData.get("company_name")?.toString() || "",
+        nid_number: formData.get("nid_number")?.toString() || "",
+        category_ids: categoryIds.length > 0 ? categoryIds : undefined,
+        type: "personal",
+        picture: pictureUrl,
+        nid_front: nidFrontUrl,
+        nid_back: nidBackUrl,
+        shop_image1: shopImageUrl1,
+        shop_image2: shopImageUrl2,
+        location: formData.get("location")?.toString() || "",
+        devision_id: selectedDevision ? Number(selectedDevision) : undefined,
+        district_id: selectedDistrict ? Number(selectedDistrict) : undefined,
+        area_id: selectedArea && !isNaN(Number(selectedArea)) ? Number(selectedArea) : undefined,
+        area_name: selectedArea && isNaN(Number(selectedArea)) ? selectedArea : undefined,
+        description: formData.get("description")?.toString() || "",
+        min_starting_price: formData.get("min_starting_price") ? Number(formData.get("min_starting_price")) : 0,
+        google_map_link: formData.get("google_map_link")?.toString() || "",
+      };
+
       await createProfileMut(profileData).unwrap();
       toast.success("Agent profile created successfully!");
       closeModal();
       refetch();
     } catch (err: any) {
+      toast.dismiss("profile-upload");
       console.error(err);
       toast.error(err.data?.message || err.message || "Failed to create agent profile.");
     }
@@ -168,6 +200,11 @@ export function useAgentState() {
     setSelectedDevision("");
     setSelectedDistrict("");
     setSelectedArea("");
+    setPictureFile(null);
+    setShopImage1File(null);
+    setShopImage2File(null);
+    setNidFrontFile(null);
+    setNidBackFile(null);
   };
 
   const handleActivate = async (id: string) => {
@@ -229,6 +266,16 @@ export function useAgentState() {
     setSelectedDistrict,
     selectedArea,
     setSelectedArea,
+    pictureFile,
+    setPictureFile,
+    shopImage1File,
+    setShopImage1File,
+    shopImage2File,
+    setShopImage2File,
+    nidFrontFile,
+    setNidFrontFile,
+    nidBackFile,
+    setNidBackFile,
     isCreatingUser,
     isCreatingProfile,
     handleCreateUser,

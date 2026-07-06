@@ -25,6 +25,16 @@ export default function AgentsPage() {
     setSelectedDistrict,
     selectedArea,
     setSelectedArea,
+    pictureFile,
+    setPictureFile,
+    shopImage1File,
+    setShopImage1File,
+    shopImage2File,
+    setShopImage2File,
+    nidFrontFile,
+    setNidFrontFile,
+    nidBackFile,
+    setNidBackFile,
     isCreatingUser,
     isCreatingProfile,
     handleCreateUser,
@@ -110,6 +120,16 @@ export default function AgentsPage() {
           setSelectedDistrict={setSelectedDistrict}
           selectedArea={selectedArea}
           setSelectedArea={setSelectedArea}
+          pictureFile={pictureFile}
+          setPictureFile={setPictureFile}
+          shopImage1File={shopImage1File}
+          setShopImage1File={setShopImage1File}
+          shopImage2File={shopImage2File}
+          setShopImage2File={setShopImage2File}
+          nidFrontFile={nidFrontFile}
+          setNidFrontFile={setNidFrontFile}
+          nidBackFile={nidBackFile}
+          setNidBackFile={setNidBackFile}
         />
       )}
 

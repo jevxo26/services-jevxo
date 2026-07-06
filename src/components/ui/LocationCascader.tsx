@@ -161,16 +161,19 @@ export function LocationCascader({
         <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">
           Area
         </label>
-        <Select
-          options={areaOptions}
-          value={currentAreaOption}
-          onChange={handleAreaChange}
-          isDisabled={isDisabled || !activeDistrict || isLoadingAreas}
-          isLoading={isLoadingAreas}
-          placeholder="Select Area"
-          isClearable
-          styles={selectStyles}
-          instanceId="select-area"
+        <input
+          type="text"
+          value={activeArea}
+          onChange={(e) => {
+            const val = e.target.value;
+            if (selectedAreaId === undefined) {
+              setLocalArea(val);
+            }
+            if (onAreaChange) onAreaChange(val);
+          }}
+          disabled={isDisabled || !activeDistrict}
+          placeholder="Type Area Name"
+          className="w-full bg-[#f8fafc] border border-[#e2e8f0] rounded-xl px-4 py-[7px] text-sm text-slate-900 focus:outline-none focus:border-rose-300 focus:ring-2 focus:ring-rose-100 transition-all font-medium h-[38px]"
         />
       </div>
     </div>

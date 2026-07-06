@@ -5,6 +5,7 @@ import { X, Trash2, Image as ImageIcon, PlusCircle } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Hero } from "@/redux/features/admin/hero";
+import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
 
 interface HeroModalProps {
   editingHero: Hero | null;
@@ -42,6 +43,9 @@ export default function HeroModal({
   isCreating,
   isUpdating,
 }: HeroModalProps) {
+  const { data: apiCategoriesRes, isLoading: isCategoriesLoading } = useGetAllCategoriesQuery();
+  const allCategories = apiCategoriesRes?.data || (Array.isArray(apiCategoriesRes) ? apiCategoriesRes : []);
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/50 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-white rounded-3xl w-full max-w-lg shadow-2xl border border-slate-100 overflow-hidden animate-in zoom-in-95 duration-200">
@@ -85,7 +89,36 @@ export default function HeroModal({
 
           <div>
             <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
-              Redirect Link
+              Link to Category (Optional)
+            </label>
+            <select
+              value={allCategories.find((c: any) => `/categories/${c.id}` === link)?.id || ""}
+              onChange={(e) => {
+                const catId = e.target.value;
+                if (catId) {
+                  setLink(`/categories/${catId}`);
+                } else {
+                  setLink("");
+                }
+              }}
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+            >
+              <option value="">-- Select Category to Redirect --</option>
+              {isCategoriesLoading ? (
+                <option value="" disabled>Loading categories...</option>
+              ) : (
+                allCategories.map((c: any) => (
+                  <option key={c.id} value={c.id}>
+                    {c.name}
+                  </option>
+                ))
+              )}
+            </select>
+          </div>
+
+          <div>
+            <label className="block text-xs font-semibold text-slate-500 uppercase tracking-wider mb-1">
+              Redirect Link (Or Type Custom Link)
             </label>
             <Input
               placeholder="e.g. /services or https://..."
