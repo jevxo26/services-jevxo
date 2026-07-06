@@ -14,6 +14,17 @@ interface AgentItem {
   phone?: string;
   rating?: string;
   categoryName?: string;
+  companyName?: string;
+  location?: string;
+  description?: string;
+  shop_image1?: string;
+  shop_image2?: string;
+  nid_number?: string;
+  nid_front?: string;
+  nid_back?: string;
+  devision?: string;
+  district?: string;
+  area?: string;
 }
 
 interface AgentTableProps {
@@ -60,9 +71,23 @@ export default function AgentTable({
       ),
     },
     {
-      key: "categoryName",
-      header: "Category",
-      render: (user: AgentItem) => <span className="font-bold text-slate-600 text-xs">{user.categoryName}</span>,
+      key: "companyName",
+      header: "Company Name",
+      render: (user: AgentItem) => <span className="font-bold text-slate-700 text-xs">{user.companyName}</span>,
+    },
+    {
+      key: "nid_number",
+      header: "NID Number",
+      render: (user: AgentItem) => <span className="font-bold text-slate-600 text-xs">{user.nid_number || "N/A"}</span>,
+    },
+    {
+      key: "devision",
+      header: "Territory Region",
+      render: (user: AgentItem) => (
+        <span className="font-bold text-slate-500 text-xs">
+          {user.devision && user.devision !== "N/A" ? `${user.devision} / ${user.district} / ${user.area}` : "Not Set"}
+        </span>
+      ),
     },
     { key: "joined", header: "Joined Date" },
     {

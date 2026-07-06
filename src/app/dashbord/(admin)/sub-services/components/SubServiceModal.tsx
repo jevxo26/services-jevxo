@@ -20,7 +20,7 @@ interface SubServiceModalProps {
   setPrice: (val: string) => void;
   isCreating: boolean;
   isUpdating: boolean;
-  
+
   description: string;
   setDescription: (val: string) => void;
   image1: string;
@@ -61,7 +61,7 @@ export default function SubServiceModal({
   handleImage1Upload,
   handleImage2Upload,
 }: SubServiceModalProps) {
-  
+
   const handleAddFaq = () => {
     setFaq([...faq, { question: "", answer: "" }]);
   };

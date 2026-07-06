@@ -7,6 +7,7 @@ import { useGetAllUsersQuery, useUpdateUserMutation, useCreateUserMutation, useD
 import { useGetAllRolesQuery } from "@/redux/features/admin/role";
 import { useCreateProfileMutation } from "@/redux/features/admin/profile";
 import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
+import { uploadImage } from "@/lib/upload";
 
 interface AgentItem {
   id: string;
@@ -18,6 +19,17 @@ interface AgentItem {
   phone?: string;
   rating?: string;
   categoryName?: string;
+  companyName?: string;
+  location?: string;
+  description?: string;
+  shop_image1?: string;
+  shop_image2?: string;
+  nid_number?: string;
+  nid_front?: string;
+  nid_back?: string;
+  devision?: string;
+  district?: string;
+  area?: string;
 }
 
 export function useAgentState() {
@@ -32,6 +44,12 @@ export function useAgentState() {
   const [selectedDevision, setSelectedDevision] = useState<string>("");
   const [selectedDistrict, setSelectedDistrict] = useState<string>("");
   const [selectedArea, setSelectedArea] = useState<string>("");
+
+  const [pictureFile, setPictureFile] = useState<File | null>(null);
+  const [shopImage1File, setShopImage1File] = useState<File | null>(null);
+  const [shopImage2File, setShopImage2File] = useState<File | null>(null);
+  const [nidFrontFile, setNidFrontFile] = useState<File | null>(null);
+  const [nidBackFile, setNidBackFile] = useState<File | null>(null);
 
   const { data: apiUsersRes, isLoading: isUsersLoading, refetch } = useGetAllUsersQuery();
   const { data: rolesRes } = useGetAllRolesQuery();
@@ -59,6 +77,17 @@ export function useAgentState() {
         joined: u.createdAt ? new Date(u.createdAt).toLocaleDateString() : "Unknown",
         rating: u.profile?.rating || "New",
         categoryName: u.profile?.category?.name || "Unassigned",
+        companyName: u.profile?.company_name || "N/A",
+        location: u.profile?.location || "N/A",
+        description: u.profile?.description || "N/A",
+        shop_image1: u.profile?.shop_image1,
+        shop_image2: u.profile?.shop_image2,
+        nid_number: u.profile?.nid_number,
+        nid_front: u.profile?.nid_front,
+        nid_back: u.profile?.nid_back,
+        devision: u.profile?.devision?.name || "N/A",
+        district: u.profile?.district?.name || "N/A",
+        area: u.profile?.area?.name || "N/A",
       }));
       setAgents(mappedUsers);
     } else {
@@ -108,6 +137,8 @@ export function useAgentState() {
 
     const profileData = {
       user_id: createdUserId,
+      company_name: formData.get("company_name")?.toString() || "",
+      nid_number: formData.get("nid_number")?.toString() || "",
       category_ids: categoryIds.length > 0 ? categoryIds : undefined,
       type: "personal",
       location: formData.get("location")?.toString() || "",

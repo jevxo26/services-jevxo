@@ -19,7 +19,8 @@ function OpportunityPageContent() {
 
   const {
     step, formData, setFormData, handleChange, selectedCategoryIds, setSelectedCategoryIds,
-    pictureFile, setPictureFile, isRegistering, isCreatingProfile, isUploading,
+    pictureFile, setPictureFile, shopImage1File, setShopImage1File, shopImage2File, setShopImage2File,
+    nidFrontFile, setNidFrontFile, nidBackFile, setNidBackFile, isRegistering, isCreatingProfile, isUploading,
     categories, handleSelectRole, handleBack, handleRegister, handleProfileSubmit,
   } = useOpportunityState();
 
@@ -127,15 +128,19 @@ function OpportunityPageContent() {
                   </button>
                 </form>
               ) : (
-                <form onSubmit={handleProfileSubmit} className="space-y-4">
+                <form onSubmit={(e) => handleProfileSubmit(e, selectedRole)} className="space-y-4">
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5"><Building size={13} className="text-[#FF6014]" />Company / Brand Name</label>
                     <input type="text" name="company_name" value={formData.company_name} onChange={handleChange} required className={inputNormal} placeholder="e.g. Rahman Maintenance Services" />
                   </div>
-                  <div className="space-y-1.5">
-                    <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em]">Categories Offered</label>
-                    <Select isMulti options={categories.map((c: any) => ({ value: c.id, label: c.name }))} onChange={(selected: any) => setSelectedCategoryIds(selected.map((s: any) => s.value))} placeholder="Select service categories..." styles={{ control: (base: any, state: any) => ({ ...base, borderRadius: "0.75rem", border: "1px solid #E7E5E4", fontSize: "12px", fontWeight: "600", backgroundColor: "#FAFAF9", boxShadow: state.isFocused ? "0 0 0 2px rgba(255, 96, 20, 0.1)" : "none", borderColor: state.isFocused ? "#FF6014" : "#E7E5E4" }) }} />
-                  </div>
+
+                  {selectedRole === "Vendor" && (
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em]">Categories Offered</label>
+                      <Select isMulti options={categories.map((c: any) => ({ value: c.id, label: c.name }))} onChange={(selected: any) => setSelectedCategoryIds(selected.map((s: any) => s.value))} placeholder="Select service categories..." styles={{ control: (base: any, state: any) => ({ ...base, borderRadius: "0.75rem", border: "1px solid #E7E5E4", fontSize: "12px", fontWeight: "600", backgroundColor: "#FAFAF9", boxShadow: state.isFocused ? "0 0 0 2px rgba(255, 96, 20, 0.1)" : "none", borderColor: state.isFocused ? "#FF6014" : "#E7E5E4" }) }} />
+                    </div>
+                  )}
+
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5"><ImageIcon size={13} className="text-[#FF6014]" />Profile / Logo Picture</label>
                     <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-dashed border-slate-200 hover:border-[#FF6014]/40 rounded-xl bg-slate-50/50 hover:bg-white transition-all cursor-pointer relative group">
@@ -147,20 +152,74 @@ function OpportunityPageContent() {
                       <input type="file" accept="image/*" onChange={(e) => { if (e.target.files && e.target.files.length > 0) setPictureFile(e.target.files[0]); }} required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
                     </div>
                   </div>
+
+                  {selectedRole === "Agent" && (
+                    <div className="space-y-1.5">
+                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5">
+                        <ImageIcon size={13} className="text-[#FF6014]" /> Your Shop Images (Max 2)
+                      </label>
+                      <div className="grid grid-cols-2 gap-3">
+                        <div className="relative group border-2 border-dashed border-slate-200 hover:border-[#FF6014]/40 rounded-xl p-3 bg-slate-50/50 hover:bg-white transition-all flex flex-col items-center justify-center text-center cursor-pointer min-h-[90px]">
+                          <ImageIcon className="h-5 w-5 text-slate-400 group-hover:text-[#FF6014] mb-1" />
+                          <span className="text-[10px] font-bold text-[#FF6014] truncate max-w-full px-1">{shopImage1File ? shopImage1File.name : "Shop Image 1"}</span>
+                          <input type="file" accept="image/*" onChange={(e) => { if (e.target.files && e.target.files.length > 0) setShopImage1File(e.target.files[0]); }} required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                        </div>
+                        <div className="relative group border-2 border-dashed border-slate-200 hover:border-[#FF6014]/40 rounded-xl p-3 bg-slate-50/50 hover:bg-white transition-all flex flex-col items-center justify-center text-center cursor-pointer min-h-[90px]">
+                          <ImageIcon className="h-5 w-5 text-slate-400 group-hover:text-[#FF6014] mb-1" />
+                          <span className="text-[10px] font-bold text-[#FF6014] truncate max-w-full px-1">{shopImage2File ? shopImage2File.name : "Shop Image 2"}</span>
+                          <input type="file" accept="image/*" onChange={(e) => { if (e.target.files && e.target.files.length > 0) setShopImage2File(e.target.files[0]); }} required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em]">Service Description</label>
                     <textarea name="description" value={formData.description} onChange={handleChange} required rows={2} className={`${inputNormal} resize-none`} placeholder="Briefly explain your services or experience..." />
                   </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5"><DollarSign size={13} className="text-[#FF6014]" />Min Starting Price</label>
-                      <input type="number" name="min_starting_price" value={formData.min_starting_price} onChange={handleChange} required className={inputNormal} placeholder="e.g. 500" />
+
+                  {selectedRole === "Agent" && (
+                    <div className="space-y-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5">
+                          <User size={13} className="text-[#FF6014]" /> NID Number
+                        </label>
+                        <input type="text" name="nid_number" value={formData.nid_number} onChange={handleChange} required className={inputNormal} placeholder="e.g. 199XXXXXXXXXX" />
+                      </div>
+
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5">
+                          <ImageIcon size={13} className="text-[#FF6014]" /> NID Page Images (Front & Back)
+                        </label>
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="relative group border-2 border-dashed border-slate-200 hover:border-[#FF6014]/40 rounded-xl p-3 bg-slate-50/50 hover:bg-white transition-all flex flex-col items-center justify-center text-center cursor-pointer min-h-[90px]">
+                            <ImageIcon className="h-5 w-5 text-slate-400 group-hover:text-[#FF6014] mb-1" />
+                            <span className="text-[10px] font-bold text-[#FF6014] truncate max-w-full px-1">{nidFrontFile ? nidFrontFile.name : "NID Front Page"}</span>
+                            <input type="file" accept="image/*" onChange={(e) => { if (e.target.files && e.target.files.length > 0) setNidFrontFile(e.target.files[0]); }} required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                          </div>
+                          <div className="relative group border-2 border-dashed border-slate-200 hover:border-[#FF6014]/40 rounded-xl p-3 bg-slate-50/50 hover:bg-white transition-all flex flex-col items-center justify-center text-center cursor-pointer min-h-[90px]">
+                            <ImageIcon className="h-5 w-5 text-slate-400 group-hover:text-[#FF6014] mb-1" />
+                            <span className="text-[10px] font-bold text-[#FF6014] truncate max-w-full px-1">{nidBackFile ? nidBackFile.name : "NID Back Page"}</span>
+                            <input type="file" accept="image/*" onChange={(e) => { if (e.target.files && e.target.files.length > 0) setNidBackFile(e.target.files[0]); }} required className="absolute inset-0 w-full h-full opacity-0 cursor-pointer" />
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div className="space-y-1.5">
-                      <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5"><Globe size={13} className="text-[#FF6014]" />Google Map Link</label>
-                      <input type="url" name="google_map_link" value={formData.google_map_link} onChange={handleChange} required className={inputNormal} placeholder="https://maps.google.com/..." />
+                  )}
+
+                  {selectedRole === "Vendor" && (
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5"><DollarSign size={13} className="text-[#FF6014]" />Min Starting Price</label>
+                        <input type="number" name="min_starting_price" value={formData.min_starting_price} onChange={handleChange} required className={inputNormal} placeholder="e.g. 500" />
+                      </div>
+                      <div className="space-y-1.5">
+                        <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em] flex items-center gap-1.5"><Globe size={13} className="text-[#FF6014]" />Google Map Link</label>
+                        <input type="url" name="google_map_link" value={formData.google_map_link} onChange={handleChange} required className={inputNormal} placeholder="https://maps.google.com/..." />
+                      </div>
                     </div>
-                  </div>
+                  )}
+
                   <div className="space-y-1.5">
                     <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em]">Region Location</label>
                     <LocationCascader selectedDevisionId={formData.devision_id} selectedDistrictId={formData.district_id} selectedAreaId={formData.area_id} onDevisionChange={(id) => setFormData(prev => ({ ...prev, devision_id: id, district_id: "", area_id: "" }))} onDistrictChange={(id) => setFormData(prev => ({ ...prev, district_id: id, area_id: "" }))} onAreaChange={(id) => setFormData(prev => ({ ...prev, area_id: id }))} />

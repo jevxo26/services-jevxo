@@ -104,13 +104,32 @@ export default function AgentModal({
         ) : (
           <form onSubmit={handleCreateProfile} className="space-y-4">
             <div>
+              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">Company / Brand Name</label>
+              <input
+                name="company_name"
+                type="text"
+                required
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                placeholder="Rahman Maintenance Services"
+              />
+            </div>
+            <div>
+              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">National ID (NID) Number</label>
+              <input
+                name="nid_number"
+                type="text"
+                required
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                placeholder="199XXXXXXXXXX"
+              />
+            </div>
+            <div>
               <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">
-                Categories (Hold Ctrl/Cmd to select multiple)
+                Categories (Hold Ctrl/Cmd to select multiple - Optional)
               </label>
               <select
                 multiple
                 name="category_ids"
-                required
                 className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all h-24"
               >
                 {isCategoriesLoading ? (

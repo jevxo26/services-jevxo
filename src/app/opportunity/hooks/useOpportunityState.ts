@@ -29,6 +29,10 @@ export function useOpportunityState() {
   const [isUploading, setIsUploading] = useState(false);
   const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
   const [pictureFile, setPictureFile] = useState<File | null>(null);
+  const [shopImage1File, setShopImage1File] = useState<File | null>(null);
+  const [shopImage2File, setShopImage2File] = useState<File | null>(null);
+  const [nidFrontFile, setNidFrontFile] = useState<File | null>(null);
+  const [nidBackFile, setNidBackFile] = useState<File | null>(null);
 
   const [register, { isLoading: isRegistering }] = useRegisterMutation();
   const [createProfile, { isLoading: isCreatingProfile }] = useCreateProfileMutation();
@@ -41,7 +45,7 @@ export function useOpportunityState() {
   const [formData, setFormData] = useState({
     name: "", phone: "", email: "", company_name: "", location: "",
     description: "", min_starting_price: "", google_map_link: "",
-    devision_id: "", district_id: "", area_id: "",
+    devision_id: "", district_id: "", area_id: "", nid_number: "",
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
@@ -85,28 +89,81 @@ export function useOpportunityState() {
     }
   };
 
-  const handleProfileSubmit = async (e: React.FormEvent) => {
+  const handleProfileSubmit = async (e: React.FormEvent, selectedRole: string | null) => {
     e.preventDefault();
     if (!createdUserId) return;
     if (!formData.devision_id || !formData.district_id || !formData.area_id) {
       toast.error("Please complete the location details (Division, District, Area)."); return;
     }
-    if (selectedCategoryIds.length === 0) { toast.error("Please select at least one category."); return; }
-    if (!pictureFile) { toast.error("Please upload a picture."); return; }
+    
+    // Conditionally validate categories
+    if (selectedRole === "Vendor" && selectedCategoryIds.length === 0) {
+      toast.error("Please select at least one category."); return;
+    }
+    
+    if (!pictureFile) {
+      toast.error("Please upload a picture."); return;
+    }
+    
+    // Validate NID for Agent role
+    if (selectedRole === "Agent") {
+      if (!formData.nid_number.trim()) {
+        toast.error("Please provide your NID number."); return;
+      }
+      if (!nidFrontFile || !nidBackFile) {
+        toast.error("Please upload both NID front and back images."); return;
+      }
+      if (!shopImage1File || !shopImage2File) {
+        toast.error("Please upload both Shop Image 1 and Shop Image 2."); return;
+      }
+    }
+
     try {
       setIsUploading(true);
+      
       const pictureUrl = await uploadImage(pictureFile);
+      
+      let shopImageUrl1 = "";
+      if (shopImage1File) {
+        shopImageUrl1 = await uploadImage(shopImage1File);
+      }
+      
+      let shopImageUrl2 = "";
+      if (shopImage2File) {
+        shopImageUrl2 = await uploadImage(shopImage2File);
+      }
+      
+      let nidFrontUrl = "";
+      if (nidFrontFile) {
+        nidFrontUrl = await uploadImage(nidFrontFile);
+      }
+      
+      let nidBackUrl = "";
+      if (nidBackFile) {
+        nidBackUrl = await uploadImage(nidBackFile);
+      }
+      
       setIsUploading(false);
+      
       await createProfile({
         user_id: createdUserId, type: "business",
-        company_name: formData.company_name, category_ids: selectedCategoryIds,
+        company_name: formData.company_name,
+        category_ids: selectedRole === "Agent" ? [] : selectedCategoryIds,
         location: formData.location, description: formData.description,
-        picture: pictureUrl, min_starting_price: Number(formData.min_starting_price) || 0,
-        google_map_link: formData.google_map_link,
+        picture: pictureUrl,
+        min_starting_price: selectedRole === "Agent" ? 0 : (Number(formData.min_starting_price) || 0),
+        google_map_link: selectedRole === "Agent" ? "" : formData.google_map_link,
         devision_id: Number(formData.devision_id),
         district_id: Number(formData.district_id),
         area_id: Number(formData.area_id),
+        
+        shop_image1: shopImageUrl1 || undefined,
+        shop_image2: shopImageUrl2 || undefined,
+        nid_number: selectedRole === "Agent" ? formData.nid_number : undefined,
+        nid_front: nidFrontUrl || undefined,
+        nid_back: nidBackUrl || undefined,
       }).unwrap();
+      
       toast.success("Application submitted successfully! Please wait for admin approval.");
       router.push("/");
     } catch (err: any) {
@@ -119,6 +176,10 @@ export function useOpportunityState() {
     step, formData, setFormData, handleChange,
     selectedCategoryIds, setSelectedCategoryIds,
     pictureFile, setPictureFile,
+    shopImage1File, setShopImage1File,
+    shopImage2File, setShopImage2File,
+    nidFrontFile, setNidFrontFile,
+    nidBackFile, setNidBackFile,
     isRegistering, isCreatingProfile, isUploading,
     categories, handleSelectRole, handleBack,
     handleRegister, handleProfileSubmit,
