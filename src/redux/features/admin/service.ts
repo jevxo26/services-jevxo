@@ -29,6 +29,10 @@ export interface SubService {
   name: string;
   price: number;
   nestedService?: NestedService;
+  description?: string;
+  image1?: string;
+  image2?: string;
+  faq?: { question: string; answer: string }[];
 }
 
 export interface NestedService {
@@ -212,12 +216,20 @@ export interface CreateSubServiceRequest {
   nested_service_id: number;
   name: string;
   price: number;
+  description?: string;
+  image1?: string;
+  image2?: string;
+  faq?: { question: string; answer: string }[];
 }
 
 export interface UpdateSubServiceRequest {
   nested_service_id?: number;
   name?: string;
   price?: number;
+  description?: string;
+  image1?: string;
+  image2?: string;
+  faq?: { question: string; answer: string }[];
 }
 
 export const subServiceApi = baseApi.injectEndpoints({

@@ -32,6 +32,18 @@ export default function SubServicesManagementPage() {
     handleDelete,
     isCreating,
     isUpdating,
+    description,
+    setDescription,
+    image1,
+    setImage1,
+    image2,
+    setImage2,
+    faq,
+    setFaq,
+    isUploadingImage1,
+    isUploadingImage2,
+    handleImage1Upload,
+    handleImage2Upload,
   } = useSubServiceState();
 
   if (role !== "superadmin" && role !== "vendor") {
@@ -121,6 +133,18 @@ export default function SubServicesManagementPage() {
           setPrice={setPrice}
           isCreating={isCreating}
           isUpdating={isUpdating}
+          description={description}
+          setDescription={setDescription}
+          image1={image1}
+          setImage1={setImage1}
+          image2={image2}
+          setImage2={setImage2}
+          faq={faq}
+          setFaq={setFaq}
+          isUploadingImage1={isUploadingImage1}
+          isUploadingImage2={isUploadingImage2}
+          handleImage1Upload={handleImage1Upload}
+          handleImage2Upload={handleImage2Upload}
         />
       )}
 

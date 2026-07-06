@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
+import { uploadImage } from "@/lib/upload";
 import {
   useGetAllNestedServicesQuery,
   useGetAllSubServicesQuery,
@@ -41,6 +42,42 @@ export function useSubServiceState() {
   const [name, setName] = useState("");
   const [price, setPrice] = useState("");
   const [nestedServiceId, setNestedServiceId] = useState("NONE");
+  const [description, setDescription] = useState("");
+  const [image1, setImage1] = useState("");
+  const [image2, setImage2] = useState("");
+  const [faq, setFaq] = useState<{ question: string; answer: string }[]>([]);
+  const [isUploadingImage1, setIsUploadingImage1] = useState(false);
+  const [isUploadingImage2, setIsUploadingImage2] = useState(false);
+
+  const handleImage1Upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploadingImage1(true);
+    try {
+      const url = await uploadImage(file);
+      setImage1(url);
+      toast.success("Image 1 uploaded successfully!");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to upload Image 1");
+    } finally {
+      setIsUploadingImage1(false);
+    }
+  };
+
+  const handleImage2Upload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setIsUploadingImage2(true);
+    try {
+      const url = await uploadImage(file);
+      setImage2(url);
+      toast.success("Image 2 uploaded successfully!");
+    } catch (err: any) {
+      toast.error(err.message || "Failed to upload Image 2");
+    } finally {
+      setIsUploadingImage2(false);
+    }
+  };
 
   // All nested services for the dropdown
   const allNestedServices: NestedService[] = useMemo(() => {
@@ -82,6 +119,10 @@ export function useSubServiceState() {
     setName("");
     setPrice("");
     setNestedServiceId("NONE");
+    setDescription("");
+    setImage1("");
+    setImage2("");
+    setFaq([]);
   };
 
   const openCreateModal = () => {
@@ -95,6 +136,10 @@ export function useSubServiceState() {
     setName(item.name);
     setPrice(item.price != null ? String(item.price) : "");
     setNestedServiceId(item.nestedService ? String(item.nestedService.id) : "NONE");
+    setDescription(item.description || "");
+    setImage1(item.image1 || "");
+    setImage2(item.image2 || "");
+    setFaq(item.faq || []);
     setIsModalOpen(true);
   };
 
@@ -112,6 +157,10 @@ export function useSubServiceState() {
     const payload = {
       name: name.trim(),
       price: Number(price),
+      description: description.trim() || undefined,
+      image1: image1.trim() || undefined,
+      image2: image2.trim() || undefined,
+      faq: faq.filter(f => f.question.trim() !== "" && f.answer.trim() !== ""),
       ...(!editingItem ? { nested_service_id: nestedServiceId === "NONE" ? 0 : Number(nestedServiceId) } : {}),
     };
 
@@ -128,6 +177,10 @@ export function useSubServiceState() {
             name: payload.name,
             price: payload.price,
             nested_service_id: nestedServiceId !== "NONE" ? Number(nestedServiceId) : undefined,
+            description: payload.description,
+            image1: payload.image1,
+            image2: payload.image2,
+            faq: payload.faq,
           },
         }).unwrap();
         toast.success("Sub-service updated successfully!");
@@ -136,6 +189,10 @@ export function useSubServiceState() {
           nested_service_id: Number(nestedServiceId),
           name: payload.name,
           price: payload.price,
+          description: payload.description,
+          image1: payload.image1,
+          image2: payload.image2,
+          faq: payload.faq,
         }).unwrap();
         toast.success("Sub-service created successfully!");
       }
@@ -189,5 +246,17 @@ export function useSubServiceState() {
     handleDelete,
     isCreating,
     isUpdating,
+    description,
+    setDescription,
+    image1,
+    setImage1,
+    image2,
+    setImage2,
+    faq,
+    setFaq,
+    isUploadingImage1,
+    isUploadingImage2,
+    handleImage1Upload,
+    handleImage2Upload,
   };
 }
