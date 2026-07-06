@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${baiJamjuree.variable} antialiased`}>
-      <body className="min-h-screen flex flex-col bg-slate-50 font-sans">
+      <body className={`min-h-screen flex flex-col bg-slate-50 ${baiJamjuree.className} antialiased`}>
         <StoreProvider>
           <LayoutWrapper>
             {children}
