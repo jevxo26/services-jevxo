@@ -3,6 +3,7 @@
 import React from "react";
 import { XCircle } from "lucide-react";
 import { LocationCascader } from "@/components/ui/LocationCascader";
+import { CategoryTagSelector } from "@/components/ui/CategoryTagSelector";
 
 interface AgentModalProps {
   step: 1 | 2;
@@ -13,6 +14,8 @@ interface AgentModalProps {
   isCreatingProfile: boolean;
   isCategoriesLoading: boolean;
   allCategories: any[];
+  selectedCategoryIds: number[];
+  setSelectedCategoryIds: (ids: number[]) => void;
   selectedDevision: string;
   setSelectedDevision: (val: string) => void;
   selectedDistrict: string;
@@ -40,6 +43,8 @@ export default function AgentModal({
   isCreatingProfile,
   isCategoriesLoading,
   allCategories,
+  selectedCategoryIds,
+  setSelectedCategoryIds,
   selectedDevision,
   setSelectedDevision,
   selectedDistrict,
@@ -258,28 +263,14 @@ export default function AgentModal({
                 )}
               </div>
             </div>
-            <div>
-              <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">
-                Categories (Hold Ctrl/Cmd to select multiple - Optional)
-              </label>
-              <select
-                multiple
-                name="category_ids"
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all h-24"
-              >
-                {isCategoriesLoading ? (
-                  <option value="" disabled>
-                    Loading categories...
-                  </option>
-                ) : (
-                  allCategories.map((c: any) => (
-                    <option key={c.id} value={c.id}>
-                      {c.name}
-                    </option>
-                  ))
-                )}
-              </select>
-            </div>
+            <CategoryTagSelector
+              categories={allCategories}
+              selectedIds={selectedCategoryIds}
+              onChange={(ids) => setSelectedCategoryIds(ids as number[])}
+              isLoading={isCategoriesLoading}
+              label="Categories (Optional)"
+              hint="Tap to select or deselect categories"
+            />
             <div>
               <LocationCascader
                 selectedDevisionId={selectedDevision}

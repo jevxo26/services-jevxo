@@ -25,6 +25,8 @@ export default function AgentsPage() {
     setSelectedDistrict,
     selectedArea,
     setSelectedArea,
+    selectedCategoryIds,
+    setSelectedCategoryIds,
     pictureFile,
     setPictureFile,
     shopImage1File,
@@ -120,6 +122,8 @@ export default function AgentsPage() {
           setSelectedDistrict={setSelectedDistrict}
           selectedArea={selectedArea}
           setSelectedArea={setSelectedArea}
+          selectedCategoryIds={selectedCategoryIds}
+          setSelectedCategoryIds={setSelectedCategoryIds}
           pictureFile={pictureFile}
           setPictureFile={setPictureFile}
           shopImage1File={shopImage1File}

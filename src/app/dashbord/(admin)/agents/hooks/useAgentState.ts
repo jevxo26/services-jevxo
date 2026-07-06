@@ -50,6 +50,7 @@ export function useAgentState() {
   const [shopImage2File, setShopImage2File] = useState<File | null>(null);
   const [nidFrontFile, setNidFrontFile] = useState<File | null>(null);
   const [nidBackFile, setNidBackFile] = useState<File | null>(null);
+  const [selectedCategoryIds, setSelectedCategoryIds] = useState<number[]>([]);
 
   const { data: apiUsersRes, isLoading: isUsersLoading, refetch } = useGetAllUsersQuery();
   const { data: rolesRes } = useGetAllRolesQuery();
@@ -133,7 +134,7 @@ export function useAgentState() {
     }
 
     const formData = new FormData(e.currentTarget);
-    const categoryIds = formData.getAll("category_ids").map((id) => Number(id));
+    const categoryIds = selectedCategoryIds.length > 0 ? selectedCategoryIds : formData.getAll("category_ids").map((id) => Number(id));
 
     if (!pictureFile) {
       toast.error("Please upload a Profile / Logo picture.");
@@ -266,6 +267,8 @@ export function useAgentState() {
     setSelectedDistrict,
     selectedArea,
     setSelectedArea,
+    selectedCategoryIds,
+    setSelectedCategoryIds,
     pictureFile,
     setPictureFile,
     shopImage1File,

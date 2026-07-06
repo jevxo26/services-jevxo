@@ -9,7 +9,7 @@ import {
   Globe, ShieldCheck, CheckCircle2
 } from "lucide-react";
 import { LocationCascader } from "@/components/ui/LocationCascader";
-import Select from "react-select";
+import { CategoryTagSelector } from "@/components/ui/CategoryTagSelector";
 import { useOpportunityState, vendorBenefits, agentBenefits } from "@/app/opportunity/hooks/useOpportunityState";
 
 function OpportunityPageContent() {
@@ -137,7 +137,12 @@ function OpportunityPageContent() {
                   {selectedRole === "Vendor" && (
                     <div className="space-y-1.5">
                       <label className="text-[10px] font-black text-slate-400 uppercase tracking-[.1em]">Categories Offered</label>
-                      <Select isMulti options={categories.map((c: any) => ({ value: c.id, label: c.name }))} onChange={(selected: any) => setSelectedCategoryIds(selected.map((s: any) => s.value))} placeholder="Select service categories..." styles={{ control: (base: any, state: any) => ({ ...base, borderRadius: "0.75rem", border: "1px solid #E7E5E4", fontSize: "12px", fontWeight: "600", backgroundColor: "#FAFAF9", boxShadow: state.isFocused ? "0 0 0 2px rgba(255, 96, 20, 0.1)" : "none", borderColor: state.isFocused ? "#FF6014" : "#E7E5E4" }) }} />
+                      <CategoryTagSelector
+                        categories={categories.map((c: any) => ({ id: c.id, name: c.name }))}
+                        selectedIds={selectedCategoryIds}
+                        onChange={(ids) => setSelectedCategoryIds(ids as number[])}
+                        hint="Tap a category to select or deselect"
+                      />
                     </div>
                   )}
 

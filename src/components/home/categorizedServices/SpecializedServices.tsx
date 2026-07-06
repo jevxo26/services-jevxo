@@ -10,7 +10,6 @@ import {
   Calendar,
   Plus,
   Minus,
-  Info,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -63,6 +62,8 @@ export function SpecializedServices({
   onAddToCart,
   onRemoveFromCart,
   onInitiateBooking,
+  onSubServiceClick,
+  selectedSubServiceId,
 }: {
   nestedServices?: any[];
   serviceId?: number;
@@ -74,9 +75,10 @@ export function SpecializedServices({
   onAddToCart: (service: any, subId: number) => void;
   onRemoveFromCart: (subId: number) => void;
   onInitiateBooking: (service: any) => void;
+  onSubServiceClick?: (subService: any) => void;
+  selectedSubServiceId?: number | null;
 }) {
   const [expandedId, setExpandedId] = useState<string | null>(null);
-  const [expandedSubId, setExpandedSubId] = useState<number | null>(null);
 
   const displayServices: SpecializedService[] =
     nestedServices && nestedServices.length > 0
@@ -282,135 +284,64 @@ export function SpecializedServices({
                     className="overflow-hidden"
                   >
                     <div className="bg-[#FFF8F4]/30 border border-slate-100 p-5 rounded-[28px] shadow-xs mt-3">
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div className="flex flex-col gap-3">
                         {service.subServices?.map((sub) => {
                           const isAdded = isInCart(sub.id);
                           const quantity = getQuantity(sub.id);
-                          const hasDetails = !!(sub.description || sub.image1 || sub.image2 || (sub.faq && sub.faq.length > 0));
+                          const isSelected = selectedSubServiceId === sub.id;
                           return (
                             <div
                               key={sub.id}
-                              className={`flex flex-col p-4 rounded-2xl border bg-white transition-all gap-4 ${isAdded
-                                ? "border-[#FF6014]/40 shadow-xs ring-1 ring-[#FF6014]/10 bg-gradient-to-br from-white to-[#FFF8F4]/30"
-                                : "border-slate-100 hover:border-slate-200 hover:shadow-xs"
+                              onClick={() => onSubServiceClick?.({ ...sub, parentTitle: service.title, parentService: service })}
+                              className={`flex items-center justify-between p-4 rounded-2xl border bg-white transition-all gap-4 cursor-pointer group
+                                ${isSelected
+                                  ? "border-[#FF6014]/50 shadow-md ring-2 ring-[#FF6014]/10 bg-gradient-to-br from-white to-[#FFF8F4]/50"
+                                  : isAdded
+                                  ? "border-[#FF6014]/30 shadow-xs bg-gradient-to-br from-white to-[#FFF8F4]/20 hover:border-[#FF6014]/50"
+                                  : "border-slate-100 hover:border-[#FF6014]/30 hover:shadow-sm"
                                 }`}
                             >
-                              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                                <div className="min-w-0 flex-1">
-                                  <h4 className="text-sm font-bold text-slate-800 leading-snug">
-                                    {sub.name}
-                                  </h4>
-                                  <div className="flex items-center gap-1.5 mt-1">
-                                    <div className="text-[#FF6014] text-base font-black">
-                                      ৳{Number(sub.price).toLocaleString()}
-                                    </div>
-                                    {hasDetails && (
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          setExpandedSubId(expandedSubId === sub.id ? null : sub.id);
-                                        }}
-                                        className="text-xs font-semibold text-slate-500 hover:text-[#FF6014] flex items-center gap-1 ml-2 transition-colors duration-150 cursor-pointer"
-                                      >
-                                        <Info size={13} />
-                                        {expandedSubId === sub.id ? "Hide Details" : "More Details"}
-                                      </button>
-                                    )}
-                                  </div>
-                                </div>
-
-                                <div className="shrink-0 w-full sm:w-28">
-                                  {isAdded ? (
-                                    <div className="flex items-center gap-1 bg-[#FFF8F4] border border-[#FF6014]/20 rounded-xl p-0.5 w-full justify-between">
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          onUpdateQuantity(sub.id, -1);
-                                        }}
-                                        className="w-7 h-7 rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
-                                        aria-label="Decrease"
-                                      >
-                                        <Minus size={11} strokeWidth={3} />
-                                      </button>
-                                      <span className="text-xs font-black text-slate-800">
-                                        {quantity}
-                                      </span>
-                                      <button
-                                        type="button"
-                                        onClick={(e) => {
-                                          e.stopPropagation();
-                                          onUpdateQuantity(sub.id, 1);
-                                        }}
-                                        className="w-7 h-7 rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
-                                        aria-label="Increase"
-                                      >
-                                        <Plus size={11} strokeWidth={3} />
-                                      </button>
-                                    </div>
-                                  ) : (
-                                    <button
-                                      onClick={(e) => {
-                                        e.stopPropagation();
-                                        onAddToCart(service, sub.id);
-                                      }}
-                                      className="w-full py-2 rounded-xl text-xs font-bold transition-all
-                                        flex items-center justify-center gap-1 cursor-pointer active:scale-95
-                                        bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-xs"
-                                    >
-                                      <Plus size={12} strokeWidth={3} />
-                                      Add
-                                    </button>
-                                  )}
+                              <div className="min-w-0 flex-1">
+                                <h4 className={`text-sm font-bold leading-snug transition-colors ${isSelected ? "text-[#FF6014]" : "text-slate-800 group-hover:text-[#FF6014]"}`}>
+                                  {sub.name}
+                                </h4>
+                                <div className="text-[#FF6014] text-sm font-black mt-0.5">
+                                  ৳{Number(sub.price).toLocaleString()}
                                 </div>
                               </div>
 
-                              {/* Collapsible Sub-Service Inclusions Details */}
-                              {expandedSubId === sub.id && hasDetails && (
-                                <div className="border-t border-slate-100 pt-3 mt-1 space-y-3 animate-in fade-in duration-200">
-                                  {sub.description && (
-                                    <p className="text-xs text-slate-600 leading-relaxed bg-slate-50 p-2.5 rounded-xl border border-slate-100/50">
-                                      {sub.description}
-                                    </p>
-                                  )}
-
-                                  {/* Double showcase images */}
-                                  {(sub.image1 || sub.image2) && (
-                                    <div className="flex flex-wrap gap-2">
-                                      {sub.image1 && (
-                                        <img
-                                          src={sub.image1}
-                                          alt={`${sub.name} Showcase 1`}
-                                          className="w-24 h-24 rounded-xl object-cover border border-slate-100 shadow-xs"
-                                        />
-                                      )}
-                                      {sub.image2 && (
-                                        <img
-                                          src={sub.image2}
-                                          alt={`${sub.name} Showcase 2`}
-                                          className="w-24 h-24 rounded-xl object-cover border border-slate-100 shadow-xs"
-                                        />
-                                      )}
-                                    </div>
-                                  )}
-
-                                  {/* Sub-service specific FAQs */}
-                                  {sub.faq && sub.faq.length > 0 && (
-                                    <div className="space-y-2 mt-2">
-                                      <p className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Frequently Asked Questions</p>
-                                      <div className="space-y-1.5">
-                                        {sub.faq.map((item, fIdx) => (
-                                          <div key={fIdx} className="bg-slate-50/50 border border-slate-100 p-2.5 rounded-xl space-y-1">
-                                            <p className="text-xs font-bold text-slate-800">Q: {item.question}</p>
-                                            <p className="text-xs text-slate-600">A: {item.answer}</p>
-                                          </div>
-                                        ))}
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              )}
+                              <div className="shrink-0 w-28" onClick={(e) => e.stopPropagation()}>
+                                {isAdded ? (
+                                  <div className="flex items-center gap-1 bg-[#FFF8F4] border border-[#FF6014]/20 rounded-xl p-0.5 w-full justify-between">
+                                    <button
+                                      type="button"
+                                      onClick={() => onUpdateQuantity(sub.id, -1)}
+                                      className="w-7 h-7 rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
+                                    >
+                                      <Minus size={11} strokeWidth={3} />
+                                    </button>
+                                    <span className="text-xs font-black text-slate-800">{quantity}</span>
+                                    <button
+                                      type="button"
+                                      onClick={() => onUpdateQuantity(sub.id, 1)}
+                                      className="w-7 h-7 rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
+                                    >
+                                      <Plus size={11} strokeWidth={3} />
+                                    </button>
+                                  </div>
+                                ) : (
+                                  <button
+                                    onClick={() => {
+                                      onAddToCart(service, sub.id);
+                                      onSubServiceClick?.({ ...sub, parentTitle: service.title, parentService: service });
+                                    }}
+                                    className="w-full py-2 rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-95 bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-xs"
+                                  >
+                                    <Plus size={12} strokeWidth={3} />
+                                    Add
+                                  </button>
+                                )}
+                              </div>
                             </div>
                           );
                         })}

@@ -81,6 +81,7 @@ import { Experts } from '@/components/home/categorizedServices/Experts';
 import { Commitments } from '@/components/home/categorizedServices/Commitments';
 import { VendorProfile } from '@/components/home/categorizedServices/VendorProfile';
 import { ServiceReviews } from '@/components/home/categorizedServices/ServiceReviews';
+import { SubServiceDetailCard, SubServiceDetailDrawer } from '@/components/home/categorizedServices/SubServiceDetailComponents';
 import { useGetPublicServiceByIdQuery, useGetPublicServicesQuery, useGetPublicReviewsByServiceQuery } from "@/redux/features/landing/landingApi";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import Link from "next/link";
@@ -115,6 +116,21 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
   const isLoading = isNumericId ? isServiceLoading : isPublicLoading || isServiceLoading;
 
   const state = useBookingCartState({ service, isLoading });
+
+  // ── Sub-service detail panel state ────────────────────────────────────────
+  const [selectedSubService, setSelectedSubService] = useState<any | null>(null);
+  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+
+  const handleSubServiceClick = (sub: any) => {
+    if (selectedSubService?.id === sub.id) {
+      // toggle off on desktop
+      setSelectedSubService(null);
+      setMobileDrawerOpen(false);
+    } else {
+      setSelectedSubService(sub);
+      setMobileDrawerOpen(true);
+    }
+  };
 
   if (isLoading) {
     return (
@@ -181,7 +197,20 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] xl:grid-cols-[1fr_420px] gap-10 xl:gap-14 items-start">
             <div className="space-y-6 md:space-y-8 min-w-0">
               <div id="specialized-services">
-                <SpecializedServices nestedServices={service.nestedServices} serviceId={service.id} vendorId={service.vendor?.id} serviceImage={service.image} serviceName={service.name} cartQuantities={state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})} onUpdateQuantity={state.handleUpdateQuantity} onAddToCart={state.handleAddToCart} onRemoveFromCart={state.handleRemoveFromCart} onInitiateBooking={state.handleInitiateBooking} />
+                <SpecializedServices
+                  nestedServices={service.nestedServices}
+                  serviceId={service.id}
+                  vendorId={service.vendor?.id}
+                  serviceImage={service.image}
+                  serviceName={service.name}
+                  cartQuantities={state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})}
+                  onUpdateQuantity={state.handleUpdateQuantity}
+                  onAddToCart={state.handleAddToCart}
+                  onRemoveFromCart={state.handleRemoveFromCart}
+                  onInitiateBooking={state.handleInitiateBooking}
+                  onSubServiceClick={handleSubServiceClick}
+                  selectedSubServiceId={selectedSubService?.id ?? null}
+                />
               </div>
               
               {service.packages && service.packages.length > 0 && (
@@ -223,31 +252,64 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
 
             {/* Sidebar Column */}
             <div className="space-y-6 md:space-y-8 sticky top-[136px] z-20">
-              {/* VendorProfile hidden as requested */}
 
-              {service.faq && service.faq.length > 0 && (
-                <div id="faq" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
-                  <h3 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
-                    <span className="w-1.5 h-5 bg-[#FF6014] rounded-full" />
-                    FAQ
-                  </h3>
-                  <p className="text-xs text-slate-400 mb-4 font-medium">Common questions about this service</p>
-                  <div className="divide-y divide-slate-100">
-                    {service.faq.map((item: any, idx: number) => {
-                      const question = item.question || item.q || item.title || "";
-                      const answer = item.answer || item.a || item.content || "";
-                      if (!question || !answer) return null;
-                      return <FAQItem key={idx} question={question} answer={answer} />;
-                    })}
+              {/* Sub-service Detail Panel — desktop only, replaces commitments when active */}
+              {selectedSubService ? (
+                <>
+                  {/* Desktop detail card */}
+                  <div className="hidden lg:block">
+                    <SubServiceDetailCard
+                      subService={selectedSubService}
+                      onClose={() => setSelectedSubService(null)}
+                      isAdded={(state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})[selectedSubService?.id] || 0) > 0}
+                      quantity={state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})[selectedSubService?.id] || 0}
+                      onAddToCart={state.handleAddToCart}
+                      onUpdateQuantity={state.handleUpdateQuantity}
+                    />
                   </div>
-                </div>
-              )}
+                  {/* Always show Commitments below the detail card */}
+                  <div className="hidden lg:block">
+                    <Commitments />
+                  </div>
+                </>
+              ) : (
+                <>
+                  {service.faq && service.faq.length > 0 && (
+                    <div id="faq" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
+                      <h3 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
+                        <span className="w-1.5 h-5 bg-[#FF6014] rounded-full" />
+                        FAQ
+                      </h3>
+                      <p className="text-xs text-slate-400 mb-4 font-medium">Common questions about this service</p>
+                      <div className="divide-y divide-slate-100">
+                        {service.faq.map((item: any, idx: number) => {
+                          const question = item.question || item.q || item.title || "";
+                          const answer = item.answer || item.a || item.content || "";
+                          if (!question || !answer) return null;
+                          return <FAQItem key={idx} question={question} answer={answer} />;
+                        })}
+                      </div>
+                    </div>
+                  )}
 
-              <Commitments />
+                  <Commitments />
+                </>
+              )}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Mobile Bottom Drawer for sub-service details */}
+      <SubServiceDetailDrawer
+        isOpen={mobileDrawerOpen}
+        onClose={() => { setMobileDrawerOpen(false); setSelectedSubService(null); }}
+        subService={selectedSubService}
+        isAdded={(state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})[selectedSubService?.id] || 0) > 0}
+        quantity={state.cartItems.reduce((acc: any, i: any) => ({ ...acc, [i.id]: i.quantity }), {})[selectedSubService?.id] || 0}
+        onAddToCart={state.handleAddToCart}
+        onUpdateQuantity={state.handleUpdateQuantity}
+      />
 
       {/* Floating Sticky Bottom CTA Bar */}
       <AnimatePresence>
