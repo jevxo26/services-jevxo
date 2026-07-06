@@ -88,7 +88,6 @@ const LEFT_NAV_LINKS: NavLink[] = [
 ];
 
 const RIGHT_NAV_LINKS: NavLink[] = [
-  { label: "Map", href: "/map", icon: MapPin },
   { label: "About Us", href: "/about", icon: Info },
   { label: "Contact", href: "/contact", icon: PhoneCall },
   { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
@@ -100,8 +99,8 @@ const MOBILE_BOTTOM_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
   { label: "Services", href: "/services", icon: Briefcase },
   { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
-  { label: "Map", href: "/map", icon: MapPin },
   { label: "Booking", href: "/bookings", icon: Calendar },
+  { label: "Contact", href: "/contact", icon: PhoneCall },
   { label: "Login", href: "/login", icon: User },
 ];
 
@@ -227,9 +226,10 @@ export function Navbar() {
   const bottomLinks = MOBILE_BOTTOM_LINKS.map((link) => {
     if (mounted && isAuthenticated && link.label === "Login") {
       return {
-        label: "Dashboard",
-        href: role === "client" ? "/dashbord/overview" : "/dashbord",
-        icon: User,
+        label: "Sign Out",
+        href: "#signout",
+        icon: LogOut,
+        isSignOut: true,
       };
     }
     return link;
@@ -786,12 +786,17 @@ export function Navbar() {
         <div className="absolute inset-0 bg-[#FFF8F4]/80 backdrop-blur-xl border-t border-white/50 shadow-[0_-8px_32px_rgba(0,0,0,0.08)]" />
 
         <div className="relative grid grid-cols-6 gap-0 max-w-lg mx-auto px-1 py-1.5">
-          {bottomLinks.map((link, i) => {
+          {bottomLinks.map((link: any, i) => {
             const Icon = link.icon;
             const isMenuActive = link.hasDropdown && pathname.startsWith("/categories");
             const active = link.hasDropdown ? isMenuActive : isActive(link.href);
 
             const handleClick = (e: React.MouseEvent) => {
+              if (link.isSignOut) {
+                e.preventDefault();
+                dispatch(authLogout());
+                return;
+              }
               if (link.hasDropdown) {
                 e.preventDefault();
                 setIsOpen((prev) => !prev);
@@ -801,7 +806,7 @@ export function Navbar() {
               }
             };
 
-            const isProfileLink = link.label === "Dashboard" || link.label === "Login";
+            const isProfileLink = link.label === "Login";
             const showAvatar = isProfileLink && mounted && isAuthenticated && profile;
 
             return (
@@ -844,11 +849,13 @@ export function Navbar() {
                       transition={{ type: "spring", stiffness: 400, damping: 20 }}
                     >
                       <Icon
-                        className={`w-[21px] h-[21px] transition-colors duration-200 ${active
-                          ? "text-[#FF6014] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
-                          : "text-slate-400 group-hover:text-slate-600"
+                        className={`w-[21px] h-[21px] transition-colors duration-200 ${(link as any).isSignOut
+                          ? "text-rose-500"
+                          : active
+                            ? "text-[#FF6014] drop-shadow-[0_0_6px_rgba(255,90,95,0.3)]"
+                            : "text-slate-400 group-hover:text-slate-600"
                           }`}
-                        strokeWidth={active ? 2.4 : 1.8}
+                        strokeWidth={(link as any).isSignOut ? 2.2 : active ? 2.4 : 1.8}
                       />
                     </motion.div>
                   )}
@@ -857,9 +864,14 @@ export function Navbar() {
                 <motion.span
                   animate={active ? { y: -1, opacity: 1 } : { y: 0, opacity: 0.7 }}
                   transition={{ type: "spring", stiffness: 400, damping: 25 }}
-                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${active ? "text-[#FF6014]" : "text-slate-400 group-hover:text-slate-600"}`}
+                  className={`relative z-10 text-[10px] font-bold tracking-wide leading-none mt-1 ${(link as any).isSignOut
+                    ? "text-rose-500"
+                    : active
+                      ? "text-[#FF6014]"
+                      : "text-slate-400 group-hover:text-slate-600"
+                    }`}
                 >
-                  {showAvatar ? "Profile" : link.label}
+                  {link.label}
                 </motion.span>
 
                 <AnimatePresence>

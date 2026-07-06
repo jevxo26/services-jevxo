@@ -198,7 +198,7 @@ export default function TrendingServices() {
             {featured && (
               <motion.div
                 variants={itemVariants}
-                className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-3xl overflow-hidden border border-slate-100/60 hover-card-premium"
+                className="grid grid-cols-1 sm:grid-cols-2 bg-white rounded-3xl overflow-hidden border border-blue-200 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-100/60 transition-all duration-300 hover-card-premium"
               >
                 <div className="relative min-h-[220px] sm:min-h-full bg-slate-50">
                   <img
@@ -251,7 +251,7 @@ export default function TrendingServices() {
             {secondary && (
               <motion.div
                 variants={itemVariants}
-                className="bg-white rounded-3xl overflow-hidden border border-slate-100/60 flex flex-col hover-card-premium"
+                className="bg-white rounded-3xl overflow-hidden border border-blue-200 hover:border-blue-500 hover:shadow-lg hover:shadow-blue-100/60 transition-all duration-300 flex flex-col hover-card-premium"
               >
                 <div className="relative h-44 w-full bg-slate-50 shrink-0">
                   <img

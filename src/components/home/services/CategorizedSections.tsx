@@ -156,7 +156,7 @@ export default function CategorizedSections() {
                     key={item.id}
                     variants={itemVariants}
                     whileHover={{ y: -5, scale: 1.01 }}
-                    className="bg-white rounded-3xl overflow-hidden border border-slate-100 shadow-sm hover:shadow-md hover:border-[#FF6014]/20 transition-all duration-300 flex flex-col"
+                    className="bg-white rounded-3xl overflow-hidden border border-blue-200 shadow-sm hover:shadow-lg hover:shadow-blue-100/60 hover:border-blue-500 transition-all duration-300 flex flex-col"
                   >
                     <div className="relative h-40 bg-slate-50 shrink-0">
                       <img

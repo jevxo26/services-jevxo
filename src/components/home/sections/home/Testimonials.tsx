@@ -1,15 +1,37 @@
 "use client";
-import React, { useState, useEffect } from "react";
-import { Star, MessageSquare, Loader2 } from "lucide-react";
+import React, { useState, useEffect, useCallback } from "react";
+import { Star, MessageSquare, Loader2, ChevronLeft, ChevronRight } from "lucide-react";
 import { useGetPublicReviewsQuery } from "@/redux/features/landing/landingApi";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+
+/* How many cards visible per viewport */
+function useVisibleCount() {
+  const [count, setCount] = useState(3);
+  useEffect(() => {
+    const update = () => setCount(window.innerWidth < 768 ? 1 : window.innerWidth < 1024 ? 2 : 3);
+    update();
+    window.addEventListener("resize", update);
+    return () => window.removeEventListener("resize", update);
+  }, []);
+  return count;
+}
+
+const slideVariants = {
+  enter: (dir: number) => ({ x: dir > 0 ? "60%" : "-60%", opacity: 0, scale: 0.95 }),
+  center: { x: 0, opacity: 1, scale: 1 },
+  exit: (dir: number) => ({ x: dir > 0 ? "-60%" : "60%", opacity: 0, scale: 0.95 }),
+};
 
 const Testimonials = () => {
   const [mounted, setMounted] = useState(false);
+  const [page, setPage] = useState(0);
+  const [direction, setDirection] = useState(1);
+  const visibleCount = useVisibleCount();
+
   const { data: reviewsRes, isLoading } = useGetPublicReviewsQuery();
   const rawReviews: any[] = reviewsRes?.data || (Array.isArray(reviewsRes) ? reviewsRes : []);
 
-  const realReviews = rawReviews
+  const reviews = rawReviews
     .filter((r: any) => (r.comment || r.content || r.review || "").trim().length > 0)
     .map((r: any) => ({
       name: r.user?.name || "Valued Customer",
@@ -21,26 +43,45 @@ const Testimonials = () => {
         `https://ui-avatars.com/api/?name=${encodeURIComponent(r.user?.name || "U")}&background=FF7C71&color=fff&size=100`,
     }));
 
+  const totalPages = Math.ceil(reviews.length / visibleCount);
+
+  const paginate = useCallback(
+    (dir: number) => {
+      setDirection(dir);
+      setPage((prev) => (prev + dir + totalPages) % totalPages);
+    },
+    [totalPages]
+  );
+
+  useEffect(() => { setMounted(true); }, []);
+
+  /* Reset page if visibleCount changes and page is out of range */
   useEffect(() => {
-    setMounted(true);
-  }, []);
+    if (page >= totalPages && totalPages > 0) setPage(0);
+  }, [totalPages, page]);
+
+  const visibleReviews = reviews.slice(page * visibleCount, page * visibleCount + visibleCount);
+
+  const Header = () => (
+    <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
+      <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+        <MessageSquare size={13} />
+        Customer Reviews
+      </div>
+      <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+        What our clients <span className="text-[#FF6014]">say about us</span>
+      </h2>
+      <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
+        Trusted by thousands of happy homes across Bangladesh.
+      </p>
+    </div>
+  );
 
   if (!mounted) {
     return (
       <div className="py-5 md:py-16 lg:py-24 relative overflow-hidden bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
-          <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-            <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
-              <MessageSquare size={13} />
-              Customer Reviews
-            </div>
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-              What our clients <span className="text-[#FF6014]">say about us</span>
-            </h2>
-            <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-              Trusted by thousands of happy homes across Bangladesh.
-            </p>
-          </div>
+          <Header />
           <div className="flex justify-center py-12">
             <Loader2 className="w-7 h-7 animate-spin text-[#FF6014]" />
           </div>
@@ -49,105 +90,124 @@ const Testimonials = () => {
     );
   }
 
-  if (realReviews.length === 0 && !isLoading) {
-    return null;
-  }
-
-  /* Each card is 340px wide + 24px gap = 364px per step */
-  const cardWidth = 340;
-  const marqueeItems = [...realReviews, ...realReviews, ...realReviews];
-  const totalWidth = realReviews.length * (cardWidth + 24);
+  if (reviews.length === 0 && !isLoading) return null;
 
   return (
     <div className="py-5 md:py-16 lg:py-24 relative overflow-hidden bg-transparent">
       <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <Header />
 
-        {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
-            <MessageSquare size={13} />
-            Customer Reviews
-          </div>
-
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
-            What our clients
-            <span className="text-[#FF6014]"> say about us</span>
-          </h2>
-
-          <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
-            Trusted by thousands of happy homes across Bangladesh.
-          </p>
-        </div>
-
-        {/* Loading */}
         {isLoading && (
           <div className="flex justify-center py-12">
             <Loader2 className="w-7 h-7 animate-spin text-[#FF6014]" />
           </div>
         )}
 
-        {/* Marquee slider */}
-        {!isLoading && realReviews.length > 0 && (
-          <div className="relative overflow-hidden rounded-[32px] bg-slate-50/30 border border-slate-100 p-6 shadow-inner">
-            {/* Left fade */}
-            <div className="absolute top-0 bottom-0 left-0 w-16 bg-gradient-to-r from-slate-50/80 to-transparent z-10 pointer-events-none" />
-            {/* Right fade */}
-            <div className="absolute top-0 bottom-0 right-0 w-16 bg-gradient-to-l from-slate-50/80 to-transparent z-10 pointer-events-none" />
+        {!isLoading && reviews.length > 0 && (
+          <div className="relative">
 
-            <motion.div
-              className="flex gap-6"
-              animate={{ x: [0, -totalWidth] }}
-              transition={{
-                duration: Math.max(15, realReviews.length * 5),
-                repeat: Infinity,
-                ease: "linear",
-              }}
+            {/* ── Left Arrow ── */}
+            <button
+              onClick={() => paginate(-1)}
+              aria-label="Previous testimonials"
+              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-3 md:-translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-blue-200 shadow-md hover:border-blue-500 hover:shadow-blue-100 hover:shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer group"
             >
-              {marqueeItems.map((test: any, idx: number) => (
-                <div key={idx} className="min-w-[340px] flex-shrink-0" style={{ width: cardWidth }}>
-                  <div className="relative bg-white rounded-3xl border border-slate-100 p-7 shadow-xs hover:shadow-md transition-all duration-300 flex flex-col h-full min-h-[250px]">
-                    {/* Decorative quote */}
-                    <span className="absolute top-4 right-6 text-8xl font-serif leading-none select-none pointer-events-none text-[#FF6014]/8">
-                      "
-                    </span>
+              <ChevronLeft className="w-5 h-5 text-slate-600 group-hover:text-blue-600 transition-colors" />
+            </button>
 
-                    {/* Stars */}
-                    <div className="flex gap-0.5 mb-4">
-                      {[...Array(Math.min(test.rating || 5, 5))].map((_, i) => (
-                        <Star key={i} size={15} className="text-amber-400 fill-amber-400" />
-                      ))}
-                    </div>
+            {/* ── Cards area ── */}
+            <div className="overflow-hidden mx-8 md:mx-10">
+              <AnimatePresence mode="wait" custom={direction}>
+                <motion.div
+                  key={page}
+                  custom={direction}
+                  variants={slideVariants}
+                  initial="enter"
+                  animate="center"
+                  exit="exit"
+                  transition={{ type: "spring", stiffness: 280, damping: 30 }}
+                  className={`grid gap-5 ${
+                    visibleCount === 1
+                      ? "grid-cols-1"
+                      : visibleCount === 2
+                      ? "grid-cols-2"
+                      : "grid-cols-3"
+                  }`}
+                >
+                  {visibleReviews.map((review, idx) => (
+                    <div
+                      key={idx}
+                      className="relative bg-white rounded-3xl border border-blue-200 p-7 shadow-sm hover:shadow-lg hover:border-blue-500 hover:shadow-blue-100 transition-all duration-300 flex flex-col min-h-[250px]"
+                    >
+                      {/* Decorative quote mark */}
+                      <span className="absolute top-4 right-6 text-8xl font-serif leading-none select-none pointer-events-none text-[#FF6014]/8">
+                        "
+                      </span>
 
-                    {/* Comment */}
-                    <p className="text-slate-700 text-[15px] leading-relaxed line-clamp-4 flex-1 mb-6">
-                      "{test.comment}"
-                    </p>
-
-                    {/* Accent line */}
-                    <div className="w-10 h-0.5 bg-[#FF6014]/30 mb-5" />
-
-                    {/* Author */}
-                    <div className="flex items-center gap-3">
-                      <div className="relative flex-shrink-0">
-                        <img
-                          src={test.avatar}
-                          alt={test.name}
-                          className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md"
-                          onError={(e) => {
-                            (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(test.name)}&background=FF5A5F&color=fff&size=80`;
-                          }}
-                        />
-                        <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white" />
+                      {/* Stars */}
+                      <div className="flex gap-0.5 mb-4">
+                        {[...Array(Math.min(review.rating || 5, 5))].map((_, i) => (
+                          <Star key={i} size={15} className="text-amber-400 fill-amber-400" />
+                        ))}
                       </div>
-                      <div>
-                        <h4 className="font-bold text-slate-900 text-sm leading-tight">{test.name}</h4>
-                        <p className="text-xs text-slate-400 font-medium mt-0.5">{test.location}</p>
+
+                      {/* Comment */}
+                      <p className="text-slate-700 text-[15px] leading-relaxed line-clamp-4 flex-1 mb-6">
+                        "{review.comment}"
+                      </p>
+
+                      {/* Accent line */}
+                      <div className="w-10 h-0.5 bg-[#FF6014]/30 mb-5" />
+
+                      {/* Author */}
+                      <div className="flex items-center gap-3">
+                        <div className="relative flex-shrink-0">
+                          <img
+                            src={review.avatar}
+                            alt={review.name}
+                            className="w-11 h-11 rounded-full object-cover border-2 border-white shadow-md"
+                            onError={(e) => {
+                              (e.target as HTMLImageElement).src = `https://ui-avatars.com/api/?name=${encodeURIComponent(review.name)}&background=FF5A5F&color=fff&size=80`;
+                            }}
+                          />
+                          <div className="absolute -bottom-0.5 -right-0.5 w-4 h-4 bg-emerald-400 rounded-full border-2 border-white" />
+                        </div>
+                        <div>
+                          <h4 className="font-bold text-slate-900 text-sm leading-tight">{review.name}</h4>
+                          <p className="text-xs text-slate-400 font-medium mt-0.5">{review.location}</p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </motion.div>
+                  ))}
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* ── Right Arrow ── */}
+            <button
+              onClick={() => paginate(1)}
+              aria-label="Next testimonials"
+              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-3 md:translate-x-5 z-20 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white border border-blue-200 shadow-md hover:border-blue-500 hover:shadow-blue-100 hover:shadow-lg flex items-center justify-center transition-all duration-200 active:scale-95 cursor-pointer group"
+            >
+              <ChevronRight className="w-5 h-5 text-slate-600 group-hover:text-blue-600 transition-colors" />
+            </button>
+
+            {/* ── Dot indicators ── */}
+            {totalPages > 1 && (
+              <div className="flex justify-center gap-2 mt-8">
+                {Array.from({ length: totalPages }).map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => { setDirection(i > page ? 1 : -1); setPage(i); }}
+                    aria-label={`Go to page ${i + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 cursor-pointer ${
+                      i === page ? "w-6 bg-blue-500" : "w-2 bg-slate-200 hover:bg-blue-300"
+                    }`}
+                  />
+                ))}
+              </div>
+            )}
+
           </div>
         )}
       </div>

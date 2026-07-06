@@ -13,7 +13,7 @@ const HERO_CONTENT = {
   accentTitleText: "Services,",
   subtitleText: "Simplified.",
   description: "Premium marketplace for all your household needs in Bangladesh.",
-  bgImage: "/images/service/pre cleaning service-21.png",
+  bgImage: "/cleaner-hero.png",
   bgAlt: "Expert home services background",
   searchButtonText: "Search",
 };

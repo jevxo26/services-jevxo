@@ -143,7 +143,7 @@ export default function FeaturedProviders() {
                 key={provider.id}
                 variants={itemVariants}
                 whileHover={{ y: -5, scale: 1.015 }}
-                className="relative bg-white rounded-2xl border border-slate-100 shadow-sm hover:shadow-xl hover:shadow-slate-200/60 overflow-hidden flex flex-col transition-all cursor-pointer group"
+                className="relative bg-white rounded-2xl border border-blue-200 shadow-sm hover:shadow-xl hover:shadow-blue-100/60 hover:border-blue-500 overflow-hidden flex flex-col transition-all cursor-pointer group"
               >
                 {/* Top colour band */}
                 <div className="relative h-20 flex-shrink-0 bg-gradient-to-br from-[#fff5f0] to-[#ffe8da]">

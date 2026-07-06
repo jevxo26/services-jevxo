@@ -192,7 +192,7 @@ export default function TopServices() {
               <motion.div
                 key={service.id}
                 variants={cardVariants}
-                className="bg-white rounded-3xl overflow-hidden border border-slate-100 group flex flex-col h-full hover-card-premium"
+                className="bg-white rounded-3xl overflow-hidden border border-blue-200 group flex flex-col h-full hover-card-premium transition-all duration-300 hover:border-blue-500 hover:shadow-blue-100 hover:shadow-lg"
               >
                 {/* ── Illustration or image ── */}
                 <div className="relative">
