@@ -599,7 +599,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.22, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden border-t border-slate-100/80 bg-[#FFF8F4]/80 backdrop-blur-lg"
+              className="md:hidden overflow-hidden border-t border-slate-200/30 bg-[#FFFDFB]/85 backdrop-blur-xl shadow-inner"
             >
               <div className="px-4 py-4 space-y-1">
                 {ALL_NAV_LINKS.map((link, i) => {
@@ -614,9 +614,9 @@ export function Navbar() {
                         <button
                           type="button"
                           onClick={() => setShowMobileAccordion(!showMobileAccordion)}
-                          className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors cursor-pointer ${active
-                            ? "text-[#FF6014] bg-rose-50"
-                            : "text-slate-700 hover:bg-slate-50 hover:text-[#FF6014]"
+                          className={`w-full flex items-center justify-between px-3 py-3 font-semibold text-[15px] rounded-xl transition-all cursor-pointer ${active
+                            ? "text-[#FF6014] bg-[#FF6014]/8 border border-[#FF6014]/15"
+                            : "text-slate-700 hover:bg-orange-50/50 hover:text-[#FF6014] border border-transparent"
                             }`}
                         >
                           <div className="flex items-center gap-2.5">
@@ -648,8 +648,8 @@ export function Navbar() {
                                       key={cat.id}
                                       href={`/categories/${cat.id}`}
                                       className={`flex flex-col items-center gap-2 p-3 rounded-xl transition-all text-sm font-medium ${isCategoryActive
-                                        ? "bg-rose-50 text-[#FF6014] font-semibold border border-rose-100"
-                                        : "text-slate-600 hover:bg-slate-50 hover:text-[#FF6014] border border-transparent hover:border-slate-100"
+                                        ? "bg-orange-50/80 text-[#FF6014] font-semibold border border-orange-100/60"
+                                        : "text-slate-600 hover:bg-orange-50/30 hover:text-[#FF6014] border border-transparent hover:border-slate-100"
                                         }`}
                                       onClick={() => { setIsOpen(false); setShowMobileAccordion(false); }}
                                     >
@@ -675,9 +675,9 @@ export function Navbar() {
                     <Link
                       key={i}
                       href={link.href}
-                      className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-colors ${active
-                        ? "text-[#FF6014] bg-rose-50"
-                        : "text-slate-700 hover:bg-slate-50 hover:text-[#FF6014]"
+                      className={`flex items-center gap-2.5 px-3 py-3 font-semibold text-[15px] rounded-xl transition-all ${active
+                        ? "text-[#FF6014] bg-[#FF6014]/8 border border-[#FF6014]/15"
+                        : "text-slate-700 hover:bg-orange-50/50 hover:text-[#FF6014] border border-transparent"
                         }`}
                       onClick={() => setIsOpen(false)}
                     >
@@ -699,9 +699,9 @@ export function Navbar() {
                     </div>
                   </div>
                 ) : isAuthenticated && profile ? (
-                  <div className="pt-4 border-t border-slate-100 mt-1 space-y-4">
-                    <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-slate-50 border border-slate-100">
-                      <div className="w-12 h-12 bg-rose-100 text-[#FF6014] font-bold rounded-full flex items-center justify-center overflow-hidden border border-rose-200 shadow-inner select-none shrink-0">
+                  <div className="pt-4 border-t border-slate-200/30 mt-1 space-y-4">
+                    <div className="flex items-center gap-3.5 p-3.5 rounded-2xl bg-white/50 border border-slate-200/40 backdrop-blur-md">
+                      <div className="w-12 h-12 bg-orange-100 text-[#FF6014] font-bold rounded-full flex items-center justify-center overflow-hidden border border-orange-200 shadow-inner select-none shrink-0">
                         {profile.avatarUrl ? (
                           <img src={profile.avatarUrl} alt={profile.name} className="w-full h-full object-cover" />
                         ) : (
@@ -711,7 +711,7 @@ export function Navbar() {
                       <div className="min-w-0 flex-grow">
                         <p className="text-sm font-bold text-slate-800 truncate leading-none">{profile.name}</p>
                         <p className="text-xs text-slate-400 mt-1 truncate font-medium leading-none">{profile.email}</p>
-                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF6014] bg-rose-50 border border-rose-100/50 rounded-full mt-1.5">
+                        <span className="inline-block px-2 py-0.5 text-[9px] font-bold text-[#FF6014] bg-orange-50 border border-orange-100/50 rounded-full mt-1.5">
                           {profile.roleName}
                         </span>
                       </div>
@@ -719,7 +719,7 @@ export function Navbar() {
                     <div className="grid grid-cols-3 gap-2">
                       <Link
                         href={role === "client" ? "/dashbord/overview" : "/dashbord"}
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF6014] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/40 border border-slate-200/30 text-slate-700 hover:bg-orange-50/60 hover:text-[#FF6014] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <LayoutGrid size={18} className="text-slate-400" />
@@ -727,7 +727,7 @@ export function Navbar() {
                       </Link>
                       <Link
                         href="/dashbord/profile"
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF6014] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/40 border border-slate-200/30 text-slate-700 hover:bg-orange-50/60 hover:text-[#FF6014] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <User size={18} className="text-slate-400" />
@@ -735,7 +735,7 @@ export function Navbar() {
                       </Link>
                       <Link
                         href="/dashbord/settings"
-                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-slate-50 border border-slate-100 text-slate-700 hover:bg-rose-50 hover:text-[#FF6014] transition-all gap-1.5"
+                        className="flex flex-col items-center justify-center p-3 rounded-xl bg-white/40 border border-slate-200/30 text-slate-700 hover:bg-orange-50/60 hover:text-[#FF6014] transition-all gap-1.5"
                         onClick={() => setIsOpen(false)}
                       >
                         <Settings size={18} className="text-slate-400" />
@@ -744,17 +744,17 @@ export function Navbar() {
                     </div>
                     <button
                       onClick={() => { setIsOpen(false); dispatch(authLogout()); }}
-                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-rose-50 text-rose-600 hover:bg-rose-100/80 font-bold text-[15px] transition-all active:scale-[0.98]"
+                      className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-rose-500/10 text-rose-600 hover:bg-rose-500/15 border border-rose-200/20 font-bold text-[15px] transition-all active:scale-[0.98]"
                     >
                       <LogOut size={16} />
                       <span>Sign Out</span>
                     </button>
                   </div>
                 ) : (
-                  <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-100 mt-1">
+                  <div className="grid grid-cols-2 gap-3 pt-4 border-t border-slate-200/30 mt-1">
                     <Link
                       href="/login"
-                      className="flex items-center justify-center gap-2 py-3 text-slate-700 font-semibold text-[15px] border border-slate-200 rounded-xl hover:border-[#FF6014] hover:text-[#FF6014] hover:bg-rose-50 transition-colors"
+                      className="flex items-center justify-center gap-2 py-3 text-slate-700 font-semibold text-[15px] border border-slate-200/60 bg-white/40 rounded-xl hover:border-[#FF6014] hover:text-[#FF6014] hover:bg-[#FF6014]/5 transition-all"
                       onClick={() => setIsOpen(false)}
                     >
                       <LogIn className="w-4 h-4" />
@@ -762,7 +762,7 @@ export function Navbar() {
                     </Link>
                     <Link
                       href="/register"
-                      className="flex items-center justify-center gap-2 py-3 bg-[#FF6014] hover:bg-[#E0530A] text-white font-semibold text-[15px] rounded-xl shadow-sm transition-colors active:scale-[0.98]"
+                      className="flex items-center justify-center gap-2 py-3 bg-gradient-to-r from-[#FF6014] to-[#FF7A37] text-white font-semibold text-[15px] rounded-xl shadow-sm hover:shadow-lg hover:shadow-orange-500/15 transition-all active:scale-[0.98]"
                       onClick={() => setIsOpen(false)}
                     >
                       <UserPlus className="w-4 h-4" />
