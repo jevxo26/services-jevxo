@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useMemo } from "react";
-import { ArrowRight, Star } from "lucide-react";
+import { ArrowRight, Star, Clock } from "lucide-react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { useGetPublicServicesQuery } from "@/redux/features/landing/landingApi";
@@ -61,6 +61,7 @@ interface TrendingServiceItem {
   price: number;
   badge?: string;
   slug: string;
+  done: string;
 }
 
 export default function TrendingServices() {
@@ -114,6 +115,15 @@ export default function TrendingServices() {
       // Format reviews count
       const reviewsStr = totalReviews > 0 ? `${totalReviews}+` : `${(1.0 + (hash % 40) * 0.1).toFixed(1)}k`;
 
+      // Done options based on actual bookings if available, else fallback
+      let done = "";
+      if (item.bookings && item.bookings.length > 0) {
+        done = `${item.bookings.length}+ done`;
+      } else {
+        const doneOptions = ["80+ done", "120+ done", "210+ done", "300+ done", "400+ done"];
+        done = doneOptions[hash % doneOptions.length];
+      }
+
       // Get lowest price from nested services
       let priceVal = 1000;
       if (item.nestedServices && item.nestedServices.length > 0) {
@@ -135,6 +145,7 @@ export default function TrendingServices() {
         price: priceVal,
         badge: index === 0 ? "MOST BOOKED" : index === 1 ? "HOT" : hash % 3 === 0 ? "POPULAR" : undefined,
         slug: item.slug || "",
+        done,
       };
     });
 
@@ -221,9 +232,13 @@ export default function TrendingServices() {
                 {/* Content Section */}
                 <div className="p-5 flex flex-col justify-between flex-grow gap-4">
                   <div className="space-y-2">
-                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-semibold">
+                    <div className="flex items-center gap-1.5 text-[10px] text-slate-400 font-semibold flex-wrap">
                       <StarRating rating={service.rating} />
                       <span>({service.reviews} reviews)</span>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-extrabold text-[#9ca3af] uppercase tracking-wider ml-1">
+                        <Clock size={10} strokeWidth={2.5} className="text-[#FF6014]/75" />
+                        {service.done}
+                      </span>
                     </div>
                     <h3 className="text-base font-medium text-slate-800 leading-snug group-hover:text-[#FF6014] transition-colors line-clamp-1">
                       {service.title}

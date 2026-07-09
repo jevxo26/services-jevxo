@@ -107,9 +107,13 @@ export function PackageOfferCard({
             <div className="text-2xl font-bold text-slate-400">Get Quote</div>
           )}
           {(pkg.bookingsCount !== undefined && pkg.bookingsCount !== null) && (
-            <p className="text-[10px] text-slate-500 font-semibold pt-1.5 flex items-center gap-1">
+            <p className={`text-[10px] font-semibold pt-1.5 flex items-center gap-1 ${
+              pkg.variant === "dark" ? "text-slate-400" : "text-slate-500"
+            }`}>
               <CheckCircle size={11} className="text-emerald-500 flex-shrink-0" />
-              <span><span className="text-emerald-600 font-bold">{pkg.bookingsCount}</span> bookings completed</span>
+              <span><span className={`font-bold ${
+                pkg.variant === "dark" ? "text-emerald-400" : "text-emerald-600"
+              }`}>{pkg.bookingsCount}</span> bookings completed</span>
             </p>
           )}
         </div>

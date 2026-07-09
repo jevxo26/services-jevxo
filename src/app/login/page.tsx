@@ -43,7 +43,7 @@ export default function LoginPage() {
           </div>
 
           {!isOtpSent ? (
-          <div className="w-full max-w-[440px] bg-transparent border border-slate-200/80 sm:border-0 rounded-3xl shadow-lg sm:shadow-none px-6 py-8 sm:px-2 sm:py-0">
+            <div className="w-full max-w-[440px] bg-transparent border border-slate-200/80 sm:border-0 rounded-3xl shadow-lg sm:shadow-none px-6 py-8 sm:px-2 sm:py-0">
               <div className="flex flex-col items-center text-center mb-8">
                 <Link href="/" className="flex flex-col items-center gap-2.5 group mb-5 lg:flex hidden">
                   <div className="w-14 h-14 bg-gradient-to-br from-[#FF6014] to-[#FF8142] rounded-2xl flex items-center justify-center text-white shadow-xl shadow-[#FF6014]/25 group-hover:scale-105 transition-transform">
@@ -154,7 +154,7 @@ export default function LoginPage() {
             <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#FF6014] transition-colors">Privacy</Link>
             <Link href="/terms" className="ml-3 text-slate-400 hover:text-[#FF6014] transition-colors">Terms</Link>
           </div>
-          <div>Developed by <a href="https://jevxo.com" target="_blank" rel="noopener noreferrer" className="text-[#FF6014] hover:underline font-semibold">Jevxo</a></div>
+          <div>Developed by <a href="https://aftabfarhan.tech" target="_blank" rel="noopener noreferrer" className="text-[#FF6014] hover:underline font-semibold">Aftab Farhan Arko</a></div>
         </div>
       </div>
     </div>
