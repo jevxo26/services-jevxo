@@ -10,18 +10,8 @@ import {
 } from "lucide-react";
 import { useAppSelector } from "@/redux/hooks";
 import { useCreateCustomShiftingMutation } from "@/redux/features/admin/customShiftingApi";
-
-async function uploadToImgBB(file: File): Promise<string> {
-  const fd = new FormData();
-  fd.append("image", file);
-  const res = await fetch(
-    `https://api.imgbb.com/1/upload?key=${process.env.NEXT_PUBLIC_IMGBB_API_KEY || "demo"}`,
-    { method: "POST", body: fd }
-  );
-  const j = await res.json();
-  if (j.success) return j.data.url;
-  throw new Error("Upload failed");
-}
+import { toast } from "sonner";
+import { uploadImage } from "@/lib/upload";
 
 function RouteMap({ type }: { type: string }) {
   const [dash, setDash] = useState(0);
@@ -133,15 +123,23 @@ export default function HomeShiftingPage() {
   const submit = async (e: React.FormEvent) => {
     e.preventDefault();
     setErr("");
+    const loadingToast = toast.loading("Submitting shifting request...");
     try {
       const urls = files.length
-        ? (await Promise.allSettled(files.map(uploadToImgBB)))
+        ? (await Promise.allSettled(files.map(uploadImage)))
           .filter((r): r is PromiseFulfilledResult<string> => r.status === "fulfilled")
           .map((r) => r.value)
         : [];
       await create({ ...form, images: urls, userId: isAuth && user ? Number((user as any).id) : undefined }).unwrap();
       setDone(true);
-    } catch { setErr("Something went wrong. Please try again."); }
+      toast.success("Shifting request submitted successfully!", { id: loadingToast });
+      setForm({ name: "", email: "", phone: "", shiftingType: "home", sourceAddress: "", destinationAddress: "" });
+      setFiles([]);
+      setPreviews([]);
+    } catch (error: any) { 
+      setErr("Something went wrong. Please try again."); 
+      toast.error(error?.data?.message || error.message || "Failed to submit request", { id: loadingToast });
+    }
   };
 
 
