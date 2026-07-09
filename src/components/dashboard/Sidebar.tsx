@@ -125,11 +125,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "সাপোর্ট ডেস্ক" : "Support Desk",
             icon: Mail,
             children: [
-
+              { label: lang === "bn" ? "টিকেট ম্যানেজমেন্ট" : "Ticket Management", href: "/dashbord/support-desk", icon: Ticket },
               { label: lang === "bn" ? "যোগাযোগ" : "Contacts", href: "/dashbord/contacts", icon: Mail },
               { label: lang === "bn" ? "লাইভ চ্যাট" : "Live Chat", href: "/dashbord/live-chat", icon: MessageSquare },
               { label: lang === "bn" ? "এআই চ্যাট লগ" : "AI Chat Log", href: "/dashbord/ai-chat-log", icon: Bot },
-
             ]
           },
           {
