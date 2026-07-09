@@ -7,6 +7,7 @@ import { CustomTable } from "@/components/ui/table";
 import { useGetAllRolesQuery, useCreateRoleMutation, useDeleteRoleMutation } from "@/redux/features/admin/role";
 import { toast } from "sonner";
 import RoleModal from "./components/RoleModal";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 interface RoleItem {
   id: string;
@@ -16,6 +17,7 @@ interface RoleItem {
 }
 
 export default function RoleManagementPage() {
+  const confirm = useConfirm();
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
   const lang = useAppSelector((state) => state.lang.value);
 
@@ -72,7 +74,13 @@ export default function RoleManagementPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm(lang === "bn" ? "এই রোলটি মুছে ফেলবেন?" : "Are you sure you want to delete this role?")) return;
+    const isConfirmed = await confirm({
+      title: "Delete Role?",
+      message: lang === "bn" ? "এই রোলটি মুছে ফেলবেন? এই কাজটি পূর্বাবস্থায় ফেরানো যাবে না।" : "Are you sure you want to delete this role? This action cannot be undone.",
+      confirmText: lang === "bn" ? "মুছুন" : "Delete",
+      cancelText: lang === "bn" ? "বাতিল" : "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteRoleMut(id).unwrap();
       toast.success("Role deleted successfully!");

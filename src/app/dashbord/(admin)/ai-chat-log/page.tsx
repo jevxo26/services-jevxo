@@ -23,6 +23,7 @@ import {
 import { format, formatDistanceToNow } from "date-fns";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 /* ── Types ────────────────────────────────────────────────── */
 interface ChatMessage {
@@ -246,6 +247,7 @@ function AiWorkflowTester() {
 
 /* ── Main Page ────────────────────────────────────────────── */
 export default function AiChatLogPage() {
+  const confirm = useConfirm();
   const [sessions, setSessions] = useState<ChatSession[]>([]);
   const [activeSession, setActiveSession] = useState<ChatSession | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -269,12 +271,18 @@ export default function AiChatLogPage() {
     setTimeout(() => setIsRefreshing(false), 700);
   };
 
-  const handleClearAll = () => {
-    if (confirm("সব AI chat logs delete করবেন?")) {
-      localStorage.removeItem(CHAT_LOG_KEY);
-      setSessions([]);
-      setActiveSession(null);
-    }
+  const handleClearAll = async () => {
+    const isConfirmed = await confirm({
+      title: "Clear All Chat Logs?",
+      message: "Are you sure you want to delete all AI chat logs? This action cannot be undone.",
+      confirmText: "Clear All",
+      cancelText: "Cancel",
+      variant: "warning",
+    });
+    if (!isConfirmed) return;
+    localStorage.removeItem(CHAT_LOG_KEY);
+    setSessions([]);
+    setActiveSession(null);
   };
 
   const filteredSessions = sessions.filter((s) => {

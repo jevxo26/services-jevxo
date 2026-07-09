@@ -7,6 +7,7 @@ import { useGetAllUsersQuery, useUpdateUserMutation, useCreateUserMutation, useD
 import { useGetAllRolesQuery } from "@/redux/features/admin/role";
 import { useCreateProfileMutation } from "@/redux/features/admin/profile";
 import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 interface VendorItem {
   id: string;
@@ -23,6 +24,7 @@ interface VendorItem {
 }
 
 export function useVendorState() {
+  const confirm = useConfirm();
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
 
   const [vendors, setVendors] = useState<VendorItem[]>([]);
@@ -209,7 +211,13 @@ export function useVendorState() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this vendor?")) return;
+    const isConfirmed = await confirm({
+      title: "Delete Vendor?",
+      message: "Are you sure you want to delete this vendor? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteUserMut(id).unwrap();
       toast.success("Vendor deleted successfully!");

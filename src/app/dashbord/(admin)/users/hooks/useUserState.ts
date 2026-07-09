@@ -7,6 +7,7 @@ import { useGetAllUsersQuery, useUpdateUserMutation, useCreateUserMutation, useD
 import { useGetAllRolesQuery } from "@/redux/features/admin/role";
 import { useCreateProfileMutation } from "@/redux/features/admin/profile";
 import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 interface UserItem {
   id: string;
@@ -20,6 +21,7 @@ interface UserItem {
 }
 
 export function useUserState() {
+  const confirm = useConfirm();
   const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
   const currentUser = useAppSelector((state) => state.auth.user);
   const role = typeof rawRole === "string" ? rawRole.toLowerCase() : (rawRole as any)?.name?.toLowerCase() || "superadmin";
@@ -185,7 +187,13 @@ export function useUserState() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this user?")) return;
+    const isConfirmed = await confirm({
+      title: "Delete User?",
+      message: "Are you sure you want to delete this user? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteUserMut(id).unwrap();
       toast.success("User deleted successfully!");

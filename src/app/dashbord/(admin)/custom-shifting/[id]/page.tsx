@@ -13,6 +13,7 @@ import {
 import { useGetAllUsersQuery } from "@/redux/features/admin/user";
 import { useAppSelector } from "@/redux/hooks";
 import { CustomSelect } from "@/components/ui/select";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 import {
   ArrowLeft,
   Truck,
@@ -60,6 +61,7 @@ function StatusBadge({ status, lang }: { status: string; lang?: string }) {
 }
 
 export default function CustomShiftingDetailsPage({ params }: { params: Promise<{ id: string }> }) {
+  const confirm = useConfirm();
   const { id } = use(params);
   const router = useRouter();
 
@@ -130,10 +132,15 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
   };
 
   const handleDelete = async () => {
-    const confirmMsg = lang === "bn"
-      ? "আপনি কি নিশ্চিত যে আপনি এই বুকিংটি স্থায়ীভাবে মুছে ফেলতে চান?"
-      : "Are you sure you want to permanently delete this booking?";
-    if (!window.confirm(confirmMsg)) return;
+    const isConfirmed = await confirm({
+      title: lang === "bn" ? "বুকিং মুছে ফেলবেন?" : "Delete Booking?",
+      message: lang === "bn"
+        ? "আপনি কি নিশ্চিত যে আপনি এই বুকিংটি স্থায়ীভাবে মুছে ফেলতে চান? এই কাজটি আর পূর্বাবস্থায় ফেরানো যাবে না।"
+        : "Are you sure you want to permanently delete this booking? This action cannot be undone.",
+      confirmText: lang === "bn" ? "মুছুন" : "Delete",
+      cancelText: lang === "bn" ? "বাতিল" : "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteShifting(Number(id)).unwrap();
       router.push("/dashbord/custom-shifting");

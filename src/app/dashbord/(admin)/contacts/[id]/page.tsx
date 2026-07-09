@@ -11,12 +11,14 @@ import { format } from "date-fns";
 import { Mail, CheckCircle, Trash2, Loader2, Clock, Check, ArrowLeft, User, Phone, Calendar } from "lucide-react";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 interface PageProps {
   params: Promise<{ id: string }>;
 }
 
 export default function ContactDetailsPage({ params }: PageProps) {
+  const confirm = useConfirm();
   const router = useRouter();
   const resolvedParams = React.use(params);
   const contactId = resolvedParams.id;
@@ -62,15 +64,20 @@ export default function ContactDetailsPage({ params }: PageProps) {
 
   const handleDelete = async () => {
     if (!contact) return;
-    if (confirm("Are you sure you want to delete this inquiry?")) {
-      try {
-        await deleteContact(contact.id).unwrap();
-        toast.success("Inquiry deleted successfully");
-        router.push("/dashbord/contacts");
-      } catch (error) {
-        toast.error("Failed to delete inquiry");
-        console.error(error);
-      }
+    const isConfirmed = await confirm({
+      title: "Delete Inquiry?",
+      message: `Are you sure you want to delete this inquiry from "${contact.name}"? This action cannot be undone.`,
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
+    try {
+      await deleteContact(contact.id).unwrap();
+      toast.success("Inquiry deleted successfully");
+      router.push("/dashbord/contacts");
+    } catch (error) {
+      toast.error("Failed to delete inquiry");
+      console.error(error);
     }
   };
 

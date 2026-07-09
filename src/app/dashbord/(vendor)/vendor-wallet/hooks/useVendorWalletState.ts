@@ -16,8 +16,10 @@ import {
 import { useGetAllBookingsQuery } from "@/redux/features/admin/booking";
 import { useGetAllUsersQuery } from "@/redux/features/admin/user";
 import { toast } from "sonner";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 export function useVendorWalletState() {
+  const confirm = useConfirm();
   const { user, role, isAuthenticated } = useAppSelector((state) => state.auth);
   const vendorId = user?.id ? Number(user.id) : 1;
   const normalizedRole = typeof role === "string" ? role.toLowerCase() : "";
@@ -122,7 +124,13 @@ export function useVendorWalletState() {
   };
 
   const handleDeleteGateway = async (id: number) => {
-    if (!confirm("Are you sure you want to delete this payment method?")) return;
+    const isConfirmed = await confirm({
+      title: "Delete Payment Method?",
+      message: "Are you sure you want to delete this payment method? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteGatewayMut(id).unwrap();
       toast.success("Payment method deleted");

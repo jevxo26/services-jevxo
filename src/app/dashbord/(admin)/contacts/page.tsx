@@ -12,8 +12,10 @@ import { toast } from "sonner";
 import { CustomTable, TableColumn } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 export default function ContactsAdminPage() {
+  const confirm = useConfirm();
   const router = useRouter();
   const { data: response, isLoading } = useGetContactsQuery();
   const lang = useAppSelector((state) => state.lang.value);
@@ -33,14 +35,19 @@ export default function ContactsAdminPage() {
   };
 
   const handleDelete = async (id: number) => {
-    if (confirm("Are you sure you want to delete this inquiry?")) {
-      try {
-        await deleteContact(id).unwrap();
-        toast.success("Inquiry deleted successfully");
-      } catch (error) {
-        toast.error("Failed to delete inquiry");
-        console.error("Failed to delete", error);
-      }
+    const isConfirmed = await confirm({
+      title: "Delete Inquiry?",
+      message: "Are you sure you want to delete this contact inquiry? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
+    try {
+      await deleteContact(id).unwrap();
+      toast.success("Inquiry deleted successfully");
+    } catch (error) {
+      toast.error("Failed to delete inquiry");
+      console.error("Failed to delete", error);
     }
   };
 

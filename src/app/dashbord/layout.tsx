@@ -50,6 +50,8 @@ function DashboardLoader() {
   );
 }
 
+import { ConfirmProvider } from "@/context/ConfirmDialogContext";
+
 export default function DashboardLayout({
   children,
 }: {
@@ -65,7 +67,7 @@ export default function DashboardLayout({
 
     // Mutation observer to detect when a modal (custom or Radix UI) is open in the DOM
     const checkModalState = () => {
-      const hasCustomModal = !!document.querySelector(".fixed.inset-0.z-50, .fixed.inset-0.z-\\[50\\]");
+      const hasCustomModal = !!document.querySelector(".fixed.inset-0.z-50, .fixed.inset-0.z-\\[50\\], .fixed.inset-0.z-\\[9999\\]");
       const hasRadixModal = document.body.hasAttribute("data-scroll-locked");
       if (hasCustomModal || hasRadixModal) {
         document.documentElement.classList.add("modal-open");
@@ -101,26 +103,28 @@ export default function DashboardLayout({
   }
 
   return (
-    <div className="flex h-screen overflow-hidden bg-[#FFF8F4] text-slate-900 relative">
-      {/* Repeating background icons pattern */}
-      <div
-        className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
-        style={{ backgroundSize: 'auto' }}
-      />
+    <ConfirmProvider>
+      <div className="flex h-screen overflow-hidden bg-[#FFF8F4] text-slate-900 relative">
+        {/* Repeating background icons pattern */}
+        <div
+          className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
+          style={{ backgroundSize: 'auto' }}
+        />
 
-      {/* Sidebar */}
-      <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
+        {/* Sidebar */}
+        <Sidebar open={sidebarOpen} onClose={() => setSidebarOpen(false)} />
 
-      {/* Main Content Area */}
-      <div className="flex flex-1 flex-col overflow-hidden relative z-10 bg-transparent">
-        {/* Top Navbar */}
-        <TopNavbar onMenuClick={() => setSidebarOpen(true)} />
+        {/* Main Content Area */}
+        <div className="flex flex-1 flex-col overflow-hidden relative z-10 bg-transparent">
+          {/* Top Navbar */}
+          <TopNavbar onMenuClick={() => setSidebarOpen(true)} />
 
-        {/* Page Content */}
-        <main className="flex-1 overflow-auto bg-transparent p-4 pb-8 sm:p-6 sm:pb-12 md:pb-12">
-          {children}
-        </main>
+          {/* Page Content */}
+          <main className="flex-1 overflow-auto bg-transparent p-4 pb-8 sm:p-6 sm:pb-12 md:pb-12">
+            {children}
+          </main>
+        </div>
       </div>
-    </div>
+    </ConfirmProvider>
   );
 }

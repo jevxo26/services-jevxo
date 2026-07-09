@@ -8,6 +8,7 @@ import { Calendar, User, Package as PkgIcon, MapPin, Briefcase, ShieldCheck, Tra
 import { toast } from "sonner";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
@@ -21,6 +22,7 @@ const getStatusColor = (status: string) => {
 };
 
 export default function BookingDetailsPage() {
+  const confirm = useConfirm();
   const { id } = useParams();
   const router = useRouter();
   const bookingId = Array.isArray(id) ? id[0] : id;
@@ -95,7 +97,13 @@ export default function BookingDetailsPage() {
   };
 
   const handleDelete = async () => {
-    if (!confirm("Are you sure you want to delete this booking? This action cannot be undone.")) return;
+    const isConfirmed = await confirm({
+      title: "Delete Booking?",
+      message: "Are you sure you want to delete this booking? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteBooking(booking.id).unwrap();
       toast.success("Booking deleted successfully");

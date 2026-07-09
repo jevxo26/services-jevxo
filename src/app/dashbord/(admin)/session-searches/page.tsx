@@ -15,6 +15,7 @@ import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { hydrateLogs, clearLogs, SearchLogEntry } from "@/redux/features/admin/searchLogSlice";
 import { toast } from "sonner";
 import { format } from "date-fns";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 /* ── Helpers ──────────────────────────────────────────────── */
 function getDeviceLabel(ua?: string): string {
@@ -95,6 +96,7 @@ function TopSearches({ logs }: { logs: SearchLogEntry[] }) {
 
 /* ── Main Page ─────────────────────────────────────────────── */
 export default function SessionSearchesPage() {
+  const confirm = useConfirm();
   const dispatch = useAppDispatch();
   const logs = useAppSelector((state) => state.searchLogs.logs);
   const [searchFilter, setSearchFilter] = useState("");
@@ -130,11 +132,17 @@ export default function SessionSearchesPage() {
   const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
   const paginated = filtered.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
 
-  const handleClearAll = () => {
-    if (confirm("সব search logs delete করবেন?")) {
-      dispatch(clearLogs());
-      toast.success("সব search logs clear হয়েছে");
-    }
+  const handleClearAll = async () => {
+    const isConfirmed = await confirm({
+      title: "Clear Search History?",
+      message: "Are you sure you want to clear all session search history logs? This action cannot be undone.",
+      confirmText: "Clear All",
+      cancelText: "Cancel",
+      variant: "warning",
+    });
+    if (!isConfirmed) return;
+    dispatch(clearLogs());
+    toast.success("সব search logs clear হয়েছে");
   };
 
   const uniqueSessions = sessions.length;

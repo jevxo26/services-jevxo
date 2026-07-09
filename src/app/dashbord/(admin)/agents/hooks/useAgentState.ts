@@ -8,6 +8,7 @@ import { useGetAllRolesQuery } from "@/redux/features/admin/role";
 import { useCreateProfileMutation } from "@/redux/features/admin/profile";
 import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
 import { uploadImage } from "@/lib/upload";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 interface AgentItem {
   id: string;
@@ -33,6 +34,7 @@ interface AgentItem {
 }
 
 export function useAgentState() {
+  const confirm = useConfirm();
   const [agents, setAgents] = useState<AgentItem[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
   const [selectedUser, setSelectedUser] = useState<AgentItem | null>(null);
@@ -236,7 +238,13 @@ export function useAgentState() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this agent?")) return;
+    const isConfirmed = await confirm({
+      title: "Delete Agent?",
+      message: "Are you sure you want to delete this agent? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteUserMut(id).unwrap();
       toast.success("Agent deleted successfully!");

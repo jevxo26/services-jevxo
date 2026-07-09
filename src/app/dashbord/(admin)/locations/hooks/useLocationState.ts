@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 import {
   useGetAllDevisionsQuery,
@@ -20,6 +21,7 @@ import {
 } from "@/redux/features/admin/location";
 
 export function useLocationState() {
+  const confirm = useConfirm();
   const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
   const role = typeof rawRole === "string" ? rawRole.toLowerCase().replace(/\s+/g, "") : "client";
 
@@ -96,7 +98,14 @@ export function useLocationState() {
   };
 
   const handleDelete = async (item: any) => {
-    if (!confirm(`Delete this ${activeTab.slice(0, -1)}?`)) return;
+    const tabLabel = activeTab.slice(0, -1);
+    const isConfirmed = await confirm({
+      title: `Delete ${tabLabel.charAt(0).toUpperCase() + tabLabel.slice(1)}?`,
+      message: `Are you sure you want to delete "${item.name}"? This action cannot be undone.`,
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       if (activeTab === "divisions") await deleteDiv(item.id).unwrap();
       if (activeTab === "districts") await deleteDist(item.id).unwrap();

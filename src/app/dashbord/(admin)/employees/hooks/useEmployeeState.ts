@@ -7,6 +7,7 @@ import { useGetAllRolesQuery } from "@/redux/features/admin/role";
 import { useCreateProfileMutation, useUpdateProfileMutation } from "@/redux/features/admin/profile";
 import { useGetAllCategoriesQuery } from "@/redux/features/admin/category";
 import { toast } from "sonner";
+import { useConfirm } from "@/context/ConfirmDialogContext";
 
 interface EmployeeItem {
   id: string;
@@ -27,6 +28,7 @@ interface EmployeeItem {
 }
 
 export function useEmployeeState() {
+  const confirm = useConfirm();
   const rawRole = useAppSelector((state) => state.auth.role) || "superadmin";
   const currentUser = useAppSelector((state) => state.auth.user);
   const role = typeof rawRole === "string" ? rawRole.toLowerCase() : (rawRole as any)?.name?.toLowerCase() || "superadmin";
@@ -239,7 +241,13 @@ export function useEmployeeState() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this employee?")) return;
+    const isConfirmed = await confirm({
+      title: "Delete Employee?",
+      message: "Are you sure you want to delete this employee? This action cannot be undone.",
+      confirmText: "Delete",
+      cancelText: "Cancel",
+    });
+    if (!isConfirmed) return;
     try {
       await deleteUserMut(id).unwrap();
       toast.success("Employee deleted successfully!");
