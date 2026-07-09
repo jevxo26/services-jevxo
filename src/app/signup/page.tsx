@@ -73,8 +73,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="flex-1 flex items-start sm:items-center justify-center px-4 sm:px-8 pb-8 pt-4 relative z-10">
-          <div className="w-full max-w-[460px]">
-            <div className="bg-white rounded-3xl sm:rounded-none border border-slate-200 sm:border-0 shadow-xl sm:shadow-none px-6 py-8 sm:px-2 sm:py-0">
+            <div className="w-full max-w-[460px] bg-transparent px-6 py-8 sm:px-2 sm:py-0">
               {!isOtpSent ? (
                 <>
                   <div className="flex flex-col items-center text-center mb-8">
@@ -174,7 +173,6 @@ export default function RegisterPage() {
                 </div>
               )}
             </div>
-          </div>
         </div>
 
         <div className="text-center py-5 text-[11px] text-slate-400 font-medium relative z-10 border-t border-slate-100 mx-6 space-y-1">

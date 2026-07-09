@@ -45,7 +45,7 @@ export default function LoginPage() {
           </div>
 
           {!isOtpSent ? (
-            <div className="w-full max-w-[440px] bg-white rounded-3xl sm:rounded-none border border-slate-200 sm:border-0 shadow-xl sm:shadow-none px-6 py-8 sm:px-2 sm:py-0">
+          <div className="w-full max-w-[440px] bg-transparent px-6 py-8 sm:px-2 sm:py-0">
               <div className="flex flex-col items-center text-center mb-8">
                 <Link href="/" className="flex flex-col items-center gap-2.5 group mb-5 lg:flex hidden">
                   <div className="w-14 h-14 bg-gradient-to-br from-[#FF6014] to-[#FF8142] rounded-2xl flex items-center justify-center text-white shadow-xl shadow-[#FF6014]/25 group-hover:scale-105 transition-transform">
