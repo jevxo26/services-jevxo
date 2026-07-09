@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldAlert, PlusCircle, Package as PackageIcon } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
 import PackageModal from "./components/PackageModal";
 import DeletePackageModal from "./components/DeletePackageModal";
 import PackageTable from "./components/PackageTable";
@@ -47,14 +48,16 @@ export default function AdminPackagesManagementPage() {
     setPackageType,
   } = usePackageState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">This panel is restricted to Administrators only.</p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "এই প্যানেলটি শুধুমাত্র অ্যাডমিনদের জন্য।" : "This panel is restricted to Administrators only."}</p>
       </div>
     );
   }
@@ -68,8 +71,8 @@ export default function AdminPackagesManagementPage() {
             <PackageIcon className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Package Directory</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage service packages across all vendors.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "প্যাকেজ ডিরেক্টরি" : "Package Directory"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "সব ভেন্ডরের সার্ভিস প্যাকেজ ম্যানেজ করুন।" : "Manage service packages across all vendors."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -77,7 +80,7 @@ export default function AdminPackagesManagementPage() {
             onClick={openCreateModal}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            <PlusCircle size={18} /> Add Package
+            <PlusCircle size={18} /> {lang === "bn" ? "প্যাকেজ যোগ করুন" : "Add Package"}
           </button>
         </div>
       </div>
@@ -92,15 +95,13 @@ export default function AdminPackagesManagementPage() {
           <div className="w-16 h-16 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100/50">
             <PackageIcon size={28} />
           </div>
-          <h3 className="text-base font-bold text-slate-800">No Packages Found</h3>
-          <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">
-            No packages have been created yet across any vendor.
-          </p>
+          <h3 className="text-base font-bold text-slate-800">{lang === "bn" ? "কোনো প্যাকেজ পাওয়া যায়নি" : "No Packages Found"}</h3>
+          <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">{lang === "bn" ? "এখনো কোনো প্যাকেজ তৈরি হয়নি।" : "No packages have been created yet across any vendor."}</p>
           <button
             onClick={openCreateModal}
             className="mt-4 bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#FF6014] font-bold px-4 py-2 rounded-xl text-xs transition-all"
           >
-            Create New Package
+            {lang === "bn" ? "নতুন প্যাকেজ তৈরি করুন" : "Create New Package"}
           </button>
         </div>
       ) : (

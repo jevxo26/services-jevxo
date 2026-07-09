@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldAlert, Users } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
 import UserModal from "./components/UserModal";
 import ViewUserModal from "./components/ViewUserModal";
 import UserTable from "./components/UserTable";
@@ -40,14 +41,16 @@ export default function UsersPage() {
     isAuthenticated,
   } = useUserState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">Please log in to access this panel.</p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "লগইন করুন।" : "Please log in to access this panel."}</p>
       </div>
     );
   }
@@ -61,8 +64,8 @@ export default function UsersPage() {
             <Users className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">User Management</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Verify service professionals and manage platform customers.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "ইউজার ম্যানেজমেন্ট" : "User Management"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "প্ল্যাটফর্মের সব ইউজার দেখুন এবং ম্যানেজ করুন।" : "Verify service professionals and manage platform customers."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -70,7 +73,7 @@ export default function UsersPage() {
             onClick={() => setIsAddModalOpen(true)}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            Add User
+            {lang === "bn" ? "ইউজার যোগ করুন" : "Add User"}
           </button>
         </div>
       </div>
@@ -79,11 +82,11 @@ export default function UsersPage() {
       {isUsersLoading ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
           <div className="w-8 h-8 border-2 border-[#FF6014] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-slate-400 font-medium">Loading users...</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "ইউজার লোড হচ্ছে..." : "Loading users..."}</p>
         </div>
       ) : users.length === 0 ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
-          <p className="text-sm text-slate-400 font-medium">No users found. The backend may be unavailable.</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "কোনো ইউজার পাওয়া যায়নি।" : "No users found. The backend may be unavailable."}</p>
         </div>
       ) : (
         <UserTable

@@ -11,10 +11,12 @@ import { Mail, CheckCircle, Trash2, Loader2, Eye, Clock, Check } from "lucide-re
 import { toast } from "sonner";
 import { CustomTable, TableColumn } from "@/components/ui/table";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function ContactsAdminPage() {
   const router = useRouter();
   const { data: response, isLoading } = useGetContactsQuery();
+  const lang = useAppSelector((state) => state.lang.value);
   const [updateStatus, { isLoading: isUpdating }] = useUpdateContactStatusMutation();
   const [deleteContact, { isLoading: isDeleting }] = useDeleteContactMutation();
 
@@ -45,7 +47,7 @@ export default function ContactsAdminPage() {
   const columns: TableColumn<any>[] = [
     {
       key: "name",
-      header: "Name",
+      header: lang === "bn" ? "নাম" : "Name",
       render: (row) => (
         <div className="flex items-center gap-2">
           {!row.isRead && <span className="w-2 h-2 rounded-full bg-[#FF6014] shrink-0" />}
@@ -57,7 +59,7 @@ export default function ContactsAdminPage() {
     },
     {
       key: "email",
-      header: "Email",
+      header: lang === "bn" ? "ইমেইল" : "Email",
       render: (row) => (
         <a href={`mailto:${row.email}`} className="text-xs font-bold text-slate-650 hover:text-[#FF6014] transition-colors">
           {row.email}
@@ -66,14 +68,14 @@ export default function ContactsAdminPage() {
     },
     {
       key: "phone",
-      header: "Phone",
+      header: lang === "bn" ? "ফোন" : "Phone",
       render: (row) => (
         <span className="text-xs font-semibold text-slate-500">{row.phone || "N/A"}</span>
       )
     },
     {
       key: "subject",
-      header: "Subject",
+      header: lang === "bn" ? "বিষয়" : "Subject",
       render: (row) => (
         <span className="text-xs font-bold text-slate-700 truncate max-w-[180px] block">
           {row.subject}
@@ -82,7 +84,7 @@ export default function ContactsAdminPage() {
     },
     {
       key: "createdAt",
-      header: "Submitted At",
+      header: lang === "bn" ? "জমার সময়" : "Submitted At",
       render: (row) => (
         <span className="text-xs font-semibold text-slate-400">
           {format(new Date(row.createdAt), "MMM d, yyyy")}
@@ -96,7 +98,7 @@ export default function ContactsAdminPage() {
         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] uppercase font-extrabold tracking-wider ${
           row.isRead ? "bg-slate-100 text-slate-550 border border-slate-200/50" : "bg-[#FFF8F4] text-[#FF6014] border border-[#FF6014]/20"
         }`}>
-          {row.isRead ? "Read" : "Unread"}
+          {row.isRead ? (lang === "bn" ? "পড়া হয়েছে" : "Read") : (lang === "bn" ? "অপঠিত" : "Unread")}
         </span>
       )
     }
@@ -104,21 +106,21 @@ export default function ContactsAdminPage() {
 
   const actions = [
     {
-      label: "View Details",
+      label: lang === "bn" ? "বিস্তারিত দেখুন" : "View Details",
       icon: Eye,
       onClick: (row: any) => {
         router.push(`/dashbord/contacts/${row.id}`);
       }
     },
     {
-      label: "Toggle Read",
+      label: lang === "bn" ? "পঠিত/অপঠিত" : "Toggle Read",
       icon: CheckCircle,
       onClick: (row: any) => {
         handleToggleRead(row);
       }
     },
     {
-      label: "Delete",
+      label: lang === "bn" ? "মুছুন" : "Delete",
       icon: Trash2,
       variant: "destructive" as const,
       onClick: (row: any) => {
@@ -136,25 +138,21 @@ export default function ContactsAdminPage() {
             <div className="p-2.5 bg-[#FFF8F4] border border-[#FF6014]/20 rounded-2xl shadow-xs shrink-0">
               <Mail className="w-5 h-5 text-[#FF6014]" />
             </div>
-            <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">
-              Contact Inquiries
-            </h1>
+            <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">{lang === "bn" ? "যোগাযোগ সমূহ" : "Contact Inquiries"}</h1>
           </div>
-          <p className="text-xs md:text-sm text-slate-500 font-medium pl-14">
-            Manage and respond to customer inquiries from the public website.
-          </p>
+          <p className="text-xs md:text-sm text-slate-500 font-medium pl-14">{lang === "bn" ? "সর্বসাধারণের যোগাযোগ রিকোয়েস্ট দেখুন এবং সাড়া দিন।" : "Manage and respond to customer inquiries from the public website."}</p>
         </div>
         <div className="bg-white/90 backdrop-blur-sm border border-slate-100 rounded-2xl px-6 py-3.5 shadow-sm flex gap-8 shrink-0 w-full md:w-auto justify-around md:justify-start">
           <div className="text-center md:text-left">
             <div className="text-xl font-black text-slate-900 leading-none mb-1">{contacts.length}</div>
-            <div className="text-[9px] uppercase font-extrabold text-slate-400 tracking-wider">Total</div>
+            <div className="text-[9px] uppercase font-extrabold text-slate-400 tracking-wider">{lang === "bn" ? "মোট" : "Total"}</div>
           </div>
           <div className="w-px bg-slate-100" />
           <div className="text-center md:text-left">
             <div className="text-xl font-black text-[#FF6014] leading-none mb-1">
               {contacts.filter((c: any) => !c.isRead).length}
             </div>
-            <div className="text-[9px] uppercase font-extrabold text-[#FF6014] tracking-wider">Unread</div>
+            <div className="text-[9px] uppercase font-extrabold text-[#FF6014] tracking-wider">{lang === "bn" ? "অপঠিত" : "Unread"}</div>
           </div>
         </div>
       </div>
@@ -171,12 +169,12 @@ export default function ContactsAdminPage() {
             data={contacts}
             actions={actions}
             searchKey="name"
-            searchPlaceholder="Search by name..."
+            searchPlaceholder={lang === "bn" ? "নাম দিয়ে খুঁজুন..." : "Search by name..."}
             filterKey="isRead"
             filterPlaceholder="All Statuses"
             filterOptions={[
-              { label: "Read Inquiries", value: "true" },
-              { label: "Unread Inquiries", value: "false" }
+              { label: lang === "bn" ? "পঠিত রিকোয়েস্ট" : "Read Inquiries", value: "true" },
+              { label: lang === "bn" ? "অপঠিত রিকোয়েস্ট" : "Unread Inquiries", value: "false" }
             ]}
             pageSize={10}
           />

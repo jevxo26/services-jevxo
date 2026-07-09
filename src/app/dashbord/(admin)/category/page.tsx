@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldAlert, PlusCircle, Grid } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
 import CategoryModal from "./components/CategoryModal";
 import DeleteCategoryModal from "./components/DeleteCategoryModal";
 import CategoryTable from "./components/CategoryTable";
@@ -40,16 +41,16 @@ export default function CategoryManagementPage() {
     isUpdating,
   } = useCategoryState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">
-          This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test this view.
-        </p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "এই প্যানেলটি শুধুমাত্র অ্যাডমিনদের জন্য।" : "This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test this view."}</p>
       </div>
     );
   }
@@ -63,8 +64,8 @@ export default function CategoryManagementPage() {
             <Grid className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Category Management</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage system-wide service categories and nesting structure.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "ক্যাটাগরি ম্যানেজমেন্ট" : "Category Management"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "সার্ভিস ক্যাটাগরি দেখুন এবং ম্যানেজ করুন।" : "Manage system-wide service categories and nesting structure."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -72,7 +73,7 @@ export default function CategoryManagementPage() {
             onClick={openCreateModal}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            <PlusCircle size={18} /> Add Category
+            <PlusCircle size={18} /> {lang === "bn" ? "ক্যাটাগরি যোগ করুন" : "Add Category"}
           </button>
         </div>
       </div>

@@ -1,13 +1,15 @@
 "use client";
 
-import { Bell, Search, User, ChevronDown, Check, Shield, HardHat, CircleUser, Briefcase, Menu, LogOut, Settings, Languages } from "lucide-react";
+import { Bell, Search, User, ChevronDown, Check, Shield, HardHat, CircleUser, Briefcase, Menu, LogOut, Settings, Languages, X, Calendar, Info, BellRing } from "lucide-react";
 import { useState, useRef, useEffect } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
 import { UserRole, setRole as setAuthRole, getRoleName } from "@/redux/features/auth/authSlice";
 import { logout as authLogout } from "@/redux/features/auth/authSlice";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useGetNotificationsQuery, useMarkNotificationAsReadMutation } from "@/redux/features/notification/notificationApi";
 import { toggleLanguage } from "@/redux/features/shared/langSlice";
+import { format } from "date-fns";
 
 export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const [mounted, setMounted] = useState(false);
@@ -20,6 +22,7 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const role = useAppSelector((state) => state.auth.role) || "client";
   const lang = useAppSelector((state) => state.lang.value);
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const roleName = mounted ? getRoleName(role) : (lang === "bn" ? "ক্লায়েন্ট" : "Client");
   const logout = () => dispatch(authLogout());
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -30,6 +33,7 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
 
   const [notificationDropdownOpen, setNotificationDropdownOpen] = useState(false);
   const notificationDropdownRef = useRef<HTMLDivElement>(null);
+  const [notificationFilter, setNotificationFilter] = useState<'all' | 'unread' | 'booking' | 'system'>('all');
 
   const [prevUnreadCount, setPrevUnreadCount] = useState(0);
   const { data: notifications = [], refetch } = useGetNotificationsQuery(undefined, { 
@@ -39,6 +43,79 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const [markAsRead] = useMarkNotificationAsReadMutation();
 
   const unreadCount = notifications.filter((n: any) => !n.isRead).length;
+
+  const formatNotificationTime = (dateStr: string) => {
+    try {
+      const d = new Date(dateStr);
+      const now = new Date();
+      if (d.toDateString() === now.toDateString()) {
+        return format(d, "h:mm a");
+      }
+      if (d.getFullYear() === now.getFullYear()) {
+        return format(d, "MMM d");
+      }
+      return format(d, "MMM d, yyyy");
+    } catch (error) {
+      return "";
+    }
+  };
+
+  const getNotificationIcon = (type: string, isRead: boolean) => {
+    const normalizedType = type?.toLowerCase() || '';
+    const hasUnreadDot = !isRead;
+    
+    let iconElement = <Info size={18} />;
+    let colorClasses = "text-slate-500 bg-slate-50 border border-slate-100";
+    
+    if (normalizedType.includes('booking')) {
+      iconElement = <Calendar size={18} />;
+      colorClasses = "text-[#FF6014] bg-[#FFF8F4] border border-[#FF6014]/15";
+    } else if (normalizedType.includes('reminder')) {
+      iconElement = <BellRing size={18} />;
+      colorClasses = "text-blue-500 bg-blue-50 border border-blue-100";
+    }
+
+    return (
+      <div className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 relative ${colorClasses}`}>
+        {hasUnreadDot && (
+          <span className="absolute -top-0.5 -left-0.5 w-2.5 h-2.5 bg-orange-500 rounded-full border border-white shadow-xs" />
+        )}
+        {iconElement}
+      </div>
+    );
+  };
+
+  const getNotificationTitle = (type: string) => {
+    const normalizedType = type?.toLowerCase() || '';
+    if (normalizedType.includes('booking')) {
+      return lang === 'bn' ? 'বুকিং আপডেট' : 'Booking Update';
+    }
+    if (normalizedType.includes('reminder')) {
+      return lang === 'bn' ? 'স্মারক' : 'Reminder';
+    }
+    if (normalizedType.includes('system')) {
+      return lang === 'bn' ? 'সিস্টেম এলার্ট' : 'System Alert';
+    }
+    return lang === 'bn' ? 'নোটিফিকেশন' : 'Notification';
+  };
+
+  const filteredNotifications = notifications.filter((n: any) => {
+    if (notificationFilter === 'unread') return !n.isRead;
+    if (notificationFilter === 'booking') return n.type?.toLowerCase().includes('booking');
+    if (notificationFilter === 'system') return !n.type?.toLowerCase().includes('booking');
+    return true;
+  });
+
+  const handleMarkAllAsRead = async () => {
+    const unreadNotifications = notifications.filter((n: any) => !n.isRead);
+    for (const notification of unreadNotifications) {
+      try {
+        await markAsRead(notification.id).unwrap();
+      } catch (err) {
+        console.error("Failed to mark notification as read", err);
+      }
+    }
+  };
 
   useEffect(() => {
     if (unreadCount > prevUnreadCount) {
@@ -143,33 +220,114 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
           </button>
           
           {notificationDropdownOpen && (
-            <div className="absolute right-0 mt-3 w-80 bg-white border border-slate-100 rounded-2xl shadow-xl py-2 z-50 animate-in fade-in slide-in-from-top-2 duration-150 max-h-[400px] overflow-y-auto">
-              <div className="px-4 py-3 border-b border-slate-100 flex justify-between items-center">
-                <h3 className="font-semibold text-slate-800">{lang === "bn" ? "নোটিফিকেশন" : "Notifications"}</h3>
-                <span className="text-xs bg-[#FF6014]/10 text-[#FF6014] px-2 py-1 rounded-full font-medium">{unreadCount} {lang === "bn" ? "নতুন" : "new"}</span>
-              </div>
-              <div className="divide-y divide-slate-50">
-                {notifications.length === 0 ? (
-                  <div className="px-4 py-8 text-center text-slate-500 text-sm">{lang === "bn" ? "এখনো কোনো নোটিফিকেশন নেই" : "No notifications yet"}</div>
-                ) : (
-                  notifications.map(notification => (
-                    <div 
-                      key={notification.id} 
-                      className={`px-4 py-3 hover:bg-slate-50 transition-colors cursor-pointer ${!notification.isRead ? 'bg-[#FF6014]/5' : ''}`}
-                      onClick={() => {
-                        if (!notification.isRead) {
-                          markAsRead(notification.id);
-                        }
-                      }}
+            <div className="fixed top-[76px] right-4 left-4 sm:absolute sm:top-auto sm:right-0 sm:left-auto sm:w-[400px] bg-white border border-slate-100/85 rounded-[28px] shadow-2xl shadow-slate-900/10 p-5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              {/* Header */}
+              <div className="flex justify-between items-center pb-3">
+                <div className="flex items-center gap-3">
+                  <h3 className="text-lg font-black text-slate-800 tracking-tight">
+                    {lang === "bn" ? "নোটিফিকেশন" : "Notifications"}
+                  </h3>
+                  {unreadCount > 0 && (
+                    <button
+                      onClick={handleMarkAllAsRead}
+                      className="text-xs text-[#FF6014] hover:text-[#E0530A] font-extrabold transition-all"
                     >
-                      <p className={`text-sm ${!notification.isRead ? 'text-slate-900 font-medium' : 'text-slate-600'}`}>
-                        {notification.message}
-                      </p>
-                      <span className="text-xs text-slate-400 mt-1 block">
-                        {new Date(notification.createdAt).toLocaleString()}
-                      </span>
-                    </div>
-                  ))
+                      {lang === "bn" ? "সব পঠিত করুন" : "Mark all as read"}
+                    </button>
+                  )}
+                </div>
+                <button
+                  onClick={() => setNotificationDropdownOpen(false)}
+                  className="w-8 h-8 rounded-full bg-slate-50 hover:bg-slate-100 flex items-center justify-center text-slate-500 hover:text-slate-800 transition-colors"
+                >
+                  <X size={16} />
+                </button>
+              </div>
+
+              {/* Filter Pills */}
+              <div className="flex items-center gap-1.5 overflow-x-auto py-1 scrollbar-none">
+                {([
+                  { value: 'all', labelEn: 'All', labelBn: 'সব' },
+                  { value: 'unread', labelEn: 'Unread', labelBn: 'অপঠিত' },
+                  { value: 'booking', labelEn: 'Bookings', labelBn: 'বুকিং' },
+                  { value: 'system', labelEn: 'System', labelBn: 'সিস্টেম' }
+                ] as const).map((tab) => {
+                  const isActive = notificationFilter === tab.value;
+                  return (
+                    <button
+                      key={tab.value}
+                      onClick={() => setNotificationFilter(tab.value)}
+                      className={`text-[11px] uppercase tracking-wider font-extrabold px-3.5 py-1.5 rounded-full transition-all shrink-0 active:scale-[0.97] ${
+                        isActive
+                          ? "bg-slate-950 text-white shadow-xs"
+                          : "bg-slate-50 hover:bg-slate-100 text-slate-400 hover:text-slate-600"
+                      }`}
+                    >
+                      {lang === "bn" ? tab.labelBn : tab.labelEn}
+                    </button>
+                  );
+                })}
+              </div>
+
+              {/* Notification List */}
+              <div className="mt-4 space-y-2.5 max-h-[360px] overflow-y-auto pr-1 scrollbar-thin">
+                {filteredNotifications.length === 0 ? (
+                  <div className="py-12 text-center text-slate-400 text-sm font-semibold">
+                    {lang === "bn" ? "কোনো নোটিফিকেশন পাওয়া যায়নি" : "No notifications found"}
+                  </div>
+                ) : (
+                  filteredNotifications.map((notification) => {
+                    const timeStr = formatNotificationTime(notification.createdAt);
+                    const titleStr = getNotificationTitle(notification.type);
+                    const isUnread = !notification.isRead;
+                    return (
+                      <div
+                        key={notification.id}
+                        onClick={() => {
+                          if (isUnread) {
+                            markAsRead(notification.id);
+                          }
+                          setNotificationDropdownOpen(false);
+                          // Route navigation based on type
+                          const isBooking = notification.type?.toLowerCase().includes('booking') || 
+                                            notification.message?.toLowerCase().includes('booking') ||
+                                            notification.message?.includes('বুকিং');
+                          if (isBooking) {
+                            if (role === 'client') {
+                              router.push('/dashbord/overview');
+                            } else {
+                              router.push('/dashbord/manage-bookings');
+                            }
+                          }
+                        }}
+                        className={`group p-3.5 rounded-[20px] transition-all duration-200 border flex gap-3.5 items-start cursor-pointer relative ${
+                          isUnread
+                            ? "bg-[#FFFDFB] border-orange-100/70 hover:bg-orange-50/20 hover:border-orange-200/50 shadow-xs"
+                            : "bg-slate-50/70 border-transparent hover:bg-slate-50 hover:border-slate-100"
+                        }`}
+                      >
+                        {/* Circular Icon Container */}
+                        {getNotificationIcon(notification.type, notification.isRead)}
+
+                        {/* Content Area */}
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between gap-2 mb-0.5">
+                            <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider truncate">
+                              {titleStr}
+                            </span>
+                            <span className="text-[10px] font-bold text-slate-400 shrink-0">
+                              {timeStr}
+                            </span>
+                          </div>
+                          <p className={`text-xs leading-relaxed line-clamp-2 ${
+                            isUnread ? 'text-slate-900 font-extrabold' : 'text-slate-500 font-semibold'
+                          }`}>
+                            {notification.message}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })
                 )}
               </div>
             </div>

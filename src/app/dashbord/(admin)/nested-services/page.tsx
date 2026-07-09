@@ -6,6 +6,7 @@ import NestedServiceTable from "./components/NestedServiceTable";
 import { useNestedServiceState } from "./hooks/useNestedServiceState";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
 
 export default function NestedServicesManagementPage() {
   const router = useRouter();
@@ -21,16 +22,16 @@ export default function NestedServicesManagementPage() {
     handleDelete,
   } = useNestedServiceState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (role !== "superadmin" && role !== "vendor") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">প্রবেশাধিকার নেই</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">
-          এই প্যানেলটি শুধুমাত্র অ্যাডমিনিস্ট্রেটর এবং নিবন্ধিত ভেন্ডরদের জন্য সংরক্ষিত।
-        </p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "প্রবেশাধিকার নেই" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "এই প্যানেলটি শুধুমাত্র অ্যাডমিনিস্ট্রেটর এবং নিবন্ধিত ভেন্ডরদের জন্য সংরক্ষিত।" : "This panel is restricted to Administrators and registered Vendors."}</p>
       </div>
     );
   }
@@ -45,12 +46,14 @@ export default function NestedServicesManagementPage() {
           </div>
           <div>
             <h1 className="text-xl font-extrabold text-slate-900 font-display">
-              {role === "vendor" ? "আমার সাব-সার্ভিসেস" : "নেস্টেড সার্ভিস ডিরেক্টরি"}
+              {lang === "bn"
+                ? (role === "vendor" ? "আমার সাব-সার্ভিসেস" : "নেস্টেড সার্ভিস ডিরেক্টরি")
+                : (role === "vendor" ? "My Sub-Services" : "Nested Service Directory")}
             </h1>
             <p className="text-xs text-slate-400 mt-0.5">
-              {role === "vendor"
-                ? "আপনার মূল সার্ভিসের অধীনে সাব-সার্ভিসগুলো যোগ করুন এবং পরিচালনা করুন।"
-                : "সমস্ত ভেন্ডরদের মূল সার্ভিসের সাথে লিঙ্ক করা সাব-সার্ভিস পরিচালনা করুন।"}
+              {lang === "bn"
+                ? (role === "vendor" ? "আপনার মূল সার্ভিসের অধীনে সাব-সার্ভিসগুলো যোগ করুন এবং পরিচালনা করুন।" : "সমস্ত ভেন্ডরদের মূল সার্ভিসের সাথে লিঙ্ক করা সাব-সার্ভিস পরিচালনা করুন।")
+                : (role === "vendor" ? "Add and manage sub-services under your main service." : "Manage sub-services linked to services across all vendors.")}
             </p>
           </div>
         </div>
@@ -59,7 +62,7 @@ export default function NestedServicesManagementPage() {
             href="/dashbord/nested-services/create"
             className="bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#FF6014]/10"
           >
-            <PlusCircle size={18} /> সাব-সার্ভিস যোগ করুন
+            <PlusCircle size={18} /> {lang === "bn" ? "সাব-সার্ভিস যোগ করুন" : "Add Sub-Service"}
           </Link>
         </div>
       </div>
@@ -74,15 +77,13 @@ export default function NestedServicesManagementPage() {
           <div className="w-16 h-16 bg-slate-50 text-slate-400 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-slate-100/50">
             <Layers size={28} />
           </div>
-          <h3 className="text-base font-bold text-slate-800">কোনো সাব-সার্ভিস পাওয়া যায়নি</h3>
-          <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">
-            আপনার একটি বিদ্যমান সার্ভিসের অধীনে একটি সাব-সার্ভিস যোগ করে শুরু করুন।
-          </p>
+          <h3 className="text-base font-bold text-slate-800">{lang === "bn" ? "কোনো সাব-সার্ভিস পাওয়া যায়নি" : "No Sub-Services Found"}</h3>
+          <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">{lang === "bn" ? "একটি বিদ্যমান সার্ভিসের অধীনে সাব-সার্ভিস যোগ করুন।" : "Add a sub-service under an existing service to get started."}</p>
           <Link
             href="/dashbord/nested-services/create"
             className="mt-4 bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#FF6014] font-bold px-4 py-2 rounded-xl text-xs transition-all inline-block"
           >
-            নতুন সাব-সার্ভিস যোগ করুন
+            {lang === "bn" ? "নতুন সাব-সার্ভিস যোগ করুন" : "Add New Sub-Service"}
           </Link>
         </div>
       ) : (

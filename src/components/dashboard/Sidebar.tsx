@@ -125,11 +125,11 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "সাপোর্ট ডেস্ক" : "Support Desk",
             icon: Mail,
             children: [
-              { label: lang === "bn" ? "সাপোর্ট ডেস্ক" : "Support Desk", href: "/dashbord/support-desk", icon: Ticket },
+
               { label: lang === "bn" ? "যোগাযোগ" : "Contacts", href: "/dashbord/contacts", icon: Mail },
               { label: lang === "bn" ? "লাইভ চ্যাট" : "Live Chat", href: "/dashbord/live-chat", icon: MessageSquare },
               { label: lang === "bn" ? "এআই চ্যাট লগ" : "AI Chat Log", href: "/dashbord/ai-chat-log", icon: Bot },
-              { label: lang === "bn" ? "সেশন সার্চেস" : "Session Searches", href: "/dashbord/session-searches", icon: Search }
+
             ]
           },
           {
@@ -284,15 +284,13 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
       {/* Backdrop overlay for mobile */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 bg-slate-900/10 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${
-          open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
-        }`}
+        className={`fixed inset-0 bg-slate-900/10 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300 ${open ? "opacity-100 pointer-events-auto" : "opacity-0 pointer-events-none"
+          }`}
       />
 
       <div
-        className={`bg-[#FFF8F4] text-slate-800 border-r-[2px] border-[#FF6014]/15 shadow-[6px_0_24px_rgba(255,96,20,0.02)] transition-all duration-300 flex flex-col h-screen fixed inset-y-0 left-0 z-[60] md:relative md:translate-x-0 ${
-          open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        } ${collapsed ? "w-20" : "w-64"} overflow-hidden`}
+        className={`bg-[#FFF8F4] text-slate-800 border-r-[2px] border-[#FF6014]/15 shadow-[6px_0_24px_rgba(255,96,20,0.02)] transition-all duration-300 flex flex-col h-screen fixed inset-y-0 left-0 z-[60] md:relative md:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+          } ${collapsed ? "w-20" : "w-64"} overflow-hidden`}
       >
         {/* Repeating background icons pattern inside sidebar */}
         <div
@@ -357,11 +355,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                   <Link
                     href={group.href}
                     onClick={onClose}
-                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group border relative ${
-                      isDirectActive
-                        ? "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-extrabold shadow-md shadow-[#FF6014]/20 scale-[1.01] border-transparent"
-                        : "border-transparent text-slate-600 hover:bg-slate-50/70 hover:text-slate-900 hover:translate-x-1 font-semibold"
-                    }`}
+                    className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group border relative ${isDirectActive
+                      ? "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-extrabold shadow-md shadow-[#FF6014]/20 scale-[1.01] border-transparent"
+                      : "border-transparent text-slate-600 hover:bg-slate-50/70 hover:text-slate-900 hover:translate-x-1 font-semibold"
+                      }`}
                   >
                     {isDirectActive && (
                       <div className="absolute left-1.5 w-1 h-5 bg-white rounded-full" />
@@ -372,13 +369,12 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                 ) : (
                   <button
                     onClick={handleToggle}
-                    className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group border relative ${
-                      containsActive
-                        ? isExpanded
-                          ? "bg-[#FFF8F4] border-[#FF6014]/15 text-[#FF6014] font-extrabold shadow-sm"
-                          : "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-extrabold shadow-md shadow-[#FF6014]/20 scale-[1.01] border-transparent"
-                        : "border-transparent text-slate-600 hover:bg-slate-50/70 hover:text-slate-900 hover:translate-x-1 font-semibold"
-                    }`}
+                    className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group border relative ${containsActive
+                      ? isExpanded
+                        ? "bg-[#FFF8F4] border-[#FF6014]/15 text-[#FF6014] font-extrabold shadow-sm"
+                        : "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-extrabold shadow-md shadow-[#FF6014]/20 scale-[1.01] border-transparent"
+                      : "border-transparent text-slate-600 hover:bg-slate-50/70 hover:text-slate-900 hover:translate-x-1 font-semibold"
+                      }`}
                   >
                     {containsActive && isExpanded && (
                       <div className="absolute left-1.5 w-1 h-5 bg-[#FF6014] rounded-full" />
@@ -402,13 +398,12 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                     {!collapsed && (
                       <ChevronDown
                         size={14}
-                        className={`transition-transform duration-200 ${
-                          containsActive
-                            ? isExpanded
-                              ? "text-[#FF6014]/70"
-                              : "text-white/70"
-                            : "text-slate-400"
-                        } ${isExpanded ? "rotate-180" : ""}`}
+                        className={`transition-transform duration-200 ${containsActive
+                          ? isExpanded
+                            ? "text-[#FF6014]/70"
+                            : "text-white/70"
+                          : "text-slate-400"
+                          } ${isExpanded ? "rotate-180" : ""}`}
                       />
                     )}
                   </button>
@@ -435,11 +430,10 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                               key={cIdx}
                               href={child.href}
                               onClick={onClose}
-                              className={`flex items-center gap-2.5 pl-9 pr-3 py-2.5 rounded-xl text-[13px] font-bold transition-all relative group border ${
-                                isChildActive
-                                  ? "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white shadow-md shadow-[#FF6014]/15 border-transparent scale-[1.01]"
-                                  : "border-transparent text-slate-500 hover:bg-slate-50/50 hover:text-slate-800 hover:translate-x-1.5"
-                              }`}
+                              className={`flex items-center gap-2.5 pl-9 pr-3 py-2.5 rounded-xl text-[13px] font-bold transition-all relative group border ${isChildActive
+                                ? "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white shadow-md shadow-[#FF6014]/15 border-transparent scale-[1.01]"
+                                : "border-transparent text-slate-500 hover:bg-slate-50/50 hover:text-slate-800 hover:translate-x-1.5"
+                                }`}
                             >
                               {/* Branch hook curve SVG-style path connector */}
                               <div className="absolute left-[27px] top-0 w-3.5 h-[22px] border-l-[1.5px] border-b-[1.5px] border-[#FF6014]/30 rounded-bl-lg pointer-events-none" />
@@ -492,7 +486,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             <Languages size={20} />
             {!collapsed && <span className="text-sm font-semibold">{lang === "bn" ? "Switch to English" : "বাংলায় পরিবর্তন করুন"}</span>}
           </button>
-          
+
           <button
             onClick={handleLogout}
             className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#E0530A] w-full rounded-xl hover:bg-[#FFF8F4]/30 transition-all duration-200"

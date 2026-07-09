@@ -6,6 +6,7 @@ import { ShieldAlert, BarChart3, TrendingUp, Sparkles, MapPin, Star, AlertCircle
 
 export default function AnalyticsPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
+  const lang = useAppSelector((state) => state.lang.value);
 
   // Access check
   if (role !== "superadmin") {
@@ -14,10 +15,8 @@ export default function AnalyticsPage() {
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">
-          This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test this view.
-        </p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "এই প্যানেলটি শুধুমাত্র অ্যাডমিনদের জন্য।" : "This panel is restricted to Administrators."}</p>
       </div>
     );
   }
@@ -46,8 +45,8 @@ export default function AnalyticsPage() {
             <BarChart3 className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">System Analytics</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Detailed statistical insights regarding bookings, regional demand, and category metrics.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "সিস্টেম অ্যানালিটিক্স" : "System Analytics"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "বুকিং, আঞ্চলিক চাহিদা এবং ক্যাটাগরি মেট্রিকস নিয়ে বিস্তারিত তথ্য।" : "Detailed statistical insights regarding bookings, regional demand, and category metrics."}</p>
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldAlert, ShieldCheck } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
 import AgentModal from "./components/AgentModal";
 import AgentViewModal from "./components/AgentViewModal";
 import AgentTable from "./components/AgentTable";
@@ -49,14 +50,16 @@ export default function AgentsPage() {
     isAuthenticated,
   } = useAgentState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">Please log in to access this panel.</p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "লগইন করুন।" : "Please log in to access this panel."}</p>
       </div>
     );
   }
@@ -70,8 +73,8 @@ export default function AgentsPage() {
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Agent Management</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage system agents and their accounts.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "এজেন্ট ম্যানেজমেন্ট" : "Agent Management"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "সিস্টেমের সব এজেন্ট দেখুন এবং ম্যানেজ করুন।" : "Manage system agents and their accounts."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -79,7 +82,7 @@ export default function AgentsPage() {
             onClick={() => setIsAddModalOpen(true)}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            Add Agent
+            {lang === "bn" ? "এজেন্ট যোগ করুন" : "Add Agent"}
           </button>
         </div>
       </div>
@@ -87,11 +90,11 @@ export default function AgentsPage() {
       {isUsersLoading ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
           <div className="w-8 h-8 border-2 border-[#FF6014] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-slate-400 font-medium">Loading agents...</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "এজেন্ট লোড হচ্ছে..." : "Loading agents..."}</p>
         </div>
       ) : agents.length === 0 ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
-          <p className="text-sm text-slate-400 font-medium">No agents found.</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "কোনো এজেন্ট পাওয়া যায়নি।" : "No agents found."}</p>
         </div>
       ) : (
         <AgentTable

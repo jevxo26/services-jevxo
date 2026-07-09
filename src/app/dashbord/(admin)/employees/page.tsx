@@ -46,6 +46,7 @@ export default function EmployeesPage() {
   } = useEmployeeState();
 
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
+  const lang = useAppSelector((state) => state.lang.value);
 
   if (!isAuthenticated) {
     return (
@@ -53,8 +54,8 @@ export default function EmployeesPage() {
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">Please log in to access this panel.</p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "লগইন করুন।" : "Please log in to access this panel."}</p>
       </div>
     );
   }
@@ -68,8 +69,8 @@ export default function EmployeesPage() {
             <Contact className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Employee Management</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage company employees, their profiles, and categories.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "কর্মচারী ম্যানেজমেন্ট" : "Employee Management"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "সিস্টেমের সব কর্মচারী দেখুন এবং ম্যানেজ করুন।" : "Manage company employees, their profiles, and categories."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -77,7 +78,7 @@ export default function EmployeesPage() {
             onClick={() => setIsAddModalOpen(true)}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            Add Employee
+            {lang === "bn" ? "কর্মচারী যোগ করুন" : "Add Employee"}
           </button>
         </div>
       </div>
@@ -85,11 +86,11 @@ export default function EmployeesPage() {
       {isUsersLoading ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
           <div className="w-8 h-8 border-2 border-[#FF6014] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-slate-400 font-medium">Loading employees...</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "কর্মচারী লোড হচ্ছে..." : "Loading employees..."}</p>
         </div>
       ) : employees.length === 0 ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
-          <p className="text-sm text-slate-400 font-medium">No employees found.</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "কোনো কর্মচারী পাওয়া যায়নি।" : "No employees found."}</p>
         </div>
       ) : (
         <EmployeeTable

@@ -1,8 +1,9 @@
 "use client";
 
-import { Calendar, Search, Languages } from "lucide-react";
+import { Calendar, Search } from "lucide-react";
 import { useState } from "react";
 import Link from "next/link";
+import { useAppSelector } from "@/redux/hooks";
 import DeleteBookingModal from "./components/DeleteBookingModal";
 import BookingTable from "./components/BookingTable";
 import { useBookingState } from "./hooks/useBookingState";
@@ -72,8 +73,8 @@ export default function BookingsManagementPage() {
     isDeleting,
     isCreating,
   } = useBookingState();
-  const [lang, setLang] = useState<"bn" | "en">("bn");
-  const t = translations[lang];
+  const lang = useAppSelector((state) => state.lang.value);
+  const t = translations[lang as keyof typeof translations];
 
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
@@ -88,13 +89,6 @@ export default function BookingsManagementPage() {
           </div>
         </div>
         <div className="flex gap-2">
-          <button
-            onClick={() => setLang(lang === "bn" ? "en" : "bn")}
-            className="flex items-center gap-1.5 bg-slate-50 hover:bg-slate-100 text-slate-600 px-3 py-2.5 rounded-xl text-xs font-bold border border-slate-200 transition-colors"
-          >
-            <Languages size={16} />
-            {lang === "bn" ? "EN" : "BN"}
-          </button>
           <Link
             href="/dashbord/quick-booking"
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-md flex items-center gap-2"

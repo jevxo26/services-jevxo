@@ -2,6 +2,7 @@
 
 import { ShieldAlert, Store } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useAppSelector } from "@/redux/hooks";
 import AddVendorModal from "./components/AddVendorModal";
 import ViewVendorModal from "./components/ViewVendorModal";
 import EditVendorModal from "./components/EditVendorModal";
@@ -50,13 +51,15 @@ export default function VendorsManagementPage() {
     isCreatingProfile,
   } = useVendorState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (!isAuthenticated) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
       </div>
     );
   }
@@ -69,8 +72,8 @@ export default function VendorsManagementPage() {
             <Store className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Vendor Management</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage system vendors and their profiles.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "ভেন্ডর ম্যানেজমেন্ট" : "Vendor Management"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "সিস্টেমের সব ভেন্ডর দেখুন এবং ম্যানেজ করুন।" : "Manage system vendors and their profiles."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -78,7 +81,7 @@ export default function VendorsManagementPage() {
             onClick={() => setIsAddModalOpen(true)}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            Add Vendor
+            {lang === "bn" ? "ভেন্ডর যোগ করুন" : "Add Vendor"}
           </button>
         </div>
       </div>
@@ -86,11 +89,11 @@ export default function VendorsManagementPage() {
       {isUsersLoading ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
           <div className="w-8 h-8 border-2 border-[#FF6014] border-t-transparent rounded-full animate-spin mx-auto mb-3" />
-          <p className="text-sm text-slate-400 font-medium">Loading vendors...</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "ভেন্ডর লোড হচ্ছে..." : "Loading vendors..."}</p>
         </div>
       ) : vendors.length === 0 ? (
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-12 text-center">
-          <p className="text-sm text-slate-400 font-medium">No vendors found.</p>
+          <p className="text-sm text-slate-400 font-medium">{lang === "bn" ? "কোনো ভেন্ডর পাওয়া যায়নি।" : "No vendors found."}</p>
         </div>
       ) : (
         <VendorTable

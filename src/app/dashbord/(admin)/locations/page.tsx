@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldAlert, PlusCircle, MapPin } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
 import LocationModal from "./components/LocationModal";
 import LocationTable from "./components/LocationTable";
 import { useLocationState } from "./hooks/useLocationState";
@@ -37,14 +38,16 @@ export default function AdminLocationsPage() {
     isLoading,
   } = useLocationState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2">Only Super Admins can manage locations.</p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2">{lang === "bn" ? "শুধুমাত্র সুপার অ্যাডমিন লোকেশন ম্যানেজ করতে পারেন।" : "Only Super Admins can manage locations."}</p>
       </div>
     );
   }
@@ -57,15 +60,17 @@ export default function AdminLocationsPage() {
             <MapPin className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Locations</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage Divisions, Districts, and Areas</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "লোকেশনসমূহ" : "Locations"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "বিভাগ, জেলা এবং এলাকা ম্যানেজ করুন" : "Manage Divisions, Districts, and Areas"}</p>
           </div>
         </div>
         <button
           onClick={openCreate}
           className="bg-brand-primary text-white font-bold px-5 py-2.5 rounded-xl flex items-center gap-2"
         >
-          <PlusCircle size={18} /> Add {activeTab === "divisions" ? "Division" : activeTab === "districts" ? "District" : "Area"}
+          <PlusCircle size={18} /> {lang === "bn"
+            ? activeTab === "divisions" ? "বিভাগ যোগ করুন" : activeTab === "districts" ? "জেলা যোগ করুন" : "এলাকা যোগ করুন"
+            : `Add ${activeTab === "divisions" ? "Division" : activeTab === "districts" ? "District" : "Area"}`}
         </button>
       </div>
 
@@ -80,7 +85,9 @@ export default function AdminLocationsPage() {
                 : "border-transparent text-slate-400 hover:text-slate-600"
             }`}
           >
-            {tab}
+            {lang === "bn"
+              ? tab === "divisions" ? "বিভাগ" : tab === "districts" ? "জেলা" : "এলাকা"
+              : tab}
           </button>
         ))}
       </div>

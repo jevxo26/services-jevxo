@@ -17,6 +17,7 @@ interface RoleItem {
 
 export default function RoleManagementPage() {
   const role = useAppSelector((state) => state.auth.role) || "superadmin";
+  const lang = useAppSelector((state) => state.lang.value);
 
   const [roles, setRoles] = useState<RoleItem[]>([]);
   const [isAddModalOpen, setIsAddModalOpen] = useState(false);
@@ -71,7 +72,7 @@ export default function RoleManagementPage() {
   };
 
   const handleDelete = async (id: string) => {
-    if (!confirm("Are you sure you want to delete this role?")) return;
+    if (!confirm(lang === "bn" ? "এই রোলটি মুছে ফেলবেন?" : "Are you sure you want to delete this role?")) return;
     try {
       await deleteRoleMut(id).unwrap();
       toast.success("Role deleted successfully!");
@@ -87,10 +88,9 @@ export default function RoleManagementPage() {
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
         <p className="text-sm text-slate-500 mt-2 max-w-sm">
-          This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test
-          this view.
+          {lang === "bn" ? "এই প্যানেলটি শুধুমাত্র অ্যাডমিনদের জন্য সীমাবদ্ধ।" : "This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test this view."}
         </p>
       </div>
     );
@@ -99,7 +99,7 @@ export default function RoleManagementPage() {
   const columns = [
     {
       key: "name",
-      header: "Role Name",
+      header: lang === "bn" ? "রোলের নাম" : "Role Name",
       render: (r: RoleItem) => (
         <div className="flex items-center gap-3">
           <div className="w-10 h-10 bg-indigo-50 text-indigo-700 font-bold rounded-xl flex items-center justify-center">
@@ -118,7 +118,7 @@ export default function RoleManagementPage() {
     },
     {
       key: "permissions",
-      header: "Permissions",
+      header: lang === "bn" ? "অনুমতিসমূহ" : "Permissions",
       render: (r: RoleItem) => (
         <div className="flex flex-wrap gap-1 max-w-[250px]">
           {r.permissions.length > 0 ? (
@@ -128,26 +128,26 @@ export default function RoleManagementPage() {
               </span>
             ))
           ) : (
-            <span className="text-slate-400 text-xs">No permissions</span>
+            <span className="text-slate-400 text-xs">{lang === "bn" ? "কোনো অনুমতি নেই" : "No permissions"}</span>
           )}
         </div>
       ),
     },
     {
       key: "createdAt",
-      header: "Created Date",
+      header: lang === "bn" ? "তৈরির তারিখ" : "Created Date",
       render: (r: RoleItem) => <span className="text-slate-500 font-medium text-xs">{r.createdAt}</span>,
     },
     {
       key: "actions",
-      header: "Actions",
+      header: lang === "bn" ? "অ্যাকশন" : "Actions",
       render: (r: RoleItem) => (
         <div className="flex items-center justify-end gap-2">
           <button
             onClick={() => handleDelete(r.id)}
             className="bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#E0530A] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
           >
-            <Trash2 size={14} /> Delete
+            <Trash2 size={14} /> {lang === "bn" ? "মুছুন" : "Delete"}
           </button>
         </div>
       ),
@@ -163,8 +163,8 @@ export default function RoleManagementPage() {
             <KeyRound className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Role Management</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage admin roles and permissions for the platform.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "রোল ম্যানেজমেন্ট" : "Role Management"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "প্ল্যাটফর্মের অ্যাডমিন রোল এবং অনুমতি ম্যানেজ করুন।" : "Manage admin roles and permissions for the platform."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -172,13 +172,13 @@ export default function RoleManagementPage() {
             onClick={() => setIsAddModalOpen(true)}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            <PlusCircle size={18} /> Add Role
+            <PlusCircle size={18} /> {lang === "bn" ? "রোল যোগ করুন" : "Add Role"}
           </button>
         </div>
       </div>
 
       {/* Premium Paginated Table */}
-      <CustomTable columns={columns} data={roles} searchKey="name" searchPlaceholder="Search roles by name..." pageSize={5} />
+      <CustomTable columns={columns} data={roles} searchKey="name" searchPlaceholder={lang === "bn" ? "রোলের নাম দিয়ে খুঁজুন..." : "Search roles by name..."} pageSize={5} />
 
       {/* Add Role Modal */}
       {isAddModalOpen && (

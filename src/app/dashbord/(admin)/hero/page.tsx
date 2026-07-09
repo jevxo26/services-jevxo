@@ -1,6 +1,7 @@
 "use client";
 
 import { ShieldAlert, PlusCircle, LayoutGrid, Image as ImageIcon, Link2 } from "lucide-react";
+import { useAppSelector } from "@/redux/hooks";
 import HeroModal from "./components/HeroModal";
 import DeleteHeroModal from "./components/DeleteHeroModal";
 import HeroTable from "./components/HeroTable";
@@ -38,16 +39,16 @@ export default function HeroManagementPage() {
     isUpdating,
   } = useHeroState();
 
+  const lang = useAppSelector((state) => state.lang.value);
+
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
         <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
           <ShieldAlert size={48} />
         </div>
-        <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
-        <p className="text-sm text-slate-500 mt-2 max-w-sm">
-          This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test this view.
-        </p>
+        <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
+        <p className="text-sm text-slate-500 mt-2 max-w-sm">{lang === "bn" ? "এই প্যানেলটি শুধুমাত্র অ্যাডমিনদের জন্য।" : "This panel is restricted to Administrators. Please switch your role using the selector in the navbar to test this view."}</p>
       </div>
     );
   }
@@ -73,8 +74,8 @@ export default function HeroManagementPage() {
             <LayoutGrid className="w-6 h-6" />
           </div>
           <div>
-            <h1 className="text-xl font-extrabold text-slate-900">Hero Section Management</h1>
-            <p className="text-xs text-slate-400 mt-0.5">Manage system-wide hero slides, descriptions, and redirection links.</p>
+            <h1 className="text-xl font-extrabold text-slate-900">{lang === "bn" ? "হিরো সেকশন ম্যানেজমেন্ট" : "Hero Section Management"}</h1>
+            <p className="text-xs text-slate-400 mt-0.5">{lang === "bn" ? "হোমপেজের হিরো স্লাইড, বিবরণ এবং লিংক ম্যানেজ করুন।" : "Manage system-wide hero slides, descriptions, and redirection links."}</p>
           </div>
         </div>
         <div className="flex gap-2">
@@ -82,7 +83,7 @@ export default function HeroManagementPage() {
             onClick={openCreateModal}
             className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-brand-primary/10"
           >
-            <PlusCircle size={18} /> Add Hero
+            <PlusCircle size={18} /> {lang === "bn" ? "হিরো যোগ করুন" : "Add Hero"}
           </button>
         </div>
       </div>
@@ -141,15 +142,13 @@ export default function HeroManagementPage() {
           <div className="w-16 h-16 bg-[#FFF8F4] text-[#FF6014] rounded-2xl flex items-center justify-center mx-auto mb-5 border border-[#FF6014]/10 shadow-inner">
             <LayoutGrid size={28} />
           </div>
-          <h3 className="text-lg font-black text-slate-800">No Hero Sections Configured</h3>
-          <p className="text-sm text-slate-400 mt-2 max-w-sm mx-auto leading-relaxed">
-            Create hero slides with title texts, multiple images, and redirection links to showcase promotions on the landing page.
-          </p>
+          <h3 className="text-lg font-black text-slate-800">{lang === "bn" ? "কোনো হিরো সেকশন তৈরি হয়নি" : "No Hero Sections Configured"}</h3>
+          <p className="text-sm text-slate-400 mt-2 max-w-sm mx-auto leading-relaxed">{lang === "bn" ? "হোমপেজে প্রমোশন দেখাতে হিরো স্লাইড তৈরি করুন।" : "Create hero slides with title texts, multiple images, and redirection links to showcase promotions on the landing page."}</p>
           <button
             onClick={openCreateModal}
             className="mt-6 bg-[#FF6014] hover:bg-[#E0530A] text-white font-extrabold px-6 py-3 rounded-2xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#FF6014]/15 inline-flex items-center gap-2"
           >
-            <PlusCircle size={16} /> Create Hero Section
+            <PlusCircle size={16} /> {lang === "bn" ? "হিরো সেকশন তৈরি করুন" : "Create Hero Section"}
           </button>
         </div>
       ) : (
