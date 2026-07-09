@@ -31,7 +31,8 @@ import {
   X,
   ChevronDown,
   Bot,
-  Languages
+  Languages,
+  Truck
 } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -82,6 +83,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             children: [
               { label: "Manage Bookings", href: "/dashbord/manage-bookings", icon: ClipboardList },
               { label: "Quick Booking", href: "/dashbord/quick-booking", icon: Zap },
+              { label: "Custom Shifting", href: "/dashbord/custom-shifting", icon: Truck },
               { label: "Withdraw Requests", href: "/dashbord/withdraw", icon: Wallet }
             ]
           },
@@ -172,6 +174,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             icon: Calendar,
             children: [
               { label: lang === "bn" ? "বুকিং ম্যানেজ করুন" : "Manage Bookings", href: "/dashbord/manage-bookings", icon: ClipboardList },
+              { label: lang === "bn" ? "কাস্টম শিফটিং" : "Custom Shifting", href: "/dashbord/custom-shifting", icon: Truck },
               { label: lang === "bn" ? "ওয়ালেট এবং উপার্জন" : "Wallet & Earnings", href: "/dashbord/vendor-wallet", icon: Wallet }
             ]
           },

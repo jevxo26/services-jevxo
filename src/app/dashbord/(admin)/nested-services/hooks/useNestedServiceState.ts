@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useMemo } from "react";
 import { useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
 import { uploadImage } from "@/lib/upload";
@@ -29,26 +29,22 @@ export function useNestedServiceState() {
 
   const [deleteMut] = useDeleteNestedServiceMutation();
 
-  const [nestedServices, setNestedServices] = useState<NestedService[]>([]);
   const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
   const [itemToDelete, setItemToDelete] = useState<NestedService | null>(null);
 
-  // All services for the dropdown
-  const allServices: Service[] = apiServicesRes?.data || (Array.isArray(apiServicesRes) ? apiServicesRes : []);
-
   // Filter nested services for vendor
-  useEffect(() => {
+  const nestedServices = useMemo(() => {
     const all: NestedService[] = apiNestedRes?.data || (Array.isArray(apiNestedRes) ? apiNestedRes : []);
+    const allServices: Service[] = apiServicesRes?.data || (Array.isArray(apiServicesRes) ? apiServicesRes : []);
 
     if (role === "vendor") {
       const vendorServiceIds = allServices
         .filter((s) => String(s.vendor?.id || s.vendor_id) === String(currentUserId))
         .map((s) => s.id);
-      setNestedServices(all.filter((ns) => ns.service && vendorServiceIds.includes(ns.service.id)));
-    } else {
-      setNestedServices(all);
+      return all.filter((ns) => ns.service && vendorServiceIds.includes(ns.service.id));
     }
-  }, [apiNestedRes, allServices, role, currentUserId]);
+    return all;
+  }, [apiNestedRes, apiServicesRes, role, currentUserId]);
 
   const openDeleteModal = (item: NestedService) => {
     setItemToDelete(item);

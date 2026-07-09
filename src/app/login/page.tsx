@@ -20,7 +20,13 @@ export default function LoginPage() {
 
       {/* RIGHT PANEL */}
       <div className="flex-1 flex flex-col relative overflow-y-auto">
-        <div className="absolute inset-0 pointer-events-none opacity-[0.025]" style={{ backgroundImage: "radial-gradient(circle, #FF6014 1px, transparent 1px)", backgroundSize: "28px 28px" }} />
+        {/* Same bg-icons pattern used across all pages */}
+        <div
+          className="absolute inset-0 pointer-events-none opacity-[0.06]"
+          style={{ backgroundImage: "url('/bg-icons-design.png')", backgroundRepeat: "repeat" }}
+        />
+        {/* Warm gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-[#FFF8F4]/90 via-white/80 to-orange-50/60 pointer-events-none" />
 
         <div className="relative z-10 px-6 sm:px-10 pt-6">
           <Link href="/" className="inline-flex items-center gap-1.5 text-xs font-black uppercase tracking-wider text-slate-400 hover:text-[#FF6014] transition-colors group">
