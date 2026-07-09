@@ -93,7 +93,7 @@ export default function CustomerOverview() {
               </div>
               <div>
                 <h1 className="text-2xl md:text-3xl font-black tracking-tight text-white">
-                  {lang === "bn" ? `হ্যালো, ${authUser?.name || "গ্রাহক"}` : `Hello, {authUser?.name || "Client"}`}
+                  {lang === "bn" ? `হ্যালো, ${authUser?.name || "গ্রাহক"}` : `Hello, ${authUser?.name || "Client"}`}
                 </h1>
                 <p className="text-xs md:text-sm text-slate-300 mt-1 font-medium">
                   {lang === "bn"
