@@ -34,7 +34,8 @@ import {
   Languages,
   Truck,
   Coins,
-  Ticket
+  Ticket,
+  Shield
 } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -94,6 +95,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "ইউজার ডিরেক্টরি" : "User Directory",
             icon: Users,
             children: [
+              { label: lang === "bn" ? "সুপার অ্যাডমিন" : "Super Admins", href: "/dashbord/superadmins", icon: Shield },
               { label: lang === "bn" ? "ইউজার ম্যানেজ করুন" : "Manage Users", href: "/dashbord/users", icon: Users },
               { label: lang === "bn" ? "ভেন্ডর ম্যানেজ করুন" : "Manage Vendors", href: "/dashbord/vendors", icon: Briefcase },
               { label: lang === "bn" ? "এজেন্ট ম্যানেজ করুন" : "Manage Agents", href: "/dashbord/agents", icon: Zap },
