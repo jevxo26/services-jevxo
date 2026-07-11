@@ -6,6 +6,7 @@ import { CustomTable } from "@/components/ui/table";
 import { Calendar, User, Package as PkgIcon, MapPin, Clock, Trash2, Briefcase, FileText } from "lucide-react";
 import InvoiceModal from "./InvoiceModal";
 import AssignEmployeeModal from "./AssignEmployeeModal";
+import { printBookingInvoice } from "@/utils/invoicePrint";
 
 interface BookingTableProps {
   filteredBookings: any[];
@@ -188,6 +189,16 @@ export default function BookingTable({ filteredBookings, setDeleteModalBookingId
       accessorKey: "actions",
       render: (item: any) => (
         <div className="flex items-center gap-2">
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              printBookingInvoice(item);
+            }}
+            className="p-2 rounded-xl border border-[#FF6014]/20 hover:border-[#FF6014] hover:text-white hover:bg-[#FF6014] text-[#FF6014] bg-[#FFF8F4] transition-all shadow-sm cursor-pointer"
+            title="Download Invoice"
+          >
+            <FileText size={16} />
+          </button>
           <button
             onClick={() => setDeleteModalBookingId(item.id)}
             className="p-2 rounded-xl border border-rose-200 hover:border-rose-500 hover:text-white hover:bg-rose-500 text-rose-500 bg-rose-50 transition-all shadow-sm"

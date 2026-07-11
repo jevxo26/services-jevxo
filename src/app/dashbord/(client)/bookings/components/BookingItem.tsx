@@ -1,10 +1,11 @@
 "use client";
 
 import React from "react";
-import { Briefcase, Calendar, MapPin, MessageCircle, Loader2 } from "lucide-react";
+import { Briefcase, Calendar, MapPin, MessageCircle, Loader2, Download } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useAppSelector } from "@/redux/hooks";
+import { printBookingInvoice } from "@/utils/invoicePrint";
 
 interface BookingItemProps {
   booking: any;
@@ -195,7 +196,14 @@ export default function BookingItem({ booking }: BookingItemProps) {
           )}
         </div>
 
-        <div className="flex items-center gap-3 w-full sm:w-auto">
+        <div className="flex items-center gap-3 w-full sm:w-auto flex-wrap">
+          <button
+            onClick={() => printBookingInvoice(booking)}
+            className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] text-xs font-bold py-2.5 px-4 rounded-2xl transition-all cursor-pointer shadow-xs active:scale-[0.98]"
+          >
+            <Download size={14} />
+            <span>{lang === "bn" ? "ইনভয়েস" : "Invoice"}</span>
+          </button>
           <button
             onClick={() => router.push(`/dashbord/bookings/${booking.id}`)}
             className="flex-1 sm:flex-none bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs font-bold py-2.5 px-4 sm:px-6 rounded-2xl transition-colors active:scale-[0.98] cursor-pointer"

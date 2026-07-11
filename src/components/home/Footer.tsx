@@ -18,18 +18,18 @@ import { useState } from "react";
 const QUICK_LINKS = [
   { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Book a Service", href: "/bookings" },
-  { label: "Become a Partner", href: "/opportunity" },
+  { label: "Book History", href: "/bookings" },
+  { label: "Opportunity", href: "/opportunity" },
+  { label: "Custom Shifting", href: "/home-shifting" },
   { label: "Contact Us", href: "/contact" },
-  { label: "Terms of Service", href: "/terms" },
+
 ];
 
 const COMPANY_LINKS = [
   { label: "About Us", href: "/about" },
-  { label: "Home Shifting", href: "/home-shifting" },
-  { label: "Track Booking", href: "/track" },
   { label: "Help Center", href: "/help" },
   { label: "Privacy Policy", href: "/privacy" },
+  { label: "Terms of Service", href: "/terms" },
   { label: "Blog", href: "/blog" },
 ];
 

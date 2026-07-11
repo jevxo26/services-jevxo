@@ -4,10 +4,11 @@ import { useParams, useRouter } from "next/navigation";
 import { useState } from "react";
 import { useGetBookingByIdQuery } from "@/redux/features/admin/booking";
 import { useCreateReviewMutation } from "@/redux/features/shared/reviewApi";
-import { Calendar, User, MapPin, Briefcase, Star, ArrowLeft, Loader2, MessageCircle, CheckCircle2 } from "lucide-react";
+import { Calendar, User, MapPin, Briefcase, Star, ArrowLeft, Loader2, MessageCircle, CheckCircle2, Download } from "lucide-react";
 import { toast } from "sonner";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
+import { printBookingInvoice } from "@/utils/invoicePrint";
 
 export default function ClientBookingDetailsPage() {
   const { id } = useParams();
@@ -105,17 +106,28 @@ export default function ClientBookingDetailsPage() {
   return (
     <div className="w-full  mx-auto animate-in fade-in duration-200 pb-12">
       {/* Header */}
-      <div className="flex items-center gap-4 mb-6">
-        <Link href="/dashbord/bookings" className="p-2 bg-white border border-slate-200 rounded-full hover:bg-slate-50 transition-colors text-slate-600">
-          <ArrowLeft size={18} />
-        </Link>
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6 pb-6 border-b border-slate-100">
+        <div className="flex items-center gap-4">
+          <Link href="/dashbord/bookings" className="p-2 bg-white border border-slate-200 rounded-full hover:bg-slate-50 transition-colors text-slate-600">
+            <ArrowLeft size={18} />
+          </Link>
+          <div>
+            <h1 className="text-xl font-extrabold text-slate-900">
+              {lang === "bn" ? "বুকিংয়ের বিবরণ" : "Booking Details"}
+            </h1>
+            <p className="text-xs text-slate-500 font-medium">
+              {lang === "bn" ? `অর্ডার #${booking.id}` : `Order #${booking.id}`}
+            </p>
+          </div>
+        </div>
         <div>
-          <h1 className="text-xl font-extrabold text-slate-900">
-            {lang === "bn" ? "বুকিংয়ের বিবরণ" : "Booking Details"}
-          </h1>
-          <p className="text-xs text-slate-500 font-medium">
-            {lang === "bn" ? `অর্ডার #${booking.id}` : `Order #${booking.id}`}
-          </p>
+          <button
+            onClick={() => printBookingInvoice(booking)}
+            className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          >
+            <Download size={16} />
+            <span>{lang === "bn" ? "ইনভয়েস ডাউনলোড" : "Download Invoice"}</span>
+          </button>
         </div>
       </div>
 

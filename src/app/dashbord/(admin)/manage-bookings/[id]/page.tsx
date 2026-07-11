@@ -9,6 +9,7 @@ import { toast } from "sonner";
 import Link from "next/link";
 import { useAppSelector } from "@/redux/hooks";
 import { useConfirm } from "@/context/ConfirmDialogContext";
+import { printBookingInvoice } from "@/utils/invoicePrint";
 
 const getStatusColor = (status: string) => {
   switch (status.toLowerCase()) {
@@ -133,6 +134,15 @@ export default function BookingDetailsPage() {
             </div>
             <p className="text-xs text-slate-400 font-medium mt-1">Manage client request details, workforce assignment, and service workflow status.</p>
           </div>
+        </div>
+        <div>
+          <button
+            onClick={() => printBookingInvoice(booking)}
+            className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          >
+            <FileText size={16} />
+            <span>Download Invoice</span>
+          </button>
         </div>
       </div>
 

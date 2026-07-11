@@ -1,13 +1,14 @@
 "use client";
 
 import React from "react";
-import { ShieldAlert, Wallet, CheckCircle2, XCircle, Clock, RefreshCw } from "lucide-react";
+import { ShieldAlert, Wallet, CheckCircle2, XCircle, Clock, RefreshCw, FileText } from "lucide-react";
 import { CustomTable } from "@/components/ui/table";
 import { Withdraw } from "@/redux/features/shared/withdrawApi";
 import { useVendorWalletState } from "./hooks/useVendorWalletState";
 import PaymentMethodsList from "./components/PaymentMethodsList";
 import AddGatewayModal from "./components/AddGatewayModal";
 import RequestWithdrawModal from "./components/RequestWithdrawModal";
+import { printWithdrawInvoice, printAllWithdrawsInvoice } from "@/utils/invoicePrint";
 
 export default function VendorWalletPage() {
   const state = useVendorWalletState();
@@ -102,6 +103,20 @@ export default function VendorWalletPage() {
         </span>
       ),
     },
+    {
+      key: "actions",
+      header: "অ্যাকশন",
+      render: (item: Withdraw) => (
+        <button
+          onClick={() => printWithdrawInvoice(item)}
+          className="flex items-center gap-1 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] px-2.5 py-1 rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer"
+          title="রিসিট ডাউনলোড করুন"
+        >
+          <FileText size={12} />
+          <span>ডাউনলোড</span>
+        </button>
+      ),
+    },
   ];
 
   const withdrawableColumns = [
@@ -170,6 +185,18 @@ export default function VendorWalletPage() {
           </div>
         </div>
         <div className="flex gap-2">
+          {state.withdraws && state.withdraws.length > 0 && (
+            <button
+              onClick={() => {
+                const totalAmount = state.withdraws.reduce((sum, w) => sum + parseFloat(String(w.amount || 0)), 0);
+                printAllWithdrawsInvoice(state.withdraws, totalAmount);
+              }}
+              className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer"
+            >
+              <FileText size={16} />
+              <span>স্টেটমেন্ট ডাউনলোড</span>
+            </button>
+          )}
           <button
             onClick={() => state.refetchWithdraws()}
             className="flex items-center gap-2 bg-slate-50 hover:bg-slate-100 text-slate-600 font-bold px-4 py-2.5 rounded-xl text-sm transition-all border border-slate-200"

@@ -1,7 +1,7 @@
-import React, { useRef } from 'react';
-import { X, Printer, Download } from 'lucide-react';
-import Image from 'next/image';
+import React from 'react';
+import { X, Printer } from 'lucide-react';
 import dayjs from 'dayjs';
+import { printBookingInvoice } from '@/utils/invoicePrint';
 
 interface InvoiceModalProps {
   isOpen: boolean;
@@ -10,26 +10,22 @@ interface InvoiceModalProps {
 }
 
 export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalProps) {
-  const printRef = useRef<HTMLDivElement>(null);
-
   if (!isOpen || !booking) return null;
 
   const handlePrint = () => {
-    const printContent = printRef.current;
-    if (printContent) {
-      const originalContents = document.body.innerHTML;
-      document.body.innerHTML = printContent.innerHTML;
-      window.print();
-      document.body.innerHTML = originalContents;
-      window.location.reload(); // Reload to restore React state properly after messing with DOM
-    }
+    printBookingInvoice(booking);
   };
 
-  // Extract necessary details
-  const invoiceId = `INV-${booking.id.toString().padStart(6, '0')}`;
-  const date = dayjs(booking.createdAt).format('DD MMM, YYYY');
+  const invoiceNo = `INV-RS-${dayjs(booking.createdAt).format('YYYY')}-${booking.id}`;
+  const invoiceDate = dayjs(booking.createdAt).format('MMMM D, YYYY');
   
-  // Re-calculate actual subservices like we did in BookingTable
+  const isPaid = booking.payment_status?.toLowerCase() === 'paid' || booking.status === 'completed';
+  const badgeText = isPaid ? 'PAID' : 'DUE';
+
+  const totalPayable = parseFloat(booking.total_price || booking.subtotal || 0);
+  const paidAmount = isPaid ? totalPayable : 0;
+  const dueAmount = totalPayable - paidAmount;
+
   const actualSubServices = booking.subServices?.filter((ss: any) => {
     if (booking.sub_service_items && booking.sub_service_items.length > 0) {
       const qty = booking.sub_service_items.find((entry: any) => entry.sub_service_id === ss.id)?.quantity;
@@ -39,173 +35,203 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
   }) || [];
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-sm p-4 overflow-y-auto">
-      <div className="bg-white rounded-2xl w-full max-w-3xl flex flex-col max-h-[90vh] shadow-2xl overflow-hidden relative">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 backdrop-blur-xs p-4 overflow-y-auto">
+      <div className="bg-white rounded-3xl w-full max-w-3xl flex flex-col max-h-[95vh] shadow-2xl overflow-hidden relative">
         {/* Header Actions */}
-        <div className="flex justify-between items-center p-4 border-b border-slate-100 bg-slate-50/50">
-          <h2 className="font-bold text-slate-800 text-lg">Invoice Preview</h2>
+        <div className="flex justify-between items-center p-5 border-b border-slate-100 bg-slate-50/50">
+          <div>
+            <h2 className="font-extrabold text-slate-800 text-lg">Invoice Preview</h2>
+            <p className="text-xs text-slate-400 font-medium">Verify details before printing or saving.</p>
+          </div>
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg text-sm font-semibold transition-all shadow-sm shadow-emerald-500/20"
+              className="flex items-center gap-2 bg-[#FF6014] hover:bg-[#E0530A] text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm shadow-[#FF6014]/20 cursor-pointer active:scale-95"
             >
               <Printer size={16} /> Print / Save PDF
             </button>
-            <button onClick={onClose} className="p-2 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all">
+            <button onClick={onClose} className="p-2.5 text-slate-400 hover:text-slate-600 hover:bg-slate-100 rounded-full transition-all cursor-pointer">
               <X size={20} />
             </button>
           </div>
         </div>
 
-        {/* Printable Area */}
-        <div className="p-8 overflow-y-auto bg-slate-50/50">
-          {/* We wrap the print content in a div that will be extracted during print */}
-          <div 
-            ref={printRef} 
-            className="bg-white p-10 rounded-xl shadow-sm border border-slate-100 min-h-[800px]"
-            style={{ fontFamily: "'Inter', sans-serif" }} // Ensure clean font for print
-          >
-            {/* Invoice Header */}
-            <div className="flex justify-between items-start border-b-2 border-emerald-500 pb-8 mb-8">
-              <div>
-                {/* Logo Placeholder - assuming /logo.png exists or similar */}
-                <h1 className="text-3xl font-black text-emerald-600 tracking-tight mb-1">RAJSEBA</h1>
-                <p className="text-sm font-medium text-slate-500">Your Trusted Service Partner</p>
-                <div className="mt-4 text-xs text-slate-500 space-y-1">
-                  <p>123 Service Road, Tech City</p>
-                  <p>info@rajseba.com</p>
-                  <p>01813-333373</p>
+        {/* Preview Container */}
+        <div className="p-6 md:p-8 overflow-y-auto bg-slate-50/30 flex-1">
+          <div className="bg-white rounded-2xl shadow-sm border border-slate-100/80 overflow-hidden flex flex-col justify-between min-h-[750px]">
+            <div className="p-8 space-y-8">
+              {/* Header: Logo & Contact Info */}
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-b border-slate-100 pb-6">
+                <div>
+                  <img src="/rajshiblogo.png" alt="Rajseba Logo" className="h-14 w-auto object-contain" />
                 </div>
-              </div>
-              <div className="text-right">
-                <h2 className="text-4xl font-black text-slate-200 tracking-wider mb-2">INVOICE</h2>
-                <div className="text-sm font-bold text-slate-800">
-                  <span className="text-slate-400 font-medium">Invoice No:</span> {invoiceId}
-                </div>
-                <div className="text-sm font-bold text-slate-800 mt-1">
-                  <span className="text-slate-400 font-medium">Date:</span> {date}
-                </div>
-                <div className="mt-4 inline-block px-3 py-1 bg-emerald-50 text-emerald-600 rounded-md text-xs font-bold uppercase tracking-wider border border-emerald-100">
-                  {booking.status === 'completed' ? 'Paid' : 'Unpaid'}
-                </div>
-              </div>
-            </div>
-
-            {/* Bill To */}
-            <div className="grid grid-cols-2 gap-8 mb-8">
-              <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Bill To</p>
-                <h3 className="text-lg font-black text-slate-800">{booking.user?.name || booking.name || 'Guest Client'}</h3>
-                <p className="text-sm text-slate-600 mt-1">{booking.user?.email || booking.email || 'N/A'}</p>
-                <p className="text-sm text-slate-600 mt-1">{booking.user?.phone || booking.phone || 'N/A'}</p>
-                <p className="text-sm text-slate-600 mt-2 max-w-[250px] leading-relaxed">{booking.location || 'N/A'}</p>
-              </div>
-              <div>
-                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest mb-2">Service Details</p>
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-slate-500">Service:</span>
-                    <span className="text-sm font-bold text-slate-800 text-right">{booking.service?.name || booking.pkg?.name || 'Service'}</span>
+                
+                <div className="bg-gradient-to-br from-[#ff6014] to-[#e0530a] text-white p-5 rounded-2xl text-[11px] max-w-[280px] shadow-md shadow-[#ff6014]/20 space-y-2.5">
+                  <div className="flex items-center gap-2">
+                    <svg className="w-3.5 h-3.5 text-white/80 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.806-5.122-4.11-6.928-6.928l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path>
+                    </svg>
+                    <span className="font-semibold">+8801813333373</span>
                   </div>
-                  {booking.schedule_date && (
+                  <div className="flex items-center gap-2">
+                    <svg className="w-3.5 h-3.5 text-white/80 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
+                    </svg>
+                    <span className="font-semibold">info@rajseba.com</span>
+                  </div>
+                  <div className="flex items-start gap-2">
+                    <svg className="w-3.5 h-3.5 text-white/80 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z"></path>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z"></path>
+                    </svg>
+                    <span className="font-semibold leading-normal">5th floor, incubation center, Hi-tech park, Rajshahi</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Title Section */}
+              <div className="text-center relative">
+                <h2 className="text-2xl font-black text-slate-900 tracking-wider uppercase">INVOICE</h2>
+                <div className="flex justify-center gap-8 mt-2 text-xs font-semibold text-slate-500">
+                  <div>Date: <span className="text-slate-800 font-bold">{invoiceDate}</span></div>
+                  <div>Invoice #: <span className="text-slate-800 font-bold">{invoiceNo}</span></div>
+                  <div>Booking ID: <span className="text-slate-800 font-bold">#{booking.id}</span></div>
+                </div>
+                {/* Stamp */}
+                <div className={`absolute top-0 right-0 sm:right-4 border-2 rounded-lg px-3 py-1 text-xs font-black tracking-wider uppercase transform rotate-6 shadow-xs ${
+                  isPaid ? 'border-emerald-500 text-emerald-600 bg-emerald-50' : 'border-[#FF6014] text-[#FF6014] bg-[#FFF8F4]'
+                }`}>
+                  {badgeText}
+                </div>
+              </div>
+
+              {/* Bill To & Service Details */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 bg-slate-50/50 p-6 rounded-2xl border border-slate-100">
+                <div>
+                  <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2.5">Bill To</p>
+                  <h3 className="text-sm font-bold text-slate-950">{booking.user?.name || booking.name || 'Guest Client'}</h3>
+                  <p className="text-xs text-slate-500 mt-1">{booking.user?.phone || booking.phone || '—'}</p>
+                  <p className="text-xs text-slate-500 mt-1 max-w-[280px] leading-relaxed">{booking.location || '—'}</p>
+                </div>
+                <div>
+                  <p className="text-[10px] font-extrabold text-slate-400 uppercase tracking-widest mb-2.5">Service Details</p>
+                  <div className="space-y-1.5 text-xs text-slate-600">
                     <div className="flex justify-between">
-                      <span className="text-sm text-slate-500">Schedule:</span>
-                      <span className="text-sm font-bold text-slate-800 text-right">
-                        {dayjs(booking.schedule_date).format('DD MMM YYYY')} at {booking.schedule_time}
+                      <span className="font-medium">Service Category:</span>
+                      <span className="font-bold text-slate-800 text-right">
+                        {booking.service?.name || booking.pkg?.name || 'Service Booking'}
                       </span>
                     </div>
-                  )}
-                  {booking.vendor && (
-                    <div className="flex justify-between border-t border-slate-200 mt-2 pt-2">
-                      <span className="text-sm text-slate-500">Assigned Expert:</span>
-                      <span className="text-sm font-bold text-emerald-600 text-right">{booking.vendor.name}</span>
-                    </div>
-                  )}
+                    {booking.vendor && (
+                      <div className="flex justify-between border-t border-slate-200/50 pt-1.5 mt-1.5">
+                        <span className="font-medium">Assigned Expert:</span>
+                        <span className="font-bold text-emerald-600 text-right">{booking.vendor.name}</span>
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
 
-            {/* Items Table */}
-            <div className="mb-8">
-              <table className="w-full text-left border-collapse">
-                <thead>
-                  <tr className="border-b-2 border-slate-200">
-                    <th className="py-3 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider">Item Description</th>
-                    <th className="py-3 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Rate</th>
-                    <th className="py-3 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-center">Qty</th>
-                    <th className="py-3 px-4 text-xs font-bold text-slate-400 uppercase tracking-wider text-right">Amount</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {actualSubServices.length > 0 ? (
-                    actualSubServices.map((ss: any, idx: number) => {
-                      const qty = booking.sub_service_items?.find((entry: any) => entry.sub_service_id === ss.id)?.quantity || 1;
-                      const price = parseFloat(ss.price) || 0;
-                      const subTotal = price * qty;
-                      return (
-                        <tr key={idx} className="border-b border-slate-100 hover:bg-slate-50/50 transition-colors">
-                          <td className="py-4 px-4">
-                            <p className="text-sm font-bold text-slate-800">{ss.name}</p>
-                            {ss.description && <p className="text-xs text-slate-500 mt-1 line-clamp-1">{ss.description}</p>}
-                          </td>
-                          <td className="py-4 px-4 text-sm font-semibold text-slate-600 text-center">৳{price}</td>
-                          <td className="py-4 px-4 text-sm font-semibold text-slate-600 text-center">{qty}</td>
-                          <td className="py-4 px-4 text-sm font-black text-slate-800 text-right">৳{subTotal}</td>
-                        </tr>
-                      );
-                    })
-                  ) : (
-                    <tr className="border-b border-slate-100">
-                      <td className="py-4 px-4">
-                        <p className="text-sm font-bold text-slate-800">{booking.pkg ? booking.pkg.name : booking.service?.name}</p>
-                      </td>
-                      <td className="py-4 px-4 text-sm font-semibold text-slate-600 text-center">৳{booking.total_price}</td>
-                      <td className="py-4 px-4 text-sm font-semibold text-slate-600 text-center">{booking.quantity || 1}</td>
-                      <td className="py-4 px-4 text-sm font-black text-slate-800 text-right">৳{booking.total_price}</td>
+              {/* Table */}
+              <div className="overflow-x-auto">
+                <table className="w-full text-left border-collapse text-xs">
+                  <thead>
+                    <tr className="border-b border-slate-200 text-slate-400 font-extrabold uppercase">
+                      <th className="py-2.5 pb-3">Description of Service</th>
+                      <th className="py-2.5 pb-3 text-center">Qty</th>
+                      <th className="py-2.5 pb-3 text-right">Rate</th>
+                      <th className="py-2.5 pb-3 text-right">Amount</th>
                     </tr>
-                  )}
-                </tbody>
-              </table>
-            </div>
+                  </thead>
+                  <tbody className="divide-y divide-slate-100">
+                    {actualSubServices.length > 0 ? (
+                      actualSubServices.map((ss: any, idx: number) => {
+                        const qty = booking.sub_service_items?.find((entry: any) => entry.sub_service_id === ss.id)?.quantity || 1;
+                        const price = parseFloat(ss.price) || 0;
+                        const amount = price * qty;
+                        return (
+                          <tr key={idx} className="text-slate-700 font-medium">
+                            <td className="py-3">
+                              <span className="font-bold text-slate-800">{ss.name}</span>
+                              {ss.description && <p className="text-[10px] text-slate-400 mt-0.5 line-clamp-1">{ss.description}</p>}
+                            </td>
+                            <td className="py-3 text-center">{qty}</td>
+                            <td className="py-3 text-right">৳{price.toLocaleString()}</td>
+                            <td className="py-3 text-right font-bold text-slate-900">৳{amount.toLocaleString()}</td>
+                          </tr>
+                        );
+                      })
+                    ) : (
+                      <tr className="text-slate-700 font-medium">
+                        <td className="py-3 font-bold text-slate-850">
+                          {booking.pkg ? booking.pkg.name : (booking.service?.name || 'Service Booking')}
+                        </td>
+                        <td className="py-3 text-center">{booking.quantity || 1}</td>
+                        <td className="py-3 text-right">৳{totalPayable.toLocaleString()}</td>
+                        <td className="py-3 text-right font-bold text-slate-900">৳{totalPayable.toLocaleString()}</td>
+                      </tr>
+                    )}
+                  </tbody>
+                </table>
+              </div>
 
-            {/* Totals */}
-            <div className="flex justify-end mb-12">
-              <div className="w-1/2 bg-slate-50 rounded-xl p-6 border border-slate-100">
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-semibold text-slate-500">Subtotal</span>
-                  <span className="text-sm font-bold text-slate-800">৳{booking.total_price || 0}</span>
+              {/* Summary Section */}
+              <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-t border-slate-100 pt-6">
+                <div className="space-y-1.5 text-xs text-slate-500 max-w-sm">
+                  <p className="font-extrabold text-slate-800 uppercase tracking-wider text-[10px]">Payment Summary</p>
+                  <p>● Total Payable Amount: <span className="font-bold text-slate-800">৳{totalPayable.toLocaleString()}.00 BDT</span></p>
+                  <p>● Paid Amount: <span className="font-bold text-slate-800">৳{paidAmount.toLocaleString()}.00 BDT</span></p>
+                  <p className={`font-bold ${dueAmount > 0 ? 'text-[#FF6014]' : 'text-slate-500'}`}>● Due Amount: ৳{dueAmount.toLocaleString()}.00 BDT</p>
                 </div>
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-semibold text-slate-500">Discount</span>
-                  <span className="text-sm font-bold text-emerald-500">- ৳0</span>
-                </div>
-                <div className="flex justify-between items-center mb-3">
-                  <span className="text-sm font-semibold text-slate-500">Tax / VAT</span>
-                  <span className="text-sm font-bold text-slate-800">৳0</span>
-                </div>
-                <div className="flex justify-between items-center pt-3 border-t-2 border-emerald-500">
-                  <span className="text-lg font-black text-slate-800">Total Amount</span>
-                  <span className="text-2xl font-black text-emerald-600">৳{booking.total_price || 0}</span>
+                
+                <div className="w-full sm:w-80 bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-2 text-xs">
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Subtotal:</span>
+                    <span className="font-bold text-slate-800">৳{totalPayable.toLocaleString()}.00</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Discount:</span>
+                    <span className="font-bold text-emerald-600">- ৳0.00</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-slate-400 font-medium">Tax / VAT:</span>
+                    <span className="font-bold text-slate-800">৳0.00</span>
+                  </div>
+                  <div className="flex justify-between border-t border-slate-200 pt-2 font-bold text-sm">
+                    <span className="text-slate-800">Total Amount:</span>
+                    <span className="text-[#FF6014]">৳{totalPayable.toLocaleString()}.00</span>
+                  </div>
                 </div>
               </div>
             </div>
 
-            {/* Footer Notes */}
-            <div className="border-t border-slate-200 pt-6 flex justify-between items-end">
-              <div>
-                <p className="text-xs font-bold text-slate-800 mb-1">Terms & Conditions</p>
-                <p className="text-[10px] text-slate-500 max-w-sm leading-relaxed">
-                  Payment is due within 15 days. Please make checks payable to Rajseba Services. Any questions? Contact us at info@rajseba.com.
-                </p>
+            {/* Signature & Footer Pattern */}
+            <div className="mt-auto">
+              <div className="flex justify-between items-end p-8 pt-0 text-xs">
+                <div>
+                  <p className="text-[10px] font-extrabold text-slate-800 uppercase tracking-wider mb-1">Terms & Conditions</p>
+                  <p className="text-[10px] text-slate-400 max-w-xs leading-relaxed">
+                    Please make payments to Rajseba. For queries or help, please contact info@rajseba.com.
+                  </p>
+                </div>
+                <div className="text-right">
+                  <p className="text-slate-400 font-medium">Sincerely,</p>
+                  <p className="font-serif italic text-lg text-slate-800 mt-1">Arif</p>
+                  <p className="font-bold text-slate-900">Ariful Islam Arif</p>
+                  <p className="text-[10px] text-slate-400">CEO, Rajseba</p>
+                </div>
               </div>
-              <div className="text-right">
-                <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider mb-2">{booking.vendor?.name || 'Authorized Signature'}</p>
-                <div className="w-32 border-b-2 border-slate-300 ml-auto"></div>
+
+              {/* Premium brand footer pattern */}
+              <div className="w-full overflow-hidden rounded-b-3xl">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 100" preserveAspectRatio="none" className="w-full h-8 block">
+                  <polygon points="0,100 120,60 240,100 360,50 480,100 600,55 720,100 840,40 960,100 1080,60 1200,100 1320,50 1440,100" fill="#FF6222" opacity="0.4" />
+                  <polygon points="80,100 180,75 300,100 420,65 540,100 660,70 780,100 900,60 1020,100 1140,70 1260,100 1380,65 1440,100" fill="#FF6222" />
+                </svg>
               </div>
             </div>
           </div>
         </div>
-
       </div>
     </div>
   );

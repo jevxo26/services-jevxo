@@ -45,11 +45,27 @@ export default function FeaturedProviders() {
 
   const rawProfiles: any[] = profilesRes?.data ?? (Array.isArray(profilesRes) ? profilesRes : []);
   const activeProviders = rawProfiles.filter(
-    (p: any) => p.categories && p.categories.length > 0
+    (p: any) => {
+      if (!p.categories || p.categories.length === 0) return false;
+      const phoneClean = String(p.user?.phone || p.phone || "").replace(/[^0-9]/g, "");
+      if (phoneClean.includes("1711715575")) return false;
+      return true;
+    }
   );
 
   const providers = activeProviders.slice(0, 4).map((p: any, idx: number) => {
     const user = p.user ?? {};
+
+    const hidePhoneNumber = (text: string) => {
+      if (!text) return text;
+      const digitsOnly = text.replace(/[^0-9]/g, "");
+      if (digitsOnly.length >= 10 && digitsOnly.length <= 15) {
+        return "Service Provider";
+      }
+      return text.replace(/(01[3-9]\d{8})/g, (match) => {
+        return `${match.slice(0, 5)}***${match.slice(-3)}`;
+      });
+    };
 
     const services: string[] = Array.isArray(p.categories) && p.categories.length > 0
       ? p.categories.map((c: any) => c.name ?? c).slice(0, 3)
@@ -87,14 +103,14 @@ export default function FeaturedProviders() {
 
     return {
       id: p.id ?? idx,
-      name: user.name || p.company_name || "Provider",
-      specialty,
+      name: hidePhoneNumber(user.name || p.company_name || "Provider"),
+      specialty: hidePhoneNumber(specialty),
       location,
       rating,
       reviews,
       jobs,
       avatar: p.picture || user.profileImage || user.avatar || null,
-      services,
+      services: services.map(s => hidePhoneNumber(s)),
       badge,
     };
   });
