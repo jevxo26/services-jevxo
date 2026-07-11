@@ -86,7 +86,7 @@ const cardVariants = {
 const ExploreCategories = () => {
   const { data: categoriesRes, isLoading, isError } = useGetPublicCategoriesQuery();
   const [isMounted, setIsMounted] = useState(false);
-  const [showAllMobile, setShowAllMobile] = useState(false);
+  const [showAll, setShowAll] = useState(false);
 
   useEffect(() => {
     setIsMounted(true);
@@ -94,6 +94,14 @@ const ExploreCategories = () => {
 
   // Support both { data: [...] } and [...] shapes
   const categories: any[] = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
+
+  // Determine if pagination is needed (more than 8 categories)
+  const needsPagination = categories.length > 8;
+
+  // Show only 7 items + 1 See More button on initial view if pagination is needed
+  const displayedCategories = needsPagination && !showAll 
+    ? categories.slice(0, 7) 
+    : categories;
 
   return (
     <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 py-5 md:py-8 lg:py-10 overflow-hidden">
@@ -136,244 +144,236 @@ const ExploreCategories = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-3 md:gap-6"
+            className="grid grid-cols-3 sm:grid-cols-4 lg:grid-cols-6 xl:grid-cols-8 gap-3 md:gap-4 lg:gap-5"
           >
-            {categories.map((cat: any, index: number) => {
+            {displayedCategories.map((cat: any) => {
               // EXACT name match only — no partial/dynamic matching
               const IconComponent = CATEGORY_ICON_MAP[cat.name?.trim()] || FALLBACK_ICON;
 
-              const slug = cat.slug || cat.name?.toLowerCase().replace(/\s+/g, "-") || String(cat.id);
-
-              const isNinthItem = index === 8;
-              const isAfterNinthItem = index > 8;
-              const isLastItem = index === categories.length - 1;
-
               return (
-                <Fragment key={cat.id}>
-                  {/* Category Card */}
-                  <motion.div
-                    variants={cardVariants}
-                    whileTap={{ scale: 0.97 }}
-                    className={`h-full ${(isNinthItem || isAfterNinthItem) && !showAllMobile ? "hidden md:block" : "block"}`}
-                  >
-                    <Link href={`/categories/${cat.id}`} className="block h-full">
+                <motion.div
+                  key={cat.id}
+                  variants={cardVariants}
+                  whileTap={{ scale: 0.97 }}
+                  className="h-full"
+                >
+                  <Link href={`/categories/${cat.id}`} className="block h-full">
+                    <div
+                      className="
+                        group relative overflow-hidden
+                        flex flex-col items-center justify-center
+                        h-full rounded-2xl md:rounded-[20px] p-2.5 md:p-4 lg:p-5
+                        bg-gradient-to-br from-white to-[#e8eaed]
+                        border border-blue-500/20 hover:border-blue-500/70
+                        cursor-pointer
+                        transition-all duration-350 ease-out
+                        hover:shadow-[0_8px_20px_rgba(59,130,246,0.12),0_0_0_3px_rgba(59,130,246,0.1)]
+                        hover:-translate-y-[2px]
+                        category-card-blue-animated
+                      "
+                    >
+                      {/* Gloss sheen */}
+                      <span
+                        className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl md:rounded-t-[20px] bg-gradient-to-b from-white/65 to-transparent"
+                        aria-hidden
+                      />
+
+                      {/* Icon orb */}
                       <div
                         className="
-                          group relative overflow-hidden
-                          flex flex-col items-center justify-center
-                          h-full rounded-2xl md:rounded-[28px] p-3 md:p-8
-                          bg-gradient-to-br from-white to-[#e8eaed]
-                          border-[2px] border-blue-500/30 hover:border-blue-500/80
-                          cursor-pointer
-                          transition-all duration-350 ease-out
-                          hover:shadow-[0_12px_28px_rgba(59,130,246,0.18),0_0_0_4px_rgba(59,130,246,0.15)]
-                          hover:-translate-y-[3px]
-                          category-card-blue-animated
+                          relative overflow-hidden
+                          w-12 h-12 md:w-16 md:h-16 rounded-full mb-2 md:mb-3
+                          flex items-center justify-center
+                          bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
+                          ring-1 ring-white/60
+                          shadow-[3px_3px_8px_rgba(174,180,190,0.3),_-3px_-3px_8px_rgba(255,255,255,0.85)] md:shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
+                          transition-all duration-500 ease-out
+                          group-hover:scale-105
+                          group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
+                          group-hover:ring-[#ff6014]/30
+                          group-hover:shadow-[0_8px_20px_-4px_rgba(229,57,53,0.45),0_0_0_5px_rgba(255,96,20,0.06)]
                         "
                       >
                         {/* Gloss sheen */}
                         <span
-                          className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl md:rounded-t-[28px] bg-gradient-to-b from-white/65 to-transparent"
+                          className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 md:top-[4px] md:left-[8px] md:w-8 md:h-4 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
                           aria-hidden
                         />
-
-                        {/* Icon orb */}
-                        <div
-                          className="
-                            relative overflow-hidden
-                            w-12 h-12 md:w-20 md:h-20 rounded-full mb-2 md:mb-4
-                            flex items-center justify-center
-                            bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
-                            ring-1 ring-white/60
-                            shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)] md:shadow-[6px_6px_14px_rgba(174,180,190,0.45),_-6px_-6px_14px_rgba(255,255,255,0.95),inset_0_1px_1px_rgba(255,255,255,0.8)]
-                            transition-all duration-500 ease-out
-                            group-hover:scale-110
-                            group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
-                            group-hover:ring-[#ff6014]/30
-                            group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
-                          "
-                        >
-                          {/* Gloss sheen */}
-                          <span
-                            className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 md:top-[6px] md:left-[10px] md:w-10 md:h-5 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
-                            aria-hidden
-                          />
-                          {/* Soft inner glow on hover */}
-                          <span
-                            className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
-                            aria-hidden
-                          />
-                          {/* If category has an image, show it; else show manually-mapped icon */}
-                          {cat.image ? (
-                            <img
-                              src={cat.image}
-                              alt={cat.name}
-                              className="relative w-6 h-6 md:w-10 md:h-10 object-cover rounded-full drop-shadow-sm group-hover:brightness-0 group-hover:invert transition-all duration-500"
-                            />
-                          ) : (
-                            <IconComponent
-                              className="relative w-5 h-5 md:w-9 md:h-9 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
-                              strokeWidth={1.75}
-                            />
-                          )}
-                        </div>
-
-                        {/* Label */}
+                        {/* Soft inner glow on hover */}
                         <span
-                          className="font-semibold text-[10px] md:text-base text-center text-slate-700 mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] md:min-h-[auto] flex items-center justify-center"
-                        >
-                          {cat.name}
-                        </span>
+                          className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
+                          aria-hidden
+                        />
+                        {/* If category has an image, show it; else show manually-mapped icon */}
+                        {cat.image ? (
+                          <img
+                            src={cat.image}
+                            alt={cat.name}
+                            className="relative w-6 h-6 md:w-8 md:h-8 object-cover rounded-full drop-shadow-sm group-hover:brightness-0 group-hover:invert transition-all duration-500"
+                          />
+                        ) : (
+                          <IconComponent
+                            className="relative w-5 h-5 md:w-7 md:h-7 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                            strokeWidth={1.75}
+                          />
+                        )}
                       </div>
-                    </Link>
-                  </motion.div>
 
-                  {/* See More Card on Mobile */}
-                  {isNinthItem && !showAllMobile && (
-                    <motion.div
-                      variants={cardVariants}
-                      whileTap={{ scale: 0.97 }}
-                      className="h-full block md:hidden"
-                    >
-                      <button
-                        onClick={() => setShowAllMobile(true)}
-                        className="w-full text-left block h-full focus:outline-none"
+                      {/* Label */}
+                      <span
+                        className="font-semibold text-[10px] md:text-xs lg:text-[14px] text-center text-slate-700 mt-1 transition-colors duration-200 group-hover:text-[#ff6014] line-clamp-2 min-h-[2.2em] md:min-h-[auto] flex items-center justify-center"
                       >
-                        <div
-                          className="
-                            group relative overflow-hidden
-                            flex flex-col items-center justify-center
-                            h-full rounded-2xl p-3
-                            bg-gradient-to-br from-white to-[#e8eaed]
-                            border-[1.5px] border-blue-500/30 hover:border-blue-500/80
-                            cursor-pointer
-                            transition-all duration-350 ease-out
-                            hover:shadow-[0_12px_28px_rgba(59,130,246,0.18),0_0_0_4px_rgba(59,130,246,0.15)]
-                            hover:-translate-y-[3px]
-                            category-card-blue-animated
-                          "
-                        >
-                          {/* Gloss sheen */}
-                          <span
-                            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/65 to-transparent"
-                            aria-hidden
-                          />
-
-                          {/* Icon orb */}
-                          <div
-                            className="
-                              relative overflow-hidden
-                              w-12 h-12 rounded-full mb-2
-                              flex items-center justify-center
-                              bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
-                              ring-1 ring-white/60
-                              shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
-                              transition-all duration-500 ease-out
-                              group-hover:scale-110
-                              group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
-                              group-hover:ring-[#ff6014]/30
-                              group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
-                            "
-                          >
-                            <span
-                              className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
-                              aria-hidden
-                            />
-                            <span
-                              className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
-                              aria-hidden
-                            />
-                            <LayoutGrid
-                              className="relative w-5 h-5 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
-                              strokeWidth={1.75}
-                            />
-                          </div>
-
-                          {/* Label */}
-                          <span
-                            className="font-semibold text-[10px] text-center text-[#ff6014] mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] flex items-center justify-center"
-                          >
-                            See More
-                          </span>
-                        </div>
-                      </button>
-                    </motion.div>
-                  )}
-
-                  {/* See Less Card on Mobile */}
-                  {isLastItem && showAllMobile && (
-                    <motion.div
-                      variants={cardVariants}
-                      whileTap={{ scale: 0.97 }}
-                      className="h-full block md:hidden"
-                    >
-                      <button
-                        onClick={() => setShowAllMobile(false)}
-                        className="w-full text-left block h-full focus:outline-none"
-                      >
-                        <div
-                          className="
-                            group relative overflow-hidden
-                            flex flex-col items-center justify-center
-                            h-full rounded-2xl p-3
-                            bg-gradient-to-br from-white to-[#e8eaed]
-                            border-[1.5px] border-blue-500/30 hover:border-blue-500/80
-                            cursor-pointer
-                            transition-all duration-350 ease-out
-                            hover:shadow-[0_12px_28px_rgba(59,130,246,0.18),0_0_0_4px_rgba(59,130,246,0.15)]
-                            hover:-translate-y-[3px]
-                            category-card-blue-animated
-                          "
-                        >
-                          {/* Gloss sheen */}
-                          <span
-                            className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl bg-gradient-to-b from-white/65 to-transparent"
-                            aria-hidden
-                          />
-
-                          {/* Icon orb */}
-                          <div
-                            className="
-                              relative overflow-hidden
-                              w-12 h-12 rounded-full mb-2
-                              flex items-center justify-center
-                              bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
-                              ring-1 ring-white/60
-                              shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
-                              transition-all duration-500 ease-out
-                              group-hover:scale-110
-                              group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
-                              group-hover:ring-[#ff6014]/30
-                              group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(255,96,20,0.08)]
-                            "
-                          >
-                            <span
-                              className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
-                              aria-hidden
-                            />
-                            <span
-                              className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
-                              aria-hidden
-                            />
-                            <LayoutGrid
-                              className="relative w-5 h-5 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
-                              strokeWidth={1.75}
-                            />
-                          </div>
-
-                          {/* Label */}
-                          <span
-                            className="font-semibold text-[10px] text-center text-[#ff6014] mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] flex items-center justify-center"
-                          >
-                            See Less
-                          </span>
-                        </div>
-                      </button>
-                    </motion.div>
-                  )}
-                </Fragment>
+                        {cat.name}
+                      </span>
+                    </div>
+                  </Link>
+                </motion.div>
               );
             })}
+
+            {/* See More Card */}
+            {needsPagination && !showAll && (
+              <motion.div
+                variants={cardVariants}
+                whileTap={{ scale: 0.97 }}
+                className="h-full"
+              >
+                <button
+                  onClick={() => setShowAll(true)}
+                  className="w-full text-left block h-full focus:outline-none"
+                >
+                  <div
+                    className="
+                      group relative overflow-hidden
+                      flex flex-col items-center justify-center
+                      h-full rounded-2xl md:rounded-[20px] p-2.5 md:p-4 lg:p-5
+                      bg-gradient-to-br from-white to-[#e8eaed]
+                      border border-blue-500/20 hover:border-blue-500/70
+                      cursor-pointer
+                      transition-all duration-350 ease-out
+                      hover:shadow-[0_8px_20px_rgba(59,130,246,0.12),0_0_0_3px_rgba(59,130,246,0.1)]
+                      hover:-translate-y-[2px]
+                      category-card-blue-animated
+                    "
+                  >
+                    {/* Gloss sheen */}
+                    <span
+                      className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl md:rounded-t-[20px] bg-gradient-to-b from-white/65 to-transparent"
+                      aria-hidden
+                    />
+
+                    {/* Icon orb */}
+                    <div
+                      className="
+                        relative overflow-hidden
+                        w-12 h-12 md:w-16 md:h-16 rounded-full mb-2 md:mb-3
+                        flex items-center justify-center
+                        bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
+                        ring-1 ring-white/60
+                        shadow-[3px_3px_8px_rgba(174,180,190,0.3),_-3px_-3px_8px_rgba(255,255,255,0.85)] md:shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
+                        transition-all duration-500 ease-out
+                        group-hover:scale-105
+                        group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
+                        group-hover:ring-[#ff6014]/30
+                        group-hover:shadow-[0_8px_20px_-4px_rgba(229,57,53,0.45),0_0_0_5px_rgba(255,96,20,0.06)]
+                      "
+                    >
+                      <span
+                        className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 md:top-[4px] md:left-[8px] md:w-8 md:h-4 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
+                        aria-hidden
+                      />
+                      <span
+                        className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
+                        aria-hidden
+                      />
+                      <LayoutGrid
+                        className="relative w-5 h-5 md:w-7 md:h-7 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                        strokeWidth={1.75}
+                      />
+                    </div>
+
+                    {/* Label */}
+                    <span
+                      className="font-bold text-[10px] md:text-xs lg:text-[14px] text-center text-[#ff6014] mt-1 transition-colors duration-200 group-hover:text-[#ff6014] line-clamp-2 min-h-[2.2em] md:min-h-[auto] flex items-center justify-center"
+                    >
+                      See More
+                    </span>
+                  </div>
+                </button>
+              </motion.div>
+            )}
+
+            {/* See Less Card */}
+            {needsPagination && showAll && (
+              <motion.div
+                variants={cardVariants}
+                whileTap={{ scale: 0.97 }}
+                className="h-full"
+              >
+                <button
+                  onClick={() => setShowAll(false)}
+                  className="w-full text-left block h-full focus:outline-none"
+                >
+                  <div
+                    className="
+                      group relative overflow-hidden
+                      flex flex-col items-center justify-center
+                      h-full rounded-2xl md:rounded-[20px] p-2.5 md:p-4 lg:p-5
+                      bg-gradient-to-br from-white to-[#e8eaed]
+                      border border-blue-500/20 hover:border-blue-500/70
+                      cursor-pointer
+                      transition-all duration-350 ease-out
+                      hover:shadow-[0_8px_20px_rgba(59,130,246,0.12),0_0_0_3px_rgba(59,130,246,0.1)]
+                      hover:-translate-y-[2px]
+                      category-card-blue-animated
+                    "
+                  >
+                    {/* Gloss sheen */}
+                    <span
+                      className="pointer-events-none absolute inset-x-0 top-0 h-1/2 rounded-t-2xl md:rounded-t-[20px] bg-gradient-to-b from-white/65 to-transparent"
+                      aria-hidden
+                    />
+
+                    {/* Icon orb */}
+                    <div
+                      className="
+                        relative overflow-hidden
+                        w-12 h-12 md:w-16 md:h-16 rounded-full mb-2 md:mb-3
+                        flex items-center justify-center
+                        bg-gradient-to-br from-[#fafbfc] via-[#f0f2f5] to-[#e3e6eb]
+                        ring-1 ring-white/60
+                        shadow-[3px_3px_8px_rgba(174,180,190,0.3),_-3px_-3px_8px_rgba(255,255,255,0.85)] md:shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
+                        transition-all duration-500 ease-out
+                        group-hover:scale-105
+                        group-hover:from-[#ff8a5c] group-hover:via-[#ff6014] group-hover:to-[#e5392f]
+                        group-hover:ring-[#ff6014]/30
+                        group-hover:shadow-[0_8px_20px_-4px_rgba(229,57,53,0.45),0_0_0_5px_rgba(255,96,20,0.06)]
+                      "
+                    >
+                      <span
+                        className="pointer-events-none absolute top-[3px] left-[5px] w-6 h-3 md:top-[4px] md:left-[8px] md:w-8 md:h-4 rounded-full bg-[radial-gradient(ellipse,rgba(255,255,255,0.85)_0%,transparent_70%)] group-hover:opacity-80 transition-opacity duration-500"
+                        aria-hidden
+                      />
+                      <span
+                        className="pointer-events-none absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 bg-[radial-gradient(circle_at_50%_30%,rgba(255,255,255,0.35),transparent_60%)] transition-opacity duration-500"
+                        aria-hidden
+                      />
+                      <LayoutGrid
+                        className="relative w-5 h-5 md:w-7 md:h-7 text-[#ff6014] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                        strokeWidth={1.75}
+                      />
+                    </div>
+
+                    {/* Label */}
+                    <span
+                      className="font-bold text-[10px] md:text-xs lg:text-[14px] text-center text-[#ff6014] mt-1 transition-colors duration-200 group-hover:text-[#ff6014] line-clamp-2 min-h-[2.2em] md:min-h-[auto] flex items-center justify-center"
+                    >
+                      See Less
+                    </span>
+                  </div>
+                </button>
+              </motion.div>
+            )}
           </motion.div>
         )}
       </AnimatePresence>

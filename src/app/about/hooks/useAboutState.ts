@@ -51,7 +51,7 @@ export function useAboutState() {
   }, []);
 
   const displayStats = [
-    { value: statsData?.servicesCompleted ? `${Number(statsData.servicesCompleted).toLocaleString()}+` : "120,000+", label: "Bookings Done", desc: "Across Dhaka City" },
+    { value: statsData?.servicesCompleted ? `${Number(statsData.servicesCompleted).toLocaleString()}+` : "120,000+", label: "Bookings Done", desc: "Across Rajshahi City" },
     { value: statsData?.verifiedExperts ? `${Number(statsData.verifiedExperts).toLocaleString()}+` : "2,500+", label: "Verified Experts", desc: "Background screened" },
     { value: typeof statsData?.averageRating === "number" ? `${statsData.averageRating.toFixed(1)}/5.0` : "4.8/5.0", label: "Average Rating", desc: "From real clients" },
     { value: statsData?.happyCustomers ? `${Number(statsData.happyCustomers).toLocaleString()}+` : "50,000+", label: "Happy Customers", desc: "Rajseba Guarantee" },

@@ -3,7 +3,7 @@ import ContactClientPage from "./ContactClientPage";
 
 export const metadata: Metadata = {
   title: "Contact Us - Rajseba Support Center",
-  description: "Get in touch with Rajseba. Reach our 24/7 hotline at +880 9612-RAJSEBA or email support@rajseba.com for booking support, refunds, or general enquiries.",
+  description: "Get in touch with Rajseba. Reach our 24/7 hotline at 01813-333373 or email info@rajseba.com for booking support, refunds, or general enquiries.",
   keywords: ["contact rajseba", "rajseba phone number", "rajseba email", "rajseba office address", "home service support"],
   openGraph: {
     title: "Contact Us - Rajseba Support Center",

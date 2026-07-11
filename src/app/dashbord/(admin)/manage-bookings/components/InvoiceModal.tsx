@@ -73,8 +73,8 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
                 <p className="text-sm font-medium text-slate-500">Your Trusted Service Partner</p>
                 <div className="mt-4 text-xs text-slate-500 space-y-1">
                   <p>123 Service Road, Tech City</p>
-                  <p>support@rajseba.com</p>
-                  <p>+880 1234 567 890</p>
+                  <p>info@rajseba.com</p>
+                  <p>01813-333373</p>
                 </div>
               </div>
               <div className="text-right">
@@ -195,7 +195,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
               <div>
                 <p className="text-xs font-bold text-slate-800 mb-1">Terms & Conditions</p>
                 <p className="text-[10px] text-slate-500 max-w-sm leading-relaxed">
-                  Payment is due within 15 days. Please make checks payable to Rajseba Services. Any questions? Contact us at support@rajseba.com.
+                  Payment is due within 15 days. Please make checks payable to Rajseba Services. Any questions? Contact us at info@rajseba.com.
                 </p>
               </div>
               <div className="text-right">

@@ -81,7 +81,7 @@ export default function HelpClientPage() {
               "Ensure your mobile network is stable and you entered the correct phone number (with prefix +880).",
               "Wait 60 seconds for the countdown timer to finish and click 'Resend OTP'.",
               "Check if your SMS inbox is full or if you have blocked promo messages from your carrier.",
-              "If you still do not receive the OTP, contact our hotline at +880 9612-725732 for manual verification.",
+              "If you still do not receive the OTP, contact our hotline at 01813-333373 for manual verification.",
             ],
           },
           {
@@ -112,7 +112,7 @@ export default function HelpClientPage() {
             title: "Issue: 'Service Not Available in My Area' Warning",
             problem: "You receive a message saying we cannot deliver services to your selected address.",
             steps: [
-              "Rajseba currently delivers premium home care inside designated zones in Dhaka, Bangladesh (e.g., Banani, Gulshan, Dhanmondi, Uttara).",
+              "Rajseba currently delivers premium home care inside designated zones in Rajshahi, Bangladesh (e.g., Rajshahi High-tech Park, local regions).",
               "Check our Service Areas page or the live map to verify if your location falls within active coverage.",
               "If you are just outside the boundary, reach out to our custom support desk to check if special scheduling is possible.",
             ],
@@ -479,10 +479,10 @@ export default function HelpClientPage() {
                 Speak directly to our Customer happiness agents.
               </p>
               <a
-                href="tel:+8809612725732"
+                href="tel:01813333373"
                 className="text-[10px] font-bold text-[#FF6014] hover:underline flex items-center gap-0.5 mt-auto"
               >
-                +880 9612-725732
+                01813-333373
                 <ExternalLink className="w-2 h-2" />
               </a>
             </div>
@@ -515,10 +515,10 @@ export default function HelpClientPage() {
                 Drop us a line and we will reply within 4 hours.
               </p>
               <a
-                href="mailto:support@rajseba.com"
+                href="mailto:info@rajseba.com"
                 className="text-[10px] font-bold text-emerald-600 hover:underline flex items-center gap-0.5 mt-auto"
               >
-                support@rajseba.com
+                info@rajseba.com
                 <Mail className="w-3 h-3" />
               </a>
             </div>

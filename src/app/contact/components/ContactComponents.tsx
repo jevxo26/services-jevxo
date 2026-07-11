@@ -8,9 +8,9 @@ import {
 import { FaFacebookF, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 
 export const CONTACT_CHANNELS = [
-  { icon: Phone, label: "Call Support", primary: "+880 9612-RAJSEBA", href: "tel:+8809612725732", secondary: "Emergency: +880 1712-345678", badge: "24/7 Hotline" },
-  { icon: Mail, label: "Email Support", primary: "support@rajseba.com", href: "mailto:support@rajseba.com", secondary: "Partner: partners@rajseba.com", badge: "Replies in 4 hrs" },
-  { icon: MapPin, label: "Visit HQ", primary: "House 24, Road 12, Banani", href: "https://maps.google.com/?q=Banani+Dhaka", secondary: "Dhaka-1213, Bangladesh", badge: "Sat – Thu (9AM-6PM)" },
+  { icon: Phone, label: "Call Support", primary: "01813-333373", href: "tel:01813333373", secondary: "Hotline: 01813-333373", badge: "24/7 Hotline" },
+  { icon: Mail, label: "Email Support", primary: "info@rajseba.com", href: "mailto:info@rajseba.com", secondary: "Support: info@rajseba.com", badge: "Replies in 4 hrs" },
+  { icon: MapPin, label: "Visit HQ", primary: "Rajshahi High-tech Park", href: "https://maps.google.com/?q=Rajshahi+High-tech+Park", secondary: "Rajshahi, Bangladesh", badge: "Sat – Thu (9AM-6PM)" },
 ];
 
 export const TRUST_BARS = [

@@ -27,6 +27,8 @@ import {
   MapPin,
   TrendingUp,
   Truck,
+  Sparkles,
+  ArrowRight,
 } from "lucide-react";
 import { TbAirConditioning, TbTruck } from "react-icons/tb";
 import {
@@ -79,6 +81,27 @@ const FALLBACK_ICON = LayoutGrid;
 
 function getCategoryIcon(name: string): React.ComponentType<any> {
   return CATEGORY_ICON_MAP[(name || "").trim()] || FALLBACK_ICON;
+}
+
+const CATEGORY_SUBTITLES: Record<string, string> = {
+  "AC Service & Repair": "Repair, installation & gas charge",
+  "AC Service & Cleaning": "Deep cleaning & filter service",
+  "Home & Office Shifting": "Hassle-free packing & moving",
+  "Plumbing Service": "Leak repair & pipe installation",
+  "Home Appliance Repair": "Fridge, washer & microwave repair",
+  "Home & Office Cleaning": "Deep cleaning & sanitization",
+  "Home & Office Deep Cleaning": "Thorough sanitization & wash",
+  "Water Purifier Installation": "Filter change & assembly",
+  "Home & Office Painting": "Wall painting & color consult",
+  "Geyser Installation & Repair": "Water heater troubleshooting",
+  "Electrical Service": "Wiring, fan & light installation",
+  "Home & Office Renovation": "Interior carpentry & design",
+  "PPM Service": "Preventive contract maintenance",
+  "Sofa & Carpet Deep Cleaning": "Vacuuming & steam stain removal",
+};
+
+function getCategorySubtitle(name: string): string {
+  return CATEGORY_SUBTITLES[(name || "").trim()] || "Professional home service";
 }
 
 // ─── Top navbar links ────────────────────────────────────────────────────
@@ -309,40 +332,84 @@ export function Navbar() {
                         <AnimatePresence>
                           {showServicesDropdown && (
                             <motion.div
-                              initial={{ opacity: 0, y: 10, scale: 0.95 }}
+                              initial={{ opacity: 0, y: 15, scale: 0.95 }}
                               animate={{ opacity: 1, y: 0, scale: 1 }}
-                              exit={{ opacity: 0, y: 8, scale: 0.95 }}
-                              transition={{ duration: 0.15 }}
-                              className="absolute left-1/2 -translate-x-1/2 top-full mt-1 w-[520px] bg-white/90 backdrop-blur-lg rounded-2xl border border-slate-100/80 shadow-xl p-4 z-50"
+                              exit={{ opacity: 0, y: 10, scale: 0.95 }}
+                              transition={{ duration: 0.2, ease: "easeOut" }}
+                              className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[740px] bg-white/95 backdrop-blur-xl rounded-3xl border border-slate-150 shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-5 z-50 flex gap-6 overflow-hidden"
                             >
-                              {apiCategories.length === 0 ? (
-                                <div className="grid grid-cols-2 gap-3">
-                                  {[1, 2, 3, 4, 5, 6].map((n) => (
-                                    <div key={n} className="h-16 bg-slate-50 rounded-xl animate-pulse" />
-                                  ))}
+                              {/* Left Panel: Categories Grid */}
+                              <div className="flex-1">
+                                <div className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400 mb-3.5 px-1">
+                                  Explore Service Categories
                                 </div>
-                              ) : (
-                                <div className="grid grid-cols-2 gap-2">
-                                  {apiCategories.map((cat: any) => {
-                                    const CatIcon = getCategoryIcon(cat.name);
-                                    return (
-                                      <Link
-                                        key={cat.id}
-                                        href={`/categories/${cat.id}`}
-                                        className="flex items-center gap-3 p-2.5 rounded-xl hover:bg-rose-50/60 group/item transition-all duration-200"
-                                        onClick={() => setShowServicesDropdown(false)}
-                                      >
-                                        <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/item:bg-[#FF6014]/10 group-hover/item:border-rose-100 transition-all duration-200 shrink-0">
-                                          <CatIcon className="w-5 h-5 text-slate-400 group-hover/item:text-[#FF6014] transition-colors duration-200" />
-                                        </div>
-                                        <span className="font-semibold text-sm text-slate-700 group-hover/item:text-[#FF6014] transition-colors line-clamp-2 leading-snug">
-                                          {cat.name}
-                                        </span>
-                                      </Link>
-                                    );
-                                  })}
+                                {apiCategories.length === 0 ? (
+                                  <div className="grid grid-cols-2 gap-3">
+                                    {[1, 2, 3, 4, 5, 6].map((n) => (
+                                      <div key={n} className="h-14 bg-slate-50 rounded-2xl animate-pulse" />
+                                    ))}
+                                  </div>
+                                ) : (
+                                  <div className="grid grid-cols-2 gap-2 max-h-[360px] overflow-y-auto pr-1 scrollbar-thin">
+                                    {apiCategories.map((cat: any) => {
+                                      const CatIcon = getCategoryIcon(cat.name);
+                                      const subtitle = getCategorySubtitle(cat.name);
+                                      return (
+                                        <Link
+                                          key={cat.id}
+                                          href={`/categories/${cat.id}`}
+                                          className="flex items-center gap-3 p-2.5 rounded-2xl border border-transparent hover:border-orange-100 hover:bg-[#FFF8F4] group/item transition-all duration-200 hover:shadow-sm"
+                                          onClick={() => setShowServicesDropdown(false)}
+                                        >
+                                          <div className="w-10 h-10 rounded-xl bg-slate-50 border border-slate-100 flex items-center justify-center group-hover/item:bg-[#FF6014] group-hover/item:border-[#FF6014] transition-all duration-200 shrink-0">
+                                            <CatIcon className="w-5 h-5 text-slate-500 group-hover/item:text-white transition-colors duration-200" />
+                                          </div>
+                                          <div className="min-w-0">
+                                            <p className="font-bold text-xs text-slate-700 group-hover/item:text-[#FF6014] transition-colors leading-snug truncate">
+                                              {cat.name}
+                                            </p>
+                                            <p className="text-[10px] text-slate-400 font-medium truncate mt-0.5">
+                                              {subtitle}
+                                            </p>
+                                          </div>
+                                        </Link>
+                                      );
+                                    })}
+                                  </div>
+                                )}
+                              </div>
+
+                              {/* Right Panel: Featured Card */}
+                              <div className="w-[220px] bg-gradient-to-br from-[#FFF9F6] to-[#FFF1E9] border border-orange-100/60 rounded-2xl p-5 flex flex-col justify-between relative overflow-hidden shrink-0">
+                                <div className="absolute top-0 right-0 w-24 h-24 border-l border-b border-[#FF6014]/6 rounded-bl-full pointer-events-none" />
+                                <div className="relative z-10">
+                                  <div className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-wider text-[#FF6014] bg-[#FFF4EE] border border-[#FF6014]/15 px-2.5 py-1 rounded-full mb-3">
+                                    <Sparkles className="w-2.5 h-2.5" /> Rajseba Standard
+                                  </div>
+                                  <h4 className="text-[13px] font-black text-slate-800 leading-snug mb-1">
+                                    Need Custom Service?
+                                  </h4>
+                                  <p className="text-[10px] text-slate-400 leading-normal font-semibold">
+                                    Get detailed quotes from background-verified professionals tailored to your needs.
+                                  </p>
                                 </div>
-                              )}
+
+                                <div className="mt-5 space-y-2 relative z-10">
+                                  <Link
+                                    href="/services"
+                                    onClick={() => setShowServicesDropdown(false)}
+                                    className="w-full flex items-center justify-center gap-1.5 bg-[#FF6014] hover:bg-[#E0530A] text-white text-[10px] font-extrabold tracking-wider py-2.5 px-3 rounded-xl transition-all shadow-[0_4px_12px_rgba(255,96,20,0.2)] hover:shadow-[0_6px_16px_rgba(255,96,20,0.3)] hover:-translate-y-0.5"
+                                  >
+                                    Get Free Quote <ArrowRight className="w-3.5 h-3.5" />
+                                  </Link>
+                                  <a
+                                    href="tel:01813333373"
+                                    className="w-full flex items-center justify-center gap-1.5 bg-white border border-orange-150 hover:bg-orange-50/50 text-[#FF6014] text-[10px] font-extrabold tracking-wider py-2.5 px-3 rounded-xl transition-all"
+                                  >
+                                    Call Hotline <Phone className="w-3 h-3" />
+                                  </a>
+                                </div>
+                              </div>
                             </motion.div>
                           )}
                         </AnimatePresence>

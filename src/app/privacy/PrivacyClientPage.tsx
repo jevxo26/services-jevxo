@@ -329,9 +329,9 @@ export default function PrivacyClientPage() {
                       If you decide to delete your account permanently, or wish to pull a full copy of your transaction logs, simply contact our support desk using the information below:
                     </p>
                     <div className="bg-[#FFFDFB] border border-rose-100/30 rounded-xl p-3 text-[11px] font-semibold text-slate-600 space-y-1">
-                      <p>📧 Email: <span className="text-[#FF6014]">support@rajseba.com</span></p>
-                      <p>📞 Hotline: <span className="text-[#FF6014]">+880 9612-725732</span></p>
-                      <p>📍 Address: House 24, Road 12, Banani, Dhaka, Bangladesh</p>
+                      <p>📧 Email: <span className="text-[#FF6014]">info@rajseba.com</span></p>
+                      <p>📞 Hotline: <span className="text-[#FF6014]">01813-333373</span></p>
+                      <p>📍 Address: Rajshahi High-tech Park, Rajshahi, Bangladesh</p>
                     </div>
                   </div>
                 </div>

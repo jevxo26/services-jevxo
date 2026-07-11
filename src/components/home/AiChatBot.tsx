@@ -159,7 +159,7 @@ export function AiChatBot() {
       }
 
       const data = await response.json();
-      const replyText = data.reply || "Sorry, I couldn't understand that. Please try again or call our hotline: +8801613410880.";
+      const replyText = data.reply || "Sorry, I couldn't understand that. Please try again or call our hotline: 01813-333373.";
 
       const finalMessages = [...updatedMessages, { role: "model" as const, text: replyText }];
       setMessages(finalMessages);
@@ -171,7 +171,7 @@ export function AiChatBot() {
         ...prev,
         {
           role: "model",
-          text: "Oops! Something went wrong connecting to the AI assistant. Please contact us at +8801613410880.",
+          text: "Oops! Something went wrong connecting to the AI assistant. Please contact us at 01813-333373.",
         },
       ]);
     } finally {
@@ -196,7 +196,7 @@ export function AiChatBot() {
               boxShadow: "0 10px 25px rgba(15, 23, 42, 0.35)"
             }}
             whileTap={{ scale: 0.9 }}
-            href="tel:+8801613410880"
+            href="tel:+8801813333373"
             className="group relative w-9 h-9 md:w-14 md:h-14 bg-slate-900 text-white rounded-full flex items-center justify-center shadow-lg cursor-pointer hover:bg-black transition-all duration-300"
             aria-label="Call Support"
           >

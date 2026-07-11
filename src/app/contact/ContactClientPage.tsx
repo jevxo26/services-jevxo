@@ -76,12 +76,12 @@ export default function ContactClientPage() {
 
             <RevealSection className="lg:col-span-5 flex flex-col gap-4" delay={0.1}>
               <div className="relative rounded-2xl overflow-hidden h-[210px] border border-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.04)]">
-                <Image src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Rajseba HQ Banani" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
+                <Image src="https://images.unsplash.com/photo-1497366216548-37526070297c?q=80&w=800&auto=format&fit=crop" alt="Rajseba HQ Rajshahi" fill className="object-cover" sizes="(max-width: 768px) 100vw, 40vw" />
                 <div className="absolute inset-0 bg-gradient-to-t from-slate-900/85 via-slate-900/20 to-transparent" />
                 <div className="relative z-10 p-5 h-full flex flex-col justify-end">
                   <span className="inline-block text-[9px] font-black tracking-[.1em] text-[#FF6014] bg-white/95 px-2.5 py-1 rounded-full uppercase mb-2 w-fit">Headquarters</span>
-                  <h3 className="font-black text-[13px] text-white mb-0.5">Banani Operations Center</h3>
-                  <p className="text-[11px] text-white/55 font-medium">Level 4, House 24, Road 12, Banani, Dhaka-1213</p>
+                  <h3 className="font-black text-[13px] text-white mb-0.5">Rajshahi Operations Center</h3>
+                  <p className="text-[11px] text-white/55 font-medium">Rajshahi High-tech Park, Rajshahi, Bangladesh</p>
                 </div>
               </div>
               <div className="bg-white border border-slate-100 rounded-2xl p-5 shadow-[0_1px_3px_rgba(0,0,0,0.03)]">

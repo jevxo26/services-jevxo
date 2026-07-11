@@ -81,7 +81,7 @@ export default function CustomQuote({
               {secondaryButtonText}
             </motion.button>
           ) : (
-            <a href="tel:+8801335106726" className="no-underline">
+            <a href="tel:01813333373" className="no-underline">
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
