@@ -105,6 +105,13 @@ const ServiceLists = () => {
   }, [syncURL]);
 
   useEffect(() => {
+    const cat = filters.activeCategory;
+    if (cat && (cat === "shifting" || cat === "10" || cat.toLowerCase().includes("shifting"))) {
+      router.push("/home-shifting");
+    }
+  }, [filters.activeCategory, router]);
+
+  useEffect(() => {
     document.body.style.overflow = isFilterOpen ? "hidden" : "";
     return () => {
       document.body.style.overflow = "";

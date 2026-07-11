@@ -47,12 +47,14 @@ import { ServiceReviews } from '@/components/home/categorizedServices/ServiceRev
 import { useGetPublicServiceByIdQuery, useGetPublicServicesQuery } from "@/redux/features/landing/landingApi";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useBookingCartState } from "@/components/home/booking/hooks/useBookingCartState";
 import { DesktopBookingSidebar } from "@/components/home/booking/DesktopBookingSidebar";
 import { MobileBookingDrawer } from "@/components/home/booking/MobileBookingDrawer";
 
 export default function CategoryDetailClientPage({ slug }: { slug: string }) {
+  const router = useRouter();
   const { data: publicRes, isLoading: isPublicLoading } = useGetPublicServicesQuery();
   const allServices = publicRes?.data || (Array.isArray(publicRes) ? publicRes : []);
   const matchedId = allServices.find((s: any) => s.slug === slug)?.id;
@@ -62,6 +64,22 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
     { skip: !matchedId }
   );
   const service = serviceRes?.data;
+
+  React.useEffect(() => {
+    if (service) {
+      const catName = service.category?.name?.toLowerCase() || "";
+      const catSlug = service.category?.slug?.toLowerCase() || "";
+      const name = service.name?.toLowerCase() || "";
+      if (
+        catName.includes("shifting") ||
+        catSlug.includes("shifting") ||
+        name.includes("shifting")
+      ) {
+        router.replace("/home-shifting");
+      }
+    }
+  }, [service, router]);
+
   const isLoading = isPublicLoading || isServiceLoading;
 
   const state = useBookingCartState({ service, isLoading });

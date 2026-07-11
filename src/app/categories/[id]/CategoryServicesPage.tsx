@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useCallback, useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import ServiceListing from "@/components/home/services/ServiceListing";
 import { useGetPublicCategoryByIdQuery } from "@/redux/features/landing/landingApi";
 import { ArrowLeft, LayoutGrid } from "lucide-react";
@@ -21,11 +21,22 @@ const PRICE_CEIL = 5000;
 
 export default function CategoryServicesPage({ categoryId }: { categoryId: string }) {
   const searchParams = useSearchParams();
+  const router = useRouter();
 
   const { data: categoryRes, isLoading: isCatLoading } = useGetPublicCategoryByIdQuery(
     Number(categoryId)
   );
   const category = categoryRes?.data || categoryRes;
+
+  useEffect(() => {
+    if (category) {
+      const name = category.name?.toLowerCase() || "";
+      const slug = category.slug?.toLowerCase() || "";
+      if (name.includes("shifting") || slug.includes("shifting")) {
+        router.replace("/home-shifting");
+      }
+    }
+  }, [category, router]);
 
   const [filters, setFiltersState] = useState<FilterState>({
     activeCategory: categoryId,

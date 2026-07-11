@@ -85,12 +85,14 @@ import { SubServiceDetailCard, SubServiceDetailDrawer } from '@/components/home/
 import { useGetPublicServiceByIdQuery, useGetPublicServicesQuery, useGetPublicReviewsByServiceQuery, useGetPublicNestedServicesByServiceQuery, useGetPublicSubServiceByIdQuery } from "@/redux/features/landing/landingApi";
 import { Loader2, ArrowLeft, ShoppingCart } from "lucide-react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { useBookingCartState } from "@/components/home/booking/hooks/useBookingCartState";
 import { DesktopBookingSidebar } from "@/components/home/booking/DesktopBookingSidebar";
 import { MobileBookingDrawer } from "@/components/home/booking/MobileBookingDrawer";
 
 export default function ServiceDetailClientPage({ id }: { id: string }) {
+  const router = useRouter();
   const isNumericId = /^\d+$/.test(id);
 
   const { data: publicRes, isLoading: isPublicLoading } = useGetPublicServicesQuery(
@@ -118,6 +120,21 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
   );
 
   const service = serviceRes?.data;
+
+  React.useEffect(() => {
+    if (service) {
+      const catName = service.category?.name?.toLowerCase() || "";
+      const catSlug = service.category?.slug?.toLowerCase() || "";
+      const name = service.name?.toLowerCase() || "";
+      if (
+        catName.includes("shifting") ||
+        catSlug.includes("shifting") ||
+        name.includes("shifting")
+      ) {
+        router.replace("/home-shifting");
+      }
+    }
+  }, [service, router]);
   const nestedServices = nestedServicesRes?.data || nestedServicesRes || [];
   const isLoading = isNumericId ? isServiceLoading : isPublicLoading || isServiceLoading;
 

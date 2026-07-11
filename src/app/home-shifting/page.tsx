@@ -252,6 +252,8 @@ export default function HomeShiftingPage() {
   const [create, { isLoading }] = useCreateCustomShiftingMutation();
 
   const [form, setForm] = useState({ name: "", email: "", phone: "", shiftingType: "home", sourceAddress: "", destinationAddress: "" });
+  const [houseSize, setHouseSize] = useState("2 Room Flat");
+  const [officeSize, setOfficeSize] = useState("Small (1-10 Desks)");
   const [files, setFiles] = useState<File[]>([]);
   const [previews, setPreviews] = useState<string[]>([]);
   const [done, setDone] = useState(false);
@@ -288,8 +290,21 @@ export default function HomeShiftingPage() {
         ? (await Promise.allSettled(files.map(uploadImage)))
           .filter((r): r is PromiseFulfilledResult<string> => r.status === "fulfilled")
           .map((r) => r.value)
+          .filter(Boolean)
         : [];
-      await create({ ...form, images: urls, userId: isAuth && user ? Number((user as any).id) : undefined }).unwrap();
+      
+      const additionalDetails = form.shiftingType === "home"
+        ? `[Home Size: ${houseSize}]`
+        : `[Office Size: ${officeSize}]`;
+
+      const payload = {
+        ...form,
+        sourceAddress: `${form.sourceAddress} ${additionalDetails}`,
+        images: urls,
+        userId: isAuth && user ? Number((user as any).id) : undefined
+      };
+
+      await create(payload).unwrap();
       setDone(true);
       toast.success("Shifting request submitted successfully!", { id: loadingToast });
       setForm({ name: "", email: "", phone: "", shiftingType: "home", sourceAddress: "", destinationAddress: "" });
@@ -377,104 +392,166 @@ export default function HomeShiftingPage() {
               </div>
 
               <div className="p-5 sm:p-6">
-                <form onSubmit={submit} className="space-y-4">
-                  {/* Shifting Type */}
-                  <div>
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2 block">Shifting Type</label>
-                    <div className="grid grid-cols-2 gap-3">
-                      {[{ v: "home", l: "Home Shifting", I: Home }, { v: "office", l: "Office Shifting", I: Building2 }].map(({ v, l, I }) => (
-                        <button key={v} type="button" onClick={() => setForm((p) => ({ ...p, shiftingType: v }))}
-                          className={`flex items-center justify-center gap-2 py-3 rounded-2xl text-sm font-bold border-2 transition-all ${form.shiftingType === v ? "bg-[#FF6014] border-[#FF6014] text-white shadow-lg shadow-[#FF6014]/20" : "bg-slate-50 border-slate-200 text-slate-600 hover:border-[#FF6014]/40"}`}>
-                          <I size={14} />{l}
-                        </button>
-                      ))}
+                {done ? (
+                  <div className="text-center py-10 px-4 animate-[fadeInUp_0.5s_ease-out]">
+                    <div className="w-16 h-16 bg-green-50 border border-green-150 text-green-500 rounded-full flex items-center justify-center mx-auto mb-5 shadow-lg shadow-green-100">
+                      <CheckCircle size={32} />
                     </div>
+                    <h3 className="text-xl font-black text-slate-800 mb-2">Request Submitted!</h3>
+                    <p className="text-xs text-slate-500 mb-6 font-semibold max-w-sm mx-auto leading-relaxed">
+                      Your shifting request has been successfully received. A verified shifting partner will contact you shortly with a price quotation.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setDone(false)}
+                      className="px-6 py-3 rounded-2xl bg-[#FF6014] text-white text-xs font-black hover:bg-[#E0530A] transition-all shadow-md active:scale-95 cursor-pointer uppercase tracking-wider"
+                    >
+                      Book Another Shift
+                    </button>
                   </div>
-
-                  {/* Name + Phone */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {[{ n: "name", l: "Full Name *", pl: "Your full name", I: User, t: "text" }, { n: "phone", l: "Phone *", pl: "+880 1XXXXXXXXX", I: Phone, t: "tel" }].map(({ n, l, pl, I, t }) => (
-                      <div key={n}>
-                        <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">{l}</label>
-                        <div className="relative">
-                          <I size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                          <input type={t} name={n} required value={(form as any)[n]} onChange={inp} placeholder={pl}
-                            className="w-full pl-9 pr-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 transition-all" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Email */}
-                  <div>
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Email <span className="text-slate-300 normal-case font-semibold">(Optional)</span></label>
-                    <div className="relative">
-                      <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
-                      <input type="email" name="email" value={form.email} onChange={inp} placeholder="you@email.com"
-                        className="w-full pl-9 pr-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 transition-all" />
-                    </div>
-                  </div>
-
-                  {/* Addresses */}
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {[{ n: "sourceAddress", l: "Pickup Address *", pl: "Full pickup address...", color: "text-[#FF6014]" }, { n: "destinationAddress", l: "Destination *", pl: "Full destination address...", color: "text-green-500" }].map(({ n, l, pl, color }) => (
-                      <div key={n}>
-                        <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">
-                          <span className={color}>●</span> {l}
-                        </label>
-                        <div className="relative">
-                          <MapPin size={14} className={`absolute left-3.5 top-3.5 ${color}`} />
-                          <textarea name={n} required value={(form as any)[n]} onChange={inp} rows={3} placeholder={pl}
-                            className="w-full pl-9 pr-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 transition-all resize-none" />
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Image upload */}
-                  <div>
-                    <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Inventory Photos <span className="text-slate-300 normal-case font-semibold">(Optional · max 6)</span></label>
-                    <div onClick={() => fileRef.current?.click()}
-                      className="border-2 border-dashed border-slate-200 hover:border-[#FF6014]/50 rounded-2xl p-4 text-center cursor-pointer transition-all hover:bg-[#FFF8F4]/50 group">
-                      <Upload size={18} className="text-slate-400 group-hover:text-[#FF6014] mx-auto mb-1 transition-colors" />
-                      <p className="text-xs font-bold text-slate-500">Click to upload photos</p>
-                      <p className="text-[11px] text-slate-400 mt-0.5">JPG, PNG — up to 5MB each</p>
-                    </div>
-                    <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={addFiles} />
-                    {previews.length > 0 && (
-                      <div className="flex flex-wrap gap-2 mt-3">
-                        {previews.map((src, i) => (
-                          <div key={i} className="relative w-14 h-14 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
-                            <img src={src} alt="" className="w-full h-full object-cover" />
-                            <button type="button" onClick={() => rmFile(i)} className="absolute top-0.5 right-0.5 w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center">
-                              <X size={9} />
-                            </button>
-                          </div>
+                ) : (
+                  <form onSubmit={submit} className="space-y-4">
+                    {/* Shifting Type */}
+                    <div>
+                      <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2 block">Shifting Type</label>
+                      <div className="grid grid-cols-2 gap-3">
+                        {[{ v: "home", l: "Home Shifting", I: Home }, { v: "office", l: "Office Shifting", I: Building2 }].map(({ v, l, I }) => (
+                          <button key={v} type="button" onClick={() => setForm((p) => ({ ...p, shiftingType: v }))}
+                            className={`flex items-center justify-center gap-2 py-3 rounded-2xl text-sm font-bold border-2 transition-all ${form.shiftingType === v ? "bg-[#FF6014] border-[#FF6014] text-white shadow-lg shadow-[#FF6014]/20" : "bg-slate-50 border-slate-200 text-slate-600 hover:border-[#FF6014]/40"}`}>
+                            <I size={14} />{l}
+                          </button>
                         ))}
                       </div>
-                    )}
-                  </div>
-
-                  {isAuth && (
-                    <div className="flex items-center gap-2 bg-green-50 border border-green-100 rounded-2xl px-4 py-2.5">
-                      <CheckCircle size={13} className="text-green-500 flex-shrink-0" />
-                      <p className="text-xs font-bold text-green-700">Details auto-filled from your profile</p>
                     </div>
-                  )}
 
-                  {err && <p className="text-red-500 text-xs font-bold bg-red-50 border border-red-100 rounded-2xl px-4 py-3">⚠️ {err}</p>}
+                    {/* Size Options */}
+                    {form.shiftingType === "home" ? (
+                      <div>
+                        <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2 block">Home Size Selection</label>
+                        <div className="flex flex-wrap gap-2">
+                          {["1 Room (Bachelor)", "2 Room Flat", "3 Room Flat", "4+ Room Flat"].map((size) => (
+                            <button
+                              key={size}
+                              type="button"
+                              onClick={() => setHouseSize(size)}
+                              className={`px-3 py-2 rounded-xl text-xs font-extrabold border-2 transition-all ${
+                                houseSize === size
+                                  ? "bg-[#FF6014]/15 border-[#FF6014] text-[#FF6014]"
+                                  : "bg-slate-50 border-slate-200 text-slate-500 hover:border-slate-300"
+                              }`}
+                            >
+                              {size}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    ) : (
+                      <div>
+                        <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-2 block">Office Size Selection</label>
+                        <div className="flex flex-wrap gap-2">
+                          {["Small (1-10 Desks)", "Medium (11-30 Desks)", "Large (30+ Desks)"].map((size) => (
+                            <button
+                              key={size}
+                              type="button"
+                              onClick={() => setOfficeSize(size)}
+                              className={`px-3 py-2 rounded-xl text-xs font-extrabold border-2 transition-all ${
+                                officeSize === size
+                                  ? "bg-[#FF6014]/15 border-[#FF6014] text-[#FF6014]"
+                                  : "bg-slate-50 border-slate-200 text-slate-500 hover:border-slate-300"
+                              }`}
+                            >
+                              {size}
+                            </button>
+                          ))}
+                        </div>
+                      </div>
+                    )}
 
-                  <button type="submit" disabled={isLoading}
-                    className="w-full bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-black py-4 rounded-2xl shadow-lg shadow-[#FF6014]/25 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed">
-                    {isLoading ? <><div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />Submitting...</> : <>Book My Shift <ArrowRight size={16} /></>}
-                  </button>
+                    {/* Name + Phone */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {[{ n: "name", l: "Full Name *", pl: "Your full name", I: User, t: "text" }, { n: "phone", l: "Phone *", pl: "+880 1XXXXXXXXX", I: Phone, t: "tel" }].map(({ n, l, pl, I, t }) => (
+                        <div key={n}>
+                          <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">{l}</label>
+                          <div className="relative">
+                            <I size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                            <input type={t} name={n} required value={(form as any)[n]} onChange={inp} placeholder={pl}
+                              className="w-full pl-9 pr-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 transition-all" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
 
-                  {!isAuth && (
-                    <p className="text-center text-xs text-slate-400 font-semibold">
-                      <Link href="/login" className="text-[#FF6014] font-black hover:underline">Login</Link> to auto-fill your details
-                    </p>
-                  )}
-                </form>
+                    {/* Email */}
+                    <div>
+                      <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Email <span className="text-slate-300 normal-case font-semibold">(Optional)</span></label>
+                      <div className="relative">
+                        <Mail size={14} className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+                        <input type="email" name="email" value={form.email} onChange={inp} placeholder="you@email.com"
+                          className="w-full pl-9 pr-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 transition-all" />
+                      </div>
+                    </div>
+
+                    {/* Addresses */}
+                    <div className="grid sm:grid-cols-2 gap-4">
+                      {[{ n: "sourceAddress", l: "Pickup Address *", pl: "Full pickup address...", color: "text-[#FF6014]" }, { n: "destinationAddress", l: "Destination *", pl: "Full destination address...", color: "text-green-500" }].map(({ n, l, pl, color }) => (
+                        <div key={n}>
+                          <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">
+                            <span className={color}>●</span> {l}
+                          </label>
+                          <div className="relative">
+                            <MapPin size={14} className={`absolute left-3.5 top-3.5 ${color}`} />
+                            <textarea name={n} required value={(form as any)[n]} onChange={inp} rows={2} placeholder={pl}
+                              className="w-full pl-9 pr-4 py-3 bg-slate-50 border-2 border-slate-100 rounded-2xl text-sm font-semibold text-slate-800 placeholder:text-slate-400 focus:outline-none focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/10 transition-all resize-none" />
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Image upload */}
+                    <div>
+                      <label className="text-xs font-black text-slate-500 uppercase tracking-wider mb-1.5 block">Inventory Photos <span className="text-slate-300 normal-case font-semibold">(Optional · max 6)</span></label>
+                      <div onClick={() => fileRef.current?.click()}
+                        className="border-2 border-dashed border-slate-200 hover:border-[#FF6014]/50 rounded-2xl p-4 text-center cursor-pointer transition-all hover:bg-[#FFF8F4]/50 group">
+                        <Upload size={18} className="text-slate-400 group-hover:text-[#FF6014] mx-auto mb-1 transition-colors" />
+                        <p className="text-xs font-bold text-slate-500">Click to upload photos</p>
+                        <p className="text-[11px] text-slate-400 mt-0.5">JPG, PNG — up to 5MB each</p>
+                      </div>
+                      <input ref={fileRef} type="file" accept="image/*" multiple className="hidden" onChange={addFiles} />
+                      {previews.length > 0 && (
+                        <div className="flex flex-wrap gap-2 mt-3">
+                          {previews.map((src, i) => (
+                            <div key={i} className="relative w-14 h-14 rounded-xl overflow-hidden border border-slate-200 shadow-sm">
+                              <img src={src} alt="" className="w-full h-full object-cover" />
+                              <button type="button" onClick={() => rmFile(i)} className="absolute top-0.5 right-0.5 w-4 h-4 bg-red-500 text-white rounded-full flex items-center justify-center">
+                                <X size={9} />
+                              </button>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    {isAuth && (
+                      <div className="flex items-center gap-2 bg-green-50 border border-green-100 rounded-2xl px-4 py-2.5">
+                        <CheckCircle size={13} className="text-green-500 flex-shrink-0" />
+                        <p className="text-xs font-bold text-green-700">Details auto-filled from your profile</p>
+                      </div>
+                    )}
+
+                    {err && <p className="text-red-500 text-xs font-bold bg-red-50 border border-red-100 rounded-2xl px-4 py-3">⚠️ {err}</p>}
+
+                    <button type="submit" disabled={isLoading}
+                      className="w-full bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-black py-4 rounded-2xl shadow-lg shadow-[#FF6014]/25 hover:shadow-xl hover:scale-[1.01] active:scale-[0.99] transition-all flex items-center justify-center gap-2 text-sm disabled:opacity-60 disabled:cursor-not-allowed">
+                      {isLoading ? <><div className="w-4 h-4 border-2 border-white/40 border-t-white rounded-full animate-spin" />Submitting...</> : <>Book My Shift <ArrowRight size={16} /></>}
+                    </button>
+
+                    {!isAuth && (
+                      <p className="text-center text-xs text-slate-400 font-semibold">
+                        <Link href="/login" className="text-[#FF6014] font-black hover:underline">Login</Link> to auto-fill your details
+                      </p>
+                    )}
+                  </form>
+                )}
               </div>
             </div>
 
