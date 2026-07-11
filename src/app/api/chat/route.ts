@@ -97,7 +97,9 @@ Use this time context to answer time/date-related queries or reference today's d
 
     const systemPrompt = `You are the official Rajseba AI Assistant, an intelligent customer support agent for Rajseba (www.rajseba.com). 
 Rajseba is Bangladesh's leading premium home service marketplace. 
-Our official hotline number is +8801335106726.
+Our official hotline number is 01813-333373.
+Our official support email is info@rajseba.com.
+Our head office / location is Rajshahi High-tech Park, Rajshahi, Bangladesh.
 ${userContextPrompt}
 ${timePrompt}
 
@@ -116,7 +118,7 @@ Troubleshooting Auth & Login/Registration Issues:
 1. "OTP not received" / "OTP ashche na": SMS gateways can occasionally experience latency. Suggest the user to check if their phone number was typed correctly, wait 60 seconds, and click "Resend OTP".
 2. "Invalid credentials" / "Password forgot": Advise checking if the email/phone and password match exactly.
 3. "Account not verified" / "Log in hocche na": If they try to login but fail because their account is unverified, tell them they must enter the OTP code sent to their registered mobile.
-4. "Server/API Error": If there is a connection issue, explain that our servers are currently processing high traffic and to try again in a few minutes, or call our hotline: +8801335106726.
+4. "Server/API Error": If there is a connection issue, explain that our servers are currently processing high traffic and to try again in a few minutes, or call our hotline: 01813-333373.
 
 Our Partner Opportunities (Become a Vendor or Agent):
 - Registration page for partners: /opportunity
@@ -150,7 +152,7 @@ Our Webpage Directory & Features:
    - Displays description of a service, listing all sub-services (nested services) and starting prices.
    - Users can choose dates/times and click "Book Now" to order.
 4. About Page (/about): Story, mission, and vision of Rajseba.
-5. Contact Page (/contact): Feedback message form, hotline (+8801335106726), and support email.
+5. Contact Page (/contact): Feedback message form, hotline (01813-333373), email (info@rajseba.com), and location (Rajshahi High-tech Park).
 6. Partner Opportunities Page (/opportunity): Application portal to join as Vendor or Agent.
 7. Track Booking (/track/[bookingId]): Real-time booking status timeline (Pending -> Accepted -> On-the-way -> Completed).
 8. Interactive Map Page (/map): Visually locates available providers and service coverage.
@@ -178,7 +180,7 @@ Instructions:
     if (!openrouterKey || openrouterKey.includes("YOUR_FREE_GEMINI_API_KEY_HERE")) {
       console.warn("OpenRouter/Gemini API key is not configured.");
       return NextResponse.json({
-        reply: "Hello! I am your Rajseba Assistant. Currently, my AI brain is not fully set up by the administrator. However, you can book AC Checkup, Plumbing, and Cleaning services from our Services menu, or call our hotline: +8801335106726.",
+        reply: "Hello! I am your Rajseba Assistant. Currently, my AI brain is not fully set up by the administrator. However, you can book AC Checkup, Plumbing, and Cleaning services from our Services menu, or call our hotline: 01813-333373.",
       });
     }
 
@@ -237,7 +239,7 @@ Instructions:
     const data = await response.json();
     const replyText =
       data.choices?.[0]?.message?.content ||
-      "Sorry, I couldn't understand that. Please try again or call our hotline: +8801335106726.";
+      "Sorry, I couldn't understand that. Please try again or call our hotline: 01813-333373.";
 
     return NextResponse.json({ reply: replyText });
   } catch (error: any) {

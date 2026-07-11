@@ -336,7 +336,7 @@ export function Navbar() {
                               animate={{ opacity: 1, y: 0, scale: 1 }}
                               exit={{ opacity: 0, y: 10, scale: 0.95 }}
                               transition={{ duration: 0.2, ease: "easeOut" }}
-                              className="absolute left-1/2 -translate-x-1/2 top-full mt-2 w-[740px] bg-white/95 backdrop-blur-xl rounded-3xl border border-slate-150 shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-5 z-50 flex gap-6 overflow-hidden"
+                              className="absolute left-[-120px] top-full mt-[2px] w-[740px] bg-white/95 backdrop-blur-xl rounded-3xl border border-slate-150 shadow-[0_20px_50px_rgba(0,0,0,0.12)] p-5 z-50 flex gap-6 overflow-hidden"
                             >
                               {/* Left Panel: Categories Grid */}
                               <div className="flex-1">
@@ -780,7 +780,7 @@ export function Navbar() {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.22, ease: "easeInOut" }}
-              className="md:hidden overflow-hidden border-t border-slate-200/30 bg-[#FFFDFB]/85 backdrop-blur-xl shadow-inner"
+              className="md:hidden max-h-[calc(100vh-70px)] overflow-y-auto border-t border-slate-200/30 bg-[#FFFDFB]/85 backdrop-blur-xl shadow-inner pb-8 scrollbar-thin"
             >
               <div className="px-4 py-4 space-y-1">
                 {ALL_NAV_LINKS.map((link, i) => {

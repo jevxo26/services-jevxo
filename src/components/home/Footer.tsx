@@ -30,10 +30,11 @@ const COMPANY_LINKS = [
   { label: "Track Booking", href: "/track" },
   { label: "Help Center", href: "/help" },
   { label: "Privacy Policy", href: "/privacy" },
+  { label: "Blog", href: "/blog" },
 ];
 
 const CONTACT_INFO = [
-  { icon: Phone, label: "Hotline: 01813-333373", href: "tel:01813333373" },
+  { icon: Phone, label: "01813-333373", href: "tel:01813333373" },
   { icon: Mail, label: "info@rajseba.com", href: "mailto:info@rajseba.com" },
   { icon: MapPin, label: "Rajshahi High-tech Park, Bangladesh", href: "https://maps.google.com/?q=Rajshahi+High-tech+Park" },
 ];
