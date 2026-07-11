@@ -81,7 +81,7 @@ const Testimonials = () => {
   if (!mounted) {
     return (
       <div className="py-5 md:py-8 lg:py-10 relative overflow-hidden bg-transparent">
-        <div className="max-w-7xl mx-auto px-4 md:px-6">
+        <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
           <Header />
           <div className="flex justify-center py-12">
             <Loader2 className="w-7 h-7 animate-spin text-[#FF6014]" />
@@ -95,7 +95,7 @@ const Testimonials = () => {
 
   return (
     <div className="py-5 md:py-8 lg:py-10 relative overflow-hidden bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
         <Header />
 
         {isLoading && (

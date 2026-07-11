@@ -31,7 +31,7 @@ export default function FAQ() {
 
   return (
     <div className="pt-5 pb-2 md:py-8 lg:py-10 bg-transparent">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
+      <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

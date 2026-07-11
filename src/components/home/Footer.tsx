@@ -100,7 +100,7 @@ export default function Footer() {
       <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#FF6014]/2 blur-[100px] rounded-full pointer-events-none" />
 
       {/* Main grid */}
-      <div className="max-w-7xl mx-auto px-4 md:px-8 pt-4 pb-8 md:py-16 relative z-10">
+      <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 pt-4 pb-8 md:py-16 relative z-10">
         <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 md:gap-x-8">
           {/* ── Brand (4/12 columns on desktop, full width on mobile) ── */}
           <div className="col-span-2 md:col-span-4 space-y-6">
@@ -260,7 +260,7 @@ export default function Footer() {
 
       {/* ── Bottom bar ── */}
       <div className="border-t border-slate-200/50 bg-slate-50/40 backdrop-blur-md relative z-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1.5 text-xs text-slate-500 font-medium">
             <span>
               © {new Date().getFullYear()} Rajseba. All rights reserved.

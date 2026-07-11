@@ -193,14 +193,14 @@ const Hero = () => {
 
   if (isLoading) {
     return (
-      <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-2 flex items-center max-w-7xl mx-auto pt-0 md:pt-6 rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
+      <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-2 flex items-center w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto pt-0 md:pt-6 rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
         <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
       </div>
     );
   }
 
   return (
-    <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-2 flex items-center max-w-7xl mx-auto pt-0 md:pt-6 rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
+    <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-2 flex items-center w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto pt-0 md:pt-6 rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
       {isImageLoading && !hasInitialLoaded && (
         <div className="absolute inset-0 z-[5] flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
           <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
@@ -235,9 +235,8 @@ const Hero = () => {
                     paginate(-1);
                   }
                 }}
-                className={`absolute inset-0 w-full h-full object-fill md:object-cover ${
-                  activeSlide?.hero?.link ? "cursor-pointer" : ""
-                }`}
+                className={`absolute inset-0 w-full h-full object-fill md:object-cover ${activeSlide?.hero?.link ? "cursor-pointer" : ""
+                  }`}
                 onClick={handleSlideClick}
                 loading="eager"
                 onLoad={() => {
@@ -254,7 +253,7 @@ const Hero = () => {
         variants={containerVariants}
         initial="hidden"
         animate="visible"
-        className="relative z-10 w-full max-w-7xl mx-auto px-4 md:px-6 text-center"
+        className="relative z-10 w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 text-center"
       >
 
 
@@ -270,11 +269,10 @@ const Hero = () => {
               <button
                 key={index}
                 onClick={() => handleIndicatorClick(index)}
-                className={`h-1.5 rounded-full transition-all duration-300 ${
-                  isActive
+                className={`h-1.5 rounded-full transition-all duration-300 ${isActive
                     ? "w-7 bg-white shadow-sm"
                     : "w-2.5 bg-white/40 hover:bg-white/60"
-                }`}
+                  }`}
                 aria-label={`Go to slide ${index + 1}`}
               />
             );

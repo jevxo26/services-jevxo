@@ -55,7 +55,7 @@ const itemVariants = {
 export default function WhyChooseUs() {
   return (
     <div className="py-5 md:py-8 lg:py-10 bg-transparent overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
           <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">

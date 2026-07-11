@@ -96,7 +96,7 @@ const ExploreCategories = () => {
   const categories: any[] = categoriesRes?.data || (Array.isArray(categoriesRes) ? categoriesRes : []);
 
   return (
-    <div className="max-w-7xl mx-auto px-4 md:px-6 py-5 md:py-8 lg:py-10 overflow-hidden">
+    <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 py-5 md:py-8 lg:py-10 overflow-hidden">
 
 
       <AnimatePresence mode="wait">

@@ -5,7 +5,7 @@ import Link from 'next/link';
 export default function PartnerCta() {
   return (
     <div className="py-16 md:py-24 relative">
-      <div className="max-w-7xl mx-auto px-4 md:px-6 relative z-10">
+      <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 relative z-10">
         <div className="bg-slate-900 rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-2xl">
           {/* Decorative shapes */}
           <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FF6014]/20 rounded-full blur-[100px] transform translate-x-1/2 -translate-y-1/2 pointer-events-none" />

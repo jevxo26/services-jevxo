@@ -55,7 +55,7 @@ export default function SpecialOffers() {
 
   return (
     <section className="py-5 md:py-8 lg:py-10 overflow-hidden">
-      <div className="max-w-7xl mx-auto px-4 md:px-6">
+      <div className="w-full max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14 flex flex-col items-center">
@@ -71,12 +71,6 @@ export default function SpecialOffers() {
             Grab exclusive deals and combo service packages prepared for your home care.
           </p>
 
-          {/* Live Countdown */}
-          <div className="mt-5 flex items-center gap-2.5 bg-slate-900 text-white px-4 py-2.5 rounded-2xl shadow-lg shadow-slate-900/10">
-            <Clock size={15} className="text-[#FF6014] animate-pulse" />
-            <span className="text-xs font-semibold text-slate-400">Offer ends in</span>
-            <span className="text-sm font-black tabular-nums text-[#FF6014]">{countdown}</span>
-          </div>
         </div>
 
         {/* Loading State */}
@@ -96,7 +90,7 @@ export default function SpecialOffers() {
               vendorId: section.service?.vendor?.id,
               startIndex: sIdx * 10,
             })
-          );
+          ).slice(0, 4);
 
           return (
             <motion.div
