@@ -41,31 +41,79 @@ export function numberToWords(num: number): string {
   return words.trim();
 }
 
-// Trigger print using a hidden iframe to prevent React state loss
-export const printHTML = (htmlContent: string) => {
-  const iframe = document.createElement('iframe');
-  iframe.style.position = 'fixed';
-  iframe.style.right = '0';
-  iframe.style.bottom = '0';
-  iframe.style.width = '0';
-  iframe.style.height = '0';
-  iframe.style.border = '0';
-  document.body.appendChild(iframe);
+// Trigger print or auto-download PDF using html2pdf.js
+export const printHTML = async (htmlContent: string, filename: string = 'invoice') => {
+  if (typeof window === 'undefined') return;
 
-  const doc = iframe.contentWindow?.document || iframe.contentDocument;
-  if (doc) {
-    doc.write(htmlContent);
-    doc.close();
+  const runPrintFallback = () => {
+    const iframe = document.createElement('iframe');
+    iframe.style.position = 'fixed';
+    iframe.style.right = '0';
+    iframe.style.bottom = '0';
+    iframe.style.width = '0';
+    iframe.style.height = '0';
+    iframe.style.border = '0';
+    document.body.appendChild(iframe);
 
-    // Wait for images/resources to load then trigger print
-    setTimeout(() => {
-      iframe.contentWindow?.focus();
-      iframe.contentWindow?.print();
-      // Remove the iframe after a short delay
+    const doc = iframe.contentWindow?.document || iframe.contentDocument;
+    if (doc) {
+      doc.write(htmlContent);
+      doc.close();
+
       setTimeout(() => {
-        document.body.removeChild(iframe);
-      }, 1000);
-    }, 500);
+        iframe.contentWindow?.focus();
+        iframe.contentWindow?.print();
+        setTimeout(() => {
+          document.body.removeChild(iframe);
+        }, 1000);
+      }, 500);
+    }
+  };
+
+  try {
+    // Resolve relative image URLs to absolute ones so html2canvas can fetch them properly
+    const origin = window.location.origin;
+    const processedHtml = htmlContent.replace(/src="\/([^"]+)"/g, `src="${origin}/$1"`);
+
+    // Dynamically import html2pdf.js to avoid SSR/compilation errors
+    // @ts-ignore
+    const html2pdf = (await import('html2pdf.js')).default;
+
+    // Create a temporary container offscreen to render the content with correct dimensions
+    const element = document.createElement('div');
+    element.innerHTML = processedHtml;
+    element.style.position = 'absolute';
+    element.style.left = '-9999px';
+    element.style.top = '-9999px';
+    element.style.width = '800px'; // Align with the container width
+    element.style.background = '#ffffff';
+    document.body.appendChild(element);
+
+    // Wait a brief moment for images to load inside the element
+    await new Promise((resolve) => setTimeout(resolve, 300));
+
+    const opt = {
+      margin:       0,
+      filename:     `${filename}.pdf`,
+      image:        { type: 'jpeg' as const, quality: 0.98 },
+      html2canvas:  { 
+        scale: 2, 
+        useCORS: true, 
+        allowTaint: true,
+        letterRendering: true,
+        logging: false
+      },
+      jsPDF:        { unit: 'mm' as const, format: 'a4' as const, orientation: 'portrait' as const }
+    };
+
+    // Generate PDF and trigger download
+    await html2pdf().set(opt).from(element).save();
+
+    // Clean up
+    document.body.removeChild(element);
+  } catch (error) {
+    console.error('Failed to auto-download PDF, falling back to print window:', error);
+    runPrintFallback();
   }
 };
 
@@ -522,7 +570,7 @@ export const printBookingInvoice = (booking: any) => {
     </html>
   `;
 
-  printHTML(html);
+  printHTML(html, invoiceNo);
 };
 
 // Generate single withdrawal transaction receipt/invoice
@@ -910,7 +958,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
     </html>
   `;
 
-  printHTML(html);
+  printHTML(html, transactionNo);
 };
 
 // Generate summary report / invoice for ALL withdrawal transactions combined
@@ -1304,7 +1352,7 @@ export const printAllWithdrawsInvoice = (withdraws: any[], totalAmount: number) 
     </html>
   `;
 
-  printHTML(html);
+  printHTML(html, statementNo);
 };
 
 // Generate summary statement report for ALL completed bookings for a client
@@ -1689,5 +1737,5 @@ export const printClientStatement = (bookings: any[], totalAmount: number) => {
     </html>
   `;
 
-  printHTML(html);
+  printHTML(html, statementNo);
 };
