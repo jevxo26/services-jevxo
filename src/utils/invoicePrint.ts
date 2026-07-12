@@ -46,6 +46,20 @@ export const printHTML = async (htmlContent: string, filename: string = 'invoice
   if (typeof window === 'undefined') return;
 
   const runPrintFallback = () => {
+    const isMobile = /Mobi|Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    if (isMobile) {
+      // On mobile, native printing the iframe often prints the parent page instead.
+      // We open it in a new window/tab to show a clean HTML version of the invoice.
+      const newWindow = window.open();
+      if (newWindow) {
+        newWindow.document.write(htmlContent);
+        newWindow.document.close();
+      } else {
+        window.location.href = `data:text/html;charset=utf-8,${encodeURIComponent(htmlContent)}`;
+      }
+      return;
+    }
+
     const iframe = document.createElement('iframe');
     iframe.style.position = 'fixed';
     iframe.style.right = '0';
@@ -77,7 +91,15 @@ export const printHTML = async (htmlContent: string, filename: string = 'invoice
 
     // Dynamically import html2pdf.js to avoid SSR/compilation errors
     // @ts-ignore
-    const html2pdf = (await import('html2pdf.js')).default;
+    const html2pdfModule = await import('html2pdf.js');
+    let html2pdf = html2pdfModule.default || html2pdfModule;
+    if (html2pdf && (html2pdf as any).default) {
+      html2pdf = (html2pdf as any).default;
+    }
+
+    if (typeof html2pdf !== 'function') {
+      throw new Error('html2pdf is not a function');
+    }
 
     // Create a temporary container offscreen to render the content with correct dimensions
     const element = document.createElement('div');
@@ -99,7 +121,7 @@ export const printHTML = async (htmlContent: string, filename: string = 'invoice
       html2canvas:  { 
         scale: 2, 
         useCORS: true, 
-        allowTaint: true,
+        allowTaint: false,
         letterRendering: true,
         logging: false
       },
