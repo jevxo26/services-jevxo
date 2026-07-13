@@ -442,10 +442,10 @@ export function Navbar() {
               </nav>
             </div>
 
-            {/* Desktop & Laptop Search Bar - Centered */}
+            {/* Desktop & Laptop Search Bar - Flex auto-fill */}
             <div
               ref={desktopSearchContainerRef}
-              className="hidden md:block absolute left-1/2 -translate-x-1/2 w-full max-w-[280px] lg:max-w-md xl:max-w-lg z-20"
+              className="hidden md:block flex-1 min-w-0 mx-4 lg:mx-6 relative z-20"
             >
               <div className="w-full flex items-center bg-slate-50/60 hover:bg-slate-50/80 border border-slate-200/80 focus-within:bg-white focus-within:border-[#FF6014]/50 rounded-full pl-4 pr-3 h-10.5 gap-2.5 shadow-sm hover:shadow transition-all duration-200 focus-within:shadow-[0_4px_20px_-2px_rgba(255,96,20,0.12)]">
                 <Search className="w-4 h-4 text-slate-400 group-focus-within:text-[#FF6014] transition-colors flex-shrink-0" aria-hidden="true" />
