@@ -66,6 +66,8 @@ export default function InvoiceTemplate1({ invoice }: InvoiceTemplateProps) {
         padding: "40px",
         fontFamily: "'Inter', sans-serif",
         position: "relative",
+        boxShadow: "0 10px 30px rgba(0, 0, 0, 0.04)",
+        borderRadius: "16px",
       }}
     >
       <div>
@@ -140,35 +142,28 @@ export default function InvoiceTemplate1({ invoice }: InvoiceTemplateProps) {
         </div>
 
         {/* Invoice Title */}
-        <div style={{ textAlign: "center", marginBottom: "30px" }}>
-          <h2
-            style={{
-              fontSize: "26px",
-              fontWeight: 900,
-              color: "#0f172a",
-              margin: 0,
-              letterSpacing: "1.5px",
-              textTransform: "uppercase",
-            }}
-          >
-            Invoice
-          </h2>
+        <div style={{ textAlign: "center", marginBottom: "24px" }}>
           <div
             style={{
-              display: "flex",
+              display: "inline-flex",
+              alignItems: "center",
               justifyContent: "center",
-              gap: "40px",
-              marginTop: "10px",
-              fontSize: "13px",
-              fontWeight: 600,
-              color: "#475569",
+              gap: "16px",
+              fontSize: "11px",
+              fontWeight: 500,
+              color: "#64748b",
+              backgroundColor: "#f8fafc",
+              padding: "6px 16px",
+              borderRadius: "100px",
+              border: "1px solid #f1f5f9",
             }}
           >
             <div>
-              Date: <span style={{ fontWeight: 800, color: "#0f172a" }}>{fmtDate(invoice.date)}</span>
+              Date: <span style={{ fontWeight: 700, color: "#0f172a" }}>{fmtDate(invoice.date)}</span>
             </div>
+            <span style={{ width: "1px", height: "12px", backgroundColor: "#e2e8f0" }} />
             <div>
-              Invoice #: <span style={{ fontWeight: 800, color: "#0f172a" }}>{invoice.invoiceNumber}</span>
+              Invoice #: <span style={{ fontWeight: 700, color: "#0f172a" }}>{invoice.invoiceNumber}</span>
             </div>
           </div>
         </div>
