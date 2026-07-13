@@ -431,3 +431,27 @@ html.dashboard-html {
 .rich-content [style*="text-align: left"] {
   text-align: left;
 }
+
+/* Sidebar scrollbar customization */
+.custom-sidebar-scrollbar::-webkit-scrollbar {
+  width: 4px !important;
+  height: 4px !important;
+}
+
+.custom-sidebar-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+}
+
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 96, 20, 0.15) !important;
+  border-radius: 9999px !important;
+}
+
+.custom-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 96, 20, 0.35) !important;
+}
+
+.custom-sidebar-scrollbar {
+  scrollbar-width: thin !important;
+  scrollbar-color: rgba(255, 96, 20, 0.15) transparent !important;
+}

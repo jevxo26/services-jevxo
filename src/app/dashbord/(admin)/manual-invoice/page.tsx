@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { Plus, Search, Trash2, Eye, Users, Settings, FileText, AlertTriangle, Receipt } from "lucide-react";
+import { Plus, Search, Trash2, Eye, Users, Settings, FileText, AlertTriangle, Receipt, DollarSign, CheckCircle, AlertCircle } from "lucide-react";
 
 const API = "https://api.rajseba.com";
 
@@ -106,25 +106,68 @@ export default function ManualInvoicePage() {
 
       {/* Stat cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 print:hidden">
-        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-2px] hover:border-[#FF6014]/20 hover:shadow-md duration-300">
-          <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Invoices</div>
-          <div className="text-2xl font-black text-slate-800 mt-2">{invoices.length}</div>
-          <div className="text-xs text-slate-450 mt-1 font-medium">{countPaid} paid · {countDue} due</div>
+        {/* Total Invoices */}
+        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-[#FF6014]/20 hover:shadow-md duration-300 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-slate-350 group-hover:bg-[#FF6014] transition-colors" />
+          <div className="flex justify-between items-start pl-1">
+            <div>
+              <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Invoices</div>
+              <div className="text-3xl font-black text-slate-800 mt-2.5 leading-none">{invoices.length}</div>
+              <div className="text-xs text-slate-500 mt-3 font-semibold flex items-center gap-1.5">
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-emerald-500" /> {countPaid} paid
+                <span className="text-slate-300">·</span>
+                <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose-500" /> {countDue} due
+              </div>
+            </div>
+            <div className="p-3 bg-slate-50 text-slate-500 rounded-2xl border border-slate-100/60 shadow-xs transition-colors group-hover:bg-[#FF6014]/5 group-hover:text-[#FF6014] group-hover:border-[#FF6014]/10">
+              <FileText className="w-5 h-5" />
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-2px] hover:border-[#FF6014]/20 hover:shadow-md duration-300">
-          <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Revenue</div>
-          <div className="text-2xl font-black text-[#FF6014] mt-2">{fmt(totalRevenue)}</div>
-          <div className="text-xs text-slate-450 mt-1 font-medium">BDT · all invoices</div>
+
+        {/* Total Revenue */}
+        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-[#FF6014]/20 hover:shadow-md duration-300 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-[#FF6014]" />
+          <div className="flex justify-between items-start pl-1">
+            <div>
+              <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Revenue</div>
+              <div className="text-3xl font-black text-[#FF6014] mt-2.5 leading-none">{fmt(totalRevenue)}</div>
+              <div className="text-xs text-slate-500 mt-3 font-semibold">BDT · all generated invoices</div>
+            </div>
+            <div className="p-3 bg-[#FFF8F4] text-[#FF6014] rounded-2xl border border-[#FF6014]/15 shadow-xs transition-colors group-hover:bg-[#FF6014] group-hover:text-white">
+              <DollarSign className="w-5 h-5" />
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-2px] hover:border-[#FF6014]/20 hover:shadow-md duration-300">
-          <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Collected</div>
-          <div className="text-2xl font-black text-emerald-600 mt-2">{fmt(totalPaid)}</div>
-          <div className="text-xs text-slate-450 mt-1 font-medium">BDT · paid amount</div>
+
+        {/* Total Collected */}
+        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-emerald-250 hover:shadow-md duration-300 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-emerald-500" />
+          <div className="flex justify-between items-start pl-1">
+            <div>
+              <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Collected</div>
+              <div className="text-3xl font-black text-emerald-600 mt-2.5 leading-none">{fmt(totalPaid)}</div>
+              <div className="text-xs text-slate-500 mt-3 font-semibold">BDT · paid amount</div>
+            </div>
+            <div className="p-3 bg-emerald-50 text-emerald-600 rounded-2xl border border-emerald-100/60 shadow-xs transition-colors group-hover:bg-emerald-500 group-hover:text-white">
+              <CheckCircle className="w-5 h-5" />
+            </div>
+          </div>
         </div>
-        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-2px] hover:border-[#FF6014]/20 hover:shadow-md duration-300">
-          <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Outstanding Due</div>
-          <div className="text-2xl font-black text-rose-600 mt-2">{fmt(totalDue)}</div>
-          <div className="text-xs text-slate-450 mt-1 font-medium">BDT · pending collection</div>
+
+        {/* Outstanding Due */}
+        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-rose-250 hover:shadow-md duration-300 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-rose-500" />
+          <div className="flex justify-between items-start pl-1">
+            <div>
+              <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Outstanding Due</div>
+              <div className="text-3xl font-black text-rose-600 mt-2.5 leading-none">{fmt(totalDue)}</div>
+              <div className="text-xs text-slate-500 mt-3 font-semibold">BDT · pending collection</div>
+            </div>
+            <div className="p-3 bg-rose-50 text-rose-600 rounded-2xl border border-rose-100/60 shadow-xs transition-colors group-hover:bg-rose-500 group-hover:text-white">
+              <AlertCircle className="w-5 h-5" />
+            </div>
+          </div>
         </div>
       </div>
 

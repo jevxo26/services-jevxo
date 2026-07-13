@@ -3,6 +3,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import { ArrowLeft, User, FileText, Palette, Package, Plus, Trash2, Check, AlertTriangle, FilePlus2 } from "lucide-react";
+import { toast } from "sonner";
 
 const API = "https://api.rajseba.com";
 
@@ -216,6 +217,7 @@ export default function CreateInvoicePage() {
             body: JSON.stringify(profilePayload),
           });
         }
+        toast.success("Client registered successfully!");
       }
 
       const body = {
@@ -245,9 +247,11 @@ export default function CreateInvoicePage() {
         throw new Error(d.message || "Failed to create invoice");
       }
       const created = await res.json();
+      toast.success("Invoice created successfully!");
       router.push(`/dashbord/manual-invoice/invoice/${created.id}`);
     } catch (err: any) {
       setError(err.message);
+      toast.error(err.message || "Failed to create invoice");
     } finally {
       setSubmitting(false);
     }

@@ -8,6 +8,7 @@ import { logout as authLogout } from "@/redux/features/auth/authSlice";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useGetNotificationsQuery, useMarkNotificationAsReadMutation } from "@/redux/features/notification/notificationApi";
+import { useGetAllBookingsQuery } from "@/redux/features/admin/booking";
 import { toggleLanguage } from "@/redux/features/shared/langSlice";
 import { format } from "date-fns";
 
@@ -27,6 +28,11 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const logout = () => dispatch(authLogout());
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [showSearchResults, setShowSearchResults] = useState(false);
+  const searchContainerRef = useRef<HTMLDivElement>(null);
+  const { data: bookingsRes, isLoading: bookingsLoading } = useGetAllBookingsQuery(undefined, { skip: !mounted });
 
   const [profileDropdownOpen, setProfileDropdownOpen] = useState(false);
   const profileDropdownRef = useRef<HTMLDivElement>(null);
@@ -152,6 +158,9 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
       if (notificationDropdownRef.current && !notificationDropdownRef.current.contains(event.target as Node)) {
         setNotificationDropdownOpen(false);
       }
+      if (searchContainerRef.current && !searchContainerRef.current.contains(event.target as Node)) {
+        setShowSearchResults(false);
+      }
     }
     document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
@@ -180,13 +189,119 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
         <button onClick={onMenuClick} className="p-2 text-slate-500 hover:text-slate-700 hover:bg-slate-100 rounded-xl md:hidden shrink-0 focus:outline-none transition-colors">
           <Menu size={20} />
         </button>
-        <div className="relative w-full max-w-md hidden md:block group">
+        <div ref={searchContainerRef} className="relative w-full max-w-md hidden md:block group">
           <Search className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400 group-focus-within:text-[#FF6014] transition-colors" size={16} />
           <input
             type="text"
+            value={searchQuery}
+            onChange={(e) => {
+              setSearchQuery(e.target.value);
+              setShowSearchResults(true);
+            }}
+            onFocus={() => setShowSearchResults(true)}
             placeholder={lang === "bn" ? "বুকিং আইডি, সার্ভিস, ক্লায়েন্ট খুঁজুন..." : "Search booking ID, service, client..."}
-            className="w-full bg-slate-50 border border-slate-100 hover:border-slate-200 rounded-2xl pl-11 pr-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#FF6014]/30 focus:ring-4 focus:ring-[#FFF8F4] transition-all shadow-sm"
+            className="w-full bg-slate-50 border border-slate-100 hover:border-slate-200 rounded-2xl pl-11 pr-10 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#FF6014]/30 focus:ring-4 focus:ring-[#FFF8F4] transition-all shadow-sm"
           />
+          {searchQuery && (
+            <button
+              onClick={() => {
+                setSearchQuery("");
+                setShowSearchResults(false);
+              }}
+              className="absolute right-4 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 transition-colors"
+            >
+              <X size={14} />
+            </button>
+          )}
+
+          {showSearchResults && searchQuery && (() => {
+            const bookings = bookingsRes?.data || [];
+            const results = bookings.filter((b: any) => {
+              const q = searchQuery.toLowerCase();
+              const matchId = String(b.id).includes(q);
+              const matchService = b.service?.name?.toLowerCase().includes(q) || 
+                                   b.nestedService?.name?.toLowerCase().includes(q) ||
+                                   b.pkg?.name?.toLowerCase().includes(q) ||
+                                   b.subServices?.some((s: any) => s.name?.toLowerCase().includes(q));
+              const matchUser = b.user?.name?.toLowerCase().includes(q) || 
+                                b.user?.email?.toLowerCase().includes(q) ||
+                                b.user?.phone?.toLowerCase().includes(q);
+              return matchId || matchService || matchUser;
+            });
+
+            return (
+              <div className="absolute left-0 right-0 mt-2 bg-white rounded-2xl shadow-xl border border-slate-100 overflow-hidden z-50 max-h-[350px] overflow-y-auto">
+                <div className="px-4 py-2.5 bg-slate-50 border-b border-slate-100 flex items-center justify-between">
+                  <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                    {lang === "bn" ? "বুকিং ফলাফল" : "Booking Search Results"}
+                  </span>
+                  <span className="text-[10px] font-bold text-slate-400 bg-white border border-slate-150 px-2 py-0.5 rounded-full shrink-0">
+                    {results.length} {lang === "bn" ? "টি পাওয়া গেছে" : "found"}
+                  </span>
+                </div>
+                {bookingsLoading ? (
+                  <div className="p-8 text-center flex flex-col items-center justify-center gap-2">
+                    <div className="w-5 h-5 border-2 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
+                    <span className="text-xs text-slate-400 font-medium">
+                      {lang === "bn" ? "বুকিং খোঁজা হচ্ছে..." : "Searching bookings..."}
+                    </span>
+                  </div>
+                ) : results.length > 0 ? (
+                  <div className="p-1.5 space-y-0.5">
+                    {results.map((b: any) => {
+                      const clientName = b.user?.name || "Guest Visitor";
+                      const serviceName = b.service?.name || b.nestedService?.name || b.pkg?.name || "General Service";
+                      const statusColors: Record<string, string> = {
+                        pending: 'bg-amber-50 text-amber-600',
+                        assigned: 'bg-blue-50 text-blue-600',
+                        on_the_way: 'bg-purple-50 text-purple-600',
+                        completed: 'bg-emerald-50 text-emerald-600',
+                        cancelled: 'bg-red-50 text-red-600'
+                      };
+                      return (
+                        <button
+                          key={b.id}
+                          onClick={() => {
+                            setSearchQuery("");
+                            setShowSearchResults(false);
+                            router.push(`/dashbord/manage-bookings/${b.id}`);
+                          }}
+                          className="w-full flex items-center justify-between p-2.5 rounded-xl hover:bg-slate-50 transition-all text-left group"
+                        >
+                          <div className="min-w-0 flex-1">
+                            <div className="flex items-center gap-2 mb-0.5">
+                              <span className="text-xs font-black text-slate-800 truncate group-hover:text-[#FF6014] transition-colors">
+                                {serviceName}
+                              </span>
+                              <span className="text-[10px] font-bold text-indigo-600 bg-indigo-50 px-2 py-0.5 rounded-full shrink-0">
+                                #{b.id}
+                              </span>
+                            </div>
+                            <p className="text-[10px] text-slate-400 font-medium truncate">
+                              Client: {clientName}
+                            </p>
+                          </div>
+                          <div className="text-right pl-3 shrink-0">
+                            <span className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
+                              statusColors[b.status?.toLowerCase()] || 'bg-slate-50 text-slate-600'
+                            }`}>
+                              {b.status}
+                            </span>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="p-8 text-center text-xs text-slate-400 font-medium">
+                    {lang === "bn"
+                      ? `"${searchQuery}" এর জন্য কোনো বুকিং পাওয়া যায়নি`
+                      : `No bookings found matching "${searchQuery}"`}
+                  </div>
+                )}
+              </div>
+            );
+          })()}
         </div>
       </div>
 

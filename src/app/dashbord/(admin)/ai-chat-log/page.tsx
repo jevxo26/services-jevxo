@@ -253,6 +253,7 @@ export default function AiChatLogPage() {
   const [searchQuery, setSearchQuery] = useState("");
   const [isRefreshing, setIsRefreshing] = useState(false);
   const [lastRefreshed, setLastRefreshed] = useState(new Date());
+  const [activeTab, setActiveTab] = useState<"sessions" | "chat" | "tester">("sessions");
 
   const loadSessions = () => {
     try {
@@ -333,19 +334,55 @@ export default function AiChatLogPage() {
       </div>
 
       {/* ── Stats ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label="Total Conversations" value={totalSessions} sub="Active chat threads" icon={MessageSquare} accent="bg-gradient-to-br from-[#FF6014] to-[#E0530A]" pulse />
         <StatCard label="Total AI Messages" value={totalMessages} sub="User queries sent" icon={Bot} accent="bg-gradient-to-br from-indigo-500 to-indigo-700" />
         <StatCard label="Avg Messages / Session" value={avgMsgsPerSession} sub="Based on all threads" icon={TrendingUp} accent="bg-gradient-to-br from-amber-500 to-amber-600" />
         <StatCard label="Today's Sessions" value={todaySessions} sub="New conversations today" icon={Clock} accent="bg-gradient-to-br from-emerald-500 to-emerald-600" />
       </div>
 
+      {/* ── Mobile Tab Switcher ── */}
+      <div className="lg:hidden flex border border-slate-100 bg-white rounded-2xl p-1 gap-1 shadow-sm">
+        <button
+          onClick={() => setActiveTab("sessions")}
+          className={`flex-1 py-2 text-center text-xs font-black rounded-xl transition-all ${
+            activeTab === "sessions"
+              ? "bg-[#FFF8F4] text-[#FF6014]"
+              : "text-slate-500 hover:bg-slate-50"
+          }`}
+        >
+          Sessions ({filteredSessions.length})
+        </button>
+        <button
+          onClick={() => setActiveTab("chat")}
+          className={`flex-1 py-2 text-center text-xs font-black rounded-xl transition-all ${
+            activeTab === "chat"
+              ? "bg-[#FFF8F4] text-[#FF6014]"
+              : "text-slate-500 hover:bg-slate-50"
+          }`}
+        >
+          Chat Detail
+        </button>
+        <button
+          onClick={() => setActiveTab("tester")}
+          className={`flex-1 py-2 text-center text-xs font-black rounded-xl transition-all ${
+            activeTab === "tester"
+              ? "bg-[#FFF8F4] text-[#FF6014]"
+              : "text-slate-500 hover:bg-slate-50"
+          }`}
+        >
+          AI Tester
+        </button>
+      </div>
+
       {/* ── Main Panel: Sessions List + Session Detail + AI Tester ── */}
-      <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden" style={{ height: "72vh" }}>
-        <div className="flex h-full">
+      <div className="bg-white rounded-3xl border border-slate-100 shadow-sm overflow-hidden" style={{ minHeight: "550px", height: "72vh" }}>
+        <div className="flex h-full w-full">
 
           {/* ── Left: Sessions List ── */}
-          <div className="w-[300px] border-r border-slate-100 flex flex-col bg-slate-50/30 shrink-0">
+          <div className={`w-full lg:w-[300px] border-r border-slate-100 flex-col bg-slate-50/30 shrink-0 ${
+            activeTab === "sessions" ? "flex" : "hidden"
+          } lg:flex`}>
             <div className="px-4 py-4 border-b border-slate-100 bg-white space-y-3">
               <div className="flex items-center justify-between">
                 <h2 className="text-sm font-black text-slate-900 flex items-center gap-2">
@@ -376,13 +413,21 @@ export default function AiChatLogPage() {
                   <Bot size={20} className="text-slate-300 mx-auto mb-2" />
                   <p className="text-xs text-slate-400 font-medium">
                     {sessions.length === 0
-                      ? "No AI chat sessions yet. Users will appear here after chatting on the home page."
+                       ? "No AI chat sessions yet. Users will appear here after chatting on the home page."
                       : "No matching sessions."}
                   </p>
                 </div>
               ) : (
                 filteredSessions.map((s, i) => (
-                  <SessionRow key={i} session={s} isActive={activeSession?.sessionId === s.sessionId} onClick={() => setActiveSession(s)} />
+                  <SessionRow
+                    key={i}
+                    session={s}
+                    isActive={activeSession?.sessionId === s.sessionId}
+                    onClick={() => {
+                      setActiveSession(s);
+                      setActiveTab("chat");
+                    }}
+                  />
                 ))
               )}
             </div>
@@ -396,18 +441,26 @@ export default function AiChatLogPage() {
           </div>
 
           {/* ── Middle: Session Detail ── */}
-          <div className="flex-1 flex flex-col min-w-0 border-r border-slate-100">
+          <div className={`flex-1 flex-col min-w-0 border-r border-slate-100 ${
+            activeTab === "chat" ? "flex" : "hidden"
+          } lg:flex`}>
             {activeSession ? (
               <>
                 <div className="px-5 py-3 border-b border-slate-100 bg-white flex items-center gap-3">
+                  <button
+                    onClick={() => setActiveTab("sessions")}
+                    className="lg:hidden p-1.5 text-slate-400 hover:text-[#FF6014] hover:bg-slate-50 rounded-xl transition-all shrink-0"
+                  >
+                    <ChevronRight className="rotate-180 w-5 h-5" />
+                  </button>
                   <div className={`w-9 h-9 rounded-full bg-gradient-to-br ${avatarColor(activeSession.user?.name || "G")} flex items-center justify-center text-white font-black text-sm shrink-0`}>
                     {getInitials(activeSession.user?.name || "G")}
                   </div>
-                  <div>
-                    <p className="font-black text-slate-900 text-sm">{activeSession.user?.name || "Guest Visitor"}</p>
-                    <p className="text-[11px] text-slate-400 font-medium">{activeSession.user?.email || "Anonymous"}</p>
+                  <div className="min-w-0">
+                    <p className="font-black text-slate-900 text-sm truncate">{activeSession.user?.name || "Guest Visitor"}</p>
+                    <p className="text-[11px] text-slate-400 font-medium truncate">{activeSession.user?.email || "Anonymous"}</p>
                   </div>
-                  <div className="ml-auto flex items-center gap-2">
+                  <div className="ml-auto flex items-center gap-2 shrink-0">
                     <span className="text-[10px] font-black text-emerald-600 bg-emerald-50 border border-emerald-100 px-2.5 py-1 rounded-full">
                       {activeSession.messages.length} Messages
                     </span>
@@ -423,16 +476,23 @@ export default function AiChatLogPage() {
                   ))}
                 </div>
 
-                <div className="px-5 py-2.5 border-t border-slate-100 bg-white">
-                  <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest">
-                    <span>Session: {activeSession.sessionId.substring(0, 14)}</span>
-                    <span>{format(new Date(activeSession.startedAt), "MMM d, hh:mm a")}</span>
-                    <span className="ml-auto">{activeSession.messages.filter(m => m.role === "user").length} user msgs</span>
+                <div className="px-5 py-2.5 border-t border-slate-100 bg-white shrink-0">
+                  <div className="flex items-center gap-4 text-[10px] font-bold text-slate-400 uppercase tracking-widest overflow-hidden">
+                    <span className="truncate">Session: {activeSession.sessionId.substring(0, 14)}</span>
+                    <span className="shrink-0">{format(new Date(activeSession.startedAt), "MMM d, hh:mm a")}</span>
+                    <span className="ml-auto shrink-0">{activeSession.messages.filter(m => m.role === "user").length} user msgs</span>
                   </div>
                 </div>
               </>
             ) : (
               <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
+                <button
+                  onClick={() => setActiveTab("sessions")}
+                  className="lg:hidden mb-4 flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#FF6014] bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl transition-all"
+                >
+                  <ChevronRight className="rotate-180 w-4 h-4" />
+                  Go to Sessions
+                </button>
                 <div className="w-16 h-16 bg-[#FFF8F4] border border-[#FF6014]/20 rounded-3xl flex items-center justify-center mx-auto mb-4">
                   <Bot size={28} className="text-[#FF6014]/60" />
                 </div>
@@ -445,7 +505,9 @@ export default function AiChatLogPage() {
           </div>
 
           {/* ── Right: AI Workflow Tester ── */}
-          <div className="w-[320px] shrink-0 flex flex-col border-l border-slate-100 bg-white">
+          <div className={`w-full lg:w-[320px] shrink-0 flex-col border-l border-slate-100 bg-white ${
+            activeTab === "tester" ? "flex" : "hidden"
+          } lg:flex`}>
             <div className="px-4 py-3 border-b border-slate-100 bg-gradient-to-r from-[#FF6014]/5 to-transparent">
               <span className="text-xs font-black text-[#FF6014] flex items-center gap-1.5">
                 <Sparkles size={13} />

@@ -324,19 +324,20 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         />
 
         {/* Brand Header */}
-        <div className="p-6 flex items-center justify-between border-b border-slate-100 relative z-10">
-          <Link href="/" className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-[#FF6014] to-[#FF7C71] rounded-xl flex items-center justify-center font-bold text-white text-lg shadow-md shadow-[#FF6014]/20">
-              R
-            </div>
+        <div className="p-5 flex items-start justify-between border-b border-slate-100 relative z-10">
+          <Link href="/" className="flex flex-col items-start gap-2">
+            <img
+              src="/rajshiblogo.png"
+              alt="Rajseba Logo"
+              className={collapsed ? "h-8 w-8 object-contain shrink-0" : "h-11 w-auto object-contain shrink-0"}
+            />
             {!collapsed && (
-              <div className="flex flex-col">
-                <span className="font-bold text-lg leading-tight tracking-tight text-slate-800">Rajseba</span>
-                <span className="text-[10px] text-[#FF6014] font-bold tracking-wider uppercase -mt-0.5">{roleName}</span>
-              </div>
+              <span className="text-[9px] text-[#FF6014] font-black tracking-wider uppercase bg-[#FFF8F4] border border-[#FF6014]/20 px-2.5 py-0.5 rounded-full shrink-0">
+                {roleName}
+              </span>
             )}
           </Link>
-          <button onClick={onClose} className="md:hidden text-slate-400 hover:text-slate-700 p-1.5 hover:bg-slate-100 rounded-lg transition-colors">
+          <button onClick={onClose} className="md:hidden text-slate-400 hover:text-slate-700 p-1.5 hover:bg-slate-100 rounded-lg transition-colors shrink-0">
             <X size={18} />
           </button>
         </div>
@@ -358,7 +359,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         )}
 
         {/* Accordion Tree Navigation Menu */}
-        <nav className="flex-1 p-4 space-y-1 overflow-y-auto relative z-10">
+        <nav className="flex-1 p-4 space-y-1 overflow-y-auto custom-sidebar-scrollbar relative z-10">
           {sidebarGroups.map((group, index) => {
             const hasChildren = group.children && group.children.length > 0;
             const isExpanded = expandedGroup === group.label;
@@ -382,7 +383,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                     onClick={onClose}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group border relative ${isDirectActive
                       ? "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-extrabold shadow-md shadow-[#FF6014]/20 scale-[1.01] border-transparent"
-                      : "border-transparent text-slate-600 hover:bg-slate-50/70 hover:text-slate-900 hover:translate-x-1 font-semibold"
+                      : "border-transparent text-slate-600 hover:bg-[#FF6014]/5 hover:text-[#FF6014] hover:translate-x-1 font-semibold"
                       }`}
                   >
                     {isDirectActive && (
@@ -398,7 +399,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                       ? isExpanded
                         ? "bg-[#FFF8F4] border-[#FF6014]/15 text-[#FF6014] font-extrabold shadow-sm"
                         : "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white font-extrabold shadow-md shadow-[#FF6014]/20 scale-[1.01] border-transparent"
-                      : "border-transparent text-slate-600 hover:bg-slate-50/70 hover:text-slate-900 hover:translate-x-1 font-semibold"
+                      : "border-transparent text-slate-600 hover:bg-[#FF6014]/5 hover:text-[#FF6014] hover:translate-x-1 font-semibold"
                       }`}
                   >
                     {containsActive && isExpanded && (
@@ -457,7 +458,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                               onClick={onClose}
                               className={`flex items-center gap-2.5 pl-9 pr-3 py-2.5 rounded-xl text-[13px] font-bold transition-all relative group border ${isChildActive
                                 ? "bg-gradient-to-r from-[#FF6014] to-[#FF7C71] text-white shadow-md shadow-[#FF6014]/15 border-transparent scale-[1.01]"
-                                : "border-transparent text-slate-500 hover:bg-slate-50/50 hover:text-slate-800 hover:translate-x-1.5"
+                                : "border-transparent text-slate-500 hover:bg-[#FF6014]/5 hover:text-[#FF6014] hover:translate-x-1.5"
                                 }`}
                             >
                               {/* Branch hook curve SVG-style path connector */}
@@ -506,7 +507,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         <div className="p-4 border-t border-slate-100 relative z-10 flex flex-col gap-2">
           <button
             onClick={() => dispatch(toggleLanguage())}
-            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#FF6014] w-full rounded-xl hover:bg-[#FFF8F4]/30 transition-all duration-200"
+            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#FF6014] w-full rounded-xl hover:bg-[#FF6014]/5 transition-all duration-200"
           >
             <Languages size={20} />
             {!collapsed && <span className="text-sm font-semibold">{lang === "bn" ? "Switch to English" : "বাংলায় পরিবর্তন করুন"}</span>}
@@ -514,7 +515,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#E0530A] w-full rounded-xl hover:bg-[#FFF8F4]/30 transition-all duration-200"
+            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#E0530A] w-full rounded-xl hover:bg-[#FF6014]/5 transition-all duration-200"
           >
             <LogOut size={20} />
             {!collapsed && <span className="text-sm font-semibold">{lang === "bn" ? "লগআউট" : "Logout"}</span>}
