@@ -1,10 +1,35 @@
 "use client";
 
-import { ShieldAlert, Wallet, RefreshCw } from "lucide-react";
+import { ShieldAlert, Wallet, RefreshCw, Clock, CheckCircle2, TrendingUp } from "lucide-react";
+import { motion } from "framer-motion";
 import WithdrawDetailModal from "./components/WithdrawDetailModal";
 import WithdrawActionModal from "./components/WithdrawActionModal";
 import WithdrawTable from "./components/WithdrawTable";
 import { useWithdrawState } from "./hooks/useWithdrawState";
+
+const staggerContainer: any = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardFadeUp: any = {
+  hidden: { opacity: 0, y: 20, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: "spring",
+      stiffness: 100,
+      damping: 15,
+    },
+  },
+};
 
 export default function AdminWithdrawPage() {
   const {
@@ -36,6 +61,39 @@ export default function AdminWithdrawPage() {
     );
   }
 
+  const stats = [
+    {
+      label: "Pending",
+      value: totalPending,
+      icon: Clock,
+      gradient: "from-amber-500/10 to-transparent",
+      bgLight: "bg-amber-50 border-amber-100/80 text-amber-600",
+      borderColor: "hover:border-amber-200/70",
+      shadow: "hover:shadow-amber-500/5 hover:shadow-xl",
+      textClass: "text-amber-600",
+    },
+    {
+      label: "Approved",
+      value: totalApproved,
+      icon: CheckCircle2,
+      gradient: "from-emerald-500/10 to-transparent",
+      bgLight: "bg-emerald-50 border-emerald-100/80 text-emerald-600",
+      borderColor: "hover:border-emerald-200/70",
+      shadow: "hover:shadow-emerald-500/5 hover:shadow-xl",
+      textClass: "text-emerald-600",
+    },
+    {
+      label: "Total Paid Out",
+      value: `৳${totalAmount.toLocaleString()}`,
+      icon: TrendingUp,
+      gradient: "from-indigo-500/10 to-transparent",
+      bgLight: "bg-indigo-50 border-indigo-100/80 text-indigo-600",
+      borderColor: "hover:border-indigo-200/70",
+      shadow: "hover:shadow-indigo-500/5 hover:shadow-xl",
+      textClass: "text-slate-900",
+    },
+  ];
+
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Header */}
@@ -58,20 +116,40 @@ export default function AdminWithdrawPage() {
       </div>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Pending</p>
-          <p className="text-3xl font-bold text-amber-600 mt-1">{totalPending}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Approved</p>
-          <p className="text-3xl font-bold text-emerald-600 mt-1">{totalApproved}</p>
-        </div>
-        <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
-          <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">Total Paid Out</p>
-          <p className="text-3xl font-bold text-slate-900 mt-1">৳{totalAmount.toLocaleString()}</p>
-        </div>
-      </div>
+      <motion.div
+        variants={staggerContainer}
+        initial="hidden"
+        animate="show"
+        className="grid grid-cols-1 sm:grid-cols-3 gap-5"
+      >
+        {stats.map((stat, i) => {
+          const Icon = stat.icon;
+          return (
+            <motion.div
+              key={i}
+              variants={cardFadeUp}
+              whileHover={{ y: -5, scale: 1.02 }}
+              className={`group bg-white p-6 rounded-3xl border border-slate-100 transition-all duration-300 relative overflow-hidden flex items-center justify-between ${stat.borderColor} ${stat.shadow}`}
+            >
+              {/* Background gradient bubble on hover */}
+              <div className={`absolute -right-6 -bottom-6 w-24 h-24 bg-gradient-to-br ${stat.gradient} rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`} />
+              
+              <div className="space-y-1.5 z-10">
+                <p className="text-xs font-bold text-slate-400 uppercase tracking-widest">
+                  {stat.label}
+                </p>
+                <h4 className={`text-3xl font-black ${stat.textClass} tracking-tight`}>
+                  {stat.value}
+                </h4>
+              </div>
+              
+              <div className={`p-4 rounded-2xl border ${stat.bgLight} shrink-0 transition-all duration-300 group-hover:scale-110 shadow-xs z-10`}>
+                <Icon className="w-6 h-6" />
+              </div>
+            </motion.div>
+          );
+        })}
+      </motion.div>
 
       {/* Table */}
       {isLoading ? (

@@ -187,6 +187,7 @@ export default function AgentTable({
     <CustomTable
       columns={columns}
       data={agents}
+      rowClassName={(row) => row.id === openDropdownId ? "relative z-30" : ""}
       searchKey="name"
       searchPlaceholder="Search agents by name..."
       filterKey="status"

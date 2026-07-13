@@ -206,7 +206,7 @@ export default function CategoryDetailClientPage({ slug }: { slug: string }) {
             initial={{ y: 100, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ y: 100, opacity: 0 }}
-            className="fixed bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center"
+            className="fixed bottom-[88px] md:bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center"
           >
             <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/50 shadow-[0_12px_40px_rgba(255,96,20,0.15)] rounded-[24px] p-3 flex items-center justify-between gap-6 w-full max-w-md animate-none">
               <div className="flex items-center gap-3 min-w-0 pl-1">

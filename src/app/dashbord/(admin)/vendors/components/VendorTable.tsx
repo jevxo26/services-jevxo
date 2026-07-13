@@ -205,6 +205,7 @@ export default function VendorTable({
     <CustomTable
       columns={columns}
       data={vendors}
+      rowClassName={(row) => row.id === openDropdownId ? "relative z-30" : ""}
       searchKey="name"
       searchPlaceholder="Search vendors by name..."
       filterKey="status"
