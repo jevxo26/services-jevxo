@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { useParams, useRouter } from "next/navigation";
+import { ArrowLeft, DollarSign, Download, Printer, Check, AlertTriangle, FileText } from "lucide-react";
 import InvoiceTemplate1 from "@/components/manual-invoice/InvoiceTemplate1";
 import InvoiceTemplate2 from "@/components/manual-invoice/InvoiceTemplate2";
 
@@ -19,7 +20,7 @@ export default function InvoiceViewPage() {
   const [paySuccess, setPaySuccess] = useState("");
 
   const authHeader = () => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("access_token") || "" : "";
+    const token = typeof window !== "undefined" ? localStorage.getItem("rajseba_access_token") || localStorage.getItem("token") || "" : "";
     return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
   };
 
@@ -58,7 +59,7 @@ export default function InvoiceViewPage() {
       setInvoice(updated);
       setShowPayModal(false);
       setPayAmount("");
-      setPaySuccess(`✅ Payment of ${amount.toLocaleString()} BDT recorded.`);
+      setPaySuccess(`Payment of ${amount.toLocaleString()} BDT recorded.`);
       setTimeout(() => setPaySuccess(""), 4000);
     } catch (err: any) {
       setError(err.message);
@@ -96,60 +97,95 @@ export default function InvoiceViewPage() {
   if (error && !invoice) {
     return (
       <div className="mi-container">
-        <div className="mi-alert mi-alert-error">{error}</div>
-        <button className="mi-btn mi-btn-secondary" onClick={() => router.back()}>← Back</button>
+        <div className="mi-alert mi-alert-error" style={{ margin: "0 0 20px" }}><AlertTriangle size={18} /> {error}</div>
+        <button className="mi-btn mi-btn-secondary" onClick={() => router.back()}>
+          <ArrowLeft size={16} /> Back
+        </button>
       </div>
     );
   }
 
   return (
-    <div className="mi-container">
+    <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300 pb-16">
       {/* Action bar */}
-      <div className="mi-header mi-no-print">
-        <div>
-          <h1 className="mi-title">Invoice #{invoice.invoiceNumber}</h1>
-          <p className="mi-subtitle">
-            {invoice.customer.name} ·{" "}
-            <span className={`mi-badge ${invoice.paymentStatus === "Paid" ? "mi-badge-paid" : "mi-badge-due"}`}>
-              {invoice.paymentStatus}
-            </span>
-          </p>
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-6 print:hidden">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 bg-[#FFF8F4] text-[#FF6014] rounded-2xl border border-[#FF6014]/15 shadow-xs">
+            <FileText className="w-6 h-6" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">Invoice #{invoice.invoiceNumber}</h1>
+            <div className="flex items-center gap-2 mt-1">
+              <span className="text-xs text-slate-400 font-semibold">{invoice.customer.name}</span>
+              <span className="w-1.5 h-1.5 rounded-full bg-slate-300" />
+              <span className={`px-2 py-0.5 rounded text-[8px] font-black uppercase tracking-wider ${
+                invoice.paymentStatus === "Paid"
+                  ? "bg-emerald-50 text-emerald-600 border border-emerald-200/50"
+                  : "bg-rose-50 text-rose-600 border border-rose-200/50"
+              }`}>
+                {invoice.paymentStatus}
+              </span>
+            </div>
+          </div>
         </div>
-        <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
-          <button className="mi-btn mi-btn-secondary" onClick={() => router.push("/dashbord/manual-invoice")}>
-            ← Dashboard
+        <div className="flex items-center gap-2.5 flex-wrap">
+          <button
+            className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
+            onClick={() => router.push("/dashbord/manual-invoice")}
+          >
+            <ArrowLeft size={16} /> Dashboard
           </button>
           {invoice.paymentStatus !== "Paid" && (
-            <button className="mi-btn mi-btn-secondary" style={{ color: "#15803d", borderColor: "rgba(21,128,61,.3)" }} onClick={() => setShowPayModal(true)}>
-              💰 Receive Payment
+            <button
+              className="flex items-center gap-2 bg-emerald-50 border border-emerald-200/50 hover:bg-emerald-600 hover:text-white text-emerald-600 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
+              onClick={() => setShowPayModal(true)}
+            >
+              <DollarSign size={16} /> Receive Payment
             </button>
           )}
-          <button className="mi-btn mi-btn-secondary" onClick={handleDownloadPDF}>
-            ⬇️ Download PDF
+          <button
+            className="flex items-center gap-2 bg-slate-50 border border-slate-205 hover:bg-slate-105 text-slate-600 font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
+            onClick={handleDownloadPDF}
+          >
+            <Download size={16} /> Download PDF
           </button>
-          <button className="mi-btn mi-btn-primary" onClick={handlePrint}>
-            🖨️ Print
+          <button
+            className="flex items-center gap-2 bg-[#FF6014] hover:bg-[#e0530a] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all shadow-sm shadow-orange-500/10 cursor-pointer active:scale-95"
+            onClick={handlePrint}
+          >
+            <Printer size={16} /> Print
           </button>
         </div>
       </div>
 
-      {paySuccess && <div className="mi-alert mi-alert-success mi-no-print">{paySuccess}</div>}
-      {error && <div className="mi-alert mi-alert-error mi-no-print">{error}</div>}
+      {paySuccess && (
+        <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200/50 text-emerald-600 rounded-xl p-4 text-xs font-bold print:hidden">
+          <Check size={18} /> {paySuccess}
+        </div>
+      )}
+      {error && (
+        <div className="flex items-center gap-2 bg-rose-50 border border-rose-200/50 text-rose-600 rounded-xl p-4 text-xs font-bold print:hidden">
+          <AlertTriangle size={18} /> {error}
+        </div>
+      )}
 
       {/* Due amount warning banner */}
       {invoice.paymentStatus === "Due" && (
-        <div className="mi-no-print" style={{ background: "#fff7ed", border: "1px solid #fed7aa", borderRadius: 10, padding: "12px 18px", marginBottom: 20, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
-          <span style={{ color: "#9a3412", fontWeight: 600, fontSize: "0.9rem" }}>
-            ⚠️ Outstanding due: <strong>{Number(invoice.dueAmount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</strong>
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 bg-amber-50/50 border border-amber-200/50 rounded-2xl p-4 print:hidden">
+          <span className="text-amber-800 font-bold text-xs flex items-center gap-2">
+            <AlertTriangle size={18} className="text-amber-600" /> Outstanding due: <strong>{Number(invoice.dueAmount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</strong>
           </span>
-          <button className="mi-btn mi-btn-secondary mi-btn-sm" style={{ color: "#c2410c", borderColor: "rgba(194,65,12,.3)" }} onClick={() => setShowPayModal(true)}>
+          <button
+            className="bg-amber-600 hover:bg-amber-700 text-white font-bold px-4 py-2 rounded-xl text-xs transition-all cursor-pointer active:scale-95"
+            onClick={() => setShowPayModal(true)}
+          >
             Receive Payment
           </button>
         </div>
       )}
 
       {/* Invoice template */}
-      <div id="invoice-print-area" className="mi-print-area" style={{ maxWidth: "100%", overflowX: "auto" }}>
+      <div id="invoice-print-area" className="w-full overflow-x-auto bg-white rounded-3xl border border-slate-100 p-2 sm:p-6 shadow-xs">
         {invoice.templateName === "template2" ? (
           <InvoiceTemplate2 invoice={invoice} />
         ) : (
@@ -159,27 +195,39 @@ export default function InvoiceViewPage() {
 
       {/* Payment modal */}
       {showPayModal && (
-        <div className="mi-modal-backdrop">
-          <div className="mi-modal">
-            <div style={{ fontSize: "2.5rem", marginBottom: 12 }}>💰</div>
-            <h3 style={{ fontSize: "1.2rem", fontWeight: 800, color: "#0f172a", marginBottom: 6 }}>Receive Payment</h3>
-            <p style={{ color: "#64748b", fontSize: "0.85rem", marginBottom: 20 }}>
-              Total Due: <strong style={{ color: "#c2410c" }}>{Number(invoice.dueAmount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</strong>
+        <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 animate-in fade-in duration-200 print:hidden">
+          <div className="bg-white rounded-3xl p-8 max-w-sm w-full mx-4 shadow-xl border border-slate-100 text-center animate-in zoom-in-95 duration-200">
+            <div className="flex justify-center mb-4">
+              <div className="p-3 bg-orange-50 text-[#FF6014] rounded-2xl">
+                <DollarSign size={32} />
+              </div>
+            </div>
+            <h3 className="text-base font-extrabold text-slate-900 mb-1">Receive Payment</h3>
+            <p className="text-xs text-slate-455 mb-6">
+              Total Due: <strong className="text-rose-600">{Number(invoice.dueAmount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</strong>
             </p>
             <input
-              className="mi-input"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 mb-6"
               type="number"
               placeholder="Enter amount received (BDT)"
               value={payAmount}
               onChange={e => setPayAmount(e.target.value)}
               min="1"
               max={invoice.dueAmount}
-              style={{ marginBottom: 16, width: "100%" }}
               autoFocus
             />
-            <div style={{ display: "flex", gap: 10, justifyContent: "center" }}>
-              <button className="mi-btn mi-btn-secondary" onClick={() => setShowPayModal(false)}>Cancel</button>
-              <button className="mi-btn mi-btn-primary" onClick={handlePayment} disabled={paying}>
+            <div className="flex gap-3 justify-center">
+              <button
+                className="flex-1 bg-slate-50 border border-slate-200 text-slate-600 font-bold px-4 py-2.5 rounded-xl text-xs transition-all cursor-pointer hover:bg-slate-100 active:scale-95"
+                onClick={() => setShowPayModal(false)}
+              >
+                Cancel
+              </button>
+              <button
+                className="flex-1 bg-[#FF6014] hover:bg-[#e0530a] text-white font-bold px-4 py-2.5 rounded-xl text-xs transition-all cursor-pointer shadow-sm shadow-orange-500/10 active:scale-95"
+                onClick={handlePayment}
+                disabled={paying}
+              >
                 {paying ? "Saving..." : "Confirm Payment"}
               </button>
             </div>

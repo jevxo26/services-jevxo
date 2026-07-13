@@ -2,10 +2,11 @@
 
 import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
+import { ArrowLeft, User, FileText, Palette, Package, Plus, Trash2, Check, AlertTriangle, FilePlus2 } from "lucide-react";
 
 const API = "https://api.rajseba.com";
 
-interface Customer { id: number; name: string; phone: string; email?: string; address: string; }
+interface Customer { id: number; name: string; phone: string; email?: string; address?: string; profile?: { location?: string }; }
 interface ServiceItem { id: number; name: string; rate: number; }
 interface LineItem { description: string; qty: number; rate: number; amount: number; }
 
@@ -58,20 +59,33 @@ export default function CreateInvoicePage() {
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState("");
 
+  // System roles and registration option
+  const [clientRoleId, setClientRoleId] = useState<number | null>(null);
+  const [registerAsUser, setRegisterAsUser] = useState(true);
+
   const authHeader = () => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("access_token") || "" : "";
+    const token = typeof window !== "undefined" ? localStorage.getItem("rajseba_access_token") || localStorage.getItem("token") || "" : "";
     return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
   };
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [cr, sr] = await Promise.all([
-          fetch(`${API}/api/manual-customers`, { headers: authHeader() }),
+        const [cr, sr, rr] = await Promise.all([
+          fetch(`${API}/users`, { headers: authHeader() }),
           fetch(`${API}/api/manual-services`, { headers: authHeader() }),
+          fetch(`${API}/roles`, { headers: authHeader() }),
         ]);
-        setCustomers(await cr.json());
+        const uData = await cr.json();
+        setCustomers(uData?.data || (Array.isArray(uData) ? uData : []));
         setServices(await sr.json());
+
+        const rData = await rr.json();
+        const rolesList = rData?.data || (Array.isArray(rData) ? rData : []);
+        const clientRole = rolesList.find((r: any) => r.name?.toLowerCase() === "client" || r.name?.toLowerCase() === "customer");
+        if (clientRole) {
+          setClientRoleId(clientRole.id);
+        }
       } catch { /* non-blocking */ }
     };
     fetchData();
@@ -79,6 +93,16 @@ export default function CreateInvoicePage() {
     const now = new Date();
     setInvoiceNumber(`INV-${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}-${Math.floor(Math.random() * 900 + 100)}`);
   }, []);
+
+  const formatPhoneForCompare = (p: string) => {
+    if (!p) return "";
+    const digits = p.replace(/\D/g, "");
+    return digits.length >= 11 ? digits.slice(-11) : digits;
+  };
+
+  const isPhoneRegistered = customers.some(
+    c => formatPhoneForCompare(c.phone) === formatPhoneForCompare(custPhone)
+  );
 
   // Customer autocomplete
   const handleCustNameChange = (v: string) => {
@@ -92,7 +116,7 @@ export default function CreateInvoicePage() {
   const setSugg = (s: Customer[]) => setCustSuggestions(s.slice(0, 5));
   const selectCustomer = (c: Customer) => {
     setCustName(c.name); setCustPhone(c.phone);
-    setCustEmail(c.email || ""); setCustAddress(c.address);
+    setCustEmail(c.email || ""); setCustAddress(c.profile?.location || "");
     setShowCustDrop(false);
   };
 
@@ -152,10 +176,52 @@ export default function CreateInvoicePage() {
     }
     setSubmitting(true);
     try {
+      let finalCustName = custName.trim();
+      let finalCustPhone = custPhone.trim();
+      let finalCustEmail = custEmail.trim();
+      let finalCustAddress = custAddress.trim();
+
+      // Register user if requested and not already registered
+      if (!isPhoneRegistered && registerAsUser && clientRoleId) {
+        const userPayload = {
+          name: finalCustName,
+          phone: finalCustPhone,
+          email: finalCustEmail || undefined,
+          roleId: clientRoleId,
+        };
+
+        const createRes = await fetch(`${API}/users`, {
+          method: "POST",
+          headers: authHeader(),
+          body: JSON.stringify(userPayload),
+        });
+
+        if (!createRes.ok) {
+          const errData = await createRes.json();
+          throw new Error(errData.message || "Failed to register new customer as a user");
+        }
+
+        const newUser = await createRes.json();
+        const newUserId = newUser?.data?.id || newUser?.id;
+
+        if (newUserId && finalCustAddress) {
+          const profilePayload = {
+            user_id: newUserId,
+            type: "personal",
+            location: finalCustAddress,
+          };
+          await fetch(`${API}/profiles`, {
+            method: "POST",
+            headers: authHeader(),
+            body: JSON.stringify(profilePayload),
+          });
+        }
+      }
+
       const body = {
         invoiceNumber: invoiceNumber.trim(),
         date,
-        customer: { name: custName.trim(), phone: custPhone.trim(), email: custEmail.trim(), address: custAddress.trim() },
+        customer: { name: finalCustName, phone: finalCustPhone, email: finalCustEmail, address: finalCustAddress },
         items,
         totalAmount,
         discount: Number(discount),
@@ -188,187 +254,313 @@ export default function CreateInvoicePage() {
   };
 
   return (
-    <div className="mi-container">
-      <div className="mi-header">
-        <div>
-          <h1 className="mi-title">Create New Invoice</h1>
-          <p className="mi-subtitle">Fill in the details below to generate a professional invoice.</p>
+    <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300 pb-16">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
+        <div className="flex items-center gap-3.5">
+          <div className="p-3 bg-[#FFF8F4] text-[#FF6014] rounded-2xl border border-[#FF6014]/15 shadow-xs">
+            <FilePlus2 className="w-6 h-6" />
+          </div>
+          <div>
+            <h1 className="text-2xl font-black text-slate-900 tracking-tight">Create New Invoice</h1>
+            <p className="text-xs text-slate-400 font-semibold mt-1">Fill in the details below to generate a professional invoice.</p>
+          </div>
         </div>
-        <button className="mi-btn mi-btn-secondary" onClick={() => router.back()}>← Back</button>
+        <button
+          type="button"
+          className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          onClick={() => router.back()}
+        >
+          <ArrowLeft size={16} /> Back
+        </button>
       </div>
 
-      {error && <div className="mi-alert mi-alert-error">{error}</div>}
+      {error && (
+        <div className="flex items-center gap-2 bg-rose-50 border border-rose-200/50 text-rose-600 rounded-xl p-4 text-xs font-bold animate-pulse">
+          <AlertTriangle size={18} /> {error}
+        </div>
+      )}
 
-      <form onSubmit={handleSubmit}>
-        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20 }}>
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 gap-6">
           {/* ── Customer ── */}
-          <div className="mi-card" style={{ gridColumn: "1 / -1" }}>
-            <div className="mi-card-body">
-              <h2 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#0f172a", marginBottom: 18 }}>👤 Customer Details</h2>
-              <div className="mi-form-grid">
-                <div className="mi-form-group" style={{ position: "relative" }}>
-                  <label className="mi-label">Customer Name *</label>
-                  <input className="mi-input" value={custName} onChange={e => handleCustNameChange(e.target.value)} placeholder="Start typing to search..." autoComplete="off" required />
-                  {showCustDrop && custSuggestions.length > 0 && (
-                    <div className="mi-dropdown">
-                      {custSuggestions.map(c => (
-                        <div key={c.id} className="mi-dropdown-item" onMouseDown={() => selectCustomer(c)}>
-                          <strong>{c.name}</strong> — {c.phone}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className="mi-form-group">
-                  <label className="mi-label">Phone *</label>
-                  <input className="mi-input" value={custPhone} onChange={e => setCustPhone(e.target.value)} placeholder="01XXXXXXXXX" required />
-                </div>
-                <div className="mi-form-group">
-                  <label className="mi-label">Email</label>
-                  <input className="mi-input" type="email" value={custEmail} onChange={e => setCustEmail(e.target.value)} placeholder="customer@email.com" />
-                </div>
-                <div className="mi-form-group">
-                  <label className="mi-label">Address *</label>
-                  <input className="mi-input" value={custAddress} onChange={e => setCustAddress(e.target.value)} placeholder="Full address" required />
-                </div>
+          <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6">
+            <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2 border-b border-slate-50 pb-4">
+              <User size={18} className="text-[#FF6014]" /> Customer Details
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="space-y-1.5 relative">
+                <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Customer Name *</label>
+                <input
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  value={custName}
+                  onChange={e => handleCustNameChange(e.target.value)}
+                  placeholder="Start typing to search..."
+                  autoComplete="off"
+                  required
+                />
+                {showCustDrop && custSuggestions.length > 0 && (
+                  <div className="absolute left-0 right-0 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg z-50 overflow-hidden divide-y divide-slate-50">
+                    {custSuggestions.map(c => (
+                      <div
+                        key={c.id}
+                        className="px-4 py-2.5 text-xs text-slate-700 hover:bg-[#FFF8F4] hover:text-[#FF6014] cursor-pointer transition-colors"
+                        onMouseDown={() => selectCustomer(c)}
+                      >
+                        <strong>{c.name}</strong> — {c.phone}
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Phone *</label>
+                <input
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  value={custPhone}
+                  onChange={e => setCustPhone(e.target.value)}
+                  placeholder="01XXXXXXXXX"
+                  required
+                />
+                {!isPhoneRegistered && custPhone.replace(/\D/g, '').length >= 11 && (
+                  <div className="mt-2.5 flex items-center gap-2">
+                    <input
+                      type="checkbox"
+                      id="registerAsUser"
+                      checked={registerAsUser}
+                      onChange={(e) => setRegisterAsUser(e.target.checked)}
+                      className="w-4 h-4 text-[#FF6014] border-slate-300 rounded focus:ring-[#FF6014]/20 cursor-pointer accent-[#FF6014]"
+                    />
+                    <label htmlFor="registerAsUser" className="text-xs text-slate-500 font-bold cursor-pointer">
+                      🆕 Register as system user (Client)
+                    </label>
+                  </div>
+                )}
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Email</label>
+                <input
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  type="email"
+                  value={custEmail}
+                  onChange={e => setCustEmail(e.target.value)}
+                  placeholder="customer@email.com"
+                />
+              </div>
+              <div className="space-y-1.5">
+                <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Address *</label>
+                <input
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  value={custAddress}
+                  onChange={e => setCustAddress(e.target.value)}
+                  placeholder="Full address"
+                  required
+                />
               </div>
             </div>
           </div>
 
-          {/* ── Invoice Meta ── */}
-          <div className="mi-card">
-            <div className="mi-card-body">
-              <h2 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#0f172a", marginBottom: 18 }}>📋 Invoice Details</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                <div className="mi-form-group">
-                  <label className="mi-label">Invoice Number *</label>
-                  <input className="mi-input" value={invoiceNumber} onChange={e => setInvoiceNumber(e.target.value)} required />
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* ── Invoice Meta ── */}
+            <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6">
+              <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2 border-b border-slate-50 pb-4">
+                <FileText size={18} className="text-[#FF6014]" /> Invoice Details
+              </h2>
+              <div className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Invoice Number *</label>
+                  <input
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    value={invoiceNumber}
+                    onChange={e => setInvoiceNumber(e.target.value)}
+                    required
+                  />
                 </div>
-                <div className="mi-form-group">
-                  <label className="mi-label">Date *</label>
-                  <input className="mi-input" type="date" value={date} onChange={e => setDate(e.target.value)} required />
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Date *</label>
+                  <input
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    type="date"
+                    value={date}
+                    onChange={e => setDate(e.target.value)}
+                    required
+                  />
                 </div>
-                <div className="mi-form-group">
-                  <label className="mi-label">Discount (BDT)</label>
-                  <input className="mi-input" type="number" min="0" value={discount} onChange={e => setDiscount(Number(e.target.value))} />
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Discount (BDT)</label>
+                  <input
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    type="number"
+                    min="0"
+                    value={discount}
+                    onChange={e => setDiscount(Number(e.target.value))}
+                  />
                 </div>
               </div>
             </div>
-          </div>
 
-          {/* ── Template ── */}
-          <div className="mi-card">
-            <div className="mi-card-body">
-              <h2 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#0f172a", marginBottom: 18 }}>🎨 Template & Signee</h2>
-              <div style={{ display: "flex", flexDirection: "column", gap: 14 }}>
-                <div className="mi-form-group">
-                  <label className="mi-label">Template</label>
-                  <select className="mi-select" value={templateName} onChange={e => setTemplateName(e.target.value as any)}>
+            {/* ── Template ── */}
+            <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6">
+              <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2 border-b border-slate-50 pb-4">
+                <Palette size={18} className="text-[#FF6014]" /> Template & Signee
+              </h2>
+              <div className="space-y-4">
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Template</label>
+                  <select
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 cursor-pointer"
+                    value={templateName}
+                    onChange={e => setTemplateName(e.target.value as any)}
+                  >
                     <option value="template1">Template 1 — RDS Dark Style</option>
                     <option value="template2">Template 2 — Rajseba Orange Style</option>
                   </select>
                 </div>
-                <div className="mi-form-group">
-                  <label className="mi-label">Signee Name</label>
-                  <input className="mi-input" value={signeeName} onChange={e => setSigneeName(e.target.value)} />
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Signee Name</label>
+                  <input
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    value={signeeName}
+                    onChange={e => setSigneeName(e.target.value)}
+                  />
                 </div>
-                <div className="mi-form-group">
-                  <label className="mi-label">Signee Role</label>
-                  <input className="mi-input" value={signeeRole} onChange={e => setSigneeRole(e.target.value)} />
+                <div className="space-y-1.5">
+                  <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Signee Role</label>
+                  <input
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    value={signeeRole}
+                    onChange={e => setSigneeRole(e.target.value)}
+                  />
                 </div>
               </div>
             </div>
           </div>
 
           {/* ── Line Items ── */}
-          <div className="mi-card" style={{ gridColumn: "1 / -1" }}>
-            <div className="mi-card-body">
-              <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 18 }}>
-                <h2 style={{ fontSize: "1.05rem", fontWeight: 800, color: "#0f172a" }}>📦 Line Items</h2>
-                <button type="button" className="mi-btn mi-btn-secondary mi-btn-sm" onClick={addItem}>+ Add Item</button>
-              </div>
-              <div style={{ overflowX: "auto" }}>
-                <table className="mi-items-table">
-                  <thead>
-                    <tr>
-                      <th>#</th>
-                      <th style={{ minWidth: 220 }}>Description</th>
-                      <th style={{ width: 80 }}>Qty</th>
-                      <th style={{ width: 110 }}>Rate (BDT)</th>
-                      <th style={{ width: 110 }}>Amount (BDT)</th>
-                      <th style={{ width: 40 }}></th>
+          <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6 overflow-visible">
+            <div className="flex justify-between items-center border-b border-slate-50 pb-4">
+              <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
+                <Package size={18} className="text-[#FF6014]" /> Line Items
+              </h2>
+              <button
+                type="button"
+                className="flex items-center gap-1.5 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-3 py-1.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
+                onClick={addItem}
+              >
+                <Plus size={14} /> Add Item
+              </button>
+            </div>
+            <div className="overflow-x-auto overflow-y-visible">
+              <table className="w-full text-left text-xs text-slate-750 border-collapse overflow-visible">
+                <thead>
+                  <tr className="bg-slate-50/75 border-b border-slate-100 text-slate-450 font-extrabold uppercase tracking-wider text-[10px]">
+                    <th className="px-4 py-3 w-10">#</th>
+                    <th className="px-4 py-3 min-w-[240px]">Description</th>
+                    <th className="px-4 py-3 w-20">Qty</th>
+                    <th className="px-4 py-3 w-28">Rate (BDT)</th>
+                    <th className="px-4 py-3 w-32">Amount (BDT)</th>
+                    <th className="px-4 py-3 w-10"></th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-50 overflow-visible">
+                  {items.map((item, i) => (
+                    <tr key={i} className="hover:bg-slate-50/20 transition-colors overflow-visible">
+                      <td className="px-4 py-4 text-slate-400 font-bold">{i + 1}</td>
+                      <td className="px-4 py-4 relative overflow-visible">
+                        <input
+                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                          value={item.description}
+                          onChange={e => handleDescChange(i, e.target.value)}
+                          placeholder="Service description..."
+                          autoComplete="off"
+                        />
+                        {showSvcDrop[i] && svcSuggestions[i]?.length > 0 && (
+                          <div className="absolute left-4 right-4 mt-1 bg-white border border-slate-200 rounded-xl shadow-lg z-50 overflow-hidden divide-y divide-slate-50">
+                            {svcSuggestions[i].map(svc => (
+                              <div
+                                key={svc.id}
+                                className="px-4 py-2.5 text-xs text-slate-700 hover:bg-[#FFF8F4] hover:text-[#FF6014] cursor-pointer transition-colors"
+                                onMouseDown={() => selectService(i, svc)}
+                              >
+                                <strong>{svc.name}</strong> — {Number(svc.rate).toLocaleString()} BDT
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </td>
+                      <td className="px-4 py-4">
+                        <input
+                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                          type="number"
+                          min="1"
+                          value={item.qty}
+                          onChange={e => updateItem(i, "qty", e.target.value)}
+                        />
+                      </td>
+                      <td className="px-4 py-4">
+                        <input
+                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                          type="number"
+                          min="0"
+                          value={item.rate}
+                          onChange={e => updateItem(i, "rate", e.target.value)}
+                        />
+                      </td>
+                      <td className="px-4 py-4 font-bold text-slate-800">
+                        {item.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}
+                      </td>
+                      <td className="px-4 py-4">
+                        <button
+                          type="button"
+                          className="p-2 text-rose-500 hover:bg-rose-50 rounded-xl transition-all cursor-pointer"
+                          onClick={() => removeItem(i)}
+                        >
+                          <Trash2 size={16} />
+                        </button>
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {items.map((item, i) => (
-                      <tr key={i}>
-                        <td style={{ color: "#94a3b8", fontWeight: 600, paddingTop: 10 }}>{i + 1}</td>
-                        <td style={{ position: "relative" }}>
-                          <input
-                            className="mi-input"
-                            style={{ width: "100%" }}
-                            value={item.description}
-                            onChange={e => handleDescChange(i, e.target.value)}
-                            placeholder="Service description..."
-                            autoComplete="off"
-                          />
-                          {showSvcDrop[i] && svcSuggestions[i]?.length > 0 && (
-                            <div className="mi-dropdown">
-                              {svcSuggestions[i].map(svc => (
-                                <div key={svc.id} className="mi-dropdown-item" onMouseDown={() => selectService(i, svc)}>
-                                  <strong>{svc.name}</strong> — {Number(svc.rate).toLocaleString()} BDT
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </td>
-                        <td>
-                          <input className="mi-input" type="number" min="1" value={item.qty} onChange={e => updateItem(i, "qty", e.target.value)} style={{ width: "100%" }} />
-                        </td>
-                        <td>
-                          <input className="mi-input" type="number" min="0" value={item.rate} onChange={e => updateItem(i, "rate", e.target.value)} style={{ width: "100%" }} />
-                        </td>
-                        <td style={{ fontWeight: 700, color: "#0f172a", paddingLeft: 8 }}>
-                          {item.amount.toLocaleString("en-US", { minimumFractionDigits: 2 })}
-                        </td>
-                        <td>
-                          <button type="button" className="mi-btn mi-btn-ghost" style={{ color: "#ef4444", padding: "4px 8px" }} onClick={() => removeItem(i)}>✕</button>
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+                  ))}
+                </tbody>
+              </table>
+            </div>
 
-              {/* Totals summary */}
-              <div style={{ marginTop: 20, marginLeft: "auto", maxWidth: 280, display: "flex", flexDirection: "column", gap: 6 }}>
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", color: "#64748b" }}>
-                  <span>Subtotal</span>
-                  <span style={{ fontWeight: 600 }}>{totalAmount.toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
+            {/* Totals summary */}
+            <div className="mt-6 ml-auto max-w-xs space-y-2 border-t border-slate-100 pt-4">
+              <div className="flex justify-between text-xs text-slate-455 font-medium">
+                <span>Subtotal</span>
+                <span>{totalAmount.toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
+              </div>
+              {Number(discount) > 0 && (
+                <div className="flex justify-between text-xs text-emerald-600 font-bold">
+                  <span>Discount</span>
+                  <span>- {Number(discount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
                 </div>
-                {Number(discount) > 0 && (
-                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "0.9rem", color: "#15803d" }}>
-                    <span>Discount</span>
-                    <span style={{ fontWeight: 600 }}>- {Number(discount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
-                  </div>
-                )}
-                <div style={{ display: "flex", justifyContent: "space-between", fontSize: "1.05rem", fontWeight: 800, color: "#FF6014", borderTop: "2px solid #e2e8f0", paddingTop: 8, marginTop: 4 }}>
-                  <span>Total Payable</span>
-                  <span>{totalPayable.toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
-                </div>
-                <div style={{ fontSize: "0.78rem", color: "#94a3b8", fontStyle: "italic", marginTop: 4 }}>
-                  {amountInWords}
-                </div>
+              )}
+              <div className="flex justify-between text-sm font-black text-[#FF6014] border-t border-slate-100 pt-2">
+                <span>Total Payable</span>
+                <span>{totalPayable.toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
+              </div>
+              <div className="text-[10px] text-slate-400 font-bold italic text-right">
+                {amountInWords}
               </div>
             </div>
           </div>
         </div>
 
         {/* Submit */}
-        <div style={{ marginTop: 24, display: "flex", gap: 12, justifyContent: "flex-end" }}>
-          <button type="button" className="mi-btn mi-btn-secondary" onClick={() => router.back()}>Cancel</button>
-          <button type="submit" className="mi-btn mi-btn-primary" disabled={submitting}>
-            {submitting ? "Creating..." : "✅ Create Invoice"}
+        <div className="flex justify-end gap-3 pt-4 border-t border-slate-100">
+          <button
+            type="button"
+            className="bg-slate-50 border border-slate-200 text-slate-600 font-bold px-4 py-2.5 rounded-xl text-sm transition-all cursor-pointer hover:bg-slate-100 active:scale-95"
+            onClick={() => router.back()}
+          >
+            Cancel
+          </button>
+          <button
+            type="submit"
+            className="flex items-center gap-1.5 bg-[#FF6014] hover:bg-[#e0530a] text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm shadow-orange-500/10 cursor-pointer active:scale-95"
+            disabled={submitting}
+          >
+            {submitting ? "Creating..." : <><Check size={16} /> Create Invoice</>}
           </button>
         </div>
       </form>

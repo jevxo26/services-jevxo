@@ -129,7 +129,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
             label: lang === "bn" ? "ম্যানুয়াল ইনভয়েস" : "Manual Invoice",
             icon: Receipt,
             children: [
-              { label: lang === "bn" ? "ড্যাশবোর্ড" : "Invoice Dashboard", href: "/dashbord/manual-invoice", icon: FileText },
+              { label: lang === "bn" ? "ড্যাশবোর্ড" : "Dashboard", href: "/dashbord/manual-invoice", icon: FileText },
               { label: lang === "bn" ? "নতুন ইনভয়েস" : "Create Invoice", href: "/dashbord/manual-invoice/create", icon: FileText },
               { label: lang === "bn" ? "ক্লায়েন্ট ডিরেক্টরি" : "Client Directory", href: "/dashbord/manual-invoice/customers", icon: Users },
               { label: lang === "bn" ? "সার্ভিস ক্যাটালগ" : "Service Catalog", href: "/dashbord/manual-invoice/services", icon: Wrench },
