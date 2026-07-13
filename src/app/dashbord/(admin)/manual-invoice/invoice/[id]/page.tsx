@@ -185,7 +185,7 @@ export default function InvoiceViewPage() {
       )}
 
       {/* Invoice template */}
-      <div id="invoice-print-area" className="w-full overflow-x-auto bg-white rounded-3xl border border-slate-100 p-2 sm:p-6 shadow-xs">
+      <div id="invoice-print-area" className="max-w-[210mm] mx-auto w-full overflow-x-auto">
         {invoice.templateName === "template2" ? (
           <InvoiceTemplate2 invoice={invoice} />
         ) : (
