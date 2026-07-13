@@ -37,7 +37,8 @@ import {
   Ticket,
   Shield,
   FileText,
-  Receipt
+  Receipt,
+  Globe
 } from "lucide-react";
 import { useState, useEffect, useMemo } from "react";
 import { useAppSelector, useAppDispatch } from "@/redux/hooks";
@@ -113,8 +114,15 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
               { label: lang === "bn" ? "লোকেশনসমূহ" : "Locations", href: "/dashbord/locations", icon: MapPin },
               { label: lang === "bn" ? "সার্ভিসেস" : "Services", href: "/dashbord/services", icon: Wrench },
               { label: lang === "bn" ? "নেস্টেড সার্ভিসেস" : "Nested Services", href: "/dashbord/nested-services", icon: Layers },
-              { label: lang === "bn" ? "প্যাকেজসমূহ" : "Packages", href: "/dashbord/packages", icon: Package },
-              { label: lang === "bn" ? "হিরো ম্যানেজমেন্ট" : "Hero Management", href: "/dashbord/hero", icon: LayoutGrid }
+              { label: lang === "bn" ? "প্যাকেজসমূহ" : "Packages", href: "/dashbord/packages", icon: Package }
+            ]
+          },
+          {
+            label: lang === "bn" ? "ল্যান্ডিং পেজ" : "Landing Page",
+            icon: Globe,
+            children: [
+              { label: lang === "bn" ? "হিরো ম্যানেজমেন্ট" : "Hero Management", href: "/dashbord/hero", icon: LayoutGrid },
+              { label: lang === "bn" ? "ব্লগ ম্যানেজমেন্ট" : "Blog Management", href: "/dashbord/blogs", icon: FileText }
             ]
           },
           {
