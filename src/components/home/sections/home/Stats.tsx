@@ -48,7 +48,7 @@ function StatCard({ stat, triggered }: { stat: typeof DEFAULT_STATS[0]; triggere
   return (
     <div className="flex flex-col items-center group">
       <div className="w-16 h-16 rounded-full bg-rose-50 flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110">
-        <stat.icon className="w-8 h-8 text-[#FF6014]" />
+        <stat.icon className="w-8 h-8 text-[#4F46E5]" />
       </div>
       <h3 className="text-3xl md:text-4xl font-extrabold text-slate-900 mb-2 tabular-nums">
         {triggered ? `${formatNumber(count)}${stat.suffix}` : '0'}
@@ -96,13 +96,13 @@ export default function Stats() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <TrendingUp size={13} />
             Our Impact
           </div>
           <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
-            Our Platform <span className="text-[#FF6014]">Impact</span>
+            <BarChart3 className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5]" />
+            Our Platform <span className="text-[#4F46E5]">Impact</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Providing top-notch home services with trust and excellence

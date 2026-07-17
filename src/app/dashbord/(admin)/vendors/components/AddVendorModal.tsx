@@ -73,7 +73,7 @@ export default function AddVendorModal({
                 name="name"
                 type="text"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="John Doe"
               />
             </div>
@@ -83,7 +83,7 @@ export default function AddVendorModal({
                 name="email"
                 type="email"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="john@vendor.com"
               />
             </div>
@@ -93,7 +93,7 @@ export default function AddVendorModal({
                 name="phone"
                 type="tel"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="01XXXXXXXXX"
               />
             </div>
@@ -106,7 +106,7 @@ export default function AddVendorModal({
                 type="number"
                 min="0"
                 max="100"
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="e.g. 80"
               />
             </div>
@@ -157,7 +157,7 @@ export default function AddVendorModal({
               <input
                 name="company_name"
                 type="text"
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="Acme Services Ltd."
               />
             </div>
@@ -187,7 +187,7 @@ export default function AddVendorModal({
               <textarea
                 name="description"
                 rows={3}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none"
                 placeholder="Briefly describe the vendor's services..."
               ></textarea>
             </div>
@@ -198,7 +198,7 @@ export default function AddVendorModal({
                   name="min_starting_price"
                   type="number"
                   step="0.01"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                   placeholder="0.00"
                 />
               </div>
@@ -207,7 +207,7 @@ export default function AddVendorModal({
                 <input
                   name="google_map_link"
                   type="url"
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                   placeholder="https://maps.google.com/..."
                 />
               </div>

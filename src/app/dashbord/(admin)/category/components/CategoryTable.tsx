@@ -18,7 +18,7 @@ export default function CategoryTable({ categories, openEditModal, openDeleteMod
       header: "Category Name",
       render: (cat: Category) => (
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 bg-[#FFF8F4] text-[#FF6014] font-bold rounded-xl flex items-center justify-center overflow-hidden shrink-0">
+          <div className="w-10 h-10 bg-[#EEF2FF] text-[#4F46E5] font-bold rounded-xl flex items-center justify-center overflow-hidden shrink-0">
             {cat.icon ? (
               cat.icon.startsWith("http") || cat.icon.startsWith("/") ? (
                 <img src={cat.icon} alt={cat.name} className="w-full h-full object-cover" />
@@ -80,7 +80,7 @@ export default function CategoryTable({ categories, openEditModal, openDeleteMod
           </button>
           <button
             onClick={() => openDeleteModal(cat)}
-            className="bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#E0530A] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
+            className="bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4338CA] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
           >
             Delete
           </button>

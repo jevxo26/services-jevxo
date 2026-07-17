@@ -49,7 +49,7 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
       {/* Back */}
       <button
         onClick={onClose}
-        className="inline-flex items-center gap-1.5 text-xs font-extrabold text-slate-400 hover:text-[#FF6014] transition-colors"
+        className="inline-flex items-center gap-1.5 text-xs font-extrabold text-slate-400 hover:text-[#4F46E5] transition-colors"
       >
         <ArrowLeft size={13} /> Back to articles
       </button>
@@ -58,7 +58,7 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
       <div className="space-y-3 max-w-3xl">
         {blog.createdAt && (
           <div className="flex items-center gap-1.5 text-[10px] font-black text-slate-400 uppercase tracking-widest">
-            <Calendar size={10} className="text-[#FF6014]" />
+            <Calendar size={10} className="text-[#4F46E5]" />
             {formatDate(blog.createdAt)}
           </div>
         )}
@@ -66,7 +66,7 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
           {blog.title}
         </h1>
         {blog.overview && (
-          <p className="text-sm font-semibold text-slate-600 leading-relaxed border-l-4 border-[#FF6014]/50 pl-4 py-2 bg-[#FFF8F4] rounded-r-2xl">
+          <p className="text-sm font-semibold text-slate-600 leading-relaxed border-l-4 border-[#4F46E5]/50 pl-4 py-2 bg-[#EEF2FF] rounded-r-2xl">
             {blog.overview}
           </p>
         )}
@@ -103,7 +103,7 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
                     <button
                       key={i}
                       onClick={() => setActiveImg(i)}
-                      className={`rounded-full transition-all ${i === activeImg ? "bg-[#FF6014] w-5 h-2" : "bg-white/60 hover:bg-white w-2 h-2"
+                      className={`rounded-full transition-all ${i === activeImg ? "bg-[#4F46E5] w-5 h-2" : "bg-white/60 hover:bg-white w-2 h-2"
                         }`}
                     />
                   ))}
@@ -123,7 +123,7 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
                   key={i}
                   onClick={() => setActiveImg(i)}
                   className={`relative w-20 h-14 sm:w-24 sm:h-16 rounded-xl overflow-hidden border-2 transition-all shrink-0 ${i === activeImg
-                      ? "border-[#FF6014] shadow-md shadow-orange-100 opacity-100"
+                      ? "border-[#4F46E5] shadow-md shadow-orange-100 opacity-100"
                       : "border-transparent opacity-50 hover:opacity-90"
                     }`}
                 >
@@ -140,7 +140,7 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
         {/* Description */}
         <div className="md:col-span-8 space-y-4">
           <div className="flex items-center gap-2 text-[10px] font-black text-slate-400 uppercase tracking-widest pb-3 border-b border-slate-100">
-            <BookOpen size={11} className="text-[#FF6014]" /> Full Article
+            <BookOpen size={11} className="text-[#4F46E5]" /> Full Article
           </div>
           <p className="text-slate-700 text-sm sm:text-[15px] leading-[1.9] font-medium whitespace-pre-line">
             {blog.description}
@@ -151,7 +151,7 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
         <div className="md:col-span-4">
           <div className="bg-gradient-to-br from-[#FFF9F6] to-[#FFF1E9] border border-orange-100 rounded-2xl sm:rounded-3xl p-5 sm:p-6 space-y-4">
             <h3 className="font-black text-slate-800 text-sm flex items-center gap-1.5 uppercase tracking-wider">
-              <ShieldCheck size={14} className="text-[#FF6014]" /> Need Help?
+              <ShieldCheck size={14} className="text-[#4F46E5]" /> Need Help?
             </h3>
             <p className="text-xs text-slate-500 font-semibold leading-relaxed">
               Our certified home service professionals are ready to help.
@@ -159,13 +159,13 @@ function BlogDetail({ blog, onClose }: { blog: any; onClose: () => void }) {
             <div className="flex flex-row sm:flex-col gap-2">
               <a
                 href="/services"
-                className="flex-1 flex items-center justify-center bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold py-2.5 px-4 rounded-xl transition-all shadow-sm shadow-orange-500/10"
+                className="flex-1 flex items-center justify-center bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold py-2.5 px-4 rounded-xl transition-all shadow-sm shadow-orange-500/10"
               >
                 Book Service
               </a>
               <a
                 href="tel:01813333373"
-                className="flex-1 flex items-center justify-center bg-white border border-orange-100 hover:bg-orange-50/50 text-[#FF6014] text-xs font-bold py-2.5 px-4 rounded-xl transition-all"
+                className="flex-1 flex items-center justify-center bg-white border border-orange-100 hover:bg-orange-50/50 text-[#4F46E5] text-xs font-bold py-2.5 px-4 rounded-xl transition-all"
               >
                 Call Hotline
               </a>
@@ -190,7 +190,7 @@ function BlogCard({ blog, index, onClick }: { blog: any; index: number; onClick:
   return (
     <button
       onClick={onClick}
-      className="group w-full text-left bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-orange-50/60 hover:border-[#FF6014]/20 transition-all duration-300 flex flex-col"
+      className="group w-full text-left bg-white/80 backdrop-blur-md rounded-2xl sm:rounded-3xl border border-slate-100 overflow-hidden shadow-sm hover:shadow-xl hover:shadow-orange-50/60 hover:border-[#4F46E5]/20 transition-all duration-300 flex flex-col"
     >
       {/* Image */}
       <div className="relative w-full h-44 sm:h-52 bg-[#FFF4EE] overflow-hidden shrink-0">
@@ -204,7 +204,7 @@ function BlogCard({ blog, index, onClick }: { blog: any; index: number; onClick:
           />
         ) : (
           <div className="w-full h-full flex flex-col items-center justify-center gap-2">
-            <ImageOff className="w-7 h-7 text-[#FF6014]/30" />
+            <ImageOff className="w-7 h-7 text-[#4F46E5]/30" />
             <span className="text-[10px] text-slate-300 font-bold uppercase tracking-wider">No image</span>
           </div>
         )}
@@ -226,13 +226,13 @@ function BlogCard({ blog, index, onClick }: { blog: any; index: number; onClick:
       <div className="p-4 sm:p-5 flex flex-col flex-1">
         {blog.createdAt && (
           <div className="flex items-center gap-1 text-[9px] font-black text-slate-400 uppercase tracking-widest mb-2.5">
-            <Calendar size={9} className="text-[#FF6014]" />
+            <Calendar size={9} className="text-[#4F46E5]" />
             {formatDate(blog.createdAt)}
           </div>
         )}
         {/* Title: first word orange, rest dark navy — matches homepage hero style */}
         <h2 className="font-bold text-[15px] sm:text-[17px] leading-snug mb-2.5 line-clamp-2 tracking-tight">
-          <span className="text-[#FF6014]">{firstWord} </span>
+          <span className="text-[#4F46E5]">{firstWord} </span>
           <span className="text-slate-900">{restWords}</span>
         </h2>
         {blog.overview && (
@@ -241,10 +241,10 @@ function BlogCard({ blog, index, onClick }: { blog: any; index: number; onClick:
           </p>
         )}
         <div className="flex items-center justify-between pt-3 border-t border-slate-50 mt-auto">
-          <span className="text-[9px] sm:text-[10px] font-extrabold text-[#FF6014] uppercase tracking-wider bg-[#FFF4EE] px-2.5 py-1 rounded-full">
+          <span className="text-[9px] sm:text-[10px] font-extrabold text-[#4F46E5] uppercase tracking-wider bg-[#FFF4EE] px-2.5 py-1 rounded-full">
             Read Article
           </span>
-          <ChevronRight size={15} className="text-slate-200 group-hover:text-[#FF6014] group-hover:translate-x-1 transition-all" />
+          <ChevronRight size={15} className="text-slate-200 group-hover:text-[#4F46E5] group-hover:translate-x-1 transition-all" />
         </div>
       </div>
     </button>
@@ -273,18 +273,18 @@ export default function BlogClientPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div className="flex items-center gap-3">
-              <div className="p-2.5 bg-[#FFF4EE] text-[#FF6014] rounded-xl shrink-0">
+              <div className="p-2.5 bg-[#FFF4EE] text-[#4F46E5] rounded-xl shrink-0">
                 <BookOpen className="w-5 h-5" />
               </div>
               <div>
                 <div className="flex items-center gap-2 mb-0.5">
-                  <Sparkles size={10} className="text-[#FF6014]" />
-                  <span className="text-[10px] font-black text-[#FF6014] uppercase tracking-[.12em]">
+                  <Sparkles size={10} className="text-[#4F46E5]" />
+                  <span className="text-[10px] font-black text-[#4F46E5] uppercase tracking-[.12em]">
                     Rajseba Blog
                   </span>
                 </div>
                 <h1 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">
-                  Expert Tips <span className="text-[#FF6014]">& Home Care</span> Insights
+                  Expert Tips <span className="text-[#4F46E5]">& Home Care</span> Insights
                 </h1>
               </div>
             </div>
@@ -307,12 +307,12 @@ export default function BlogClientPage() {
           </div>
         ) : isLoading ? (
           <div className="flex flex-col items-center justify-center py-24 sm:py-32 gap-3">
-            <Loader2 className="w-7 h-7 animate-spin text-[#FF6014]" />
+            <Loader2 className="w-7 h-7 animate-spin text-[#4F46E5]" />
             <span className="text-slate-400 text-xs font-semibold animate-pulse">Loading articles...</span>
           </div>
         ) : blogs.length === 0 ? (
           <div className="text-center py-24 sm:py-32 bg-white/70 backdrop-blur-md border border-dashed border-slate-200 rounded-2xl sm:rounded-3xl space-y-3">
-            <div className="w-14 h-14 bg-[#FFF4EE] text-[#FF6014] rounded-2xl flex items-center justify-center mx-auto">
+            <div className="w-14 h-14 bg-[#FFF4EE] text-[#4F46E5] rounded-2xl flex items-center justify-center mx-auto">
               <BookOpen size={24} />
             </div>
             <p className="text-slate-700 font-bold text-sm">No blog posts published yet.</p>

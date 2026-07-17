@@ -18,7 +18,7 @@ export default function EmployeeTasksPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-[#FF6014]" />
+        <Loader2 size={32} className="animate-spin text-[#4F46E5]" />
       </div>
     );
   }
@@ -29,7 +29,7 @@ export default function EmployeeTasksPage() {
         {/* Title Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
+            <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
               <Briefcase className="w-6 h-6" />
             </div>
             <div>

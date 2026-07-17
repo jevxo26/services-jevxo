@@ -36,7 +36,7 @@ export default function PopularArticles() {
             {lang === "bn" ? "রাজসেবা কমিউনিটির সবচেয়ে বেশি পঠিত নির্দেশিকা" : "Most read guides by the Rajseba community"}
           </p>
         </div>
-        <Link href="#" className="text-xs font-bold text-[#FF6014] hover:underline">
+        <Link href="#" className="text-xs font-bold text-[#4F46E5] hover:underline">
           {lang === "bn" ? "সব আর্টিকেল দেখুন" : "View all articles"}
         </Link>
       </div>
@@ -54,7 +54,7 @@ export default function PopularArticles() {
           <div className="absolute inset-0 bg-gradient-to-t from-slate-950/90 via-slate-950/40 to-slate-950/10 z-0" />
 
           <div className="relative z-10 w-fit">
-            <span className="bg-[#FF6014] text-white text-[9px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
+            <span className="bg-[#4F46E5] text-white text-[9px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider shadow-sm">
               {lang === "bn" ? "ফিচারড নির্দেশিকা" : "Featured Guide"}
             </span>
           </div>
@@ -78,8 +78,8 @@ export default function PopularArticles() {
               key={idx}
               className="bg-white/95 p-5 rounded-[28px] border border-slate-100 shadow-sm flex flex-col justify-between gap-2 hover:shadow-md transition-shadow cursor-pointer"
             >
-              <span className="text-[9px] font-bold text-[#FF6014] uppercase tracking-wider">{art.tag}</span>
-              <h4 className="font-extrabold text-slate-800 text-sm hover:text-[#FF6014] transition-colors">
+              <span className="text-[9px] font-bold text-[#4F46E5] uppercase tracking-wider">{art.tag}</span>
+              <h4 className="font-extrabold text-slate-800 text-sm hover:text-[#4F46E5] transition-colors">
                 {art.title}
               </h4>
               <span className="text-[10px] text-slate-450 font-semibold block mt-1">{art.time}</span>

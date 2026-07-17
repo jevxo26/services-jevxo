@@ -43,7 +43,7 @@ export default function PersonalInfoCard({
               type="text"
               value={personalInfo.fullName}
               onChange={(e) => setPersonalInfo({ ...personalInfo, fullName: e.target.value })}
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF6014]/20/5 transition-all"
+              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#4F46E5]/20/5 transition-all"
               required
             />
           </div>
@@ -56,7 +56,7 @@ export default function PersonalInfoCard({
               type="email"
               value={personalInfo.email}
               onChange={(e) => setPersonalInfo({ ...personalInfo, email: e.target.value })}
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF6014]/20/5 transition-all"
+              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#4F46E5]/20/5 transition-all"
               required
             />
           </div>
@@ -69,7 +69,7 @@ export default function PersonalInfoCard({
               type="tel"
               value={personalInfo.phone}
               onChange={(e) => setPersonalInfo({ ...personalInfo, phone: e.target.value })}
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF6014]/20/5 transition-all"
+              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#4F46E5]/20/5 transition-all"
             />
           </div>
 
@@ -81,7 +81,7 @@ export default function PersonalInfoCard({
               type="text"
               value={personalInfo.location}
               onChange={(e) => setPersonalInfo({ ...personalInfo, location: e.target.value })}
-              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#FF6014]/20/5 transition-all"
+              className="w-full bg-slate-50 border border-slate-100 rounded-2xl px-4 py-3.5 text-sm text-slate-900 font-bold focus:outline-none focus:bg-white focus:border-rose-350 focus:ring-4 focus:ring-[#4F46E5]/20/5 transition-all"
             />
           </div>
         </div>
@@ -89,7 +89,7 @@ export default function PersonalInfoCard({
         <div className="flex justify-end pt-2">
           <button
             type="submit"
-            className="bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold px-6 py-2.5 rounded-full text-xs shadow-md shadow-[#FF6014]/10 transition-all active:scale-[0.98]"
+            className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold px-6 py-2.5 rounded-full text-xs shadow-md shadow-[#4F46E5]/10 transition-all active:scale-[0.98]"
           >
             {lang === "bn" ? "পরিবর্তনগুলো সেভ করুন" : "Save Changes"}
           </button>

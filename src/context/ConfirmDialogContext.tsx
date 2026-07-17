@@ -117,7 +117,7 @@ export function ConfirmProvider({ children }: { children: React.ReactNode }) {
                       ? "bg-red-500 hover:bg-red-600 shadow-red-500/10"
                       : variant === "warning"
                         ? "bg-amber-500 hover:bg-amber-600 shadow-amber-500/10"
-                        : "bg-[#FF6014] hover:bg-[#E0530A] shadow-orange-500/10"
+                        : "bg-[#4F46E5] hover:bg-[#4338CA] shadow-orange-500/10"
                   }`}
                 >
                   {confirmText}

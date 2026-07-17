@@ -121,13 +121,13 @@ export default function FeaturedProviders() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <BadgeCheck size={13} />
             Verified Professionals
           </div>
           <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <ThumbsUp className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
-            Our Top <span className="text-[#FF6014]">Providers</span>
+            <ThumbsUp className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5]" />
+            Our Top <span className="text-[#4F46E5]">Providers</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Background-checked, highly rated professionals trusted by thousands of happy customers.
@@ -178,7 +178,7 @@ export default function FeaturedProviders() {
                           className="w-14 h-14 rounded-full object-cover bg-slate-100 border-4 border-white shadow-md"
                         />
                       ) : (
-                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#FF6014] to-[#ff7c71] text-white flex items-center justify-center font-black text-lg border-4 border-white shadow-md uppercase">
+                        <div className="w-14 h-14 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#818CF8] text-white flex items-center justify-center font-black text-lg border-4 border-white shadow-md uppercase">
                           {provider.name.charAt(0)}
                         </div>
                       )}
@@ -195,7 +195,7 @@ export default function FeaturedProviders() {
                     <h3 className="font-extrabold text-[15px] leading-tight text-slate-900">
                       {provider.name}
                     </h3>
-                    <p className="text-[11px] font-semibold mt-0.5 line-clamp-1 text-[#FF6014]">
+                    <p className="text-[11px] font-semibold mt-0.5 line-clamp-1 text-[#4F46E5]">
                       {provider.specialty}
                     </p>
                   </div>

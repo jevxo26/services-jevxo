@@ -30,16 +30,16 @@ export default function ChatSidebar({
       <div className="p-4 border-b border-slate-100 bg-white space-y-3">
         <div className="flex items-center justify-between">
           <h2 className="text-base font-black text-slate-900 uppercase tracking-wider flex items-center gap-1.5">
-            <MessageSquare className="w-4 h-4 text-[#FF6014]" />
+            <MessageSquare className="w-4 h-4 text-[#4F46E5]" />
             {lang === "bn" ? "ইনবক্স চ্যাট" : "Inbox Chat"}
           </h2>
-          <span className="text-[10px] font-extrabold text-[#FF6014] bg-[#FFF8F4] border border-[#FF6014]/20 px-2 py-0.5 rounded-full">
+          <span className="text-[10px] font-extrabold text-[#4F46E5] bg-[#EEF2FF] border border-[#4F46E5]/20 px-2 py-0.5 rounded-full">
             {lang === "bn" ? `মোট ${filteredInbox.length}` : `Total ${filteredInbox.length}`}
           </span>
         </div>
 
         {/* Search bar inside inbox list */}
-        <div className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 focus-within:border-[#FF6014]/40 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#FF6014]/5 transition-all">
+        <div className="flex items-center gap-2 rounded-xl border border-slate-100 bg-slate-50 px-3 py-2 focus-within:border-[#4F46E5]/40 focus-within:bg-white focus-within:ring-2 focus-within:ring-[#4F46E5]/5 transition-all">
           <Search className="h-3.5 w-3.5 text-slate-400 shrink-0" />
           <input
             type="text"
@@ -76,7 +76,7 @@ export default function ChatSidebar({
                   onClick={() => setActiveChatUser(item.user)}
                   className={`w-full text-left p-3 flex items-center gap-3 transition-all cursor-pointer rounded-2xl ${
                     isActive
-                      ? "bg-[#FFF8F4] border-l-4 border-l-[#FF6014] border border-[#FF6014]/15 shadow-sm shadow-[#FF6014]/5"
+                      ? "bg-[#EEF2FF] border-l-4 border-l-[#4F46E5] border border-[#4F46E5]/15 shadow-sm shadow-[#4F46E5]/5"
                       : "bg-transparent border border-transparent hover:bg-white hover:border-slate-100"
                   }`}
                 >
@@ -90,7 +90,7 @@ export default function ChatSidebar({
                     ) : (
                       <div
                         className={`w-10 h-10 rounded-full flex items-center justify-center shrink-0 shadow-xs ${
-                          isActive ? "bg-gradient-to-br from-[#FF6014] to-[#FF8142] text-white" : "bg-slate-100 text-slate-500"
+                          isActive ? "bg-gradient-to-br from-[#4F46E5] to-[#FF8142] text-white" : "bg-slate-100 text-slate-500"
                         }`}
                       >
                         {item.user?.name ? (
@@ -114,7 +114,7 @@ export default function ChatSidebar({
                         </span>
                       )}
                     </div>
-                    <p className={`text-[11px] truncate ${isActive ? "text-[#E0530A] font-semibold" : "text-slate-400 font-medium"}`}>
+                    <p className={`text-[11px] truncate ${isActive ? "text-[#4338CA] font-semibold" : "text-slate-400 font-medium"}`}>
                       {item.lastMessage}
                     </p>
                   </div>

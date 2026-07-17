@@ -164,7 +164,7 @@ const ServiceHero = () => {
       <div className="max-w-7xl mx-auto px-4 md:px-6 text-center">
         {/* Title */}
         <h1 className="text-2xl md:text-3xl lg:text-4xl font-medium text-slate-900 leading-tight mb-4 max-w-3xl mx-auto">
-          Find the best home <span className="text-[#FF6014]">services</span>
+          Find the best home <span className="text-[#4F46E5]">services</span>
         </h1>
         <p className="text-sm md:text-base text-slate-500 max-w-xl mx-auto mb-5 md:mb-8 font-medium leading-relaxed">
           Premium, reliable, and effortless solutions for your urban lifestyle in Bangladesh.
@@ -210,7 +210,7 @@ const ServiceHero = () => {
           {/* Search Button */}
           <Button
             type="submit"
-            className="w-full md:w-auto bg-[#FF6014] hover:bg-[#E0530A] text-white font-extrabold px-6 sm:px-8 py-3.5 h-auto rounded-xl md:rounded-full transition-all duration-200 shadow-sm active:scale-95 text-sm sm:text-base flex-shrink-0 cursor-pointer"
+            className="w-full md:w-auto bg-[#4F46E5] hover:bg-[#4338CA] text-white font-extrabold px-6 sm:px-8 py-3.5 h-auto rounded-xl md:rounded-full transition-all duration-200 shadow-sm active:scale-95 text-sm sm:text-base flex-shrink-0 cursor-pointer"
           >
             Search
           </Button>
@@ -241,15 +241,15 @@ const ServiceHero = () => {
                     key={cat.id}
                     href={`/categories/${cat.id}`}
                     className={`group flex items-center gap-2 px-4 py-2 rounded-full border font-extrabold text-xs transition-all duration-200 hover:-translate-y-0.5 no-underline cursor-pointer shadow-sm ${isActive
-                      ? "border-[#FF6014] text-[#FF6014] bg-gradient-to-br from-[#FFF8F4] to-[#FFEDE3]"
-                      : "border-slate-100 text-slate-600 bg-white hover:border-[#FF6014]/40 hover:text-slate-800 hover:shadow-md"
+                      ? "border-[#4F46E5] text-[#4F46E5] bg-gradient-to-br from-[#EEF2FF] to-[#FFEDE3]"
+                      : "border-slate-100 text-slate-600 bg-white hover:border-[#4F46E5]/40 hover:text-slate-800 hover:shadow-md"
                       }`}
                   >
                     <span
-                      className={`flex items-center justify-center w-5 h-5 rounded-full transition-colors duration-200 ${isActive ? "bg-[#FF6014]/15" : "bg-slate-50 group-hover:bg-[#FF6014]/10"
+                      className={`flex items-center justify-center w-5 h-5 rounded-full transition-colors duration-200 ${isActive ? "bg-[#4F46E5]/15" : "bg-slate-50 group-hover:bg-[#4F46E5]/10"
                         }`}
                     >
-                      <Icon size={12} className={isActive ? "text-[#FF6014]" : "text-slate-400 group-hover:text-[#FF6014]"} />
+                      <Icon size={12} className={isActive ? "text-[#4F46E5]" : "text-slate-400 group-hover:text-[#4F46E5]"} />
                     </span>
                     {label}
                   </Link>
@@ -283,15 +283,15 @@ const ServiceHero = () => {
                       key={cat.id}
                       href={`/categories/${cat.id}`}
                       className={`group snap-start flex-shrink-0 flex items-center gap-2 px-4 py-2.5 rounded-full border font-extrabold text-xs transition-all duration-200 active:scale-95 no-underline cursor-pointer shadow-sm ${isActive
-                        ? "border-[#FF6014] text-[#FF6014] bg-gradient-to-br from-[#FFF8F4] to-[#FFEDE3]"
+                        ? "border-[#4F46E5] text-[#4F46E5] bg-gradient-to-br from-[#EEF2FF] to-[#FFEDE3]"
                         : "border-slate-100 text-slate-600 bg-white"
                         }`}
                     >
                       <span
-                        className={`flex items-center justify-center w-5 h-5 rounded-full transition-colors duration-200 ${isActive ? "bg-[#FF6014]/15" : "bg-slate-50"
+                        className={`flex items-center justify-center w-5 h-5 rounded-full transition-colors duration-200 ${isActive ? "bg-[#4F46E5]/15" : "bg-slate-50"
                           }`}
                       >
-                        <Icon size={12} className={isActive ? "text-[#FF6014]" : "text-slate-400"} />
+                        <Icon size={12} className={isActive ? "text-[#4F46E5]" : "text-slate-400"} />
                       </span>
                       {label}
                     </Link>

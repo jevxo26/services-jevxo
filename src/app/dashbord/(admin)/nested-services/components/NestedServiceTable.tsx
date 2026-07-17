@@ -45,7 +45,7 @@ export default function NestedServiceTable({
       key: "service",
       header: "প্যারেন্ট সার্ভিস",
       render: (item: NestedService) => (
-        <span className="inline-flex items-center gap-1.5 bg-[#FFF8F4]/70 text-[#E0530A] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#FFF0EB]/50">
+        <span className="inline-flex items-center gap-1.5 bg-[#EEF2FF]/70 text-[#4338CA] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#E0E7FF]/50">
           <Wrench size={12} />
           {item.service?.name || "—"}
         </span>
@@ -89,7 +89,7 @@ export default function NestedServiceTable({
           </button>
           <button
             onClick={() => openDeleteModal(item)}
-            className="bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#E0530A] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
+            className="bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4338CA] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
           >
             <Trash2 size={14} /> ডিলিট
           </button>

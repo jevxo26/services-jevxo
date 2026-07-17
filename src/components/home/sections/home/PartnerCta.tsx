@@ -8,12 +8,12 @@ export default function PartnerCta() {
       <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 relative z-10">
         <div className="bg-slate-900 rounded-3xl p-8 md:p-16 flex flex-col md:flex-row items-center justify-between relative overflow-hidden shadow-2xl">
           {/* Decorative shapes */}
-          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#FF6014]/20 rounded-full blur-[100px] transform translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+          <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#4F46E5]/20 rounded-full blur-[100px] transform translate-x-1/2 -translate-y-1/2 pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-cyan-500/10 rounded-full blur-[80px] transform -translate-x-1/2 translate-y-1/2 pointer-events-none" />
           
           <div className="md:w-2/3 z-10 mb-12 md:mb-0">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 text-white border border-white/20 mb-8 backdrop-blur-sm">
-              <Briefcase className="w-4 h-4 text-[#FF6014]" />
+              <Briefcase className="w-4 h-4 text-[#4F46E5]" />
               <span className="text-sm font-semibold tracking-wide">JOIN OUR NETWORK</span>
             </div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mb-6 leading-tight">
@@ -24,25 +24,25 @@ export default function PartnerCta() {
             </p>
             <ul className="grid sm:grid-cols-2 gap-4 mb-10 text-slate-300 font-medium">
               <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#FF6014]" />
+                <div className="w-2 h-2 rounded-full bg-[#4F46E5]" />
                 Flexible working hours
               </li>
               <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#FF6014]" />
+                <div className="w-2 h-2 rounded-full bg-[#4F46E5]" />
                 Guaranteed payments
               </li>
               <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#FF6014]" />
+                <div className="w-2 h-2 rounded-full bg-[#4F46E5]" />
                 Access to a large customer base
               </li>
               <li className="flex items-center gap-3">
-                <div className="w-2 h-2 rounded-full bg-[#FF6014]" />
+                <div className="w-2 h-2 rounded-full bg-[#4F46E5]" />
                 Training & support
               </li>
             </ul>
             <Link 
               href="#" 
-              className="inline-flex items-center gap-2 bg-[#FF6014] hover:bg-[#E0530A] text-white px-8 py-4 rounded-xl font-bold transition-all hover:gap-4 shadow-lg hover:shadow-[#FF6014]/20 hover:-translate-y-0.5"
+              className="inline-flex items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white px-8 py-4 rounded-xl font-bold transition-all hover:gap-4 shadow-lg hover:shadow-[#4F46E5]/20 hover:-translate-y-0.5"
             >
               Become a Partner
               <ArrowRight className="w-5 h-5" />
@@ -62,7 +62,7 @@ export default function PartnerCta() {
                 <p className="text-slate-400 font-medium mb-6">Master Plumber</p>
                 <div className="w-full bg-slate-900/80 rounded-2xl p-4 text-center border border-slate-700 backdrop-blur-sm">
                   <p className="text-slate-400 text-sm mb-1 font-medium">Monthly Earnings</p>
-                  <p className="text-[#FF6014] font-extrabold text-2xl">৳ 45,000+</p>
+                  <p className="text-[#4F46E5] font-extrabold text-2xl">৳ 45,000+</p>
                 </div>
              </div>
           </div>

@@ -24,12 +24,12 @@ interface LoginLeftPanelProps {
 export default function LoginLeftPanel({ lottieAnimation }: LoginLeftPanelProps) {
   return (
     <div className="hidden lg:flex lg:w-[48%] xl:w-[50%] flex-col items-center justify-center relative overflow-hidden bg-gradient-to-br from-rose-50 via-orange-50 to-amber-50">
-      <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-[#FF6014]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-[-80px] left-[-80px] w-72 h-72 bg-[#4F46E5]/10 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-[-60px] right-[-60px] w-64 h-64 bg-orange-300/10 rounded-full blur-3xl pointer-events-none" />
 
       <div className="relative z-10 flex flex-col items-center text-center px-10">
-        <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/25 text-[#FF6014] px-4 py-1.5 rounded-full text-xs font-bold mb-6">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014] animate-pulse" />
+        <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/25 text-[#4F46E5] px-4 py-1.5 rounded-full text-xs font-bold mb-6">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5] animate-pulse" />
           Bangladesh's #1 Home Service Platform
         </div>
 
@@ -38,20 +38,20 @@ export default function LoginLeftPanel({ lottieAnimation }: LoginLeftPanelProps)
             <Lottie animationData={lottieAnimation} loop autoplay className="w-full h-auto" />
           ) : (
             <div className="relative w-16 h-16 flex items-center justify-center">
-              <div className="absolute w-16 h-16 border-4 border-slate-200 border-t-[#FF6014] rounded-full animate-spin" />
+              <div className="absolute w-16 h-16 border-4 border-slate-200 border-t-[#4F46E5] rounded-full animate-spin" />
             </div>
           )}
         </div>
 
         <h2 className="text-2xl xl:text-3xl font-black text-slate-800 leading-tight mt-4">
-          Welcome back to <span className="text-[#FF6014]">Rajseba</span>
+          Welcome back to <span className="text-[#4F46E5]">Rajseba</span>
         </h2>
 
         <ul className="mt-6 space-y-2.5 text-left w-full max-w-xs">
           {features.map((f, i) => (
             <li key={i} className="flex items-center gap-3 text-xs text-slate-650 font-bold">
-              <div className="w-5 h-5 rounded-full bg-[#FF6014]/15 border border-[#FF6014]/25 flex items-center justify-center shrink-0">
-                <CheckCircle2 size={12} className="text-[#FF6014]" />
+              <div className="w-5 h-5 rounded-full bg-[#4F46E5]/15 border border-[#4F46E5]/25 flex items-center justify-center shrink-0">
+                <CheckCircle2 size={12} className="text-[#4F46E5]" />
               </div>
               {f}
             </li>

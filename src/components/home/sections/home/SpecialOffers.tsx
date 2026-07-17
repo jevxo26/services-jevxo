@@ -59,13 +59,13 @@ export default function SpecialOffers() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14 flex flex-col items-center">
-          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <Sparkles size={13} />
             Featured Promotions
           </div>
           <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <Zap className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
-            Special Deals & <span className="text-[#FF6014]">Packages</span>
+            <Zap className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5]" />
+            Special Deals & <span className="text-[#4F46E5]">Packages</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Grab exclusive deals and combo service packages prepared for your home care.
@@ -76,7 +76,7 @@ export default function SpecialOffers() {
         {/* Loading State */}
         {isLoading && (
           <div className="flex items-center justify-center py-20">
-            <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
           </div>
         )}
 
@@ -115,7 +115,7 @@ export default function SpecialOffers() {
         {/* Empty state if API has no packages */}
         {!isLoading && packagesData.length === 0 && (
           <div className="flex flex-col items-center justify-center py-16 text-center">
-            <div className="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center text-[#FF6014] mb-4">
+            <div className="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center text-[#4F46E5] mb-4">
               <Gift size={28} />
             </div>
             <h3 className="text-lg font-bold text-slate-700 mb-1">No packages available yet</h3>

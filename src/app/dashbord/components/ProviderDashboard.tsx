@@ -361,7 +361,7 @@ export default function ProviderDashboard() {
           <div className="flex items-center gap-3 bg-white border border-slate-100 p-3 rounded-2xl shadow-sm shrink-0 md:mt-10 lg:mt-0 lg:mr-28">
             <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse"></span>
             <span className="text-sm font-semibold text-slate-700">{t.online}</span>
-            <button className="text-xs font-semibold text-[#FF6014] bg-[#FFF8F4] hover:bg-[#FFF0EB]/50 px-3 py-1.5 rounded-xl transition-all">
+            <button className="text-xs font-semibold text-[#4F46E5] bg-[#EEF2FF] hover:bg-[#E0E7FF]/50 px-3 py-1.5 rounded-xl transition-all">
               {t.toggleOffline}
             </button>
           </div>
@@ -410,12 +410,12 @@ export default function ProviderDashboard() {
                   key={job.id}
                   onClick={() => setActiveJob(job.id)}
                   className={`p-4 border rounded-2xl flex flex-col md:flex-row md:items-center justify-between gap-4 hover:shadow-md cursor-pointer transition-all ${
-                    activeJob === job.id ? "border-[#FF6014]/40 bg-[#FFF8F4]/20" : "border-slate-100"
+                    activeJob === job.id ? "border-[#4F46E5]/40 bg-[#EEF2FF]/20" : "border-slate-100"
                   }`}
                 >
                   <div className="space-y-2">
                     <div className="flex items-center gap-2">
-                      <span className="text-sm font-bold text-[#FF6014]">#{job.id}</span>
+                      <span className="text-sm font-bold text-[#4F46E5]">#{job.id}</span>
                       <span
                         className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full ${
                           currentStatus === "completed"
@@ -488,7 +488,7 @@ export default function ProviderDashboard() {
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 space-y-2">
                   <p className="text-xs text-slate-400 uppercase tracking-wider font-semibold">{t.clientContact}</p>
                   <h5 className="text-sm font-bold text-slate-850">{activeJobDetails.customer}</h5>
-                  <p className="text-xs font-semibold text-[#FF6014] flex items-center gap-1">
+                  <p className="text-xs font-semibold text-[#4F46E5] flex items-center gap-1">
                     <Phone size={12} /> {activeJobDetails.phone}
                   </p>
                 </div>
@@ -513,7 +513,7 @@ export default function ProviderDashboard() {
                   {activeJobDetails.status !== "completed" && activeJobDetails.status !== "cancelled" && (
                     <button
                       onClick={() => setIsEmployeeModalOpen(true)}
-                      className="w-full py-2 bg-white border border-slate-200 hover:border-[#FF6014]/50 rounded-lg text-xs font-semibold text-slate-700 hover:text-[#FF6014] transition-all flex justify-center items-center gap-1.5"
+                      className="w-full py-2 bg-white border border-slate-200 hover:border-[#4F46E5]/50 rounded-lg text-xs font-semibold text-slate-700 hover:text-[#4F46E5] transition-all flex justify-center items-center gap-1.5"
                     >
                       <Users size={14} /> {t.assignEmployee}
                     </button>
@@ -567,7 +567,7 @@ export default function ProviderDashboard() {
               {!isEditingProfile && !isCreatingProfile && myProfile && (
                 <button
                   onClick={() => setIsEditingProfile(true)}
-                  className="text-xs font-semibold text-[#FF6014] hover:text-[#E0530A] px-3 py-1.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-100/50 transition-colors"
+                  className="text-xs font-semibold text-[#4F46E5] hover:text-[#4338CA] px-3 py-1.5 rounded-lg border border-slate-100 bg-slate-50/50 hover:bg-slate-100/50 transition-colors"
                 >
                   {t.edit}
                 </button>
@@ -601,7 +601,7 @@ export default function ProviderDashboard() {
                         <select
                           name="type"
                           defaultValue={myProfile?.type || "personal"}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#4F46E5]/40"
                           required
                         >
                           <option value="personal">{t.personal}</option>
@@ -617,7 +617,7 @@ export default function ProviderDashboard() {
                           type="number"
                           placeholder="800"
                           defaultValue={myProfile?.min_starting_price}
-                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
+                          className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#4F46E5]/40"
                           required
                         />
                       </div>
@@ -632,7 +632,7 @@ export default function ProviderDashboard() {
                         type="text"
                         placeholder="e.g. Rana AC Services"
                         defaultValue={myProfile?.company_name}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#4F46E5]/40"
                         required
                       />
                     </div>
@@ -644,7 +644,7 @@ export default function ProviderDashboard() {
                       <select
                         name="category_id"
                         defaultValue={myProfile?.category?.id || ""}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#4F46E5]/40"
                       >
                         <option value="">{t.selectCategory}</option>
                         {categoriesRes?.data?.map((cat: any) => (
@@ -664,7 +664,7 @@ export default function ProviderDashboard() {
                         type="text"
                         placeholder="e.g. Mirpur, Dhaka"
                         defaultValue={myProfile?.location}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#4F46E5]/40"
                         required
                       />
                     </div>
@@ -678,7 +678,7 @@ export default function ProviderDashboard() {
                         rows={3}
                         placeholder="Describe your expertise and service quality..."
                         defaultValue={myProfile?.description}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#4F46E5]/40"
                         required
                       />
                     </div>
@@ -692,7 +692,7 @@ export default function ProviderDashboard() {
                         type="url"
                         placeholder="https://maps.google.com/..."
                         defaultValue={myProfile?.google_map_link}
-                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#FF6014]/40"
+                        className="w-full bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs text-slate-850 focus:outline-none focus:border-[#4F46E5]/40"
                       />
                     </div>
 
@@ -700,7 +700,7 @@ export default function ProviderDashboard() {
                       <button
                         type="submit"
                         disabled={isCreating || isUpdating}
-                        className="flex-1 py-2 bg-[#FF6014] hover:bg-[#E0530A] text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
+                        className="flex-1 py-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white rounded-xl text-xs font-semibold shadow-sm transition-all"
                       >
                         {isCreating || isUpdating ? "Saving..." : t.saveDetails}
                       </button>
@@ -721,7 +721,7 @@ export default function ProviderDashboard() {
             ) : (
               <div className="space-y-4">
                 <div className="flex items-center gap-3">
-                  <div className="w-12 h-12 bg-[#FFF8F4] rounded-xl flex items-center justify-center text-[#FF6014] font-bold shrink-0">
+                  <div className="w-12 h-12 bg-[#EEF2FF] rounded-xl flex items-center justify-center text-[#4F46E5] font-bold shrink-0">
                     <Building size={20} />
                   </div>
                   <div>
@@ -776,7 +776,7 @@ export default function ProviderDashboard() {
                           href={myProfile.google_map_link}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-[#FF6014] hover:underline font-semibold"
+                          className="text-[#4F46E5] hover:underline font-semibold"
                         >
                           View on Google Maps
                         </a>
@@ -796,7 +796,7 @@ export default function ProviderDashboard() {
           <div className="bg-white rounded-2xl shadow-xl w-full max-w-md overflow-hidden animate-in zoom-in-95 duration-200">
             <div className="flex items-center justify-between p-4 border-b border-slate-100 bg-slate-50">
               <h3 className="font-bold text-slate-800 flex items-center gap-2">
-                <Users size={18} className="text-[#FF6014]" />
+                <Users size={18} className="text-[#4F46E5]" />
                 {t.assignEmployee}
               </h3>
               <button 
@@ -830,7 +830,7 @@ export default function ProviderDashboard() {
                         }}
                         className={`p-3 rounded-xl border cursor-pointer transition-all flex items-center gap-3 ${
                           isSelected 
-                            ? "border-[#FF6014] bg-[#FFF8F4] shadow-sm" 
+                            ? "border-[#4F46E5] bg-[#EEF2FF] shadow-sm" 
                             : "border-slate-100 hover:border-slate-200 hover:bg-slate-50"
                         }`}
                       >
@@ -842,7 +842,7 @@ export default function ProviderDashboard() {
                           <p className="text-xs text-slate-500">{emp.email || "No email"}</p>
                         </div>
                         {isSelected && (
-                          <div className="ml-auto text-[#FF6014]">
+                          <div className="ml-auto text-[#4F46E5]">
                             <CheckCircle2 size={18} />
                           </div>
                         )}
@@ -873,7 +873,7 @@ export default function ProviderDashboard() {
               <button
                 onClick={handleAssignEmployee}
                 disabled={selectedEmployeeIds.length === 0 || isAssigning}
-                className="px-6 py-2 text-sm font-bold text-white bg-[#FF6014] hover:bg-[#E0530A] rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
+                className="px-6 py-2 text-sm font-bold text-white bg-[#4F46E5] hover:bg-[#4338CA] rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed flex items-center gap-2"
               >
                 {isAssigning ? "..." : t.assign}
               </button>

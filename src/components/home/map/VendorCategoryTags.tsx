@@ -33,7 +33,7 @@ export default function VendorCategoryTags({
         </span>
       ))}
       {extra > 0 && (
-        <span className={`${tagClass} bg-[#FFF8F4] text-[#FF6014] border border-[#FF6014]/20`}>
+        <span className={`${tagClass} bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]/20`}>
           +{extra} more
         </span>
       )}

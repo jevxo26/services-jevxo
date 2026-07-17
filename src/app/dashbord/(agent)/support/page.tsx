@@ -19,7 +19,7 @@ export default function AgentSupportPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
             <MessageCircle className="w-6 h-6" />
           </div>
           <div>
@@ -64,7 +64,7 @@ export default function AgentSupportPage() {
                         ? "bg-emerald-50 text-emerald-700"
                         : t.status === "In Progress"
                         ? "bg-indigo-50 text-indigo-700"
-                        : "bg-[#FFF8F4] text-[#E0530A]"
+                        : "bg-[#EEF2FF] text-[#4338CA]"
                     }`}
                   >
                     {t.status === "Resolved"
@@ -95,7 +95,7 @@ export default function AgentSupportPage() {
         {/* Right 1 Column: Create ticket */}
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm space-y-4">
           <h3 className="text-lg font-bold text-slate-900 flex items-center gap-2">
-            <MessageCircle size={20} className="text-[#FF6014]" />{" "}
+            <MessageCircle size={20} className="text-[#4F46E5]" />{" "}
             {lang === "bn" ? "নতুন টিকিট খুলুন" : "Open Priority Ticket"}
           </h3>
 
@@ -107,7 +107,7 @@ export default function AgentSupportPage() {
               <select
                 value={state.category}
                 onChange={(e) => state.setCategory(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all cursor-pointer"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs font-semibold focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all cursor-pointer"
               >
                 <option value="Commission & Payout">
                   {lang === "bn" ? "কমিশন ও পে-আউট" : "Commission & Payout"}
@@ -130,7 +130,7 @@ export default function AgentSupportPage() {
                 placeholder={lang === "bn" ? "সংक्षिप्त বিবরণ..." : "Brief summary..."}
                 value={state.subject}
                 onChange={(e) => state.setSubject(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold"
                 required
               />
             </div>
@@ -144,14 +144,14 @@ export default function AgentSupportPage() {
                 placeholder={lang === "bn" ? "সমস্যাটি বিস্তারিত ব্যাখ্যা করুন..." : "Explain the issue in detail..."}
                 value={state.description}
                 onChange={(e) => state.setDescription(e.target.value)}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-xs focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all font-semibold resize-none"
                 required
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#FF6014] hover:bg-[#E0530A] text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]"
+              className="w-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold py-2.5 rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all active:scale-[0.98]"
             >
               <Send size={14} /> {lang === "bn" ? "টিকিট জমা দিন" : "Submit Ticket"}
             </button>

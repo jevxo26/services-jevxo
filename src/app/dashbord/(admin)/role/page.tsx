@@ -93,7 +93,7 @@ export default function RoleManagementPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
+        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
@@ -153,7 +153,7 @@ export default function RoleManagementPage() {
         <div className="flex items-center justify-end gap-2">
           <button
             onClick={() => handleDelete(r.id)}
-            className="bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#E0530A] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
+            className="bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4338CA] text-xs font-bold px-3 py-1.5 rounded-lg flex items-center gap-1.5 transition-all active:scale-[0.97]"
           >
             <Trash2 size={14} /> {lang === "bn" ? "মুছুন" : "Delete"}
           </button>
@@ -167,7 +167,7 @@ export default function RoleManagementPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
             <KeyRound className="w-6 h-6" />
           </div>
           <div>

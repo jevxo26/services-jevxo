@@ -85,7 +85,7 @@ export default function AgentModal({
                 name="name"
                 type="text"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="Jane Doe"
               />
             </div>
@@ -95,7 +95,7 @@ export default function AgentModal({
                 name="email"
                 type="email"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="jane@example.com"
               />
             </div>
@@ -105,7 +105,7 @@ export default function AgentModal({
                 name="phone"
                 type="tel"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="01XXXXXXXXX"
               />
             </div>
@@ -134,7 +134,7 @@ export default function AgentModal({
                 name="company_name"
                 type="text"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="Rahman Maintenance Services"
               />
             </div>
@@ -144,7 +144,7 @@ export default function AgentModal({
                 name="nid_number"
                 type="text"
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                 placeholder="199XXXXXXXXXX"
               />
             </div>
@@ -156,7 +156,7 @@ export default function AgentModal({
                 <span className="text-xs font-bold text-slate-600 truncate max-w-[280px]">
                   {pictureFile ? pictureFile.name : "Choose profile photo..."}
                 </span>
-                <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">Browse</span>
+                <span className="text-[10px] font-black uppercase text-[#4F46E5] group-hover:underline">Browse</span>
                 <input
                   type="file"
                   accept="image/*"
@@ -180,7 +180,7 @@ export default function AgentModal({
                   <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
                     {shopImage1File ? shopImage1File.name : "Image 1"}
                   </span>
-                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <span className="text-[10px] font-black uppercase text-[#4F46E5] group-hover:underline">File</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -201,7 +201,7 @@ export default function AgentModal({
                   <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
                     {shopImage2File ? shopImage2File.name : "Image 2"}
                   </span>
-                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <span className="text-[10px] font-black uppercase text-[#4F46E5] group-hover:underline">File</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -226,7 +226,7 @@ export default function AgentModal({
                   <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
                     {nidFrontFile ? nidFrontFile.name : "NID Front"}
                   </span>
-                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <span className="text-[10px] font-black uppercase text-[#4F46E5] group-hover:underline">File</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -247,7 +247,7 @@ export default function AgentModal({
                   <span className="text-xs font-bold text-slate-600 truncate max-w-[120px]">
                     {nidBackFile ? nidBackFile.name : "NID Back"}
                   </span>
-                  <span className="text-[10px] font-black uppercase text-[#FF6014] group-hover:underline">File</span>
+                  <span className="text-[10px] font-black uppercase text-[#4F46E5] group-hover:underline">File</span>
                   <input
                     type="file"
                     accept="image/*"
@@ -297,7 +297,7 @@ export default function AgentModal({
               <textarea
                 name="description"
                 rows={3}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none"
                 placeholder="Briefly describe the agent's services..."
               ></textarea>
             </div>

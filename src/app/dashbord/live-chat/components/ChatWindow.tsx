@@ -47,7 +47,7 @@ export default function ChatWindow({
         {/* Back button visible on Mobile devices */}
         <button
           onClick={() => setActiveChatUser(null)}
-          className="md:hidden p-2 -ml-2 text-slate-500 hover:text-[#FF6014] hover:bg-[#FFF8F4] rounded-full transition-colors shrink-0"
+          className="md:hidden p-2 -ml-2 text-slate-500 hover:text-[#4F46E5] hover:bg-[#EEF2FF] rounded-full transition-colors shrink-0"
         >
           <ChevronLeft className="w-5 h-5" />
         </button>
@@ -60,7 +60,7 @@ export default function ChatWindow({
               className="w-10 h-10 rounded-full object-cover border border-slate-100 shadow-sm"
             />
           ) : (
-            <div className="w-10 h-10 bg-gradient-to-br from-[#FF6014] to-[#FF8142] rounded-full flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-[#FF6014]/10">
+            <div className="w-10 h-10 bg-gradient-to-br from-[#4F46E5] to-[#FF8142] rounded-full flex items-center justify-center text-white font-extrabold text-sm shadow-md shadow-[#4F46E5]/10">
               {activeChatUser.name?.charAt(0) || "U"}
             </div>
           )}
@@ -81,7 +81,7 @@ export default function ChatWindow({
         {messages.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full text-slate-400 space-y-3">
             <div className="p-4 bg-white rounded-full border border-slate-100 shadow-sm">
-              <MessageSquare size={36} className="text-[#FF6014]/25" />
+              <MessageSquare size={36} className="text-[#4F46E5]/25" />
             </div>
             <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">
               {lang === "bn" ? "কোনো মেসেজ নেই। কথোপকথন শুরু করুন!" : "No messages yet. Start conversation!"}
@@ -104,7 +104,7 @@ export default function ChatWindow({
                 <div
                   className={`max-w-[80%] md:max-w-[70%] rounded-2xl px-4 py-2.5 shadow-xs border ${
                     isMe
-                      ? "bg-gradient-to-br from-[#FF6014] to-[#FF8142] text-white rounded-tr-none border-transparent shadow-[#FF6014]/10"
+                      ? "bg-gradient-to-br from-[#4F46E5] to-[#FF8142] text-white rounded-tr-none border-transparent shadow-[#4F46E5]/10"
                       : "bg-white text-slate-800 rounded-tl-none border-slate-100/90"
                   }`}
                 >
@@ -187,13 +187,13 @@ export default function ChatWindow({
                 ? "আপনার মেসেজ লিখুন..."
                 : "Type your message..."
             }
-            className="flex-1 bg-slate-550/5 border border-slate-200/80 rounded-full px-4 py-2.5 text-xs font-semibold text-slate-800 placeholder-slate-400 outline-none focus:bg-white focus:border-[#FF6014]/30 focus:ring-4 focus:ring-[#FF6014]/5 transition-all"
+            className="flex-1 bg-slate-550/5 border border-slate-200/80 rounded-full px-4 py-2.5 text-xs font-semibold text-slate-800 placeholder-slate-400 outline-none focus:bg-white focus:border-[#4F46E5]/30 focus:ring-4 focus:ring-[#4F46E5]/5 transition-all"
             disabled={isUploading}
           />
           <button
             type="submit"
             disabled={(!messageInput.trim() && !imageFile) || isUploading}
-            className="w-10 h-10 bg-[#FF6014] hover:bg-[#E0530A] rounded-full flex items-center justify-center text-white transition-all disabled:opacity-55 disabled:cursor-not-allowed shadow-md shadow-[#FF6014]/15 hover:scale-105 active:scale-95 cursor-pointer shrink-0"
+            className="w-10 h-10 bg-[#4F46E5] hover:bg-[#4338CA] rounded-full flex items-center justify-center text-white transition-all disabled:opacity-55 disabled:cursor-not-allowed shadow-md shadow-[#4F46E5]/15 hover:scale-105 active:scale-95 cursor-pointer shrink-0"
           >
             {isUploading ? <Loader2 size={15} className="animate-spin" /> : <Send size={15} className="ml-0.5" />}
           </button>

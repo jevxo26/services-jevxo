@@ -18,7 +18,7 @@ export default function BookingsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-[#FF6014]" />
+        <Loader2 size={32} className="animate-spin text-[#4F46E5]" />
       </div>
     );
   }
@@ -40,12 +40,12 @@ export default function BookingsPage() {
       <div className="w-full space-y-8 relative z-10">
         {/* Premium Greeting & Stats Card */}
         <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15 animate-in fade-in duration-300">
-          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#FF6014]/25 blur-3xl pointer-events-none" />
+          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#4F46E5]/25 blur-3xl pointer-events-none" />
           <div className="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-[#FF6014] border border-white/10 flex-shrink-0">
+              <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-[#4F46E5] border border-white/10 flex-shrink-0">
                 <Calendar className="w-6 h-6" />
               </div>
               <div>
@@ -64,7 +64,7 @@ export default function BookingsPage() {
 
         {/* Status Filter Tab Pill Bar */}
         <div className="overflow-x-auto pb-2 -mx-4 px-4 sm:mx-0 sm:px-0 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
-          <div className="bg-[#FFF8F4]/40 border border-[#FFF0EB]/40 p-1.5 rounded-full flex gap-1 w-max">
+          <div className="bg-[#EEF2FF]/40 border border-[#E0E7FF]/40 p-1.5 rounded-full flex gap-1 w-max">
             {(["All", "Pending", "Assigned", "On The Way", "Completed", "Cancelled"] as const).map((tab) => {
               const isActive = filter === tab;
               return (
@@ -73,7 +73,7 @@ export default function BookingsPage() {
                   onClick={() => setFilter(tab)}
                   className={`px-5 py-2 rounded-full text-xs font-bold transition-all focus:outline-none whitespace-nowrap ${
                     isActive
-                      ? "bg-[#FF6014] text-white shadow-sm shadow-[#FF6014]/10"
+                      ? "bg-[#4F46E5] text-white shadow-sm shadow-[#4F46E5]/10"
                       : "text-slate-500 hover:text-slate-800 hover:bg-slate-50/50"
                   }`}
                 >

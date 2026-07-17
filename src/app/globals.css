@@ -7,10 +7,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --brand-primary: #8b1a1a;
-  --brand-primary-light: #a52a2a;
-  --brand-primary-dark: #6b1414;
-  --brand-accent: #fff5f5;
+  --brand-primary: #4F46E5;
+  --brand-primary-light: #818CF8;
+  --brand-primary-dark: #4338CA;
+  --brand-accent: #EEF2FF;
   --brand-hero-bg: #fef7f5;
   --text-primary: #1a1a1a;
   --text-secondary: #6b7280;
@@ -70,11 +70,11 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --color-brand-primary: #FF6014;
-  --color-brand-light: #FF9E96;
-  --color-brand-dark: #E0530A;
-  --color-brand-bg: #FFF8F4;
-  --color-brand-hover: #FFF0EB;
+  --color-brand-primary: #4F46E5;
+  --color-brand-light: #A5B4FC;
+  --color-brand-dark: #4338CA;
+  --color-brand-bg: #EEF2FF;
+  --color-brand-hover: #E0E7FF;
 
   --color-premium-slate: #0F172A;
   --color-premium-gray: #64748B;
@@ -85,7 +85,7 @@
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
 
-  --primary: #FF6014;
+  --primary: #4F46E5;
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -94,12 +94,12 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
 
-  --accent: #FF6014;
+  --accent: #4F46E5;
   --accent-foreground: oklch(0.985 0 0);
 
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: #FF6014;
+  --ring: #4F46E5;
 
   --radius: 0.625rem;
 
@@ -119,18 +119,18 @@
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #FF6014;
+  --sidebar-primary: #4F46E5;
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: #FF6014;
+  --sidebar-ring: #4F46E5;
 }
 
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --primary: #FF6014;
+  --primary: #4F46E5;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --muted: oklch(0.269 0 0);
@@ -140,12 +140,12 @@
   --popover-foreground: oklch(0.985 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: #FF6014;
+  --accent: #4F46E5;
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: #FF6014;
+  --ring: #4F46E5;
 }
 
 /* ============== Bai Jamjuree Font ============== */
@@ -171,7 +171,7 @@ body {
     overflow-x: hidden;
     /* ✅ Scrollbar শুধু একবার html-এ */
     scrollbar-width: thin;
-    scrollbar-color: #FFD2D4 transparent;
+    scrollbar-color: #C7D2FE transparent;
   }
 
   /* ✅ Webkit scrollbar — একবারই */
@@ -185,22 +185,26 @@ body {
   }
 
   ::-webkit-scrollbar-thumb {
-    background: #FFD2D4;
+    background: #C7D2FE;
     border-radius: 9999px;
     transition: background-color 0.2s ease;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #FF6014;
+    background: #4F46E5;
   }
 }
 
 @utility bg-brand-gradient {
-  background: #FF6014;
+  background: linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%) !important;
 }
 
 @utility bg-brand-gradient-hover {
-  background: #E0530A;
+  background: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%) !important;
+}
+
+.brand-logo-filter {
+  filter: hue-rotate(220deg) saturate(1.2) brightness(0.95);
 }
 
 @utility shadow-premium {
@@ -227,12 +231,12 @@ body {
   }
 
   &::-webkit-scrollbar-thumb {
-    background: #FFD2D4;
+    background: #C7D2FE;
     border-radius: 9999px;
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #FF6014;
+    background: #4F46E5;
   }
 }
 
@@ -266,8 +270,8 @@ html.dashboard-html {
 
   &:hover {
     transform: translateY(-5px) scale(1.015);
-    box-shadow: 0 16px 28px -10px rgba(255, 124, 113, 0.25), 0 6px 16px rgba(0, 0, 0, 0.04);
-    border-color: rgba(255, 124, 113, 0.35);
+    box-shadow: 0 16px 28px -10px rgba(99, 102, 241, 0.25), 0 6px 16px rgba(0, 0, 0, 0.04);
+    border-color: rgba(99, 102, 241, 0.35);
   }
 }
 
@@ -443,15 +447,15 @@ html.dashboard-html {
 }
 
 .custom-sidebar-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(255, 96, 20, 0.15) !important;
+  background: rgba(79, 70, 229, 0.15) !important;
   border-radius: 9999px !important;
 }
 
 .custom-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(255, 96, 20, 0.35) !important;
+  background: rgba(79, 70, 229, 0.35) !important;
 }
 
 .custom-sidebar-scrollbar {
   scrollbar-width: thin !important;
-  scrollbar-color: rgba(255, 96, 20, 0.15) transparent !important;
+  scrollbar-color: rgba(79, 70, 229, 0.15) transparent !important;
 }

@@ -95,7 +95,7 @@ export default function AgentViewModal({ selectedUser, setSelectedUser }: AgentV
           <div className="grid grid-cols-2 gap-4">
             <div className="bg-slate-50/50 p-4 rounded-2xl border border-slate-100/50">
               <span className="text-[10px] text-slate-400 font-bold block uppercase tracking-wider mb-1">Application Status</span>
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-extrabold capitalize bg-orange-100 text-[#FF6014]">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-extrabold capitalize bg-orange-100 text-[#4F46E5]">
                 {selectedUser.status}
               </span>
             </div>

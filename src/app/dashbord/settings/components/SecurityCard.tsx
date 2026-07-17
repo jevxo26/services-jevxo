@@ -27,7 +27,7 @@ export default function SecurityCard({ twoFactor, onTwoFactorChange, Switch, lan
               {lang === "bn" ? "৩ মাস আগে সর্বশেষ আপডেট করা হয়েছে" : "Last updated 3 months ago"}
             </p>
           </div>
-          <button className="text-[#FF6014] hover:text-[#E0530A] text-xs font-bold focus:outline-none hover:underline">
+          <button className="text-[#4F46E5] hover:text-[#4338CA] text-xs font-bold focus:outline-none hover:underline">
             {lang === "bn" ? "আপডেট করুন" : "Update"}
           </button>
         </div>

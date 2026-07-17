@@ -41,7 +41,7 @@ export default function PackageTable({
       key: "service",
       header: "প্যারেন্ট সার্ভিস",
       render: (item: Package) => (
-        <span className="inline-flex items-center gap-1.5 bg-[#FFF8F4]/70 text-[#E0530A] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#FFF0EB]/50">
+        <span className="inline-flex items-center gap-1.5 bg-[#EEF2FF]/70 text-[#4338CA] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#E0E7FF]/50">
           <Wrench size={12} />
           {item.service?.name || "—"}
         </span>

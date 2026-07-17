@@ -49,7 +49,7 @@ const fmtDate = (d: string) => {
 export default function InvoiceTemplate2({ invoice }: InvoiceTemplateProps) {
   const isPaid = invoice.paymentStatus?.toLowerCase() === "paid";
   const badgeText = isPaid ? "PAID" : "DUE";
-  const badgeColor = isPaid ? "#10b981" : "#ff6014";
+  const badgeColor = isPaid ? "#10b981" : "#4F46E5";
 
   return (
     <div
@@ -90,7 +90,7 @@ export default function InvoiceTemplate2({ invoice }: InvoiceTemplateProps) {
 
           <div
             style={{
-              background: "linear-gradient(135deg, #ff6014 0%, #e0530a 100%)",
+              background: "linear-gradient(135deg, #4F46E5 0%, #4338CA 100%)",
               color: "#ffffff",
               padding: "18px 24px",
               borderRadius: "12px",
@@ -98,7 +98,7 @@ export default function InvoiceTemplate2({ invoice }: InvoiceTemplateProps) {
               lineHeight: "1.6",
               width: "280px",
               position: "relative",
-              boxShadow: "0 4px 12px rgba(255,96,20,0.2)",
+              boxShadow: "0 4px 12px rgba(79, 70, 229,0.2)",
               boxSizing: "border-box",
             }}
           >
@@ -415,12 +415,12 @@ export default function InvoiceTemplate2({ invoice }: InvoiceTemplateProps) {
               marginBottom: "8px",
               fontSize: "12px",
               fontWeight: 600,
-              color: "#ff6014",
+              color: "#4F46E5",
             }}
           >
             <span style={{ marginRight: "8px", fontSize: "14px" }}>●</span>
             <div style={{ flex: 1 }}>
-              Due Amount: <span style={{ fontWeight: 800, color: "#ff6014" }}>{fmt(invoice.dueAmount)} BDT</span>
+              Due Amount: <span style={{ fontWeight: 800, color: "#4F46E5" }}>{fmt(invoice.dueAmount)} BDT</span>
             </div>
           </div>
 

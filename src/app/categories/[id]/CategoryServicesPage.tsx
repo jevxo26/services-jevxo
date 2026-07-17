@@ -74,7 +74,7 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
   }, [categoryId]);
 
   return (
-    <div className="min-h-screen bg-[#FFF8F4] relative">
+    <div className="min-h-screen bg-[#EEF2FF] relative">
       {/* Subtle background pattern */}
       <div
         className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0"
@@ -90,16 +90,16 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
               <div className="flex-1 min-w-0">
                 {/* Breadcrumb */}
                 <div className="flex items-center gap-1.5 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-1.5">
-                  <Link href="/" className="hover:text-[#FF6014] transition-colors">Home</Link>
+                  <Link href="/" className="hover:text-[#4F46E5] transition-colors">Home</Link>
                   <span>/</span>
-                  <Link href="/services" className="hover:text-[#FF6014] transition-colors">All Services</Link>
+                  <Link href="/services" className="hover:text-[#4F46E5] transition-colors">All Services</Link>
                   <span>/</span>
-                  <span className="text-[#FF6014] font-black">{isCatLoading ? "..." : (category?.name || "Category")}</span>
+                  <span className="text-[#4F46E5] font-black">{isCatLoading ? "..." : (category?.name || "Category")}</span>
                 </div>
 
                 <div className="flex items-center gap-3">
                   {/* Category icon / image */}
-                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden bg-gradient-to-br from-white to-[#FFF4EE] border border-[#FF6014]/15 flex items-center justify-center shrink-0 shadow-sm p-0.5">
+                  <div className="w-10 h-10 md:w-12 md:h-12 rounded-xl overflow-hidden bg-gradient-to-br from-white to-[#FFF4EE] border border-[#4F46E5]/15 flex items-center justify-center shrink-0 shadow-sm p-0.5">
                     {!isCatLoading && category?.icon ? (
                       <img
                         src={category.icon}
@@ -107,7 +107,7 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
                         className="w-full h-full object-cover rounded-lg"
                       />
                     ) : (
-                      <LayoutGrid className="w-5 h-5 text-[#FF6014]" />
+                      <LayoutGrid className="w-5 h-5 text-[#4F46E5]" />
                     )}
                   </div>
 
@@ -127,7 +127,7 @@ export default function CategoryServicesPage({ categoryId }: { categoryId: strin
               {/* Back button */}
               <Link
                 href="/services"
-                className="flex items-center gap-1.5 text-[10px] sm:text-xs font-extrabold text-[#FF6014] hover:text-[#E0530A] transition-all bg-[#FFF4EE] hover:bg-[#FFE8DD] border border-[#FF6014]/15 px-3.5 py-2 rounded-xl shrink-0 shadow-sm active:scale-95"
+                className="flex items-center gap-1.5 text-[10px] sm:text-xs font-extrabold text-[#4F46E5] hover:text-[#4338CA] transition-all bg-[#FFF4EE] hover:bg-[#FFE8DD] border border-[#4F46E5]/15 px-3.5 py-2 rounded-xl shrink-0 shadow-sm active:scale-95"
               >
                 <ArrowLeft size={13} strokeWidth={2.5} />
                 <span>Back</span>

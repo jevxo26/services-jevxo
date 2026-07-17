@@ -34,7 +34,7 @@ export default function SavedServiceCard({ service, handleUnsave }: SavedService
         {/* Remove heart */}
         <button
           onClick={() => handleUnsave(service.id, service.name)}
-          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-[#FF6014] text-white shadow-md hover:scale-110 transition-all cursor-pointer"
+          className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center bg-[#4F46E5] text-white shadow-md hover:scale-110 transition-all cursor-pointer"
           aria-label="Remove from wishlist"
         >
           <Heart size={14} className="fill-white" />
@@ -69,7 +69,7 @@ export default function SavedServiceCard({ service, handleUnsave }: SavedService
           </Link>
           <Link
             href={`/categories/service/${service.slug || service.id}`}
-            className="flex-1 text-center bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm"
+            className="flex-1 text-center bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold px-3 py-2 rounded-xl transition-all shadow-sm"
           >
             {lang === "bn" ? "বুক করুন" : "Book Now"}
           </Link>

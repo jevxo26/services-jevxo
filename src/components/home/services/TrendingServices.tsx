@@ -157,7 +157,7 @@ export default function TrendingServices() {
     return (
       <section className="py-14 bg-transparent relative overflow-hidden flex items-center justify-center min-h-[250px]">
         <div className="flex flex-col items-center justify-center gap-3">
-          <svg className="animate-spin h-8 w-8 text-[#FF6014]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+          <svg className="animate-spin h-8 w-8 text-[#4F46E5]" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
             <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
             <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
           </svg>
@@ -208,7 +208,7 @@ export default function TrendingServices() {
               <motion.div
                 key={service.id}
                 variants={itemVariants}
-                className="group relative bg-white rounded-3xl border border-slate-100 hover:border-[#FF6014]/25 hover:shadow-[0_20px_50px_rgba(255,96,20,0.06)] transition-all duration-300 flex flex-col overflow-hidden"
+                className="group relative bg-white rounded-3xl border border-slate-100 hover:border-[#4F46E5]/25 hover:shadow-[0_20px_50px_rgba(79, 70, 229,0.06)] transition-all duration-300 flex flex-col overflow-hidden"
               >
                 {/* Image Section */}
                 <div className="relative aspect-[16/10] w-full bg-slate-50 overflow-hidden">
@@ -219,7 +219,7 @@ export default function TrendingServices() {
                   />
                   {/* Badge */}
                   {service.badge && (
-                    <span className="absolute top-3.5 left-3.5 py-1 px-3 bg-gradient-to-r from-[#FF6014] to-[#ff7a37] text-white text-[9px] font-extrabold tracking-wider rounded-full uppercase shadow-md z-10">
+                    <span className="absolute top-3.5 left-3.5 py-1 px-3 bg-gradient-to-r from-[#4F46E5] to-[#ff7a37] text-white text-[9px] font-extrabold tracking-wider rounded-full uppercase shadow-md z-10">
                       {service.badge}
                     </span>
                   )}
@@ -236,11 +236,11 @@ export default function TrendingServices() {
                       <StarRating rating={service.rating} />
                       <span>({service.reviews} reviews)</span>
                       <span className="inline-flex items-center gap-1 text-[10px] font-extrabold text-[#9ca3af] uppercase tracking-wider ml-1">
-                        <Clock size={10} strokeWidth={2.5} className="text-[#FF6014]/75" />
+                        <Clock size={10} strokeWidth={2.5} className="text-[#4F46E5]/75" />
                         {service.done}
                       </span>
                     </div>
-                    <h3 className="text-base font-medium text-slate-800 leading-snug group-hover:text-[#FF6014] transition-colors line-clamp-1">
+                    <h3 className="text-base font-medium text-slate-800 leading-snug group-hover:text-[#4F46E5] transition-colors line-clamp-1">
                       {service.title}
                     </h3>
                     <p className="text-xs text-slate-500 leading-relaxed line-clamp-2">
@@ -260,7 +260,7 @@ export default function TrendingServices() {
                     </div>
                     <Link
                       href={service.slug ? `/categories/service/${service.slug}?book=true` : `/services/${service.id}?book=true`}
-                      className="px-4 py-2 border border-[#FF6014]/25 hover:border-[#FF6014] bg-white hover:bg-[#FF6014] text-[#FF6014] hover:text-white text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-1 cursor-pointer"
+                      className="px-4 py-2 border border-[#4F46E5]/25 hover:border-[#4F46E5] bg-white hover:bg-[#4F46E5] text-[#4F46E5] hover:text-white text-xs font-semibold rounded-xl transition-all duration-300 flex items-center gap-1 cursor-pointer"
                     >
                       Book Now <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform" />
                     </Link>

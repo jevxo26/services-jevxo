@@ -44,7 +44,7 @@ const priorityConfig: Record<string, { label: string; color: string; dot: string
 /* ── Stat Card ─────────────────────────────────────────────── */
 function StatCard({ label, count, accent, icon: Icon }: { label: string; count: number; accent: string; icon: React.ComponentType<any> }) {
   return (
-    <div className="bg-white rounded-3xl border border-slate-100 shadow-xs p-6 flex items-center justify-between hover:shadow-md hover:border-[#FF6014]/15 transition-all duration-300 group">
+    <div className="bg-white rounded-3xl border border-slate-100 shadow-xs p-6 flex items-center justify-between hover:shadow-md hover:border-[#4F46E5]/15 transition-all duration-300 group">
       <div className="space-y-1">
         <p className="text-3xl font-black text-slate-900 leading-none">{count}</p>
         <p className="text-[10px] font-black text-slate-450 uppercase tracking-widest pt-1">{label}</p>
@@ -148,11 +148,11 @@ export default function SupportDeskPage() {
       
       {/* Premium Header with Gradient Banner */}
       <div className="relative overflow-hidden bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 rounded-[32px] border border-slate-800/80 px-8 py-6 shadow-xl">
-        <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#FF6014]/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-12 -right-12 w-48 h-48 bg-[#4F46E5]/10 rounded-full blur-3xl pointer-events-none" />
         
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-[#FF6014] text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
+            <div className="inline-flex items-center gap-1.5 bg-white/5 border border-white/10 text-[#4F46E5] text-[10px] font-black uppercase tracking-widest px-3 py-1 rounded-full">
               <Sparkles size={11} className="animate-pulse" />
               {lang === "bn" ? "অ্যাডমিন সাপোর্ট কনসোল" : "Support Operations Desk"}
             </div>
@@ -170,7 +170,7 @@ export default function SupportDeskPage() {
             onClick={() => refetchTickets()}
             className="flex items-center gap-2 px-4 py-2.5 bg-white/5 border border-white/10 hover:bg-white/10 text-white rounded-xl text-xs font-black transition-all active:scale-[0.98] shadow-md"
           >
-            <RefreshCw size={13} className="text-[#FF6014]" />
+            <RefreshCw size={13} className="text-[#4F46E5]" />
             {lang === "bn" ? "রিলোড করুন" : "Sync Tickets"}
           </button>
         </div>
@@ -179,7 +179,7 @@ export default function SupportDeskPage() {
       {/* Stats Cards Row */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
         <StatCard label={lang === "bn" ? "মোট টিকিট" : "Total Tickets"} count={stats.total} accent="bg-gradient-to-br from-slate-700 to-slate-800 shadow-slate-900/10" icon={Ticket} />
-        <StatCard label={lang === "bn" ? "নতুন পেন্ডিং" : "New Pending"} count={stats.pending} accent="bg-gradient-to-br from-[#FF6014] to-[#E0530A] shadow-[#FF6014]/20" icon={AlertCircle} />
+        <StatCard label={lang === "bn" ? "নতুন পেন্ডিং" : "New Pending"} count={stats.pending} accent="bg-gradient-to-br from-[#4F46E5] to-[#4338CA] shadow-[#4F46E5]/20" icon={AlertCircle} />
         <StatCard label={lang === "bn" ? "চলমান সমস্যা" : "Active In-Progress"} count={stats.inProgress} accent="bg-gradient-to-br from-blue-500 to-blue-600 shadow-blue-500/10" icon={Clock} />
         <StatCard label={lang === "bn" ? "সমাধানকৃত টিকিট" : "Resolved"} count={stats.resolved} accent="bg-gradient-to-br from-emerald-500 to-emerald-600 shadow-emerald-500/10" icon={CheckCircle2} />
       </div>
@@ -193,7 +193,7 @@ export default function SupportDeskPage() {
           <div className="bg-white rounded-3xl border border-slate-100 p-5 space-y-4 shadow-xs">
             <div className="flex items-center justify-between border-b border-slate-50 pb-2">
               <span className="text-[11px] font-black text-slate-700 uppercase tracking-widest flex items-center gap-1.5">
-                <Filter size={12} className="text-[#FF6014]" />
+                <Filter size={12} className="text-[#4F46E5]" />
                 {lang === "bn" ? "ফিল্টার কনসোল" : "Inbox Filters"}
               </span>
               <span className="text-[10px] font-extrabold text-slate-400 bg-slate-50 px-2 py-0.5 rounded-md">
@@ -206,14 +206,14 @@ export default function SupportDeskPage() {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder={lang === "bn" ? "আইডি, বিষয়বস্তু অথবা গ্রাহকের নাম..." : "Search ID, subject or name..."}
-              className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#FF6014] focus:bg-white transition-colors"
+              className="w-full bg-slate-50 border border-slate-100 rounded-xl px-4 py-2.5 text-xs font-semibold text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#4F46E5] focus:bg-white transition-colors"
             />
             
             <div className="grid grid-cols-2 gap-2">
               <select
                 value={filterStatus}
                 onChange={(e) => setFilterStatus(e.target.value)}
-                className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-2.5 text-xs font-bold text-slate-600 outline-none focus:border-[#FF6014] bg-white cursor-pointer"
+                className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-2.5 text-xs font-bold text-slate-600 outline-none focus:border-[#4F46E5] bg-white cursor-pointer"
               >
                 <option value="all">{lang === "bn" ? "সকল স্ট্যাটাস" : "All Status"}</option>
                 <option value="pending">{lang === "bn" ? "পেন্ডিং (Pending)" : "Pending"}</option>
@@ -225,7 +225,7 @@ export default function SupportDeskPage() {
               <select
                 value={filterPriority}
                 onChange={(e) => setFilterPriority(e.target.value)}
-                className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-2.5 text-xs font-bold text-slate-600 outline-none focus:border-[#FF6014] bg-white cursor-pointer"
+                className="bg-slate-50 border border-slate-100 rounded-xl px-2.5 py-2.5 text-xs font-bold text-slate-600 outline-none focus:border-[#4F46E5] bg-white cursor-pointer"
               >
                 <option value="all">{lang === "bn" ? "সকল গুরুত্ব" : "All Priority"}</option>
                 <option value="low">{lang === "bn" ? "স্বল্প (Low)" : "Low Priority"}</option>
@@ -238,7 +238,7 @@ export default function SupportDeskPage() {
           {/* Dynamic Scrollable Tickets Inbox */}
           {isTicketsLoading ? (
             <div className="flex justify-center py-16 bg-white rounded-3xl border border-slate-100">
-              <Loader2 className="w-8 h-8 text-[#FF6014] animate-spin" />
+              <Loader2 className="w-8 h-8 text-[#4F46E5] animate-spin" />
             </div>
           ) : filteredTickets.length === 0 ? (
             <div className="bg-white rounded-3xl border border-slate-100 p-16 text-center text-slate-400 font-bold text-xs space-y-2">
@@ -328,11 +328,11 @@ export default function SupportDeskPage() {
 
               {/* User Bio Panel Card */}
               {activeTicketData?.data?.user && (
-                <div className="px-5 py-3.5 border-b border-slate-100 bg-[#FFF8F4]/10 flex flex-wrap gap-4 text-[10px] font-bold text-slate-500">
-                  <span className="flex items-center gap-1.5"><User size={13} className="text-[#FF6014]" /> {activeTicketData.data.user.name}</span>
-                  <span className="flex items-center gap-1.5"><Mail size={13} className="text-[#FF6014]" /> {activeTicketData.data.user.email}</span>
+                <div className="px-5 py-3.5 border-b border-slate-100 bg-[#EEF2FF]/10 flex flex-wrap gap-4 text-[10px] font-bold text-slate-500">
+                  <span className="flex items-center gap-1.5"><User size={13} className="text-[#4F46E5]" /> {activeTicketData.data.user.name}</span>
+                  <span className="flex items-center gap-1.5"><Mail size={13} className="text-[#4F46E5]" /> {activeTicketData.data.user.email}</span>
                   {activeTicketData.data.user.phone && (
-                    <span className="flex items-center gap-1.5"><Phone size={13} className="text-[#FF6014]" /> {activeTicketData.data.user.phone}</span>
+                    <span className="flex items-center gap-1.5"><Phone size={13} className="text-[#4F46E5]" /> {activeTicketData.data.user.phone}</span>
                   )}
                 </div>
               )}
@@ -341,7 +341,7 @@ export default function SupportDeskPage() {
               <div className="flex-1 p-5 overflow-y-auto space-y-4 max-h-[350px] bg-slate-50/30">
                 {isActiveTicketLoading ? (
                   <div className="flex justify-center items-center h-48">
-                    <Loader2 className="w-7 h-7 text-[#FF6014] animate-spin" />
+                    <Loader2 className="w-7 h-7 text-[#4F46E5] animate-spin" />
                   </div>
                 ) : (
                   <>
@@ -370,7 +370,7 @@ export default function SupportDeskPage() {
                           className={`flex gap-3 max-w-xl ${isClient ? "" : "ml-auto flex-row-reverse"}`}
                         >
                           <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-xs ${
-                            isClient ? "bg-slate-100 text-slate-500 border-slate-200" : "bg-[#FFF8F4] text-[#FF6014] border-[#FFF0EB]"
+                            isClient ? "bg-slate-100 text-slate-500 border-slate-200" : "bg-[#EEF2FF] text-[#4F46E5] border-[#E0E7FF]"
                           }`}>
                             {isClient ? <User size={13} /> : <Shield size={13} />}
                           </div>
@@ -401,7 +401,7 @@ export default function SupportDeskPage() {
                   value={replyMessage}
                   onChange={(e) => setReplyMessage(e.target.value)}
                   placeholder={lang === "bn" ? "অ্যাডমিন উত্তর লিখুন..." : "Type reply message to client..."}
-                  className="flex-1 px-4 py-3 bg-slate-50 border border-slate-150 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#FF6014] transition-colors"
+                  className="flex-1 px-4 py-3 bg-slate-50 border border-slate-150 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#4F46E5] transition-colors"
                 />
                 <button
                   type="submit"
@@ -415,7 +415,7 @@ export default function SupportDeskPage() {
             </div>
           ) : (
             <div className="bg-white border border-slate-100 rounded-3xl p-16 text-center space-y-3 min-h-[550px] flex flex-col justify-center items-center">
-              <div className="p-4 bg-slate-50 rounded-full border border-slate-100 text-[#FF6014]/65">
+              <div className="p-4 bg-slate-50 rounded-full border border-slate-100 text-[#4F46E5]/65">
                 <Ticket className="w-8 h-8 animate-pulse" />
               </div>
               <h3 className="text-sm font-black text-slate-850">

@@ -28,9 +28,9 @@ export function SubServiceDetailCard({
   return (
     <div className="bg-white rounded-[32px] border border-slate-100/80 shadow-[0_12px_40px_rgba(0,0,0,0.03)] overflow-hidden animate-in fade-in slide-in-from-bottom-4 duration-300">
       {/* Header Banner */}
-      <div className="bg-[#FFF8F4] px-6 py-5 border-b border-[#FF6014]/10 flex items-center justify-between">
+      <div className="bg-[#EEF2FF] px-6 py-5 border-b border-[#4F46E5]/10 flex items-center justify-between">
         <div className="min-w-0">
-          <span className="text-[10px] text-[#FF6014] font-black uppercase tracking-widest block mb-1">
+          <span className="text-[10px] text-[#4F46E5] font-black uppercase tracking-widest block mb-1">
             {subService.parentTitle || "Sub Service"} Details
           </span>
           <h3 className="text-base font-bold text-slate-800 truncate">
@@ -50,17 +50,17 @@ export function SubServiceDetailCard({
         <div className="flex items-center justify-between bg-slate-50/60 p-4 rounded-2xl border border-slate-100/50">
           <div>
             <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Price</span>
-            <div className="text-[#FF6014] text-2xl font-black">
+            <div className="text-[#4F46E5] text-2xl font-black">
               ৳{Number(subService.price).toLocaleString()}
             </div>
           </div>
           <div className="w-32">
             {isAdded ? (
-              <div className="flex items-center gap-1 bg-white border border-[#FF6014]/20 rounded-xl p-0.5 w-full justify-between shadow-xs">
+              <div className="flex items-center gap-1 bg-white border border-[#4F46E5]/20 rounded-xl p-0.5 w-full justify-between shadow-xs">
                 <button
                   type="button"
                   onClick={() => onUpdateQuantity(subService.id, -1)}
-                  className="w-8 h-8 rounded-lg bg-slate-50 text-[#FF6014] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
+                  className="w-8 h-8 rounded-lg bg-slate-50 text-[#4F46E5] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
                 >
                   <Minus size={12} strokeWidth={3} />
                 </button>
@@ -70,7 +70,7 @@ export function SubServiceDetailCard({
                 <button
                   type="button"
                   onClick={() => onUpdateQuantity(subService.id, 1)}
-                  className="w-8 h-8 rounded-lg bg-slate-50 text-[#FF6014] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
+                  className="w-8 h-8 rounded-lg bg-slate-50 text-[#4F46E5] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
                 >
                   <Plus size={12} strokeWidth={3} />
                 </button>
@@ -78,7 +78,7 @@ export function SubServiceDetailCard({
             ) : (
               <button
                 onClick={() => onAddToCart(subService.parentService, subService.id)}
-                className="w-full py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-md shadow-rose-100"
+                className="w-full py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-md shadow-rose-100"
               >
                 <Plus size={13} strokeWidth={3} />
                 Add to Cart
@@ -135,7 +135,7 @@ export function SubServiceDetailCard({
         {faqs.length > 0 && (
           <div className="space-y-3">
             <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-              <HelpCircle size={14} className="text-[#FF6014]" />
+              <HelpCircle size={14} className="text-[#4F46E5]" />
               Service FAQs
             </h4>
             <div className="space-y-2.5">
@@ -204,7 +204,7 @@ export function SubServiceDetailDrawer({
             {/* Header */}
             <div className="px-6 pb-4 border-b border-slate-100 flex items-center justify-between shrink-0">
               <div className="min-w-0 flex-1 pr-4">
-                <span className="text-[10px] text-[#FF6014] font-black uppercase tracking-widest block mb-0.5">
+                <span className="text-[10px] text-[#4F46E5] font-black uppercase tracking-widest block mb-0.5">
                   {subService.parentTitle || "Sub Service"} Details
                 </span>
                 <h3 className="text-base font-bold text-slate-900 truncate">
@@ -225,17 +225,17 @@ export function SubServiceDetailDrawer({
               <div className="flex items-center justify-between bg-slate-50/60 p-4 rounded-2xl border border-slate-100/50">
                 <div>
                   <span className="text-[10px] text-slate-400 font-bold uppercase tracking-wider block">Price</span>
-                  <div className="text-[#FF6014] text-xl font-black">
+                  <div className="text-[#4F46E5] text-xl font-black">
                     ৳{Number(subService.price).toLocaleString()}
                   </div>
                 </div>
                 <div className="w-32">
                   {isAdded ? (
-                    <div className="flex items-center gap-1 bg-white border border-[#FF6014]/20 rounded-xl p-0.5 w-full justify-between shadow-xs">
+                    <div className="flex items-center gap-1 bg-white border border-[#4F46E5]/20 rounded-xl p-0.5 w-full justify-between shadow-xs">
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(subService.id, -1)}
-                        className="w-8 h-8 rounded-lg bg-slate-50 text-[#FF6014] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
+                        className="w-8 h-8 rounded-lg bg-slate-50 text-[#4F46E5] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
                       >
                         <Minus size={12} strokeWidth={3} />
                       </button>
@@ -245,7 +245,7 @@ export function SubServiceDetailDrawer({
                       <button
                         type="button"
                         onClick={() => onUpdateQuantity(subService.id, 1)}
-                        className="w-8 h-8 rounded-lg bg-slate-50 text-[#FF6014] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
+                        className="w-8 h-8 rounded-lg bg-slate-50 text-[#4F46E5] flex items-center justify-center hover:bg-rose-50/50 transition cursor-pointer"
                       >
                         <Plus size={12} strokeWidth={3} />
                       </button>
@@ -253,7 +253,7 @@ export function SubServiceDetailDrawer({
                   ) : (
                     <button
                       onClick={() => onAddToCart(subService.parentService, subService.id)}
-                      className="w-full py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-md shadow-rose-100"
+                      className="w-full py-2.5 rounded-xl text-xs font-black transition-all flex items-center justify-center gap-1.5 cursor-pointer active:scale-95 bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-md shadow-rose-100"
                     >
                       <Plus size={13} strokeWidth={3} />
                       Add to Cart
@@ -310,7 +310,7 @@ export function SubServiceDetailDrawer({
               {faqs.length > 0 && (
                 <div className="space-y-3">
                   <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wider flex items-center gap-1.5">
-                    <HelpCircle size={14} className="text-[#FF6014]" />
+                    <HelpCircle size={14} className="text-[#4F46E5]" />
                     Service FAQs
                   </h4>
                   <div className="space-y-2.5">

@@ -81,7 +81,7 @@ export default function EmployeeModal({
                   name="name"
                   type="text"
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                   placeholder="যেমন: রহিম মিয়া"
                 />
               </div>
@@ -91,7 +91,7 @@ export default function EmployeeModal({
                   name="email"
                   type="email"
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                   placeholder="যেমন: email@example.com"
                 />
               </div>
@@ -101,7 +101,7 @@ export default function EmployeeModal({
                   name="phone"
                   type="tel"
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                   placeholder="01XXXXXXXXX"
                 />
               </div>
@@ -110,7 +110,7 @@ export default function EmployeeModal({
                   <label className="block text-xs font-semibold text-slate-500 mb-1.5 uppercase">ভেন্ডর</label>
                   <select
                     name="vendor_id"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                   >
                     <option value="">কোনো ভেন্ডর নেই (ঐচ্ছিক)</option>
                     {isUsersLoading ? (
@@ -154,7 +154,7 @@ export default function EmployeeModal({
                   multiple
                   name="category_ids"
                   required
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all h-24"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all h-24"
                 >
                   {isCategoriesLoading ? (
                     <option value="" disabled>
@@ -195,7 +195,7 @@ export default function EmployeeModal({
                 <textarea
                   name="description"
                   rows={3}
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all resize-none"
                   placeholder="এমপ্লয়ির দক্ষতা সম্পর্কে সংক্ষেপে লিখুন..."
                 ></textarea>
               </div>
@@ -206,7 +206,7 @@ export default function EmployeeModal({
                     name="min_starting_price"
                     type="number"
                     step="0.01"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                     placeholder="0.00"
                   />
                 </div>
@@ -215,7 +215,7 @@ export default function EmployeeModal({
                   <input
                     name="google_map_link"
                     type="url"
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#FF6014]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
                     placeholder="https://maps.google.com/..."
                   />
                 </div>

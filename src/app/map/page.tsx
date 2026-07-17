@@ -16,7 +16,7 @@ const DhakaMap = dynamic(() => import("@/components/home/map/DhakaMap"), {
   loading: () => (
     <div className="flex-1 min-h-[480px] md:min-h-[600px] md:h-full rounded-3xl border border-slate-200 bg-slate-100 flex items-center justify-center">
       <div className="flex flex-col items-center gap-3">
-        <Loader2 className="w-8 h-8 animate-spin text-[#FF6014]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
         <p className="text-xs font-bold text-slate-400">Loading map...</p>
       </div>
     </div>
@@ -38,7 +38,7 @@ export default function MapPage() {
       <div className="min-h-screen bg-transparent flex items-center justify-center relative">
         <div className="absolute inset-0 bg-[url('/bg-icons-design.png')] bg-repeat opacity-10 pointer-events-none z-0" style={{ backgroundSize: 'auto' }} />
         <div className="flex flex-col items-center gap-3 relative z-10">
-          <Loader2 className="w-10 h-10 animate-spin text-[#FF6014]" />
+          <Loader2 className="w-10 h-10 animate-spin text-[#4F46E5]" />
           <p className="text-sm font-semibold text-slate-500">Loading vendor profiles...</p>
         </div>
       </div>
@@ -54,13 +54,13 @@ export default function MapPage() {
             {/* Professional Help Header Section */}
             <div className="bg-white border border-slate-100 p-4 md:p-5 rounded-[28px] shadow-xs flex flex-col lg:flex-row lg:items-center justify-between gap-4 shrink-0">
               <div className="flex items-start gap-3">
-                <div className="w-10 h-10 rounded-2xl bg-[#FFF8F4] flex items-center justify-center text-[#FF6014] shrink-0">
+                <div className="w-10 h-10 rounded-2xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] shrink-0">
                   <MapIcon className="w-5 h-5" />
                 </div>
                 <div>
                   <h1 className="text-lg md:text-xl font-black text-slate-800 tracking-tight flex items-center gap-2">
                     Live Vendor Locator Map
-                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-[#FF6014]/10 text-[#FF6014] uppercase tracking-wide">
+                    <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[9px] font-extrabold bg-[#4F46E5]/10 text-[#4F46E5] uppercase tracking-wide">
                       Live
                     </span>
                   </h1>
@@ -73,17 +73,17 @@ export default function MapPage() {
               {/* Instructions/Help guide */}
               <div className="flex flex-wrap items-center gap-3 md:gap-4 lg:justify-end text-[11px] font-bold text-slate-500 bg-slate-50 p-2 md:p-3 rounded-2xl border border-slate-100/50">
                 <div className="flex items-center gap-1.5">
-                  <span className="w-5 h-5 rounded-full bg-[#FF6014] text-white flex items-center justify-center font-extrabold text-[10px]">1</span>
+                  <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white flex items-center justify-center font-extrabold text-[10px]">1</span>
                   <span>Select Category</span>
                 </div>
                 <div className="h-3 w-px bg-slate-200 hidden sm:block" />
                 <div className="flex items-center gap-1.5">
-                  <span className="w-5 h-5 rounded-full bg-[#FF6014] text-white flex items-center justify-center font-extrabold text-[10px]">2</span>
+                  <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white flex items-center justify-center font-extrabold text-[10px]">2</span>
                   <span>Tap Location Pin</span>
                 </div>
                 <div className="h-3 w-px bg-slate-200 hidden sm:block" />
                 <div className="flex items-center gap-1.5">
-                  <span className="w-5 h-5 rounded-full bg-[#FF6014] text-white flex items-center justify-center font-extrabold text-[10px]">3</span>
+                  <span className="w-5 h-5 rounded-full bg-[#4F46E5] text-white flex items-center justify-center font-extrabold text-[10px]">3</span>
                   <span>Click 'View Profile' & Book</span>
                 </div>
               </div>
@@ -108,7 +108,7 @@ export default function MapPage() {
                 <Button variant="ghost" onClick={() => setActiveTab("map")} className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer text-slate-500 hover:text-slate-800">
                   <MapIcon className="w-3.5 h-3.5" />Map
                 </Button>
-                <Button onClick={() => setActiveTab("list")} className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#FF6014] hover:bg-[#FF6014]/90 text-white shadow-sm">
+                <Button onClick={() => setActiveTab("list")} className="flex-1 py-1.5 h-auto rounded-full text-xs font-bold transition-all flex items-center justify-center gap-1.5 cursor-pointer bg-[#4F46E5] hover:bg-[#4F46E5]/90 text-white shadow-sm">
                   <ListIcon className="w-3.5 h-3.5" />List
                 </Button>
               </div>
@@ -133,7 +133,7 @@ export default function MapPage() {
                     <Info className="w-12 h-12 text-slate-300 mx-auto mb-4" />
                     <h3 className="text-lg font-bold text-slate-800">No available experts</h3>
                     <p className="text-sm text-slate-500 mt-2">Adjust your filters or search to discover vendors near you.</p>
-                    <Button onClick={handleClearFilters} className="mt-6 px-6 py-2.5 h-auto bg-[#FF6014] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#E0530A] transition-colors cursor-pointer">Clear Filters</Button>
+                    <Button onClick={handleClearFilters} className="mt-6 px-6 py-2.5 h-auto bg-[#4F46E5] text-white font-bold rounded-xl text-sm shadow-xs hover:bg-[#4338CA] transition-colors cursor-pointer">Clear Filters</Button>
                   </div>
                 ) : (
                   filteredExperts.map((expert) => (

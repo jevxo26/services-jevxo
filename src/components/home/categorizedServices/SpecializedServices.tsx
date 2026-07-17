@@ -129,7 +129,7 @@ export function SpecializedServices({
       {/* Section Header */}
       <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 gap-3">
         <div>
-          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             Available Services
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
@@ -141,7 +141,7 @@ export function SpecializedServices({
         </div>
         <Link
           href="/services"
-          className="text-[#FF6014] hover:text-[#E0530A] font-bold text-sm flex items-center gap-1 group self-start sm:self-auto"
+          className="text-[#4F46E5] hover:text-[#4338CA] font-bold text-sm flex items-center gap-1 group self-start sm:self-auto"
         >
           View All Services{" "}
           <span className="group-hover:translate-x-1 transition-transform">→</span>
@@ -168,7 +168,7 @@ export function SpecializedServices({
               >
                 {/* Glow */}
                 <div className="absolute inset-0 overflow-hidden pointer-events-none">
-                  <div className="absolute top-0 right-10 w-48 h-48 bg-[#FF6014]/20 rounded-full blur-[60px]" />
+                  <div className="absolute top-0 right-10 w-48 h-48 bg-[#4F46E5]/20 rounded-full blur-[60px]" />
                 </div>
 
                 <h3 className="text-xl sm:text-2xl font-black mb-2 z-10">
@@ -181,7 +181,7 @@ export function SpecializedServices({
                 <div className="flex flex-wrap gap-3 mt-auto z-10">
                   <a
                     href="tel:01813333373"
-                    className="inline-flex items-center gap-2 bg-[#FF6014] hover:bg-[#E0530A]
+                    className="inline-flex items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA]
                       px-6 py-3 rounded-full font-bold text-xs text-white
                       transition shadow-lg shadow-rose-900/20 cursor-pointer"
                   >
@@ -191,7 +191,7 @@ export function SpecializedServices({
                 </div>
 
                 <div className="absolute bottom-6 right-8 text-right hidden sm:block z-10">
-                  <div className="text-5xl font-black text-[#FF6014] leading-none">60</div>
+                  <div className="text-5xl font-black text-[#4F46E5] leading-none">60</div>
                   <div className="text-[9px] uppercase tracking-[2px] font-bold text-slate-400 mt-1">
                     Minute Arrival
                   </div>
@@ -210,10 +210,10 @@ export function SpecializedServices({
                 onClick={() => hasSubServices && toggleExpand(service.id)}
                 className={`rounded-[32px] p-6 md:p-8 border transition-all duration-300 group flex flex-col sm:flex-row sm:items-center justify-between gap-6
                   ${isExpanded
-                    ? "bg-gradient-to-br from-white via-white to-[#FFF8F4]/30 border-[#FF6014]/45 shadow-md shadow-[#FF6014]/5 -translate-y-0.5"
+                    ? "bg-gradient-to-br from-white via-white to-[#EEF2FF]/30 border-[#4F46E5]/45 shadow-md shadow-[#4F46E5]/5 -translate-y-0.5"
                     : "bg-white border-slate-100/90 shadow-[0_8px_30px_rgba(0,0,0,0.02)] hover:shadow-lg hover:-translate-y-0.5"
                   }
-                  ${hasSubServices ? "cursor-pointer hover:border-[#FF6014]/30" : ""}`}
+                  ${hasSubServices ? "cursor-pointer hover:border-[#4F46E5]/30" : ""}`}
               >
                 <div className="flex flex-col sm:flex-row items-start gap-5 sm:gap-6 min-w-0 flex-1">
                   {service.image ? (
@@ -224,11 +224,11 @@ export function SpecializedServices({
                     />
                   ) : (
                     <div className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 bg-rose-50 rounded-[24px] flex items-center justify-center flex-shrink-0 border border-rose-100/50">
-                      <Droplet className="w-8 h-8 text-[#FF6014]" />
+                      <Droplet className="w-8 h-8 text-[#4F46E5]" />
                     </div>
                   )}
                   <div className="min-w-0 space-y-1">
-                    <h3 className="text-lg md:text-xl font-black text-slate-800 group-hover:text-[#FF6014] transition-colors leading-snug">
+                    <h3 className="text-lg md:text-xl font-black text-slate-800 group-hover:text-[#4F46E5] transition-colors leading-snug">
                       {service.title}
                     </h3>
                     {/<[a-z]/.test(service.description) ? (
@@ -250,7 +250,7 @@ export function SpecializedServices({
                       <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider block">
                         Starting Price
                       </span>
-                      <div className="text-[#FF6014] font-black text-lg sm:text-xl">
+                      <div className="text-[#4F46E5] font-black text-lg sm:text-xl">
                         ৳{Number(service.price).toLocaleString()}
                       </div>
                     </div>
@@ -262,7 +262,7 @@ export function SpecializedServices({
                         e.stopPropagation();
                         handleInitiateBooking(service);
                       }}
-                      className="inline-flex items-center gap-1.5 bg-[#FF6014] hover:bg-[#E0530A]
+                      className="inline-flex items-center gap-1.5 bg-[#4F46E5] hover:bg-[#4338CA]
                         text-white px-5 py-2.5 rounded-full text-xs font-bold
                         transition shadow-md shadow-rose-100 cursor-pointer active:scale-95"
                     >
@@ -272,8 +272,8 @@ export function SpecializedServices({
                   ) : (
                     <div className={`flex items-center gap-1.5 px-4 py-2 rounded-full border text-xs font-bold transition-all cursor-pointer shadow-2xs active:scale-95
                       ${isExpanded
-                        ? "bg-[#FFF8F4] text-[#FF6014] border-[#FF6014]/40 hover:bg-[#FF6014]/10"
-                        : "bg-slate-50/65 text-slate-500 border-slate-100 hover:bg-rose-50 hover:text-[#FF6014] hover:border-[#FF6014]/20"
+                        ? "bg-[#EEF2FF] text-[#4F46E5] border-[#4F46E5]/40 hover:bg-[#4F46E5]/10"
+                        : "bg-slate-50/65 text-slate-500 border-slate-100 hover:bg-rose-50 hover:text-[#4F46E5] hover:border-[#4F46E5]/20"
                       }`}
                     >
                       {isExpanded ? "Hide Options" : "View Options"}
@@ -297,7 +297,7 @@ export function SpecializedServices({
                     exit={{ opacity: 0, height: 0 }}
                     className="overflow-hidden"
                   >
-                    <div className="bg-[#FFF8F4]/30 border border-slate-100 p-3 sm:p-5 rounded-[24px] sm:rounded-[28px] shadow-xs mt-3">
+                    <div className="bg-[#EEF2FF]/30 border border-slate-100 p-3 sm:p-5 rounded-[24px] sm:rounded-[28px] shadow-xs mt-3">
                       <div className="flex flex-col gap-2.5">
                         {service.subServices?.map((sub) => {
                           const isAdded = isInCart(sub.id);
@@ -309,28 +309,28 @@ export function SpecializedServices({
                               onClick={() => onSubServiceClick?.({ ...sub, parentTitle: service.title, parentService: service })}
                               className={`flex items-center justify-between p-3 sm:p-4 rounded-xl sm:rounded-2xl border bg-white transition-all gap-3 sm:gap-4 cursor-pointer group
                                 ${isSelected
-                                  ? "border-[#FF6014]/50 shadow-md ring-2 ring-[#FF6014]/10 bg-gradient-to-br from-white to-[#FFF8F4]/50"
+                                  ? "border-[#4F46E5]/50 shadow-md ring-2 ring-[#4F46E5]/10 bg-gradient-to-br from-white to-[#EEF2FF]/50"
                                   : isAdded
-                                    ? "border-[#FF6014]/30 shadow-xs bg-gradient-to-br from-white to-[#FFF8F4]/20 hover:border-[#FF6014]/50"
-                                    : "border-slate-100 hover:border-[#FF6014]/30 hover:shadow-sm"
+                                    ? "border-[#4F46E5]/30 shadow-xs bg-gradient-to-br from-white to-[#EEF2FF]/20 hover:border-[#4F46E5]/50"
+                                    : "border-slate-100 hover:border-[#4F46E5]/30 hover:shadow-sm"
                                 }`}
                             >
                               <div className="min-w-0 flex-1">
-                                <h4 className={`text-xs sm:text-sm font-bold leading-snug transition-colors ${isSelected ? "text-[#FF6014]" : "text-slate-800 group-hover:text-[#FF6014]"}`}>
+                                <h4 className={`text-xs sm:text-sm font-bold leading-snug transition-colors ${isSelected ? "text-[#4F46E5]" : "text-slate-800 group-hover:text-[#4F46E5]"}`}>
                                   {sub.name}
                                 </h4>
-                                <div className="text-[#FF6014] text-xs sm:text-sm font-black mt-0.5">
+                                <div className="text-[#4F46E5] text-xs sm:text-sm font-black mt-0.5">
                                   ৳{Number(sub.price).toLocaleString()}
                                 </div>
                               </div>
 
                               <div className="shrink-0 w-[96px] sm:w-28" onClick={(e) => e.stopPropagation()}>
                                 {isAdded ? (
-                                  <div className="flex items-center gap-1 bg-[#FFF8F4] border border-[#FF6014]/20 rounded-lg sm:rounded-xl p-0.5 w-full justify-between">
+                                  <div className="flex items-center gap-1 bg-[#EEF2FF] border border-[#4F46E5]/20 rounded-lg sm:rounded-xl p-0.5 w-full justify-between">
                                     <button
                                       type="button"
                                       onClick={() => onUpdateQuantity(sub.id, -1)}
-                                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
+                                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-white text-[#4F46E5] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
                                     >
                                       <Minus size={10} strokeWidth={3} />
                                     </button>
@@ -338,7 +338,7 @@ export function SpecializedServices({
                                     <button
                                       type="button"
                                       onClick={() => onUpdateQuantity(sub.id, 1)}
-                                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-white text-[#FF6014] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
+                                      className="w-6 h-6 sm:w-7 sm:h-7 rounded-md sm:rounded-lg bg-white text-[#4F46E5] flex items-center justify-center hover:bg-rose-50 transition shadow-xs cursor-pointer"
                                     >
                                       <Plus size={10} strokeWidth={3} />
                                     </button>
@@ -349,7 +349,7 @@ export function SpecializedServices({
                                       onAddToCart(service, sub.id);
                                       onSubServiceClick?.({ ...sub, parentTitle: service.title, parentService: service });
                                     }}
-                                    className="w-full py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-95 bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-xs"
+                                    className="w-full py-1.5 sm:py-2 rounded-lg sm:rounded-xl text-xs font-bold transition-all flex items-center justify-center gap-1 cursor-pointer active:scale-95 bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-xs"
                                   >
                                     <Plus size={12} strokeWidth={3} />
                                     Add

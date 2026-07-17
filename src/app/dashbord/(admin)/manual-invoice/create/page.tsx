@@ -261,7 +261,7 @@ export default function CreateInvoicePage() {
     <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300 pb-16">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-[#FFF8F4] text-[#FF6014] rounded-2xl border border-[#FF6014]/15 shadow-xs">
+          <div className="p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl border border-[#4F46E5]/15 shadow-xs">
             <FilePlus2 className="w-6 h-6" />
           </div>
           <div>
@@ -271,7 +271,7 @@ export default function CreateInvoicePage() {
         </div>
         <button
           type="button"
-          className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
           onClick={() => router.back()}
         >
           <ArrowLeft size={16} /> Back
@@ -289,13 +289,13 @@ export default function CreateInvoicePage() {
           {/* ── Customer ── */}
           <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6">
             <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2 border-b border-slate-50 pb-4">
-              <User size={18} className="text-[#FF6014]" /> Customer Details
+              <User size={18} className="text-[#4F46E5]" /> Customer Details
             </h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-1.5 relative">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Customer Name *</label>
                 <input
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                   value={custName}
                   onChange={e => handleCustNameChange(e.target.value)}
                   placeholder="Start typing to search..."
@@ -307,7 +307,7 @@ export default function CreateInvoicePage() {
                     {custSuggestions.map(c => (
                       <div
                         key={c.id}
-                        className="px-4 py-2.5 text-xs text-slate-700 hover:bg-[#FFF8F4] hover:text-[#FF6014] cursor-pointer transition-colors"
+                        className="px-4 py-2.5 text-xs text-slate-700 hover:bg-[#EEF2FF] hover:text-[#4F46E5] cursor-pointer transition-colors"
                         onMouseDown={() => selectCustomer(c)}
                       >
                         <strong>{c.name}</strong> — {c.phone}
@@ -319,7 +319,7 @@ export default function CreateInvoicePage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Phone *</label>
                 <input
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                   value={custPhone}
                   onChange={e => setCustPhone(e.target.value)}
                   placeholder="01XXXXXXXXX"
@@ -332,7 +332,7 @@ export default function CreateInvoicePage() {
                       id="registerAsUser"
                       checked={registerAsUser}
                       onChange={(e) => setRegisterAsUser(e.target.checked)}
-                      className="w-4 h-4 text-[#FF6014] border-slate-300 rounded focus:ring-[#FF6014]/20 cursor-pointer accent-[#FF6014]"
+                      className="w-4 h-4 text-[#4F46E5] border-slate-300 rounded focus:ring-[#4F46E5]/20 cursor-pointer accent-[#4F46E5]"
                     />
                     <label htmlFor="registerAsUser" className="text-xs text-slate-500 font-bold cursor-pointer">
                       🆕 Register as system user (Client)
@@ -343,7 +343,7 @@ export default function CreateInvoicePage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Email</label>
                 <input
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                   type="email"
                   value={custEmail}
                   onChange={e => setCustEmail(e.target.value)}
@@ -353,7 +353,7 @@ export default function CreateInvoicePage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Address *</label>
                 <input
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                   value={custAddress}
                   onChange={e => setCustAddress(e.target.value)}
                   placeholder="Full address"
@@ -367,13 +367,13 @@ export default function CreateInvoicePage() {
             {/* ── Invoice Meta ── */}
             <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6">
               <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2 border-b border-slate-50 pb-4">
-                <FileText size={18} className="text-[#FF6014]" /> Invoice Details
+                <FileText size={18} className="text-[#4F46E5]" /> Invoice Details
               </h2>
               <div className="space-y-4">
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Invoice Number *</label>
                   <input
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                     value={invoiceNumber}
                     onChange={e => setInvoiceNumber(e.target.value)}
                     required
@@ -382,7 +382,7 @@ export default function CreateInvoicePage() {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Date *</label>
                   <input
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                     type="date"
                     value={date}
                     onChange={e => setDate(e.target.value)}
@@ -392,7 +392,7 @@ export default function CreateInvoicePage() {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Discount (BDT)</label>
                   <input
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                     type="number"
                     min="0"
                     value={discount}
@@ -405,13 +405,13 @@ export default function CreateInvoicePage() {
             {/* ── Template ── */}
             <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6">
               <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2 border-b border-slate-50 pb-4">
-                <Palette size={18} className="text-[#FF6014]" /> Template & Signee
+                <Palette size={18} className="text-[#4F46E5]" /> Template & Signee
               </h2>
               <div className="space-y-4">
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Template</label>
                   <select
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 cursor-pointer"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 cursor-pointer"
                     value={templateName}
                     onChange={e => setTemplateName(e.target.value as any)}
                   >
@@ -422,7 +422,7 @@ export default function CreateInvoicePage() {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Signee Name</label>
                   <input
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                     value={signeeName}
                     onChange={e => setSigneeName(e.target.value)}
                   />
@@ -430,7 +430,7 @@ export default function CreateInvoicePage() {
                 <div className="space-y-1.5">
                   <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Signee Role</label>
                   <input
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                     value={signeeRole}
                     onChange={e => setSigneeRole(e.target.value)}
                   />
@@ -443,11 +443,11 @@ export default function CreateInvoicePage() {
           <div className="bg-white rounded-3xl p-6 border border-slate-100 shadow-sm space-y-6 overflow-visible">
             <div className="flex justify-between items-center border-b border-slate-50 pb-4">
               <h2 className="text-base font-extrabold text-slate-900 flex items-center gap-2">
-                <Package size={18} className="text-[#FF6014]" /> Line Items
+                <Package size={18} className="text-[#4F46E5]" /> Line Items
               </h2>
               <button
                 type="button"
-                className="flex items-center gap-1.5 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-3 py-1.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
+                className="flex items-center gap-1.5 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-3 py-1.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
                 onClick={addItem}
               >
                 <Plus size={14} /> Add Item
@@ -471,7 +471,7 @@ export default function CreateInvoicePage() {
                       <td className="px-4 py-4 text-slate-400 font-bold">{i + 1}</td>
                       <td className="px-4 py-4 relative overflow-visible">
                         <input
-                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                           value={item.description}
                           onChange={e => handleDescChange(i, e.target.value)}
                           placeholder="Service description..."
@@ -482,7 +482,7 @@ export default function CreateInvoicePage() {
                             {svcSuggestions[i].map(svc => (
                               <div
                                 key={svc.id}
-                                className="px-4 py-2.5 text-xs text-slate-700 hover:bg-[#FFF8F4] hover:text-[#FF6014] cursor-pointer transition-colors"
+                                className="px-4 py-2.5 text-xs text-slate-700 hover:bg-[#EEF2FF] hover:text-[#4F46E5] cursor-pointer transition-colors"
                                 onMouseDown={() => selectService(i, svc)}
                               >
                                 <strong>{svc.name}</strong> — {Number(svc.rate).toLocaleString()} BDT
@@ -493,7 +493,7 @@ export default function CreateInvoicePage() {
                       </td>
                       <td className="px-4 py-4">
                         <input
-                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                           type="number"
                           min="1"
                           value={item.qty}
@@ -502,7 +502,7 @@ export default function CreateInvoicePage() {
                       </td>
                       <td className="px-4 py-4">
                         <input
-                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                          className="w-full bg-slate-50 border border-slate-205 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                           type="number"
                           min="0"
                           value={item.rate}
@@ -539,7 +539,7 @@ export default function CreateInvoicePage() {
                   <span>- {Number(discount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
                 </div>
               )}
-              <div className="flex justify-between text-sm font-black text-[#FF6014] border-t border-slate-100 pt-2">
+              <div className="flex justify-between text-sm font-black text-[#4F46E5] border-t border-slate-100 pt-2">
                 <span>Total Payable</span>
                 <span>{totalPayable.toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</span>
               </div>
@@ -561,7 +561,7 @@ export default function CreateInvoicePage() {
           </button>
           <button
             type="submit"
-            className="flex items-center gap-1.5 bg-[#FF6014] hover:bg-[#e0530a] text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm shadow-orange-500/10 cursor-pointer active:scale-95"
+            className="flex items-center gap-1.5 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all shadow-sm shadow-orange-500/10 cursor-pointer active:scale-95"
             disabled={submitting}
           >
             {submitting ? "Creating..." : <><Check size={16} /> Create Invoice</>}

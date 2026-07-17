@@ -68,7 +68,7 @@ export default function ClientBookingDetailsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center min-h-[60vh]">
-        <Loader2 size={32} className="animate-spin text-[#FF6014]" />
+        <Loader2 size={32} className="animate-spin text-[#4F46E5]" />
       </div>
     );
   }
@@ -79,7 +79,7 @@ export default function ClientBookingDetailsPage() {
         <h2 className="text-xl font-bold text-slate-800">
           {lang === "bn" ? "বুকিং পাওয়া যায়নি" : "Booking not found"}
         </h2>
-        <Link href="/dashbord/bookings" className="text-[#FF6014] hover:underline mt-2">
+        <Link href="/dashbord/bookings" className="text-[#4F46E5] hover:underline mt-2">
           {lang === "bn" ? "বুকিং তালিকায় ফিরে যান" : "Return to Bookings"}
         </Link>
       </div>
@@ -123,7 +123,7 @@ export default function ClientBookingDetailsPage() {
         <div>
           <button
             onClick={() => printBookingInvoice(booking)}
-            className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+            className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
           >
             <Download size={16} />
             <span>{lang === "bn" ? "ইনভয়েস ডাউনলোড" : "Download Invoice"}</span>
@@ -136,7 +136,7 @@ export default function ClientBookingDetailsPage() {
         <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm">
           <div className="flex flex-col md:flex-row md:items-start justify-between gap-6">
             <div className="flex gap-4">
-              <div className="w-14 h-14 bg-[#FFF8F4] border border-[#FFF0EB] rounded-2xl flex items-center justify-center text-[#FF6014] shrink-0">
+              <div className="w-14 h-14 bg-[#EEF2FF] border border-[#E0E7FF] rounded-2xl flex items-center justify-center text-[#4F46E5] shrink-0">
                 <Briefcase size={24} className="stroke-[2.5]" />
               </div>
               <div>
@@ -149,11 +149,11 @@ export default function ClientBookingDetailsPage() {
 
                 <div className="mt-4 grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <Calendar size={16} className="text-[#FF6014]" />
+                    <Calendar size={16} className="text-[#4F46E5]" />
                     <span className="font-semibold">{new Date(booking.createdAt).toLocaleDateString("en-BD", { dateStyle: 'medium' })}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-slate-600">
-                    <MapPin size={16} className="text-[#FF6014]" />
+                    <MapPin size={16} className="text-[#4F46E5]" />
                     <span className="font-semibold">{booking.location || (lang === "bn" ? "অবস্থান দেওয়া হয়নি" : "Location not provided")}</span>
                   </div>
                 </div>
@@ -259,7 +259,7 @@ export default function ClientBookingDetailsPage() {
         {booking.status === 'completed' && (
           <div className="bg-white border border-slate-100 rounded-3xl p-6 shadow-sm mt-6">
             <div className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-2xl bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center">
+              <div className="w-10 h-10 rounded-2xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center">
                 <Star size={20} className="fill-current" />
               </div>
               <div>
@@ -307,7 +307,7 @@ export default function ClientBookingDetailsPage() {
                     <select
                       value={reviewTarget}
                       onChange={(e) => setReviewTarget(e.target.value)}
-                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 transition-all"
+                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 transition-all"
                     >
                       <option value="service">{lang === "bn" ? "সামগ্রিক সার্ভিস" : "Overall Service"}</option>
                       {booking.employees.map((emp: any) => (
@@ -328,7 +328,7 @@ export default function ClientBookingDetailsPage() {
                     value={comment}
                     onChange={(e) => setComment(e.target.value)}
                     placeholder={lang === "bn" ? "আপনার অভিজ্ঞতার কথা আমাদের জানান..." : "Tell us about your experience..."}
-                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 transition-all min-h-[120px] resize-none"
+                    className="w-full p-4 bg-slate-50 border border-slate-200 rounded-2xl text-sm focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 transition-all min-h-[120px] resize-none"
                     required
                   />
                 </div>
@@ -336,7 +336,7 @@ export default function ClientBookingDetailsPage() {
                 <button
                   type="submit"
                   disabled={isSubmittingReview}
-                  className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-sm font-bold py-3.5 px-8 rounded-2xl transition-all shadow-sm shadow-[#FF6014]/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
+                  className="bg-[#4F46E5] hover:bg-[#4338CA] text-white text-sm font-bold py-3.5 px-8 rounded-2xl transition-all shadow-sm shadow-[#4F46E5]/20 active:scale-[0.98] disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer"
                 >
                   {isSubmittingReview ? <Loader2 size={16} className="animate-spin" /> : null}
                   {lang === "bn" ? "রিভিউ জমা দিন" : "Submit Review"}

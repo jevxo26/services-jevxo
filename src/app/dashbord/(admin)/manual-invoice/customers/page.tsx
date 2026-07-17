@@ -206,7 +206,7 @@ export default function CustomersPage() {
     <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300 pb-16">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-[#FFF8F4] text-[#FF6014] rounded-2xl border border-[#FF6014]/15 shadow-xs">
+          <div className="p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl border border-[#4F46E5]/15 shadow-xs">
             <Users className="w-6 h-6" />
           </div>
           <div>
@@ -216,7 +216,7 @@ export default function CustomersPage() {
         </div>
         <Link
           href="/dashbord/manual-invoice"
-          className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
         >
           Dashboard
         </Link>
@@ -236,9 +236,9 @@ export default function CustomersPage() {
       {/* Tabs */}
       <div className="flex gap-2.5 border-b border-slate-100 pb-3">
         <button
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer hover:bg-[#FFF8F4] hover:text-[#FF6014] flex items-center gap-1.5 ${
+          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer hover:bg-[#EEF2FF] hover:text-[#4F46E5] flex items-center gap-1.5 ${
             tab === "directory"
-              ? "bg-[#FF6014] text-white border-[#FF6014] hover:bg-[#e0530a] hover:text-white shadow-sm"
+              ? "bg-[#4F46E5] text-white border-[#4F46E5] hover:bg-[#4338CA] hover:text-white shadow-sm"
               : "bg-white text-slate-550 border-slate-200"
           }`}
           onClick={() => setTab("directory")}
@@ -246,9 +246,9 @@ export default function CustomersPage() {
           <Users size={15} /> Client Ledger
         </button>
         <button
-          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer hover:bg-[#FFF8F4] hover:text-[#FF6014] flex items-center gap-1.5 ${
+          className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border cursor-pointer hover:bg-[#EEF2FF] hover:text-[#4F46E5] flex items-center gap-1.5 ${
             tab === "register"
-              ? "bg-[#FF6014] text-white border-[#FF6014] hover:bg-[#e0530a] hover:text-white shadow-sm"
+              ? "bg-[#4F46E5] text-white border-[#4F46E5] hover:bg-[#4338CA] hover:text-white shadow-sm"
               : "bg-white text-slate-550 border-slate-200"
           }`}
           onClick={() => setTab("register")}
@@ -263,7 +263,7 @@ export default function CustomersPage() {
             <div className="relative flex-1 max-w-md">
               <Search size={18} className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400" />
               <input
-                className="w-full bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-700 pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 transition-all"
+                className="w-full bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-700 pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 transition-all"
                 placeholder="Search by name, phone or email..."
                 value={search}
                 onChange={e => setSearch(e.target.value)}
@@ -273,7 +273,7 @@ export default function CustomersPage() {
 
           {loading ? (
             <div className="flex flex-col items-center justify-center p-20 text-slate-400 text-xs font-medium">
-              <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin mb-4"></div>
+              <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin mb-4"></div>
               <p>Loading clients...</p>
             </div>
           ) : filtered.length === 0 ? (
@@ -319,7 +319,7 @@ export default function CustomersPage() {
                       <td className="px-6 py-4 text-slate-500 font-medium">{c.email || "—"}</td>
                       <td className="px-6 py-4 text-slate-500 font-medium max-w-[200px] truncate" title={c.address}>{c.address}</td>
                       <td className="px-6 py-4">
-                        <span className={`font-bold ${c.invoiceCount > 0 ? "text-[#FF6014]" : "text-slate-400"}`}>
+                        <span className={`font-bold ${c.invoiceCount > 0 ? "text-[#4F46E5]" : "text-slate-400"}`}>
                           {c.invoiceCount} {c.invoiceCount === 1 ? "Invoice" : "Invoices"}
                         </span>
                       </td>
@@ -366,7 +366,7 @@ export default function CustomersPage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Full Name *</label>
                 <input
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                   value={name}
                   onChange={e => setName(e.target.value)}
                   placeholder="e.g. Rahim Uddin"
@@ -376,7 +376,7 @@ export default function CustomersPage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Phone *</label>
                 <input
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                   value={phone}
                   onChange={e => setPhone(e.target.value)}
                   placeholder="01XXXXXXXXX"
@@ -386,7 +386,7 @@ export default function CustomersPage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Email</label>
                 <input
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40"
                   type="email"
                   value={email}
                   onChange={e => setEmail(e.target.value)}
@@ -396,7 +396,7 @@ export default function CustomersPage() {
               <div className="space-y-1.5">
                 <label className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Address *</label>
                 <textarea
-                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 min-h-[80px]"
+                  className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 min-h-[80px]"
                   value={address}
                   onChange={e => setAddress(e.target.value)}
                   placeholder="Full address..."
@@ -405,7 +405,7 @@ export default function CustomersPage() {
               </div>
               <button
                 type="submit"
-                className="w-full py-3 bg-[#FF6014] hover:bg-[#e0530a] text-white text-xs font-extrabold rounded-xl transition-all hover:scale-[1.01] active:scale-[0.99] shadow-sm shadow-orange-500/10 cursor-pointer disabled:opacity-50"
+                className="w-full py-3 bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-extrabold rounded-xl transition-all hover:scale-[1.01] active:scale-[0.99] shadow-sm shadow-orange-500/10 cursor-pointer disabled:opacity-50"
                 disabled={saving}
               >
                 {saving ? "Saving..." : "Save Client"}

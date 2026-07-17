@@ -37,7 +37,7 @@ export default function BookingItem({ booking }: BookingItemProps) {
       {/* Top Row: Service Name, Status, Price */}
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-[#FFF8F4] border border-[#FFF0EB] rounded-2xl flex items-center justify-center text-[#FF6014]">
+          <div className="w-12 h-12 bg-[#EEF2FF] border border-[#E0E7FF] rounded-2xl flex items-center justify-center text-[#4F46E5]">
             <Briefcase size={22} className="stroke-[2.5]" />
           </div>
           <div>
@@ -45,8 +45,8 @@ export default function BookingItem({ booking }: BookingItemProps) {
               {booking.nestedService?.name || booking.pkg?.name || (lang === "bn" ? "সার্ভিস বুকিং" : "Service Booking")}
             </h3>
             <div className="flex items-center gap-2 mt-1.5">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#FFF8F4] text-[#E0530A]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#E0530A] animate-pulse" />
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#EEF2FF] text-[#4338CA]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA] animate-pulse" />
                 {getStatusText(booking.status)}
               </span>
               <span className="text-[10px] font-bold text-slate-400">
@@ -73,7 +73,7 @@ export default function BookingItem({ booking }: BookingItemProps) {
           <div className="flex flex-col gap-2">
             {booking.vendor && (
               <div className="flex items-center gap-2.5">
-                <div className="w-8 h-8 rounded-full bg-[#FFF0EB] flex items-center justify-center text-[#E0530A] font-bold text-xs border border-[#FF6014]/30">
+                <div className="w-8 h-8 rounded-full bg-[#E0E7FF] flex items-center justify-center text-[#4338CA] font-bold text-xs border border-[#4F46E5]/30">
                   {booking.vendor?.name?.[0] || "V"}
                 </div>
                 <div>
@@ -164,7 +164,7 @@ export default function BookingItem({ booking }: BookingItemProps) {
                   )}`
                 )
               }
-              className="flex items-center gap-1.5 text-[#FF6014] bg-[#FFF8F4] hover:bg-[#FFF0EB] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus:outline-none cursor-pointer"
+              className="flex items-center gap-1.5 text-[#4F46E5] bg-[#EEF2FF] hover:bg-[#E0E7FF] px-3 py-1.5 rounded-lg text-xs font-bold transition-colors focus:outline-none cursor-pointer"
             >
               <MessageCircle size={14} />
               <span>{lang === "bn" ? "ভেন্ডরের সাথে চ্যাট" : "Chat Vendor"}</span>
@@ -199,7 +199,7 @@ export default function BookingItem({ booking }: BookingItemProps) {
         <div className="flex items-center gap-3 w-full sm:w-auto flex-wrap">
           <button
             onClick={() => printBookingInvoice(booking)}
-            className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] text-xs font-bold py-2.5 px-4 rounded-2xl transition-all cursor-pointer shadow-xs active:scale-[0.98]"
+            className="flex-1 sm:flex-none flex items-center justify-center gap-1.5 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] text-xs font-bold py-2.5 px-4 rounded-2xl transition-all cursor-pointer shadow-xs active:scale-[0.98]"
           >
             <Download size={14} />
             <span>{lang === "bn" ? "ইনভয়েস" : "Invoice"}</span>
@@ -212,7 +212,7 @@ export default function BookingItem({ booking }: BookingItemProps) {
           </button>
           <Link
             href={`/dashbord/bookings/track/${booking.id}`}
-            className="flex-1 sm:flex-none bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold py-2.5 px-4 sm:px-6 rounded-2xl transition-all shadow-sm shadow-[#FF6014]/10 active:scale-[0.98] inline-block text-center"
+            className="flex-1 sm:flex-none bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold py-2.5 px-4 sm:px-6 rounded-2xl transition-all shadow-sm shadow-[#4F46E5]/10 active:scale-[0.98] inline-block text-center"
           >
             {lang === "bn" ? "অর্ডার ট্র্যাক করুন" : "Track Order"}
           </Link>

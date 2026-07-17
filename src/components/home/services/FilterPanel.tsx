@@ -100,7 +100,7 @@ function ToggleSwitch({
       aria-label={label}
       onClick={onChange}
       className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-300 focus:outline-none cursor-pointer ${
-        checked ? "bg-[#FF6014]" : "bg-slate-200"
+        checked ? "bg-[#4F46E5]" : "bg-slate-200"
       }`}
     >
       <span
@@ -172,7 +172,7 @@ export default function FilterPanel({
             {/* Header */}
             <div className="px-6 py-5 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] flex items-center justify-center text-[#FF6014]">
+                <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5]">
                   <SlidersHorizontal size={18} strokeWidth={2.5} />
                 </div>
                 <div>
@@ -184,14 +184,14 @@ export default function FilterPanel({
                 <button
                   type="button"
                   onClick={onClearAll}
-                  className="text-xs font-bold text-slate-500 hover:text-[#FF6014] hover:bg-[#FFF8F4]/50 transition-colors bg-slate-100 px-3 py-2 rounded-xl cursor-pointer"
+                  className="text-xs font-bold text-slate-500 hover:text-[#4F46E5] hover:bg-[#EEF2FF]/50 transition-colors bg-slate-100 px-3 py-2 rounded-xl cursor-pointer"
                 >
                   Clear all
                 </button>
                 <button
                   type="button"
                   onClick={onClose}
-                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 text-slate-600 hover:text-[#FF6014] hover:bg-[#FFF8F4] transition-all cursor-pointer"
+                  className="w-9 h-9 flex items-center justify-center rounded-xl bg-slate-100 text-slate-600 hover:text-[#4F46E5] hover:bg-[#EEF2FF] transition-all cursor-pointer"
                   aria-label="Close filters"
                 >
                   <X size={18} strokeWidth={2.5} />
@@ -240,7 +240,7 @@ export default function FilterPanel({
                           }
                           className={`flex items-center gap-2.5 px-3.5 py-3 rounded-xl border text-xs font-bold transition-all duration-200 text-left cursor-pointer ${
                             isActive
-                              ? "border-[#FF6014] bg-[#FFF8F4] text-[#FF6014] shadow-[0_4px_12px_rgba(255,90,95,0.08)]"
+                              ? "border-[#4F46E5] bg-[#EEF2FF] text-[#4F46E5] shadow-[0_4px_12px_rgba(255,90,95,0.08)]"
                               : "border-slate-100 bg-slate-50/50 text-slate-600 hover:border-slate-300 hover:bg-slate-50"
                           }`}
                         >
@@ -259,14 +259,14 @@ export default function FilterPanel({
                   <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
                     Price Range limit
                   </h4>
-                  <span className="text-[11px] font-extrabold text-[#FF6014] bg-[#FFF8F4] px-2.5 py-1 rounded-lg">
+                  <span className="text-[11px] font-extrabold text-[#4F46E5] bg-[#EEF2FF] px-2.5 py-1 rounded-lg">
                     ৳{PRICE_FLOOR.toLocaleString()} – ৳{priceMax.toLocaleString()}
                   </span>
                 </div>
                 <div className="px-1.5 pt-2">
                   <div className="relative h-2 bg-slate-100 rounded-full mb-4">
                     <div
-                      className="absolute h-full bg-[#FF6014] rounded-full"
+                      className="absolute h-full bg-[#4F46E5] rounded-full"
                       style={{ width: `${fillPct}%` }}
                     />
                     <input
@@ -281,7 +281,7 @@ export default function FilterPanel({
                       className="absolute w-full h-2 top-0 left-0 appearance-none bg-transparent z-10 cursor-pointer
                         [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-5 [&::-webkit-slider-thumb]:h-5
                         [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white
-                        [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#FF6014]
+                        [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#4F46E5]
                         [&::-webkit-slider-thumb]:shadow-[0_2px_6px_rgba(0,0,0,0.15)] [&::-webkit-slider-thumb]:transition-transform
                         [&::-webkit-slider-thumb]:active:scale-110"
                       aria-label="Maximum price"
@@ -308,7 +308,7 @@ export default function FilterPanel({
                         key={opt.value}
                         className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl border cursor-pointer transition-all ${
                           isActive
-                            ? "border-[#FF6014] bg-[#FFF8F4] shadow-[0_4px_12px_rgba(255,90,95,0.05)]"
+                            ? "border-[#4F46E5] bg-[#EEF2FF] shadow-[0_4px_12px_rgba(255,90,95,0.05)]"
                             : "border-slate-100 bg-slate-50/50 hover:border-slate-200"
                         }`}
                       >
@@ -324,7 +324,7 @@ export default function FilterPanel({
                                 currentPage: 1,
                               })
                             }
-                            className="w-4 h-4 accent-[#FF6014] cursor-pointer"
+                            className="w-4 h-4 accent-[#4F46E5] cursor-pointer"
                           />
                           <span className="flex items-center gap-1.5 text-xs font-bold text-slate-700">
                             <Star
@@ -363,12 +363,12 @@ export default function FilterPanel({
                         }
                         className={`flex items-center justify-between gap-3 px-4 py-3 rounded-xl border text-xs font-bold transition-all cursor-pointer ${
                           isActive
-                            ? "border-[#FF6014] bg-[#FFF8F4] text-[#FF6014]"
+                            ? "border-[#4F46E5] bg-[#EEF2FF] text-[#4F46E5]"
                             : "border-slate-100 bg-slate-50/50 text-slate-600 hover:border-slate-200"
                         }`}
                       >
                         <span className="flex items-center gap-3">
-                          <Icon size={15} strokeWidth={2.5} className={isActive ? "text-[#FF6014]" : "text-slate-400"} />
+                          <Icon size={15} strokeWidth={2.5} className={isActive ? "text-[#4F46E5]" : "text-slate-400"} />
                           {opt.label}
                         </span>
                         {isActive && <Check size={14} strokeWidth={3} />}
@@ -423,7 +423,7 @@ export default function FilterPanel({
               <button
                 type="button"
                 onClick={onClose}
-                className="flex-1 py-3.5 rounded-2xl bg-[#FF6014] hover:bg-[#E0530A] text-white font-extrabold text-xs shadow-lg shadow-rose-200 hover:shadow-xl active:scale-98 transition-all text-center uppercase tracking-wider cursor-pointer"
+                className="flex-1 py-3.5 rounded-2xl bg-[#4F46E5] hover:bg-[#4338CA] text-white font-extrabold text-xs shadow-lg shadow-rose-200 hover:shadow-xl active:scale-98 transition-all text-center uppercase tracking-wider cursor-pointer"
               >
                 Apply Filters ({resultCount})
               </button>
@@ -460,13 +460,13 @@ export function FilterPanelDesktop({
       {/* Header */}
       <div className="flex items-center justify-between pb-3 border-b border-slate-100">
         <div className="flex items-center gap-2">
-          <SlidersHorizontal size={15} className="text-[#FF6014]" strokeWidth={2.5} />
+          <SlidersHorizontal size={15} className="text-[#4F46E5]" strokeWidth={2.5} />
           <span className="text-sm font-extrabold text-slate-800">Filters</span>
         </div>
         <button
           type="button"
           onClick={onClearAll}
-          className="text-xs font-bold text-slate-500 hover:text-[#FF6014] transition-colors cursor-pointer"
+          className="text-xs font-bold text-slate-500 hover:text-[#4F46E5] transition-colors cursor-pointer"
         >
           Clear all
         </button>
@@ -508,7 +508,7 @@ export function FilterPanelDesktop({
                   }
                   className={`flex items-center gap-2 px-3 py-2.5 rounded-xl border text-xs font-semibold transition-all duration-200 text-left cursor-pointer truncate ${
                     isActive
-                      ? "border-[#FF6014] bg-[#FFF8F4] text-[#FF6014]"
+                      ? "border-[#4F46E5] bg-[#EEF2FF] text-[#4F46E5]"
                       : "border-slate-100 bg-slate-50/50 text-slate-600 hover:border-slate-300 hover:bg-slate-50"
                   }`}
                 >
@@ -527,14 +527,14 @@ export function FilterPanelDesktop({
           <h4 className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase">
             Price Range
           </h4>
-          <span className="text-[11px] font-extrabold text-[#FF6014] bg-[#FFF8F4] px-2 py-0.5 rounded-lg">
+          <span className="text-[11px] font-extrabold text-[#4F46E5] bg-[#EEF2FF] px-2 py-0.5 rounded-lg">
             ৳{PRICE_FLOOR} - ৳{priceMax}
           </span>
         </div>
         <div className="px-1 pt-1">
           <div className="relative h-2 bg-slate-100 rounded-full mb-3">
             <div
-              className="absolute h-full bg-[#FF6014] rounded-full"
+              className="absolute h-full bg-[#4F46E5] rounded-full"
               style={{ width: `${fillPct}%` }}
             />
             <input
@@ -549,7 +549,7 @@ export function FilterPanelDesktop({
               className="absolute w-full h-2 top-0 left-0 appearance-none bg-transparent z-10 cursor-pointer
                 [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4
                 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white
-                [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#FF6014]
+                [&::-webkit-slider-thumb]:border-[3px] [&::-webkit-slider-thumb]:border-[#4F46E5]
                 [&::-webkit-slider-thumb]:shadow-[0_2px_6px_rgba(0,0,0,0.15)]"
               aria-label="Maximum price"
               suppressHydrationWarning

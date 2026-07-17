@@ -31,7 +31,7 @@ export default function TermsClientPage() {
       {/* Ambient glows */}
       <motion.div
         style={{ y: glowY }}
-        className="pointer-events-none absolute top-[-5%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#FF6014]/4 blur-[130px] z-0"
+        className="pointer-events-none absolute top-[-5%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#4F46E5]/4 blur-[130px] z-0"
       />
       <div className="pointer-events-none absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-500/3 blur-[120px] z-0" />
 
@@ -40,13 +40,13 @@ export default function TermsClientPage() {
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3 py-1.5 rounded-full border border-[#FF6014]/20 mb-3 hover:bg-[#FF6014]/5 transition-colors"
+            className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#4F46E5] uppercase tracking-[.12em] bg-[#FFF4EE] px-3 py-1.5 rounded-full border border-[#4F46E5]/20 mb-3 hover:bg-[#4F46E5]/5 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
 
           <h1 className="text-[clamp(24px,4vw,36px)] font-black text-slate-900 tracking-[-0.03em] leading-[1.1] mb-2.5">
-            Terms of <span className="text-[#FF6014]">Service</span>
+            Terms of <span className="text-[#4F46E5]">Service</span>
           </h1>
 
           <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
@@ -67,7 +67,7 @@ export default function TermsClientPage() {
                 onClick={() => setActiveTab(sec.id)}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border text-[11px] font-extrabold transition-all shrink-0 snap-align-none ${
                   isActive
-                    ? "bg-[#FF6014] text-white border-[#FF6014] shadow-sm"
+                    ? "bg-[#4F46E5] text-white border-[#4F46E5] shadow-sm"
                     : "bg-white border-slate-200/60 text-slate-600"
                 }`}
               >
@@ -103,8 +103,8 @@ export default function TermsClientPage() {
                         onClick={() => setActiveTab(sec.id)}
                         className={`flex items-center gap-2.5 w-full text-left px-3 py-2.5 rounded-xl border text-[11px] font-bold transition-all ${
                           isActive
-                            ? "bg-[#FF6014] text-white border-[#FF6014] shadow-[0_4px_12px_rgba(255,96,20,0.12)] scale-[1.01]"
-                            : "bg-white/60 border-slate-100 text-slate-600 hover:border-[#FF6014]/20 hover:bg-white"
+                            ? "bg-[#4F46E5] text-white border-[#4F46E5] shadow-[0_4px_12px_rgba(79, 70, 229,0.12)] scale-[1.01]"
+                            : "bg-white/60 border-slate-100 text-slate-600 hover:border-[#4F46E5]/20 hover:bg-white"
                         }`}
                       >
                         <div className={`p-1 rounded-lg ${isActive ? "bg-white/20 text-white" : "bg-slate-50 text-slate-500"}`}>
@@ -120,7 +120,7 @@ export default function TermsClientPage() {
               {/* Quick Warranty Note */}
               <div className="bg-gradient-to-br from-[#FFFDFB] to-[#FFF9F6] border border-rose-100/40 rounded-2xl p-4">
                 <div className="flex items-center gap-1.5 mb-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#FF6014]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#4F46E5]" />
                   <h4 className="text-[10px] font-extrabold text-slate-800 uppercase tracking-wider">
                     Official Booking
                   </h4>
@@ -138,7 +138,7 @@ export default function TermsClientPage() {
               {activeTab === "acceptance" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
                       <Scale className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -168,7 +168,7 @@ export default function TermsClientPage() {
               {activeTab === "booking" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
                       <Calendar className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -206,7 +206,7 @@ export default function TermsClientPage() {
               {activeTab === "billing" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
                       <CreditCard className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -244,7 +244,7 @@ export default function TermsClientPage() {
               {activeTab === "warranty" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
                       <Award className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -282,7 +282,7 @@ export default function TermsClientPage() {
               {activeTab === "liability" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
                       <ShieldAlert className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -317,7 +317,7 @@ export default function TermsClientPage() {
               {activeTab === "conduct" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
                       <FileText className="w-4.5 h-4.5" />
                     </div>
                     <div>

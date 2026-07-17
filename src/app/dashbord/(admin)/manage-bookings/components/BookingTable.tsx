@@ -85,7 +85,7 @@ export default function BookingTable({ filteredBookings, setDeleteModalBookingId
       case "completed":
         return "bg-emerald-50 text-emerald-700 border border-emerald-200";
       case "cancelled":
-        return "bg-[#FFF8F4] text-[#E0530A] border border-[#FF6014]/30";
+        return "bg-[#EEF2FF] text-[#4338CA] border border-[#4F46E5]/30";
       default:
         return "bg-slate-100 text-slate-600";
     }
@@ -192,7 +192,7 @@ export default function BookingTable({ filteredBookings, setDeleteModalBookingId
               e.stopPropagation();
               printBookingInvoice(item);
             }}
-            className="p-2 rounded-xl border border-[#FF6014]/20 hover:border-[#FF6014] hover:text-white hover:bg-[#FF6014] text-[#FF6014] bg-[#FFF8F4] transition-all shadow-sm cursor-pointer"
+            className="p-2 rounded-xl border border-[#4F46E5]/20 hover:border-[#4F46E5] hover:text-white hover:bg-[#4F46E5] text-[#4F46E5] bg-[#EEF2FF] transition-all shadow-sm cursor-pointer"
             title="Download Invoice"
           >
             <Download size={16} />
@@ -244,7 +244,7 @@ export default function BookingTable({ filteredBookings, setDeleteModalBookingId
               <div className="md:col-span-2 pt-1">
                 <button 
                   onClick={() => printBookingInvoice(row)}
-                  className="w-full flex justify-center items-center gap-2 bg-[#FF6014] hover:bg-[#E0530A] text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm cursor-pointer"
+                  className="w-full flex justify-center items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white px-4 py-2.5 rounded-xl text-sm font-semibold transition-all shadow-sm cursor-pointer"
                 >
                   <Download size={16} /> Download PDF
                 </button>

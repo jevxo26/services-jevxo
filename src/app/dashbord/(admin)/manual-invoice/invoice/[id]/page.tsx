@@ -110,7 +110,7 @@ export default function InvoiceViewPage() {
       {/* Action bar */}
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-100 pb-6 print:hidden">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-[#FFF8F4] text-[#FF6014] rounded-2xl border border-[#FF6014]/15 shadow-xs">
+          <div className="p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl border border-[#4F46E5]/15 shadow-xs">
             <FileText className="w-6 h-6" />
           </div>
           <div>
@@ -130,7 +130,7 @@ export default function InvoiceViewPage() {
         </div>
         <div className="flex items-center gap-2.5 flex-wrap">
           <button
-            className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
+            className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-xs transition-all shadow-xs cursor-pointer active:scale-95"
             onClick={() => router.push("/dashbord/manual-invoice")}
           >
             <ArrowLeft size={16} /> Dashboard
@@ -150,7 +150,7 @@ export default function InvoiceViewPage() {
             <Download size={16} /> Download PDF
           </button>
           <button
-            className="flex items-center gap-2 bg-[#FF6014] hover:bg-[#e0530a] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all shadow-sm shadow-orange-500/10 cursor-pointer active:scale-95"
+            className="flex items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold px-5 py-2.5 rounded-xl text-xs transition-all shadow-sm shadow-orange-500/10 cursor-pointer active:scale-95"
             onClick={handlePrint}
           >
             <Printer size={16} /> Print
@@ -198,7 +198,7 @@ export default function InvoiceViewPage() {
         <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-xs flex items-center justify-center z-50 animate-in fade-in duration-200 print:hidden">
           <div className="bg-white rounded-3xl p-8 max-w-sm w-full mx-4 shadow-xl border border-slate-100 text-center animate-in zoom-in-95 duration-200">
             <div className="flex justify-center mb-4">
-              <div className="p-3 bg-orange-50 text-[#FF6014] rounded-2xl">
+              <div className="p-3 bg-orange-50 text-[#4F46E5] rounded-2xl">
                 <DollarSign size={32} />
               </div>
             </div>
@@ -207,7 +207,7 @@ export default function InvoiceViewPage() {
               Total Due: <strong className="text-rose-600">{Number(invoice.dueAmount).toLocaleString("en-US", { minimumFractionDigits: 2 })} BDT</strong>
             </p>
             <input
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#FF6014]/20 focus:border-[#FF6014]/40 mb-6"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl text-xs font-medium text-slate-700 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 mb-6"
               type="number"
               placeholder="Enter amount received (BDT)"
               value={payAmount}
@@ -224,7 +224,7 @@ export default function InvoiceViewPage() {
                 Cancel
               </button>
               <button
-                className="flex-1 bg-[#FF6014] hover:bg-[#e0530a] text-white font-bold px-4 py-2.5 rounded-xl text-xs transition-all cursor-pointer shadow-sm shadow-orange-500/10 active:scale-95"
+                className="flex-1 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold px-4 py-2.5 rounded-xl text-xs transition-all cursor-pointer shadow-sm shadow-orange-500/10 active:scale-95"
                 onClick={handlePayment}
                 disabled={paying}
               >

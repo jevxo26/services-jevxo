@@ -65,7 +65,7 @@ export default function HelpCategories() {
               className="bg-white p-6 rounded-[32px] border border-slate-100 shadow-sm hover:shadow-md transition-shadow flex flex-col justify-between gap-6"
             >
               <div className="space-y-4">
-                <div className="w-12 h-12 bg-[#FFF8F4]/60 rounded-2xl flex items-center justify-center text-[#FF6014] border border-[#FFF0EB]/30">
+                <div className="w-12 h-12 bg-[#EEF2FF]/60 rounded-2xl flex items-center justify-center text-[#4F46E5] border border-[#E0E7FF]/30">
                   <Icon size={20} />
                 </div>
                 <div>
@@ -79,7 +79,7 @@ export default function HelpCategories() {
                   <Link
                     key={lidx}
                     href="#"
-                    className="flex items-center text-xs font-bold text-[#FF6014] hover:text-[#FF6014] transition-colors"
+                    className="flex items-center text-xs font-bold text-[#4F46E5] hover:text-[#4F46E5] transition-colors"
                   >
                     <span className="mr-1.5 text-sm font-bold">→</span>
                     {link}

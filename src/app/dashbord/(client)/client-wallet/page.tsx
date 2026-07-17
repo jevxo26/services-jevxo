@@ -40,7 +40,7 @@ export default function WalletPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-[#FF6014]" />
+        <Loader2 size={32} className="animate-spin text-[#4F46E5]" />
       </div>
     );
   }
@@ -50,12 +50,12 @@ export default function WalletPage() {
       <div className="w-full max-w-5xl space-y-6 md:space-y-8 relative z-10">
         {/* Premium Header Card */}
         <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15 animate-in fade-in duration-300">
-          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#FF6014]/25 blur-3xl pointer-events-none" />
+          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#4F46E5]/25 blur-3xl pointer-events-none" />
           <div className="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-[#FF6014] border border-white/10 flex-shrink-0">
+              <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-[#4F46E5] border border-white/10 flex-shrink-0">
                 <CreditCard className="w-6 h-6" />
               </div>
               <div>
@@ -84,7 +84,7 @@ export default function WalletPage() {
 
             {/* Quick Action Buttons */}
             <div className="flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start gap-4 w-full max-w-[420px] sm:max-w-[480px] lg:max-w-[520px]">
-              <button className="bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs sm:text-sm font-bold px-8 py-3.5 sm:py-4 rounded-2xl flex items-center justify-center gap-2 shadow-sm shadow-[#FF6014]/10 active:scale-[0.98] transition-all w-full sm:w-auto flex-1 cursor-pointer">
+              <button className="bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs sm:text-sm font-bold px-8 py-3.5 sm:py-4 rounded-2xl flex items-center justify-center gap-2 shadow-sm shadow-[#4F46E5]/10 active:scale-[0.98] transition-all w-full sm:w-auto flex-1 cursor-pointer">
                 <Plus size={18} /> {lang === "bn" ? "টাকা যোগ করুন" : "Add Funds"}
               </button>
               <button className="bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 text-xs sm:text-sm font-bold px-8 py-3.5 sm:py-4 rounded-2xl flex items-center justify-center gap-2 active:scale-[0.98] transition-all w-full sm:w-auto flex-1 cursor-pointer">
@@ -124,7 +124,7 @@ export default function WalletPage() {
                 <button
                   onClick={() => setAutoRecharge(!autoRecharge)}
                   className={`w-9 h-5 rounded-full p-0.5 transition-colors duration-200 focus:outline-none cursor-pointer ${
-                    autoRecharge ? "bg-[#FF6014]" : "bg-slate-200"
+                    autoRecharge ? "bg-[#4F46E5]" : "bg-slate-200"
                   }`}
                 >
                   <div
@@ -157,7 +157,7 @@ export default function WalletPage() {
               <h3 className="font-extrabold text-slate-800 text-base">
                 {lang === "bn" ? "পেমেন্ট পদ্ধতি" : "Payment Methods"}
               </h3>
-              <button className="text-xs font-bold text-[#FF6014] hover:underline focus:outline-none cursor-pointer">
+              <button className="text-xs font-bold text-[#4F46E5] hover:underline focus:outline-none cursor-pointer">
                 {lang === "bn" ? "নতুন যুক্ত করুন" : "Add New"}
               </button>
             </div>
@@ -173,7 +173,7 @@ export default function WalletPage() {
                     <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">**** **** **** 4242</span>
                   </div>
                 </div>
-                <span className="text-[9px] font-bold text-[#FF6014] bg-[#FFF8F4] px-2 py-0.5 rounded-lg">
+                <span className="text-[9px] font-bold text-[#4F46E5] bg-[#EEF2FF] px-2 py-0.5 rounded-lg">
                   {lang === "bn" ? "প্রাথমিক" : "Primary"}
                 </span>
               </div>
@@ -190,7 +190,7 @@ export default function WalletPage() {
                     <span className="text-[10px] text-slate-400 font-semibold block mt-0.5">017 **** 5678</span>
                   </div>
                 </div>
-                <button className="p-2 bg-slate-50 hover:bg-[#FFF8F4] text-slate-400 hover:text-[#FF6014] rounded-xl transition-colors focus:outline-none cursor-pointer">
+                <button className="p-2 bg-slate-50 hover:bg-[#EEF2FF] text-slate-400 hover:text-[#4F46E5] rounded-xl transition-colors focus:outline-none cursor-pointer">
                   <Trash2 size={14} />
                 </button>
               </div>
@@ -198,7 +198,7 @@ export default function WalletPage() {
           </div>
 
           {/* Refer & Earn Coupon Card */}
-          <div className="lg:col-span-2 bg-[#FF6014] text-white p-6 rounded-[32px] shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[220px]">
+          <div className="lg:col-span-2 bg-[#4F46E5] text-white p-6 rounded-[32px] shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[220px]">
             <div className="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-x-4 translate-y-4">
               <Gift size={160} />
             </div>

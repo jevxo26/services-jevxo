@@ -102,7 +102,7 @@ export default function VendorTable({
             user.status === "active"
               ? "bg-emerald-50 text-emerald-700"
               : user.status === "blocked"
-              ? "bg-[#FFF8F4] text-[#E0530A]"
+              ? "bg-[#EEF2FF] text-[#4338CA]"
               : "bg-slate-100 text-slate-600"
           }`}
         >
@@ -176,7 +176,7 @@ export default function VendorTable({
                       handleBlock(user.id);
                       setOpenDropdownId(null);
                     }}
-                    className="w-full text-left px-4 py-2 text-sm text-[#E0530A] hover:bg-[#FFF8F4] flex items-center gap-2 font-medium"
+                    className="w-full text-left px-4 py-2 text-sm text-[#4338CA] hover:bg-[#EEF2FF] flex items-center gap-2 font-medium"
                   >
                     <XCircle size={14} /> Block
                   </button>
@@ -189,7 +189,7 @@ export default function VendorTable({
                     handleDelete(user.id);
                     setOpenDropdownId(null);
                   }}
-                  className="w-full text-left px-4 py-2 text-sm text-[#E0530A] hover:bg-[#FFF8F4] flex items-center gap-2 font-medium"
+                  className="w-full text-left px-4 py-2 text-sm text-[#4338CA] hover:bg-[#EEF2FF] flex items-center gap-2 font-medium"
                 >
                   <Trash2 size={14} /> Delete
                 </button>

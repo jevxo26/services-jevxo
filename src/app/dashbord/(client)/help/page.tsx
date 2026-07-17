@@ -125,13 +125,13 @@ export default function HelpCenterPage() {
       
       {/* Premium Gradient Hero Banner */}
       <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 p-8 sm:p-10 shadow-xl border border-slate-800/80">
-        <div className="absolute -right-16 -top-16 w-64 h-64 bg-[#FF6014]/10 rounded-full blur-3xl" />
+        <div className="absolute -right-16 -top-16 w-64 h-64 bg-[#4F46E5]/10 rounded-full blur-3xl" />
         <div className="absolute -left-10 -bottom-10 w-48 h-48 bg-blue-500/10 rounded-full blur-2xl" />
         
         <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
           <div className="space-y-3">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black tracking-widest text-[#FF6014] uppercase">
-              <Sparkles className="w-3.5 h-3.5 text-[#FF6014] animate-pulse" />
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black tracking-widest text-[#4F46E5] uppercase">
+              <Sparkles className="w-3.5 h-3.5 text-[#4F46E5] animate-pulse" />
               {lang === "bn" ? "রাজসেবা কাস্টমার সাপোর্ট" : "Rajseba Care Hub"}
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-none">
@@ -187,7 +187,7 @@ export default function HelpCenterPage() {
                 placeholder={
                   lang === "bn" ? "সার্ভিস বুকিং, পেমেন্ট অথবা রিফান্ড সংক্রান্ত বিষয় খুঁজুন..." : "Find issues related to scheduling, cancellation, refunds, or safety..."
                 }
-                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-150/70 rounded-2xl text-xs font-semibold text-slate-700 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#FF6014] focus:ring-4 focus:ring-[#FF6014]/5 transition-all shadow-inner"
+                className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-150/70 rounded-2xl text-xs font-semibold text-slate-700 placeholder-slate-400 focus:outline-none focus:bg-white focus:border-[#4F46E5] focus:ring-4 focus:ring-[#4F46E5]/5 transition-all shadow-inner"
               />
             </div>
 
@@ -213,7 +213,7 @@ export default function HelpCenterPage() {
           <div className="bg-white border border-slate-100 rounded-3xl shadow-sm overflow-hidden">
             {isArticlesLoading ? (
               <div className="flex flex-col items-center justify-center p-20 space-y-3">
-                <Loader2 className="w-9 h-9 text-[#FF6014] animate-spin" />
+                <Loader2 className="w-9 h-9 text-[#4F46E5] animate-spin" />
                 <span className="text-xs text-slate-400 font-extrabold tracking-wider">
                   {lang === "bn" ? "নির্দেশিকা লোড হচ্ছে..." : "Loading premium FAQ articles..."}
                 </span>
@@ -243,7 +243,7 @@ export default function HelpCenterPage() {
                         className="w-full flex items-center justify-between p-6 text-left focus:outline-none"
                       >
                         <div className="flex items-center gap-3.5 pr-4">
-                          <div className={`p-1.5 rounded-lg transition-colors ${isExpanded ? "bg-[#FF6014]/10 text-[#FF6014]" : "bg-slate-100/70 text-slate-500"}`}>
+                          <div className={`p-1.5 rounded-lg transition-colors ${isExpanded ? "bg-[#4F46E5]/10 text-[#4F46E5]" : "bg-slate-100/70 text-slate-500"}`}>
                             <HelpCircle size={16} />
                           </div>
                           <span className="text-xs sm:text-sm font-black text-slate-800 tracking-tight">
@@ -272,8 +272,8 @@ export default function HelpCenterPage() {
           {/* Premium Quick Help Section */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4">
             
-            <div className="bg-gradient-to-br from-[#FFF8F4] to-white border border-[#FFF0EB] p-6 rounded-3xl shadow-xs space-y-4 hover:shadow-md transition-all group">
-              <div className="p-3 bg-white rounded-2xl text-[#FF6014] border border-[#FFF0EB] w-fit shadow-xs group-hover:scale-110 transition-transform">
+            <div className="bg-gradient-to-br from-[#EEF2FF] to-white border border-[#E0E7FF] p-6 rounded-3xl shadow-xs space-y-4 hover:shadow-md transition-all group">
+              <div className="p-3 bg-white rounded-2xl text-[#4F46E5] border border-[#E0E7FF] w-fit shadow-xs group-hover:scale-110 transition-transform">
                 <MessageSquare size={22} />
               </div>
               <div className="space-y-1">
@@ -281,7 +281,7 @@ export default function HelpCenterPage() {
                 <p className="text-[10px] text-slate-450 font-bold leading-relaxed">{lang === "bn" ? "যেকোনো জরুরি বিষয়ে সরাসরি সাপোর্ট মেসেজ পাঠান।" : "Submit support queries directly to our service specialists."}</p>
                 <button
                   onClick={() => setActiveTab("tickets")}
-                  className="inline-flex items-center gap-1 text-xs font-black text-[#FF6014] hover:underline pt-2"
+                  className="inline-flex items-center gap-1 text-xs font-black text-[#4F46E5] hover:underline pt-2"
                 >
                   {lang === "bn" ? "নতুন সাপোর্ট টিকেট →" : "Initiate chat desk →"}
                 </button>
@@ -333,7 +333,7 @@ export default function HelpCenterPage() {
               </h3>
               <button
                 onClick={() => setIsCreateModalOpen(true)}
-                className="flex items-center gap-1.5 px-4 py-2.5 bg-[#FF6014] text-white text-xs font-black rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-md shadow-[#FF6014]/15 cursor-pointer"
+                className="flex items-center gap-1.5 px-4 py-2.5 bg-[#4F46E5] text-white text-xs font-black rounded-xl hover:opacity-90 active:scale-[0.98] transition-all shadow-md shadow-[#4F46E5]/15 cursor-pointer"
               >
                 <Plus size={14} />
                 {lang === "bn" ? "নতুন টিকিট খুলুন" : "Create New Ticket"}
@@ -342,7 +342,7 @@ export default function HelpCenterPage() {
 
             {isTicketsLoading ? (
               <div className="flex justify-center py-16 bg-white border border-slate-100 rounded-3xl">
-                <Loader2 className="w-7 h-7 text-[#FF6014] animate-spin" />
+                <Loader2 className="w-7 h-7 text-[#4F46E5] animate-spin" />
               </div>
             ) : ticketsData?.data?.length === 0 ? (
               <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center space-y-3">
@@ -439,7 +439,7 @@ export default function HelpCenterPage() {
                 <div className="flex-1 p-5 overflow-y-auto space-y-4 max-h-[350px] bg-slate-50/30">
                   {isActiveTicketLoading ? (
                     <div className="flex justify-center items-center h-48">
-                      <Loader2 className="w-7 h-7 text-[#FF6014] animate-spin" />
+                      <Loader2 className="w-7 h-7 text-[#4F46E5] animate-spin" />
                     </div>
                   ) : (
                     <>
@@ -468,7 +468,7 @@ export default function HelpCenterPage() {
                             className={`flex gap-3 max-w-xl ${isClient ? "" : "ml-auto flex-row-reverse"}`}
                           >
                             <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border shadow-xs ${
-                              isClient ? "bg-slate-100 text-slate-500 border-slate-200" : "bg-[#FFF8F4] text-[#FF6014] border-[#FFF0EB]"
+                              isClient ? "bg-slate-100 text-slate-500 border-slate-200" : "bg-[#EEF2FF] text-[#4F46E5] border-[#E0E7FF]"
                             }`}>
                               {isClient ? <User size={13} /> : <Shield size={13} />}
                             </div>
@@ -499,7 +499,7 @@ export default function HelpCenterPage() {
                     value={replyMessage}
                     onChange={(e) => setReplyMessage(e.target.value)}
                     placeholder={lang === "bn" ? "রিপ্লাই মেসেজ লিখুন..." : "Type reply message to our customer service desk..."}
-                    className="flex-1 px-4 py-3 bg-slate-50 border border-slate-150 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#FF6014] transition-colors"
+                    className="flex-1 px-4 py-3 bg-slate-50 border border-slate-150 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#4F46E5] transition-colors"
                   />
                   <button
                     type="submit"
@@ -513,7 +513,7 @@ export default function HelpCenterPage() {
               </div>
             ) : (
               <div className="bg-white border border-slate-100 rounded-3xl p-16 text-center space-y-3 min-h-[500px] flex flex-col justify-center items-center">
-                <div className="p-4 bg-slate-50 rounded-full border border-slate-100 text-[#FF6014]/60">
+                <div className="p-4 bg-slate-50 rounded-full border border-slate-100 text-[#4F46E5]/60">
                   <LifeBuoy className="w-8 h-8 animate-pulse" />
                 </div>
                 <h3 className="text-sm font-black text-slate-850">
@@ -538,7 +538,7 @@ export default function HelpCenterPage() {
             {/* Header */}
             <div className="p-6 border-b border-slate-150 flex justify-between items-center">
               <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-xl border border-[#FFF0EB]">
+                <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-xl border border-[#E0E7FF]">
                   <LifeBuoy size={20} />
                 </div>
                 <div>
@@ -571,7 +571,7 @@ export default function HelpCenterPage() {
                   value={ticketSubject}
                   onChange={(e) => setTicketSubject(e.target.value)}
                   placeholder={lang === "bn" ? "সংক্ষেপে সমস্যার নাম লিখুন..." : "e.g. Booking rescheduled incorrectly"}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#FF6014] transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#4F46E5] transition-all"
                 />
               </div>
 
@@ -583,7 +583,7 @@ export default function HelpCenterPage() {
                   <select
                     value={ticketCategory}
                     onChange={(e) => setTicketCategory(e.target.value)}
-                    className="w-full px-3 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#FF6014]"
+                    className="w-full px-3 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#4F46E5]"
                   >
                     <option value="booking">{lang === "bn" ? "বুকিং সংক্রান্ত" : "Booking"}</option>
                     <option value="payment">{lang === "bn" ? "পেমেন্ট/রিফান্ড" : "Payment & Refund"}</option>
@@ -599,7 +599,7 @@ export default function HelpCenterPage() {
                   <select
                     value={ticketPriority}
                     onChange={(e) => setTicketPriority(e.target.value)}
-                    className="w-full px-3 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#FF6014]"
+                    className="w-full px-3 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#4F46E5]"
                   >
                     <option value="low">{lang === "bn" ? "স্বল্প (Low)" : "Low"}</option>
                     <option value="medium">{lang === "bn" ? "মাঝারি (Medium)" : "Medium"}</option>
@@ -618,7 +618,7 @@ export default function HelpCenterPage() {
                   value={ticketDescription}
                   onChange={(e) => setTicketDescription(e.target.value)}
                   placeholder={lang === "bn" ? "আপনার সমস্যাটির বিস্তারিত বিবরণ লিখুন..." : "Provide detailed information about the issue you are facing..."}
-                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#FF6014] resize-none transition-all"
+                  className="w-full px-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-xs font-semibold focus:outline-none focus:bg-white focus:border-[#4F46E5] resize-none transition-all"
                 />
               </div>
 
@@ -633,7 +633,7 @@ export default function HelpCenterPage() {
                 <button
                   type="submit"
                   disabled={isCreatingTicket}
-                  className="px-6 py-3 bg-[#FF6014] text-white rounded-xl text-xs font-black hover:opacity-95 transition-colors flex items-center gap-1.5 disabled:opacity-50"
+                  className="px-6 py-3 bg-[#4F46E5] text-white rounded-xl text-xs font-black hover:opacity-95 transition-colors flex items-center gap-1.5 disabled:opacity-50"
                 >
                   {isCreatingTicket && <Loader2 size={14} className="animate-spin" />}
                   {lang === "bn" ? "টিকিট সাবমিট করুন" : "Submit Ticket"}

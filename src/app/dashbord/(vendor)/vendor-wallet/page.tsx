@@ -16,7 +16,7 @@ export default function VendorWalletPage() {
   if (!state.isAuthenticated || (state.normalizedRole !== "vendor" && state.normalizedRole !== "agent")) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
+        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">প্রবেশাধিকার নেই</h3>
@@ -29,7 +29,7 @@ export default function VendorWalletPage() {
     const map: Record<string, string> = {
       pending: "bg-amber-50 text-amber-700 border-amber-100",
       approved: "bg-emerald-50 text-emerald-700 border-emerald-100",
-      rejected: "bg-[#FFF8F4] text-[#E0530A] border-[#FFF0EB]",
+      rejected: "bg-[#EEF2FF] text-[#4338CA] border-[#E0E7FF]",
     };
     const icons: Record<string, React.ReactNode> = {
       pending: <Clock size={11} />,
@@ -109,7 +109,7 @@ export default function VendorWalletPage() {
       render: (item: Withdraw) => (
         <button
           onClick={() => printWithdrawInvoice(item)}
-          className="flex items-center gap-1 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] px-2.5 py-1 rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer"
+          className="flex items-center gap-1 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] px-2.5 py-1 rounded-lg text-xs font-bold transition-all shadow-xs cursor-pointer"
           title="রিসিট ডাউনলোড করুন"
         >
           <FileText size={12} />
@@ -163,7 +163,7 @@ export default function VendorWalletPage() {
         <button
           onClick={() => state.handleRequestWithdrawClick(item.id)}
           disabled={state.isRequesting}
-          className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-all shadow-sm shadow-[#FF6014]/20 disabled:opacity-50"
+          className="bg-brand-primary hover:bg-brand-dark text-white font-bold px-3 py-1.5 rounded-lg text-xs transition-all shadow-sm shadow-[#4F46E5]/20 disabled:opacity-50"
         >
           {state.isRequesting ? "অপেক্ষা করুন..." : "কমিশন রিকোয়েস্ট করুন"}
         </button>
@@ -176,7 +176,7 @@ export default function VendorWalletPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
             <Wallet className="w-6 h-6" />
           </div>
           <div>
@@ -191,7 +191,7 @@ export default function VendorWalletPage() {
                 const totalAmount = state.withdraws.reduce((sum, w) => sum + parseFloat(String(w.amount || 0)), 0);
                 printAllWithdrawsInvoice(state.withdraws, totalAmount);
               }}
-              className="flex items-center gap-2 bg-[#FFF8F4] border border-[#FF6014]/20 hover:bg-[#FF6014] hover:text-white text-[#FF6014] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer"
+              className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer"
             >
               <FileText size={16} />
               <span>স্টেটমেন্ট ডাউনলোড</span>
@@ -219,7 +219,7 @@ export default function VendorWalletPage() {
         </div>
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
           <p className="text-xs font-bold text-slate-400 uppercase tracking-wider">কমিশন রেট</p>
-          <p className="text-3xl font-bold text-[#FF6014] mt-1">{state.commissionPct}%</p>
+          <p className="text-3xl font-bold text-[#4F46E5] mt-1">{state.commissionPct}%</p>
           <p className="text-xs text-slate-400 mt-1">প্রতি কমপ্লিট হওয়া বুকিংয়ে</p>
         </div>
         <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
@@ -245,7 +245,7 @@ export default function VendorWalletPage() {
         <h2 className="text-lg font-bold text-slate-900 mb-4">উইথড্র করার জন্য প্রস্তুত উপার্জন</h2>
         {state.isBookingsLoading ? (
           <div className="flex items-center justify-center py-10 bg-white border border-slate-100 rounded-3xl shadow-sm">
-            <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : state.withdrawableBookings.length === 0 ? (
           <div className="bg-white border border-slate-100 rounded-3xl p-10 text-center shadow-sm">
@@ -269,7 +269,7 @@ export default function VendorWalletPage() {
         <h2 className="text-lg font-bold text-slate-900 mb-4">উইথড্র হিস্ট্রি</h2>
         {state.isWithdrawsLoading ? (
           <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-sm">
-            <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
+            <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin" />
           </div>
         ) : state.withdraws.length === 0 ? (
           <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">

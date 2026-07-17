@@ -34,7 +34,7 @@ export function PackageOfferCard({
     >
       {/* Badge */}
       {pkg.badge && (
-        <div className="absolute top-3 right-3 bg-[#FF6014] text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-sm">
+        <div className="absolute top-3 right-3 bg-[#4F46E5] text-white text-[10px] font-bold px-3 py-1 rounded-full z-10 shadow-sm">
           {pkg.badge}
         </div>
       )}
@@ -65,7 +65,7 @@ export function PackageOfferCard({
           <span
             className={`text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full ${pkg.variant === "dark"
                 ? "bg-white/10 text-slate-300"
-                : "bg-[#FF6014]/10 text-[#FF6014]"
+                : "bg-[#4F46E5]/10 text-[#4F46E5]"
               }`}
           >
             {pkg.serviceName}
@@ -96,7 +96,7 @@ export function PackageOfferCard({
           {pkg.price ? (
             <div className="flex items-baseline gap-1">
               <span
-                className={`text-3xl font-extrabold ${pkg.variant === "dark" ? "text-white" : "text-[#FF6014]"
+                className={`text-3xl font-extrabold ${pkg.variant === "dark" ? "text-white" : "text-[#4F46E5]"
                   }`}
               >
                 ৳{pkg.price}
@@ -122,7 +122,7 @@ export function PackageOfferCard({
           <ul className="space-y-2.5 mb-6 flex-1">
             {pkg.features.map((feature, i) => (
               <li key={i} className="flex items-start gap-2.5 text-sm">
-                <Check className="w-4 h-4 text-[#FF6014] mt-0.5 flex-shrink-0" />
+                <Check className="w-4 h-4 text-[#4F46E5] mt-0.5 flex-shrink-0" />
                 <span
                   className={
                     pkg.variant === "dark" ? "text-slate-300" : "text-slate-600"
@@ -147,7 +147,7 @@ export function PackageOfferCard({
           className={`w-full py-3 rounded-2xl font-bold text-sm transition-all cursor-pointer active:scale-[0.98] ${pkg.variant === "dark"
               ? "bg-white text-slate-900 hover:bg-slate-100"
               : pkg.variant === "popular"
-                ? "bg-[#FF6014] text-white hover:bg-[#E0530A] shadow-md shadow-[#FF6014]/20"
+                ? "bg-[#4F46E5] text-white hover:bg-[#4338CA] shadow-md shadow-[#4F46E5]/20"
                 : "bg-slate-900 text-white hover:bg-black"
             }`}
         >

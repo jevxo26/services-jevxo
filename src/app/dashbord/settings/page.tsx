@@ -19,7 +19,7 @@ export default function SettingsPage() {
       type="button"
       onClick={onChange}
       className={`w-11 h-6 rounded-full transition-colors relative focus:outline-none shrink-0 ${
-        checked ? "bg-[#FF6014]" : "bg-slate-200"
+        checked ? "bg-[#4F46E5]" : "bg-slate-200"
       }`}
     >
       <span
@@ -124,7 +124,7 @@ export default function SettingsPage() {
                         </p>
                       </div>
                     </div>
-                    <button className="text-slate-400 hover:text-[#FF6014] text-xs font-bold transition-colors">
+                    <button className="text-slate-400 hover:text-[#4F46E5] text-xs font-bold transition-colors">
                       {lang === "bn" ? "সংযোগ বিচ্ছিন্ন করুন" : "Disconnect"}
                     </button>
                   </div>
@@ -141,7 +141,7 @@ export default function SettingsPage() {
                         </p>
                       </div>
                     </div>
-                    <button className="text-[#FF6014] hover:text-[#E0530A] text-xs font-bold transition-colors">
+                    <button className="text-[#4F46E5] hover:text-[#4338CA] text-xs font-bold transition-colors">
                       {lang === "bn" ? "সংযুক্ত করুন" : "Connect"}
                     </button>
                   </div>
@@ -164,17 +164,17 @@ export default function SettingsPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <div className="flex items-center justify-between p-4 border border-[#FFF0EB] bg-[#FFF8F4]/20 rounded-2xl">
+                  <div className="flex items-center justify-between p-4 border border-[#E0E7FF] bg-[#EEF2FF]/20 rounded-2xl">
                     <div className="flex items-center gap-3">
-                      <span className="text-xs font-black bg-[#FF6014] text-white px-2 py-1 rounded">bKash</span>
+                      <span className="text-xs font-black bg-[#4F46E5] text-white px-2 py-1 rounded">bKash</span>
                       <div>
                         <h5 className="text-sm font-bold text-slate-800">01712 ****78</h5>
-                        <span className="text-[10px] text-[#FF6014] font-bold block mt-0.5">
+                        <span className="text-[10px] text-[#4F46E5] font-bold block mt-0.5">
                           {lang === "bn" ? "প্রাথমিক পেমেন্ট অপশন" : "Primary Payment Option"}
                         </span>
                       </div>
                     </div>
-                    <span className="text-xs text-[#FF6014] font-extrabold uppercase">
+                    <span className="text-xs text-[#4F46E5] font-extrabold uppercase">
                       {lang === "bn" ? "সক্রিয়" : "Active"}
                     </span>
                   </div>
@@ -189,7 +189,7 @@ export default function SettingsPage() {
                         </span>
                       </div>
                     </div>
-                    <button className="text-xs font-semibold text-slate-400 hover:text-[#FF6014] transition-colors">
+                    <button className="text-xs font-semibold text-slate-400 hover:text-[#4F46E5] transition-colors">
                       {lang === "bn" ? "মুছে ফেলুন" : "Delete"}
                     </button>
                   </div>

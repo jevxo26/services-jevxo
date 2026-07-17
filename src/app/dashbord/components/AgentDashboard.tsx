@@ -47,7 +47,7 @@ export default function AgentDashboard() {
       value: `${totalBookings} Orders`,
       desc: `${thisWeekBookings} active this week`,
       icon: Briefcase,
-      color: "text-[#E0530A] bg-[#FFF8F4]",
+      color: "text-[#4338CA] bg-[#EEF2FF]",
     },
     {
       label: "Total Order Volume",
@@ -141,7 +141,7 @@ export default function AgentDashboard() {
           </div>
           <Link
             href="/dashbord/quick-booking"
-            className="shrink-0 bg-gradient-to-br from-[#FF6014] to-[#E0530A] hover:from-[#E0530A] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF6014]/25 text-sm transition-all active:scale-[0.985] text-center flex items-center gap-2 w-fit"
+            className="shrink-0 bg-gradient-to-br from-[#4F46E5] to-[#4338CA] hover:from-[#4338CA] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#4F46E5]/25 text-sm transition-all active:scale-[0.985] text-center flex items-center gap-2 w-fit"
           >
             <Zap size={15} /> Quick Booking Console
           </Link>
@@ -182,7 +182,7 @@ export default function AgentDashboard() {
         <div className="lg:col-span-2 space-y-4">
           <div className="flex justify-between items-center bg-white p-4 rounded-2xl border border-slate-100 shadow-premium">
             <h3 className="text-lg font-bold text-slate-900">Recent Placed Orders</h3>
-            <Link href="/dashbord/orders" className="text-xs font-semibold text-[#FF6014] hover:underline">
+            <Link href="/dashbord/orders" className="text-xs font-semibold text-[#4F46E5] hover:underline">
               View All Orders
             </Link>
           </div>
@@ -202,10 +202,10 @@ export default function AgentDashboard() {
           <div className="p-4 bg-slate-50 border border-slate-100 rounded-xl space-y-4">
             <div className="flex justify-between items-center text-xs font-bold text-slate-400 uppercase">
               <span>Current Default Rate</span>
-              <span className="text-[#FF6014] text-sm">{authUser?.commission_percentage || 0}% Commission</span>
+              <span className="text-[#4F46E5] text-sm">{authUser?.commission_percentage || 0}% Commission</span>
             </div>
             <div className="h-2 w-full bg-slate-200 rounded-full overflow-hidden">
-              <div className="h-full bg-[#FF6014] rounded-full w-3/4" />
+              <div className="h-full bg-[#4F46E5] rounded-full w-3/4" />
             </div>
             <p className="text-xs text-slate-400 font-medium">
               Complete 26 more bookings to unlock **18% Silver Partner commission** rate!
@@ -220,7 +220,7 @@ export default function AgentDashboard() {
                 { title: "Custom Agent Coupons", desc: "Offer 5% off to your clients" },
               ].map((b, idx) => (
                 <div key={idx} className="flex gap-3 text-xs">
-                  <span className="text-[#FF6014] font-bold">✓</span>
+                  <span className="text-[#4F46E5] font-bold">✓</span>
                   <div>
                     <h5 className="font-semibold text-slate-800">{b.title}</h5>
                     <p className="text-slate-400">{b.desc}</p>

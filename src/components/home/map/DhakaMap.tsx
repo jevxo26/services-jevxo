@@ -124,9 +124,9 @@ function createMarkerIcon(expert: Expert, isSelected: boolean) {
           display: flex;
           align-items: center;
           justify-content: center;
-          border: 2px solid ${isSelected ? "#ffffff" : "rgba(255,124,113,0.25)"};
-          background: ${isSelected ? "#FF6014" : "#ffffff"};
-          color: ${isSelected ? "#ffffff" : "#FF6014"};
+          border: 2px solid ${isSelected ? "#ffffff" : "rgba(99, 102, 241,0.25)"};
+          background: ${isSelected ? "#4F46E5" : "#ffffff"};
+          color: ${isSelected ? "#ffffff" : "#4F46E5"};
           box-shadow: 0 8px 20px rgba(15, 23, 42, 0.18);
           transform: scale(${isSelected ? 1.15 : 1});
           transition: transform 0.2s ease;
@@ -138,7 +138,7 @@ function createMarkerIcon(expert: Expert, isSelected: boolean) {
           padding: ${showFullLabel ? "6px 10px" : "4px 8px"};
           border-radius: 12px;
           background: rgba(255,255,255,0.96);
-          border: 1px solid ${isSelected ? "rgba(255,124,113,0.45)" : "rgba(148,163,184,0.35)"};
+          border: 1px solid ${isSelected ? "rgba(99, 102, 241,0.45)" : "rgba(148,163,184,0.35)"};
           color: #334155;
           font-size: 10px;
           font-weight: 700;
@@ -202,14 +202,14 @@ function VendorMarker({
 
           <VendorCategoryTags categories={expert.categories} max={3} />
 
-          <p className="text-sm font-black text-[#FF6014]">
+          <p className="text-sm font-black text-[#4F46E5]">
             ৳{expert.price.toLocaleString()}+
           </p>
 
           <button
             type="button"
             onClick={onViewDetails}
-            className="w-full rounded-lg bg-[#FF6014] hover:bg-[#E0530A] text-white text-xs font-bold py-2 transition-colors cursor-pointer"
+            className="w-full rounded-lg bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold py-2 transition-colors cursor-pointer"
           >
             View Details
           </button>
@@ -270,7 +270,7 @@ export default function DhakaMap({
             setResetToken((prev) => prev + 1);
             if (filteredExperts[0]) setSelectedExpertId(filteredExperts[0].id);
           }}
-          className="w-12 h-12 p-0 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-700 hover:text-[#FF6014] shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer hover:bg-slate-50"
+          className="w-12 h-12 p-0 rounded-full bg-white border border-slate-100 flex items-center justify-center text-slate-700 hover:text-[#4F46E5] shadow-lg hover:shadow-xl active:scale-95 transition-all cursor-pointer hover:bg-slate-50"
           title="Reset Map View"
         >
           <Compass className="w-5 h-5" />
@@ -281,10 +281,10 @@ export default function DhakaMap({
         <button
           type="button"
           onClick={() => onViewDetails?.(selectedExpert)}
-          className="absolute top-4 left-4 z-[500] bg-white/95 backdrop-blur-sm border border-slate-100 rounded-2xl px-4 py-3 shadow-md max-w-[280px] text-left hover:border-[#FF6014]/30 transition-colors cursor-pointer"
+          className="absolute top-4 left-4 z-[500] bg-white/95 backdrop-blur-sm border border-slate-100 rounded-2xl px-4 py-3 shadow-md max-w-[280px] text-left hover:border-[#4F46E5]/30 transition-colors cursor-pointer"
         >
           <div className="flex items-start gap-2">
-            <div className="w-9 h-9 rounded-full bg-[#FFF8F4] text-[#FF6014] flex items-center justify-center shrink-0">
+            <div className="w-9 h-9 rounded-full bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0">
               {renderCategoryIcon(selectedExpert.icon, "w-4 h-4")}
             </div>
             <div className="min-w-0 flex-1">
@@ -292,7 +292,7 @@ export default function DhakaMap({
               <div className="mt-1">
                 <VendorLocationInfo expert={selectedExpert} compact />
               </div>
-              <p className="text-[10px] font-bold text-[#FF6014] mt-2 uppercase tracking-wide">
+              <p className="text-[10px] font-bold text-[#4F46E5] mt-2 uppercase tracking-wide">
                 Tap for vendor details
               </p>
             </div>

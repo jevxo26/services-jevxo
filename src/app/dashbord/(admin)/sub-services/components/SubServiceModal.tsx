@@ -86,7 +86,7 @@ export default function SubServiceModal({
         {/* Modal Header */}
         <div className="p-6 border-b border-slate-100 flex items-center justify-between">
           <h2 className="text-xl font-bold text-slate-900 font-display flex items-center gap-2">
-            <Sparkles className="text-[#FF6014]" size={20} />
+            <Sparkles className="text-[#4F46E5]" size={20} />
             {editingItem ? "Edit Sub-Service" : "Add New Sub-Service"}
           </h2>
           <button
@@ -145,7 +145,7 @@ export default function SubServiceModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               rows={3}
-              className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF6014]/10 focus-visible:border-[#FF6014]/80 disabled:cursor-not-allowed disabled:opacity-50 transition-all w-full"
+              className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2.5 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]/10 focus-visible:border-[#4F46E5]/80 disabled:cursor-not-allowed disabled:opacity-50 transition-all w-full"
             />
           </div>
 
@@ -172,7 +172,7 @@ export default function SubServiceModal({
                 )}
               </div>
               <div className="flex-1 space-y-1">
-                <label className="cursor-pointer bg-[#FF6014] hover:bg-[#E0530A] text-white text-[10px] font-bold px-3 py-2 rounded-lg inline-flex items-center gap-1.5 transition-all active:scale-[0.98] shadow-md shadow-[#FF6014]/10">
+                <label className="cursor-pointer bg-[#4F46E5] hover:bg-[#4338CA] text-white text-[10px] font-bold px-3 py-2 rounded-lg inline-flex items-center gap-1.5 transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/10">
                   {isUploadingImage1 ? "Uploading..." : "Browse Photo 1"}
                   <input
                     type="file"
@@ -210,7 +210,7 @@ export default function SubServiceModal({
                 )}
               </div>
               <div className="flex-1 space-y-1">
-                <label className="cursor-pointer bg-[#FF6014] hover:bg-[#E0530A] text-white text-[10px] font-bold px-3 py-2 rounded-lg inline-flex items-center gap-1.5 transition-all active:scale-[0.98] shadow-md shadow-[#FF6014]/10">
+                <label className="cursor-pointer bg-[#4F46E5] hover:bg-[#4338CA] text-white text-[10px] font-bold px-3 py-2 rounded-lg inline-flex items-center gap-1.5 transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/10">
                   {isUploadingImage2 ? "Uploading..." : "Browse Photo 2"}
                   <input
                     type="file"
@@ -234,7 +234,7 @@ export default function SubServiceModal({
               <button
                 type="button"
                 onClick={handleAddFaq}
-                className="text-xs font-bold text-[#FF6014] flex items-center gap-1 hover:underline"
+                className="text-xs font-bold text-[#4F46E5] flex items-center gap-1 hover:underline"
               >
                 <PlusCircle size={14} /> Add FAQ
               </button>
@@ -255,7 +255,7 @@ export default function SubServiceModal({
                       <button
                         type="button"
                         onClick={() => handleRemoveFaq(idx)}
-                        className="p-2 text-[#FF6014] hover:bg-[#FFF0EB] rounded-lg transition-all shrink-0"
+                        className="p-2 text-[#4F46E5] hover:bg-[#E0E7FF] rounded-lg transition-all shrink-0"
                       >
                         <Trash2 size={16} />
                       </button>
@@ -265,7 +265,7 @@ export default function SubServiceModal({
                       value={item.answer}
                       onChange={(e) => handleFaqChange(idx, "answer", e.target.value)}
                       rows={2}
-                      className="rounded-xl border border-slate-200/80 bg-white px-3 py-2 text-xs text-slate-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#FF6014] w-full"
+                      className="rounded-xl border border-slate-200/80 bg-white px-3 py-2 text-xs text-slate-900 focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#4F46E5] w-full"
                     />
                   </div>
                 ))}
@@ -285,7 +285,7 @@ export default function SubServiceModal({
             <button
               type="submit"
               disabled={isCreating || isUpdating || isUploadingImage1 || isUploadingImage2}
-              className="bg-[#FF6014] hover:bg-[#E0530A] disabled:opacity-50 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#FF6014]/10"
+              className="bg-[#4F46E5] hover:bg-[#4338CA] disabled:opacity-50 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/10"
             >
               {editingItem ? "Update Sub-Service" : "Create Sub-Service"}
             </button>

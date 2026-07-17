@@ -209,7 +209,7 @@ export default function CouponModal({
               type="checkbox"
               checked={form.is_active}
               onChange={(e) => setForm({ ...form, is_active: e.target.checked })}
-              className="rounded border-slate-300 text-[#FF6014] focus:ring-[#FF6014]"
+              className="rounded border-slate-300 text-[#4F46E5] focus:ring-[#4F46E5]"
             />
             Active coupon
           </label>
@@ -225,7 +225,7 @@ export default function CouponModal({
             <button
               type="submit"
               disabled={isCreating || isUpdating}
-              className="px-6 py-2.5 text-sm font-bold text-white bg-[#FF6014] hover:bg-[#E0530A] rounded-xl disabled:opacity-70"
+              className="px-6 py-2.5 text-sm font-bold text-white bg-[#4F46E5] hover:bg-[#4338CA] rounded-xl disabled:opacity-70"
             >
               {editingCoupon ? "Update Coupon" : "Create Coupon"}
             </button>

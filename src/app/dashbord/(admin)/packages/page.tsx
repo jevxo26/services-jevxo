@@ -53,7 +53,7 @@ export default function AdminPackagesManagementPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#FFF8F4] rounded-2xl text-[#FF6014] mb-4">
+        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
@@ -67,7 +67,7 @@ export default function AdminPackagesManagementPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
             <PackageIcon className="w-6 h-6" />
           </div>
           <div>
@@ -88,7 +88,7 @@ export default function AdminPackagesManagementPage() {
       {/* Table */}
       {isPackagesLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-sm">
-          <div className="w-8 h-8 border-4 border-[#FF6014] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : packages.length === 0 ? (
         <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -99,7 +99,7 @@ export default function AdminPackagesManagementPage() {
           <p className="text-sm text-slate-400 mt-1 max-w-sm mx-auto">{lang === "bn" ? "এখনো কোনো প্যাকেজ তৈরি হয়নি।" : "No packages have been created yet across any vendor."}</p>
           <button
             onClick={openCreateModal}
-            className="mt-4 bg-[#FFF8F4] hover:bg-[#FFF0EB] text-[#FF6014] font-bold px-4 py-2 rounded-xl text-xs transition-all"
+            className="mt-4 bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4F46E5] font-bold px-4 py-2 rounded-xl text-xs transition-all"
           >
             {lang === "bn" ? "নতুন প্যাকেজ তৈরি করুন" : "Create New Package"}
           </button>

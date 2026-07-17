@@ -20,7 +20,7 @@ export default function AgentQuickBookingPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
             <Zap className="w-6 h-6 fill-current" />
           </div>
           <div>
@@ -87,7 +87,7 @@ export default function AgentQuickBookingPage() {
                               <p className="text-[10px] text-slate-500 mt-1 line-clamp-2">{sub.description}</p>
                             </div>
                             <div className="flex items-center justify-between mt-3 pt-3 border-t border-slate-50">
-                              <span className="font-bold text-[#FF6014] text-sm">৳{sub.price}</span>
+                              <span className="font-bold text-[#4F46E5] text-sm">৳{sub.price}</span>
                               {quantity > 0 ? (
                                 <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-lg p-0.5">
                                   <button onClick={() => state.handleUpdateQuantity(sub.id, -1)} type="button" className="w-6 h-6 rounded text-slate-600 hover:bg-slate-200 flex items-center justify-center cursor-pointer">-</button>

@@ -23,7 +23,7 @@ interface BookingFiltersProps {
 export default function BookingFilters({ search, setSearch, activeFilter, setActiveFilter }: BookingFiltersProps) {
   return (
     <div className="bg-white p-5 rounded-3xl border border-slate-100/80 shadow-[0_8px_30px_rgb(0,0,0,0.015)] mb-6 space-y-4">
-      <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/50 px-4 py-3 focus-within:border-[#FF6014]/30 focus-within:bg-white focus-within:ring-4 focus-within:ring-[#FF6014]/5 transition-all">
+      <div className="flex items-center gap-3 rounded-2xl border border-slate-100 bg-slate-50/50 px-4 py-3 focus-within:border-[#4F46E5]/30 focus-within:bg-white focus-within:ring-4 focus-within:ring-[#4F46E5]/5 transition-all">
         <Search className="h-4 w-4 shrink-0 text-slate-400" />
         <input
           type="text"
@@ -46,8 +46,8 @@ export default function BookingFilters({ search, setSearch, activeFilter, setAct
             onClick={() => setActiveFilter(f.value)}
             className={`rounded-xl px-4 py-2.5 text-xs font-extrabold transition-all cursor-pointer ${
               activeFilter === f.value
-                ? "bg-[#FF6014] text-white shadow-sm shadow-[#FF6014]/20"
-                : "bg-[#FFF8F4] text-[#FF6014] hover:bg-[#FFF0EB] border border-[#FF6014]/10"
+                ? "bg-[#4F46E5] text-white shadow-sm shadow-[#4F46E5]/20"
+                : "bg-[#EEF2FF] text-[#4F46E5] hover:bg-[#E0E7FF] border border-[#4F46E5]/10"
             }`}
           >
             {f.label}

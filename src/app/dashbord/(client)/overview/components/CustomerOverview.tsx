@@ -81,14 +81,14 @@ export default function CustomerOverview() {
         {/* Premium Greeting & Stats Card */}
         <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15">
           {/* Decorative Glow Circles */}
-          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#FF6014]/25 blur-3xl pointer-events-none" />
+          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#4F46E5]/25 blur-3xl pointer-events-none" />
           <div className="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-6">
             {/* Left side: User Profile Greeting */}
             <div className="space-y-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold text-[#FFF0EB]">
-                <Sparkles className="w-3.5 h-3.5 text-[#FF6014] animate-pulse" />
+              <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/10 text-xs font-bold text-[#E0E7FF]">
+                <Sparkles className="w-3.5 h-3.5 text-[#4F46E5] animate-pulse" />
                 <span>{lang === "bn" ? "গ্রাহক ড্যাশবোর্ড" : "Client Dashboard"}</span>
               </div>
               <div>
@@ -107,9 +107,9 @@ export default function CustomerOverview() {
             <div className="flex items-center gap-3 sm:gap-4 self-stretch md:self-auto">
               <div className="flex-1 md:flex-none bg-white/10 backdrop-blur-md border border-white/10 rounded-2xl p-3 md:p-4 min-w-[105px] text-center hover:bg-white/15 transition-all">
                 {loadingBookings ? (
-                  <Loader2 size={18} className="animate-spin text-[#FF6014] mx-auto" />
+                  <Loader2 size={18} className="animate-spin text-[#4F46E5] mx-auto" />
                 ) : (
-                  <span className="text-2xl md:text-3xl font-black text-[#FF6014] block leading-tight">
+                  <span className="text-2xl md:text-3xl font-black text-[#4F46E5] block leading-tight">
                     {activeBookings.length.toString().padStart(2, "0")}
                   </span>
                 )}
@@ -138,7 +138,7 @@ export default function CustomerOverview() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <Link
             href="/services"
-            className="relative overflow-hidden bg-[#FF6014] text-white p-6 rounded-[28px] shadow-lg shadow-[#FF6014]/10 flex items-center justify-between group hover:opacity-95 transition-all"
+            className="relative overflow-hidden bg-[#4F46E5] text-white p-6 rounded-[28px] shadow-lg shadow-[#4F46E5]/10 flex items-center justify-between group hover:opacity-95 transition-all"
           >
             <div className="flex items-center gap-4">
               <div className="p-3 bg-white/20 rounded-full border border-white/10">
@@ -158,7 +158,7 @@ export default function CustomerOverview() {
 
           <div className="bg-white p-6 rounded-[28px] border border-slate-100 shadow-sm flex items-center justify-between hover:shadow-md transition-shadow">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-[#FFF8F4] rounded-2xl text-[#FF6014]">
+              <div className="p-3 bg-[#EEF2FF] rounded-2xl text-[#4F46E5]">
                 <Share2 size={22} />
               </div>
               <div>
@@ -170,7 +170,7 @@ export default function CustomerOverview() {
                 </p>
               </div>
             </div>
-            <button className="p-2.5 bg-[#FF6014] text-white rounded-full hover:bg-[#E0530A] transition-colors shadow-sm focus:outline-none cursor-pointer">
+            <button className="p-2.5 bg-[#4F46E5] text-white rounded-full hover:bg-[#4338CA] transition-colors shadow-sm focus:outline-none cursor-pointer">
               <ChevronRight size={16} />
             </button>
           </div>
@@ -183,7 +183,7 @@ export default function CustomerOverview() {
               <h2 className="text-xl font-bold text-slate-900 tracking-tight">
                 {lang === "bn" ? "সক্রিয় বুকিংস" : "Active Bookings"}
               </h2>
-              <Link href="/dashbord/bookings" className="text-xs font-bold text-[#FF6014] hover:underline">
+              <Link href="/dashbord/bookings" className="text-xs font-bold text-[#4F46E5] hover:underline">
                 {lang === "bn" ? "সব দেখুন" : "View All"} &rarr;
               </Link>
             </div>
@@ -196,14 +196,14 @@ export default function CustomerOverview() {
                 >
                   <div className="flex justify-between items-start">
                     <div>
-                      <h3 className="font-extrabold text-[#FF6014] text-base">
+                      <h3 className="font-extrabold text-[#4F46E5] text-base">
                         {booking.nestedService?.name || booking.pkg?.name || (lang === "bn" ? "সার্ভিস বুকিং" : "Service Booking")}
                       </h3>
                       <span className="text-[10px] font-bold text-slate-400 block mt-0.5">ID: #{booking.id}</span>
                     </div>
                     <span
                       className={`text-[10px] font-extrabold px-3 py-1 rounded-full uppercase tracking-wider ${
-                        booking.status === "on_the_way" ? "text-[#E0530A] bg-[#FFF8F4]" : "text-amber-600 bg-amber-50"
+                        booking.status === "on_the_way" ? "text-[#4338CA] bg-[#EEF2FF]" : "text-amber-600 bg-amber-50"
                       }`}
                     >
                       {getStatusText(booking.status)}
@@ -212,7 +212,7 @@ export default function CustomerOverview() {
 
                   <div className="flex items-center justify-between bg-slate-50/50 p-3 rounded-2xl border border-slate-100/40">
                     <div className="flex items-center gap-3">
-                      <div className="w-10 h-10 rounded-full bg-[#FFF0EB] flex items-center justify-center text-[#E0530A] font-bold text-sm">
+                      <div className="w-10 h-10 rounded-full bg-[#E0E7FF] flex items-center justify-center text-[#4338CA] font-bold text-sm">
                         {booking.vendor?.name?.[0] || "V"}
                       </div>
                       <div>
@@ -224,7 +224,7 @@ export default function CustomerOverview() {
                         </p>
                       </div>
                     </div>
-                    <button className="p-2 bg-white text-[#FF6014] rounded-xl hover:bg-[#FFF8F4] border border-slate-100 shadow-sm transition-colors cursor-pointer">
+                    <button className="p-2 bg-white text-[#4F46E5] rounded-xl hover:bg-[#EEF2FF] border border-slate-100 shadow-sm transition-colors cursor-pointer">
                       <MessageCircle size={16} />
                     </button>
                   </div>

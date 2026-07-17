@@ -66,12 +66,12 @@ export default function RevenueChart({ data }: { data?: { month: string; value: 
       >
         <defs>
           <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#FF6014" />
+            <stop offset="0%" stopColor="#4F46E5" />
             <stop offset="100%" stopColor="#FFBAB4" stopOpacity="0.75" />
           </linearGradient>
           <linearGradient id="barGradHover" x1="0" y1="0" x2="0" y2="1">
             <stop offset="0%" stopColor="#E05A50" />
-            <stop offset="60%" stopColor="#FF6014" />
+            <stop offset="60%" stopColor="#4F46E5" />
             <stop offset="100%" stopColor="#FFB3AD" stopOpacity="0.8" />
           </linearGradient>
           <linearGradient id="barGloss" x1="0" y1="0" x2="1" y2="0">
@@ -80,7 +80,7 @@ export default function RevenueChart({ data }: { data?: { month: string; value: 
             <stop offset="100%" stopColor="white" stopOpacity="0" />
           </linearGradient>
           <filter id="barGlow" x="-30%" y="-10%" width="160%" height="140%">
-            <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#FF6014" floodOpacity="0.28" />
+            <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="#4F46E5" floodOpacity="0.28" />
           </filter>
           <filter id="trackShadow" x="-5%" y="-2%" width="110%" height="110%">
             <feDropShadow dx="0" dy="1" stdDeviation="1" floodColor="#cbd5e1" floodOpacity="0.4" />
@@ -189,7 +189,7 @@ export default function RevenueChart({ data }: { data?: { month: string; value: 
                   y={by - 5}
                   textAnchor="middle"
                   fontSize={9.5}
-                  fill="#FF6014"
+                  fill="#4F46E5"
                   fontFamily="Inter, ui-sans-serif, sans-serif"
                   fontWeight={700}
                   letterSpacing="-0.2"

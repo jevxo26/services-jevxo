@@ -49,7 +49,7 @@ export default function WithdrawActionModal({
               type="text"
               id="actionModalNoteInput"
               placeholder={actionModal.type === "approved" ? "e.g., TrxID 123456" : "e.g., Invalid gateway"}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#FF6014] focus:border-[#FF6014] block p-3 outline-none"
+              className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#4F46E5] focus:border-[#4F46E5] block p-3 outline-none"
             />
           </div>
           <div className="flex gap-3 justify-end pt-2">
@@ -67,7 +67,7 @@ export default function WithdrawActionModal({
                 setActionModal(null);
               }}
               className={`${
-                actionModal.type === "approved" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-[#FF6014] hover:bg-[#E0530A]"
+                actionModal.type === "approved" ? "bg-emerald-500 hover:bg-emerald-600" : "bg-[#4F46E5] hover:bg-[#4338CA]"
               } disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all flex-1 capitalize`}
             >
               Confirm {actionModal.type}

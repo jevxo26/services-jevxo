@@ -43,7 +43,7 @@ export default function AgentOverview() {
       value: isLoading ? "—" : `${totalOrders}`,
       desc: lang === "bn" ? "সর্বকালের বুকিং" : "All time bookings",
       icon: Briefcase,
-      color: "text-[#E0530A] bg-[#FFF8F4]",
+      color: "text-[#4338CA] bg-[#EEF2FF]",
     },
     {
       label: lang === "bn" ? "আজকের বুকিং" : "Today's Bookings",
@@ -114,7 +114,7 @@ export default function AgentOverview() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#FFF8F4] text-[#FF6014] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
             <Sparkles className="w-6 h-6" />
           </div>
           <div>
@@ -130,7 +130,7 @@ export default function AgentOverview() {
         </div>
         <Link
           href="/dashbord/quick-booking"
-          className="bg-[#FF6014] hover:bg-[#E0530A] text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-[#FF6014]/20 text-sm transition-all active:scale-[0.985] text-center"
+          className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold px-6 py-3 rounded-2xl shadow-lg shadow-[#4F46E5]/20 text-sm transition-all active:scale-[0.985] text-center"
         >
           {lang === "bn" ? "নতুন লিড বুক করুন" : "Book a New Lead"}
         </Link>
@@ -161,14 +161,14 @@ export default function AgentOverview() {
           <h3 className="text-lg font-bold text-slate-900">
             {lang === "bn" ? "সাম্প্রতিক লিড অর্ডার" : "Recent Lead Orders"}
           </h3>
-          <Link href="/dashbord/orders" className="text-xs font-bold text-[#FF6014] hover:underline">
+          <Link href="/dashbord/orders" className="text-xs font-bold text-[#4F46E5] hover:underline">
             {lang === "bn" ? "সব দেখুন" : "View All"} &rarr;
           </Link>
         </div>
 
         {isLoading ? (
           <div className="flex items-center justify-center h-32">
-            <Loader2 size={32} className="animate-spin text-[#FF6014]" />
+            <Loader2 size={32} className="animate-spin text-[#4F46E5]" />
           </div>
         ) : (
           <CustomTable

@@ -58,13 +58,13 @@ export default function WhyChooseUs() {
       <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FF6014]/10 border border-[#FF6014]/20 text-[#FF6014] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             <ShieldCheck size={13} />
             Safety First
           </div>
           <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-[#FF6014]" />
-            Why Choose <span className="text-[#FF6014]">Us</span>
+            <ShieldCheck className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5]" />
+            Why Choose <span className="text-[#4F46E5]">Us</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             {WHY_CHOOSE_US_CONTENT.subtitle}
@@ -117,8 +117,8 @@ export default function WhyChooseUs() {
                     shadow-[2px_2px_5px_rgba(174,180,190,0.35),_-2px_-2px_5px_rgba(255,255,255,1)]
                     sm:shadow-[4px_4px_10px_rgba(174,180,190,0.5),_-4px_-4px_10px_rgba(255,255,255,1)]
                     transition-all duration-300
-                    group-hover:from-[#FF6014] group-hover:to-[#E0530A]
-                    group-hover:shadow-[4px_4px_14px_rgba(255,96,20,0.35),_-3px_-3px_10px_rgba(255,220,200,0.6)]
+                    group-hover:from-[#4F46E5] group-hover:to-[#4338CA]
+                    group-hover:shadow-[4px_4px_14px_rgba(79, 70, 229,0.35),_-3px_-3px_10px_rgba(255,220,200,0.6)]
                   "
                 >
                   {/* Orb inner gloss */}

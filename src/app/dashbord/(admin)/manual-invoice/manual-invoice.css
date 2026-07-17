@@ -45,7 +45,7 @@
 .inv1-label {
   font-size: 22pt;
   font-weight: 900;
-  color: #FF6014;
+  color: #4F46E5;
   letter-spacing: -.03em;
 }
 
@@ -202,7 +202,7 @@
 
 .inv1-words {
   background: #fff7ed;
-  border-left: 3px solid #FF6014;
+  border-left: 3px solid #4F46E5;
   border-radius: 0 8px 8px 0;
   padding: 10px 14px;
   font-size: 9pt;
@@ -284,7 +284,7 @@
 
 /* ---- Template 2 (Partner Style) ---- */
 .inv2-header {
-  background: linear-gradient(135deg, #FF6014 0%, #e84e07 100%);
+  background: linear-gradient(135deg, #4F46E5 0%, #e84e07 100%);
   color: #fff;
   padding: 22px 28px;
   display: flex;
@@ -350,7 +350,7 @@
 }
 
 .inv2-bill-to {
-  border-left: 3px solid #FF6014;
+  border-left: 3px solid #4F46E5;
   padding: 10px 16px;
   margin-bottom: 20px;
   background: #fff7ed;
@@ -377,7 +377,7 @@
 }
 
 .inv2-table thead tr {
-  background: #FF6014;
+  background: #4F46E5;
   color: #fff;
 }
 
@@ -429,10 +429,10 @@
 .inv2-totals-row.total {
   font-weight: 800;
   font-size: 12pt;
-  border-top: 2px solid #FF6014;
+  border-top: 2px solid #4F46E5;
   padding-top: 8px;
   margin-top: 4px;
-  color: #FF6014;
+  color: #4F46E5;
 }
 
 .inv2-totals-row .label {
@@ -454,7 +454,7 @@
 
 .inv2-words {
   background: #fff7ed;
-  border-left: 3px solid #FF6014;
+  border-left: 3px solid #4F46E5;
   border-radius: 0 8px 8px 0;
   padding: 10px 14px;
   font-size: 9pt;
@@ -529,7 +529,7 @@
 }
 
 .inv2-bottom-bar {
-  background: linear-gradient(135deg, #FF6014, #e84e07);
+  background: linear-gradient(135deg, #4F46E5, #e84e07);
   height: 6px;
   margin-top: 20px;
 }

@@ -47,7 +47,7 @@ export default function RequestWithdrawModal({
                   key={g.id}
                   className={`flex items-center p-3 border rounded-xl cursor-pointer transition-all ${
                     selectedGatewayId === g.id
-                      ? "border-brand-primary bg-[#FFF8F4]"
+                      ? "border-brand-primary bg-[#EEF2FF]"
                       : "border-slate-200 bg-slate-50 hover:bg-slate-100"
                   }`}
                 >

@@ -34,7 +34,7 @@ export default function NotificationsCard({
         {/* Email Notifications Row */}
         <div className="flex items-center justify-between gap-4 p-4 bg-slate-50/50 hover:bg-slate-50/80 rounded-2xl border border-slate-50 transition-colors">
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 bg-[#FFF8F4] rounded-xl text-[#FF6014] shrink-0">
+            <div className="p-2.5 bg-[#EEF2FF] rounded-xl text-[#4F46E5] shrink-0">
               <Mail size={18} />
             </div>
             <div>
@@ -54,7 +54,7 @@ export default function NotificationsCard({
         {/* SMS Alerts Row */}
         <div className="flex items-center justify-between gap-4 p-4 bg-slate-50/50 hover:bg-slate-50/80 rounded-2xl border border-slate-50 transition-colors">
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 bg-[#FFF8F4] rounded-xl text-[#FF6014] shrink-0">
+            <div className="p-2.5 bg-[#EEF2FF] rounded-xl text-[#4F46E5] shrink-0">
               <MessageSquare size={18} />
             </div>
             <div>
@@ -74,7 +74,7 @@ export default function NotificationsCard({
         {/* Promotions Row */}
         <div className="flex items-center justify-between gap-4 p-4 bg-slate-50/50 hover:bg-slate-50/80 rounded-2xl border border-slate-50 transition-colors">
           <div className="flex items-start gap-3.5">
-            <div className="p-2.5 bg-[#FFF8F4] rounded-xl text-[#FF6014] shrink-0">
+            <div className="p-2.5 bg-[#EEF2FF] rounded-xl text-[#4F46E5] shrink-0">
               <Megaphone size={18} />
             </div>
             <div>

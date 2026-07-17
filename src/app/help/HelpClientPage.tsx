@@ -242,7 +242,7 @@ export default function HelpClientPage() {
       {/* Ambient glows */}
       <motion.div
         style={{ y: glowY }}
-        className="pointer-events-none absolute top-[-5%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#FF6014]/4 blur-[130px] z-0"
+        className="pointer-events-none absolute top-[-5%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#4F46E5]/4 blur-[130px] z-0"
       />
       <motion.div
         style={{ y: glowY2 }}
@@ -252,13 +252,13 @@ export default function HelpClientPage() {
       {/* Hero Section */}
       <section ref={heroRef} className="relative pt-8 pb-4 md:pt-12 md:pb-6 z-10">
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
-          <div className="inline-flex items-center gap-2 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3 py-1 rounded-full border border-[#FF6014]/20 mb-3">
-            <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014] animate-pulse" />
+          <div className="inline-flex items-center gap-2 text-[10px] font-extrabold text-[#4F46E5] uppercase tracking-[.12em] bg-[#FFF4EE] px-3 py-1 rounded-full border border-[#4F46E5]/20 mb-3">
+            <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5] animate-pulse" />
             Support Center
           </div>
 
           <h1 className="text-[clamp(24px,4vw,36px)] font-black text-slate-900 tracking-[-0.03em] leading-[1.1] mb-2.5">
-            Client <span className="text-[#FF6014]">Help Center</span> & Guides
+            Client <span className="text-[#4F46E5]">Help Center</span> & Guides
           </h1>
 
           <p className="text-[11px] md:text-xs text-slate-500 font-medium max-w-lg mx-auto mb-4">
@@ -267,7 +267,7 @@ export default function HelpClientPage() {
 
           {/* Search Box */}
           <div className="relative max-w-lg mx-auto">
-            <div className="flex items-center bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] rounded-xl px-3 py-2 focus-within:border-[#FF6014] focus-within:ring-2 focus-within:ring-[#FF6014]/15 transition-all">
+            <div className="flex items-center bg-white/90 backdrop-blur-md border border-slate-200/80 shadow-[0_4px_20px_rgba(0,0,0,0.02)] rounded-xl px-3 py-2 focus-within:border-[#4F46E5] focus-within:ring-2 focus-within:ring-[#4F46E5]/15 transition-all">
               <Search className="w-4 h-4 text-slate-400 shrink-0 mr-2" />
               <input
                 type="text"
@@ -279,7 +279,7 @@ export default function HelpClientPage() {
               {searchQuery && (
                 <button
                   onClick={() => setSearchQuery("")}
-                  className="text-slate-400 hover:text-[#FF6014] text-[10px] font-extrabold px-1.5 py-0.5 rounded hover:bg-slate-50 transition-colors"
+                  className="text-slate-400 hover:text-[#4F46E5] text-[10px] font-extrabold px-1.5 py-0.5 rounded hover:bg-slate-50 transition-colors"
                 >
                   Clear
                 </button>
@@ -301,7 +301,7 @@ export default function HelpClientPage() {
                   key={sec.id}
                   onClick={() => setActiveTab(sec.id)}
                   className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border text-[11px] font-extrabold transition-all shrink-0 snap-align-none ${isActive
-                    ? "bg-[#FF6014] text-white border-[#FF6014] shadow-sm"
+                    ? "bg-[#4F46E5] text-white border-[#4F46E5] shadow-sm"
                     : "bg-white border-slate-200/60 text-slate-600"
                     }`}
                 >
@@ -341,8 +341,8 @@ export default function HelpClientPage() {
                           key={sec.id}
                           onClick={() => setActiveTab(sec.id)}
                           className={`flex items-center gap-2.5 w-full text-left px-3 py-2.5 rounded-xl border text-[11px] font-bold transition-all ${isActive
-                            ? "bg-[#FF6014] text-white border-[#FF6014] shadow-[0_4px_12px_rgba(255,96,20,0.12)] scale-[1.01]"
-                            : "bg-white/60 border-slate-100 text-slate-600 hover:border-[#FF6014]/20 hover:bg-white"
+                            ? "bg-[#4F46E5] text-white border-[#4F46E5] shadow-[0_4px_12px_rgba(79, 70, 229,0.12)] scale-[1.01]"
+                            : "bg-white/60 border-slate-100 text-slate-600 hover:border-[#4F46E5]/20 hover:bg-white"
                             }`}
                         >
                           <div className={`p-1 rounded-lg ${isActive ? "bg-white/20 text-white" : "bg-slate-50 text-slate-500"}`}>
@@ -358,7 +358,7 @@ export default function HelpClientPage() {
                 {/* Quick Tip box */}
                 <div className="bg-gradient-to-br from-[#FFFDFB] to-[#FFF9F6] border border-rose-100/40 rounded-2xl p-4">
                   <div className="flex items-center gap-1.5 mb-2">
-                    <Sparkles className="w-3.5 h-3.5 text-[#FF6014]" />
+                    <Sparkles className="w-3.5 h-3.5 text-[#4F46E5]" />
                     <h4 className="text-[10px] font-extrabold text-slate-800 uppercase tracking-wider">
                       Quick Tip
                     </h4>
@@ -385,7 +385,7 @@ export default function HelpClientPage() {
                     >
                       {/* Section Header */}
                       <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                        <div className="w-9 h-9 rounded-xl bg-[#FFF8F4] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] shrink-0">
+                        <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
                           <Icon className="w-4.5 h-4.5" />
                         </div>
                         <div>
@@ -402,14 +402,14 @@ export default function HelpClientPage() {
                       <div className="space-y-5">
                         {section.items.map((item: any, idx: number) => (
                           <div key={idx} className="space-y-2 group/item">
-                            <h3 className="text-xs font-black text-slate-800 flex items-center gap-2 group-hover/item:text-[#FF6014] transition-colors duration-200">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6014]" />
+                            <h3 className="text-xs font-black text-slate-800 flex items-center gap-2 group-hover/item:text-[#4F46E5] transition-colors duration-200">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
                               {item.title}
                             </h3>
 
                             {/* Problem definition */}
                             <div className="bg-[#FFFDFB] border border-rose-100/30 rounded-xl px-3 py-2 text-[10px] sm:text-[11px] font-semibold text-slate-600 flex gap-2">
-                              <span className="text-[#FF6014] shrink-0">What happens:</span>
+                              <span className="text-[#4F46E5] shrink-0">What happens:</span>
                               <p className="font-medium text-slate-500">{item.problem}</p>
                             </div>
 
@@ -440,7 +440,7 @@ export default function HelpClientPage() {
             </div>
           ) : (
             <div className="bg-white/50 backdrop-blur-sm border border-dashed border-slate-200 rounded-2xl p-8 text-center max-w-xl mx-auto">
-              <div className="w-10 h-10 rounded-full bg-[#FFF8F4] flex items-center justify-center mx-auto mb-2 text-[#FF6014]">
+              <div className="w-10 h-10 rounded-full bg-[#EEF2FF] flex items-center justify-center mx-auto mb-2 text-[#4F46E5]">
                 <LifeBuoy className="w-5 h-5 animate-spin" />
               </div>
               <h4 className="font-black text-xs text-slate-800 mb-1">No matching guides found</h4>
@@ -456,7 +456,7 @@ export default function HelpClientPage() {
       <section className="py-8 md:py-10 border-t border-slate-100 bg-[#FFFDFB]/40 relative z-10">
         <div className="max-w-4xl mx-auto px-4 md:px-6">
           <div className="text-center mb-5">
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#FF6014] uppercase tracking-[.12em] bg-[#FFF4EE] px-3 py-1 rounded-full border border-[#FF6014]/20 mb-2">
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#4F46E5] uppercase tracking-[.12em] bg-[#FFF4EE] px-3 py-1 rounded-full border border-[#4F46E5]/20 mb-2">
               <LifeBuoy className="w-3.5 h-3.5" />
               Direct Support
             </span>
@@ -470,8 +470,8 @@ export default function HelpClientPage() {
 
           <div className="grid sm:grid-cols-3 gap-3">
             {/* Support Card 1: Call */}
-            <div className="bg-white border border-slate-100 hover:border-[#FF6014]/20 rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.015)] flex flex-col items-center text-center transition-all duration-300 group">
-              <div className="w-9 h-9 rounded-xl bg-[#FFF4EE] border border-[#FF6014]/15 flex items-center justify-center text-[#FF6014] mb-2.5 group-hover:scale-105 transition-transform">
+            <div className="bg-white border border-slate-100 hover:border-[#4F46E5]/20 rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.015)] flex flex-col items-center text-center transition-all duration-300 group">
+              <div className="w-9 h-9 rounded-xl bg-[#FFF4EE] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] mb-2.5 group-hover:scale-105 transition-transform">
                 <Phone className="w-4 h-4" />
               </div>
               <h3 className="text-xs font-black text-slate-900 mb-0.5">24/7 Hotline</h3>
@@ -480,7 +480,7 @@ export default function HelpClientPage() {
               </p>
               <a
                 href="tel:01813333373"
-                className="text-[10px] font-bold text-[#FF6014] hover:underline flex items-center gap-0.5 mt-auto"
+                className="text-[10px] font-bold text-[#4F46E5] hover:underline flex items-center gap-0.5 mt-auto"
               >
                 01813-333373
                 <ExternalLink className="w-2 h-2" />
@@ -488,7 +488,7 @@ export default function HelpClientPage() {
             </div>
 
             {/* Support Card 2: Live Chat */}
-            <div className="bg-white border border-slate-100 hover:border-[#FF6014]/20 rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.015)] flex flex-col items-center text-center transition-all duration-300 group">
+            <div className="bg-white border border-slate-100 hover:border-[#4F46E5]/20 rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.015)] flex flex-col items-center text-center transition-all duration-300 group">
               <div className="w-9 h-9 rounded-xl bg-amber-50 border border-amber-100 flex items-center justify-center text-amber-600 mb-2.5 group-hover:scale-105 transition-transform">
                 <MessageSquare className="w-4 h-4" />
               </div>
@@ -506,7 +506,7 @@ export default function HelpClientPage() {
             </div>
 
             {/* Support Card 3: Email */}
-            <div className="bg-white border border-slate-100 hover:border-[#FF6014]/20 rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.015)] flex flex-col items-center text-center transition-all duration-300 group">
+            <div className="bg-white border border-slate-100 hover:border-[#4F46E5]/20 rounded-2xl p-4 shadow-[0_4px_20px_rgba(0,0,0,0.015)] flex flex-col items-center text-center transition-all duration-300 group">
               <div className="w-9 h-9 rounded-xl bg-emerald-50 border border-emerald-100/50 flex items-center justify-center text-emerald-600 mb-2.5 group-hover:scale-105 transition-transform">
                 <Mail className="w-4 h-4" />
               </div>
