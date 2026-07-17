@@ -32,7 +32,7 @@ export function useChatMessages(
   useEffect(() => {
     if (!user?.id && !user?._id) return;
 
-    const newSocket = io("https://api.rajseba.com", {
+    const newSocket = io("https://services-jevxo-api-production.up.railway.app", {
       query: { userId: user.id || user._id },
     });
 

@@ -11,7 +11,7 @@ export async function generateMetadata({
   const { id } = await params;
   try {
     const res = await fetch(
-      `https://api.rajseba.com/category/${id}`,
+      `https://services-jevxo-api-production.up.railway.app/category/${id}`,
       { next: { revalidate: 3600 } }
     );
     const json = await res.json();

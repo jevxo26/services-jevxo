@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 
-const API_BASE_URL = "https://api.rajseba.com";
+const API_BASE_URL = "https://services-jevxo-api-production.up.railway.app";
 
 export async function POST(req: NextRequest) {
   try {

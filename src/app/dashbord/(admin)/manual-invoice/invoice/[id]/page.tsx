@@ -6,7 +6,7 @@ import { ArrowLeft, DollarSign, Download, Printer, Check, AlertTriangle, FileTex
 import InvoiceTemplate1 from "@/components/manual-invoice/InvoiceTemplate1";
 import InvoiceTemplate2 from "@/components/manual-invoice/InvoiceTemplate2";
 
-const API = "https://api.rajseba.com";
+const API = "https://services-jevxo-api-production.up.railway.app";
 
 export default function InvoiceViewPage() {
   const { id } = useParams<{ id: string }>();

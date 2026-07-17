@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Plus, Search, Trash2, Users, AlertTriangle, Lock, User, Check } from "lucide-react";
 import { toast } from "sonner";
 
-const API = "https://api.rajseba.com";
+const API = "https://services-jevxo-api-production.up.railway.app";
 
 interface Customer {
   id: number | null;

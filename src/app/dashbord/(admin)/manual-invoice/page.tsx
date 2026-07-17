@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Search, Trash2, Eye, Users, Settings, FileText, AlertTriangle, Receipt, DollarSign, CheckCircle, AlertCircle } from "lucide-react";
 
-const API = "https://api.rajseba.com";
+const API = "https://services-jevxo-api-production.up.railway.app";
 
 interface Invoice {
   id: number;

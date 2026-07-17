@@ -4,7 +4,7 @@ import React, { useState, useEffect } from "react";
 import Link from "next/link";
 import { Plus, Search, Trash2, FolderOpen, AlertTriangle, Settings } from "lucide-react";
 
-const API = "https://api.rajseba.com";
+const API = "https://services-jevxo-api-production.up.railway.app";
 
 interface ServiceItem { id: number; name: string; rate: number; createdAt: string; }
 
