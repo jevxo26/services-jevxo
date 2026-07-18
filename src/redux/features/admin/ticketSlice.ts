@@ -21,7 +21,7 @@ interface TicketState {
   tickets: SupportTicket[];
 }
 
-const STORAGE_KEY = 'rajseba_support_tickets';
+const STORAGE_KEY = 'jevxo services_support_tickets';
 
 const loadTickets = (): SupportTicket[] => {
   if (typeof window === 'undefined') return [];

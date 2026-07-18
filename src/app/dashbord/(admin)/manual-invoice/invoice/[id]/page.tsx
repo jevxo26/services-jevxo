@@ -20,7 +20,7 @@ export default function InvoiceViewPage() {
   const [paySuccess, setPaySuccess] = useState("");
 
   const authHeader = () => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("rajseba_access_token") || localStorage.getItem("token") || "" : "";
+    const token = typeof window !== "undefined" ? localStorage.getItem("jevxo services_access_token") || localStorage.getItem("token") || "" : "";
     return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
   };
 

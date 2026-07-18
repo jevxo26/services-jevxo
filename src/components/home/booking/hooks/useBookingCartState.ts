@@ -52,7 +52,7 @@ export function useBookingCartState({ service, isLoading, nestedServices }: UseB
   // Load initial cart quantities from localStorage once service.id is available
   useEffect(() => {
     if (typeof window !== "undefined" && service?.id) {
-      const saved = window.localStorage.getItem(`rajseba_cart_${service.id}`);
+      const saved = window.localStorage.getItem(`jevxo services_cart_${service.id}`);
       if (saved) {
         try {
           setCartQuantities(JSON.parse(saved));
@@ -68,7 +68,7 @@ export function useBookingCartState({ service, isLoading, nestedServices }: UseB
   // Save cart quantities to localStorage whenever they change (only after initial load)
   useEffect(() => {
     if (typeof window !== "undefined" && service?.id && hasLoadedFromStorage.current) {
-      window.localStorage.setItem(`rajseba_cart_${service.id}`, JSON.stringify(cartQuantities));
+      window.localStorage.setItem(`jevxo services_cart_${service.id}`, JSON.stringify(cartQuantities));
     }
   }, [cartQuantities, service?.id]);
 
@@ -139,7 +139,7 @@ export function useBookingCartState({ service, isLoading, nestedServices }: UseB
     setCartQuantities({});
     setAppliedCoupon(null);
     if (typeof window !== "undefined" && service?.id) {
-      window.localStorage.removeItem(`rajseba_cart_${service.id}`);
+      window.localStorage.removeItem(`jevxo services_cart_${service.id}`);
     }
   };
 
@@ -214,7 +214,7 @@ export function useBookingCartState({ service, isLoading, nestedServices }: UseB
       setAppliedCoupon(null);
       setBookingDetails({ date: "", time: "", location: "", notes: "" });
       if (typeof window !== "undefined" && service?.id) {
-        window.localStorage.removeItem(`rajseba_cart_${service.id}`);
+        window.localStorage.removeItem(`jevxo services_cart_${service.id}`);
       }
     } catch (err: any) {
       toast.error(err?.data?.message || "Failed to place booking. Please try again.");

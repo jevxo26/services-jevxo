@@ -129,10 +129,10 @@ export const printHTML = async (htmlContent: string, filename: string = 'invoice
     };
 
     // If the browser extension is active, send the dataurl directly to the extension for silent direct download
-    if ((window as any).__rajseba_extension_active) {
+    if ((window as any).__jevxo_services_extension_active) {
       const pdfWorker = html2pdf().set(opt).from(element).toPdf();
       const dataUrl = await pdfWorker.output('dataurlstring');
-      window.dispatchEvent(new CustomEvent('rajseba-direct-download', { 
+      window.dispatchEvent(new CustomEvent('jevxo-services-direct-download', { 
         detail: { dataUrl, filename } 
       }));
       document.body.removeChild(element);
@@ -495,7 +495,7 @@ export const printBookingInvoice = (booking: any) => {
             <!-- Header -->
             <div class="header">
               <div class="logo-container">
-                <img src="/rajshiblogo.png" alt="Rajseba Logo" style="height: 52px; width: auto; object-fit: contain;" />
+                <img src="/rajshiblogo.png" alt="Jevxo Services Logo" style="height: 52px; width: auto; object-fit: contain;" />
               </div>
               <div class="info-box">
                 <div class="stamp">${badgeText}</div>
@@ -509,7 +509,7 @@ export const printBookingInvoice = (booking: any) => {
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
                   </svg>
-                  <span>info@rajseba.com</span>
+                  <span>info@jevxo.com</span>
                 </div>
                 <div class="info-row align-start">
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -599,7 +599,7 @@ export const printBookingInvoice = (booking: any) => {
                 <p style="margin: 0 0 8px 0; font-size: 13px; color: #475569; font-weight: 500;">Sincerely,</p>
                 <div class="sig-line">Arif</div>
                 <p class="sig-name">Ariful Islam Arif</p>
-                <p class="sig-title">CEO, Rajseba</p>
+                <p class="sig-title">CEO, Jevxo Services</p>
               </div>
             </div>
 
@@ -884,7 +884,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
             <!-- Header -->
             <div class="header">
               <div class="logo-container">
-                <img src="/rajshiblogo.png" alt="Rajseba Logo" style="height: 52px; width: auto; object-fit: contain;" />
+                <img src="/rajshiblogo.png" alt="Jevxo Services Logo" style="height: 52px; width: auto; object-fit: contain;" />
               </div>
               <div class="info-box">
                 <div class="stamp">${badgeText}</div>
@@ -898,7 +898,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
                   </svg>
-                  <span>info@rajseba.com</span>
+                  <span>info@jevxo.com</span>
                 </div>
                 <div class="info-row align-start">
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -989,7 +989,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
                 <p style="margin: 0 0 8px 0; font-size: 13px; color: #475569; font-weight: 500;">Sincerely,</p>
                 <div class="sig-line">Arif</div>
                 <p class="sig-name">Ariful Islam Arif</p>
-                <p class="sig-title">CEO, Rajseba</p>
+                <p class="sig-title">CEO, Jevxo Services</p>
               </div>
             </div>
 
@@ -1291,7 +1291,7 @@ export const printAllWithdrawsInvoice = (withdraws: any[], totalAmount: number) 
             <!-- Header -->
             <div class="header">
               <div class="logo-container">
-                <img src="/rajshiblogo.png" alt="Rajseba Logo" style="height: 52px; width: auto; object-fit: contain;" />
+                <img src="/rajshiblogo.png" alt="Jevxo Services Logo" style="height: 52px; width: auto; object-fit: contain;" />
               </div>
               <div class="info-box">
                 <div class="stamp">REPORT</div>
@@ -1305,7 +1305,7 @@ export const printAllWithdrawsInvoice = (withdraws: any[], totalAmount: number) 
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
                   </svg>
-                  <span>info@rajseba.com</span>
+                  <span>info@jevxo.com</span>
                 </div>
                 <div class="info-row align-start">
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1385,7 +1385,7 @@ export const printAllWithdrawsInvoice = (withdraws: any[], totalAmount: number) 
                 <p style="margin: 0 0 8px 0; font-size: 13px; color: #475569; font-weight: 500;">Sincerely,</p>
                 <div class="sig-line">Arif</div>
                 <p class="sig-name">Ariful Islam Arif</p>
-                <p class="sig-title">CEO, Rajseba</p>
+                <p class="sig-title">CEO, Jevxo Services</p>
               </div>
             </div>
 
@@ -1679,7 +1679,7 @@ export const printClientStatement = (bookings: any[], totalAmount: number) => {
             <!-- Header -->
             <div class="header">
               <div class="logo-container">
-                <img src="/rajshiblogo.png" alt="Rajseba Logo" style="height: 52px; width: auto; object-fit: contain;" />
+                <img src="/rajshiblogo.png" alt="Jevxo Services Logo" style="height: 52px; width: auto; object-fit: contain;" />
               </div>
               <div class="info-box">
                 <div class="stamp">STATEMENT</div>
@@ -1693,7 +1693,7 @@ export const printClientStatement = (bookings: any[], totalAmount: number) => {
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
                   </svg>
-                  <span>info@rajseba.com</span>
+                  <span>info@jevxo.com</span>
                 </div>
                 <div class="info-row align-start">
                   <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -1772,7 +1772,7 @@ export const printClientStatement = (bookings: any[], totalAmount: number) => {
                 <p style="margin: 0 0 8px 0; font-size: 13px; color: #475569; font-weight: 500;">Sincerely,</p>
                 <div class="sig-line">Arif</div>
                 <p class="sig-name">Ariful Islam Arif</p>
-                <p class="sig-title">CEO, Rajseba</p>
+                <p class="sig-title">CEO, Jevxo Services</p>
               </div>
             </div>
 

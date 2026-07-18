@@ -8,7 +8,7 @@ interface LangState {
 
 const getInitialLanguage = (): Language => {
   if (typeof window !== 'undefined') {
-    const saved = localStorage.getItem('rajseba_lang') as Language;
+    const saved = localStorage.getItem('jevxo services_lang') as Language;
     if (saved === 'bn' || saved === 'en') {
       return saved;
     }
@@ -27,14 +27,14 @@ const langSlice = createSlice({
     setLanguage: (state, action: PayloadAction<Language>) => {
       state.value = action.payload;
       if (typeof window !== 'undefined') {
-        localStorage.setItem('rajseba_lang', action.payload);
+        localStorage.setItem('jevxo services_lang', action.payload);
       }
     },
     toggleLanguage: (state) => {
       const nextLang: Language = state.value === 'bn' ? 'en' : 'bn';
       state.value = nextLang;
       if (typeof window !== 'undefined') {
-        localStorage.setItem('rajseba_lang', nextLang);
+        localStorage.setItem('jevxo services_lang', nextLang);
       }
     },
   },

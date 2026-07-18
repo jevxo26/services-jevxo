@@ -39,7 +39,7 @@ interface ChatSession {
   user?: { name: string; email: string } | null;
 }
 
-const CHAT_LOG_KEY = "rajseba_ai_chat_logs";
+const CHAT_LOG_KEY = "jevxo services_ai_chat_logs";
 
 /* ── Helpers ──────────────────────────────────────────────── */
 function getInitials(name: string) {

@@ -152,7 +152,7 @@ export default function PrivacyClientPage() {
                   </div>
                   <div className="text-[11px] md:text-xs text-slate-500 leading-relaxed font-medium space-y-3">
                     <p>
-                      At Rajseba, operated officially by Rajseba IT Limited, we hold your trust as our highest priority. This Privacy Policy details how we collect, process, manage, and safeguard your personal details when you interact with our home services marketplace, mobile application, and website.
+                      At Jevxo Services, operated officially by Jevxo Services IT Limited, we hold your trust as our highest priority. This Privacy Policy details how we collect, process, manage, and safeguard your personal details when you interact with our home services marketplace, mobile application, and website.
                     </p>
                     <p>
                       Our system is designed strictly in compliance with the Digital Security Act of Bangladesh and standard global data protection frameworks. We guarantee that your personal information is never sold, leased, or distributed to third-party marketing companies for promotional gains.
@@ -258,7 +258,7 @@ export default function PrivacyClientPage() {
                   </div>
                   <div className="text-[11px] md:text-xs text-slate-500 leading-relaxed font-medium space-y-3">
                     <p>
-                      Rajseba maintains a strict policy against selling user profiles. Data disclosure is limited to the following essential channels:
+                      Jevxo Services maintains a strict policy against selling user profiles. Data disclosure is limited to the following essential channels:
                     </p>
                     <ul className="list-disc pl-4 space-y-2">
                       <li>
@@ -329,7 +329,7 @@ export default function PrivacyClientPage() {
                       If you decide to delete your account permanently, or wish to pull a full copy of your transaction logs, simply contact our support desk using the information below:
                     </p>
                     <div className="bg-[#FFFDFB] border border-rose-100/30 rounded-xl p-3 text-[11px] font-semibold text-slate-600 space-y-1">
-                      <p>📧 Email: <span className="text-[#1E4E8C]">info@rajseba.com</span></p>
+                      <p>📧 Email: <span className="text-[#1E4E8C]">info@jevxo.com</span></p>
                       <p>📞 Hotline: <span className="text-[#1E4E8C]">01813-333373</span></p>
                       <p>📍 Address: Rajshahi High-tech Park, Rajshahi, Bangladesh</p>
                     </div>

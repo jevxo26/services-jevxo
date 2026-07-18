@@ -40,7 +40,7 @@ export function ServiceDeliveryDetails() {
       <div className="space-y-4">
         <div className="flex items-center gap-2 pb-2 border-b border-slate-50">
           <Compass size={16} className="text-[#1E4E8C]" />
-          <h4 className="font-black text-slate-800 text-xs md:text-sm tracking-tight uppercase">How Rajseba Works</h4>
+          <h4 className="font-black text-slate-800 text-xs md:text-sm tracking-tight uppercase">How Jevxo Services Works</h4>
         </div>
         <div className="relative border-l border-slate-100 pl-4 ml-2.5 space-y-5 py-1">
           {steps.map((step, idx) => (

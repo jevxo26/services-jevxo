@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const faqs = [
   {
-    question: "How do I book a service on Rajseba?",
+    question: "How do I book a service on Jevxo Services?",
     answer: "Booking is simple! Just browse our categories, select the service you need, choose a convenient time slot, and confirm your booking. Our professional will arrive at your doorstep."
   },
   {

@@ -1,8 +1,8 @@
 // Helper to check if we are in the browser environment
 const isBrowser = () => typeof window !== "undefined";
 
-const ACCESS_TOKEN_KEY = "rajseba_access_token";
-const REFRESH_TOKEN_KEY = "rajseba_refresh_token";
+const ACCESS_TOKEN_KEY = "jevxo services_access_token";
+const REFRESH_TOKEN_KEY = "jevxo services_refresh_token";
 
 // Cookie helper functions
 export const setCookie = (name: string, value: string, days = 30): void => {
@@ -69,9 +69,9 @@ export const clearTokens = (): void => {
   localStorage.removeItem(ACCESS_TOKEN_KEY);
   localStorage.removeItem("token");
   localStorage.removeItem(REFRESH_TOKEN_KEY);
-  localStorage.removeItem("rajseba_user_role");
+  localStorage.removeItem("jevxo services_user_role");
   eraseCookie(ACCESS_TOKEN_KEY);
   eraseCookie("token");
   eraseCookie(REFRESH_TOKEN_KEY);
-  eraseCookie("rajseba_user_role");
+  eraseCookie("jevxo services_user_role");
 };

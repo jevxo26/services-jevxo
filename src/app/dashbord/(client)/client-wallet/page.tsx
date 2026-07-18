@@ -65,7 +65,7 @@ export default function WalletPage() {
                 <p className="text-xs md:text-sm text-slate-300 mt-1 font-semibold leading-relaxed">
                   {lang === "bn"
                     ? "রাজসেবায় আপনার পেমেন্ট অপশন, ইনভয়েস ও প্রোমো কুপন পরিচালনা করুন।"
-                    : "Manage payment options, invoices, and promo coupons at Rajseba."}
+                    : "Manage payment options, invoices, and promo coupons at Jevxo Services."}
                 </p>
               </div>
             </div>
@@ -210,7 +210,7 @@ export default function WalletPage() {
               <p className="text-xs text-rose-100 leading-relaxed font-semibold max-w-[240px]">
                 {lang === "bn"
                   ? "আপনার বন্ধুদের রাজসেবায় আমন্ত্রণ জানান এবং তাদের প্রথম বুকিংয়ে উভয়ই বোনাস পান।"
-                  : "Invite your friends to Rajseba and both of you will get credit upon their first booking."}
+                  : "Invite your friends to Jevxo Services and both of you will get credit upon their first booking."}
               </p>
             </div>
 

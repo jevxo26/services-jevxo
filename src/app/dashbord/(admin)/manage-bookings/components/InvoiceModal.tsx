@@ -63,7 +63,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
               {/* Header: Logo & Contact Info */}
               <div className="flex flex-col sm:flex-row justify-between items-start gap-6 border-b border-slate-100 pb-6">
                 <div>
-                  <img src="/rajshiblogo.png" alt="Rajseba Logo" className="h-14 w-auto object-contain" />
+                  <img src="/rajshiblogo.png" alt="Jevxo Services Logo" className="h-14 w-auto object-contain" />
                 </div>
                 
                 <div className="bg-gradient-to-br from-[#1E4E8C] to-[#123C73] text-white p-5 rounded-2xl text-[11px] max-w-[280px] shadow-md shadow-[#1E4E8C]/20 space-y-2.5">
@@ -77,7 +77,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
                     <svg className="w-3.5 h-3.5 text-white/80 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 01-2.25 2.25h-15a2.25 2.25 0 01-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0019.5 4.5h-15a2.25 2.25 0 00-2.25 2.25m19.5 0v.243a2.25 2.25 0 01-1.07 1.916l-7.5 4.615a2.25 2.25 0 01-2.36 0L3.32 8.91a2.25 2.25 0 01-1.07-1.916V6.75"></path>
                     </svg>
-                    <span className="font-semibold">info@rajseba.com</span>
+                    <span className="font-semibold">info@jevxo.com</span>
                   </div>
                   <div className="flex items-start gap-2">
                     <svg className="w-3.5 h-3.5 text-white/80 shrink-0 mt-0.5" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -211,14 +211,14 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
                 <div>
                   <p className="text-[10px] font-extrabold text-slate-800 uppercase tracking-wider mb-1">Terms & Conditions</p>
                   <p className="text-[10px] text-slate-400 max-w-xs leading-relaxed">
-                    Please make payments to Rajseba. For queries or help, please contact info@rajseba.com.
+                    Please make payments to Jevxo Services. For queries or help, please contact info@jevxo.com.
                   </p>
                 </div>
                 <div className="text-right">
                   <p className="text-slate-400 font-medium">Sincerely,</p>
                   <p className="font-serif italic text-lg text-slate-800 mt-1">Arif</p>
                   <p className="font-bold text-slate-900">Ariful Islam Arif</p>
-                  <p className="text-[10px] text-slate-400">CEO, Rajseba</p>
+                  <p className="text-[10px] text-slate-400">CEO, Jevxo Services</p>
                 </div>
               </div>
 

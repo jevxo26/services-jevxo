@@ -16,26 +16,26 @@ export async function generateMetadata({
 
     if (!service) {
       return {
-        title: "Service Details - Rajseba",
+        title: "Service Details - Jevxo Services",
         description: "Professional home services details.",
       };
     }
 
     return {
-      title: `${service.name} - Professional Home Services | Rajseba`,
+      title: `${service.name} - Professional Home Services | Jevxo Services`,
       description: service.description || `Book professional ${service.name} services in Bangladesh. Vetted experts, safe and guaranteed satisfaction.`,
       openGraph: {
-        title: `${service.name} - Rajseba`,
+        title: `${service.name} - Jevxo Services`,
         description: service.description || `Professional ${service.name} services in Bangladesh.`,
-        url: `https://rajseba.com/services/${id}`,
-        siteName: "Rajseba",
+        url: `https://jevxo.com/services/${id}`,
+        siteName: "Jevxo Services",
         locale: "en_US",
         type: "website",
       },
     };
   } catch {
     return {
-      title: "Service Details - Rajseba",
+      title: "Service Details - Jevxo Services",
       description: "Professional home services details.",
     };
   }

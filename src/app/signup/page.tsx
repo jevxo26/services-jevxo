@@ -37,10 +37,10 @@ export default function RegisterPage() {
             <Player autoplay loop src="/signup.json" style={{ width: "100%", height: "auto" }} />
           </div>
           <h2 className="text-2xl xl:text-3xl font-black text-slate-800 leading-tight mt-4">
-            Start your journey with <span className="text-[#1E4E8C]">Rajseba</span>
+            Start your journey with <span className="text-[#1E4E8C]">Jevxo Services</span>
           </h2>
           <p className="text-slate-500 text-sm font-medium mt-3 max-w-sm leading-relaxed">
-            Join 50,000+ happy customers who trust Rajseba for professional home services every day.
+            Join 50,000+ happy customers who trust Jevxo Services for professional home services every day.
           </p>
           <div className="flex items-center gap-8 mt-8 pt-6 border-t border-slate-200/60 w-full justify-center">
             {[{ v: "50K+", l: "Happy Clients" }, { v: "4.9★", l: "Avg Rating" }, { v: "120+", l: "Services" }].map((s, i) => (
@@ -79,7 +79,7 @@ export default function RegisterPage() {
                     <div className="w-14 h-14 sm:w-16 sm:h-16 bg-gradient-to-br from-[#1E4E8C] to-rose-600 rounded-2xl flex items-center justify-center text-white shadow-xl shadow-rose-400/25 group-hover:scale-105 transition-transform">
                       <Sparkles size={26} className="stroke-[2]" />
                     </div>
-                    <span className="font-black text-xl sm:text-2xl text-slate-900 tracking-tight">Rajseba</span>
+                    <span className="font-black text-xl sm:text-2xl text-slate-900 tracking-tight">Jevxo Services</span>
                   </Link>
                   <h1 className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight leading-tight flex items-center gap-2.5">
                     <UserPlus size={28} className="text-[#1E4E8C]" />
@@ -177,7 +177,7 @@ export default function RegisterPage() {
         </div>
 
         <div className="text-center py-5 text-[11px] text-slate-400 font-medium relative z-10 border-t border-slate-100 mx-6 space-y-1">
-          <div>© {new Date().getFullYear()} Rajseba Services Ltd. · All rights reserved. <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#1E4E8C] transition-colors">Privacy</Link><Link href="/terms" className="ml-3 text-slate-400 hover:text-[#1E4E8C] transition-colors">Terms</Link></div>
+          <div>© {new Date().getFullYear()} Jevxo Services Services Ltd. · All rights reserved. <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#1E4E8C] transition-colors">Privacy</Link><Link href="/terms" className="ml-3 text-slate-400 hover:text-[#1E4E8C] transition-colors">Terms</Link></div>
           <div>Developed by <a href="https://aftabfarhan.tech" target="_blank" rel="noopener noreferrer" className="text-[#1E4E8C] hover:underline font-semibold">Aftab Farhan Arko</a></div>
         </div>
       </div>

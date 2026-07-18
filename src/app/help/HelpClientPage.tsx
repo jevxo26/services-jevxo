@@ -88,7 +88,7 @@ export default function HelpClientPage() {
             title: "Issue: Account Verification Requirement",
             problem: "You cannot place a booking because your account is unverified.",
             steps: [
-              "Rajseba requires a verified phone number for all booking placements to prevent spam.",
+              "Jevxo Services requires a verified phone number for all booking placements to prevent spam.",
               "Go to your Profile settings in the client dashboard, click 'Verify Phone', and enter the OTP sent to you.",
               "Once verified, your account status will show a green badge, and checkout will be enabled.",
             ],
@@ -112,7 +112,7 @@ export default function HelpClientPage() {
             title: "Issue: 'Service Not Available in My Area' Warning",
             problem: "You receive a message saying we cannot deliver services to your selected address.",
             steps: [
-              "Rajseba currently delivers premium home care inside designated zones in Rajshahi, Bangladesh (e.g., Rajshahi High-tech Park, local regions).",
+              "Jevxo Services currently delivers premium home care inside designated zones in Rajshahi, Bangladesh (e.g., Rajshahi High-tech Park, local regions).",
               "Check our Service Areas page or the live map to verify if your location falls within active coverage.",
               "If you are just outside the boundary, reach out to our custom support desk to check if special scheduling is possible.",
             ],
@@ -129,7 +129,7 @@ export default function HelpClientPage() {
         ],
       },
       features: {
-        title: "Rajseba Platform Core Features",
+        title: "Jevxo Services Platform Core Features",
         icon: Compass,
         items: [
           {
@@ -172,7 +172,7 @@ export default function HelpClientPage() {
             ],
           },
           {
-            title: "2. The Rajseba Digital Wallet System",
+            title: "2. The Jevxo Services Digital Wallet System",
             problem: "Making cashless payments and receiving refunds instantly.",
             steps: [
               "Go to the 'Wallet' tab in your client dashboard to view your current balance.",
@@ -515,10 +515,10 @@ export default function HelpClientPage() {
                 Drop us a line and we will reply within 4 hours.
               </p>
               <a
-                href="mailto:info@rajseba.com"
+                href="mailto:info@jevxo.com"
                 className="text-[10px] font-bold text-emerald-600 hover:underline flex items-center gap-0.5 mt-auto"
               >
-                info@rajseba.com
+                info@jevxo.com
                 <Mail className="w-3 h-3" />
               </a>
             </div>

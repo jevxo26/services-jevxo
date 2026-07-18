@@ -55,7 +55,7 @@ export default function BookingsPage() {
                 <p className="text-xs md:text-sm text-slate-300 mt-1 font-semibold leading-relaxed">
                   {lang === "bn"
                     ? "রাজসেবায় আপনার সার্ভিস অনুরোধগুলো পরিচালনা ও ট্র্যাক করুন এবং চ্যাট করুন।"
-                    : "Manage, track, and chat about your service requests at Rajseba."}
+                    : "Manage, track, and chat about your service requests at Jevxo Services."}
                 </p>
               </div>
             </div>

@@ -20,7 +20,7 @@ export default function PopularArticles() {
     },
     {
       tag: lang === "bn" ? "পার্টনারশিপ" : "Partnership",
-      title: lang === "bn" ? "রাজসেবা প্রো হওয়া" : "Becoming a Rajseba Pro",
+      title: lang === "bn" ? "রাজসেবা প্রো হওয়া" : "Becoming a Jevxo Services Pro",
       time: lang === "bn" ? "১২ মিনিট পাঠ • ১ সপ্তাহ আগে আপডেট করা হয়েছে" : "12 min read • Updated 1 week ago",
     },
   ];
@@ -33,7 +33,7 @@ export default function PopularArticles() {
             {lang === "bn" ? "জনপ্রিয় আর্টিকেলসমূহ" : "Popular Articles"}
           </h2>
           <p className="text-xs text-slate-400 mt-0.5 font-semibold">
-            {lang === "bn" ? "রাজসেবা কমিউনিটির সবচেয়ে বেশি পঠিত নির্দেশিকা" : "Most read guides by the Rajseba community"}
+            {lang === "bn" ? "রাজসেবা কমিউনিটির সবচেয়ে বেশি পঠিত নির্দেশিকা" : "Most read guides by the Jevxo Services community"}
           </p>
         </div>
         <Link href="#" className="text-xs font-bold text-[#1E4E8C] hover:underline">

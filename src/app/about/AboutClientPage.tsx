@@ -39,7 +39,7 @@ export default function AboutClientPage() {
               Bangladesh's Most <span className="text-[#1E4E8C]">Trusted</span> Home Service Platform
             </h1>
             <p className="text-[14px] text-slate-500 font-medium leading-[1.8] max-w-lg mb-6">
-              Rajseba was built with a single mission — to bring reliable, transparent, and affordable home services to every household in Bangladesh.
+              Jevxo Services was built with a single mission — to bring reliable, transparent, and affordable home services to every household in Bangladesh.
             </p>
             <div className="flex flex-wrap gap-3">
               <Link href="/services"><Button variant="outline" className="border-[#1E4E8C] text-[#1E4E8C] hover:bg-[#1E4E8C]/5 font-bold px-6 py-3 h-auto rounded-xl text-sm flex items-center gap-2">Explore Services<ArrowRight className="w-4 h-4" /></Button></Link>
@@ -49,7 +49,7 @@ export default function AboutClientPage() {
 
           <RevealSection variants={fadeRight} className="relative">
             <div className="relative h-[400px] lg:h-[480px] rounded-3xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.06)] border border-slate-100">
-              <Image src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=800&auto=format&fit=crop" alt="Rajseba home service professional at work" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
+              <Image src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?q=80&w=800&auto=format&fit=crop" alt="Jevxo Services home service professional at work" fill className="object-cover" sizes="(max-width: 1024px) 100vw, 50vw" priority />
               <div className="absolute inset-0 bg-gradient-to-t from-slate-900/60 via-slate-900/10 to-transparent" />
               <div className="absolute bottom-5 left-5 right-5 z-10 bg-white/90 backdrop-blur-sm rounded-2xl p-4 border border-white/60 shadow-lg">
                 <p className="text-[9px] font-extrabold uppercase tracking-widest text-[#1E4E8C] mb-1.5">Trusted by thousands daily</p>
@@ -96,7 +96,7 @@ export default function AboutClientPage() {
       <section className="py-6 md:py-10 bg-transparent">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <RevealSection className="text-center mb-10">
-            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#1E4E8C] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#1E4E8C]/20 mb-4"><Target className="w-3.5 h-3.5" />The Rajseba Standard</span>
+            <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#1E4E8C] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#1E4E8C]/20 mb-4"><Target className="w-3.5 h-3.5" />The Jevxo Services Standard</span>
             <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight mb-3">What Makes Us Different</h2>
             <p className="text-[13px] text-slate-400 font-medium max-w-md mx-auto leading-relaxed">We've set the highest standards for professional home care in Bangladesh.</p>
           </RevealSection>
@@ -153,7 +153,7 @@ export default function AboutClientPage() {
           <RevealSection className="text-center mb-10">
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#1E4E8C] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#1E4E8C]/20 mb-4"><Users className="w-3.5 h-3.5" />Our Leadership</span>
             <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight mb-3">Meet the Team</h2>
-            <p className="text-[13px] text-slate-400 font-medium max-w-sm mx-auto leading-relaxed">The people driving Rajseba's mission of affordable, professional home care.</p>
+            <p className="text-[13px] text-slate-400 font-medium max-w-sm mx-auto leading-relaxed">The people driving Jevxo Services's mission of affordable, professional home care.</p>
           </RevealSection>
           <RevealSection variants={stagger}>
             <div className="grid md:grid-cols-3 gap-5">
@@ -180,8 +180,8 @@ export default function AboutClientPage() {
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <RevealSection>
             <span className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#1E4E8C] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#1E4E8C]/20 mb-5"><Sparkles className="w-3.5 h-3.5" />Ready to Get Started?</span>
-            <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight leading-tight mb-4">Experience the Rajseba Difference</h2>
-            <p className="text-[13px] text-slate-400 font-medium max-w-md mx-auto leading-relaxed mb-8">Join 50,000+ households who rely on Rajseba for professional, reliable home maintenance.</p>
+            <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight leading-tight mb-4">Experience the Jevxo Services Difference</h2>
+            <p className="text-[13px] text-slate-400 font-medium max-w-md mx-auto leading-relaxed mb-8">Join 50,000+ households who rely on Jevxo Services for professional, reliable home maintenance.</p>
             <div className="flex flex-wrap justify-center gap-4">
               <Link href="/services"><Button variant="outline" className="border-[#1E4E8C] text-[#1E4E8C] hover:bg-[#1E4E8C]/5 font-bold px-8 py-4 h-auto rounded-xl text-sm flex items-center gap-2 shadow-lg">Book a Service<ArrowRight className="w-4 h-4" /></Button></Link>
               <Link href="/opportunity"><Button variant="outline" className="border-slate-200 text-slate-700 hover:bg-slate-50 font-bold px-8 py-4 h-auto rounded-xl text-sm flex items-center gap-2">Join as Partner<TrendingUp className="w-4 h-4" /></Button></Link>

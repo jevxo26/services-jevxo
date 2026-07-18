@@ -132,7 +132,7 @@ export default function HelpCenterPage() {
           <div className="space-y-3">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-white/5 border border-white/10 rounded-full text-[10px] font-black tracking-widest text-[#1E4E8C] uppercase">
               <Sparkles className="w-3.5 h-3.5 text-[#1E4E8C] animate-pulse" />
-              {lang === "bn" ? "রাজসেবা কাস্টমার সাপোর্ট" : "Rajseba Care Hub"}
+              {lang === "bn" ? "রাজসেবা কাস্টমার সাপোর্ট" : "Jevxo Services Care Hub"}
             </div>
             <h1 className="text-2xl sm:text-3xl font-black text-white tracking-tight leading-none">
               {lang === "bn" ? "আমরা কীভাবে সাহায্য করতে পারি?" : "How can we help you today?"}

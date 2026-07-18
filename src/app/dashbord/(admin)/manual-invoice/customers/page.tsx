@@ -39,7 +39,7 @@ export default function CustomersPage() {
   const [clientRoleId, setClientRoleId] = useState<number | null>(null);
 
   const authHeader = () => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("rajseba_access_token") || localStorage.getItem("token") || "" : "";
+    const token = typeof window !== "undefined" ? localStorage.getItem("jevxo services_access_token") || localStorage.getItem("token") || "" : "";
     return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
   };
 

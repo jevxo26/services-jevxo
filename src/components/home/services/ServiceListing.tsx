@@ -398,7 +398,7 @@ export default function ServiceListing({
               <span className="text-[#1E4E8C]">{vendorName}</span>
             </p>
             <p className="text-xs text-slate-400 font-medium mt-1">
-              Book directly from this verified vendor on Rajseba.
+              Book directly from this verified vendor on Jevxo Services.
             </p>
           </div>
         )}

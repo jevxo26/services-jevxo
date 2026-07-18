@@ -83,7 +83,7 @@ export default function InvoiceTemplate2({ invoice }: InvoiceTemplateProps) {
           <div>
             <img
               src="/rajshiblogo.png"
-              alt="Rajseba Logo"
+              alt="Jevxo Services Logo"
               style={{ height: "52px", width: "auto", objectFit: "contain" }}
             />
           </div>
@@ -131,7 +131,7 @@ export default function InvoiceTemplate2({ invoice }: InvoiceTemplateProps) {
 
             <div style={{ display: "flex", alignItems: "center", gap: "8px", margin: "6px 0" }}>
               <Mail size={13} style={{ color: "rgba(255, 255, 255, 0.85)" }} />
-              <span style={{ fontWeight: 500 }}>info@rajseba.com</span>
+              <span style={{ fontWeight: 500 }}>info@jevxo.com</span>
             </div>
 
             <div style={{ display: "flex", alignItems: "flex-start", gap: "8px", margin: "6px 0" }}>
@@ -459,7 +459,7 @@ export default function InvoiceTemplate2({ invoice }: InvoiceTemplateProps) {
             </div>
             <p style={{ fontWeight: 800, color: "#0f172a", margin: 0 }}>{invoice.signeeName || "Ariful Islam Arif"}</p>
             <p style={{ fontSize: "11px", fontWeight: 600, color: "#64748b", margin: "2px 0 0 0" }}>
-              {invoice.signeeRole || "CEO, Rajseba"}
+              {invoice.signeeRole || "CEO, Jevxo Services"}
             </p>
           </div>
         </div>

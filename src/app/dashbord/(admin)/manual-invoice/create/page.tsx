@@ -12,7 +12,7 @@ interface ServiceItem { id: number; name: string; rate: number; }
 interface LineItem { description: string; qty: number; rate: number; amount: number; }
 
 const EMPTY_ITEM: LineItem = { description: "", qty: 1, rate: 0, amount: 0 };
-const DEFAULT_PO = { accountName: "RAJSEBA.COM", accountNumber: "02433002451", bankName: "Bank Asia PLC", branch: "Rajshahi Branch", routingNumber: "070811937" };
+const DEFAULT_PO = { accountName: "jevxo.com", accountNumber: "02433002451", bankName: "Bank Asia PLC", branch: "Rajshahi Branch", routingNumber: "070811937" };
 
 function toWords(n: number): string {
   const ones = ["", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten", "Eleven", "Twelve", "Thirteen", "Fourteen", "Fifteen", "Sixteen", "Seventeen", "Eighteen", "Nineteen"];
@@ -49,7 +49,7 @@ export default function CreateInvoicePage() {
   const [templateName, setTemplateName] = useState<"template1" | "template2">("template1");
   const [discount, setDiscount] = useState(0);
   const [signeeName, setSigneeName] = useState("Ariful Islam Arif");
-  const [signeeRole, setSigneeRole] = useState("CEO, Rajseba Design Studio");
+  const [signeeRole, setSigneeRole] = useState("CEO, Jevxo Services Design Studio");
 
   // Items
   const [items, setItems] = useState<LineItem[]>([{ ...EMPTY_ITEM }]);
@@ -65,7 +65,7 @@ export default function CreateInvoicePage() {
   const [registerAsUser, setRegisterAsUser] = useState(true);
 
   const authHeader = () => {
-    const token = typeof window !== "undefined" ? localStorage.getItem("rajseba_access_token") || localStorage.getItem("token") || "" : "";
+    const token = typeof window !== "undefined" ? localStorage.getItem("jevxo services_access_token") || localStorage.getItem("token") || "" : "";
     return { Authorization: `Bearer ${token}`, "Content-Type": "application/json" };
   };
 
@@ -416,7 +416,7 @@ export default function CreateInvoicePage() {
                     onChange={e => setTemplateName(e.target.value as any)}
                   >
                     <option value="template1">Template 1 — RDS Dark Style</option>
-                    <option value="template2">Template 2 — Rajseba Orange Style</option>
+                    <option value="template2">Template 2 — Jevxo Services Orange Style</option>
                   </select>
                 </div>
                 <div className="space-y-1.5">

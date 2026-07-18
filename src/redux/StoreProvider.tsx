@@ -28,7 +28,7 @@ function AuthLoader({ children }: { children: React.ReactNode }) {
 
   // Only trigger profile validation after client mount and if a token is present.
   const hasToken = mounted
-    ? !!(localStorage.getItem('rajseba_access_token') || localStorage.getItem('token'))
+    ? !!(localStorage.getItem('jevxo services_access_token') || localStorage.getItem('token'))
     : false;
 
   useGetUserProfileQuery(undefined, {

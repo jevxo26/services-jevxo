@@ -13,7 +13,7 @@ const baiJamjuree = Bai_Jamjuree({
 });
 
 export const metadata: Metadata = {
-  title: "Rajseba - Expert Care for Your Premium Home",
+  title: "Jevxo Services - Expert Care for Your Premium Home",
   description:
     "Professional home services in Bangladesh with verified experts.",
   icons: {

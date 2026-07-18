@@ -67,7 +67,7 @@ export function DesktopBookingSidebar({
           <p className="text-xs font-bold text-slate-500">Select services from the list to start booking.</p>
         </div>
         <div className="space-y-4">
-          <p className="text-[10px] font-bold uppercase tracking-widest text-[#1E4E8C]">Why Choose Rajseba</p>
+          <p className="text-[10px] font-bold uppercase tracking-widest text-[#1E4E8C]">Why Choose Jevxo Services</p>
           <div className="space-y-3.5">
             {trustPoints.map(({ icon: Icon, text }) => (
               <div key={text} className="flex items-center gap-3">

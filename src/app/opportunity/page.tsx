@@ -38,7 +38,7 @@ function OpportunityPageContent() {
             <div className="inline-flex items-center gap-2 text-[10px] font-extrabold text-[#1E4E8C] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#1E4E8C]/20">
               <Sparkles className="w-3.5 h-3.5" />Partnership Opportunities
             </div>
-            <h1 className="text-xl md:text-3xl lg:text-4xl font-medium text-slate-900 tracking-tight leading-tight">Join <span className="text-[#1E4E8C]">Rajseba</span> Platform</h1>
+            <h1 className="text-xl md:text-3xl lg:text-4xl font-medium text-slate-900 tracking-tight leading-tight">Join <span className="text-[#1E4E8C]">Jevxo Services</span> Platform</h1>
             <p className="text-slate-400 text-sm md:text-base font-semibold max-w-xl mx-auto leading-relaxed">Partner with Bangladesh's leading home service marketplace and grow your business or operations network.</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto">
@@ -73,7 +73,7 @@ function OpportunityPageContent() {
           <div className="md:col-span-5 flex flex-col justify-between shrink-0 min-h-[420px] md:min-h-[520px] py-4">
             <div>
               <span className="text-xl font-black text-slate-800 flex items-center gap-2 mb-6">
-                <span className="w-7 h-7 bg-[#1E4E8C] rounded-lg flex items-center justify-center text-xs text-white">R</span>Rajseba
+                <span className="w-7 h-7 bg-[#1E4E8C] rounded-lg flex items-center justify-center text-xs text-white">R</span>Jevxo Services
               </span>
               <div>
                 <div className="inline-flex items-center gap-2 text-[9px] font-extrabold text-[#1E4E8C] uppercase tracking-wider bg-[#1E4E8C]/10 border border-[#1E4E8C]/20 px-3 py-1 rounded-full mb-4">
@@ -97,7 +97,7 @@ function OpportunityPageContent() {
                 </div>
               ))}
             </div>
-            <div className="flex items-center gap-2 text-slate-400 text-[10px] font-semibold"><ShieldCheck size={14} className="text-emerald-500" /><span>Rajseba Partner Onboarding Portal</span></div>
+            <div className="flex items-center gap-2 text-slate-400 text-[10px] font-semibold"><ShieldCheck size={14} className="text-emerald-500" /><span>Jevxo Services Partner Onboarding Portal</span></div>
           </div>
 
           <div className="md:col-span-7 flex flex-col justify-center py-4">

@@ -35,7 +35,7 @@ const COMPANY_LINKS = [
 
 const CONTACT_INFO = [
   { icon: Phone, label: "01813-333373", href: "tel:01813333373" },
-  { icon: Mail, label: "info@rajseba.com", href: "mailto:info@rajseba.com" },
+  { icon: Mail, label: "info@jevxo.com", href: "mailto:info@jevxo.com" },
   { icon: MapPin, label: "Rajshahi High-tech Park, Bangladesh", href: "https://maps.google.com/?q=Rajshahi+High-tech+Park" },
 ];
 
@@ -67,13 +67,13 @@ const SOCIALS = [
   {
     Icon: FacebookIcon,
     label: "Facebook",
-    href: "https://facebook.com/rajseba",
+    href: "https://facebook.com/jevxo services",
     hoverClass: "hover:text-[#1877F2] hover:border-[#1877F2]/40 hover:shadow-[0_4px_12px_rgba(24,119,242,0.15)]"
   },
   {
     Icon: InstagramIcon,
     label: "Instagram",
-    href: "https://instagram.com/rajseba",
+    href: "https://instagram.com/jevxo services",
     hoverClass: "hover:text-[#E4405F] hover:border-[#E4405F]/40 hover:shadow-[0_4px_12px_rgba(228,64,95,0.15)]"
   },
   {
@@ -85,7 +85,7 @@ const SOCIALS = [
   {
     Icon: YoutubeIcon,
     label: "YouTube",
-    href: "https://youtube.com/@rajseba",
+    href: "https://youtube.com/@jevxo services",
     hoverClass: "hover:text-[#FF0000] hover:border-[#FF0000]/40 hover:shadow-[0_4px_12px_rgba(255,0,0,0.15)]"
   },
 ];
@@ -156,10 +156,10 @@ export default function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-12 gap-x-6 gap-y-10 md:gap-x-8 lg:gap-x-10">
           {/* ── Brand (4/12 columns on desktop, full width on mobile) ── */}
           <motion.div variants={itemVariants} className="col-span-2 md:col-span-4 space-y-4">
-            <Link href="/" aria-label="Rajseba home" className="inline-block hover:opacity-90 transition-opacity">
+            <Link href="/" aria-label="Jevxo Services home" className="inline-block hover:opacity-90 transition-opacity">
               <Image
                 src="/newlogo.png"
-                alt="Rajseba"
+                alt="Jevxo Services"
                 width={100}
                 height={48}
                 style={{ width: "auto", height: "auto" }}
@@ -295,7 +295,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-2">
             <a
-              href="https://rajseba.com"
+              href="https://jevxo.com"
               target="_blank"
               aria-label="Visit website"
               className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#1E4E8C] hover:border-[#1E4E8C]/20 transition-all duration-200 shrink-0"
@@ -306,7 +306,7 @@ export default function Footer() {
               onClick={() => {
                 if (navigator.share) {
                   navigator.share({
-                    title: "Rajseba",
+                    title: "Jevxo Services",
                     text: "Premium Home Services in Bangladesh",
                     url: window.location.origin,
                   });

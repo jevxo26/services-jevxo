@@ -39,7 +39,7 @@ export default function ManualInvoicePage() {
   const fetchInvoices = async () => {
     try {
       setLoading(true);
-      const token = localStorage.getItem("rajseba_access_token") || localStorage.getItem("token") || "";
+      const token = localStorage.getItem("jevxo services_access_token") || localStorage.getItem("token") || "";
       const res = await fetch(`${API}/api/manual-invoices`, {
         headers: { Authorization: `Bearer ${token}` },
       });
@@ -57,7 +57,7 @@ export default function ManualInvoicePage() {
 
   const handleDelete = async (id: number) => {
     try {
-      const token = localStorage.getItem("rajseba_access_token") || localStorage.getItem("token") || "";
+      const token = localStorage.getItem("jevxo services_access_token") || localStorage.getItem("token") || "";
       const res = await fetch(`${API}/api/manual-invoices/${id}`, {
         method: "DELETE",
         headers: { Authorization: `Bearer ${token}` },

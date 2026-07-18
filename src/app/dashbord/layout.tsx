@@ -41,7 +41,7 @@ function DashboardLoader() {
       </div>
 
       {/* Brand wordmark */}
-      <p className="text-base font-black text-slate-800 tracking-tight mb-1">Rajseba</p>
+      <p className="text-base font-black text-slate-800 tracking-tight mb-1">Jevxo Services</p>
       <p className="text-xs font-semibold text-slate-400 tracking-wide">Loading your dashboard…</p>
 
       {/* Keyframes via inline style */}

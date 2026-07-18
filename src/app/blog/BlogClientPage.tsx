@@ -280,7 +280,7 @@ export default function BlogClientPage() {
                 <div className="flex items-center gap-2 mb-0.5">
                   <Sparkles size={10} className="text-[#1E4E8C]" />
                   <span className="text-[10px] font-black text-[#1E4E8C] uppercase tracking-[.12em]">
-                    Rajseba Blog
+                    Jevxo Services Blog
                   </span>
                 </div>
                 <h1 className="text-lg sm:text-xl font-extrabold text-slate-900 leading-tight">

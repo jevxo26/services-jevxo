@@ -66,7 +66,7 @@ export default function ServiceAreas() {
           <p className="mt-3.5 text-slate-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
             {isLoading
               ? "Mapping our coverage areas..."
-              : `Rajseba is available in ${activeCount} divisions with ${totalDistricts} districts and verified professionals ready to serve you.`}
+              : `Jevxo Services is available in ${activeCount} divisions with ${totalDistricts} districts and verified professionals ready to serve you.`}
           </p>
         </div>
 
@@ -195,7 +195,7 @@ export default function ServiceAreas() {
                 Don't see your area? We're expanding fast!
               </h3>
               <p className="text-slate-500 text-xs mt-1.5 max-w-xl font-medium">
-                Leave your location details and we will notify you immediately once Rajseba verified professionals arrive in your neighborhood.
+                Leave your location details and we will notify you immediately once Jevxo Services verified professionals arrive in your neighborhood.
               </p>
             </div>
             <button className="shrink-0 bg-[#1E4E8C] hover:bg-[#1E4E8C]/90 active:scale-[0.98] text-white text-xs font-black px-6 py-3.5 rounded-2xl shadow-lg shadow-[#1E4E8C]/20 transition-all flex items-center gap-2">

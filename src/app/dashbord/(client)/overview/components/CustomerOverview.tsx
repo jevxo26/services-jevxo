@@ -98,7 +98,7 @@ export default function CustomerOverview() {
                 <p className="text-xs md:text-sm text-slate-300 mt-1 font-medium">
                   {lang === "bn"
                     ? "রাজসেবার সাথে আপনার ঘর সাজানোর আজ এক চমৎকার দিন।"
-                    : "It's a great day to refresh your home with Rajseba."}
+                    : "It's a great day to refresh your home with Jevxo Services."}
                 </p>
               </div>
             </div>

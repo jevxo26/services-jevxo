@@ -13,16 +13,16 @@ interface SearchLogState {
   logs: SearchLogEntry[];
 }
 
-const STORAGE_KEY = 'rajseba_search_logs';
+const STORAGE_KEY = 'jevxo services_search_logs';
 const MAX_LOGS = 500;
 
 // Generate or retrieve session ID
 export const getOrCreateSessionId = (): string => {
   if (typeof window === 'undefined') return 'server';
-  let sid = sessionStorage.getItem('rajseba_session_id');
+  let sid = sessionStorage.getItem('jevxo services_session_id');
   if (!sid) {
     sid = `SES-${Math.random().toString(36).substr(2, 9).toUpperCase()}-${Date.now()}`;
-    sessionStorage.setItem('rajseba_session_id', sid);
+    sessionStorage.setItem('jevxo services_session_id', sid);
   }
   return sid;
 };

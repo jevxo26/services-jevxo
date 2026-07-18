@@ -7,14 +7,14 @@ import { Metadata } from 'next';
 import { Suspense } from 'react';
 
 export const metadata: Metadata = {
-  title: "Professional Home Services Directory - Rajseba",
+  title: "Professional Home Services Directory - Jevxo Services",
   description: "Browse and book from our comprehensive list of verified home services including cleaning, appliance repair, plumbing, electrical, and painting in Bangladesh.",
   keywords: ["home service list", "AC service", "home cleaning services", "plumbing service", "electrical work", "Dhaka services"],
   openGraph: {
-    title: "Professional Home Services Directory - Rajseba",
+    title: "Professional Home Services Directory - Jevxo Services",
     description: "Browse and book from our comprehensive list of verified home services.",
-    url: "https://rajseba.com/services",
-    siteName: "Rajseba",
+    url: "https://jevxo.com/services",
+    siteName: "Jevxo Services",
     locale: "en_US",
     type: "website",
   },

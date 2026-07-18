@@ -336,7 +336,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
           <Link href="/" className="flex flex-col items-start gap-2">
             <img
               src="/rajshiblogo.png"
-              alt="Rajseba Logo"
+              alt="Jevxo Services Logo"
               className={collapsed ? "h-8 w-8 object-contain shrink-0" : "h-11 w-auto object-contain shrink-0"}
             />
             {!collapsed && (

@@ -19,15 +19,15 @@ interface ChatSession {
   user?: { name: string; email: string } | null;
 }
 
-const CHAT_LOG_KEY = "rajseba_ai_chat_logs";
+const CHAT_LOG_KEY = "jevxo services_ai_chat_logs";
 const MAX_SESSIONS = 100;
 
 function getOrCreateSessionId(): string {
   if (typeof window === "undefined") return "server";
-  let sid = sessionStorage.getItem("rajseba_chat_session_id");
+  let sid = sessionStorage.getItem("jevxo services_chat_session_id");
   if (!sid) {
     sid = `CS-${Math.random().toString(36).substr(2, 9).toUpperCase()}-${Date.now()}`;
-    sessionStorage.setItem("rajseba_chat_session_id", sid);
+    sessionStorage.setItem("jevxo services_chat_session_id", sid);
   }
   return sid;
 }
@@ -59,7 +59,7 @@ export function AiChatBot() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: "model",
-      text: "Hello! I am your Rajseba AI Assistant. How can I help you with our home services today? (আপনি বাংলায়ও কথা বলতে পারেন।)",
+      text: "Hello! I am your Jevxo Services AI Assistant. How can I help you with our home services today? (আপনি বাংলায়ও কথা বলতে পারেন।)",
     },
   ]);
   const [inputValue, setInputValue] = useState("");
@@ -290,7 +290,7 @@ export function AiChatBot() {
                 </div>
                 <div>
                   <h3 className="font-extrabold text-sm flex items-center gap-1.5">
-                    Rajseba AI Assistant
+                    Jevxo Services AI Assistant
                     <Sparkles size={12} className="text-amber-200 animate-pulse" />
                   </h3>
                   <p className="text-[10px] text-white/80 font-semibold flex items-center gap-1 mt-0.5">

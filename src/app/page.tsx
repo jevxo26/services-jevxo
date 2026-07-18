@@ -15,14 +15,14 @@ import ScrollToTop from "@/components/home/ScrollToTop";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Rajseba - Expert Care for Your Premium Home",
+  title: "Jevxo Services - Expert Care for Your Premium Home",
   description: "Professional home services in Bangladesh with verified experts. Book top-rated cleaning, AC repair, plumbing, electrical, and other home services today.",
-  keywords: ["home services", "AC repair", "cleaning", "plumbing", "electrical", "Bangladesh", "Dhaka", "Rajseba"],
+  keywords: ["home services", "AC repair", "cleaning", "plumbing", "electrical", "Bangladesh", "Dhaka", "Jevxo Services"],
   openGraph: {
-    title: "Rajseba - Expert Care for Your Premium Home",
+    title: "Jevxo Services - Expert Care for Your Premium Home",
     description: "Professional home services in Bangladesh with verified experts.",
-    url: "https://rajseba.com",
-    siteName: "Rajseba",
+    url: "https://jevxo.com",
+    siteName: "Jevxo Services",
     locale: "en_US",
     type: "website",
   },

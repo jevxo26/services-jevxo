@@ -28,11 +28,11 @@ const initialState: AuthState = {
 
 const saveRoleToStorage = (roleString: string) => {
   if (typeof window === 'undefined') return;
-  localStorage.setItem("rajseba_user_role", roleString);
+  localStorage.setItem("jevxo services_user_role", roleString);
   const date = new Date();
   date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
   const expires = "; expires=" + date.toUTCString();
-  document.cookie = `rajseba_user_role=${roleString}${expires}; path=/; SameSite=Lax`;
+  document.cookie = `jevxo services_user_role=${roleString}${expires}; path=/; SameSite=Lax`;
 };
 
 export const authSlice = createSlice({
@@ -56,7 +56,7 @@ export const authSlice = createSlice({
       if (typeof window !== 'undefined') {
         // Persist user data and role for instant restore on page reload
         try {
-          localStorage.setItem("rajseba_user", JSON.stringify(action.payload));
+          localStorage.setItem("jevxo services_user", JSON.stringify(action.payload));
         } catch {}
         saveRoleToStorage(roleString);
       }
@@ -65,8 +65,8 @@ export const authSlice = createSlice({
       // Called synchronously on client mount to rehydrate from localStorage
       if (typeof window === 'undefined') return;
       try {
-        const stored = localStorage.getItem("rajseba_user");
-        const token = localStorage.getItem("rajseba_access_token") || localStorage.getItem("token");
+        const stored = localStorage.getItem("jevxo services_user");
+        const token = localStorage.getItem("jevxo services_access_token") || localStorage.getItem("token");
         if (stored && token) {
           const user = JSON.parse(stored) as User;
           state.user = user;
@@ -96,15 +96,15 @@ export const authSlice = createSlice({
       state.role = null;
       state.isLoading = false;
       if (typeof window !== 'undefined') {
-        localStorage.removeItem("rajseba_user");
-        localStorage.removeItem("rajseba_user_role");
+        localStorage.removeItem("jevxo services_user");
+        localStorage.removeItem("jevxo services_user_role");
         localStorage.removeItem("token");
-        localStorage.removeItem("rajseba_access_token");
-        localStorage.removeItem("rajseba_refresh_token");
+        localStorage.removeItem("jevxo services_access_token");
+        localStorage.removeItem("jevxo services_refresh_token");
         document.cookie = "token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "rajseba_access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "rajseba_refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
-        document.cookie = "rajseba_user_role=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        document.cookie = "jevxo services_access_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        document.cookie = "jevxo services_refresh_token=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
+        document.cookie = "jevxo services_user_role=; path=/; expires=Thu, 01 Jan 1970 00:00:01 GMT;";
         window.location.href = "/";
       }
     },

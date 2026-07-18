@@ -44,7 +44,7 @@ export default function VirtualCard({ profileData, totalExpense, walletBalance, 
           </svg>
         </div>
         <span className="text-[10px] font-extrabold tracking-widest uppercase bg-white/10 px-2.5 py-1 rounded-lg border border-white/10 backdrop-blur-sm">
-          Rajseba Pay
+          Jevxo Services Pay
         </span>
       </div>
 

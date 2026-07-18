@@ -252,7 +252,7 @@ export function mapProfileToExpert(
     distance: "Nearby",
     status: user.status === "active" ? "Identity Verified" : "Verified Provider",
     description:
-      profile.description || "Professional service provider available on Rajseba.",
+      profile.description || "Professional service provider available on Jevxo Services.",
     price,
     lat,
     lng,

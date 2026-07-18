@@ -17,10 +17,10 @@ export default function PartnerCta() {
               <span className="text-sm font-semibold tracking-wide">JOIN OUR NETWORK</span>
             </div>
             <h2 className="text-2xl md:text-3xl lg:text-4xl font-extrabold text-white mb-6 leading-tight">
-              Earn More As A Professional <br className="hidden lg:block"/> Partner With Rajseba
+              Earn More As A Professional <br className="hidden lg:block"/> Partner With Jevxo Services
             </h2>
             <p className="text-slate-300 text-lg mb-8 max-w-xl font-medium leading-relaxed">
-              Join thousands of professionals on Rajseba who are growing their business, finding more customers, and earning consistently.
+              Join thousands of professionals on Jevxo Services who are growing their business, finding more customers, and earning consistently.
             </p>
             <ul className="grid sm:grid-cols-2 gap-4 mb-10 text-slate-300 font-medium">
               <li className="flex items-center gap-3">

@@ -38,7 +38,7 @@ export default function LoginPage() {
               <div className="w-12 h-12 bg-gradient-to-br from-[#1E4E8C] to-[#FF8142] rounded-xl flex items-center justify-center text-white shadow-lg shadow-[#1E4E8C]/25">
                 <Sparkles size={20} className="stroke-[2.5]" />
               </div>
-              <span className="font-extrabold text-[#1E4E8C] text-xl tracking-tight">Rajseba</span>
+              <span className="font-extrabold text-[#1E4E8C] text-xl tracking-tight">Jevxo Services</span>
             </Link>
           </div>
 
@@ -49,7 +49,7 @@ export default function LoginPage() {
                   <div className="w-14 h-14 bg-gradient-to-br from-[#1E4E8C] to-[#FF8142] rounded-2xl flex items-center justify-center text-white shadow-xl shadow-[#1E4E8C]/25 group-hover:scale-105 transition-transform">
                     <Sparkles size={24} className="stroke-[2]" />
                   </div>
-                  <span className="font-black text-xl text-slate-900 tracking-tight">Rajseba</span>
+                  <span className="font-black text-xl text-slate-900 tracking-tight">Jevxo Services</span>
                 </Link>
                 <div className="inline-flex items-center gap-2 bg-[#FFF4EE] text-[#1E4E8C] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider mb-4 border border-[#1E4E8C]/20">
                   <ShieldCheck size={13} className="stroke-[2.5]" />Secure OTP Login
@@ -150,7 +150,7 @@ export default function LoginPage() {
 
         <div className="text-center py-5 text-[11px] text-slate-400 font-medium relative z-10 border-t border-slate-100 mx-6 space-y-1">
           <div>
-            © {new Date().getFullYear()} Rajseba Services Ltd. · All rights reserved.
+            © {new Date().getFullYear()} Jevxo Services Services Ltd. · All rights reserved.
             <Link href="/privacy" className="ml-3 text-slate-400 hover:text-[#1E4E8C] transition-colors">Privacy</Link>
             <Link href="/terms" className="ml-3 text-slate-400 hover:text-[#1E4E8C] transition-colors">Terms</Link>
           </div>

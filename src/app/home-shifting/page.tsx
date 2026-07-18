@@ -333,7 +333,7 @@ export default function HomeShiftingPage() {
                 </span>
                 <h1 className="text-2xl sm:text-3xl lg:text-4xl font-black text-slate-900 leading-tight animate-[fadeInUp_0.7s_ease-out]">
                   Move Smarter with<br />
-                  <span className="text-[#1E4E8C]">Rajseba Shifting</span>
+                  <span className="text-[#1E4E8C]">Jevxo Services Shifting</span>
                 </h1>
                 <p className="text-sm text-slate-600 mt-3 max-w-md mx-auto lg:mx-0 leading-relaxed font-semibold animate-[fadeInUp_0.8s_ease-out]">
                   From a single-bedroom flat to a full office floor, our verified crews handle packing,
@@ -359,7 +359,7 @@ export default function HomeShiftingPage() {
               </div>
               <div className="flex-shrink-0 w-full max-w-xs lg:max-w-sm">
                 <div className="relative rounded-3xl overflow-hidden shadow-2xl aspect-[4/3] border border-slate-100 group">
-                  <Image src="/rajseba_about_banner.png" alt="Rajseba movers carrying boxes during a home shifting job in Dhaka" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
+                  <Image src="/jevxo services_about_banner.png" alt="Jevxo Services movers carrying boxes during a home shifting job in Dhaka" fill className="object-cover transition-transform duration-700 group-hover:scale-105" priority />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4 flex gap-3">
                     {[{ n: "10K+", l: "Moves Done" }, { n: "4.9★", l: "Avg Rating" }, { n: "24/7", l: "Support" }].map((s) => (
@@ -569,7 +569,7 @@ export default function HomeShiftingPage() {
 
               <Reveal delay={100}>
                 <div className="relative rounded-3xl overflow-hidden aspect-[16/9] shadow-lg border border-[#1E4E8C]/10 group">
-                  <Image src="/cleaner-hero.png" alt="Rajseba crew wrapping and loading furniture for a move" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
+                  <Image src="/cleaner-hero.png" alt="Jevxo Services crew wrapping and loading furniture for a move" fill className="object-cover transition-transform duration-700 group-hover:scale-105" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
                   <div className="absolute bottom-4 left-4 right-4">
                     <p className="text-white font-black text-base leading-tight">Professional & Safe Shifting</p>
@@ -610,7 +610,7 @@ export default function HomeShiftingPage() {
         {/* Why Choose Us */}
         <section className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12">
           <Reveal className="text-center mb-6">
-            <h2 className="text-xl sm:text-2xl font-black text-slate-800">Why Choose Rajseba Shifting?</h2>
+            <h2 className="text-xl sm:text-2xl font-black text-slate-800">Why Choose Jevxo Services Shifting?</h2>
             <p className="text-sm text-slate-500 font-semibold mt-2">Everything you need for a stress-free move</p>
           </Reveal>
           <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">

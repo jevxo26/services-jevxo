@@ -9,7 +9,7 @@ import { useGetPublicStatsQuery } from "@/redux/features/landing/landingApi";
 const TEAM_MEMBERS_FALLBACK = [
   { name: "Mahbubur Rahman", role: "Founder & CEO", bio: "Pioneering digital logistics for urban home maintenance, driven to establish job security and dignity for service professionals.", avatar: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=200&auto=format&fit=crop" },
   { name: "Farhana Yasmin", role: "Head of Customer Experience", bio: "Setting strict SLA protocols and service compliance measures to ensure every customer is delighted on every visit.", avatar: "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=200&auto=format&fit=crop" },
-  { name: "Asif Adnan", role: "Director of Vendor Operations", bio: "Leading verification audits and continuous skill training labs to verify only the top 5% of technicians join Rajseba.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" },
+  { name: "Asif Adnan", role: "Director of Vendor Operations", bio: "Leading verification audits and continuous skill training labs to verify only the top 5% of technicians join Jevxo Services.", avatar: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop" },
 ];
 
 export function useAboutState() {
@@ -54,7 +54,7 @@ export function useAboutState() {
     { value: statsData?.servicesCompleted ? `${Number(statsData.servicesCompleted).toLocaleString()}+` : "120,000+", label: "Bookings Done", desc: "Across Rajshahi City" },
     { value: statsData?.verifiedExperts ? `${Number(statsData.verifiedExperts).toLocaleString()}+` : "2,500+", label: "Verified Experts", desc: "Background screened" },
     { value: typeof statsData?.averageRating === "number" ? `${statsData.averageRating.toFixed(1)}/5.0` : "4.8/5.0", label: "Average Rating", desc: "From real clients" },
-    { value: statsData?.happyCustomers ? `${Number(statsData.happyCustomers).toLocaleString()}+` : "50,000+", label: "Happy Customers", desc: "Rajseba Guarantee" },
+    { value: statsData?.happyCustomers ? `${Number(statsData.happyCustomers).toLocaleString()}+` : "50,000+", label: "Happy Customers", desc: "Jevxo Services Guarantee" },
   ];
 
   return { displayStats, teamMembers };

@@ -2,14 +2,14 @@ import { Metadata } from "next";
 import AboutClientPage from "./AboutClientPage";
 
 export const metadata: Metadata = {
-  title: "About Us - Rajseba",
-  description: "Learn about Rajseba, Bangladesh's most reliable and secure ecosystem for on-demand home services. We connect premium homes with vetted professionals.",
-  keywords: ["about rajseba", "home services company", "verified experts Bangladesh", "home care services"],
+  title: "About Us - Jevxo Services",
+  description: "Learn about Jevxo Services, Bangladesh's most reliable and secure ecosystem for on-demand home services. We connect premium homes with vetted professionals.",
+  keywords: ["about jevxo services", "home services company", "verified experts Bangladesh", "home care services"],
   openGraph: {
-    title: "About Us - Rajseba",
-    description: "Learn about Rajseba, Bangladesh's most reliable and secure ecosystem for on-demand home services.",
-    url: "https://rajseba.com/about",
-    siteName: "Rajseba",
+    title: "About Us - Jevxo Services",
+    description: "Learn about Jevxo Services, Bangladesh's most reliable and secure ecosystem for on-demand home services.",
+    url: "https://jevxo.com/about",
+    siteName: "Jevxo Services",
     locale: "en_US",
     type: "website",
   },

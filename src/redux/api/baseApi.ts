@@ -3,11 +3,11 @@ import type { BaseQueryFn, FetchArgs, FetchBaseQueryError } from '@reduxjs/toolk
 import { getAccessToken, getRefreshToken, setTokens, clearTokens } from '@/lib/token';
 
 const API_BASE_URL = "https://service.api.jevxo.com"
-// https://api.rajseba.com
+// https://api.jevxo.com
 
 // "http://localhost:8000";
 // "http://localhost:8000"
-// https://rajseba-api-production.up.railway.app
+// https://jevxo services-api-production.up.railway.app
 const baseQuery = fetchBaseQuery({
   baseUrl: API_BASE_URL,
   prepareHeaders: (headers) => {

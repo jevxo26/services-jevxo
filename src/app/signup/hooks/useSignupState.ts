@@ -50,7 +50,7 @@ export function useSignupState() {
           date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
           const expires = "; expires=" + date.toUTCString();
           document.cookie = `token=${token}${expires}; path=/; SameSite=Lax`;
-          document.cookie = `rajseba_access_token=${token}${expires}; path=/; SameSite=Lax`;
+          document.cookie = `jevxo services_access_token=${token}${expires}; path=/; SameSite=Lax`;
         }
         const user = response.user || response;
         dispatch(setUser(user));
@@ -87,7 +87,7 @@ export function useSignupState() {
         date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
         const expires = "; expires=" + date.toUTCString();
         document.cookie = `token=${token}${expires}; path=/; SameSite=Lax`;
-        document.cookie = `rajseba_access_token=${token}${expires}; path=/; SameSite=Lax`;
+        document.cookie = `jevxo services_access_token=${token}${expires}; path=/; SameSite=Lax`;
       }
       const user = response?.data?.user || response?.user;
       if (user) {
@@ -96,7 +96,7 @@ export function useSignupState() {
         const roleString = typeof userRole === "string" ? userRole.toLowerCase().replace(/\s+/g, "") : "client";
         const date = new Date();
         date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
-        document.cookie = `rajseba_user_role=${roleString}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
+        document.cookie = `jevxo services_user_role=${roleString}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
         toast.success("Registration successful!");
         if (redirectUrl) router.push(redirectUrl);
         else if (roleString === "client") router.push("/dashbord/overview");

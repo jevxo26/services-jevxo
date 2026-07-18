@@ -146,16 +146,16 @@ export default function TermsClientPage() {
                         1. Acceptance of Terms
                       </h2>
                       <p className="text-[10px] text-slate-400 font-medium">
-                        User agreements and binding rules of Rajseba.
+                        User agreements and binding rules of Jevxo Services.
                       </p>
                     </div>
                   </div>
                   <div className="text-[11px] md:text-xs text-slate-500 leading-relaxed font-medium space-y-3">
                     <p>
-                      Welcome to Rajseba, a premium home service marketplace operated by Rajseba IT Limited. By creating an account, browsing listings, scheduling jobs, or interacting with our mobile application, you explicitly agree to follow and be bound by these Terms of Service.
+                      Welcome to Jevxo Services, a premium home service marketplace operated by Jevxo Services IT Limited. By creating an account, browsing listings, scheduling jobs, or interacting with our mobile application, you explicitly agree to follow and be bound by these Terms of Service.
                     </p>
                     <p>
-                      These terms constitute a legally binding agreement between you ("Customer", "Client") and Rajseba. If you represent another individual or a corporate entity when booking, you warrant that you are legally authorized to sign agreements on their behalf.
+                      These terms constitute a legally binding agreement between you ("Customer", "Client") and Jevxo Services. If you represent another individual or a corporate entity when booking, you warrant that you are legally authorized to sign agreements on their behalf.
                     </p>
                     <p>
                       We reserve the right to modify, adjust, or replace these terms at any time. Changes will be posted immediately on this page with an updated "Last Updated" date. Continued use of the platform indicates acceptance of any new terms.
@@ -220,11 +220,11 @@ export default function TermsClientPage() {
                   </div>
                   <div className="text-[11px] md:text-xs text-slate-500 leading-relaxed font-medium space-y-3">
                     <p>
-                      All standard pricing displayed on Rajseba is fixed and transparent. Here is how billing is regulated:
+                      All standard pricing displayed on Jevxo Services is fixed and transparent. Here is how billing is regulated:
                     </p>
                     <ul className="list-disc pl-4 space-y-2">
                       <li>
-                        <strong className="text-slate-700">Payment Gateways:</strong> We support payments via Cash on Delivery (COD), digital cards, MFS (bKash, Nagad), or deductions from your pre-loaded Rajseba Wallet.
+                        <strong className="text-slate-700">Payment Gateways:</strong> We support payments via Cash on Delivery (COD), digital cards, MFS (bKash, Nagad), or deductions from your pre-loaded Jevxo Services Wallet.
                       </li>
                       <li>
                         <strong className="text-slate-700">Inspection Charges:</strong> If a service requires physical diagnosis first, a minimal inspection fee of ৳150 applies. This fee is waived if you proceed with the suggested repair job.
@@ -233,14 +233,14 @@ export default function TermsClientPage() {
                         <strong className="text-slate-700">Additional Spare Parts:</strong> If the repair requires additional spare materials, the technician will present a cost estimate. Extra materials are only purchased and billed upon your explicit dashboard approval.
                       </li>
                       <li>
-                        <strong className="text-slate-700">Refunds:</strong> Cancelled bookings paid online are eligible for instant refunds to the Rajseba Wallet or within 3-5 business days to your original payment channel.
+                        <strong className="text-slate-700">Refunds:</strong> Cancelled bookings paid online are eligible for instant refunds to the Jevxo Services Wallet or within 3-5 business days to your original payment channel.
                       </li>
                     </ul>
                   </div>
                 </div>
               )}
 
-              {/* 4. Rajseba Service Warranty */}
+              {/* 4. Jevxo Services Service Warranty */}
               {activeTab === "warranty" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
@@ -249,7 +249,7 @@ export default function TermsClientPage() {
                     </div>
                     <div>
                       <h2 className="text-xs md:text-sm font-black text-slate-900">
-                        4. Rajseba Service Warranty
+                        4. Jevxo Services Service Warranty
                       </h2>
                       <p className="text-[10px] text-slate-400 font-medium">
                         Our quality trust policies for repairs.
@@ -265,10 +265,10 @@ export default function TermsClientPage() {
                         <strong className="text-slate-700">7-Day Warranty:</strong> We offer a 7-day service warranty on completed bookings. If the exact same issue reoccurs within 7 days, we will dispatch an expert to resolve it free of charge.
                       </li>
                       <li>
-                        <strong className="text-slate-700">Platform Strict Restriction:</strong> The warranty is ONLY valid if the booking, cost estimates, and payment transactions are officially tracked and recorded on the Rajseba platform.
+                        <strong className="text-slate-700">Platform Strict Restriction:</strong> The warranty is ONLY valid if the booking, cost estimates, and payment transactions are officially tracked and recorded on the Jevxo Services platform.
                       </li>
                       <li>
-                        <strong className="text-slate-700">Void Terms:</strong> If you contact or pay the technician directly off-platform, Rajseba is not responsible for any subsequent damages, and all warranty guarantees will be immediately voided.
+                        <strong className="text-slate-700">Void Terms:</strong> If you contact or pay the technician directly off-platform, Jevxo Services is not responsible for any subsequent damages, and all warranty guarantees will be immediately voided.
                       </li>
                       <li>
                         <strong className="text-slate-700">Parts Warranty:</strong> Warranty covers service labor. Spare parts purchased independently by the customer are subject to the manufacturer's warranty policies.
@@ -300,13 +300,13 @@ export default function TermsClientPage() {
                     </p>
                     <ul className="list-disc pl-4 space-y-2">
                       <li>
-                        <strong className="text-slate-700">Damage Protection:</strong> Rajseba offers coverage up to <strong className="text-slate-700">৳10,000</strong> in case of accidental property damage caused directly by technician negligence during service delivery.
+                        <strong className="text-slate-700">Damage Protection:</strong> Jevxo Services offers coverage up to <strong className="text-slate-700">৳10,000</strong> in case of accidental property damage caused directly by technician negligence during service delivery.
                       </li>
                       <li>
                         <strong className="text-slate-700">Exclusions:</strong> We are not liable for pre-existing structural issues, appliance wear-and-tear (e.g. old corroded copper lines breaking during basic AC servicing), or issues caused by cheap/faulty parts supplied directly by the client.
                       </li>
                       <li>
-                        <strong className="text-slate-700">Indirect Losses:</strong> Under no circumstances is Rajseba liable for business losses, data recovery costs, or indirect/consequential damages.
+                        <strong className="text-slate-700">Indirect Losses:</strong> Under no circumstances is Jevxo Services liable for business losses, data recovery costs, or indirect/consequential damages.
                       </li>
                     </ul>
                   </div>
@@ -344,7 +344,7 @@ export default function TermsClientPage() {
                         <strong className="text-slate-700">Payment Bypassing:</strong> Attempting to negotiate off-platform services with technicians to evade commission and platform fees will result in account closure.
                       </li>
                       <li>
-                        <strong className="text-slate-700">Account Closure:</strong> Rajseba reserves the right to suspend or permanently delete any user profile that violates our terms, without prior warning.
+                        <strong className="text-slate-700">Account Closure:</strong> Jevxo Services reserves the right to suspend or permanently delete any user profile that violates our terms, without prior warning.
                       </li>
                     </ul>
                   </div>

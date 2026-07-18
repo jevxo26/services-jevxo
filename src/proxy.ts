@@ -6,8 +6,8 @@ export function proxy(request: NextRequest) {
 
   // Only run proxy for dashboard routes
   if (pathname.startsWith("/dashbord")) {
-    const token = request.cookies.get("token")?.value || request.cookies.get("rajseba_access_token")?.value;
-    const role = request.cookies.get("rajseba_user_role")?.value;
+    const token = request.cookies.get("token")?.value || request.cookies.get("jevxo services_access_token")?.value;
+    const role = request.cookies.get("jevxo services_user_role")?.value;
 
     // 1. If not logged in, redirect to login page with original destination as a redirect query param
     if (!token) {

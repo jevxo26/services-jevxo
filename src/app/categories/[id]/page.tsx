@@ -18,12 +18,12 @@ export async function generateMetadata({
     const cat = json?.data || json;
     const name = cat?.name || "Category";
     return {
-      title: `${name} Services - Rajseba`,
+      title: `${name} Services - Jevxo Services`,
       description: cat?.description || `Browse and book expert ${name} services in Bangladesh.`,
     };
   } catch {
     return {
-      title: "Category Services - Rajseba",
+      title: "Category Services - Jevxo Services",
       description: "Browse professional home services.",
     };
   }

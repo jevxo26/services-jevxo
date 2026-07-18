@@ -273,7 +273,7 @@ export function CategorizedHero({
                     Verified Professional
                   </p>
                   <p className="text-[11px] text-slate-400 mt-0.5 leading-none">
-                    Rajseba Guarantee
+                    Jevxo Services Guarantee
                   </p>
                 </div>
               </motion.div>

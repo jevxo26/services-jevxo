@@ -82,7 +82,7 @@ export function useLoginState() {
         dispatch(setUser(user));
         const date = new Date();
         date.setTime(date.getTime() + 30 * 24 * 60 * 60 * 1000);
-        document.cookie = `rajseba_user_role=${roleString}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
+        document.cookie = `jevxo services_user_role=${roleString}; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
         toast.success("Login successful!");
         if (redirectUrl) router.push(redirectUrl);
         else if (roleString === "client") router.push("/dashbord/overview");

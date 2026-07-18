@@ -16,7 +16,7 @@ interface WishlistState {
   items: WishlistItem[];
 }
 
-const STORAGE_KEY = 'rajseba_wishlist';
+const STORAGE_KEY = 'jevxo services_wishlist';
 
 function loadFromStorage(): WishlistItem[] {
   if (typeof window === 'undefined') return [];

@@ -114,7 +114,7 @@ export default function SuperAdminDashboard() {
             <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight leading-tight">
               Hello, <span className="text-[#1E4E8C]">{authUser?.name || "Admin"}</span>!
             </h1>
-            <p className="text-slate-400 mt-1.5 text-sm font-medium">Real-time statistics and administrative insights for Rajseba.</p>
+            <p className="text-slate-400 mt-1.5 text-sm font-medium">Real-time statistics and administrative insights for Jevxo Services.</p>
           </div>
 
           <div className="flex items-center gap-3 shrink-0">

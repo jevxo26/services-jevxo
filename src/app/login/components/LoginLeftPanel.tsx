@@ -44,7 +44,7 @@ export default function LoginLeftPanel({ lottieAnimation }: LoginLeftPanelProps)
         </div>
 
         <h2 className="text-2xl xl:text-3xl font-black text-slate-800 leading-tight mt-4">
-          Welcome back to <span className="text-[#1E4E8C]">Rajseba</span>
+          Welcome back to <span className="text-[#1E4E8C]">Jevxo Services</span>
         </h2>
 
         <ul className="mt-6 space-y-2.5 text-left w-full max-w-xs">

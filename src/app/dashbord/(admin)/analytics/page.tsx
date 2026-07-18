@@ -102,7 +102,7 @@ export default function AnalyticsPage() {
           <div className="space-y-2 flex-1">
             <div className="flex items-center justify-between gap-4">
               <h4 className="text-sm font-black text-white uppercase tracking-wider">
-                {lang === "bn" ? "রাজসেবা এআই পারফরম্যান্স কনসালট্যান্ট" : "Rajseba AI Business Consultant"}
+                {lang === "bn" ? "রাজসেবা এআই পারফরম্যান্স কনসালট্যান্ট" : "Jevxo Services AI Business Consultant"}
               </h4>
               <span className="text-[9px] font-black bg-orange-500/20 text-orange-400 px-2 py-0.5 rounded-full uppercase tracking-wider">
                 {lang === "bn" ? "সরাসরি ইনসাইট" : "Live AI Analysis"}

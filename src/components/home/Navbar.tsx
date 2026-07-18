@@ -111,9 +111,9 @@ function getCategorySubtitle(name: string): string {
 // mobile bottom nav / footer / direct links elsewhere in the app.
 const LEFT_NAV_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
-  { label: "Services", href: "/services", icon: Briefcase, hasDropdown: true },
-  { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
-  { label: "Map", href: "/map", icon: MapIcon },
+  { label: "Services", href: "/services", icon: LayoutGrid, hasDropdown: true },
+  { label: "Opportunity", href: "/opportunity", icon: Briefcase },
+  { label: "Map", href: "/map", icon: MapPin },
 ];
 
 const RIGHT_NAV_LINKS: NavLink[] = [];
@@ -122,9 +122,9 @@ const ALL_NAV_LINKS: NavLink[] = [...LEFT_NAV_LINKS, ...RIGHT_NAV_LINKS];
 
 const MOBILE_BOTTOM_LINKS: NavLink[] = [
   { label: "Home", href: "/", icon: HomeIcon },
-  { label: "Services", href: "/services", icon: Briefcase },
+  { label: "Services", href: "/services", icon: LayoutGrid },
   { label: "Booking", href: "/bookings", icon: Calendar },
-  { label: "Opportunity", href: "/opportunity", icon: TrendingUp },
+  { label: "Opportunity", href: "/opportunity", icon: Briefcase },
   { label: "Login", href: "/login", icon: User },
 ];
 
@@ -317,11 +317,11 @@ export function Navbar() {
               <Link
                 href="/"
                 className="flex items-center hover:opacity-90 transition-opacity flex-shrink-0"
-                aria-label="Rajseba — Home"
+                aria-label="Jevxo Services — Home"
               >
                 <Image
                   src="/newlogo.png"
-                  alt="Rajseba"
+                  alt="Jevxo Services"
                   width={70}
                   height={80}
                   className="h-9 sm:h-10 w-auto object-contain"
@@ -425,7 +425,7 @@ export function Navbar() {
                                 <div className="absolute top-0 right-0 w-24 h-24 border-l border-b border-[#1E4E8C]/6 rounded-bl-full pointer-events-none" />
                                 <div className="relative z-10">
                                   <div className="inline-flex items-center gap-1 text-[8px] font-black uppercase tracking-wider text-[#1E4E8C] bg-[#FFF4EE] border border-[#1E4E8C]/15 px-2.5 py-1 rounded-full mb-3">
-                                    <Sparkles className="w-2.5 h-2.5" /> Rajseba Standard
+                                    <Sparkles className="w-2.5 h-2.5" /> Jevxo Services Standard
                                   </div>
                                   <h4 className="text-[13px] font-black text-slate-800 leading-snug mb-1">
                                     Need Custom Service?
