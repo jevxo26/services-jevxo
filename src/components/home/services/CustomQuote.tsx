@@ -37,7 +37,7 @@ export default function CustomQuote({
       >
         {/* Left Content */}
         <div className="flex-1 space-y-4">
-          <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-[#4F46E5] leading-tight">
+          <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-[#1E4E8C] leading-tight">
             {title}
           </h2>
           <p className="text-slate-600 leading-relaxed max-w-md text-[15px]">
@@ -52,7 +52,7 @@ export default function CustomQuote({
               whileHover={{ scale: 1.03 }}
               whileTap={{ scale: 0.97 }}
               onClick={onPrimaryClick}
-              className="px-8 py-4 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 text-base cursor-pointer"
+              className="px-8 py-4 bg-[#1E4E8C] hover:bg-[#123C73] text-white font-semibold rounded-2xl shadow-lg transition-all active:scale-95 flex items-center justify-center gap-2 text-base cursor-pointer"
             >
               <MessageSquare className="w-5 h-5" />
               {primaryButtonText}
@@ -62,7 +62,7 @@ export default function CustomQuote({
               <motion.div
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.97 }}
-                className="px-8 py-4 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-semibold rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-base cursor-pointer"
+                className="px-8 py-4 bg-[#1E4E8C] hover:bg-[#123C73] text-white font-semibold rounded-2xl shadow-lg transition-all flex items-center justify-center gap-2 text-base cursor-pointer"
               >
                 <MessageSquare className="w-5 h-5" />
                 {primaryButtonText}

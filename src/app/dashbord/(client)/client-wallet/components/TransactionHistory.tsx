@@ -23,7 +23,7 @@ export default function TransactionHistory({ myCompletedBookings, lang = "bn" }:
                 const totalAmount = myCompletedBookings.reduce((sum, b) => sum + parseFloat(b.total_price || 0), 0);
                 printClientStatement(myCompletedBookings, totalAmount);
               }}
-              className="p-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] rounded-xl shadow-xs transition-all flex items-center gap-1.5 focus:outline-none cursor-pointer text-[10px] font-bold"
+              className="p-2 bg-[#EEF2FF] border border-[#1E4E8C]/20 hover:bg-[#1E4E8C] hover:text-white text-[#1E4E8C] rounded-xl shadow-xs transition-all flex items-center gap-1.5 focus:outline-none cursor-pointer text-[10px] font-bold"
             >
               <FileText size={14} />
               <span>{lang === "bn" ? "স্টেটমেন্ট ডাউনলোড" : "Download Statement"}</span>
@@ -65,7 +65,7 @@ export default function TransactionHistory({ myCompletedBookings, lang = "bn" }:
                 myCompletedBookings.map((b: any) => (
                   <tr key={b.id} className="hover:bg-slate-50/30 transition-colors">
                     <td className="px-3 md:px-6 py-3 md:py-4 flex items-center gap-3">
-                      <div className="p-2.5 rounded-xl shrink-0 bg-[#EEF2FF] text-[#4F46E5]">
+                      <div className="p-2.5 rounded-xl shrink-0 bg-[#EEF2FF] text-[#1E4E8C]">
                         <Sparkles size={16} />
                       </div>
                       <div>
@@ -84,18 +84,18 @@ export default function TransactionHistory({ myCompletedBookings, lang = "bn" }:
                         year: "numeric",
                       })}
                     </td>
-                    <td className="px-3 md:px-6 py-3 md:py-4 text-xs font-extrabold text-[#4F46E5]">
+                    <td className="px-3 md:px-6 py-3 md:py-4 text-xs font-extrabold text-[#1E4E8C]">
                       - ৳ {Number(b.total_price || 0).toLocaleString("en-BD")}
                     </td>
                     <td className="px-3 md:px-6 py-3 md:py-4">
-                      <span className="text-[9px] font-bold px-2 py-0.5 rounded-lg bg-[#EEF2FF] text-[#4F46E5] uppercase">
+                      <span className="text-[9px] font-bold px-2 py-0.5 rounded-lg bg-[#EEF2FF] text-[#1E4E8C] uppercase">
                         {lang === "bn" ? "খরচ" : "EXPENSE"}
                       </span>
                     </td>
                     <td className="px-3 md:px-6 py-3 md:py-4 pr-6 text-right">
                       <button
                         onClick={() => printBookingInvoice(b)}
-                        className="inline-flex items-center gap-1 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all shadow-xs cursor-pointer"
+                        className="inline-flex items-center gap-1 bg-[#EEF2FF] border border-[#1E4E8C]/20 hover:bg-[#1E4E8C] hover:text-white text-[#1E4E8C] px-2.5 py-1 rounded-lg text-[10px] font-bold transition-all shadow-xs cursor-pointer"
                         title={lang === "bn" ? "ইনভয়েস ডাউনলোড করুন" : "Download Invoice"}
                       >
                         <Download size={11} />
@@ -116,7 +116,7 @@ export default function TransactionHistory({ myCompletedBookings, lang = "bn" }:
         </div>
 
         <div className="p-4 text-center border-t border-slate-50">
-          <button className="text-xs font-bold text-[#4F46E5] hover:underline focus:outline-none flex items-center gap-1 mx-auto cursor-pointer">
+          <button className="text-xs font-bold text-[#1E4E8C] hover:underline focus:outline-none flex items-center gap-1 mx-auto cursor-pointer">
             {lang === "bn" ? "সব লেনদেন দেখুন" : "View All Transactions"} <ArrowRight size={12} />
           </button>
         </div>

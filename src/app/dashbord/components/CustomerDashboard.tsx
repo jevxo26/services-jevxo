@@ -59,7 +59,7 @@ export default function CustomerDashboard() {
       value: "3 Available",
       desc: "Up to 20% off next booking",
       icon: Sparkles,
-      color: "text-[#4338CA] bg-[#EEF2FF]",
+      color: "text-[#123C73] bg-[#EEF2FF]",
     },
   ];
 
@@ -115,7 +115,7 @@ export default function CustomerDashboard() {
                 )}`
               )
             }
-            className="text-xs bg-[#EEF2FF] text-[#4F46E5] px-3 py-1.5 rounded-lg font-bold hover:bg-[#E0E7FF] transition-colors"
+            className="text-xs bg-[#EEF2FF] text-[#1E4E8C] px-3 py-1.5 rounded-lg font-bold hover:bg-[#E0E7FF] transition-colors"
           >
             Chat Provider
           </button>
@@ -129,7 +129,7 @@ export default function CustomerDashboard() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* Header */}
       <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
-        <div className="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-[#4F46E5]/10 to-amber-100/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-10 -right-10 w-48 h-48 bg-gradient-to-br from-[#1E4E8C]/10 to-amber-100/20 rounded-full blur-3xl pointer-events-none" />
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <div className="inline-flex items-center gap-1.5 bg-amber-50 border border-amber-100 text-amber-600 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
@@ -137,13 +137,13 @@ export default function CustomerDashboard() {
               Client Portal
             </div>
             <h1 className="text-3xl font-extrabold text-slate-900 tracking-tight">
-              Welcome back, <span className="text-[#4F46E5]">{authUser?.name || "Client"}</span>!
+              Welcome back, <span className="text-[#1E4E8C]">{authUser?.name || "Client"}</span>!
             </h1>
             <p className="text-slate-400 mt-1.5 text-sm font-medium">
               Keep track of your active services and book premium care for your home.
             </p>
           </div>
-          <button className="shrink-0 bg-gradient-to-br from-[#4F46E5] to-[#4338CA] hover:from-[#4338CA] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#4F46E5]/25 text-sm transition-all active:scale-[0.985] flex items-center gap-2">
+          <button className="shrink-0 bg-gradient-to-br from-[#1E4E8C] to-[#123C73] hover:from-[#123C73] hover:to-[#CC5049] text-white font-bold px-6 py-3 rounded-2xl shadow-lg shadow-[#1E4E8C]/25 text-sm transition-all active:scale-[0.985] flex items-center gap-2">
             <Plus size={16} /> Book a New Service
           </button>
         </div>
@@ -183,7 +183,7 @@ export default function CustomerDashboard() {
         <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm lg:col-span-2 space-y-6">
           <div className="flex justify-between items-center">
             <h3 className="text-lg font-bold text-slate-900">Active Service Tracker</h3>
-            <span className="text-xs text-[#4F46E5] font-semibold bg-[#EEF2FF] px-2.5 py-1 rounded-lg">
+            <span className="text-xs text-[#1E4E8C] font-semibold bg-[#EEF2FF] px-2.5 py-1 rounded-lg">
               Real-time update
             </span>
           </div>
@@ -194,7 +194,7 @@ export default function CustomerDashboard() {
                 <div className="flex flex-col sm:flex-row justify-between gap-4 border-b border-slate-200 pb-4">
                   <div>
                     <span className="text-xs text-slate-400 font-bold uppercase">Booking ID</span>
-                    <p className="text-base font-bold text-[#4F46E5]">RS-{activeBooking.id}</p>
+                    <p className="text-base font-bold text-[#1E4E8C]">RS-{activeBooking.id}</p>
                   </div>
                   <div>
                     <span className="text-xs text-slate-400 font-bold uppercase">Service Category</span>
@@ -221,14 +221,14 @@ export default function CustomerDashboard() {
                               )}`
                             )
                           }
-                          className="bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4F46E5] border border-[#4F46E5]/20 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
+                          className="bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#1E4E8C] border border-[#1E4E8C]/20 text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
                         >
                           <MessageCircle size={14} /> Chat
                         </button>
                       )}
                       <button
                         onClick={() => router.push(`/dashbord/bookings/track/${activeBooking.id}`)}
-                        className="bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
+                        className="bg-[#1E4E8C] hover:bg-[#123C73] text-white text-xs font-bold px-3 py-1.5 rounded-lg shadow-sm transition-all flex items-center gap-1.5"
                       >
                         <MapPin size={14} /> Track Flow
                       </button>
@@ -265,9 +265,9 @@ export default function CustomerDashboard() {
                         <span
                           className={`absolute -left-[22px] top-1.5 w-3 h-3 rounded-full border-2 ring-4 ring-white ${
                             step.done
-                              ? "bg-[#4F46E5] border-[#4F46E5]"
+                              ? "bg-[#1E4E8C] border-[#1E4E8C]"
                               : step.current
-                              ? "bg-[#4F46E5] border-[#4F46E5] animate-pulse"
+                              ? "bg-[#1E4E8C] border-[#1E4E8C] animate-pulse"
                               : "bg-slate-200 border-slate-200"
                           }`}
                         />
@@ -307,10 +307,10 @@ export default function CustomerDashboard() {
               { code: "CLEANHOMY", discount: "৳500 OFF", service: "Valid on Deep Cleaning", expiry: "Exp: July 05" },
             ].map((promo, i) => (
               <div key={i} className="p-4 bg-[#EEF2FF] border border-[#E0E7FF]/50 rounded-2xl relative overflow-hidden">
-                <div className="absolute right-0 top-0 w-16 h-16 bg-[#4F46E5]/5 rounded-bl-full flex items-center justify-center font-bold text-[#4F46E5] text-xs">
+                <div className="absolute right-0 top-0 w-16 h-16 bg-[#1E4E8C]/5 rounded-bl-full flex items-center justify-center font-bold text-[#1E4E8C] text-xs">
                   %
                 </div>
-                <span className="text-xs font-bold text-[#4338CA] tracking-wider bg-[#E0E7FF]/60 px-2 py-0.5 rounded-lg">
+                <span className="text-xs font-bold text-[#123C73] tracking-wider bg-[#E0E7FF]/60 px-2 py-0.5 rounded-lg">
                   {promo.code}
                 </span>
                 <h4 className="text-lg font-bold text-slate-800 mt-2">{promo.discount}</h4>

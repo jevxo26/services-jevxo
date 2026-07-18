@@ -18,7 +18,7 @@ export default function BookingsPage() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
-        <Loader2 size={32} className="animate-spin text-[#4F46E5]" />
+        <Loader2 size={32} className="animate-spin text-[#1E4E8C]" />
       </div>
     );
   }
@@ -40,12 +40,12 @@ export default function BookingsPage() {
       <div className="w-full space-y-8 relative z-10">
         {/* Premium Greeting & Stats Card */}
         <div className="relative overflow-hidden rounded-[32px] bg-gradient-to-br from-slate-900 via-slate-900 to-slate-800 p-6 md:p-8 text-white shadow-xl shadow-slate-950/15 animate-in fade-in duration-300">
-          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#4F46E5]/25 blur-3xl pointer-events-none" />
+          <div className="absolute -right-16 -top-16 w-48 h-48 rounded-full bg-[#1E4E8C]/25 blur-3xl pointer-events-none" />
           <div className="absolute -left-16 -bottom-16 w-48 h-48 rounded-full bg-blue-500/10 blur-3xl pointer-events-none" />
 
           <div className="relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
             <div className="flex items-center gap-4">
-              <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-[#4F46E5] border border-white/10 flex-shrink-0">
+              <div className="p-3 bg-white/10 backdrop-blur-md rounded-2xl text-[#1E4E8C] border border-white/10 flex-shrink-0">
                 <Calendar className="w-6 h-6" />
               </div>
               <div>
@@ -73,7 +73,7 @@ export default function BookingsPage() {
                   onClick={() => setFilter(tab)}
                   className={`px-5 py-2 rounded-full text-xs font-bold transition-all focus:outline-none whitespace-nowrap ${
                     isActive
-                      ? "bg-[#4F46E5] text-white shadow-sm shadow-[#4F46E5]/10"
+                      ? "bg-[#1E4E8C] text-white shadow-sm shadow-[#1E4E8C]/10"
                       : "text-slate-500 hover:text-slate-800 hover:bg-slate-50/50"
                   }`}
                 >

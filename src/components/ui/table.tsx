@@ -296,7 +296,7 @@ export function CustomTable<T extends { id?: string | number;[key: string]: any 
                                       ? "bg-rose-50 text-brand-primary hover:bg-rose-100 border border-rose-100"
                                       : act.variant === "secondary"
                                         ? "bg-slate-50 text-slate-500 hover:bg-slate-100 border border-slate-200"
-                                        : "bg-[#EEF2FF] text-[#4F46E5] hover:bg-[#E0E7FF] border border-[#E0E7FF]"
+                                        : "bg-[#EEF2FF] text-[#1E4E8C] hover:bg-[#E0E7FF] border border-[#E0E7FF]"
                                   )}
                                 >
                                   {ActIcon ? <ActIcon size={16} /> : <span className="text-[10px] font-bold px-1">{act.label}</span>}

@@ -84,7 +84,7 @@ export default function TrashPage() {
     <div className="w-full space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-300 pb-16">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl border border-[#4F46E5]/15 shadow-xs">
+          <div className="p-3 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl border border-[#1E4E8C]/15 shadow-xs">
             <Trash2 className="w-6 h-6" />
           </div>
           <div>
@@ -94,7 +94,7 @@ export default function TrashPage() {
         </div>
         <Link
           href="/dashbord/manual-invoice"
-          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#1E4E8C]/20 hover:bg-[#1E4E8C] hover:text-white text-[#1E4E8C] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
         >
           <ArrowLeft size={16} /> Dashboard
         </Link>
@@ -111,7 +111,7 @@ export default function TrashPage() {
           <div className="relative flex-1 max-w-md">
             <Search size={18} className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400" />
             <input
-              className="w-full bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-700 pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 transition-all"
+              className="w-full bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-700 pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E4E8C]/20 focus:border-[#1E4E8C]/40 transition-all"
               placeholder="Search trashed invoices..."
               value={search}
               onChange={e => setSearch(e.target.value)}
@@ -121,7 +121,7 @@ export default function TrashPage() {
 
         {loading ? (
           <div className="flex flex-col items-center justify-center p-20 text-slate-400 text-xs font-medium">
-            <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin mb-4"></div>
+            <div className="w-8 h-8 border-4 border-[#1E4E8C] border-t-transparent rounded-full animate-spin mb-4"></div>
             <p>Loading trashed invoices...</p>
           </div>
         ) : filtered.length === 0 ? (
@@ -220,7 +220,7 @@ export default function TrashPage() {
               <button
                 className={`flex-1 font-bold px-4 py-2.5 rounded-xl text-xs transition-all cursor-pointer shadow-sm active:scale-95 ${
                   confirm.type === "restore"
-                    ? "bg-[#4F46E5] hover:bg-[#4338CA] text-white shadow-orange-500/10"
+                    ? "bg-[#1E4E8C] hover:bg-[#123C73] text-white shadow-orange-500/10"
                     : "bg-rose-600 hover:bg-rose-700 text-white shadow-rose-600/10"
                 }`}
                 onClick={() => confirm.type === "restore" ? handleRestore(confirm.id) : handleForceDelete(confirm.id)}

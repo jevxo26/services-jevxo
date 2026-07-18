@@ -65,7 +65,7 @@ export function Experts({ employees }: { employees?: any[] }) {
     <section className="py-6 w-full overflow-hidden">
       <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-8">
         <div>
-          <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 bg-[#1E4E8C]/10 border border-[#1E4E8C]/20 text-[#1E4E8C] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
             Top Professionals
           </div>
           <h2 className="text-2xl md:text-3xl font-bold text-slate-900 tracking-tight">
@@ -79,7 +79,7 @@ export function Experts({ employees }: { employees?: any[] }) {
 
       {displayExperts.length === 0 ? (
         <div className="flex flex-col items-center justify-center py-10 px-4 rounded-[32px] bg-slate-50/50 border border-slate-100 border-dashed text-center">
-          <div className="w-12 h-12 rounded-full bg-[#4F46E5]/5 flex items-center justify-center text-[#4F46E5]/60 mb-3">
+          <div className="w-12 h-12 rounded-full bg-[#1E4E8C]/5 flex items-center justify-center text-[#1E4E8C]/60 mb-3">
             <User size={20} className="stroke-[2.2]" />
           </div>
           <p className="text-slate-800 text-sm font-bold">No experts assigned yet</p>
@@ -113,7 +113,7 @@ export function Experts({ employees }: { employees?: any[] }) {
                         className="w-full h-full object-cover"
                       />
                     ) : (
-                      <div className="w-full h-full bg-[#fff0f0] flex items-center justify-center text-[#4F46E5]">
+                      <div className="w-full h-full bg-[#fff0f0] flex items-center justify-center text-[#1E4E8C]">
                         <User className="w-6 h-6" />
                       </div>
                     )}
@@ -125,7 +125,7 @@ export function Experts({ employees }: { employees?: any[] }) {
                   <p className="text-slate-400 text-xs font-semibold mb-3">{expert.title}</p>
 
                   <div className="flex items-center justify-center gap-1">
-                    <Star className="w-4 h-4 fill-[#4F46E5] text-[#4F46E5]" />
+                    <Star className="w-4 h-4 fill-[#1E4E8C] text-[#1E4E8C]" />
                     <span className="font-extrabold text-sm text-slate-800">
                       {expert.rating}
                     </span>

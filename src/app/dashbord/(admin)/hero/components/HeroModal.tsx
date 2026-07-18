@@ -83,7 +83,7 @@ export default function HeroModal({
               placeholder="Provide descriptive subtext..."
               value={subtext}
               onChange={(e) => setSubtext(e.target.value)}
-              className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#4F46E5]/20 focus-visible:border-rose-400/80 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
+              className="rounded-2xl border border-slate-200/80 bg-white px-4 py-2 text-sm text-slate-900 shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1E4E8C]/20 focus-visible:border-rose-400/80 disabled:cursor-not-allowed disabled:opacity-50 transition-all"
             />
           </div>
 
@@ -101,7 +101,7 @@ export default function HeroModal({
                   setLink("");
                 }
               }}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#1E4E8C]/40 focus:ring-2 focus:ring-rose-100 transition-all font-medium"
             >
               <option value="">-- Select Category to Redirect --</option>
               {isCategoriesLoading ? (
@@ -148,9 +148,9 @@ export default function HeroModal({
               ))}
 
               {/* Upload Button Block */}
-              <label className="aspect-square border-2 border-dashed border-slate-200 hover:border-[#4F46E5] rounded-2xl flex flex-col items-center justify-center text-slate-400 hover:text-[#4F46E5] cursor-pointer transition-all bg-slate-50/50 hover:bg-[#EEF2FF]/30">
+              <label className="aspect-square border-2 border-dashed border-slate-200 hover:border-[#1E4E8C] rounded-2xl flex flex-col items-center justify-center text-slate-400 hover:text-[#1E4E8C] cursor-pointer transition-all bg-slate-50/50 hover:bg-[#EEF2FF]/30">
                 {isUploadingImage ? (
-                  <div className="w-5 h-5 border-2 border-[#4F46E5] border-t-transparent rounded-full animate-spin"></div>
+                  <div className="w-5 h-5 border-2 border-[#1E4E8C] border-t-transparent rounded-full animate-spin"></div>
                 ) : (
                   <>
                     <PlusCircle size={20} />

@@ -74,10 +74,10 @@ export default function NotFound(): React.JSX.Element {
                     <Link
                         href="/"
                         className="w-full sm:w-auto inline-flex items-center justify-center gap-2
-                       bg-[#4F46E5] hover:bg-[#4338CA] active:scale-95
+                       bg-[#1E4E8C] hover:bg-[#123C73] active:scale-95
                        text-white font-semibold text-sm
                        px-7 py-3 rounded-full
-                       shadow-md shadow-[#4F46E5]/30
+                       shadow-md shadow-[#1E4E8C]/30
                        transition-all duration-200 cursor-pointer"
                     >
                         <Home size={16} strokeWidth={2.2} />

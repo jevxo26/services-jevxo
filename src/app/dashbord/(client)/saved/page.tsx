@@ -23,7 +23,7 @@ export default function SavedServicesPage() {
         {/* Title Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+            <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
               <Heart className="w-6 h-6" />
             </div>
             <div>
@@ -47,7 +47,7 @@ export default function SavedServicesPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           {isLoading ? (
             <div className="col-span-full flex items-center justify-center py-16">
-              <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
+              <Loader2 className="w-8 h-8 animate-spin text-[#1E4E8C]" />
             </div>
           ) : savedServices.length === 0 ? (
             <div className="col-span-full bg-white p-12 rounded-[24px] border border-dashed border-slate-200 text-center shadow-sm">
@@ -64,7 +64,7 @@ export default function SavedServicesPage() {
               </p>
               <Link
                 href="/services"
-                className="inline-flex items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm"
+                className="inline-flex items-center gap-2 bg-[#1E4E8C] hover:bg-[#123C73] text-white text-sm font-bold px-6 py-2.5 rounded-xl transition-all shadow-sm"
               >
                 <BookOpen size={14} />
                 {lang === "bn" ? "সার্ভিসসমূহ ব্রাউজ করুন" : "Browse Services"}

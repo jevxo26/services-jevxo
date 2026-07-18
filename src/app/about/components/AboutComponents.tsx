@@ -5,10 +5,10 @@ import { motion, useInView, type Variants } from "framer-motion";
 import { ShieldCheck, Award, Heart, Sparkles } from "lucide-react";
 
 export const PILLARS = [
-  { title: "100% Background-Vetted Team", description: "Every technician undergoes biometric NID check, police verification, and a rigorous skills assessment.", icon: ShieldCheck, bg: "bg-[#EEF2FF] text-[#4F46E5]" },
-  { title: "Transparent Fixed Pricing", description: "Say goodbye to surprise charges. Get detailed rate cards and fixed billing estimates before booking.", icon: Award, bg: "bg-[#EEF2FF] text-[#4F46E5]" },
-  { title: "Premium Damage Guarantee", description: "All service appointments are backed by Rajseba's damage protection guarantee for absolute peace of mind.", icon: Heart, bg: "bg-[#EEF2FF] text-[#4F46E5]" },
-  { title: "24/7 Priority Support", description: "Our dedicated helpline handles every booking from dispatch to post-service warranty questions.", icon: Sparkles, bg: "bg-[#EEF2FF] text-[#4F46E5]" },
+  { title: "100% Background-Vetted Team", description: "Every technician undergoes biometric NID check, police verification, and a rigorous skills assessment.", icon: ShieldCheck, bg: "bg-[#EEF2FF] text-[#1E4E8C]" },
+  { title: "Transparent Fixed Pricing", description: "Say goodbye to surprise charges. Get detailed rate cards and fixed billing estimates before booking.", icon: Award, bg: "bg-[#EEF2FF] text-[#1E4E8C]" },
+  { title: "Premium Damage Guarantee", description: "All service appointments are backed by Rajseba's damage protection guarantee for absolute peace of mind.", icon: Heart, bg: "bg-[#EEF2FF] text-[#1E4E8C]" },
+  { title: "24/7 Priority Support", description: "Our dedicated helpline handles every booking from dispatch to post-service warranty questions.", icon: Sparkles, bg: "bg-[#EEF2FF] text-[#1E4E8C]" },
 ];
 
 export const SERVICES_COVERED = [

@@ -49,9 +49,9 @@ export default function StatsGrid({ overview }: StatsGridProps) {
         return (
           <div
             key={i}
-            className="group bg-white p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-100 hover:border-[#4F46E5]/20 hover:shadow-lg hover:shadow-[#4F46E5]/5 hover:scale-[1.01] hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2.5 sm:gap-4 relative overflow-hidden"
+            className="group bg-white p-3.5 sm:p-5 rounded-2xl sm:rounded-3xl border border-slate-100 hover:border-[#1E4E8C]/20 hover:shadow-lg hover:shadow-[#1E4E8C]/5 hover:scale-[1.01] hover:-translate-y-0.5 transition-all duration-300 flex items-center gap-2.5 sm:gap-4 relative overflow-hidden"
           >
-            <div className="absolute -right-6 -bottom-6 w-20 h-20 bg-gradient-to-br from-[#4F46E5]/5 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+            <div className="absolute -right-6 -bottom-6 w-20 h-20 bg-gradient-to-br from-[#1E4E8C]/5 to-transparent rounded-full blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
             <div
               className={`p-2.5 sm:p-3.5 rounded-xl sm:rounded-2xl ${stat.color} shrink-0 transition-transform duration-300 group-hover:scale-110 shadow-xs`}
             >

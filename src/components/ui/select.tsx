@@ -232,11 +232,11 @@ export function CustomSelect({
       ...base,
       borderRadius: size === "sm" ? "0.5rem" : size === "lg" ? "1rem" : "0.75rem",
       minHeight: size === "sm" ? "36px" : size === "lg" ? "48px" : "42px",
-      borderColor: state.isFocused ? "#4F46E5" : controlBg ? "transparent" : "#e2e8f0",
+      borderColor: state.isFocused ? "#1E4E8C" : controlBg ? "transparent" : "#e2e8f0",
       backgroundColor: controlBg || "#ffffff",
       boxShadow: state.isFocused ? "0 0 0 2px #E0E7FF" : "none",
       "&:hover": {
-        borderColor: state.isFocused ? "#4F46E5" : controlBg ? "transparent" : "#cbd5e1"
+        borderColor: state.isFocused ? "#1E4E8C" : controlBg ? "transparent" : "#cbd5e1"
       }
     }),
     valueContainer: (base: any) => ({
@@ -245,7 +245,7 @@ export function CustomSelect({
     }),
     option: (base: any, state: any) => ({
       ...base,
-      backgroundColor: state.isSelected ? "#4F46E5" : state.isFocused ? "#E0E7FF" : "white",
+      backgroundColor: state.isSelected ? "#1E4E8C" : state.isFocused ? "#E0E7FF" : "white",
       color: state.isSelected ? "white" : "#0f172a",
       fontSize: "0.875rem",
       "&:active": {
@@ -262,11 +262,11 @@ export function CustomSelect({
         {...innerProps} 
         className={cn(
           "flex items-center gap-3 px-3 py-2 cursor-pointer transition-colors text-sm",
-          isSelected ? "bg-[#4F46E5] text-white" : isFocused ? "bg-[#E0E7FF] text-slate-900" : "bg-white text-slate-700"
+          isSelected ? "bg-[#1E4E8C] text-white" : isFocused ? "bg-[#E0E7FF] text-slate-900" : "bg-white text-slate-700"
         )}
       >
         {data.icon && (
-          <div className={cn("p-1 rounded", isSelected ? "bg-[#4F46E5] text-white" : "bg-slate-50 text-slate-500")}>
+          <div className={cn("p-1 rounded", isSelected ? "bg-[#1E4E8C] text-white" : "bg-slate-50 text-slate-500")}>
             <data.icon className="size-4" />
           </div>
         )}

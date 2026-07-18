@@ -195,7 +195,7 @@ const Hero = () => {
     return (
       <div className="w-full max-w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-0 md:px-6 pt-0 md:pt-[3px]">
         <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-0 flex items-center rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
-          <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
+          <Loader2 className="w-8 h-8 animate-spin text-[#1E4E8C]" />
         </div>
       </div>
     );
@@ -206,7 +206,7 @@ const Hero = () => {
       <div className="relative w-full aspect-[16/9.5] md:aspect-auto md:min-h-[45vh] lg:min-h-[50vh] mt-0 md:mt-0 flex items-center rounded-none md:rounded-[26px] overflow-hidden justify-center py-0 md:py-0">
         {isImageLoading && !hasInitialLoaded && (
           <div className="absolute inset-0 z-[5] flex items-center justify-center bg-white/20 backdrop-blur-[2px]">
-            <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#1E4E8C]" />
           </div>
         )}
         <div className="absolute inset-0 z-0 overflow-hidden">

@@ -41,7 +41,7 @@ export default function AddGatewayModal({
             <select
               value={newGatewayType}
               onChange={(e) => setNewGatewayType(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#4F46E5] focus:border-[#4F46E5] block p-3 outline-none"
+              className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#1E4E8C] focus:border-[#1E4E8C] block p-3 outline-none"
             >
               <option value="bkash">bKash</option>
               <option value="nagad">Nagad</option>
@@ -58,7 +58,7 @@ export default function AddGatewayModal({
               placeholder="e.g. +88017XXXXXXXX or Account No."
               value={newGatewayInfo}
               onChange={(e) => setNewGatewayInfo(e.target.value)}
-              className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#4F46E5] focus:border-[#4F46E5] block p-3 outline-none"
+              className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#1E4E8C] focus:border-[#1E4E8C] block p-3 outline-none"
             />
             <p className="text-xs text-slate-500 mt-2">
               Enter the phone number, email, or account details for this method.

@@ -15,7 +15,7 @@ export default function BookingPipeline({ bookings }: BookingPipelineProps) {
   const totalPipeline = bookings.completed + bookings.pending + bookings.todayAssigned;
 
   return (
-    <div className="bg-white rounded-3xl border border-slate-100 hover:border-[#4F46E5]/15 hover:shadow-lg hover:shadow-[#4F46E5]/5 transition-all duration-300 p-6">
+    <div className="bg-white rounded-3xl border border-slate-100 hover:border-[#1E4E8C]/15 hover:shadow-lg hover:shadow-[#1E4E8C]/5 transition-all duration-300 p-6">
       <div className="flex justify-between items-center mb-5">
         <div>
           <h3 className="text-lg font-bold text-slate-900 tracking-tight">Booking Pipeline</h3>

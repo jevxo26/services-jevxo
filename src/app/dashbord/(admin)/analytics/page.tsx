@@ -25,7 +25,7 @@ export default function AnalyticsPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
+        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#1E4E8C] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
@@ -37,7 +37,7 @@ export default function AnalyticsPage() {
   if (isStatsLoading) {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center space-y-4">
-        <div className="w-10 h-10 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin" />
+        <div className="w-10 h-10 border-4 border-[#1E4E8C] border-t-transparent rounded-full animate-spin" />
         <p className="text-sm font-semibold text-slate-500 animate-pulse">
           {lang === "bn" ? "অ্যানালিটিক্স লোড হচ্ছে..." : "Loading analytics insights..."}
         </p>
@@ -73,7 +73,7 @@ export default function AnalyticsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
             <BarChart3 className="w-6 h-6" />
           </div>
           <div>
@@ -93,10 +93,10 @@ export default function AnalyticsPage() {
       {/* AI Business Insight Panel */}
       <div className="bg-gradient-to-r from-slate-900 via-slate-950 to-slate-900 p-6 rounded-[24px] border border-slate-800 shadow-xl relative overflow-hidden group">
         {/* Glow effect */}
-        <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-[#4F46E5]/10 blur-3xl group-hover:bg-[#4F46E5]/15 transition-all duration-700" />
+        <div className="absolute -right-20 -top-20 w-80 h-80 rounded-full bg-[#1E4E8C]/10 blur-3xl group-hover:bg-[#1E4E8C]/15 transition-all duration-700" />
         
         <div className="flex items-start gap-4 relative z-10">
-          <div className="p-3 bg-gradient-to-br from-[#4F46E5] to-orange-600 text-white rounded-2xl shadow-lg shadow-orange-500/20 shrink-0">
+          <div className="p-3 bg-gradient-to-br from-[#1E4E8C] to-orange-600 text-white rounded-2xl shadow-lg shadow-orange-500/20 shrink-0">
             <Sparkles className="w-5 h-5 animate-pulse" />
           </div>
           <div className="space-y-2 flex-1">
@@ -145,13 +145,13 @@ export default function AnalyticsPage() {
                   <span className="text-slate-800">{cat.name}</span>
                   <div className="flex gap-2">
                     <span className="text-slate-400">{cat.count}</span>
-                    <span className="text-[#4F46E5]">{cat.percentage}%</span>
+                    <span className="text-[#1E4E8C]">{cat.percentage}%</span>
                   </div>
                 </div>
                 <div className="h-2.5 w-full bg-slate-50 border border-slate-100 rounded-full overflow-hidden">
                   <div
                     style={{ width: `${cat.percentage}%` }}
-                    className={`h-full ${cat.color || 'bg-[#4F46E5]'} rounded-full transition-all duration-500`}
+                    className={`h-full ${cat.color || 'bg-[#1E4E8C]'} rounded-full transition-all duration-500`}
                   />
                 </div>
               </div>
@@ -174,7 +174,7 @@ export default function AnalyticsPage() {
             {regionalActivity.map((region: any, i: number) => (
               <div key={i} className="flex items-center justify-between p-3 border border-slate-100 rounded-xl hover:bg-slate-50/50 transition-colors">
                 <div className="flex items-center gap-3">
-                  <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-xl">
+                  <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-xl">
                     <MapPin size={18} />
                   </div>
                   <div>
@@ -210,7 +210,7 @@ export default function AnalyticsPage() {
           <div className="flex items-center gap-6 pb-2">
             <div>
               <h2 className="text-4xl font-extrabold text-slate-900">{ratings.average}</h2>
-              <span className="text-xs font-semibold text-[#4F46E5] flex items-center gap-0.5 mt-1">★ {lang === "bn" ? "রেটিং স্কোর" : "Rating Score"}</span>
+              <span className="text-xs font-semibold text-[#1E4E8C] flex items-center gap-0.5 mt-1">★ {lang === "bn" ? "রেটিং স্কোর" : "Rating Score"}</span>
             </div>
             <div className="h-10 w-px bg-slate-100" />
             <div>

@@ -36,7 +36,7 @@ export default function TaskCard({ booking, isUpdating, handleMarkComplete }: Ta
       {/* Top Row: Service Name, Status */}
       <div className="flex items-start justify-between gap-4">
         <div className="flex items-center gap-4">
-          <div className="w-12 h-12 bg-[#EEF2FF] border border-[#E0E7FF] rounded-2xl flex items-center justify-center text-[#4F46E5]">
+          <div className="w-12 h-12 bg-[#EEF2FF] border border-[#E0E7FF] rounded-2xl flex items-center justify-center text-[#1E4E8C]">
             <Briefcase size={22} className="stroke-[2.5]" />
           </div>
           <div>
@@ -44,8 +44,8 @@ export default function TaskCard({ booking, isUpdating, handleMarkComplete }: Ta
               {booking.nestedService?.name || booking.pkg?.name || (lang === "bn" ? "সার্ভিস বুকিং" : "Service Booking")}
             </h3>
             <div className="flex items-center gap-2 mt-1.5">
-              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#EEF2FF] text-[#4338CA]">
-                <span className="w-1.5 h-1.5 rounded-full bg-[#4338CA] animate-pulse" />
+              <span className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-bold bg-[#EEF2FF] text-[#123C73]">
+                <span className="w-1.5 h-1.5 rounded-full bg-[#123C73] animate-pulse" />
                 {getStatusText(booking.status).toUpperCase()}
               </span>
               <span className="text-[10px] font-bold text-slate-400">
@@ -126,7 +126,7 @@ export default function TaskCard({ booking, isUpdating, handleMarkComplete }: Ta
               href={`/dashbord/live-chat?userId=${booking.vendor.id}&userName=${encodeURIComponent(
                 booking.vendor.name || "Vendor"
               )}`}
-              className="text-xs font-bold text-slate-500 hover:text-[#4F46E5] transition-colors flex items-center gap-1.5"
+              className="text-xs font-bold text-slate-500 hover:text-[#1E4E8C] transition-colors flex items-center gap-1.5"
             >
               <MessageSquare size={14} />
               {lang === "bn" ? "ভেন্ডরের সাথে চ্যাট" : "Chat with Vendor"}

@@ -81,7 +81,7 @@ export default function EmployeeTable({
             user.status === "active"
               ? "bg-emerald-50 text-emerald-700"
               : user.status === "blocked"
-              ? "bg-[#EEF2FF] text-[#4338CA]"
+              ? "bg-[#EEF2FF] text-[#123C73]"
               : "bg-slate-100 text-slate-600"
           }`}
         >
@@ -137,7 +137,7 @@ export default function EmployeeTable({
             <button
               onClick={() => handleBlock(user.id)}
               title="ব্লক করুন"
-              className="p-1.5 text-slate-400 hover:text-[#4338CA] hover:bg-[#EEF2FF] rounded-lg transition-colors cursor-pointer"
+              className="p-1.5 text-slate-400 hover:text-[#123C73] hover:bg-[#EEF2FF] rounded-lg transition-colors cursor-pointer"
             >
               <XCircle size={16} />
             </button>

@@ -26,8 +26,8 @@ export function ServiceDeliveryDetails() {
   return (
     <div className="bg-white border border-slate-100/80 rounded-[32px] p-6 md:p-7 shadow-[0_8px_30px_rgba(0,0,0,0.02)] space-y-6">
       {/* Operating Hours */}
-      <div className="bg-gradient-to-br from-[#4F46E5]/8 to-[#4F46E5]/2 border border-[#4F46E5]/10 rounded-2xl p-4 flex gap-4 items-center">
-        <div className="w-10 h-10 rounded-xl bg-white text-[#4F46E5] flex items-center justify-center shadow-xs border border-[#4F46E5]/5 shrink-0">
+      <div className="bg-gradient-to-br from-[#1E4E8C]/8 to-[#1E4E8C]/2 border border-[#1E4E8C]/10 rounded-2xl p-4 flex gap-4 items-center">
+        <div className="w-10 h-10 rounded-xl bg-white text-[#1E4E8C] flex items-center justify-center shadow-xs border border-[#1E4E8C]/5 shrink-0">
           <Clock size={20} className="stroke-[2.2]" />
         </div>
         <div>
@@ -39,15 +39,15 @@ export function ServiceDeliveryDetails() {
       {/* How it works */}
       <div className="space-y-4">
         <div className="flex items-center gap-2 pb-2 border-b border-slate-50">
-          <Compass size={16} className="text-[#4F46E5]" />
+          <Compass size={16} className="text-[#1E4E8C]" />
           <h4 className="font-black text-slate-800 text-xs md:text-sm tracking-tight uppercase">How Rajseba Works</h4>
         </div>
         <div className="relative border-l border-slate-100 pl-4 ml-2.5 space-y-5 py-1">
           {steps.map((step, idx) => (
             <div key={idx} className="relative group">
               {/* Timeline Dot */}
-              <div className="absolute -left-[22.5px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-white bg-slate-200 group-hover:bg-[#4F46E5] group-hover:scale-110 transition-all duration-300" />
-              <h5 className="text-xs font-bold text-slate-700 group-hover:text-[#4F46E5] transition-colors duration-250">
+              <div className="absolute -left-[22.5px] top-1.5 w-3.5 h-3.5 rounded-full border-2 border-white bg-slate-200 group-hover:bg-[#1E4E8C] group-hover:scale-110 transition-all duration-300" />
+              <h5 className="text-xs font-bold text-slate-700 group-hover:text-[#1E4E8C] transition-colors duration-250">
                 {step.title}
               </h5>
               <p className="text-[11px] text-slate-500 leading-normal mt-0.5">
@@ -61,7 +61,7 @@ export function ServiceDeliveryDetails() {
       {/* Safety & Support Guarantee */}
       <div className="space-y-4 pt-2">
         <div className="flex items-center gap-2 pb-2 border-b border-slate-50">
-          <ShieldCheck size={16} className="text-[#4F46E5]" />
+          <ShieldCheck size={16} className="text-[#1E4E8C]" />
           <h4 className="font-black text-slate-800 text-xs md:text-sm tracking-tight uppercase">Our Trust Guarantees</h4>
         </div>
         <div className="grid grid-cols-1 gap-2.5">
@@ -88,9 +88,9 @@ export function ServiceDeliveryDetails() {
         </div>
         <a
           href="tel:+8809612444888"
-          className="flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#4F46E5] border border-slate-200 rounded-xl transition duration-200 shadow-xs text-[10px] font-bold shrink-0 cursor-pointer"
+          className="flex items-center gap-1.5 px-3 py-2 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#1E4E8C] border border-slate-200 rounded-xl transition duration-200 shadow-xs text-[10px] font-bold shrink-0 cursor-pointer"
         >
-          <Phone size={12} className="text-[#4F46E5]" />
+          <Phone size={12} className="text-[#1E4E8C]" />
           Call Us
         </a>
       </div>

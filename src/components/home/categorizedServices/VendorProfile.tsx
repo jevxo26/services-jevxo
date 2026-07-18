@@ -56,7 +56,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
       <div className="flex flex-col gap-5 relative z-10 mt-4">
         {/* Header/Badge */}
         <div className="flex items-center justify-between border-b border-slate-50 pb-3">
-          <span className="inline-flex items-center gap-1.5 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase">
+          <span className="inline-flex items-center gap-1.5 bg-[#1E4E8C]/10 border border-[#1E4E8C]/20 text-[#1E4E8C] px-3.5 py-1.5 rounded-full text-[10px] font-bold tracking-wider uppercase">
             {t[lang].servicePartner}
           </span>
           {vendor.status === "active" && (
@@ -69,7 +69,7 @@ export function VendorProfile({ vendor, serviceRating = "0.0" }: { vendor?: Vend
 
         {/* Profile Info */}
         <div className="flex items-center gap-4">
-          <div className="w-14 h-14 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-[#4F46E5] shrink-0 shadow-inner">
+          <div className="w-14 h-14 bg-rose-50 border border-rose-100 rounded-2xl flex items-center justify-center text-[#1E4E8C] shrink-0 shadow-inner">
             <Building className="w-7 h-7" />
           </div>
           <div className="min-w-0">

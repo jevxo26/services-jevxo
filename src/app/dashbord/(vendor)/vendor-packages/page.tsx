@@ -24,7 +24,7 @@ export default function PackagesManagementPage() {
   if (state.role !== "superadmin" && state.role !== "vendor") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
+        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#1E4E8C] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">Access Denied</h3>
@@ -59,7 +59,7 @@ export default function PackagesManagementPage() {
       key: "service",
       header: "প্যারেন্ট সার্ভিস",
       render: (item: Package) => (
-        <span className="inline-flex items-center gap-1.5 bg-[#EEF2FF]/70 text-[#4338CA] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#E0E7FF]/50">
+        <span className="inline-flex items-center gap-1.5 bg-[#EEF2FF]/70 text-[#123C73] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#E0E7FF]/50">
           <Wrench size={12} />
           {item.service?.name || "—"}
         </span>
@@ -136,7 +136,7 @@ export default function PackagesManagementPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
             <PackageIcon className="w-6 h-6" />
           </div>
           <div>
@@ -153,7 +153,7 @@ export default function PackagesManagementPage() {
         <div className="flex gap-2">
           <button
             onClick={state.openCreateModal}
-            className="bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/10"
+            className="bg-[#1E4E8C] hover:bg-[#123C73] text-white font-bold px-5 py-2.5 rounded-xl text-sm flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#1E4E8C]/10"
           >
             <PlusCircle size={18} /> প্যাকেজ যোগ করুন
           </button>
@@ -163,7 +163,7 @@ export default function PackagesManagementPage() {
       {/* Table */}
       {state.isPackagesLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-premium">
-          <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin" />
+          <div className="w-8 h-8 border-4 border-[#1E4E8C] border-t-transparent rounded-full animate-spin" />
         </div>
       ) : state.packages.length === 0 ? (
         <div className="bg-white border border-slate-100 rounded-3xl p-12 text-center shadow-sm">
@@ -176,7 +176,7 @@ export default function PackagesManagementPage() {
           </p>
           <button
             onClick={state.openCreateModal}
-            className="mt-4 bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4F46E5] font-bold px-4 py-2 rounded-xl text-xs transition-all"
+            className="mt-4 bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#1E4E8C] font-bold px-4 py-2 rounded-xl text-xs transition-all"
           >
             নতুন প্যাকেজ তৈরি করুন
           </button>

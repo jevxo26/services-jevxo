@@ -41,7 +41,7 @@ export default function ScrollToTop() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute inset-0 rounded-full bg-gradient-to-r from-[#4F46E5] to-[#818CF8] blur-md pointer-events-none z-[-1]"
+            className="absolute inset-0 rounded-full bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] blur-md pointer-events-none z-[-1]"
           />
         )}
 
@@ -54,16 +54,16 @@ export default function ScrollToTop() {
             pointerEvents: isAtTop ? "none" : "auto",
             boxShadow: isAtTop
               ? "0 4px 12px rgba(0, 0, 0, 0.02)"
-              : "0 10px 25px rgba(79, 70, 229, 0.25)",
+              : "0 10px 25px rgba(30, 78, 140, 0.25)",
           }}
           transition={{ type: "spring", stiffness: 260, damping: 22 }}
           whileHover={{ 
             scale: 1.08,
-            boxShadow: "0 14px 32px rgba(79, 70, 229, 0.4)"
+            boxShadow: "0 14px 32px rgba(30, 78, 140, 0.4)"
           }}
           whileTap={{ scale: 0.92 }}
           onClick={handleClick}
-          className="relative w-12 h-12 bg-gradient-to-r from-[#4F46E5] to-[#818CF8] text-white flex items-center justify-center border border-white/10 cursor-pointer overflow-hidden"
+          className="relative w-12 h-12 bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] text-white flex items-center justify-center border border-white/10 cursor-pointer overflow-hidden"
           aria-label="Scroll to top"
         >
           {/* Shimmer overlay effect */}

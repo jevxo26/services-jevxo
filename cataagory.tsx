@@ -98,7 +98,7 @@ const ExploreCategories = () => {
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-5 md:py-16 lg:py-20 overflow-hidden">
             {/* Header */}
             <div className="text-center max-w-3xl hidden md:block mx-auto mb-8 md:mb-14">
-                <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+                <div className="inline-flex items-center gap-2 bg-[#1E4E8C]/10 border border-[#1E4E8C]/20 text-[#1E4E8C] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
                     <LayoutGrid size={13} />
                     Categories
                 </div>
@@ -119,7 +119,7 @@ const ExploreCategories = () => {
                         exit={{ opacity: 0 }}
                         className="flex justify-center items-center py-16"
                     >
-                        <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
+                        <Loader2 className="w-8 h-8 animate-spin text-[#1E4E8C]" />
                     </motion.div>
                 ) : isError ? (
                     <motion.p
@@ -195,9 +195,9 @@ const ExploreCategories = () => {
                             shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)] md:shadow-[6px_6px_14px_rgba(174,180,190,0.45),_-6px_-6px_14px_rgba(255,255,255,0.95),inset_0_1px_1px_rgba(255,255,255,0.8)]
                             transition-all duration-500 ease-out
                             group-hover:scale-110
-                            group-hover:from-[#ff8a5c] group-hover:via-[#4F46E5] group-hover:to-[#e5392f]
-                            group-hover:ring-[#4F46E5]/30
-                            group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(79, 70, 229,0.08)]
+                            group-hover:from-[#ff8a5c] group-hover:via-[#1E4E8C] group-hover:to-[#e5392f]
+                            group-hover:ring-[#1E4E8C]/30
+                            group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(30, 78, 140,0.08)]
                           "
                                                 >
                                                     {/* Gloss sheen */}
@@ -219,7 +219,7 @@ const ExploreCategories = () => {
                                                         />
                                                     ) : (
                                                         <IconComponent
-                                                            className="relative w-5 h-5 md:w-9 md:h-9 text-[#4F46E5] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                                                            className="relative w-5 h-5 md:w-9 md:h-9 text-[#1E4E8C] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
                                                             strokeWidth={1.75}
                                                         />
                                                     )}
@@ -271,9 +271,9 @@ const ExploreCategories = () => {
                               shadow-[4px_4px_10px_rgba(174,180,190,0.35),_-4px_-4px_10px_rgba(255,255,255,0.9)]
                               transition-all duration-500 ease-out
                               group-hover:scale-110
-                              group-hover:from-[#ff8a5c] group-hover:via-[#4F46E5] group-hover:to-[#e5392f]
-                              group-hover:ring-[#4F46E5]/30
-                              group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(79, 70, 229,0.08)]
+                              group-hover:from-[#ff8a5c] group-hover:via-[#1E4E8C] group-hover:to-[#e5392f]
+                              group-hover:ring-[#1E4E8C]/30
+                              group-hover:shadow-[0_10px_28px_-6px_rgba(229,57,53,0.55),0_0_0_6px_rgba(30, 78, 140,0.08)]
                             "
                                                     >
                                                         <span
@@ -285,14 +285,14 @@ const ExploreCategories = () => {
                                                             aria-hidden
                                                         />
                                                         <LayoutGrid
-                                                            className="relative w-5 h-5 text-[#4F46E5] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
+                                                            className="relative w-5 h-5 text-[#1E4E8C] drop-shadow-[0_1px_1px_rgba(0,0,0,0.06)] transition-all duration-500 group-hover:text-white group-hover:drop-shadow-[0_2px_4px_rgba(0,0,0,0.2)]"
                                                             strokeWidth={1.75}
                                                         />
                                                     </div>
 
                                                     {/* Label */}
                                                     <span
-                                                        className="font-semibold text-[10px] text-center text-[#4F46E5] mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] flex items-center justify-center"
+                                                        className="font-semibold text-[10px] text-center text-[#1E4E8C] mt-1 transition-colors duration-200 group-hover:text-primary line-clamp-2 min-h-[2.4em] flex items-center justify-center"
                                                     >
                                                         See More
                                                     </span>

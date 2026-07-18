@@ -134,7 +134,7 @@ export function PackageBookingModal({
         {/* Modal Header */}
         <div className="p-5 sm:p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50 shrink-0">
           <h3 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2">
-            <Calendar size={18} className="text-[#4F46E5]" />
+            <Calendar size={18} className="text-[#1E4E8C]" />
             Complete Booking Info
           </h3>
           <button
@@ -149,14 +149,14 @@ export function PackageBookingModal({
         {/* Scrollable Content Body */}
         <div className="overflow-y-auto flex-1 p-5 sm:p-6 space-y-5 pb-[calc(env(safe-area-inset-bottom)+20px)]">
           {/* Selected Package Details */}
-          <div className="bg-[#EEF2FF] border border-[#4F46E5]/10 rounded-2xl p-4 space-y-3 text-xs">
-            <div className="text-[10px] font-bold text-[#4F46E5] uppercase tracking-wider">
+          <div className="bg-[#EEF2FF] border border-[#1E4E8C]/10 rounded-2xl p-4 space-y-3 text-xs">
+            <div className="text-[10px] font-bold text-[#1E4E8C] uppercase tracking-wider">
               Selected Package
             </div>
             <div className="flex justify-between items-center text-sm font-black text-slate-800">
               <span>{selectedPackage.title}</span>
               {selectedPackage.price && (
-                <span className="text-[#4F46E5] text-base">
+                <span className="text-[#1E4E8C] text-base">
                   ৳{packagePayableTotal.toLocaleString()}
                 </span>
               )}
@@ -185,7 +185,7 @@ export function PackageBookingModal({
                 <button
                   type="button"
                   onClick={() => setPackageQuantity((qty) => Math.max(1, qty - 1))}
-                  className="w-9 h-9 rounded-xl border border-slate-200 text-[#4F46E5] font-black hover:bg-rose-50 transition cursor-pointer flex items-center justify-center"
+                  className="w-9 h-9 rounded-xl border border-slate-200 text-[#1E4E8C] font-black hover:bg-rose-50 transition cursor-pointer flex items-center justify-center"
                 >
                   <Minus size={14} strokeWidth={2.5} />
                 </button>
@@ -195,7 +195,7 @@ export function PackageBookingModal({
                 <button
                   type="button"
                   onClick={() => setPackageQuantity((qty) => qty + 1)}
-                  className="w-9 h-9 rounded-xl border border-slate-200 text-[#4F46E5] font-black hover:bg-rose-50 transition cursor-pointer flex items-center justify-center"
+                  className="w-9 h-9 rounded-xl border border-slate-200 text-[#1E4E8C] font-black hover:bg-rose-50 transition cursor-pointer flex items-center justify-center"
                 >
                   <Plus size={14} strokeWidth={2.5} />
                 </button>
@@ -264,7 +264,7 @@ export function PackageBookingModal({
                 onChange={(e) =>
                   setBookingDetails({ ...bookingDetails, location: e.target.value })
                 }
-                className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#4F46E5] focus:border-[#4F46E5] block p-3 outline-none transition font-semibold resize-none"
+                className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#1E4E8C] focus:border-[#1E4E8C] block p-3 outline-none transition font-semibold resize-none"
               />
             </div>
 
@@ -279,7 +279,7 @@ export function PackageBookingModal({
                 onChange={(e) =>
                   setBookingDetails({ ...bookingDetails, notes: e.target.value })
                 }
-                className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#4F46E5] focus:border-[#4F46E5] block p-3 outline-none transition font-semibold resize-none"
+                className="w-full bg-slate-50 border border-slate-200 text-slate-800 text-sm rounded-xl focus:ring-1 focus:ring-[#1E4E8C] focus:border-[#1E4E8C] block p-3 outline-none transition font-semibold resize-none"
               />
             </div>
 
@@ -294,7 +294,7 @@ export function PackageBookingModal({
               <button
                 type="submit"
                 disabled={isBooking}
-                className="px-6 py-3 text-sm font-bold text-white bg-[#4F46E5] hover:bg-[#4338CA] rounded-xl transition shadow-md disabled:opacity-70 flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none"
+                className="px-6 py-3 text-sm font-bold text-white bg-[#1E4E8C] hover:bg-[#123C73] rounded-xl transition shadow-md disabled:opacity-70 flex items-center justify-center gap-2 cursor-pointer flex-1 sm:flex-none"
               >
                 {isBooking ? (
                   <>

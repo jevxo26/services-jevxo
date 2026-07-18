@@ -78,7 +78,7 @@ export default function BlogModal({
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder={lang === "bn" ? "ব্লগের শিরোনাম লিখুন..." : "Enter blog title..."}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#4F46E5]/30 focus:ring-4 focus:ring-[#EEF2FF] transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#1E4E8C]/30 focus:ring-4 focus:ring-[#EEF2FF] transition-all"
             />
           </div>
 
@@ -92,7 +92,7 @@ export default function BlogModal({
               value={overview}
               onChange={(e) => setOverview(e.target.value)}
               placeholder={lang === "bn" ? "ব্লগের সংক্ষিপ্ত সারমর্ম লিখুন..." : "Enter a brief summary of the blog..."}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#4F46E5]/30 focus:ring-4 focus:ring-[#EEF2FF] transition-all resize-none"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#1E4E8C]/30 focus:ring-4 focus:ring-[#EEF2FF] transition-all resize-none"
             />
           </div>
 
@@ -107,7 +107,7 @@ export default function BlogModal({
               value={description}
               onChange={(e) => setDescription(e.target.value)}
               placeholder={lang === "bn" ? "ব্লগের মূল বিস্তারিত লিখুন..." : "Write the main body content of the blog..."}
-              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#4F46E5]/30 focus:ring-4 focus:ring-[#EEF2FF] transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:bg-white focus:border-[#1E4E8C]/30 focus:ring-4 focus:ring-[#EEF2FF] transition-all"
             />
           </div>
 
@@ -124,7 +124,7 @@ export default function BlogModal({
 
             {/* Upload Box */}
             {images.length < 3 && (
-              <div className="relative group border-2 border-dashed border-slate-200 hover:border-[#4F46E5]/30 rounded-2xl p-6 transition-all bg-slate-50/50 hover:bg-white text-center flex flex-col items-center justify-center cursor-pointer">
+              <div className="relative group border-2 border-dashed border-slate-200 hover:border-[#1E4E8C]/30 rounded-2xl p-6 transition-all bg-slate-50/50 hover:bg-white text-center flex flex-col items-center justify-center cursor-pointer">
                 <input
                   type="file"
                   accept="image/*"
@@ -134,14 +134,14 @@ export default function BlogModal({
                 />
                 {isUploadingImage ? (
                   <div className="flex flex-col items-center gap-2">
-                    <Loader2 className="w-8 h-8 text-[#4F46E5] animate-spin" />
+                    <Loader2 className="w-8 h-8 text-[#1E4E8C] animate-spin" />
                     <span className="text-xs font-semibold text-slate-500">
                       {lang === "bn" ? "ছবি আপলোড হচ্ছে..." : "Uploading image..."}
                     </span>
                   </div>
                 ) : (
                   <div className="flex flex-col items-center gap-2">
-                    <div className="p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl group-hover:scale-105 transition-transform duration-250">
+                    <div className="p-3 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl group-hover:scale-105 transition-transform duration-250">
                       <Upload size={20} />
                     </div>
                     <div>
@@ -196,7 +196,7 @@ export default function BlogModal({
             <button
               type="submit"
               disabled={isLoading}
-              className="px-5 py-2.5 bg-[#4F46E5] hover:bg-[#4338CA] disabled:opacity-50 text-white font-bold rounded-xl text-xs flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/15"
+              className="px-5 py-2.5 bg-[#1E4E8C] hover:bg-[#123C73] disabled:opacity-50 text-white font-bold rounded-xl text-xs flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#1E4E8C]/15"
             >
               {isLoading ? (
                 <>

@@ -95,7 +95,7 @@ export default function EmployeeActionMenu({
                 handleBlock(user.id);
                 setOpenDropdownId(null);
               }}
-              className="w-full text-left px-3 py-2.5 text-xs text-[#4338CA] hover:bg-[#EEF2FF] flex items-center gap-2.5 font-semibold rounded-xl transition-all cursor-pointer"
+              className="w-full text-left px-3 py-2.5 text-xs text-[#123C73] hover:bg-[#EEF2FF] flex items-center gap-2.5 font-semibold rounded-xl transition-all cursor-pointer"
             >
               <XCircle size={15} /> Block
             </button>
@@ -108,7 +108,7 @@ export default function EmployeeActionMenu({
               handleDelete(user.id);
               setOpenDropdownId(null);
             }}
-            className="w-full text-left px-3 py-2.5 text-xs text-[#4338CA] hover:bg-[#EEF2FF] flex items-center gap-2.5 font-semibold rounded-xl transition-all cursor-pointer"
+            className="w-full text-left px-3 py-2.5 text-xs text-[#123C73] hover:bg-[#EEF2FF] flex items-center gap-2.5 font-semibold rounded-xl transition-all cursor-pointer"
           >
             <Trash2 size={15} /> Delete
           </button>

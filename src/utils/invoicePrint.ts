@@ -168,8 +168,8 @@ export const printBookingInvoice = (booking: any) => {
   // Check payment status
   const isPaid = booking.payment_status?.toLowerCase() === 'paid' || booking.status === 'completed';
   const badgeText = isPaid ? 'PAID' : 'DUE';
-  const badgeColor = isPaid ? '#10b981' : '#4F46E5';
-  const badgeBorder = isPaid ? 'rgba(16,185,129,0.2)' : 'rgba(79, 70, 229,0.2)';
+  const badgeColor = isPaid ? '#10b981' : '#1E4E8C';
+  const badgeBorder = isPaid ? 'rgba(16,185,129,0.2)' : 'rgba(30, 78, 140,0.2)';
 
   // Calculate prices
   const totalPayable = parseFloat(booking.total_price || booking.subtotal || 0);
@@ -261,7 +261,7 @@ export const printBookingInvoice = (booking: any) => {
           .logo-title {
             font-size: 28px;
             font-weight: 900;
-            color: #4F46E5;
+            color: #1E4E8C;
             letter-spacing: -0.5px;
             margin: 0;
             display: flex;
@@ -276,7 +276,7 @@ export const printBookingInvoice = (booking: any) => {
             margin: 2px 0 0 0;
           }
           .info-box {
-            background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+            background: linear-gradient(135deg, #1E4E8C 0%, #123C73 100%);
             color: #ffffff;
             padding: 18px 24px;
             border-radius: 12px;
@@ -284,7 +284,7 @@ export const printBookingInvoice = (booking: any) => {
             line-height: 1.6;
             max-width: 280px;
             position: relative;
-            box-shadow: 0 4px 12px rgba(79, 70, 229,0.2);
+            box-shadow: 0 4px 12px rgba(30, 78, 140,0.2);
           }
           .info-box p {
             margin: 3px 0;
@@ -418,10 +418,10 @@ export const printBookingInvoice = (booking: any) => {
             color: #334155;
           }
           .summary-row.due {
-            color: #4F46E5;
+            color: #1E4E8C;
           }
           .summary-row.due span {
-            color: #4F46E5;
+            color: #1E4E8C;
             font-weight: 800;
           }
           .summary-bullet {
@@ -430,7 +430,7 @@ export const printBookingInvoice = (booking: any) => {
             font-size: 14px;
           }
           .summary-row.due .summary-bullet {
-            color: #4F46E5;
+            color: #1E4E8C;
           }
           .words {
             font-size: 12px;
@@ -631,7 +631,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
   };
   const status = withdraw.status?.toLowerCase() || 'pending';
   const badgeText = statusMap[status] || status.toUpperCase();
-  const badgeColor = status === 'approved' ? '#10b981' : status === 'rejected' ? '#ef4444' : '#4F46E5';
+  const badgeColor = status === 'approved' ? '#10b981' : status === 'rejected' ? '#ef4444' : '#1E4E8C';
 
   const amount = parseFloat(withdraw.amount || 0);
   const amountInWords = numberToWords(amount);
@@ -677,7 +677,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
           .logo-title {
             font-size: 28px;
             font-weight: 900;
-            color: #4F46E5;
+            color: #1E4E8C;
             letter-spacing: -0.5px;
             margin: 0;
             display: flex;
@@ -692,7 +692,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
             margin: 2px 0 0 0;
           }
           .info-box {
-            background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+            background: linear-gradient(135deg, #1E4E8C 0%, #123C73 100%);
             color: #ffffff;
             padding: 18px 24px;
             border-radius: 12px;
@@ -700,7 +700,7 @@ export const printWithdrawInvoice = (withdraw: any) => {
             line-height: 1.6;
             max-width: 280px;
             position: relative;
-            box-shadow: 0 4px 12px rgba(79, 70, 229,0.2);
+            box-shadow: 0 4px 12px rgba(30, 78, 140,0.2);
           }
           .info-box p {
             margin: 3px 0;
@@ -1084,7 +1084,7 @@ export const printAllWithdrawsInvoice = (withdraws: any[], totalAmount: number) 
           .logo-title {
             font-size: 28px;
             font-weight: 900;
-            color: #4F46E5;
+            color: #1E4E8C;
             letter-spacing: -0.5px;
             margin: 0;
             display: flex;
@@ -1099,7 +1099,7 @@ export const printAllWithdrawsInvoice = (withdraws: any[], totalAmount: number) 
             margin: 2px 0 0 0;
           }
           .info-box {
-            background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+            background: linear-gradient(135deg, #1E4E8C 0%, #123C73 100%);
             color: #ffffff;
             padding: 18px 24px;
             border-radius: 12px;
@@ -1107,7 +1107,7 @@ export const printAllWithdrawsInvoice = (withdraws: any[], totalAmount: number) 
             line-height: 1.6;
             max-width: 280px;
             position: relative;
-            box-shadow: 0 4px 12px rgba(79, 70, 229,0.2);
+            box-shadow: 0 4px 12px rgba(30, 78, 140,0.2);
           }
           .info-box p {
             margin: 3px 0;
@@ -1472,7 +1472,7 @@ export const printClientStatement = (bookings: any[], totalAmount: number) => {
           .logo-title {
             font-size: 28px;
             font-weight: 900;
-            color: #4F46E5;
+            color: #1E4E8C;
             letter-spacing: -0.5px;
             margin: 0;
             display: flex;
@@ -1487,7 +1487,7 @@ export const printClientStatement = (bookings: any[], totalAmount: number) => {
             margin: 2px 0 0 0;
           }
           .info-box {
-            background: linear-gradient(135deg, #4F46E5 0%, #4338CA 100%);
+            background: linear-gradient(135deg, #1E4E8C 0%, #123C73 100%);
             color: #ffffff;
             padding: 18px 24px;
             border-radius: 12px;
@@ -1495,7 +1495,7 @@ export const printClientStatement = (bookings: any[], totalAmount: number) => {
             line-height: 1.6;
             max-width: 280px;
             position: relative;
-            box-shadow: 0 4px 12px rgba(79, 70, 229,0.2);
+            box-shadow: 0 4px 12px rgba(30, 78, 140,0.2);
           }
           .info-box p {
             margin: 3px 0;

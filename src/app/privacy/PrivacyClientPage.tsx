@@ -31,7 +31,7 @@ export default function PrivacyClientPage() {
       {/* Ambient glows */}
       <motion.div
         style={{ y: glowY }}
-        className="pointer-events-none absolute top-[-5%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#4F46E5]/4 blur-[130px] z-0"
+        className="pointer-events-none absolute top-[-5%] right-[-10%] w-[500px] h-[500px] rounded-full bg-[#1E4E8C]/4 blur-[130px] z-0"
       />
       <div className="pointer-events-none absolute bottom-[10%] left-[-5%] w-[400px] h-[400px] rounded-full bg-cyan-500/3 blur-[120px] z-0" />
 
@@ -40,13 +40,13 @@ export default function PrivacyClientPage() {
         <div className="max-w-4xl mx-auto px-4 md:px-6 text-center">
           <Link
             href="/"
-            className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#4F46E5] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#4F46E5]/20 mb-3 hover:bg-[#4F46E5]/5 transition-colors"
+            className="inline-flex items-center gap-1.5 text-[10px] font-extrabold text-[#1E4E8C] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#1E4E8C]/20 mb-3 hover:bg-[#1E4E8C]/5 transition-colors"
           >
             <ArrowLeft className="w-3.5 h-3.5" /> Back to Home
           </Link>
 
           <h1 className="text-[clamp(24px,4vw,36px)] font-black text-slate-900 tracking-[-0.03em] leading-[1.1] mb-2.5">
-            Privacy <span className="text-[#4F46E5]">Policy</span>
+            Privacy <span className="text-[#1E4E8C]">Policy</span>
           </h1>
 
           <p className="text-[10px] text-slate-400 font-bold uppercase tracking-wider">
@@ -67,7 +67,7 @@ export default function PrivacyClientPage() {
                 onClick={() => setActiveTab(sec.id)}
                 className={`flex items-center gap-2 px-3.5 py-2 rounded-xl border text-[11px] font-extrabold transition-all shrink-0 snap-align-none ${
                   isActive
-                    ? "bg-[#4F46E5] text-white border-[#4F46E5] shadow-sm"
+                    ? "bg-[#1E4E8C] text-white border-[#1E4E8C] shadow-sm"
                     : "bg-white border-slate-200/60 text-slate-600"
                 }`}
               >
@@ -103,8 +103,8 @@ export default function PrivacyClientPage() {
                         onClick={() => setActiveTab(sec.id)}
                         className={`flex items-center gap-2.5 w-full text-left px-3 py-2.5 rounded-xl border text-[11px] font-bold transition-all ${
                           isActive
-                            ? "bg-[#4F46E5] text-white border-[#4F46E5] shadow-[0_4px_12px_rgba(79, 70, 229,0.12)] scale-[1.01]"
-                            : "bg-white/60 border-slate-100 text-slate-600 hover:border-[#4F46E5]/20 hover:bg-white"
+                            ? "bg-[#1E4E8C] text-white border-[#1E4E8C] shadow-[0_4px_12px_rgba(30, 78, 140,0.12)] scale-[1.01]"
+                            : "bg-white/60 border-slate-100 text-slate-600 hover:border-[#1E4E8C]/20 hover:bg-white"
                         }`}
                       >
                         <div className={`p-1 rounded-lg ${isActive ? "bg-white/20 text-white" : "bg-slate-50 text-slate-500"}`}>
@@ -120,7 +120,7 @@ export default function PrivacyClientPage() {
               {/* Quick Security Tip */}
               <div className="bg-gradient-to-br from-[#FFFDFB] to-[#FFF9F6] border border-rose-100/40 rounded-2xl p-4">
                 <div className="flex items-center gap-1.5 mb-2">
-                  <Sparkles className="w-3.5 h-3.5 text-[#4F46E5]" />
+                  <Sparkles className="w-3.5 h-3.5 text-[#1E4E8C]" />
                   <h4 className="text-[10px] font-extrabold text-slate-800 uppercase tracking-wider">
                     Data Control
                   </h4>
@@ -138,7 +138,7 @@ export default function PrivacyClientPage() {
               {activeTab === "overview" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#1E4E8C]/15 flex items-center justify-center text-[#1E4E8C] shrink-0">
                       <Shield className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -168,7 +168,7 @@ export default function PrivacyClientPage() {
               {activeTab === "collect" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#1E4E8C]/15 flex items-center justify-center text-[#1E4E8C] shrink-0">
                       <Eye className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -206,7 +206,7 @@ export default function PrivacyClientPage() {
               {activeTab === "use" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#1E4E8C]/15 flex items-center justify-center text-[#1E4E8C] shrink-0">
                       <UserCheck className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -244,7 +244,7 @@ export default function PrivacyClientPage() {
               {activeTab === "share" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#1E4E8C]/15 flex items-center justify-center text-[#1E4E8C] shrink-0">
                       <Share2 className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -279,7 +279,7 @@ export default function PrivacyClientPage() {
               {activeTab === "security" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#1E4E8C]/15 flex items-center justify-center text-[#1E4E8C] shrink-0">
                       <Lock className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -309,7 +309,7 @@ export default function PrivacyClientPage() {
               {activeTab === "rights" && (
                 <div className="bg-white border border-slate-100/80 rounded-2xl p-4 sm:p-5 md:p-6 shadow-[0_4px_20px_rgba(0,0,0,0.01)] space-y-4">
                   <div className="flex items-center gap-3 pb-3 border-b border-slate-100">
-                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#4F46E5]/15 flex items-center justify-center text-[#4F46E5] shrink-0">
+                    <div className="w-9 h-9 rounded-xl bg-[#EEF2FF] border border-[#1E4E8C]/15 flex items-center justify-center text-[#1E4E8C] shrink-0">
                       <HelpCircle className="w-4.5 h-4.5" />
                     </div>
                     <div>
@@ -329,8 +329,8 @@ export default function PrivacyClientPage() {
                       If you decide to delete your account permanently, or wish to pull a full copy of your transaction logs, simply contact our support desk using the information below:
                     </p>
                     <div className="bg-[#FFFDFB] border border-rose-100/30 rounded-xl p-3 text-[11px] font-semibold text-slate-600 space-y-1">
-                      <p>📧 Email: <span className="text-[#4F46E5]">info@rajseba.com</span></p>
-                      <p>📞 Hotline: <span className="text-[#4F46E5]">01813-333373</span></p>
+                      <p>📧 Email: <span className="text-[#1E4E8C]">info@rajseba.com</span></p>
+                      <p>📞 Hotline: <span className="text-[#1E4E8C]">01813-333373</span></p>
                       <p>📍 Address: Rajshahi High-tech Park, Rajshahi, Bangladesh</p>
                     </div>
                   </div>

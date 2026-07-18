@@ -13,7 +13,7 @@ export default function AccessDenied({ roleRequired }: AccessDeniedProps) {
 
   return (
     <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-      <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
+      <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#1E4E8C] mb-4">
         <ShieldAlert size={48} />
       </div>
       <h3 className="text-xl font-bold text-slate-800">

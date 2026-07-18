@@ -150,7 +150,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
   if (isLoading) {
     return (
       <div className="flex flex-col items-center justify-center min-h-[50vh] text-slate-400">
-        <div className="w-10 h-10 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin mb-4" />
+        <div className="w-10 h-10 border-4 border-[#1E4E8C] border-t-transparent rounded-full animate-spin mb-4" />
         <p className="text-sm font-medium">{lang === "bn" ? "বিস্তারিত লোড হচ্ছে..." : "Loading details..."}</p>
       </div>
     );
@@ -166,7 +166,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
         </p>
         <button
           onClick={() => router.push("/dashbord/custom-shifting")}
-          className="px-5 py-2.5 bg-[#4F46E5] text-white font-extrabold text-xs rounded-xl hover:bg-[#e04f0f] transition-colors"
+          className="px-5 py-2.5 bg-[#1E4E8C] text-white font-extrabold text-xs rounded-xl hover:bg-[#e04f0f] transition-colors"
         >
           {lang === "bn" ? "ফিরে যান" : "Go Back"}
         </button>
@@ -236,7 +236,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
           {/* Client Details */}
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
-              <User size={16} className="text-[#4F46E5]" />
+              <User size={16} className="text-[#1E4E8C]" />
               {lang === "bn" ? "গ্রাহকের তথ্য" : "Client Information"}
             </h3>
             <div className="grid sm:grid-cols-2 gap-5 bg-[#EEF2FF]/30 rounded-2xl p-5 border border-orange-100/50">
@@ -269,7 +269,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
           {/* Shifting Details */}
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm space-y-5">
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
-              <Truck size={16} className="text-[#4F46E5]" />
+              <Truck size={16} className="text-[#1E4E8C]" />
               {lang === "bn" ? "শিফটিংয়ের তথ্য" : "Shifting Information"}
             </h3>
 
@@ -280,7 +280,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
                   {shifting.shiftingType === "office" ? (
                     <Building2 size={12} className="text-blue-500" />
                   ) : (
-                    <Home size={12} className="text-[#4F46E5]" />
+                    <Home size={12} className="text-[#1E4E8C]" />
                   )}
                   {shifting.shiftingType === "office"
                     ? (lang === "bn" ? "অফিস শিফটিং" : "Office Shifting")
@@ -302,8 +302,8 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
             <div className="space-y-4 pt-2">
               <div className="relative pl-6 pb-2">
                 <div className="absolute left-1.5 top-1.5 bottom-0 w-0.5 bg-dashed border-l-2 border-slate-200" />
-                <div className="absolute left-0 top-0.5 w-3.5 h-3.5 rounded-full bg-[#EEF2FF] border-2 border-[#4F46E5] flex items-center justify-center">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
+                <div className="absolute left-0 top-0.5 w-3.5 h-3.5 rounded-full bg-[#EEF2FF] border-2 border-[#1E4E8C] flex items-center justify-center">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#1E4E8C]" />
                 </div>
                 <h4 className="text-[10px] font-black text-slate-450 uppercase tracking-widest">{lang === "bn" ? "পিকআপ ঠিকানা (Source)" : "Pickup Address (Source)"}</h4>
                 <p className="text-sm font-semibold text-slate-805 mt-1 bg-slate-50/50 border border-slate-100 px-3.5 py-2.5 rounded-2xl">
@@ -330,14 +330,14 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
           {isSuperAdmin && (
             <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
               <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
-                <Users size={16} className="text-[#4F46E5]" />
+                <Users size={16} className="text-[#1E4E8C]" />
                 {lang === "bn" ? "ভেন্ডর নিযুক্তকরণ" : "Vendor Assignment"}
               </h3>
 
               {shifting.vendor && !isReassigning ? (
                 <div className="space-y-4">
                   <div className="bg-[#EEF2FF]/30 border border-orange-100/50 rounded-2xl p-4">
-                    <p className="text-[9px] font-black text-[#4F46E5] uppercase tracking-wider">{lang === "bn" ? "সক্রিয় ভেন্ডর" : "Active Vendor"}</p>
+                    <p className="text-[9px] font-black text-[#1E4E8C] uppercase tracking-wider">{lang === "bn" ? "সক্রিয় ভেন্ডর" : "Active Vendor"}</p>
                     <p className="text-sm font-extrabold text-slate-800 mt-1">
                       {shifting.vendor.profile?.businessName || shifting.vendor.name || (lang === "bn" ? "ভেন্ডর" : "Vendor")}
                     </p>
@@ -380,7 +380,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
                     <button
                       onClick={handleAssign}
                       disabled={!selectedVendorId || isAssigning}
-                      className="w-full py-3 bg-[#4F46E5] hover:bg-[#e04f0f] text-white text-xs font-black rounded-xl transition-colors disabled:opacity-50 shadow-md shadow-[#4F46E5]/15"
+                      className="w-full py-3 bg-[#1E4E8C] hover:bg-[#e04f0f] text-white text-xs font-black rounded-xl transition-colors disabled:opacity-50 shadow-md shadow-[#1E4E8C]/15"
                     >
                       {isAssigning
                         ? (lang === "bn" ? "নিযুক্ত করা হচ্ছে..." : "Assigning...")
@@ -404,7 +404,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
           {isSuperAdmin && (
             <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm space-y-4">
               <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
-                <CheckCircle size={16} className="text-[#4F46E5]" />
+                <CheckCircle size={16} className="text-[#1E4E8C]" />
                 {lang === "bn" ? "কাজের অবস্থা নিয়ন্ত্রণ" : "Job Status Controls"}
               </h3>
               
@@ -436,7 +436,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
           {/* Job Pricing (Super Admin can set/update, Client & Vendor can view) */}
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm space-y-4">
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest flex items-center gap-2">
-              <Coins size={16} className="text-[#4F46E5]" />
+              <Coins size={16} className="text-[#1E4E8C]" />
               {lang === "bn" ? "শিফটিং খরচ / মূল্য" : "Shifting Cost / Price"}
             </h3>
             
@@ -452,14 +452,14 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
                       value={priceInput}
                       onChange={(e) => setPriceInput(e.target.value)}
                       disabled={isSavingPrice}
-                      className="pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-[#4F46E5]/20 w-full disabled:opacity-60 transition-all font-extrabold text-slate-800 outline-none"
+                      className="pl-8 pr-4 py-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:ring-2 focus:ring-[#1E4E8C]/20 w-full disabled:opacity-60 transition-all font-extrabold text-slate-800 outline-none"
                     />
                   </div>
                 </div>
                 <button
                   onClick={handleSavePrice}
                   disabled={!priceInput || isSavingPrice}
-                  className="w-full py-3 bg-[#4F46E5] hover:bg-[#e04f0f] text-white text-xs font-black rounded-xl transition-all disabled:opacity-50 shadow-md shadow-[#4F46E5]/15 flex items-center justify-center gap-1.5"
+                  className="w-full py-3 bg-[#1E4E8C] hover:bg-[#e04f0f] text-white text-xs font-black rounded-xl transition-all disabled:opacity-50 shadow-md shadow-[#1E4E8C]/15 flex items-center justify-center gap-1.5"
                 >
                   {isSavingPrice ? (
                     <div className="w-3.5 h-3.5 border-2 border-white/40 border-t-white rounded-full animate-spin" />
@@ -469,14 +469,14 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
             ) : (
               <div className="bg-[#EEF2FF]/40 border border-orange-100/40 rounded-2xl p-4 flex items-center justify-between">
                 <div>
-                  <p className="text-[9px] font-black text-[#4F46E5] uppercase tracking-wider">{lang === "bn" ? "শিফটিং খরচ" : "Shifting Cost"}</p>
+                  <p className="text-[9px] font-black text-[#1E4E8C] uppercase tracking-wider">{lang === "bn" ? "শিফটিং খরচ" : "Shifting Cost"}</p>
                   <p className="text-lg font-black text-slate-800 mt-1">
                     {shifting.price 
                       ? (lang === "bn" ? `৳${Number(shifting.price).toLocaleString('bn-BD')}` : `৳${Number(shifting.price).toLocaleString('en-US')}`) 
                       : (lang === "bn" ? "মূল্যায়ন পেন্ডিং" : "Pending Evaluation")}
                   </p>
                 </div>
-                <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-[#4F46E5]">
+                <div className="w-10 h-10 rounded-xl bg-orange-100/50 flex items-center justify-center text-[#1E4E8C]">
                   <Coins size={20} />
                 </div>
               </div>
@@ -486,7 +486,7 @@ export default function CustomShiftingDetailsPage({ params }: { params: Promise<
           {/* Inventory Photos */}
           <div className="bg-white rounded-3xl border border-slate-100 p-6 shadow-sm">
             <h3 className="text-sm font-black text-slate-900 uppercase tracking-widest mb-4 flex items-center gap-2">
-              <ImageIcon size={16} className="text-[#4F46E5]" />
+              <ImageIcon size={16} className="text-[#1E4E8C]" />
               {lang === "bn" ? `ছবি (${shifting.images?.length || 0})` : `Photos (${shifting.images?.length || 0})`}
             </h3>
 

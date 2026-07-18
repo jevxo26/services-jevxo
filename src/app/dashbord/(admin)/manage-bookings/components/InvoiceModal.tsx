@@ -46,7 +46,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
           <div className="flex items-center gap-3">
             <button
               onClick={handlePrint}
-              className="flex items-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm shadow-[#4F46E5]/20 cursor-pointer active:scale-95"
+              className="flex items-center gap-2 bg-[#1E4E8C] hover:bg-[#123C73] text-white px-4 py-2.5 rounded-xl text-sm font-bold transition-all shadow-sm shadow-[#1E4E8C]/20 cursor-pointer active:scale-95"
             >
               <Download size={16} /> Download PDF
             </button>
@@ -66,7 +66,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
                   <img src="/rajshiblogo.png" alt="Rajseba Logo" className="h-14 w-auto object-contain" />
                 </div>
                 
-                <div className="bg-gradient-to-br from-[#4F46E5] to-[#4338CA] text-white p-5 rounded-2xl text-[11px] max-w-[280px] shadow-md shadow-[#4F46E5]/20 space-y-2.5">
+                <div className="bg-gradient-to-br from-[#1E4E8C] to-[#123C73] text-white p-5 rounded-2xl text-[11px] max-w-[280px] shadow-md shadow-[#1E4E8C]/20 space-y-2.5">
                   <div className="flex items-center gap-2">
                     <svg className="w-3.5 h-3.5 text-white/80 shrink-0" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 002.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-2.824-1.806-5.122-4.11-6.928-6.928l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 00-1.091-.852H4.5A2.25 2.25 0 002.25 4.5v2.25z"></path>
@@ -99,7 +99,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
                 </div>
                 {/* Stamp */}
                 <div className={`absolute top-0 right-0 sm:right-4 border-2 rounded-lg px-3 py-1 text-xs font-black tracking-wider uppercase transform rotate-6 shadow-xs ${
-                  isPaid ? 'border-emerald-500 text-emerald-600 bg-emerald-50' : 'border-[#4F46E5] text-[#4F46E5] bg-[#EEF2FF]'
+                  isPaid ? 'border-emerald-500 text-emerald-600 bg-emerald-50' : 'border-[#1E4E8C] text-[#1E4E8C] bg-[#EEF2FF]'
                 }`}>
                   {badgeText}
                 </div>
@@ -181,7 +181,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
                   <p className="font-extrabold text-slate-800 uppercase tracking-wider text-[10px]">Payment Summary</p>
                   <p>● Total Payable Amount: <span className="font-bold text-slate-800">৳{totalPayable.toLocaleString()}.00 BDT</span></p>
                   <p>● Paid Amount: <span className="font-bold text-slate-800">৳{paidAmount.toLocaleString()}.00 BDT</span></p>
-                  <p className={`font-bold ${dueAmount > 0 ? 'text-[#4F46E5]' : 'text-slate-500'}`}>● Due Amount: ৳{dueAmount.toLocaleString()}.00 BDT</p>
+                  <p className={`font-bold ${dueAmount > 0 ? 'text-[#1E4E8C]' : 'text-slate-500'}`}>● Due Amount: ৳{dueAmount.toLocaleString()}.00 BDT</p>
                 </div>
                 
                 <div className="w-full sm:w-80 bg-slate-50 p-4 rounded-2xl border border-slate-100 space-y-2 text-xs">
@@ -199,7 +199,7 @@ export default function InvoiceModal({ isOpen, onClose, booking }: InvoiceModalP
                   </div>
                   <div className="flex justify-between border-t border-slate-200 pt-2 font-bold text-sm">
                     <span className="text-slate-800">Total Amount:</span>
-                    <span className="text-[#4F46E5]">৳{totalPayable.toLocaleString()}.00</span>
+                    <span className="text-[#1E4E8C]">৳{totalPayable.toLocaleString()}.00</span>
                   </div>
                 </div>
               </div>

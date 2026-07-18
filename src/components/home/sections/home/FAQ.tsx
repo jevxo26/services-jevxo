@@ -42,12 +42,12 @@ export default function FAQ() {
 
           {/* Left — Text */}
           <div className="md:sticky md:top-24 flex flex-col items-center text-center md:items-start md:text-left">
-            <span className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
+            <span className="inline-flex items-center gap-2 bg-[#1E4E8C]/10 border border-[#1E4E8C]/20 text-[#1E4E8C] px-3.5 py-1.5 rounded-full text-xs font-bold mb-4">
               Got questions?
             </span>
             <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight leading-tight mb-4 flex items-center justify-center md:justify-start gap-2">
-              <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5]" />
-              Frequently Asked <span className="text-[#4F46E5]">Questions</span>
+              <MessageCircle className="w-5 h-5 md:w-6 md:h-6 text-[#1E4E8C]" />
+              Frequently Asked <span className="text-[#1E4E8C]">Questions</span>
             </h2>
             <p className="text-slate-500 text-sm md:text-base leading-relaxed mb-8">
               Find answers to the most common questions about our services and booking process.
@@ -55,7 +55,7 @@ export default function FAQ() {
 
             <a
               href="#"
-              className="inline-flex items-center gap-2 text-sm font-medium text-[#4F46E5] border border-[#4F46E5]/25 rounded-full px-5 py-2.5 hover:bg-[#4F46E5]/5 transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-sm font-medium text-[#1E4E8C] border border-[#1E4E8C]/25 rounded-full px-5 py-2.5 hover:bg-[#1E4E8C]/5 transition-colors duration-200"
             >
               <MessageCircle className="w-4 h-4" />
               Still need help? Contact us
@@ -70,7 +70,7 @@ export default function FAQ() {
                 <div
                   key={index}
                   className={`rounded-2xl border bg-white overflow-hidden transition-all duration-300 ${isOpen
-                    ? 'border-[#4F46E5]/40 shadow-sm'
+                    ? 'border-[#1E4E8C]/40 shadow-sm'
                     : 'border-slate-200 hover:border-slate-300'
                     }`}
                 >
@@ -83,7 +83,7 @@ export default function FAQ() {
                       {faq.question}
                     </span>
                     <div
-                      className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-[#4F46E5]/10 text-[#4F46E5]' : 'bg-slate-100 text-slate-400'
+                      className={`flex-shrink-0 w-7 h-7 rounded-full flex items-center justify-center transition-colors duration-300 ${isOpen ? 'bg-[#1E4E8C]/10 text-[#1E4E8C]' : 'bg-slate-100 text-slate-400'
                         }`}
                     >
                       <ChevronDown

@@ -121,7 +121,7 @@ export default function CreateVendorServicePage() {
         </Link>
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-            <Sparkles className="text-[#4F46E5]" size={20} /> নতুন সার্ভিস যোগ করুন
+            <Sparkles className="text-[#1E4E8C]" size={20} /> নতুন সার্ভিস যোগ করুন
           </h1>
           <p className="text-xs text-slate-400 mt-0.5">প্ল্যাটফর্মে আপনার নতুন সার্ভিস অফার যোগ করুন।</p>
         </div>
@@ -184,7 +184,7 @@ export default function CreateVendorServicePage() {
                   <label key={emp.id} className="flex items-center gap-2 cursor-pointer group">
                     <input
                       type="checkbox"
-                      className="w-4 h-4 rounded border-slate-300 text-[#4F46E5] focus:ring-[#4F46E5]/30"
+                      className="w-4 h-4 rounded border-slate-300 text-[#1E4E8C] focus:ring-[#1E4E8C]/30"
                       checked={employeeIds.includes(emp.id)}
                       onChange={(e) => {
                         if (e.target.checked) setEmployeeIds([...employeeIds, emp.id]);
@@ -240,7 +240,7 @@ export default function CreateVendorServicePage() {
               <button
                 type="button"
                 onClick={() => setFaq([...faq, { question: "", answer: "" }])}
-                className="text-xs text-[#4F46E5] font-bold hover:underline flex items-center gap-1"
+                className="text-xs text-[#1E4E8C] font-bold hover:underline flex items-center gap-1"
               >
                 <PlusCircle size={14} /> FAQ যোগ করুন
               </button>
@@ -254,7 +254,7 @@ export default function CreateVendorServicePage() {
                   <button
                     type="button"
                     onClick={() => setFaq(faq.filter((_, idx) => idx !== i))}
-                    className="absolute -top-2 -right-2 bg-[#E0E7FF] text-[#4F46E5] hover:bg-[#4F46E5] hover:text-white rounded-full p-1.5 transition-colors"
+                    className="absolute -top-2 -right-2 bg-[#E0E7FF] text-[#1E4E8C] hover:bg-[#1E4E8C] hover:text-white rounded-full p-1.5 transition-colors"
                   >
                     <X size={14} />
                   </button>
@@ -304,7 +304,7 @@ export default function CreateVendorServicePage() {
                   <ImageIcon className="text-slate-400" size={24} />
                 )}
               </div>
-              <label className="cursor-pointer bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold px-4 py-2.5 rounded-lg inline-flex items-center gap-2 transition-all active:scale-[0.98]">
+              <label className="cursor-pointer bg-[#1E4E8C] hover:bg-[#123C73] text-white text-xs font-bold px-4 py-2.5 rounded-lg inline-flex items-center gap-2 transition-all active:scale-[0.98]">
                 {isUploadingImage ? "Uploading..." : "Browse Photo"}
                 <input
                   type="file"
@@ -328,7 +328,7 @@ export default function CreateVendorServicePage() {
             <button
               type="submit"
               disabled={isCreating || isUploadingImage}
-              className="bg-[#4F46E5] hover:bg-[#4338CA] disabled:opacity-50 text-white font-bold px-8 py-3 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/10"
+              className="bg-[#1E4E8C] hover:bg-[#123C73] disabled:opacity-50 text-white font-bold px-8 py-3 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#1E4E8C]/10"
             >
               {isCreating ? "তৈরি হচ্ছে..." : "সার্ভিস তৈরি করুন"}
             </button>

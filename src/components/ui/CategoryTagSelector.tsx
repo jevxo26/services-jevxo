@@ -61,8 +61,8 @@ export function CategoryTagSelector({
                 className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-bold border transition-all duration-150 cursor-pointer select-none
                   ${
                     isSelected
-                      ? "bg-[#4F46E5] text-white border-[#4F46E5] shadow-sm shadow-rose-100"
-                      : "bg-slate-50 text-slate-600 border-slate-200 hover:border-[#4F46E5]/40 hover:text-[#4F46E5] hover:bg-rose-50/50"
+                      ? "bg-[#1E4E8C] text-white border-[#1E4E8C] shadow-sm shadow-rose-100"
+                      : "bg-slate-50 text-slate-600 border-slate-200 hover:border-[#1E4E8C]/40 hover:text-[#1E4E8C] hover:bg-rose-50/50"
                   }`}
               >
                 {isSelected && <Check size={11} strokeWidth={3} />}

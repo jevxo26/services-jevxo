@@ -66,7 +66,7 @@ export default function DeleteServiceModal({
             </button>
             <button
               onClick={handleDelete}
-              className="bg-[#4F46E5] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
+              className="bg-[#1E4E8C] hover:bg-red-600 text-white font-bold px-5 py-2.5 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-red-500/10"
             >
               Delete
             </button>

@@ -104,7 +104,7 @@ function FooterLinkColumn({ title, links }: { title: string; links: { label: str
   return (
     <div className="space-y-4">
       <h3 className="text-[13px] font-extrabold tracking-wider text-slate-800 uppercase flex items-center gap-1.5">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
+        <span className="w-1.5 h-1.5 rounded-full bg-[#1E4E8C]" />
         {title}
       </h3>
       <ul className="space-y-2.5">
@@ -112,9 +112,9 @@ function FooterLinkColumn({ title, links }: { title: string; links: { label: str
           <li key={l.label}>
             <Link
               href={l.href}
-              className="flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#4F46E5] transition-all duration-200 group/link"
+              className="flex items-center gap-1.5 text-[13px] text-slate-600 hover:text-[#1E4E8C] transition-all duration-200 group/link"
             >
-              <ChevronRight className="w-4 h-4 text-[#4F46E5] group-hover/link:translate-x-1 flex-shrink-0 transition-all duration-200" />
+              <ChevronRight className="w-4 h-4 text-[#1E4E8C] group-hover/link:translate-x-1 flex-shrink-0 transition-all duration-200" />
               <span>{l.label}</span>
             </Link>
           </li>
@@ -140,10 +140,10 @@ export default function Footer() {
   return (
     <footer className="relative bg-gradient-to-b from-white/95 to-[#FFFDFB]/95 backdrop-blur-xl pt-5 md:pb-0 pb-[calc(env(safe-area-inset-bottom)+80px)] overflow-hidden text-[15px] leading-normal">
       {/* Decorative top gradient line */}
-      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#4F46E5]/40 to-transparent" />
+      <div className="absolute top-0 left-0 right-0 h-[1.5px] bg-gradient-to-r from-transparent via-[#1E4E8C]/40 to-transparent" />
 
       {/* Ambient background glow */}
-      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#4F46E5]/2 blur-[100px] rounded-full pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-80 h-80 bg-[#1E4E8C]/2 blur-[100px] rounded-full pointer-events-none" />
 
       {/* Main grid */}
       <motion.div
@@ -158,7 +158,7 @@ export default function Footer() {
           <motion.div variants={itemVariants} className="col-span-2 md:col-span-4 space-y-4">
             <Link href="/" aria-label="Rajseba home" className="inline-block hover:opacity-90 transition-opacity">
               <Image
-                src="/logo.png"
+                src="/newlogo.png"
                 alt="Rajseba"
                 width={100}
                 height={48}
@@ -204,7 +204,7 @@ export default function Footer() {
           {/* ── Get in Touch ── */}
           <motion.div variants={itemVariants} className="col-span-2 md:col-span-2 space-y-4 max-w-sm">
             <h3 className="text-[13px] font-extrabold tracking-wider text-slate-800 uppercase flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1E4E8C]" />
               Get in Touch
             </h3>
 
@@ -215,11 +215,11 @@ export default function Footer() {
                     href={href}
                     target={href.startsWith("http") ? "_blank" : undefined}
                     rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-                    className="flex items-center gap-3 text-[13px] text-slate-600 hover:text-[#4F46E5] transition-all duration-200 group/item"
+                    className="flex items-center gap-3 text-[13px] text-slate-600 hover:text-[#1E4E8C] transition-all duration-200 group/item"
                   >
                     <motion.span
                       whileHover={{ scale: 1.1, rotate: 5 }}
-                      className="w-9 h-9 rounded-xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 group-hover/item:border-[#4F46E5]/20 group-hover/item:bg-[#4F46E5]/5 text-slate-400 group-hover/item:text-[#4F46E5] transition-all duration-300"
+                      className="w-9 h-9 rounded-xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 group-hover/item:border-[#1E4E8C]/20 group-hover/item:bg-[#1E4E8C]/5 text-slate-400 group-hover/item:text-[#1E4E8C] transition-all duration-300"
                     >
                       <Icon className="w-4 h-4" />
                     </motion.span>
@@ -233,7 +233,7 @@ export default function Footer() {
           {/* ── Newsletter (fills the previously empty space) ── */}
           <motion.div variants={itemVariants} className="col-span-2 md:col-span-2 space-y-4 max-w-sm">
             <h3 className="text-[13px] font-extrabold tracking-wider text-slate-800 uppercase flex items-center gap-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5]" />
+              <span className="w-1.5 h-1.5 rounded-full bg-[#1E4E8C]" />
               Newsletter
             </h3>
             <p className="text-[13px] text-slate-600 leading-relaxed">
@@ -251,11 +251,11 @@ export default function Footer() {
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Your email address"
                   required
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-[13px] text-slate-700 placeholder-slate-400 focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/10 focus:outline-none transition-all"
+                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-[13px] text-slate-700 placeholder-slate-400 focus:border-[#1E4E8C] focus:ring-2 focus:ring-[#1E4E8C]/10 focus:outline-none transition-all"
                 />
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#4F46E5] hover:bg-[#4338CA] hover:shadow-[0_4px_12px_rgba(79, 70, 229,0.2)] text-white text-[13px] font-bold rounded-xl transition-all duration-300"
+                  className="w-full py-3 bg-[#1E4E8C] hover:bg-[#123C73] hover:shadow-[0_4px_12px_rgba(30, 78, 140,0.2)] text-white text-[13px] font-bold rounded-xl transition-all duration-300"
                 >
                   Subscribe
                 </button>
@@ -270,7 +270,7 @@ export default function Footer() {
         <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 py-5 flex flex-col sm:flex-row items-center justify-between gap-4">
           <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1.5 text-[12px] text-slate-500 font-medium">
             <span>
-              © {new Date().getFullYear()} Rajseba. All rights reserved.
+              © {new Date().getFullYear()} Services Jevxo. All rights reserved.
             </span>
             <span className="text-slate-300 hidden sm:inline">|</span>
             <span>
@@ -278,17 +278,17 @@ export default function Footer() {
               <Link
                 href="https://www.jevxo.com"
                 target="_blank"
-                className="text-[#4F46E5] font-semibold hover:underline"
+                className="text-[#1E4E8C] font-semibold hover:underline"
               >
                 Jevxo
               </Link>
             </span>
             <span className="text-slate-300 hidden sm:inline">|</span>
-            <Link href="/privacy" className="hover:text-[#4F46E5] transition-colors">
+            <Link href="/privacy" className="hover:text-[#1E4E8C] transition-colors">
               Privacy Policy
             </Link>
             <span className="text-slate-200 hidden sm:inline">•</span>
-            <Link href="/terms" className="hover:text-[#4F46E5] transition-colors">
+            <Link href="/terms" className="hover:text-[#1E4E8C] transition-colors">
               Terms of Service
             </Link>
           </div>
@@ -298,7 +298,7 @@ export default function Footer() {
               href="https://rajseba.com"
               target="_blank"
               aria-label="Visit website"
-              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#4F46E5] hover:border-[#4F46E5]/20 transition-all duration-200 shrink-0"
+              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#1E4E8C] hover:border-[#1E4E8C]/20 transition-all duration-200 shrink-0"
             >
               <Globe size={14} />
             </a>
@@ -315,7 +315,7 @@ export default function Footer() {
                   toast.success("Link copied!");
                 }
               }}
-              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#4F46E5] hover:border-[#4F46E5]/20 transition-all duration-200 shrink-0"
+              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#1E4E8C] hover:border-[#1E4E8C]/20 transition-all duration-200 shrink-0"
               aria-label="Share"
             >
               <Share2 size={14} />
@@ -323,7 +323,7 @@ export default function Footer() {
             <Link
               href="/dashbord/live-chat"
               aria-label="Live Chat"
-              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#4F46E5] hover:border-[#4F46E5]/20 transition-all duration-200 shrink-0"
+              className="w-8 h-8 bg-white border border-slate-100 rounded-xl flex items-center justify-center text-slate-400 hover:text-[#1E4E8C] hover:border-[#1E4E8C]/20 transition-all duration-200 shrink-0"
             >
               <MessageSquare size={14} />
             </Link>

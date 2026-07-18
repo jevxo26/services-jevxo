@@ -55,13 +55,13 @@ export default function ServiceAreas() {
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 bg-[#FFF4EE] border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider mb-4">
+          <div className="inline-flex items-center gap-2 bg-[#FFF4EE] border border-[#1E4E8C]/20 text-[#1E4E8C] px-3.5 py-1.5 rounded-full text-[10px] font-extrabold uppercase tracking-wider mb-4">
             <Globe className="w-3.5 h-3.5" />
             Coverage Areas
           </div>
           <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-2">
-            <Globe className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5]" />
-            We Serve Across <span className="text-[#4F46E5]">Bangladesh</span>
+            <Globe className="w-5 h-5 md:w-6 md:h-6 text-[#1E4E8C]" />
+            We Serve Across <span className="text-[#1E4E8C]">Bangladesh</span>
           </h2>
           <p className="mt-3.5 text-slate-400 text-sm md:text-base font-medium max-w-2xl mx-auto leading-relaxed">
             {isLoading
@@ -81,7 +81,7 @@ export default function ServiceAreas() {
             const StatIcon = stat.icon;
             return (
               <div key={idx} className="flex items-center gap-3 bg-white/70 backdrop-blur-md border border-slate-100/80 rounded-2xl px-4 py-3 sm:px-5 sm:py-3.5 shadow-[0_4px_20px_rgba(0,0,0,0.015)]">
-                <div className="w-8.5 h-8.5 rounded-xl bg-[#EEF2FF] flex items-center justify-center text-[#4F46E5] shrink-0 border border-[#4F46E5]/10">
+                <div className="w-8.5 h-8.5 rounded-xl bg-[#EEF2FF] flex items-center justify-center text-[#1E4E8C] shrink-0 border border-[#1E4E8C]/10">
                   <StatIcon className="w-4 h-4" />
                 </div>
                 <div className="text-left">
@@ -96,7 +96,7 @@ export default function ServiceAreas() {
         {/* Division Grid */}
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-16 gap-3">
-            <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#1E4E8C]" />
             <p className="text-xs font-bold text-slate-400">Loading divisions & districts...</p>
           </div>
         ) : areas.length === 0 ? (
@@ -116,16 +116,16 @@ export default function ServiceAreas() {
                 key={area.id}
                 variants={itemVariants}
                 className={`group relative rounded-3xl border p-5 transition-all duration-300 flex flex-col justify-between ${area.highlight
-                    ? "bg-gradient-to-br from-[#FFFDFB] to-[#FFF9F6] border-[#4F46E5]/20 shadow-[0_10px_35px_rgba(79, 70, 229,0.035)] hover:border-[#4F46E5]/40"
+                    ? "bg-gradient-to-br from-[#FFFDFB] to-[#FFF9F6] border-[#1E4E8C]/20 shadow-[0_10px_35px_rgba(30, 78, 140,0.035)] hover:border-[#1E4E8C]/40"
                     : area.active
-                      ? "bg-white border-slate-100 hover:border-[#4F46E5]/25 hover:shadow-[0_10px_30px_rgba(0,0,0,0.02)]"
+                      ? "bg-white border-slate-100 hover:border-[#1E4E8C]/25 hover:shadow-[0_10px_30px_rgba(0,0,0,0.02)]"
                       : "bg-slate-50/50 border-slate-100 opacity-60"
                   }`}
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">
                     <div className="flex items-center gap-2">
-                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${area.active ? "bg-[#FFF4EE] text-[#4F46E5]" : "bg-slate-100 text-slate-400"}`}>
+                      <div className={`w-8 h-8 rounded-xl flex items-center justify-center ${area.active ? "bg-[#FFF4EE] text-[#1E4E8C]" : "bg-slate-100 text-slate-400"}`}>
                         <MapPin size={16} />
                       </div>
                       <h3 className={`font-black text-sm ${area.active ? "text-slate-800" : "text-slate-400"}`}>
@@ -134,7 +134,7 @@ export default function ServiceAreas() {
                     </div>
                     <span
                       className={`text-[9px] font-extrabold px-2.5 py-0.5 rounded-full border flex items-center gap-1.5 ${area.highlight
-                          ? "bg-[#4F46E5] text-white border-[#4F46E5]"
+                          ? "bg-[#1E4E8C] text-white border-[#1E4E8C]"
                           : area.active
                             ? "bg-emerald-50 text-emerald-700 border-emerald-100"
                             : "bg-slate-200 text-slate-500 border-slate-300"
@@ -156,7 +156,7 @@ export default function ServiceAreas() {
                         <span
                           key={zone}
                           className={`px-2.5 py-1 rounded-xl text-[10px] font-bold border transition-colors ${area.active
-                              ? "bg-slate-50 border-slate-100/80 text-slate-500 group-hover:bg-[#EEF2FF] group-hover:border-[#4F46E5]/10 group-hover:text-[#4F46E5]/80"
+                              ? "bg-slate-50 border-slate-100/80 text-slate-500 group-hover:bg-[#EEF2FF] group-hover:border-[#1E4E8C]/10 group-hover:text-[#1E4E8C]/80"
                               : "bg-slate-100 border-slate-200 text-slate-400"
                             }`}
                         >
@@ -180,14 +180,14 @@ export default function ServiceAreas() {
         )}
 
         {/* CTA */}
-        <div className="mt-12 relative overflow-hidden bg-gradient-to-br from-[#FFFDFB] to-[#FFF4EE] border border-[#4F46E5]/20 rounded-[32px] p-6 md:p-8 shadow-md">
+        <div className="mt-12 relative overflow-hidden bg-gradient-to-br from-[#FFFDFB] to-[#FFF4EE] border border-[#1E4E8C]/20 rounded-[32px] p-6 md:p-8 shadow-md">
           {/* Background glows */}
-          <div className="absolute top-0 right-0 w-80 h-80 bg-[#4F46E5]/5 blur-[80px] rounded-full pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#4F46E5]/2 blur-[80px] rounded-full pointer-events-none" />
+          <div className="absolute top-0 right-0 w-80 h-80 bg-[#1E4E8C]/5 blur-[80px] rounded-full pointer-events-none" />
+          <div className="absolute bottom-0 left-0 w-80 h-80 bg-[#1E4E8C]/2 blur-[80px] rounded-full pointer-events-none" />
 
           <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
-              <span className="inline-flex items-center gap-1.5 text-[9px] font-extrabold text-[#4F46E5] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#4F46E5]/25 mb-3">
+              <span className="inline-flex items-center gap-1.5 text-[9px] font-extrabold text-[#1E4E8C] uppercase tracking-[.12em] bg-[#FFF4EE] px-3.5 py-1.5 rounded-full border border-[#1E4E8C]/25 mb-3">
                 <Sparkles className="w-3 h-3" />
                 Rapid Expansion
               </span>
@@ -198,7 +198,7 @@ export default function ServiceAreas() {
                 Leave your location details and we will notify you immediately once Rajseba verified professionals arrive in your neighborhood.
               </p>
             </div>
-            <button className="shrink-0 bg-[#4F46E5] hover:bg-[#4F46E5]/90 active:scale-[0.98] text-white text-xs font-black px-6 py-3.5 rounded-2xl shadow-lg shadow-[#4F46E5]/20 transition-all flex items-center gap-2">
+            <button className="shrink-0 bg-[#1E4E8C] hover:bg-[#1E4E8C]/90 active:scale-[0.98] text-white text-xs font-black px-6 py-3.5 rounded-2xl shadow-lg shadow-[#1E4E8C]/20 transition-all flex items-center gap-2">
               <MapPin size={14} />
               Request My Area
             </button>

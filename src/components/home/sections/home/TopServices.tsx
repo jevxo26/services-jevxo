@@ -136,19 +136,19 @@ export default function TopServices() {
     <section className="py-5 md:py-8 lg:py-10 relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute top-0 right-0 w-1/3 h-[500px] rounded-bl-full pointer-events-none" />
-      <div className="absolute -left-32 bottom-0 w-96 h-96 bg-[#4F46E5]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70 pointer-events-none" />
+      <div className="absolute -left-32 bottom-0 w-96 h-96 bg-[#1E4E8C]/5 rounded-full mix-blend-multiply filter blur-3xl opacity-70 pointer-events-none" />
 
       <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6 relative z-10">
 
         {/* Header */}
         <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-[#4F46E5] text-xs font-bold uppercase tracking-wider mb-3">
-            <Star size={13} className="fill-[#4F46E5]" />
+          <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-rose-50 border border-rose-100 text-[#1E4E8C] text-xs font-bold uppercase tracking-wider mb-3">
+            <Star size={13} className="fill-[#1E4E8C]" />
             Most Booked
           </div>
           <h2 className="text-lg md:text-xl lg:text-2xl font-medium text-slate-900 tracking-tight flex items-center justify-center gap-2">
-            <Star className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5] fill-[#4F46E5]" />
-            Top Rated <span className="text-[#4F46E5]">Services</span>
+            <Star className="w-5 h-5 md:w-6 md:h-6 text-[#1E4E8C] fill-[#1E4E8C]" />
+            Top Rated <span className="text-[#1E4E8C]">Services</span>
           </h2>
           <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
             Hand-picked professional services highly rated by our community.
@@ -210,7 +210,7 @@ export default function TopServices() {
 
                   {/* Verified badge */}
                   <div className="absolute top-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 rounded-full text-[9px] font-black tracking-wider flex items-center gap-1 shadow-sm text-slate-700 uppercase">
-                    <ShieldCheck size={12} className="text-[#4F46E5]" />
+                    <ShieldCheck size={12} className="text-[#1E4E8C]" />
                     Verified
                   </div>
 
@@ -230,7 +230,7 @@ export default function TopServices() {
                   >
                     <Heart
                       className={`w-4 h-4 transition-colors ${savedServices.some((s) => String(s.id) === String(service.id))
-                        ? "fill-[#4F46E5] text-[#4F46E5]"
+                        ? "fill-[#1E4E8C] text-[#1E4E8C]"
                         : "text-slate-500"
                         }`}
                     />
@@ -245,8 +245,8 @@ export default function TopServices() {
                         {service.name}
                       </h3>
                       <div className="flex flex-col items-end">
-                        <div className="flex items-center gap-0.5 text-[#4F46E5] font-black text-sm whitespace-nowrap">
-                          <Star className="w-3 h-3 fill-[#4F46E5]" />
+                        <div className="flex items-center gap-0.5 text-[#1E4E8C] font-black text-sm whitespace-nowrap">
+                          <Star className="w-3 h-3 fill-[#1E4E8C]" />
                           <span>{averageRating}</span>
                         </div>
                         <span className="text-[9px] text-slate-400 font-bold uppercase tracking-wider">{totalReviews} Reviews</span>
@@ -282,7 +282,7 @@ export default function TopServices() {
                       )}
                     </div>
                     <Link href={`/services/${service.id}`}>
-                      <Button className="bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-extrabold px-4 py-2 h-auto rounded-xl transition-all cursor-pointer hover:scale-105 border-none shadow-md hover:shadow-lg flex items-center gap-1.5">
+                      <Button className="bg-[#1E4E8C] hover:bg-[#123C73] text-white text-xs font-extrabold px-4 py-2 h-auto rounded-xl transition-all cursor-pointer hover:scale-105 border-none shadow-md hover:shadow-lg flex items-center gap-1.5">
                         Details <ArrowRight size={13} strokeWidth={3} />
                       </Button>
                     </Link>

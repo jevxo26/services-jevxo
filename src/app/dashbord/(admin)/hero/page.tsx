@@ -44,7 +44,7 @@ export default function HeroManagementPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center animate-in fade-in duration-200">
-        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
+        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#1E4E8C] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
@@ -70,7 +70,7 @@ export default function HeroManagementPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
             <LayoutGrid className="w-6 h-6" />
           </div>
           <div>
@@ -92,20 +92,20 @@ export default function HeroManagementPage() {
       {!isHeroesLoading && (
         <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
           {/* Card 1 */}
-          <div className="bg-white border border-slate-200/50 p-5 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex items-center justify-between relative overflow-hidden group hover:border-[#4F46E5]/20 transition-all">
+          <div className="bg-white border border-slate-200/50 p-5 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex items-center justify-between relative overflow-hidden group hover:border-[#1E4E8C]/20 transition-all">
             <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-[#EEF2FF] blur-2xl -mr-6 -mt-6 group-hover:bg-[#EEF2FF]/80 transition-colors" />
             <div className="relative space-y-1">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Slots</span>
               <h3 className="text-2xl font-black text-slate-800">{totalHeroes}</h3>
               <p className="text-[10px] font-bold text-slate-400">Hero configurations</p>
             </div>
-            <div className="relative p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+            <div className="relative p-3 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
               <LayoutGrid size={22} />
             </div>
           </div>
 
           {/* Card 2 */}
-          <div className="bg-white border border-slate-200/50 p-5 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex items-center justify-between relative overflow-hidden group hover:border-[#4F46E5]/20 transition-all">
+          <div className="bg-white border border-slate-200/50 p-5 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex items-center justify-between relative overflow-hidden group hover:border-[#1E4E8C]/20 transition-all">
             <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-rose-50/50 blur-2xl -mr-6 -mt-6 group-hover:bg-rose-50 transition-colors" />
             <div className="relative space-y-1">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">Total Images</span>
@@ -118,7 +118,7 @@ export default function HeroManagementPage() {
           </div>
 
           {/* Card 3 */}
-          <div className="bg-white border border-slate-200/50 p-5 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex items-center justify-between relative overflow-hidden group hover:border-[#4F46E5]/20 transition-all">
+          <div className="bg-white border border-slate-200/50 p-5 rounded-3xl shadow-[0_4px_20px_-4px_rgba(0,0,0,0.02)] flex items-center justify-between relative overflow-hidden group hover:border-[#1E4E8C]/20 transition-all">
             <div className="absolute top-0 right-0 w-24 h-24 rounded-full bg-indigo-50/50 blur-2xl -mr-6 -mt-6 group-hover:bg-indigo-50 transition-colors" />
             <div className="relative space-y-1">
               <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider">CTAs Enabled</span>
@@ -135,18 +135,18 @@ export default function HeroManagementPage() {
       {/* Main Content Area */}
       {isHeroesLoading ? (
         <div className="flex items-center justify-center py-20 bg-white border border-slate-100 rounded-3xl shadow-sm">
-          <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin"></div>
+          <div className="w-8 h-8 border-4 border-[#1E4E8C] border-t-transparent rounded-full animate-spin"></div>
         </div>
       ) : heroes.length === 0 ? (
         <div className="bg-white border border-slate-200/60 rounded-3xl p-16 text-center shadow-[0_8px_30px_rgb(0,0,0,0.02)] max-w-2xl mx-auto border-dashed">
-          <div className="w-16 h-16 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl flex items-center justify-center mx-auto mb-5 border border-[#4F46E5]/10 shadow-inner">
+          <div className="w-16 h-16 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl flex items-center justify-center mx-auto mb-5 border border-[#1E4E8C]/10 shadow-inner">
             <LayoutGrid size={28} />
           </div>
           <h3 className="text-lg font-black text-slate-800">{lang === "bn" ? "কোনো হিরো সেকশন তৈরি হয়নি" : "No Hero Sections Configured"}</h3>
           <p className="text-sm text-slate-400 mt-2 max-w-sm mx-auto leading-relaxed">{lang === "bn" ? "হোমপেজে প্রমোশন দেখাতে হিরো স্লাইড তৈরি করুন।" : "Create hero slides with title texts, multiple images, and redirection links to showcase promotions on the landing page."}</p>
           <button
             onClick={openCreateModal}
-            className="mt-6 bg-[#4F46E5] hover:bg-[#4338CA] text-white font-extrabold px-6 py-3 rounded-2xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/15 inline-flex items-center gap-2"
+            className="mt-6 bg-[#1E4E8C] hover:bg-[#123C73] text-white font-extrabold px-6 py-3 rounded-2xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#1E4E8C]/15 inline-flex items-center gap-2"
           >
             <PlusCircle size={16} /> {lang === "bn" ? "হিরো সেকশন তৈরি করুন" : "Create Hero Section"}
           </button>

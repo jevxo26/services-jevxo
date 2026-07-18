@@ -17,7 +17,7 @@ export default function WithdrawTable({ withdraws, setSelectedItem, setActionMod
     const map: Record<string, string> = {
       pending: "bg-amber-50 text-amber-700 border-amber-100",
       approved: "bg-emerald-50 text-emerald-700 border-emerald-100",
-      rejected: "bg-[#EEF2FF] text-[#4338CA] border-[#E0E7FF]",
+      rejected: "bg-[#EEF2FF] text-[#123C73] border-[#E0E7FF]",
     };
     const icons: Record<string, React.ReactNode> = {
       pending: <Clock size={11} />,

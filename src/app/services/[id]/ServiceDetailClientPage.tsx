@@ -22,7 +22,7 @@ const RichContent = ({ html, className = "" }: { html: string; className?: strin
     <ul className="space-y-2">
       {lines.map((line, idx) => (
         <li key={idx} className="flex items-start gap-2.5 text-sm text-slate-600 leading-relaxed">
-          <span className="w-1.5 h-1.5 rounded-full bg-[#4F46E5] mt-2 shrink-0" />
+          <span className="w-1.5 h-1.5 rounded-full bg-[#1E4E8C] mt-2 shrink-0" />
           <span>{line.replace(/^[•\-*]\s*/, "")}</span>
         </li>
       ))}
@@ -39,10 +39,10 @@ const FAQItem = ({ question, answer }: { question: string, answer: string }) => 
     <div className="border-b border-slate-100 last:border-b-0 py-4">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between text-left font-bold text-slate-800 hover:text-[#4F46E5] transition-colors gap-4 py-2 focus:outline-none"
+        className="w-full flex items-center justify-between text-left font-bold text-slate-800 hover:text-[#1E4E8C] transition-colors gap-4 py-2 focus:outline-none"
       >
         <span className="text-sm md:text-base">{question}</span>
-        <span className={`w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#4F46E5]/10 text-[#4F46E5]' : 'text-slate-400'}`}>
+        <span className={`w-6 h-6 rounded-full bg-slate-50 flex items-center justify-center shrink-0 transition-transform duration-300 ${isOpen ? 'rotate-180 bg-[#1E4E8C]/10 text-[#1E4E8C]' : 'text-slate-400'}`}>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
           </svg>
@@ -198,7 +198,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-slate-50/50">
         <div className="flex flex-col items-center gap-3">
-          <Loader2 className="w-10 h-10 animate-spin text-[#4F46E5]" />
+          <Loader2 className="w-10 h-10 animate-spin text-[#1E4E8C]" />
           <p className="text-sm font-semibold text-slate-500">Loading service details...</p>
         </div>
       </div>
@@ -216,7 +216,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
           </div>
           <h2 className="text-2xl font-black text-slate-800 mb-2">Service Not Found</h2>
           <p className="text-sm text-slate-500 mb-6 font-medium">We couldn't retrieve details for the requested service.</p>
-          <Link href="/services" className="inline-flex items-center justify-center gap-2 bg-[#4F46E5] hover:bg-[#4338CA] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md cursor-pointer">
+          <Link href="/services" className="inline-flex items-center justify-center gap-2 bg-[#1E4E8C] hover:bg-[#123C73] text-white px-6 py-3 rounded-full font-bold text-sm transition-all shadow-md cursor-pointer">
             <ArrowLeft size={16} /> Back to Services
           </Link>
         </div>
@@ -254,7 +254,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
                 key={tab.id}
                 onClick={() => state.scrollToSection(tab.id)}
                 className={`text-xs font-bold px-4 py-2.5 rounded-full transition-all duration-300 shrink-0 cursor-pointer ${state.activeTab === tab.id
-                  ? "text-white bg-[#4F46E5] shadow-md shadow-rose-100"
+                  ? "text-white bg-[#1E4E8C] shadow-md shadow-rose-100"
                   : "text-slate-400 hover:text-slate-700 hover:bg-slate-50"
                   }`}
               >
@@ -293,7 +293,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
               {service.overview && (
                 <div id="overview" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
                   <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <span className="w-1.5 h-6 bg-[#4F46E5] rounded-full" />
+                    <span className="w-1.5 h-6 bg-[#1E4E8C] rounded-full" />
                     Overview
                   </h3>
                   <RichContent html={service.overview} />
@@ -303,7 +303,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
               {service.details && (
                 <div id="details" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
                   <h3 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
-                    <span className="w-1.5 h-6 bg-[#4F46E5] rounded-full" />
+                    <span className="w-1.5 h-6 bg-[#1E4E8C] rounded-full" />
                     Key Features & Details
                   </h3>
                   <RichContent html={service.details} />
@@ -350,7 +350,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
                   {service.faq && service.faq.length > 0 && (
                     <div id="faq" className="bg-white rounded-3xl p-6 md:p-8 border border-slate-100 shadow-[0_8px_30px_rgba(0,0,0,0.02)]">
                       <h3 className="text-lg font-bold text-slate-800 mb-2 flex items-center gap-2">
-                        <span className="w-1.5 h-5 bg-[#4F46E5] rounded-full" />
+                        <span className="w-1.5 h-5 bg-[#1E4E8C] rounded-full" />
                         FAQ
                       </h3>
                       <p className="text-xs text-slate-400 mb-4 font-medium">Common questions about this service</p>
@@ -393,9 +393,9 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
             exit={{ y: 100, opacity: 0 }}
             className="fixed bottom-[88px] md:bottom-6 left-0 right-0 z-40 px-4 pointer-events-none flex justify-center"
           >
-            <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/50 shadow-[0_12px_40px_rgba(79, 70, 229,0.15)] rounded-[24px] p-3 flex items-center justify-between gap-6 w-full max-w-md animate-none">
+            <div className="pointer-events-auto bg-white/95 backdrop-blur-xl border border-slate-200/50 shadow-[0_12px_40px_rgba(30, 78, 140,0.15)] rounded-[24px] p-3 flex items-center justify-between gap-6 w-full max-w-md animate-none">
               <div className="flex items-center gap-3 min-w-0 pl-1">
-                <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] text-[#4F46E5] flex items-center justify-center shrink-0 border border-[#4F46E5]/10 animate-none">
+                <div className="w-10 h-10 rounded-xl bg-[#EEF2FF] text-[#1E4E8C] flex items-center justify-center shrink-0 border border-[#1E4E8C]/10 animate-none">
                   <ShoppingCart size={18} className="stroke-[2.5]" />
                 </div>
                 <div className="min-w-0">
@@ -406,7 +406,7 @@ export default function ServiceDetailClientPage({ id }: { id: string }) {
               <button
                 type="button"
                 onClick={() => state.setIsModalOpen(true)}
-                className="px-6 py-3 rounded-xl text-xs font-black text-white bg-[#4F46E5] hover:bg-[#4338CA] transition-all duration-250 shadow-md active:scale-95 shrink-0 cursor-pointer"
+                className="px-6 py-3 rounded-xl text-xs font-black text-white bg-[#1E4E8C] hover:bg-[#123C73] transition-all duration-250 shadow-md active:scale-95 shrink-0 cursor-pointer"
               >
                 Proceed to Book
               </button>

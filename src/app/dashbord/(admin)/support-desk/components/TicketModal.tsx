@@ -73,9 +73,9 @@ export default function TicketModal({ isOpen, onClose }: TicketModalProps) {
       <div className="relative bg-white rounded-3xl shadow-2xl w-full max-w-lg overflow-hidden animate-in zoom-in-95 duration-150">
         {/* Header */}
         <div className="relative px-6 pt-6 pb-4 border-b border-slate-100 overflow-hidden">
-          <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-[#4F46E5]/10 to-transparent rounded-full blur-2xl pointer-events-none" />
+          <div className="absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-[#1E4E8C]/10 to-transparent rounded-full blur-2xl pointer-events-none" />
           <div className="flex items-center gap-3 relative">
-            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#4F46E5] to-[#4338CA] flex items-center justify-center shadow-lg shadow-[#4F46E5]/25">
+            <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#1E4E8C] to-[#123C73] flex items-center justify-center shadow-lg shadow-[#1E4E8C]/25">
               <Ticket size={18} className="text-white" />
             </div>
             <div>
@@ -100,14 +100,14 @@ export default function TicketModal({ isOpen, onClose }: TicketModalProps) {
           {/* Subject */}
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">
-              {lang === "bn" ? "বিষয়বস্তু" : "Ticket Subject"} <span className="text-[#4F46E5]">*</span>
+              {lang === "bn" ? "বিষয়বস্তু" : "Ticket Subject"} <span className="text-[#1E4E8C]">*</span>
             </label>
             <input
               type="text"
               value={form.subject}
               onChange={(e) => setForm({ ...form, subject: e.target.value })}
               placeholder={lang === "bn" ? "সমস্যার সংক্ষিপ্ত বিবরণ..." : "Brief summary of the issue..."}
-              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#4F46E5] focus:ring-4 focus:ring-[#4F46E5]/10 transition-all"
+              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#1E4E8C] focus:ring-4 focus:ring-[#1E4E8C]/10 transition-all"
             />
           </div>
 
@@ -120,7 +120,7 @@ export default function TicketModal({ isOpen, onClose }: TicketModalProps) {
               <select
                 value={form.category}
                 onChange={(e) => setForm({ ...form, category: e.target.value })}
-                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 text-sm font-semibold text-slate-800 outline-none focus:border-[#4F46E5] transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-3 py-2.5 text-sm font-semibold text-slate-800 outline-none focus:border-[#1E4E8C] transition-all"
               >
                 {categories.map((c) => (
                   <option key={c.value} value={c.value}>{c.label}</option>
@@ -154,14 +154,14 @@ export default function TicketModal({ isOpen, onClose }: TicketModalProps) {
           {/* Description */}
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">
-              {lang === "bn" ? "বিস্তারিত বিবরণ" : "Description"} <span className="text-[#4F46E5]">*</span>
+              {lang === "bn" ? "বিস্তারিত বিবরণ" : "Description"} <span className="text-[#1E4E8C]">*</span>
             </label>
             <textarea
               rows={4}
               value={form.description}
               onChange={(e) => setForm({ ...form, description: e.target.value })}
               placeholder={lang === "bn" ? "সমস্যার বিস্তারিত বিবরণ দিন..." : "Provide detailed information about the issue..."}
-              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#4F46E5] focus:ring-4 focus:ring-[#4F46E5]/10 transition-all resize-none"
+              className="w-full bg-slate-50 border border-slate-200 rounded-2xl px-4 py-2.5 text-sm font-semibold text-slate-800 placeholder:text-slate-400 outline-none focus:border-[#1E4E8C] focus:ring-4 focus:ring-[#1E4E8C]/10 transition-all resize-none"
             />
           </div>
         </form>
@@ -178,7 +178,7 @@ export default function TicketModal({ isOpen, onClose }: TicketModalProps) {
           <button
             onClick={handleSubmit}
             disabled={isSubmitting}
-            className="flex-1 py-2.5 rounded-2xl bg-gradient-to-r from-[#4F46E5] to-[#4338CA] text-white text-sm font-black shadow-lg shadow-[#4F46E5]/25 hover:opacity-90 transition-all disabled:opacity-60 flex items-center justify-center gap-2"
+            className="flex-1 py-2.5 rounded-2xl bg-gradient-to-r from-[#1E4E8C] to-[#123C73] text-white text-sm font-black shadow-lg shadow-[#1E4E8C]/25 hover:opacity-90 transition-all disabled:opacity-60 flex items-center justify-center gap-2"
           >
             {isSubmitting ? (
               <><Loader2 size={15} className="animate-spin" /> {lang === "bn" ? "তৈরি হচ্ছে..." : "Creating..."}</>

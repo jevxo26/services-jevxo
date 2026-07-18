@@ -64,13 +64,13 @@ const Testimonials = () => {
 
   const Header = () => (
     <div className="text-center max-w-3xl mx-auto mb-8 md:mb-14">
-      <div className="inline-flex items-center gap-2 bg-[#4F46E5]/10 border border-[#4F46E5]/20 text-[#4F46E5] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
+      <div className="inline-flex items-center gap-2 bg-[#1E4E8C]/10 border border-[#1E4E8C]/20 text-[#1E4E8C] px-3.5 py-1.5 rounded-full text-xs font-bold mb-3">
         <MessageSquare size={13} />
         Customer Reviews
       </div>
       <h2 className="text-xl md:text-2xl lg:text-3xl font-semibold text-slate-900 tracking-tight leading-tight flex items-center justify-center gap-2">
-        <MessageSquare className="w-5 h-5 md:w-6 md:h-6 text-[#4F46E5]" />
-        What our clients <span className="text-[#4F46E5]">say about us</span>
+        <MessageSquare className="w-5 h-5 md:w-6 md:h-6 text-[#1E4E8C]" />
+        What our clients <span className="text-[#1E4E8C]">say about us</span>
       </h2>
       <p className="mt-3 text-slate-500 text-sm md:text-base max-w-2xl mx-auto leading-relaxed">
         Trusted by thousands of happy homes across Bangladesh.
@@ -84,7 +84,7 @@ const Testimonials = () => {
         <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
           <Header />
           <div className="flex justify-center py-12">
-            <Loader2 className="w-7 h-7 animate-spin text-[#4F46E5]" />
+            <Loader2 className="w-7 h-7 animate-spin text-[#1E4E8C]" />
           </div>
         </div>
       </div>
@@ -100,7 +100,7 @@ const Testimonials = () => {
 
         {isLoading && (
           <div className="flex justify-center py-12">
-            <Loader2 className="w-7 h-7 animate-spin text-[#4F46E5]" />
+            <Loader2 className="w-7 h-7 animate-spin text-[#1E4E8C]" />
           </div>
         )}
 
@@ -140,7 +140,7 @@ const Testimonials = () => {
                       className="relative bg-white rounded-3xl border border-blue-200 p-7 shadow-sm hover:shadow-lg hover:border-blue-500 hover:shadow-blue-100 transition-all duration-300 flex flex-col min-h-[250px]"
                     >
                       {/* Decorative quote mark */}
-                      <span className="absolute top-4 right-6 text-8xl font-serif leading-none select-none pointer-events-none text-[#4F46E5]/8">
+                      <span className="absolute top-4 right-6 text-8xl font-serif leading-none select-none pointer-events-none text-[#1E4E8C]/8">
                         "
                       </span>
 
@@ -157,7 +157,7 @@ const Testimonials = () => {
                       </p>
 
                       {/* Accent line */}
-                      <div className="w-10 h-0.5 bg-[#4F46E5]/30 mb-5" />
+                      <div className="w-10 h-0.5 bg-[#1E4E8C]/30 mb-5" />
 
                       {/* Author */}
                       <div className="flex items-center gap-3">

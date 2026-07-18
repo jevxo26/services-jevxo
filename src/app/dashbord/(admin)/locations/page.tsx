@@ -43,7 +43,7 @@ export default function AdminLocationsPage() {
   if (role !== "superadmin") {
     return (
       <div className="min-h-[60vh] flex flex-col items-center justify-center p-8 bg-white border border-slate-100 rounded-3xl shadow-sm text-center">
-        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#4F46E5] mb-4">
+        <div className="p-4 bg-[#EEF2FF] rounded-2xl text-[#1E4E8C] mb-4">
           <ShieldAlert size={48} />
         </div>
         <h3 className="text-xl font-bold text-slate-800">{lang === "bn" ? "অ্যাক্সেস অস্বীকৃত" : "Access Denied"}</h3>
@@ -56,7 +56,7 @@ export default function AdminLocationsPage() {
     <div className="space-y-6">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
             <MapPin className="w-6 h-6" />
           </div>
           <div>
@@ -95,7 +95,7 @@ export default function AdminLocationsPage() {
       <div>
         {isLoading ? (
           <div className="py-20 text-center">
-            <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin mx-auto" />
+            <div className="w-8 h-8 border-4 border-[#1E4E8C] border-t-transparent rounded-full animate-spin mx-auto" />
           </div>
         ) : (
           <LocationTable

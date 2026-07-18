@@ -7,10 +7,10 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  --brand-primary: #4F46E5;
-  --brand-primary-light: #818CF8;
-  --brand-primary-dark: #4338CA;
-  --brand-accent: #EEF2FF;
+  --brand-primary: #1E4E8C;
+  --brand-primary-light: #5B92E5;
+  --brand-primary-dark: #03172E;
+  --brand-accent: #E6F0FA;
   --brand-hero-bg: #fef7f5;
   --text-primary: #1a1a1a;
   --text-secondary: #6b7280;
@@ -70,11 +70,23 @@
   --radius-3xl: calc(var(--radius) * 2.2);
   --radius-4xl: calc(var(--radius) * 2.6);
 
-  --color-brand-primary: #4F46E5;
-  --color-brand-light: #A5B4FC;
-  --color-brand-dark: #4338CA;
-  --color-brand-bg: #EEF2FF;
-  --color-brand-hover: #E0E7FF;
+  --color-brand-primary: #1E4E8C;
+  --color-brand-light: #5B92E5;
+  --color-brand-dark: #03172E;
+  --color-brand-bg: #E6F0FA;
+  --color-brand-hover: #D3E4F6;
+
+  --color-indigo-50: #F0F4FA;
+  --color-indigo-100: #E1EBF5;
+  --color-indigo-200: #C3D5EB;
+  --color-indigo-300: #9CBAE0;
+  --color-indigo-400: #6F9AD0;
+  --color-indigo-500: #4278BC;
+  --color-indigo-600: #1E4E8C;
+  --color-indigo-700: #123C73;
+  --color-indigo-800: #082C54;
+  --color-indigo-900: #04162B;
+  --color-indigo-950: #020B16;
 
   --color-premium-slate: #0F172A;
   --color-premium-gray: #64748B;
@@ -85,7 +97,7 @@
   --card: oklch(1 0 0);
   --card-foreground: oklch(0.145 0 0);
 
-  --primary: #4F46E5;
+  --primary: #1E4E8C;
   --primary-foreground: oklch(0.985 0 0);
 
   --secondary: oklch(0.97 0 0);
@@ -94,12 +106,12 @@
   --muted: oklch(0.97 0 0);
   --muted-foreground: oklch(0.556 0 0);
 
-  --accent: #4F46E5;
+  --accent: #1E4E8C;
   --accent-foreground: oklch(0.985 0 0);
 
   --border: oklch(0.922 0 0);
   --input: oklch(0.922 0 0);
-  --ring: #4F46E5;
+  --ring: #1E4E8C;
 
   --radius: 0.625rem;
 
@@ -119,18 +131,18 @@
 
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: #4F46E5;
+  --sidebar-primary: #1E4E8C;
   --sidebar-primary-foreground: oklch(0.985 0 0);
   --sidebar-accent: oklch(0.97 0 0);
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: #4F46E5;
+  --sidebar-ring: #1E4E8C;
 }
 
 .dark {
   --background: oklch(0.145 0 0);
   --foreground: oklch(0.985 0 0);
-  --primary: #4F46E5;
+  --primary: #1E4E8C;
   --primary-foreground: oklch(0.205 0 0);
   --secondary: oklch(0.269 0 0);
   --muted: oklch(0.269 0 0);
@@ -140,12 +152,12 @@
   --popover-foreground: oklch(0.985 0 0);
   --secondary-foreground: oklch(0.985 0 0);
   --muted-foreground: oklch(0.708 0 0);
-  --accent: #4F46E5;
+  --accent: #1E4E8C;
   --accent-foreground: oklch(0.985 0 0);
   --destructive: oklch(0.704 0.191 22.216);
   --border: oklch(1 0 0 / 10%);
   --input: oklch(1 0 0 / 15%);
-  --ring: #4F46E5;
+  --ring: #1E4E8C;
 }
 
 /* ============== Bai Jamjuree Font ============== */
@@ -191,7 +203,7 @@ body {
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background: #4F46E5;
+    background: #1E4E8C;
   }
 }
 
@@ -236,7 +248,7 @@ body {
   }
 
   &::-webkit-scrollbar-thumb:hover {
-    background: #4F46E5;
+    background: #1E4E8C;
   }
 }
 
@@ -447,15 +459,15 @@ html.dashboard-html {
 }
 
 .custom-sidebar-scrollbar::-webkit-scrollbar-thumb {
-  background: rgba(79, 70, 229, 0.15) !important;
+  background: rgba(30, 78, 140, 0.15) !important;
   border-radius: 9999px !important;
 }
 
 .custom-sidebar-scrollbar::-webkit-scrollbar-thumb:hover {
-  background: rgba(79, 70, 229, 0.35) !important;
+  background: rgba(30, 78, 140, 0.35) !important;
 }
 
 .custom-sidebar-scrollbar {
   scrollbar-width: thin !important;
-  scrollbar-color: rgba(79, 70, 229, 0.15) transparent !important;
+  scrollbar-color: rgba(30, 78, 140, 0.15) transparent !important;
 }

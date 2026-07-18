@@ -27,11 +27,11 @@ export default function RegisterPage() {
         {/* Left Side - Hero Section */}
         <div className="hidden md:flex flex-col justify-center space-y-8 pl-4 lg:pl-8">
           <motion.div variants={itemVariants}>
-            <div className="inline-flex items-center gap-2 bg-[#4F46E5] text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider mb-6">
+            <div className="inline-flex items-center gap-2 bg-[#1E4E8C] text-white px-4 py-1.5 rounded-full text-xs font-bold tracking-wider mb-6">
               {REGISTER_CONTENT.badge}
             </div>
             <h1 className="text-4xl lg:text-5xl font-extrabold text-slate-900 leading-tight tracking-tight">
-              {REGISTER_CONTENT.heroTitle} <span className="text-[#4F46E5] block lg:inline">{REGISTER_CONTENT.heroAccent}</span>
+              {REGISTER_CONTENT.heroTitle} <span className="text-[#1E4E8C] block lg:inline">{REGISTER_CONTENT.heroAccent}</span>
             </h1>
             <p className="mt-4 text-base lg:text-lg text-slate-600 max-w-md leading-relaxed">{REGISTER_CONTENT.heroDesc}</p>
           </motion.div>
@@ -42,7 +42,7 @@ export default function RegisterPage() {
               const Icon = benefit.icon;
               return (
                 <motion.div key={i} variants={itemVariants} className="flex gap-4 items-start">
-                  <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 text-[#4F46E5] shadow-sm">
+                  <div className="w-12 h-12 rounded-2xl bg-white border border-slate-100 flex items-center justify-center flex-shrink-0 text-[#1E4E8C] shadow-sm">
                     <Icon className="w-5 h-5" />
                   </div>
                   <div>
@@ -72,7 +72,7 @@ export default function RegisterPage() {
                 <label className="block text-xs md:text-sm font-bold text-slate-700">{REGISTER_CONTENT.fields.nameLabel}</label>
                 <div className="relative">
                   <User className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                  <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.namePlaceholder} className="w-full pl-11 pr-4 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
+                  <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.namePlaceholder} className="w-full pl-11 pr-4 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#1E4E8C] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
                 </div>
               </div>
 
@@ -80,7 +80,7 @@ export default function RegisterPage() {
                 <label className="block text-xs md:text-sm font-bold text-slate-700">{REGISTER_CONTENT.fields.emailLabel}</label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.emailPlaceholder} className="w-full pl-11 pr-4 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
+                  <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.emailPlaceholder} className="w-full pl-11 pr-4 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#1E4E8C] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
                 </div>
               </div>
 
@@ -88,7 +88,7 @@ export default function RegisterPage() {
                 <label className="block text-xs md:text-sm font-bold text-slate-700">{REGISTER_CONTENT.fields.phoneLabel}</label>
                 <div className="relative">
                   <Phone className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.phonePlaceholder} className="w-full pl-11 pr-4 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
+                  <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.phonePlaceholder} className="w-full pl-11 pr-4 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#1E4E8C] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
                 </div>
               </div>
 
@@ -96,14 +96,14 @@ export default function RegisterPage() {
                 <label className="block text-xs md:text-sm font-bold text-slate-700">{REGISTER_CONTENT.fields.passLabel}</label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 h-4 w-4 text-slate-400" />
-                  <input type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.passPlaceholder} className="w-full pl-11 pr-12 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#4F46E5] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
+                  <input type={showPassword ? "text" : "password"} name="password" value={formData.password} onChange={handleChange} placeholder={REGISTER_CONTENT.fields.passPlaceholder} className="w-full pl-11 pr-12 py-3 bg-[#F9F9FB] border border-slate-200/50 rounded-xl text-sm placeholder-slate-400 text-slate-800 outline-none focus:bg-white focus:border-[#1E4E8C] focus:ring-2 focus:ring-red-100 transition-all duration-300" required />
                   <Button variant="ghost" type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-2 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600 focus:outline-none p-2 h-auto hover:bg-transparent">
                     {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
                   </Button>
                 </div>
               </div>
 
-              <Button type="submit" className="w-full bg-[#4F46E5] hover:bg-[#4338CA] text-white font-bold py-4 h-auto rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md active:scale-[0.985] text-base mt-6 cursor-pointer">
+              <Button type="submit" className="w-full bg-[#1E4E8C] hover:bg-[#123C73] text-white font-bold py-4 h-auto rounded-xl transition-all duration-200 flex items-center justify-center gap-2 shadow-sm hover:shadow-md active:scale-[0.985] text-base mt-6 cursor-pointer">
                 {REGISTER_CONTENT.submitText} <ArrowRight className="w-4.5 h-4.5" />
               </Button>
             </form>
@@ -111,11 +111,11 @@ export default function RegisterPage() {
             <div className="mt-8 text-center text-xs md:text-sm">
               <p className="text-slate-500 leading-relaxed">
                 {REGISTER_CONTENT.termsText}
-                <Link href="#" className="text-[#4F46E5] font-bold hover:underline">{REGISTER_CONTENT.termsLink}</Link> and <Link href="#" className="text-[#4F46E5] font-bold hover:underline">{REGISTER_CONTENT.privacyLink}</Link>.
+                <Link href="#" className="text-[#1E4E8C] font-bold hover:underline">{REGISTER_CONTENT.termsLink}</Link> and <Link href="#" className="text-[#1E4E8C] font-bold hover:underline">{REGISTER_CONTENT.privacyLink}</Link>.
               </p>
               <p className="mt-4 text-slate-550 font-semibold">
                 {REGISTER_CONTENT.alreadyHaveText}
-                <Link href="/login" className="text-[#4F46E5] font-extrabold hover:underline">{REGISTER_CONTENT.loginLink}</Link>
+                <Link href="/login" className="text-[#1E4E8C] font-extrabold hover:underline">{REGISTER_CONTENT.loginLink}</Link>
               </p>
             </div>
           </div>

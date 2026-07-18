@@ -322,7 +322,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
       />
 
       <div
-        className={`bg-[#EEF2FF] text-slate-800 border-r-[2px] border-[#4F46E5]/15 shadow-[6px_0_24px_rgba(79, 70, 229,0.02)] transition-all duration-300 flex flex-col h-screen fixed inset-y-0 left-0 z-[60] md:relative md:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
+        className={`bg-[#EEF2FF] text-slate-800 border-r-[2px] border-[#1E4E8C]/15 shadow-[6px_0_24px_rgba(30, 78, 140,0.02)] transition-all duration-300 flex flex-col h-screen fixed inset-y-0 left-0 z-[60] md:relative md:translate-x-0 ${open ? "translate-x-0" : "-translate-x-full md:translate-x-0"
           } ${collapsed ? "w-20" : "w-64"} overflow-hidden`}
       >
         {/* Repeating background icons pattern inside sidebar */}
@@ -340,7 +340,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
               className={collapsed ? "h-8 w-8 object-contain shrink-0" : "h-11 w-auto object-contain shrink-0"}
             />
             {!collapsed && (
-              <span className="text-[9px] text-[#4F46E5] font-black tracking-wider uppercase bg-[#EEF2FF] border border-[#4F46E5]/20 px-2.5 py-0.5 rounded-full shrink-0">
+              <span className="text-[9px] text-[#1E4E8C] font-black tracking-wider uppercase bg-[#EEF2FF] border border-[#1E4E8C]/20 px-2.5 py-0.5 rounded-full shrink-0">
                 {roleName}
               </span>
             )}
@@ -360,7 +360,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                 placeholder={lang === "bn" ? "মেনু খুঁজুন..." : "Search menu..."}
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full bg-white border border-slate-200/80 rounded-2xl py-2.5 pl-10 pr-4 text-xs font-bold text-slate-700 placeholder:text-slate-400/80 outline-none focus:border-[#4F46E5] focus:ring-4 focus:ring-[#4F46E5]/10 transition-all shadow-sm focus:shadow-[0_0_20px_-3px_rgba(79, 70, 229,0.15)]"
+                className="w-full bg-white border border-slate-200/80 rounded-2xl py-2.5 pl-10 pr-4 text-xs font-bold text-slate-700 placeholder:text-slate-400/80 outline-none focus:border-[#1E4E8C] focus:ring-4 focus:ring-[#1E4E8C]/10 transition-all shadow-sm focus:shadow-[0_0_20px_-3px_rgba(30, 78, 140,0.15)]"
               />
             </div>
           </div>
@@ -390,8 +390,8 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                     href={group.href}
                     onClick={onClose}
                     className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group border relative ${isDirectActive
-                      ? "bg-gradient-to-r from-[#4F46E5] to-[#818CF8] text-white font-extrabold shadow-md shadow-[#4F46E5]/20 scale-[1.01] border-transparent"
-                      : "border-transparent text-slate-600 hover:bg-[#4F46E5]/5 hover:text-[#4F46E5] hover:translate-x-1 font-semibold"
+                      ? "bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] text-white font-extrabold shadow-md shadow-[#1E4E8C]/20 scale-[1.01] border-transparent"
+                      : "border-transparent text-slate-600 hover:bg-[#1E4E8C]/5 hover:text-[#1E4E8C] hover:translate-x-1 font-semibold"
                       }`}
                   >
                     {isDirectActive && (
@@ -405,13 +405,13 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                     onClick={handleToggle}
                     className={`w-full flex items-center justify-between px-4 py-3 rounded-xl transition-all duration-200 group border relative ${containsActive
                       ? isExpanded
-                        ? "bg-[#EEF2FF] border-[#4F46E5]/15 text-[#4F46E5] font-extrabold shadow-sm"
-                        : "bg-gradient-to-r from-[#4F46E5] to-[#818CF8] text-white font-extrabold shadow-md shadow-[#4F46E5]/20 scale-[1.01] border-transparent"
-                      : "border-transparent text-slate-600 hover:bg-[#4F46E5]/5 hover:text-[#4F46E5] hover:translate-x-1 font-semibold"
+                        ? "bg-[#EEF2FF] border-[#1E4E8C]/15 text-[#1E4E8C] font-extrabold shadow-sm"
+                        : "bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] text-white font-extrabold shadow-md shadow-[#1E4E8C]/20 scale-[1.01] border-transparent"
+                      : "border-transparent text-slate-600 hover:bg-[#1E4E8C]/5 hover:text-[#1E4E8C] hover:translate-x-1 font-semibold"
                       }`}
                   >
                     {containsActive && isExpanded && (
-                      <div className="absolute left-1.5 w-1 h-5 bg-[#4F46E5] rounded-full" />
+                      <div className="absolute left-1.5 w-1 h-5 bg-[#1E4E8C] rounded-full" />
                     )}
                     {containsActive && !isExpanded && (
                       <div className="absolute left-1.5 w-1 h-5 bg-white rounded-full" />
@@ -422,7 +422,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                         className={
                           containsActive
                             ? isExpanded
-                              ? "text-[#4F46E5]"
+                              ? "text-[#1E4E8C]"
                               : "text-white"
                             : "text-slate-400 group-hover:text-slate-600 transition-colors"
                         }
@@ -434,7 +434,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                         size={14}
                         className={`transition-transform duration-200 ${containsActive
                           ? isExpanded
-                            ? "text-[#4F46E5]/70"
+                            ? "text-[#1E4E8C]/70"
                             : "text-white/70"
                           : "text-slate-400"
                           } ${isExpanded ? "rotate-180" : ""}`}
@@ -455,7 +455,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                         className="relative pl-6 space-y-1 overflow-hidden"
                       >
                         {/* Parent vertical timeline trunk */}
-                        <div className="absolute left-[27px] top-0 bottom-4 w-[1.5px] bg-[#4F46E5]/25" />
+                        <div className="absolute left-[27px] top-0 bottom-4 w-[1.5px] bg-[#1E4E8C]/25" />
 
                         {group.children.map((child, cIdx) => {
                           const isChildActive = pathname === child.href;
@@ -465,12 +465,12 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
                               href={child.href}
                               onClick={onClose}
                               className={`flex items-center gap-2.5 pl-9 pr-3 py-2.5 rounded-xl text-[13px] font-bold transition-all relative group border ${isChildActive
-                                ? "bg-gradient-to-r from-[#4F46E5] to-[#818CF8] text-white shadow-md shadow-[#4F46E5]/15 border-transparent scale-[1.01]"
-                                : "border-transparent text-slate-500 hover:bg-[#4F46E5]/5 hover:text-[#4F46E5] hover:translate-x-1.5"
+                                ? "bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] text-white shadow-md shadow-[#1E4E8C]/15 border-transparent scale-[1.01]"
+                                : "border-transparent text-slate-500 hover:bg-[#1E4E8C]/5 hover:text-[#1E4E8C] hover:translate-x-1.5"
                                 }`}
                             >
                               {/* Branch hook curve SVG-style path connector */}
-                              <div className="absolute left-[27px] top-0 w-3.5 h-[22px] border-l-[1.5px] border-b-[1.5px] border-[#4F46E5]/30 rounded-bl-lg pointer-events-none" />
+                              <div className="absolute left-[27px] top-0 w-3.5 h-[22px] border-l-[1.5px] border-b-[1.5px] border-[#1E4E8C]/30 rounded-bl-lg pointer-events-none" />
 
                               {isChildActive && (
                                 <div className="absolute left-[25px] top-[14px] w-1.5 h-1.5 bg-[#818CF8] rounded-full ring-2 ring-white z-10" />
@@ -498,14 +498,14 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         {/* Refer & Earn Promo Card (For client role in expanded state) */}
         {role === "client" && !collapsed && (
           <div className="bg-[#EEF2FF]/80 backdrop-blur-md border border-slate-100 p-4 rounded-3xl shadow-sm mb-4 mx-4 relative z-10">
-            <div className="w-9 h-9 bg-[#EEF2FF] border border-[#E0E7FF] rounded-full flex items-center justify-center text-[#4F46E5] mx-auto">
+            <div className="w-9 h-9 bg-[#EEF2FF] border border-[#E0E7FF] rounded-full flex items-center justify-center text-[#1E4E8C] mx-auto">
               <Gift size={16} />
             </div>
             <h4 className="text-xs font-bold text-slate-800 text-center mt-2">Refer & Earn</h4>
             <p className="text-[10px] text-slate-400 text-center mt-1 max-w-[170px] mx-auto leading-relaxed">
               Invite friends and get 500 BDT off your next service.
             </p>
-            <button className="mt-3 bg-[#4F46E5] hover:opacity-95 text-white font-extrabold text-[10px] py-2 px-4 rounded-xl w-full text-center shadow-md shadow-[#4F46E5]/10 active:scale-[0.98] transition-all">
+            <button className="mt-3 bg-[#1E4E8C] hover:opacity-95 text-white font-extrabold text-[10px] py-2 px-4 rounded-xl w-full text-center shadow-md shadow-[#1E4E8C]/10 active:scale-[0.98] transition-all">
               Invite Now
             </button>
           </div>
@@ -515,7 +515,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         <div className="p-4 border-t border-slate-100 relative z-10 flex flex-col gap-2">
           <button
             onClick={() => dispatch(toggleLanguage())}
-            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#4F46E5] w-full rounded-xl hover:bg-[#4F46E5]/5 transition-all duration-200"
+            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#1E4E8C] w-full rounded-xl hover:bg-[#1E4E8C]/5 transition-all duration-200"
           >
             <Languages size={20} />
             {!collapsed && <span className="text-sm font-semibold">{lang === "bn" ? "Switch to English" : "বাংলায় পরিবর্তন করুন"}</span>}
@@ -523,7 +523,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
 
           <button
             onClick={handleLogout}
-            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#4338CA] w-full rounded-xl hover:bg-[#4F46E5]/5 transition-all duration-200"
+            className="flex items-center gap-3 px-4 py-3 text-slate-500 hover:text-[#123C73] w-full rounded-xl hover:bg-[#1E4E8C]/5 transition-all duration-200"
           >
             <LogOut size={20} />
             {!collapsed && <span className="text-sm font-semibold">{lang === "bn" ? "লগআউট" : "Logout"}</span>}

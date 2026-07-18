@@ -69,7 +69,7 @@ export function MobileBookingDrawer({
 
             <div className="px-6 pb-4 border-b border-slate-100 flex items-center justify-between shrink-0">
               <h3 className="text-base font-black text-slate-900 flex items-center gap-2">
-                <Calendar size={18} className="text-[#4F46E5]" />
+                <Calendar size={18} className="text-[#1E4E8C]" />
                 Complete Booking Info
               </h3>
               <button onClick={onClose} className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 p-2 rounded-full transition cursor-pointer">
@@ -80,8 +80,8 @@ export function MobileBookingDrawer({
             <form onSubmit={onSubmit} className="flex-1 flex flex-col min-h-0 overflow-hidden">
               <div className="overflow-y-auto flex-1 p-5 space-y-5 [&::-webkit-scrollbar]:w-0.5">
                 {cartItems.length > 0 && (
-                  <div className="bg-[#EEF2FF] border border-[#4F46E5]/10 rounded-2xl p-4 space-y-3">
-                    <div className="flex justify-between items-center text-xs font-bold text-[#4F46E5] uppercase tracking-wider pb-2 border-b border-[#4F46E5]/10">
+                  <div className="bg-[#EEF2FF] border border-[#1E4E8C]/10 rounded-2xl p-4 space-y-3">
+                    <div className="flex justify-between items-center text-xs font-bold text-[#1E4E8C] uppercase tracking-wider pb-2 border-b border-[#1E4E8C]/10">
                       <span className="flex items-center gap-1"><ShoppingCart size={12} />Selected Services ({cartItemCount})</span>
                       <button type="button" onClick={onClearCart} className="text-slate-400 hover:text-rose-500">Clear All</button>
                     </div>
@@ -94,9 +94,9 @@ export function MobileBookingDrawer({
                           </div>
                           <div className="flex items-center gap-2 shrink-0">
                             <div className="flex items-center gap-0.5 bg-white border border-slate-100 rounded-lg p-0.5">
-                              <button type="button" onClick={() => onUpdateQuantity(item.id, -1)} className="w-5 h-5 rounded-md text-[#4F46E5] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"><Minus size={10} strokeWidth={3} /></button>
+                              <button type="button" onClick={() => onUpdateQuantity(item.id, -1)} className="w-5 h-5 rounded-md text-[#1E4E8C] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"><Minus size={10} strokeWidth={3} /></button>
                               <span className="w-5 text-center text-[10px] font-black text-slate-800">{item.quantity}</span>
-                              <button type="button" onClick={() => onUpdateQuantity(item.id, 1)} className="w-5 h-5 rounded-md text-[#4F46E5] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"><Plus size={10} strokeWidth={3} /></button>
+                              <button type="button" onClick={() => onUpdateQuantity(item.id, 1)} className="w-5 h-5 rounded-md text-[#1E4E8C] flex items-center justify-center hover:bg-rose-50 transition cursor-pointer"><Plus size={10} strokeWidth={3} /></button>
                             </div>
                             <span className="font-black text-slate-700 min-w-[3.5rem] text-right">৳{(Number(item.price) * item.quantity).toLocaleString()}</span>
                             <button type="button" onClick={() => onRemoveFromCart(item.id)} className="text-slate-400 hover:text-rose-500 transition cursor-pointer"><X size={12} /></button>
@@ -104,7 +104,7 @@ export function MobileBookingDrawer({
                         </div>
                       ))}
                     </div>
-                    <div className="pt-2 border-t border-[#4F46E5]/10 space-y-1.5 text-xs">
+                    <div className="pt-2 border-t border-[#1E4E8C]/10 space-y-1.5 text-xs">
                       <div className="flex justify-between text-slate-600 font-semibold"><span>Subtotal</span><span>৳{cartTotal.toLocaleString()}</span></div>
                       {appliedCoupon && (
                         <div className="flex justify-between text-emerald-600 font-bold">
@@ -113,7 +113,7 @@ export function MobileBookingDrawer({
                         </div>
                       )}
                       <div className="flex justify-between items-center text-sm font-black text-slate-800 pt-1.5 border-t border-slate-100">
-                        <span>Total Price</span><span className="text-[#4F46E5] text-base">৳{payableTotal.toLocaleString()}</span>
+                        <span>Total Price</span><span className="text-[#1E4E8C] text-base">৳{payableTotal.toLocaleString()}</span>
                       </div>
                     </div>
                   </div>
@@ -133,18 +133,18 @@ export function MobileBookingDrawer({
                   </div>
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Address *</label>
-                    <textarea required rows={2} placeholder="Enter your street address, house no, area..." value={bookingDetails.location} onChange={(e) => setBookingDetails({ ...bookingDetails, location: e.target.value })} className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none" />
+                    <textarea required rows={2} placeholder="Enter your street address, house no, area..." value={bookingDetails.location} onChange={(e) => setBookingDetails({ ...bookingDetails, location: e.target.value })} className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#1E4E8C] focus:ring-2 focus:ring-[#1E4E8C]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none" />
                   </div>
                   <div className="space-y-1">
                     <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider">Notes</label>
-                    <textarea rows={1} placeholder="Any specific requests or instructions..." value={bookingDetails.notes} onChange={(e) => setBookingDetails({ ...bookingDetails, notes: e.target.value })} className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#4F46E5] focus:ring-2 focus:ring-[#4F46E5]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none" />
+                    <textarea rows={1} placeholder="Any specific requests or instructions..." value={bookingDetails.notes} onChange={(e) => setBookingDetails({ ...bookingDetails, notes: e.target.value })} className="w-full bg-slate-50/55 hover:bg-slate-50 focus:bg-white border border-slate-200/80 hover:border-slate-300 focus:border-[#1E4E8C] focus:ring-2 focus:ring-[#1E4E8C]/15 text-slate-800 text-xs sm:text-sm rounded-2xl p-3 outline-none transition-all font-semibold resize-none" />
                   </div>
                 </div>
               </div>
 
               <div className="p-4 border-t border-slate-100 bg-white flex items-center justify-end gap-3 shrink-0 pb-[calc(env(safe-area-inset-bottom)+16px)]">
                 <button type="button" onClick={onClose} className="px-5 py-3 text-sm font-bold text-slate-500 hover:bg-slate-50 border border-slate-200 rounded-xl transition cursor-pointer flex-1">Cancel</button>
-                <button type="submit" disabled={isBooking} className="px-6 py-3 text-sm font-bold text-white bg-[#4F46E5] hover:bg-[#4338CA] rounded-xl transition shadow-md disabled:opacity-70 flex-1 flex items-center justify-center gap-2 cursor-pointer">
+                <button type="submit" disabled={isBooking} className="px-6 py-3 text-sm font-bold text-white bg-[#1E4E8C] hover:bg-[#123C73] rounded-xl transition shadow-md disabled:opacity-70 flex-1 flex items-center justify-center gap-2 cursor-pointer">
                   {isBooking ? (<><Loader2 size={16} className="animate-spin" />Placing...</>) : "Confirm Booking"}
                 </button>
               </div>

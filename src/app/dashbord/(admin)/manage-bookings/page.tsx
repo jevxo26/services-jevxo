@@ -80,7 +80,7 @@ export default function BookingsManagementPage() {
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-3 duration-200">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
             <Calendar className="w-6 h-6" />
           </div>
           <div>

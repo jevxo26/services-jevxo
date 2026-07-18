@@ -91,7 +91,7 @@ export default function ManualInvoicePage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-6 print:hidden">
         <div className="flex items-center gap-3.5">
-          <div className="p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl border border-[#4F46E5]/15 shadow-xs">
+          <div className="p-3 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl border border-[#1E4E8C]/15 shadow-xs">
             <Receipt className="w-6 h-6" />
           </div>
           <div>
@@ -99,7 +99,7 @@ export default function ManualInvoicePage() {
             <p className="text-xs text-slate-400 font-semibold mt-1">Manage all your manual invoices, track payments and due amounts.</p>
           </div>
         </div>
-        <Link href="/dashbord/manual-invoice/create" className="flex items-center gap-2 bg-[#4F46E5] text-white hover:bg-[#4338CA] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-sm cursor-pointer active:scale-[0.98]">
+        <Link href="/dashbord/manual-invoice/create" className="flex items-center gap-2 bg-[#1E4E8C] text-white hover:bg-[#123C73] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-sm cursor-pointer active:scale-[0.98]">
           <Plus size={18} /> Create Invoice
         </Link>
       </div>
@@ -107,8 +107,8 @@ export default function ManualInvoicePage() {
       {/* Stat cards */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 print:hidden">
         {/* Total Invoices */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-[#4F46E5]/20 hover:shadow-md duration-300 relative overflow-hidden group">
-          <div className="absolute top-0 left-0 w-1.5 h-full bg-slate-350 group-hover:bg-[#4F46E5] transition-colors" />
+        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-[#1E4E8C]/20 hover:shadow-md duration-300 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-slate-350 group-hover:bg-[#1E4E8C] transition-colors" />
           <div className="flex justify-between items-start pl-1">
             <div>
               <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Invoices</div>
@@ -119,22 +119,22 @@ export default function ManualInvoicePage() {
                 <span className="inline-block w-1.5 h-1.5 rounded-full bg-rose-500" /> {countDue} due
               </div>
             </div>
-            <div className="p-3 bg-slate-50 text-slate-500 rounded-2xl border border-slate-100/60 shadow-xs transition-colors group-hover:bg-[#4F46E5]/5 group-hover:text-[#4F46E5] group-hover:border-[#4F46E5]/10">
+            <div className="p-3 bg-slate-50 text-slate-500 rounded-2xl border border-slate-100/60 shadow-xs transition-colors group-hover:bg-[#1E4E8C]/5 group-hover:text-[#1E4E8C] group-hover:border-[#1E4E8C]/10">
               <FileText className="w-5 h-5" />
             </div>
           </div>
         </div>
 
         {/* Total Revenue */}
-        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-[#4F46E5]/20 hover:shadow-md duration-300 relative overflow-hidden group">
-          <div className="absolute top-0 left-0 w-1.5 h-full bg-[#4F46E5]" />
+        <div className="bg-white rounded-3xl p-6 border border-slate-100/80 shadow-sm transition-all hover:translate-y-[-3px] hover:border-[#1E4E8C]/20 hover:shadow-md duration-300 relative overflow-hidden group">
+          <div className="absolute top-0 left-0 w-1.5 h-full bg-[#1E4E8C]" />
           <div className="flex justify-between items-start pl-1">
             <div>
               <div className="text-[10px] font-extrabold text-slate-400 uppercase tracking-wider">Total Revenue</div>
-              <div className="text-3xl font-black text-[#4F46E5] mt-2.5 leading-none">{fmt(totalRevenue)}</div>
+              <div className="text-3xl font-black text-[#1E4E8C] mt-2.5 leading-none">{fmt(totalRevenue)}</div>
               <div className="text-xs text-slate-500 mt-3 font-semibold">BDT · all generated invoices</div>
             </div>
-            <div className="p-3 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl border border-[#4F46E5]/15 shadow-xs transition-colors group-hover:bg-[#4F46E5] group-hover:text-white">
+            <div className="p-3 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl border border-[#1E4E8C]/15 shadow-xs transition-colors group-hover:bg-[#1E4E8C] group-hover:text-white">
               <DollarSign className="w-5 h-5" />
             </div>
           </div>
@@ -178,7 +178,7 @@ export default function ManualInvoicePage() {
           <div className="relative flex-1 max-w-md">
             <Search size={18} className="absolute left-3.5 top-1/2 transform -translate-y-1/2 text-slate-400" />
             <input
-              className="w-full bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-700 pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#4F46E5]/20 focus:border-[#4F46E5]/40 transition-all"
+              className="w-full bg-white border border-slate-200 rounded-xl text-xs font-medium text-slate-700 pl-10 pr-4 py-3 focus:outline-none focus:ring-2 focus:ring-[#1E4E8C]/20 focus:border-[#1E4E8C]/40 transition-all"
               placeholder="Search by invoice #, customer name or phone..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -188,9 +188,9 @@ export default function ManualInvoicePage() {
             {(["all", "Paid", "Due"] as const).map((f) => (
               <button
                 key={f}
-                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border border-slate-205 cursor-pointer hover:bg-[#EEF2FF] hover:text-[#4F46E5] ${
+                className={`px-4 py-2 rounded-xl text-xs font-bold transition-all border border-slate-205 cursor-pointer hover:bg-[#EEF2FF] hover:text-[#1E4E8C] ${
                   filter === f
-                    ? "bg-[#4F46E5] text-white border-[#4F46E5] hover:bg-[#4338CA] hover:text-white"
+                    ? "bg-[#1E4E8C] text-white border-[#1E4E8C] hover:bg-[#123C73] hover:text-white"
                     : "bg-white text-slate-550 border-slate-200"
                 }`}
                 onClick={() => setFilter(f)}
@@ -210,7 +210,7 @@ export default function ManualInvoicePage() {
 
         {loading ? (
           <div className="flex flex-col items-center justify-center p-20 text-slate-400 text-xs font-medium">
-            <div className="w-8 h-8 border-4 border-[#4F46E5] border-t-transparent rounded-full animate-spin mb-4"></div>
+            <div className="w-8 h-8 border-4 border-[#1E4E8C] border-t-transparent rounded-full animate-spin mb-4"></div>
             <p>Loading invoices...</p>
           </div>
         ) : filtered.length === 0 ? (
@@ -241,7 +241,7 @@ export default function ManualInvoicePage() {
               <tbody className="divide-y divide-slate-50">
                 {filtered.map((inv) => (
                   <tr key={inv.id} className="hover:bg-slate-50/50 transition-colors">
-                    <td className="px-6 py-4 font-extrabold text-[#4F46E5]">{inv.invoiceNumber}</td>
+                    <td className="px-6 py-4 font-extrabold text-[#1E4E8C]">{inv.invoiceNumber}</td>
                     <td className="px-6 py-4">
                       <div className="font-bold text-slate-800">{inv.customer.name}</div>
                       <div className="text-[10px] text-slate-400 font-medium mt-0.5">{inv.customer.phone}</div>
@@ -265,7 +265,7 @@ export default function ManualInvoicePage() {
                       <div className="flex items-center gap-2 justify-end">
                         <Link
                           href={`/dashbord/manual-invoice/invoice/${inv.id}`}
-                          className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/60 hover:bg-[#EEF2FF] hover:text-[#4F46E5] text-slate-600 font-bold px-3 py-1.5 rounded-xl transition-all shadow-xs cursor-pointer active:scale-95"
+                          className="flex items-center gap-1.5 bg-slate-50 border border-slate-200/60 hover:bg-[#EEF2FF] hover:text-[#1E4E8C] text-slate-600 font-bold px-3 py-1.5 rounded-xl transition-all shadow-xs cursor-pointer active:scale-95"
                         >
                           <Eye size={14} /> View
                         </Link>
@@ -290,19 +290,19 @@ export default function ManualInvoicePage() {
       <div className="flex items-center gap-3 flex-wrap print:hidden">
         <Link
           href="/dashbord/manual-invoice/customers"
-          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#1E4E8C]/20 hover:bg-[#1E4E8C] hover:text-white text-[#1E4E8C] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
         >
           <Users size={16} /> Client Directory
         </Link>
         <Link
           href="/dashbord/manual-invoice/services"
-          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#1E4E8C]/20 hover:bg-[#1E4E8C] hover:text-white text-[#1E4E8C] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
         >
           <Settings size={16} /> Service Catalog
         </Link>
         <Link
           href="/dashbord/manual-invoice/trash"
-          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#4F46E5]/20 hover:bg-[#4F46E5] hover:text-white text-[#4F46E5] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
+          className="flex items-center gap-2 bg-[#EEF2FF] border border-[#1E4E8C]/20 hover:bg-[#1E4E8C] hover:text-white text-[#1E4E8C] font-bold px-4 py-2.5 rounded-xl text-sm transition-all shadow-xs cursor-pointer active:scale-[0.98]"
         >
           <Trash2 size={16} /> Trash Bin
         </Link>

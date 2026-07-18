@@ -85,7 +85,7 @@ export default function HeroTable({ heroes, openEditModal, openDeleteModal }: He
               href={hero.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-[#4F46E5] font-bold text-[11px] px-3 py-1.5 rounded-xl border border-slate-200/80 transition-all shadow-sm active:scale-[0.97]"
+              className="inline-flex items-center gap-1.5 bg-white hover:bg-slate-50 text-[#1E4E8C] font-bold text-[11px] px-3 py-1.5 rounded-xl border border-slate-200/80 transition-all shadow-sm active:scale-[0.97]"
             >
               <span>Visit Link</span>
               <ExternalLink size={11} />
@@ -119,9 +119,9 @@ export default function HeroTable({ heroes, openEditModal, openDeleteModal }: He
           </button>
           <button
             onClick={() => openDeleteModal(hero)}
-            className="bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#4338CA] text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 border border-[#4F46E5]/15 transition-all active:scale-[0.97]"
+            className="bg-[#EEF2FF] hover:bg-[#E0E7FF] text-[#123C73] text-xs font-bold px-3 py-2 rounded-xl flex items-center gap-1.5 border border-[#1E4E8C]/15 transition-all active:scale-[0.97]"
           >
-            <Trash2 size={12} className="text-[#4F46E5]" />
+            <Trash2 size={12} className="text-[#1E4E8C]" />
             <span>Delete</span>
           </button>
         </div>

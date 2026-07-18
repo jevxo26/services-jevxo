@@ -110,7 +110,7 @@ function ToolbarBtn({
       title={title}
       className={`p-1.5 rounded-lg transition-all duration-150 flex items-center justify-center ${
         active
-          ? "bg-[#4F46E5]/15 text-[#4F46E5] shadow-inner"
+          ? "bg-[#1E4E8C]/15 text-[#1E4E8C] shadow-inner"
           : "text-slate-500 hover:bg-slate-100 hover:text-slate-800"
       }`}
     >
@@ -209,7 +209,7 @@ export default function RichTextEditor({
   if (!editor) return null;
 
   return (
-    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden focus-within:border-[#4F46E5]/50 focus-within:ring-2 focus-within:ring-[#4F46E5]/10 transition-all duration-200">
+    <div className="rounded-2xl border border-slate-200 bg-white shadow-sm overflow-hidden focus-within:border-[#1E4E8C]/50 focus-within:ring-2 focus-within:ring-[#1E4E8C]/10 transition-all duration-200">
       {/* ── Toolbar ── */}
       <div className="flex flex-wrap items-center gap-0.5 px-2 py-1.5 border-b border-slate-100 bg-slate-50/80">
 
@@ -219,7 +219,7 @@ export default function RichTextEditor({
           onChange={handleFontSizeChange}
           onMouseDown={(e) => e.stopPropagation()}
           title="Font Size"
-          className="h-7 px-1.5 pr-5 rounded-lg border border-slate-200 bg-white text-slate-700 text-xs font-semibold cursor-pointer appearance-none focus:outline-none focus:border-[#4F46E5]/60 hover:border-slate-300 transition-all min-w-[56px]"
+          className="h-7 px-1.5 pr-5 rounded-lg border border-slate-200 bg-white text-slate-700 text-xs font-semibold cursor-pointer appearance-none focus:outline-none focus:border-[#1E4E8C]/60 hover:border-slate-300 transition-all min-w-[56px]"
           style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%2394a3b8'/%3E%3C/svg%3E\")", backgroundRepeat: "no-repeat", backgroundPosition: "right 6px center" }}
         >
           <option value="">Size</option>

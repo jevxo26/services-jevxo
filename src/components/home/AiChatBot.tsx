@@ -98,7 +98,7 @@ export function AiChatBot() {
             onClick={() => {
               setIsOpen(false);
             }}
-            className="inline-flex items-center gap-1 bg-[#4F46E5]/10 hover:bg-[#4F46E5]/20 text-[#4F46E5] px-2.5 py-1 rounded-full text-[10px] font-extrabold transition-all border border-[#4F46E5]/20 hover:scale-[1.03] my-0.5 ml-1"
+            className="inline-flex items-center gap-1 bg-[#1E4E8C]/10 hover:bg-[#1E4E8C]/20 text-[#1E4E8C] px-2.5 py-1 rounded-full text-[10px] font-extrabold transition-all border border-[#1E4E8C]/20 hover:scale-[1.03] my-0.5 ml-1"
           >
             {label}
           </Link>
@@ -110,7 +110,7 @@ export function AiChatBot() {
             href={url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1 bg-[#4F46E5]/10 hover:bg-[#4F46E5]/20 text-[#4F46E5] px-2.5 py-1 rounded-full text-[10px] font-extrabold transition-all border border-[#4F46E5]/20 hover:scale-[1.03] my-0.5 ml-1"
+            className="inline-flex items-center gap-1 bg-[#1E4E8C]/10 hover:bg-[#1E4E8C]/20 text-[#1E4E8C] px-2.5 py-1 rounded-full text-[10px] font-extrabold transition-all border border-[#1E4E8C]/20 hover:scale-[1.03] my-0.5 ml-1"
           >
             {label}
           </a>
@@ -222,18 +222,18 @@ export function AiChatBot() {
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute w-9 h-9 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-[#4F46E5] to-[#818CF8] blur-md pointer-events-none z-[-1]"
+            className="absolute w-9 h-9 md:w-14 md:h-14 rounded-full bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] blur-md pointer-events-none z-[-1]"
           />
 
           <motion.button
             whileHover={{
               scale: 1.1,
               rotate: -8,
-              boxShadow: "0 14px 32px rgba(79, 70, 229, 0.45)"
+              boxShadow: "0 14px 32px rgba(30, 78, 140, 0.45)"
             }}
             whileTap={{ scale: 0.92 }}
             onClick={() => setIsOpen(!isOpen)}
-            className="w-9 h-9 md:w-14 md:h-14 bg-gradient-to-r from-[#4F46E5] to-[#818CF8] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#4F46E5]/25 cursor-pointer relative overflow-hidden transition-all duration-300"
+            className="w-9 h-9 md:w-14 md:h-14 bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] text-white rounded-full flex items-center justify-center shadow-lg shadow-[#1E4E8C]/25 cursor-pointer relative overflow-hidden transition-all duration-300"
             aria-label="AI Assistant"
           >
             {/* Shimmer sweep effect */}
@@ -283,7 +283,7 @@ export function AiChatBot() {
             className="fixed bottom-[156px] right-4 md:bottom-24 md:right-6 w-[340px] sm:w-[380px] h-[480px] bg-white/95 backdrop-blur-md rounded-3xl border border-slate-100 shadow-2xl z-[998] flex flex-col overflow-hidden"
           >
             {/* Header */}
-            <div className="bg-gradient-to-r from-[#4F46E5] to-[#818CF8] p-4 text-white flex items-center justify-between shadow-sm">
+            <div className="bg-gradient-to-r from-[#1E4E8C] to-[#818CF8] p-4 text-white flex items-center justify-between shadow-sm">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center">
                   <Bot size={20} className="text-white" />
@@ -316,7 +316,7 @@ export function AiChatBot() {
                 >
                   <div
                     className={`max-w-[80%] rounded-[20px] p-3.5 text-xs font-semibold leading-relaxed shadow-2xs whitespace-pre-wrap ${msg.role === "user"
-                      ? "bg-[#4F46E5] text-white rounded-tr-none"
+                      ? "bg-[#1E4E8C] text-white rounded-tr-none"
                       : "bg-white text-slate-700 border border-slate-100/50 rounded-tl-none"
                       }`}
                   >
@@ -327,7 +327,7 @@ export function AiChatBot() {
               {isLoading && (
                 <div className="flex justify-start">
                   <div className="bg-white border border-slate-100 rounded-[20px] rounded-tl-none p-3.5 flex items-center gap-1.5 shadow-2xs">
-                    <Loader2 size={12} className="animate-spin text-[#4F46E5]" />
+                    <Loader2 size={12} className="animate-spin text-[#1E4E8C]" />
                     <span className="text-[10px] text-slate-400 font-extrabold uppercase tracking-wider">AI is typing...</span>
                   </div>
                 </div>
@@ -342,7 +342,7 @@ export function AiChatBot() {
                   e.preventDefault();
                   handleSend();
                 }}
-                className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-2xl p-1.5 pr-2 focus-within:bg-white focus-within:border-[#4F46E5]/30 focus-within:ring-4 focus-within:ring-[#EEF2FF] transition-all"
+                className="flex items-center gap-2 bg-slate-50 border border-slate-100 rounded-2xl p-1.5 pr-2 focus-within:bg-white focus-within:border-[#1E4E8C]/30 focus-within:ring-4 focus-within:ring-[#EEF2FF] transition-all"
               >
                 <input
                   type="text"
@@ -354,7 +354,7 @@ export function AiChatBot() {
                 <button
                   type="submit"
                   disabled={!inputValue.trim() || isLoading}
-                  className="w-8 h-8 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white flex items-center justify-center transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0"
+                  className="w-8 h-8 rounded-xl bg-[#1E4E8C] hover:bg-[#123C73] text-white flex items-center justify-center transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer shrink-0"
                 >
                   <Send size={14} />
                 </button>

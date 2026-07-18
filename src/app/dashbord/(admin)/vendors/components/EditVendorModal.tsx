@@ -55,7 +55,7 @@ export default function EditVendorModal({
                 type="text"
                 defaultValue={editingVendor.name}
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#1E4E8C]/40 focus:ring-2 focus:ring-rose-100 transition-all"
               />
             </div>
             <div>
@@ -65,7 +65,7 @@ export default function EditVendorModal({
                 type="email"
                 defaultValue={editingVendor.email}
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#1E4E8C]/40 focus:ring-2 focus:ring-rose-100 transition-all"
               />
             </div>
             <div>
@@ -75,7 +75,7 @@ export default function EditVendorModal({
                 type="tel"
                 defaultValue={editingVendor.phone || ""}
                 required
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#1E4E8C]/40 focus:ring-2 focus:ring-rose-100 transition-all"
               />
             </div>
             <div>
@@ -88,7 +88,7 @@ export default function EditVendorModal({
                 min="0"
                 max="100"
                 defaultValue={editingVendor.commission_percentage || 0}
-                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#4F46E5]/40 focus:ring-2 focus:ring-rose-100 transition-all"
+                className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-2.5 text-sm text-slate-900 focus:outline-none focus:border-[#1E4E8C]/40 focus:ring-2 focus:ring-rose-100 transition-all"
               />
             </div>
             <div className="pt-4 flex justify-end gap-3 border-t border-slate-100">

@@ -57,7 +57,7 @@ export default function ContactsAdminPage() {
       header: lang === "bn" ? "নাম" : "Name",
       render: (row) => (
         <div className="flex items-center gap-2">
-          {!row.isRead && <span className="w-2 h-2 rounded-full bg-[#4F46E5] shrink-0" />}
+          {!row.isRead && <span className="w-2 h-2 rounded-full bg-[#1E4E8C] shrink-0" />}
           <span className={`text-xs ${!row.isRead ? "font-black text-slate-900" : "font-bold text-slate-650"}`}>
             {row.name}
           </span>
@@ -68,7 +68,7 @@ export default function ContactsAdminPage() {
       key: "email",
       header: lang === "bn" ? "ইমেইল" : "Email",
       render: (row) => (
-        <a href={`mailto:${row.email}`} className="text-xs font-bold text-slate-650 hover:text-[#4F46E5] transition-colors">
+        <a href={`mailto:${row.email}`} className="text-xs font-bold text-slate-650 hover:text-[#1E4E8C] transition-colors">
           {row.email}
         </a>
       )
@@ -103,7 +103,7 @@ export default function ContactsAdminPage() {
       header: "Status",
       render: (row) => (
         <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[10px] uppercase font-extrabold tracking-wider ${
-          row.isRead ? "bg-slate-100 text-slate-550 border border-slate-200/50" : "bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]/20"
+          row.isRead ? "bg-slate-100 text-slate-550 border border-slate-200/50" : "bg-[#EEF2FF] text-[#1E4E8C] border border-[#1E4E8C]/20"
         }`}>
           {row.isRead ? (lang === "bn" ? "পড়া হয়েছে" : "Read") : (lang === "bn" ? "অপঠিত" : "Unread")}
         </span>
@@ -142,8 +142,8 @@ export default function ContactsAdminPage() {
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="space-y-1">
           <div className="flex items-center gap-3">
-            <div className="p-2.5 bg-[#EEF2FF] border border-[#4F46E5]/20 rounded-2xl shadow-xs shrink-0">
-              <Mail className="w-5 h-5 text-[#4F46E5]" />
+            <div className="p-2.5 bg-[#EEF2FF] border border-[#1E4E8C]/20 rounded-2xl shadow-xs shrink-0">
+              <Mail className="w-5 h-5 text-[#1E4E8C]" />
             </div>
             <h1 className="text-xl md:text-2xl font-black text-slate-900 tracking-tight">{lang === "bn" ? "যোগাযোগ সমূহ" : "Contact Inquiries"}</h1>
           </div>
@@ -156,10 +156,10 @@ export default function ContactsAdminPage() {
           </div>
           <div className="w-px bg-slate-100" />
           <div className="text-center md:text-left">
-            <div className="text-xl font-black text-[#4F46E5] leading-none mb-1">
+            <div className="text-xl font-black text-[#1E4E8C] leading-none mb-1">
               {contacts.filter((c: any) => !c.isRead).length}
             </div>
-            <div className="text-[9px] uppercase font-extrabold text-[#4F46E5] tracking-wider">{lang === "bn" ? "অপঠিত" : "Unread"}</div>
+            <div className="text-[9px] uppercase font-extrabold text-[#1E4E8C] tracking-wider">{lang === "bn" ? "অপঠিত" : "Unread"}</div>
           </div>
         </div>
       </div>
@@ -168,7 +168,7 @@ export default function ContactsAdminPage() {
       <div className="bg-white rounded-3xl border border-slate-100 shadow-md overflow-hidden w-full">
         {isLoading ? (
           <div className="flex justify-center items-center py-24">
-            <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
+            <Loader2 className="w-8 h-8 animate-spin text-[#1E4E8C]" />
           </div>
         ) : (
           <CustomTable

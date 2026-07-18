@@ -82,7 +82,7 @@ export default function ViewNestedServicePage() {
             {nested.service && (
               <div>
                 <label className="block text-xs font-semibold text-slate-500 uppercase mb-1">প্যারেন্ট সার্ভিস</label>
-                <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF]/70 text-[#4338CA] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#E0E7FF]/50">
+                <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF]/70 text-[#123C73] font-bold text-xs px-2.5 py-1 rounded-xl border border-[#E0E7FF]/50">
                   <Wrench size={12} />
                   {nested.service.name}
                 </div>

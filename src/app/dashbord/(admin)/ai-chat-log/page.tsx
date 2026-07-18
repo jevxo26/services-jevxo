@@ -47,7 +47,7 @@ function getInitials(name: string) {
 }
 function avatarColor(name: string) {
   const colors = [
-    "from-[#4F46E5] to-[#4338CA]",
+    "from-[#1E4E8C] to-[#123C73]",
     "from-indigo-500 to-indigo-700",
     "from-emerald-500 to-emerald-700",
     "from-amber-500 to-amber-700",
@@ -63,7 +63,7 @@ function StatCard({ label, value, sub, icon: Icon, accent, pulse }: {
   icon: React.ComponentType<any>; accent: string; pulse?: boolean;
 }) {
   return (
-    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col gap-3 hover:shadow-md hover:border-[#4F46E5]/15 transition-all duration-300">
+    <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5 flex flex-col gap-3 hover:shadow-md hover:border-[#1E4E8C]/15 transition-all duration-300">
       <div className="flex items-center justify-between">
         <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${accent}`}>
           <Icon size={18} className="text-white" />
@@ -97,7 +97,7 @@ function SessionRow({ session, isActive, onClick }: {
       onClick={onClick}
       className={`w-full text-left p-4 flex items-start gap-3 transition-all rounded-2xl border ${
         isActive
-          ? "bg-[#EEF2FF] border-[#4F46E5]/20 shadow-sm"
+          ? "bg-[#EEF2FF] border-[#1E4E8C]/20 shadow-sm"
           : "border-transparent hover:bg-slate-50 hover:border-slate-100"
       }`}
     >
@@ -106,7 +106,7 @@ function SessionRow({ session, isActive, onClick }: {
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-2 mb-0.5">
-          <span className={`text-sm font-black truncate ${isActive ? "text-[#4F46E5]" : "text-slate-800"}`}>
+          <span className={`text-sm font-black truncate ${isActive ? "text-[#1E4E8C]" : "text-slate-800"}`}>
             {name}
           </span>
           <span className="text-[10px] text-slate-400 font-medium shrink-0">
@@ -137,8 +137,8 @@ function MsgBubble({ msg }: { msg: ChatMessage }) {
       const [_, label, url] = match;
       parts.push(
         url.startsWith("/")
-          ? <Link key={match.index} href={url} className="inline-flex items-center gap-1 bg-[#4F46E5]/10 hover:bg-[#4F46E5]/20 text-[#4F46E5] px-2 py-0.5 rounded-full text-[10px] font-extrabold border border-[#4F46E5]/20 ml-1">{label}</Link>
-          : <a key={match.index} href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 bg-[#4F46E5]/10 text-[#4F46E5] px-2 py-0.5 rounded-full text-[10px] font-extrabold border border-[#4F46E5]/20 ml-1">{label}</a>
+          ? <Link key={match.index} href={url} className="inline-flex items-center gap-1 bg-[#1E4E8C]/10 hover:bg-[#1E4E8C]/20 text-[#1E4E8C] px-2 py-0.5 rounded-full text-[10px] font-extrabold border border-[#1E4E8C]/20 ml-1">{label}</Link>
+          : <a key={match.index} href={url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1 bg-[#1E4E8C]/10 text-[#1E4E8C] px-2 py-0.5 rounded-full text-[10px] font-extrabold border border-[#1E4E8C]/20 ml-1">{label}</a>
       );
       last = regex.lastIndex;
     }
@@ -149,14 +149,14 @@ function MsgBubble({ msg }: { msg: ChatMessage }) {
   return (
     <div className={`flex ${isUser ? "justify-end" : "justify-start"} mb-2`}>
       {!isUser && (
-        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#4F46E5] to-[#4338CA] flex items-center justify-center text-white mr-2 shrink-0 mt-0.5">
+        <div className="w-7 h-7 rounded-full bg-gradient-to-br from-[#1E4E8C] to-[#123C73] flex items-center justify-center text-white mr-2 shrink-0 mt-0.5">
           <Bot size={14} />
         </div>
       )}
       <div className={`max-w-[75%] flex flex-col ${isUser ? "items-end" : "items-start"}`}>
         <div className={`px-4 py-2.5 rounded-2xl text-xs font-medium leading-relaxed ${
           isUser
-            ? "bg-gradient-to-br from-[#4F46E5] to-[#4338CA] text-white rounded-br-sm shadow-md shadow-[#4F46E5]/15"
+            ? "bg-gradient-to-br from-[#1E4E8C] to-[#123C73] text-white rounded-br-sm shadow-md shadow-[#1E4E8C]/15"
             : "bg-white border border-slate-100 text-slate-800 rounded-bl-sm shadow-sm"
         }`}>
           {parseText(msg.text)}
@@ -208,7 +208,7 @@ function AiWorkflowTester() {
     <div className="flex flex-col h-full">
       <div className="px-4 py-3 border-b border-slate-100 bg-[#EEF2FF]/50">
         <div className="flex items-center gap-2">
-          <Sparkles size={14} className="text-[#4F46E5]" />
+          <Sparkles size={14} className="text-[#1E4E8C]" />
           <span className="text-xs font-black text-slate-800">AI Workflow Tester</span>
           <span className="ml-auto text-[10px] text-slate-400 font-medium">Chat directly with the bot</span>
         </div>
@@ -218,7 +218,7 @@ function AiWorkflowTester() {
         {isLoading && (
           <div className="flex justify-start">
             <div className="bg-white border border-slate-100 rounded-2xl rounded-tl-sm p-3 flex items-center gap-1.5 shadow-sm">
-              <Loader2 size={12} className="animate-spin text-[#4F46E5]" />
+              <Loader2 size={12} className="animate-spin text-[#1E4E8C]" />
               <span className="text-[10px] text-slate-400 font-bold">AI is typing…</span>
             </div>
           </div>
@@ -227,7 +227,7 @@ function AiWorkflowTester() {
       </div>
       <div className="p-3 border-t border-slate-100 bg-white">
         <form onSubmit={(e) => { e.preventDefault(); handleSend(); }}
-          className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-2xl p-1.5 pr-2 focus-within:border-[#4F46E5]/30 focus-within:bg-white transition-all">
+          className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-2xl p-1.5 pr-2 focus-within:border-[#1E4E8C]/30 focus-within:bg-white transition-all">
           <input
             type="text"
             value={input}
@@ -236,7 +236,7 @@ function AiWorkflowTester() {
             className="flex-1 bg-transparent text-xs font-semibold text-slate-800 placeholder:text-slate-400 outline-none px-2"
           />
           <button type="submit" disabled={!input.trim() || isLoading}
-            className="w-8 h-8 rounded-xl bg-[#4F46E5] hover:bg-[#4338CA] text-white flex items-center justify-center transition disabled:opacity-40 shrink-0">
+            className="w-8 h-8 rounded-xl bg-[#1E4E8C] hover:bg-[#123C73] text-white flex items-center justify-center transition disabled:opacity-40 shrink-0">
             <Send size={13} />
           </button>
         </form>
@@ -307,10 +307,10 @@ export default function AiChatLogPage() {
     <div className="space-y-5 animate-in fade-in slide-in-from-bottom-3 duration-200">
       {/* ── Header ── */}
       <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
-        <div className="absolute -top-10 -right-10 w-56 h-56 bg-gradient-to-br from-[#4F46E5]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -top-10 -right-10 w-56 h-56 bg-gradient-to-br from-[#1E4E8C]/10 to-transparent rounded-full blur-3xl pointer-events-none" />
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] border border-[#4F46E5]/20 text-[#4F46E5] text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
+            <div className="inline-flex items-center gap-1.5 bg-[#EEF2FF] border border-[#1E4E8C]/20 text-[#1E4E8C] text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full mb-3">
               <Bot size={10} />AI Customer Service
             </div>
             <h1 className="text-2xl font-extrabold text-slate-900 tracking-tight">AI Chat Log Manager</h1>
@@ -335,7 +335,7 @@ export default function AiChatLogPage() {
 
       {/* ── Stats ── */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <StatCard label="Total Conversations" value={totalSessions} sub="Active chat threads" icon={MessageSquare} accent="bg-gradient-to-br from-[#4F46E5] to-[#4338CA]" pulse />
+        <StatCard label="Total Conversations" value={totalSessions} sub="Active chat threads" icon={MessageSquare} accent="bg-gradient-to-br from-[#1E4E8C] to-[#123C73]" pulse />
         <StatCard label="Total AI Messages" value={totalMessages} sub="User queries sent" icon={Bot} accent="bg-gradient-to-br from-indigo-500 to-indigo-700" />
         <StatCard label="Avg Messages / Session" value={avgMsgsPerSession} sub="Based on all threads" icon={TrendingUp} accent="bg-gradient-to-br from-amber-500 to-amber-600" />
         <StatCard label="Today's Sessions" value={todaySessions} sub="New conversations today" icon={Clock} accent="bg-gradient-to-br from-emerald-500 to-emerald-600" />
@@ -347,7 +347,7 @@ export default function AiChatLogPage() {
           onClick={() => setActiveTab("sessions")}
           className={`flex-1 py-2 text-center text-xs font-black rounded-xl transition-all ${
             activeTab === "sessions"
-              ? "bg-[#EEF2FF] text-[#4F46E5]"
+              ? "bg-[#EEF2FF] text-[#1E4E8C]"
               : "text-slate-500 hover:bg-slate-50"
           }`}
         >
@@ -357,7 +357,7 @@ export default function AiChatLogPage() {
           onClick={() => setActiveTab("chat")}
           className={`flex-1 py-2 text-center text-xs font-black rounded-xl transition-all ${
             activeTab === "chat"
-              ? "bg-[#EEF2FF] text-[#4F46E5]"
+              ? "bg-[#EEF2FF] text-[#1E4E8C]"
               : "text-slate-500 hover:bg-slate-50"
           }`}
         >
@@ -367,7 +367,7 @@ export default function AiChatLogPage() {
           onClick={() => setActiveTab("tester")}
           className={`flex-1 py-2 text-center text-xs font-black rounded-xl transition-all ${
             activeTab === "tester"
-              ? "bg-[#EEF2FF] text-[#4F46E5]"
+              ? "bg-[#EEF2FF] text-[#1E4E8C]"
               : "text-slate-500 hover:bg-slate-50"
           }`}
         >
@@ -386,11 +386,11 @@ export default function AiChatLogPage() {
             <div className="px-4 py-4 border-b border-slate-100 bg-white space-y-3">
               <div className="flex items-center justify-between">
                 <h2 className="text-sm font-black text-slate-900 flex items-center gap-2">
-                  <Bot size={14} className="text-[#4F46E5]" />
+                  <Bot size={14} className="text-[#1E4E8C]" />
                   AI Chat Sessions
                 </h2>
                 <div className="flex items-center gap-1.5">
-                  <span className="text-[10px] font-black text-[#4F46E5] bg-[#EEF2FF] border border-[#4F46E5]/20 px-2 py-0.5 rounded-full">
+                  <span className="text-[10px] font-black text-[#1E4E8C] bg-[#EEF2FF] border border-[#1E4E8C]/20 px-2 py-0.5 rounded-full">
                     {filteredSessions.length}
                   </span>
                   {sessions.length > 0 && (
@@ -400,7 +400,7 @@ export default function AiChatLogPage() {
                   )}
                 </div>
               </div>
-              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus-within:border-[#4F46E5]/40 focus-within:bg-white transition-all">
+              <div className="flex items-center gap-2 bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 focus-within:border-[#1E4E8C]/40 focus-within:bg-white transition-all">
                 <Search size={12} className="text-slate-400 shrink-0" />
                 <input type="text" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
                   placeholder="Search sessions..." className="flex-1 bg-transparent text-xs font-semibold text-slate-800 placeholder-slate-400 outline-none" />
@@ -449,7 +449,7 @@ export default function AiChatLogPage() {
                 <div className="px-5 py-3 border-b border-slate-100 bg-white flex items-center gap-3">
                   <button
                     onClick={() => setActiveTab("sessions")}
-                    className="lg:hidden p-1.5 text-slate-400 hover:text-[#4F46E5] hover:bg-slate-50 rounded-xl transition-all shrink-0"
+                    className="lg:hidden p-1.5 text-slate-400 hover:text-[#1E4E8C] hover:bg-slate-50 rounded-xl transition-all shrink-0"
                   >
                     <ChevronRight className="rotate-180 w-5 h-5" />
                   </button>
@@ -488,13 +488,13 @@ export default function AiChatLogPage() {
               <div className="flex-1 flex flex-col items-center justify-center text-center p-8">
                 <button
                   onClick={() => setActiveTab("sessions")}
-                  className="lg:hidden mb-4 flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#4F46E5] bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl transition-all"
+                  className="lg:hidden mb-4 flex items-center gap-1.5 text-xs font-bold text-slate-400 hover:text-[#1E4E8C] bg-slate-50 border border-slate-100 px-3 py-1.5 rounded-xl transition-all"
                 >
                   <ChevronRight className="rotate-180 w-4 h-4" />
                   Go to Sessions
                 </button>
-                <div className="w-16 h-16 bg-[#EEF2FF] border border-[#4F46E5]/20 rounded-3xl flex items-center justify-center mx-auto mb-4">
-                  <Bot size={28} className="text-[#4F46E5]/60" />
+                <div className="w-16 h-16 bg-[#EEF2FF] border border-[#1E4E8C]/20 rounded-3xl flex items-center justify-center mx-auto mb-4">
+                  <Bot size={28} className="text-[#1E4E8C]/60" />
                 </div>
                 <p className="font-black text-slate-700 mb-1.5 text-lg">No Session Selected</p>
                 <p className="text-sm text-slate-400 font-medium max-w-[200px] leading-relaxed">
@@ -508,8 +508,8 @@ export default function AiChatLogPage() {
           <div className={`w-full lg:w-[320px] shrink-0 flex-col border-l border-slate-100 bg-white ${
             activeTab === "tester" ? "flex" : "hidden"
           } lg:flex`}>
-            <div className="px-4 py-3 border-b border-slate-100 bg-gradient-to-r from-[#4F46E5]/5 to-transparent">
-              <span className="text-xs font-black text-[#4F46E5] flex items-center gap-1.5">
+            <div className="px-4 py-3 border-b border-slate-100 bg-gradient-to-r from-[#1E4E8C]/5 to-transparent">
+              <span className="text-xs font-black text-[#1E4E8C] flex items-center gap-1.5">
                 <Sparkles size={13} />
                 AI WORKFLOW TESTER
               </span>

@@ -16,13 +16,13 @@ export default function ProfilePage() {
         <span
           className="absolute w-16 h-16 rounded-full border-[3px] border-transparent"
           style={{
-            borderTopColor: "#4F46E5",
-            borderRightColor: "#4F46E5",
+            borderTopColor: "#1E4E8C",
+            borderRightColor: "#1E4E8C",
             animation: "spin 1.2s linear infinite",
             opacity: 0.25,
           }}
         />
-        <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#4F46E5] to-rose-500 shadow-lg shadow-rose-300/40" />
+        <span className="w-8 h-8 rounded-full bg-gradient-to-br from-[#1E4E8C] to-rose-500 shadow-lg shadow-rose-300/40" />
       </div>
       <p className="text-base font-black text-slate-800 tracking-tight mb-1">Redirecting to Dashboard...</p>
       <p className="text-xs font-semibold text-slate-400 tracking-wide">Loading your profile panel</p>

@@ -27,7 +27,7 @@ function getDeviceLabel(ua?: string): string {
 
 function getSourceBadge(page: string): { label: string; className: string } {
   if (page.includes("live-chat")) return { label: "💬 Live Chat", className: "bg-indigo-50 text-indigo-700 border border-indigo-100" };
-  if (page === "/dashbord" || page === "/dashbord/") return { label: "🔍 Global Search", className: "bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]/20" };
+  if (page === "/dashbord" || page === "/dashbord/") return { label: "🔍 Global Search", className: "bg-[#EEF2FF] text-[#1E4E8C] border border-[#1E4E8C]/20" };
   if (page.includes("dashbord")) {
     const segment = page.split("/").pop() || page;
     return { label: `📋 ${segment.replace(/-/g, " ")}`, className: "bg-slate-100 text-slate-600 border border-slate-200" };
@@ -67,7 +67,7 @@ function TopSearches({ logs }: { logs: SearchLogEntry[] }) {
   return (
     <div className="bg-white rounded-2xl border border-slate-100 shadow-sm p-5">
       <div className="flex items-center gap-2 mb-4">
-        <TrendingUp size={16} className="text-[#4F46E5]" />
+        <TrendingUp size={16} className="text-[#1E4E8C]" />
         <h3 className="font-black text-slate-900 text-sm">Top Searches</h3>
         <span className="text-[10px] font-bold text-slate-400 ml-auto">সর্বাধিক search করা terms</span>
       </div>
@@ -78,11 +78,11 @@ function TopSearches({ logs }: { logs: SearchLogEntry[] }) {
             <div className="flex-1">
               <div className="flex items-center justify-between mb-1">
                 <span className="text-xs font-bold text-slate-700 truncate max-w-[60%]">"{query}"</span>
-                <span className="text-[10px] font-black text-[#4F46E5]">{count}×</span>
+                <span className="text-[10px] font-black text-[#1E4E8C]">{count}×</span>
               </div>
               <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
                 <div
-                  className="h-full bg-gradient-to-r from-[#4F46E5] to-[#FFB3AD] rounded-full transition-all duration-500"
+                  className="h-full bg-gradient-to-r from-[#1E4E8C] to-[#FFB3AD] rounded-full transition-all duration-500"
                   style={{ width: `${(count / max) * 100}%` }}
                 />
               </div>
@@ -158,7 +158,7 @@ export default function SessionSearchesPage() {
       {/* ── Header ── */}
       <div className="relative overflow-hidden bg-white rounded-3xl border border-slate-100 shadow-sm px-7 py-6">
         <div className="absolute -top-10 -right-10 w-56 h-56 bg-gradient-to-br from-indigo-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-[#4F46E5]/5 to-transparent rounded-full blur-2xl pointer-events-none" />
+        <div className="absolute -bottom-8 -left-8 w-40 h-40 bg-gradient-to-tr from-[#1E4E8C]/5 to-transparent rounded-full blur-2xl pointer-events-none" />
 
         <div className="relative flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
@@ -186,7 +186,7 @@ export default function SessionSearchesPage() {
 
       {/* ── Stats ── */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        <MiniStat label="Total Searches" value={totalSearches} icon={Search} accent="bg-gradient-to-br from-[#4F46E5] to-[#4338CA]" />
+        <MiniStat label="Total Searches" value={totalSearches} icon={Search} accent="bg-gradient-to-br from-[#1E4E8C] to-[#123C73]" />
         <MiniStat label="Unique Sessions" value={uniqueSessions} icon={Users} accent="bg-gradient-to-br from-indigo-500 to-indigo-600" />
         <MiniStat label="Today's Searches" value={todaySearches} icon={Clock} accent="bg-gradient-to-br from-emerald-500 to-emerald-600" />
         <MiniStat label="Pages Tracked" value={pages.length} icon={BarChart2} accent="bg-gradient-to-br from-amber-500 to-amber-600" />
@@ -209,12 +209,12 @@ export default function SessionSearchesPage() {
               value={searchFilter}
               onChange={(e) => { setSearchFilter(e.target.value); setCurrentPage(1); }}
               placeholder="Query search করুন..."
-              className="flex-1 min-w-[140px] bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#4F46E5] focus:ring-4 focus:ring-[#4F46E5]/10 transition-all"
+              className="flex-1 min-w-[140px] bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-sm font-semibold text-slate-700 placeholder:text-slate-400 outline-none focus:border-[#1E4E8C] focus:ring-4 focus:ring-[#1E4E8C]/10 transition-all"
             />
             <select
               value={sessionFilter}
               onChange={(e) => { setSessionFilter(e.target.value); setCurrentPage(1); }}
-              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-[#4F46E5] transition-all max-w-[150px]"
+              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-[#1E4E8C] transition-all max-w-[150px]"
             >
               <option value="all">All Sessions</option>
               {sessions.map((s) => (
@@ -224,7 +224,7 @@ export default function SessionSearchesPage() {
             <select
               value={pageFilter}
               onChange={(e) => { setPageFilter(e.target.value); setCurrentPage(1); }}
-              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-[#4F46E5] transition-all"
+              className="bg-slate-50 border border-slate-200 rounded-xl px-3 py-2 text-xs font-bold text-slate-700 outline-none focus:border-[#1E4E8C] transition-all"
             >
               <option value="all">All Pages</option>
               {pages.map((p) => (

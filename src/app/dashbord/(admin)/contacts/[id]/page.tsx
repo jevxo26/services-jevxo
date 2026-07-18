@@ -84,7 +84,7 @@ export default function ContactDetailsPage({ params }: PageProps) {
   if (isLoading) {
     return (
       <div className="min-h-[70vh] flex flex-col items-center justify-center space-y-4">
-        <Loader2 className="w-8 h-8 animate-spin text-[#4F46E5]" />
+        <Loader2 className="w-8 h-8 animate-spin text-[#1E4E8C]" />
         <p className="text-xs font-bold text-slate-400 uppercase tracking-widest animate-pulse">Loading inquiry details...</p>
       </div>
     );
@@ -102,7 +102,7 @@ export default function ContactDetailsPage({ params }: PageProps) {
         </p>
         <button
           onClick={() => router.push("/dashbord/contacts")}
-          className="flex items-center gap-2 text-xs font-bold bg-[#4F46E5] text-white px-5 py-2.5 rounded-xl hover:bg-[#4338CA] transition-colors shadow-md"
+          className="flex items-center gap-2 text-xs font-bold bg-[#1E4E8C] text-white px-5 py-2.5 rounded-xl hover:bg-[#123C73] transition-colors shadow-md"
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Inquiries
@@ -117,14 +117,14 @@ export default function ContactDetailsPage({ params }: PageProps) {
       <div className="flex items-center justify-between">
         <button
           onClick={() => router.push("/dashbord/contacts")}
-          className="group flex items-center gap-2 text-xs font-bold text-slate-650 hover:text-[#4F46E5] transition-colors bg-white px-4 py-2.5 rounded-xl border border-slate-100 shadow-xs"
+          className="group flex items-center gap-2 text-xs font-bold text-slate-650 hover:text-[#1E4E8C] transition-colors bg-white px-4 py-2.5 rounded-xl border border-slate-100 shadow-xs"
         >
           <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
           Back to Inquiries List
         </button>
 
         <span className="text-xs font-bold text-slate-400 bg-slate-50 border border-slate-100 px-3.5 py-1.5 rounded-xl">
-          Inquiry ID: <span className="text-[#4F46E5]">#{contact.id}</span>
+          Inquiry ID: <span className="text-[#1E4E8C]">#{contact.id}</span>
         </span>
       </div>
 
@@ -134,16 +134,16 @@ export default function ContactDetailsPage({ params }: PageProps) {
         <div className="lg:col-span-4 space-y-6">
           <div className="bg-white rounded-3xl border border-slate-100 shadow-md p-6 relative overflow-hidden">
             {/* Top border decoration */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#4F46E5] to-[#FF8142]" />
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-[#1E4E8C] to-[#FF8142]" />
 
             <div className="flex flex-col items-center text-center space-y-4 pt-2">
-              <div className="w-16 h-16 bg-gradient-to-br from-[#4F46E5] to-[#FF8142] rounded-2xl flex items-center justify-center text-white font-extrabold text-2xl shadow-md shadow-[#4F46E5]/15">
+              <div className="w-16 h-16 bg-gradient-to-br from-[#1E4E8C] to-[#FF8142] rounded-2xl flex items-center justify-center text-white font-extrabold text-2xl shadow-md shadow-[#1E4E8C]/15">
                 {contact.name?.charAt(0) || "U"}
               </div>
 
               <div className="space-y-1">
                 <h3 className="font-black text-slate-900 text-lg leading-tight">{contact.name}</h3>
-                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] uppercase font-black tracking-wider ${contact.isRead ? "bg-slate-550/10 text-slate-550 border border-slate-200/30" : "bg-[#EEF2FF] text-[#4F46E5] border border-[#4F46E5]/20"
+                <span className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-[9px] uppercase font-black tracking-wider ${contact.isRead ? "bg-slate-550/10 text-slate-550 border border-slate-200/30" : "bg-[#EEF2FF] text-[#1E4E8C] border border-[#1E4E8C]/20"
                   }`}>
                   {contact.isRead ? "Read Inquiry" : "New / Unread"}
                 </span>
@@ -153,13 +153,13 @@ export default function ContactDetailsPage({ params }: PageProps) {
             <div className="mt-6 pt-6 border-t border-slate-100 space-y-4 text-xs font-semibold text-slate-600">
               <div className="flex items-center justify-between">
                 <span className="text-slate-400">Email:</span>
-                <a href={`mailto:${contact.email}`} className="text-[#4F46E5] hover:underline font-bold">
+                <a href={`mailto:${contact.email}`} className="text-[#1E4E8C] hover:underline font-bold">
                   {contact.email}
                 </a>
               </div>
               <div className="flex items-center justify-between">
                 <span className="text-slate-400">Phone:</span>
-                <a href={`tel:${contact.phone}`} className="text-slate-800 hover:text-[#4F46E5] transition-colors">
+                <a href={`tel:${contact.phone}`} className="text-slate-800 hover:text-[#1E4E8C] transition-colors">
                   {contact.phone || "Not Provided"}
                 </a>
               </div>
@@ -188,7 +188,7 @@ export default function ContactDetailsPage({ params }: PageProps) {
               disabled={followedUp}
               className={`w-full flex justify-center items-center gap-2 text-xs font-extrabold py-3 px-4 rounded-xl transition-all shadow-sm ${followedUp
                   ? "bg-emerald-50 text-emerald-600 border border-emerald-250 cursor-default"
-                  : "bg-[#4F46E5] hover:bg-[#4338CA] text-white"
+                  : "bg-[#1E4E8C] hover:bg-[#123C73] text-white"
                 }`}
             >
               {followedUp ? (
@@ -222,11 +222,11 @@ export default function ContactDetailsPage({ params }: PageProps) {
         <div className="lg:col-span-8 space-y-6">
           <div className="bg-white rounded-3xl border border-slate-100 shadow-md p-6 md:p-8 relative overflow-hidden">
             {/* Top border decoration */}
-            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 to-[#4F46E5]" />
+            <div className="absolute top-0 left-0 right-0 h-1.5 bg-gradient-to-r from-amber-500 to-[#1E4E8C]" />
 
             <div className="space-y-4">
               <div className="space-y-1">
-                <span className="text-[10px] uppercase font-black text-[#4F46E5] tracking-widest block">
+                <span className="text-[10px] uppercase font-black text-[#1E4E8C] tracking-widest block">
                   Subject Line
                 </span>
                 <h2 className="text-xl font-black text-slate-900 leading-snug">
@@ -241,8 +241,8 @@ export default function ContactDetailsPage({ params }: PageProps) {
           </div>
 
           {/* Premium Help Card */}
-          <div className="bg-[#EEF2FF] rounded-3xl border border-[#4F46E5]/15 p-6 flex items-start gap-4 shadow-sm">
-            <div className="p-3 bg-white rounded-2xl shadow-xs text-[#4F46E5] shrink-0">
+          <div className="bg-[#EEF2FF] rounded-3xl border border-[#1E4E8C]/15 p-6 flex items-start gap-4 shadow-sm">
+            <div className="p-3 bg-white rounded-2xl shadow-xs text-[#1E4E8C] shrink-0">
               <Mail className="w-6 h-6" />
             </div>
             <div className="space-y-1.5">

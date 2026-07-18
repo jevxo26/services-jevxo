@@ -12,7 +12,7 @@ import { StaticDatePicker } from "@mui/x-date-pickers/StaticDatePicker"
 const calendarTheme = createTheme({
   palette: {
     primary: {
-      main: "#4F46E5", // brand-primary
+      main: "#1E4E8C", // brand-primary
       light: "#EEF2FF", // brand-bg
       dark: "#E03B40",
       contrastText: "#FFFFFF",
@@ -38,20 +38,20 @@ const calendarTheme = createTheme({
           margin: "2px",
           "&:hover": {
             backgroundColor: "#EEF2FF",
-            color: "#4F46E5",
+            color: "#1E4E8C",
           },
           "&.Mui-selected": {
-            background: "linear-gradient(135deg, #4F46E5, #4F46E5)",
+            background: "linear-gradient(135deg, #1E4E8C, #1E4E8C)",
             color: "#FFFFFF",
             boxShadow: "0 4px 12px rgba(255, 70, 76, 0.2)",
             "&:hover": {
-              background: "linear-gradient(135deg, #4F46E5, #4F46E5)",
+              background: "linear-gradient(135deg, #1E4E8C, #1E4E8C)",
               color: "#FFFFFF",
             },
           },
           "&.MuiPickersDay-today": {
-            borderColor: "#4F46E5",
-            color: "#4F46E5",
+            borderColor: "#1E4E8C",
+            color: "#1E4E8C",
             "&.Mui-selected": {
               color: "#FFFFFF",
             },
@@ -195,7 +195,7 @@ export function CustomCalendar({
                         boxShadow: "0 2px 8px rgba(15, 23, 42, 0.04)",
                       },
                       "&.Mui-focused": {
-                        borderColor: "#4F46E5",
+                        borderColor: "#1E4E8C",
                         boxShadow: "0 0 0 4px rgba(255, 70, 76, 0.08)",
                       },
                       "& input": {
@@ -206,7 +206,7 @@ export function CustomCalendar({
                         marginRight: "4px",
                         "&:hover": {
                           backgroundColor: "#EEF2FF",
-                          color: "#4F46E5",
+                          color: "#1E4E8C",
                         },
                       },
                     },

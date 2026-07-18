@@ -131,7 +131,7 @@ export default function CreateNestedServicePage() {
         </Link>
         <div>
           <h1 className="text-xl font-extrabold text-slate-900 flex items-center gap-2">
-            <Layers className="text-[#4F46E5]" size={20} /> নতুন সাব-সার্ভিস যোগ করুন
+            <Layers className="text-[#1E4E8C]" size={20} /> নতুন সাব-সার্ভিস যোগ করুন
           </h1>
           <p className="text-xs text-slate-400 mt-0.5">আপনার মূল সার্ভিসের অধীনে নতুন একটি সাব-সার্ভিস যোগ করুন।</p>
         </div>
@@ -194,7 +194,7 @@ export default function CreateNestedServicePage() {
               <button
                 type="button"
                 onClick={() => setSubServices([...subServices, { name: "", price: "", agent_commission_percentage: "", vendor_commission_percentage: "", description: "", image1: "", image2: "", faq: [] }])}
-                className="text-xs font-bold text-[#4F46E5] flex items-center gap-1 hover:underline"
+                className="text-xs font-bold text-[#1E4E8C] flex items-center gap-1 hover:underline"
               >
                 <PlusCircle size={14} /> অপশন যোগ করুন
               </button>
@@ -331,7 +331,7 @@ export default function CreateNestedServicePage() {
                             newSubs[idx].faq.push({ question: "", answer: "" });
                             setSubServices(newSubs);
                           }}
-                          className="text-xs font-bold text-[#4F46E5] flex items-center gap-1"
+                          className="text-xs font-bold text-[#1E4E8C] flex items-center gap-1"
                         >
                           <PlusCircle size={12} /> FAQ যোগ করুন
                         </button>
@@ -410,7 +410,7 @@ export default function CreateNestedServicePage() {
                 )}
               </div>
               <div className="flex-1 space-y-1.5">
-                <label className="cursor-pointer bg-[#4F46E5] hover:bg-[#4338CA] text-white text-xs font-bold px-4 py-2.5 rounded-lg inline-flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/10">
+                <label className="cursor-pointer bg-[#1E4E8C] hover:bg-[#123C73] text-white text-xs font-bold px-4 py-2.5 rounded-lg inline-flex items-center gap-2 transition-all active:scale-[0.98] shadow-md shadow-[#1E4E8C]/10">
                   {isUploadingImage ? "আপলোড হচ্ছে..." : "ছবি বাছুন"}
                   <input
                     type="file"
@@ -436,7 +436,7 @@ export default function CreateNestedServicePage() {
             <button
               type="submit"
               disabled={isCreating || isUploadingImage}
-              className="bg-[#4F46E5] hover:bg-[#4338CA] disabled:opacity-50 text-white font-bold px-8 py-3 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#4F46E5]/10"
+              className="bg-[#1E4E8C] hover:bg-[#123C73] disabled:opacity-50 text-white font-bold px-8 py-3 rounded-xl text-sm transition-all active:scale-[0.98] shadow-md shadow-[#1E4E8C]/10"
             >
               {isCreating ? "তৈরি হচ্ছে..." : "তৈরি করুন"}
             </button>

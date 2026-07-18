@@ -27,7 +27,7 @@ export default function DynamicBookingTracker() {
   if (isLoading) {
     return (
       <div className="w-full min-h-[60vh] flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#4F46E5]"></div>
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#1E4E8C]"></div>
       </div>
     );
   }
@@ -41,7 +41,7 @@ export default function DynamicBookingTracker() {
         </p>
         <button
           onClick={() => router.back()}
-          className="text-[#4F46E5] hover:underline text-sm font-bold cursor-pointer"
+          className="text-[#1E4E8C] hover:underline text-sm font-bold cursor-pointer"
         >
           {lang === "bn" ? "ফিরে যান" : "Go Back"}
         </button>
@@ -143,13 +143,13 @@ export default function DynamicBookingTracker() {
                       <div key={step.id} className="flex flex-col items-center relative w-1/4">
                         {/* Connecting Line */}
                         {index !== 0 && (
-                          <div className={`absolute top-6 left-[-50%] w-full h-[3px] -z-10 transition-colors duration-500 ${currentStepIndex >= index ? "bg-[#4F46E5]" : "bg-slate-100"
+                          <div className={`absolute top-6 left-[-50%] w-full h-[3px] -z-10 transition-colors duration-500 ${currentStepIndex >= index ? "bg-[#1E4E8C]" : "bg-slate-100"
                             }`} />
                         )}
 
                         {/* Circle */}
-                        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-black transition-all duration-300 shadow-sm border-4 border-white ${isCompleted ? "bg-[#4F46E5] text-white" :
-                            isActive ? "bg-[#4F46E5] text-white ring-4 ring-[#4F46E5]/20 scale-110" :
+                        <div className={`w-12 h-12 rounded-full flex items-center justify-center text-sm font-black transition-all duration-300 shadow-sm border-4 border-white ${isCompleted ? "bg-[#1E4E8C] text-white" :
+                            isActive ? "bg-[#1E4E8C] text-white ring-4 ring-[#1E4E8C]/20 scale-110" :
                               "bg-slate-100 text-slate-400"
                           }`}>
                           {isCompleted ? <Check size={20} className="stroke-[3]" /> : index + 1}
@@ -157,7 +157,7 @@ export default function DynamicBookingTracker() {
 
                         {/* Labels */}
                         <div className="mt-4 text-center">
-                          <span className={`text-sm font-black block tracking-wide ${isActive ? "text-[#4F46E5]" : isCompleted ? "text-slate-800" : "text-slate-400"}`}>
+                          <span className={`text-sm font-black block tracking-wide ${isActive ? "text-[#1E4E8C]" : isCompleted ? "text-slate-800" : "text-slate-400"}`}>
                             {step.label}
                           </span>
                           <span className={`text-[11px] font-bold mt-1 block ${isActive ? "text-slate-500" : "text-slate-400"}`}>
@@ -173,7 +173,7 @@ export default function DynamicBookingTracker() {
               {/* Mobile Stepper */}
               <div className="sm:hidden space-y-6 relative ml-4">
                 <div className="absolute left-5 top-5 bottom-5 w-[3px] bg-slate-100 -z-10" />
-                <div className="absolute left-5 top-5 bottom-5 w-[3px] bg-[#4F46E5] -z-10 transition-all duration-500 origin-top"
+                <div className="absolute left-5 top-5 bottom-5 w-[3px] bg-[#1E4E8C] -z-10 transition-all duration-500 origin-top"
                   style={{ height: `${(currentStepIndex / (steps.length - 1)) * 100}%` }}
                 />
 
@@ -183,14 +183,14 @@ export default function DynamicBookingTracker() {
 
                   return (
                     <div key={step.id} className="flex items-center gap-6">
-                      <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-xs font-black transition-all duration-300 shadow-sm border-2 border-white ${isCompleted ? "bg-[#4F46E5] text-white" :
-                          isActive ? "bg-[#4F46E5] text-white ring-4 ring-[#4F46E5]/20 scale-110" :
+                      <div className={`w-10 h-10 shrink-0 rounded-full flex items-center justify-center text-xs font-black transition-all duration-300 shadow-sm border-2 border-white ${isCompleted ? "bg-[#1E4E8C] text-white" :
+                          isActive ? "bg-[#1E4E8C] text-white ring-4 ring-[#1E4E8C]/20 scale-110" :
                             "bg-slate-100 text-slate-400"
                         }`}>
                         {isCompleted ? <Check size={16} className="stroke-[3]" /> : index + 1}
                       </div>
                       <div>
-                        <span className={`text-sm font-black block tracking-wide ${isActive ? "text-[#4F46E5]" : isCompleted ? "text-slate-800" : "text-slate-400"}`}>
+                        <span className={`text-sm font-black block tracking-wide ${isActive ? "text-[#1E4E8C]" : isCompleted ? "text-slate-800" : "text-slate-400"}`}>
                           {step.label}
                         </span>
                         <span className={`text-xs font-bold mt-0.5 block ${isActive ? "text-slate-500" : "text-slate-400"}`}>
@@ -247,7 +247,7 @@ export default function DynamicBookingTracker() {
               <span className="text-sm font-black text-slate-400">
                 {lang === "bn" ? "মোট পরিমাণ" : "Total Amount"}
               </span>
-              <span className="text-xl font-black text-[#4F46E5]">৳{booking.total_price || booking.service?.price || booking.pkg?.price || 0}</span>
+              <span className="text-xl font-black text-[#1E4E8C]">৳{booking.total_price || booking.service?.price || booking.pkg?.price || 0}</span>
             </div>
           </div>
 
@@ -277,7 +277,7 @@ export default function DynamicBookingTracker() {
                 {booking.vendor && (
                   <div className="flex items-center gap-4 p-4 rounded-2xl border border-slate-100 bg-slate-50/50">
                     <div className="w-12 h-12 rounded-full bg-white border border-slate-200 flex items-center justify-center text-slate-400 overflow-hidden shrink-0">
-                      <Shield size={20} className="text-[#4F46E5]" />
+                      <Shield size={20} className="text-[#1E4E8C]" />
                     </div>
                     <div className="w-full">
                       <div className="flex justify-between items-start">
@@ -294,7 +294,7 @@ export default function DynamicBookingTracker() {
                       <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4 border-t border-slate-200/60 pt-2 mt-1">
                         <button
                           onClick={() => router.push(`/dashbord/live-chat?receiverId=${booking.vendor.id}&receiverName=${encodeURIComponent(booking.vendor.name)}`)}
-                          className="flex items-center gap-1.5 text-xs font-semibold text-[#4F46E5] hover:text-[#4338CA] transition-colors sm:ml-auto cursor-pointer"
+                          className="flex items-center gap-1.5 text-xs font-semibold text-[#1E4E8C] hover:text-[#123C73] transition-colors sm:ml-auto cursor-pointer"
                         >
                           <MessageCircle size={14} /> {lang === "bn" ? "মেসেজ" : "Message"}
                         </button>

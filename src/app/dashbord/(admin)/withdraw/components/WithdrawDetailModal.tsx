@@ -75,7 +75,7 @@ export default function WithdrawDetailModal({
                   type="text"
                   id="adminNoteInput"
                   placeholder="e.g., TrxID 123456"
-                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#4F46E5] focus:border-[#4F46E5] block p-2.5 outline-none"
+                  className="w-full bg-slate-50 border border-slate-200 text-slate-900 text-sm rounded-xl focus:ring-[#1E4E8C] focus:border-[#1E4E8C] block p-2.5 outline-none"
                 />
               </div>
             )}
@@ -101,7 +101,7 @@ export default function WithdrawDetailModal({
                     handleUpdateStatus(selectedItem.id, "rejected", note);
                     setSelectedItem(null);
                   }}
-                  className="bg-[#4F46E5] hover:bg-[#4338CA] disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all"
+                  className="bg-[#1E4E8C] hover:bg-[#123C73] disabled:opacity-50 text-white font-bold px-4 py-2 rounded-xl text-sm transition-all"
                 >
                   Reject
                 </button>

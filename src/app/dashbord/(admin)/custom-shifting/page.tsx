@@ -205,7 +205,7 @@ export default function CustomShiftingDashboard() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 pb-5">
         <div className="flex items-center gap-3">
-          <div className="p-2.5 bg-[#EEF2FF] text-[#4F46E5] rounded-2xl">
+          <div className="p-2.5 bg-[#EEF2FF] text-[#1E4E8C] rounded-2xl">
             <Truck className="w-6 h-6" />
           </div>
           <div>
@@ -255,7 +255,7 @@ export default function CustomShiftingDashboard() {
             { label: lang === "bn" ? "অপেক্ষমান" : "Pending", value: stats.pending, color: "text-amber-700", bg: "bg-amber-50/60 border-amber-200/50", icon: Clock, iconColor: "text-amber-600 bg-amber-100/80" },
             { label: lang === "bn" ? "নিযুক্ত" : "Assigned", value: stats.assigned, color: "text-blue-700", bg: "bg-blue-50/60 border-blue-200/50", icon: UserCheck, iconColor: "text-blue-600 bg-blue-100/80" },
             { label: lang === "bn" ? "সম্পন্ন" : "Completed", value: stats.completed, color: "text-green-700", bg: "bg-green-50/60 border-green-200/50", icon: CheckCircle, iconColor: "text-green-600 bg-green-100/80" },
-            { label: lang === "bn" ? "সক্রিয় ভেন্ডর" : "Vendors Active", value: stats.vendorsAssigned, color: "text-[#4F46E5]", bg: "bg-[#EEF2FF]/80 border-orange-200/50", icon: Users, iconColor: "text-[#4F46E5] bg-orange-100/80" },
+            { label: lang === "bn" ? "সক্রিয় ভেন্ডর" : "Vendors Active", value: stats.vendorsAssigned, color: "text-[#1E4E8C]", bg: "bg-[#EEF2FF]/80 border-orange-200/50", icon: Users, iconColor: "text-[#1E4E8C] bg-orange-100/80" },
           ].map((s, index) => {
             const IconComponent = s.icon;
             return (
@@ -287,7 +287,7 @@ export default function CustomShiftingDashboard() {
             placeholder={lang === "bn" ? "নাম, ফোন, ঠিকানা দিয়ে খুঁজুন..." : "Search by name, phone, address..."}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-[#4F46E5]/20 transition-all outline-none"
+            className="w-full pl-9 pr-4 py-2.5 bg-slate-50 border-none rounded-xl text-sm focus:ring-2 focus:ring-[#1E4E8C]/20 transition-all outline-none"
           />
         </div>
         <div className="flex gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
@@ -305,7 +305,7 @@ export default function CustomShiftingDashboard() {
                 onClick={() => setFilterStatus(s)}
                 className={`px-4 py-2 rounded-xl text-xs font-bold capitalize whitespace-nowrap transition-all ${
                   filterStatus === s
-                    ? "bg-[#4F46E5] text-white shadow-md shadow-[#4F46E5]/20"
+                    ? "bg-[#1E4E8C] text-white shadow-md shadow-[#1E4E8C]/20"
                     : "bg-slate-50 text-slate-600 hover:bg-slate-100"
                 }`}
               >
@@ -320,7 +320,7 @@ export default function CustomShiftingDashboard() {
       <div className="bg-white rounded-3xl shadow-sm border border-slate-100 overflow-hidden">
         {isLoading ? (
           <div className="flex flex-col items-center justify-center py-20 text-slate-400">
-            <div className="w-8 h-8 border-2 border-[#4F46E5] border-t-transparent rounded-full animate-spin mb-4" />
+            <div className="w-8 h-8 border-2 border-[#1E4E8C] border-t-transparent rounded-full animate-spin mb-4" />
             <p className="text-sm font-medium">{lang === "bn" ? "শিফটিং বুকিং লোড হচ্ছে..." : "Loading shifting bookings..."}</p>
           </div>
         ) : filtered.length === 0 ? (
@@ -370,7 +370,7 @@ export default function CustomShiftingDashboard() {
                           {shifting.shiftingType === "office" ? (
                             <Building2 size={11} className="text-blue-500" />
                           ) : (
-                            <Home size={11} className="text-[#4F46E5]" />
+                            <Home size={11} className="text-[#1E4E8C]" />
                           )}
                           {shifting.shiftingType === "office"
                             ? (lang === "bn" ? "অফিস" : "Office")
@@ -378,7 +378,7 @@ export default function CustomShiftingDashboard() {
                         </span>
                         {shifting.price && (
                           <div className="text-xs font-black text-slate-800 flex items-center gap-0.5 mt-1">
-                            <span className="text-[#4F46E5] font-extrabold">৳</span>
+                            <span className="text-[#1E4E8C] font-extrabold">৳</span>
                             {Number(shifting.price).toLocaleString()}
                           </div>
                         )}
@@ -388,7 +388,7 @@ export default function CustomShiftingDashboard() {
                     {/* Route */}
                     <td className="px-5 py-4 max-w-[200px]">
                       <div className="text-xs text-slate-600 font-medium line-clamp-1">
-                        <span className="text-[#4F46E5]">▸</span> {shifting.sourceAddress}
+                        <span className="text-[#1E4E8C]">▸</span> {shifting.sourceAddress}
                       </div>
                       <div className="text-xs text-slate-400 line-clamp-1 mt-0.5">
                         <span className="text-green-500">▸</span> {shifting.destinationAddress}
@@ -403,7 +403,7 @@ export default function CustomShiftingDashboard() {
                             e.stopPropagation();
                             setImageModalData(shifting.images);
                           }}
-                          className="flex items-center gap-1.5 text-xs font-bold text-[#4F46E5] hover:underline"
+                          className="flex items-center gap-1.5 text-xs font-bold text-[#1E4E8C] hover:underline"
                         >
                           <ImageIcon size={13} />
                           {shifting.images.length} {lang === "bn" ? "টি ছবি" : `photo${shifting.images.length > 1 ? "s" : ""}`}
@@ -438,7 +438,7 @@ export default function CustomShiftingDashboard() {
                         {shifting.vendor ? (
                           <div className="space-y-1.5">
                             <div className="flex items-center gap-1.5 flex-wrap">
-                              <span className="inline-flex items-center gap-1 bg-[#4F46E5]/10 text-[#4F46E5] text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-[#4F46E5]/20">
+                              <span className="inline-flex items-center gap-1 bg-[#1E4E8C]/10 text-[#1E4E8C] text-[10px] font-extrabold px-2 py-0.5 rounded-full border border-[#1E4E8C]/20">
                                 <Users size={9} />
                                 {lang === "bn" ? "ভেন্ডর" : "Vendor"}
                               </span>
@@ -454,7 +454,7 @@ export default function CustomShiftingDashboard() {
                             <div className="text-[11px] text-slate-400 font-medium">{shifting.vendor.phoneNumber}</div>
                             <button
                               onClick={() => setAssigningId(assigningId === shifting.id ? null : shifting.id)}
-                              className="text-[10px] text-[#4F46E5] font-bold hover:underline"
+                              className="text-[10px] text-[#1E4E8C] font-bold hover:underline"
                             >
                               {lang === "bn" ? "পুনরায় নিযুক্ত করুন" : "Reassign"}
                             </button>
@@ -462,7 +462,7 @@ export default function CustomShiftingDashboard() {
                         ) : (
                           <button
                             onClick={() => setAssigningId(assigningId === shifting.id ? null : shifting.id)}
-                            className="text-xs font-bold text-[#4F46E5] flex items-center gap-1 hover:underline"
+                            className="text-xs font-bold text-[#1E4E8C] flex items-center gap-1 hover:underline"
                           >
                             {lang === "bn" ? "ভেন্ডর নিযুক্ত করুন" : "Assign Vendor"}
                             <ChevronDown size={12} className={`transition-transform ${assigningId === shifting.id ? "rotate-180" : ""}`} />

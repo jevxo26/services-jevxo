@@ -33,7 +33,7 @@ export default function BookingDetailModal({ selectedBooking, onClose, onCancel,
           >
             <div className="p-6 border-b border-slate-100 flex items-center justify-between bg-slate-50/50">
               <div className="flex items-center gap-2">
-                <div className="w-2.5 h-2.5 rounded-full bg-[#4F46E5] animate-pulse" />
+                <div className="w-2.5 h-2.5 rounded-full bg-[#1E4E8C] animate-pulse" />
                 <h2 className="text-sm font-black text-slate-900 uppercase tracking-wider">Booking Information</h2>
               </div>
               <button onClick={onClose} className="text-slate-400 hover:text-slate-600 hover:bg-slate-100 p-2 rounded-full transition-colors cursor-pointer">
