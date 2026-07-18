@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { ArrowLeft, User, FileText, Palette, Package, Plus, Trash2, Check, AlertTriangle, FilePlus2 } from "lucide-react";
 import { toast } from "sonner";
 
-const API = "https://services-jevxo-api-production.up.railway.app";
+const API = "https://service.api.jevxo.com";
 
 interface Customer { id: number; name: string; phone: string; email?: string; address?: string; profile?: { location?: string }; }
 interface ServiceItem { id: number; name: string; rate: number; }

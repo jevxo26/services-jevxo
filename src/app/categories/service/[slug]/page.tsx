@@ -8,7 +8,7 @@ export async function generateMetadata({
 }): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const allRes = await fetch("https://services-jevxo-api-production.up.railway.app/services/public", {
+    const allRes = await fetch("https://service.api.jevxo.com/services/public", {
       next: { revalidate: 3600 },
     });
     const allJson = await allRes.json();
@@ -20,7 +20,7 @@ export async function generateMetadata({
       };
     }
 
-    const res = await fetch(`https://services-jevxo-api-production.up.railway.app/services/${serviceObj.id}`, {
+    const res = await fetch(`https://service.api.jevxo.com/services/${serviceObj.id}`, {
       next: { revalidate: 3600 },
     });
     const json = await res.json();

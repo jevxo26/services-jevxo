@@ -22,7 +22,7 @@ export function useAboutState() {
     const headers: any = { "Content-Type": "application/json" };
     if (token) headers["Authorization"] = `Bearer ${token}`;
 
-    fetch("https://services-jevxo-api-production.up.railway.app/users", { headers })
+    fetch("https://service.api.jevxo.com/users", { headers })
       .then((res) => res.json())
       .then((json) => {
         const users = json.data || (Array.isArray(json) ? json : []);
