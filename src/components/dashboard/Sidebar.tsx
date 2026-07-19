@@ -335,7 +335,7 @@ export function Sidebar({ open, onClose }: { open?: boolean; onClose?: () => voi
         <div className="p-5 flex items-start justify-between border-b border-slate-100 relative z-10">
           <Link href="/" className="flex flex-col items-start gap-2">
             <img
-              src="/rajshiblogo.png"
+              src="/ew.jpg"
               alt="Jevxo Services Logo"
               className={collapsed ? "h-8 w-8 object-contain shrink-0" : "h-11 w-auto object-contain shrink-0"}
             />
