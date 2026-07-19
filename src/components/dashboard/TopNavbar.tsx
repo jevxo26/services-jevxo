@@ -168,9 +168,11 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
 
   const rolesList: { value: UserRole; label: string; desc: string; icon: React.ComponentType<any>; color: string }[] = [
     { value: "superadmin", label: "Super Admin", desc: "System control", icon: Shield, color: "text-[#1E4E8C] bg-[#EEF2FF]" },
+    { value: "admin", label: "Admin", desc: "System Administrator", icon: Shield, color: "text-blue-500 bg-blue-50" },
     { value: "agent", label: "Agent", desc: "Booking agent", icon: Briefcase, color: "text-emerald-500 bg-emerald-50" },
     { value: "vendor", label: "Vendor", desc: "Service professional", icon: HardHat, color: "text-teal-500 bg-teal-50" },
     { value: "client", label: "Client", desc: "Client profile", icon: CircleUser, color: "text-indigo-500 bg-indigo-50" },
+    { value: "employee", label: "Employee", desc: "Employee profile", icon: HardHat, color: "text-amber-500 bg-amber-50" },
   ];
 
   // Derive display profile from real user data in Redux
@@ -179,8 +181,8 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
   const avatarText = name.substring(0, 2).toUpperCase();
   const profileImg = mounted ? (authUser?.profile?.avatar || authUser?.profile?.images?.[0] || authUser?.profile?.picture || authUser?.avatar) : undefined;
   const activeRoleConfig = mounted
-    ? (rolesList.find((x) => x.value === role) || rolesList[3])
-    : rolesList[3];
+    ? (rolesList.find((x) => x.value === role) || rolesList.find((x) => x.value === "client") || rolesList[0])
+    : (rolesList.find((x) => x.value === "client") || rolesList[0]);
 
   return (
     <header className="bg-[#EEF2FF]/95 backdrop-blur-md border-b border-slate-100 px-4 sm:px-8 py-4 flex items-center justify-between z-30 sticky top-0 shadow-sm">
@@ -307,6 +309,65 @@ export function TopNavbar({ onMenuClick }: { onMenuClick?: () => void }) {
 
       {/* Right Navbar Controls */}
       <div className="flex items-center gap-5">
+
+        {/* Role Selector Dropdown */}
+        <div className="relative" ref={dropdownRef}>
+          {(() => {
+            const ActiveIcon = activeRoleConfig.icon;
+            return (
+              <button
+                onClick={() => setDropdownOpen(!dropdownOpen)}
+                className="flex items-center gap-2 px-3 py-1.5 bg-white hover:bg-slate-50 border border-slate-200/80 rounded-xl text-xs font-bold text-slate-700 hover:text-slate-900 transition-all shadow-sm focus:outline-none"
+                title={lang === "bn" ? "রোল পরিবর্তন করুন" : "Switch Role"}
+              >
+                <ActiveIcon className="w-4 h-4 text-[#1E4E8C]" />
+                <span className="hidden md:inline">{activeRoleConfig.label}</span>
+                <ChevronDown size={14} className={`text-slate-400 transition-transform ${dropdownOpen ? 'rotate-180' : ''}`} />
+              </button>
+            );
+          })()}
+
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-56 bg-white border border-slate-100/90 rounded-2xl shadow-xl py-1.5 z-50 animate-in fade-in slide-in-from-top-2 duration-150">
+              <div className="px-3 py-1.5 border-b border-slate-50">
+                <span className="text-[10px] font-black text-slate-400 uppercase tracking-wider">
+                  {lang === "bn" ? "রোল নির্বাচন করুন" : "Select Role"}
+                </span>
+              </div>
+              <div className="p-1 space-y-0.5">
+                {rolesList.map((r) => {
+                  const isSelected = r.value === role;
+                  const Icon = r.icon;
+                  return (
+                    <button
+                      key={r.value}
+                      onClick={() => {
+                        dispatch(setAuthRole(r.value));
+                        setDropdownOpen(false);
+                      }}
+                      className={`w-full flex items-center justify-between p-2 rounded-xl text-left transition-all ${
+                        isSelected 
+                          ? "bg-[#EEF2FF] text-[#1E4E8C] font-bold" 
+                          : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
+                      }`}
+                    >
+                      <div className="flex items-center gap-2.5">
+                        <div className={`p-1.5 rounded-lg ${r.color}`}>
+                          <Icon size={14} />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-xs font-bold leading-none">{r.label}</p>
+                          <p className="text-[9px] text-slate-400 mt-1 leading-none font-medium">{r.desc}</p>
+                        </div>
+                      </div>
+                      {isSelected && <Check size={14} className="text-[#1E4E8C] shrink-0" />}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Language Toggle Button */}
         <button
