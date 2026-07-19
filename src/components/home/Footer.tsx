@@ -158,7 +158,7 @@ export default function Footer() {
           <motion.div variants={itemVariants} className="col-span-2 md:col-span-4 space-y-4">
             <Link href="/" aria-label="Jevxo Services home" className="inline-block hover:opacity-90 transition-opacity">
               <Image
-                src="/newlogo.png"
+                src="/ew.jpg"
                 alt="Jevxo Services"
                 width={100}
                 height={48}

@@ -304,8 +304,8 @@ export function Navbar() {
       <motion.nav
         style={{ boxShadow: headerShadow, borderBottomColor: borderColor }}
         className={`backdrop-blur-md border-b sticky top-0 z-50 transition-all duration-300 ${isScrolled
-            ? "bg-white/95 border-slate-200"
-            : "bg-white/80 md:bg-white/70 border-slate-100/80"
+          ? "bg-white/95 border-slate-200"
+          : "bg-white/80 md:bg-white/70 border-slate-100/80"
           }`}
       >
         <div className="w-full md:max-w-[92%] lg:max-w-[960px] xl:max-w-[1140px] min-[1440px]:max-w-[1280px] 2xl:max-w-[1400px] mx-auto px-4 md:px-6">
@@ -320,10 +320,10 @@ export function Navbar() {
                 aria-label="Jevxo Services — Home"
               >
                 <Image
-                  src="/newlogo.png"
+                  src="/ew.jpg"
                   alt="Jevxo Services"
-                  width={70}
-                  height={80}
+                  width={90}
+                  height={100}
                   className="h-9 sm:h-10 w-auto object-contain"
                   priority
                 />
@@ -835,8 +835,8 @@ export function Navbar() {
                       <motion.div key={i} variants={mobileItemVariants} className="space-y-1">
                         <div
                           className={`w-full flex items-center justify-between px-3 py-2.5 rounded-xl transition-all ${active
-                              ? "text-[#1E4E8C] bg-[#FFF4EE] font-bold border-l-2 border-[#1E4E8C]"
-                              : "text-slate-700 hover:bg-slate-50 border-l-2 border-transparent"
+                            ? "text-[#1E4E8C] bg-[#FFF4EE] font-bold border-l-2 border-[#1E4E8C]"
+                            : "text-slate-700 hover:bg-slate-50 border-l-2 border-transparent"
                             }`}
                         >
                           <Link
@@ -881,8 +881,8 @@ export function Navbar() {
                                         key={cat.id}
                                         href={`/categories/${cat.id}`}
                                         className={`flex flex-col items-center gap-1.5 p-2.5 rounded-xl border transition-all ${isCategoryActive
-                                            ? "bg-[#FFF4EE] border-[#1E4E8C]/20 text-[#1E4E8C] font-bold"
-                                            : "bg-slate-50/50 border-slate-100 text-slate-600 hover:bg-slate-50 hover:text-[#1E4E8C]"
+                                          ? "bg-[#FFF4EE] border-[#1E4E8C]/20 text-[#1E4E8C] font-bold"
+                                          : "bg-slate-50/50 border-slate-100 text-slate-600 hover:bg-slate-50 hover:text-[#1E4E8C]"
                                           }`}
                                         onClick={() => {
                                           setIsOpen(false);
@@ -911,8 +911,8 @@ export function Navbar() {
                       <Link
                         href={link.href}
                         className={`flex items-center gap-2 px-3 py-2.5 text-sm font-semibold rounded-xl transition-all ${active
-                            ? "text-[#1E4E8C] bg-[#FFF4EE] font-bold border-l-2 border-[#1E4E8C]"
-                            : "text-slate-700 hover:bg-slate-50 border-l-2 border-transparent"
+                          ? "text-[#1E4E8C] bg-[#FFF4EE] font-bold border-l-2 border-[#1E4E8C]"
+                          : "text-slate-700 hover:bg-slate-50 border-l-2 border-transparent"
                           }`}
                         onClick={() => setIsOpen(false)}
                       >
